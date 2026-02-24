@@ -1,14 +1,24 @@
 # robots.txt for www.humanifylab.com
+# HumanifyLab - Professional AI Humanizer
 # Allow all web crawlers to access all content except sensitive areas
 
 User-agent: *
 Allow: /
 Allow: /pricing
 Allow: /faq
-Allow: /help-center
 Allow: /contact
 Allow: /privacy
 Allow: /terms
+Allow: /responsible-use
+
+# Allow all keyword pages for SEO
+Allow: /ai-humanizer
+Allow: /humanize-ai-text
+Allow: /bypass-turnitin
+Allow: /free-ai-humanizer
+Allow: /bypass-gptzero
+Allow: /humanizer
+Allow: /*
 
 # Block API endpoints
 Disallow: /api/
@@ -19,10 +29,20 @@ Disallow: /sign-in
 Disallow: /sign-up
 Disallow: /account
 Disallow: /api-keys
+Disallow: /team
 
 # Block internal Next.js routes
 Disallow: /_next/
 Disallow: /static/
 
-# Sitemap location (canonical domain with www)
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Sitemap locations (canonical domain with www)
 Sitemap: https://www.humanifylab.com/sitemap.xml
+Sitemap: https://www.humanifylab.com/sitemaps/sitemap-index.xml
+
+# Additional metadata
+# Website: https://www.humanifylab.com
+# Contact: humanifylab1@gmail.com
+# Brand: HumanifyLab - AI Humanizer

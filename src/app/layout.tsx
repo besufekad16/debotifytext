@@ -134,8 +134,6 @@ export default function RootLayout({
             }}
           />
           {/* End Google Analytics */}
-          {/* Google Search Console Verification */}
-          <meta name="google-site-verification" content="google11bdb4ff94bca264.html" />
           {/* Google Tag Manager */}
           <script
             dangerouslySetInnerHTML={{
