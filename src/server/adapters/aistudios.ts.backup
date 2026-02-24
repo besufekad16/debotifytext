@@ -1,0 +1,764 @@
+import { env } from "~/env";
+import { GoogleGenAI } from "@google/genai";
+
+import {
+  DEFAULT_MODEL,
+  FALLBACK_MODEL,
+} from "~/server/config/models";
+
+// Vertex AI Model (fine-tuned endpoint)
+const GEMINI_MODEL = "projects/431949019361/locations/europe-west1/endpoints/7245256060485763072";
+
+const GOOGLE_SEARCH_TOOLS = [
+  {
+    googleSearch: {},
+  },
+];
+
+// Initialize Google Gen AI Client
+const ai = new GoogleGenAI({
+  apiKey: env.GOOGLE_CLOUD_API_KEY,
+});
+
+// OpenAI Responses API endpoint (as per documentation)
+const OPENAI_RESPONSES_API_URL = "https://api.openai.com/v1/responses";
+
+// Helper function to build Gemini API URL with dynamic model selection
+function getGeminiApiUrl(model: string, endpoint: "generateContent" | "streamGenerateContent" = "generateContent"): string {
+  return `https://generativelanguage.googleapis.com/v1beta/models/${model}:${endpoint}?key=${env.GOOGLE_CLOUD_API_KEY}`;
+}
+
+interface HumanizeOptions {
+  temperature?: number;
+  maxTokens?: number;
+  preset?: string;
+  stream?: boolean;
+  model?: string; // Allow custom model selection
+  isFreeUser?: boolean;
+}
+
+interface HumanizeResult {
+  success: boolean;
+  humanizedText: string;
+  tokensUsed: number;
+  metadata: {
+    model?: string;
+    finishReason?: string;
+    source: string;
+    fallback?: boolean;
+    message?: string;
+    [key: string]: any;
+  };
+  error?: string;
+}
+
+/**
+ * Builds the system message following OpenAI best practices
+ * According to OpenAI documentation, critical rules and instructions should be in the system message
+ * for better adherence and consistency. The system message defines the model's behavior.
+ */
+export function buildHumanizationSystemMessage(isFreeUser: boolean = false): string {
+  return `Rewrite the following text so it sounds natural and human-written. Avoid overly formal or polished language. Use varied sentence length and conversational phrasing. Return plain text only; do not use Markdown headers (like ###).
+
+PRESERVE EXACTLY – DO NOT MODIFY OR DELETE:
+Keep the following elements exactly as they appear in the original. Do not paraphrase, reformat, or remove them:
+
+- Titles: main titles, document titles, essay titles – keep as is.
+- Headings and subheadings: all section headings, H1/H2/H3-style headings – keep as is.
+- Chapters and subtitles: chapter titles, chapter numbers, subtitles – keep as is.
+- Citations and references:
+  - Bracket citations: [1], [2], [3], [1,2], [1–3], etc. – keep exactly as written.
+  - In-text citations: (Author, Year), (Smith, 2020), footnotes, endnotes – keep as is.
+  - Reference lists / bibliography / "References" or "Works Cited" sections – keep entire section as is, including formatting.
+- Proper nouns: names, places, product names, organizations – keep as is.
+- Dates, numbers, quantities, and statistics – keep as is.
+- Any structural or formatting elements that are not regular body prose (e.g. labels, captions, bullet points in lists that are reference-style).
+
+If something is a title, heading, citation, reference, or similar non-prose element, do not humanize it. Copy it verbatim from the original. Only humanize the main body paragraphs and sentences.`;
+}
+
+export function buildHumanizationUserMessage(text: string): string {
+  return text;
+}
+
+export class AIStudiosAdapter {
+  constructor() {}
+
+  /**
+   * Transforms OpenAI Responses API streaming format to frontend format
+   * Responses API uses semantic events like response.output_text.delta
+   * Frontend expects: {"choices": [{"delta": {"content": "..."}}]}
+   */
+  private transformOpenAIResponsesStreamToFrontendFormat(
+    responsesStream: ReadableStream<Uint8Array>
+  ): ReadableStream {
+    const decoder = new TextDecoder();
+    const encoder = new TextEncoder();
+    let buffer = "";
+
+    return new ReadableStream({
+      async start(controller) {
+        const reader = responsesStream.getReader();
+        let chunkCount = 0;
+
+        // Helper function to process SSE lines
+        const processLine = (line: string) => {
+          const trimmed = line.trim();
+          if (!trimmed || !trimmed.startsWith("data: ")) {
+            return;
+          }
+
+          const data = trimmed.slice(6);
+          if (data === "[DONE]") {
+            return;
+          }
+
+          try {
+            const event = JSON.parse(data);
+            
+            // Log event types for first few chunks (for debugging)
+            if (chunkCount <= 5) {
+              console.log(`[OpenAI Stream] Event type: ${event.type}`);
+            }
+            
+            // Handle response.output_text.delta events (contains actual content)
+            // According to Responses API docs: response.output_text.delta
+            if (event.type === "response.output_text.delta") {
+              // In Responses API, the text can be in event.delta or event.delta.text
+              // Check both locations for compatibility
+              let textContent = "";
+              
+              if (typeof event.delta === "string") {
+                textContent = event.delta;
+              } else if (event.delta?.text && typeof event.delta.text === "string") {
+                textContent = event.delta.text;
+              } else if (event.delta?.content && typeof event.delta.content === "string") {
+                textContent = event.delta.content;
+              }
+              
+              if (textContent && textContent.length > 0) {
+                if (chunkCount <= 5) {
+                  console.log(`[OpenAI Stream] ✓ Text delta received (${textContent.length} chars): "${textContent.substring(0, 50)}${textContent.length > 50 ? '...' : ''}"`);
+                }
+                // Transform to frontend format
+                const frontendChunk = {
+                  type: "content",
+                  choices: [{
+                    delta: { content: textContent },
+                    index: 0,
+                    finish_reason: null,
+                  }],
+                };
+                controller.enqueue(
+                  encoder.encode(`data: ${JSON.stringify(frontendChunk)}\n\n`)
+                );
+              } else if (chunkCount <= 5) {
+                console.log(`[OpenAI Stream] ⚠ response.output_text.delta event but no text content found. Event structure:`, JSON.stringify(event, null, 2).substring(0, 300));
+              }
+            }
+            // Handle completion event
+            else if (event.type === "response.completed" || event.type === "response.done") {
+              console.log("[OpenAI Stream] Response completed");
+            }
+          } catch (parseError) {
+            console.warn("[OpenAI Stream] Failed to parse event:", parseError);
+          }
+        };
+
+        try {
+          while (true) {
+            const { done, value } = await reader.read();
+
+            if (done) {
+              // CRITICAL: Flush the decoder to get any remaining bytes
+              const finalChunk = decoder.decode();
+              if (finalChunk) {
+                buffer += finalChunk;
+              }
+              
+              // Process any remaining content in the buffer
+              if (buffer.trim()) {
+                const remainingLines = buffer.split("\n");
+                for (const line of remainingLines) {
+                  processLine(line);
+                }
+              }
+              
+              console.log(`[OpenAI Stream] Stream ended. Total chunks processed: ${chunkCount}`);
+              controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+              break;
+            }
+
+            chunkCount++;
+            const decoded = decoder.decode(value, { stream: true });
+            if (chunkCount <= 3) {
+              console.log(`[OpenAI Stream] Raw chunk #${chunkCount} received, length: ${decoded.length}`);
+            }
+            buffer += decoded;
+
+            // Process Server-Sent Events (SSE) format
+            const lines = buffer.split("\n");
+            const lastLine = lines.pop() || "";
+            buffer = lastLine;
+
+            for (const line of lines) {
+              processLine(line);
+            }
+          }
+        } catch (error) {
+          console.error("[OpenAI Stream] Error processing stream:", error);
+          controller.error(error);
+        } finally {
+          reader.releaseLock();
+          controller.close();
+        }
+      },
+    });
+  }
+
+  async humanizeText(
+    text: string,
+    options: HumanizeOptions = {},
+  ): Promise<HumanizeResult> {
+    try {
+      console.log("[Humanization] Starting humanization process...");
+      console.log(`[Humanization] Using default model: ${DEFAULT_MODEL}`);
+
+      // Try Gemini first (primary model)
+      const geminiResult = await this.tryGemini(text, options);
+      if (geminiResult.success) {
+        console.log("[Humanization] Gemini humanization successful");
+        return {
+          ...geminiResult,
+          metadata: {
+            ...geminiResult.metadata,
+          },
+        };
+      }
+
+      console.warn("[Humanization] Gemini failed, attempting fallback to OpenAI", {
+        error: geminiResult.error,
+      });
+
+      // Fallback to OpenAI
+      return await this.tryOpenAI(text, options);
+    } catch (error) {
+      console.error("[Humanization] Unexpected error:", error);
+      return {
+        success: false,
+        humanizedText: text,
+        tokensUsed: 0,
+        metadata: {
+          source: "error",
+          error: error instanceof Error ? error.message : String(error),
+        },
+        error: error instanceof Error ? error.message : String(error),
+      };
+    }
+  }
+
+  async humanizeTextStream(
+    text: string,
+    options: HumanizeOptions = {},
+  ): Promise<ReadableStream> {
+    try {
+      console.log("[Humanization Stream] Starting humanization stream...");
+      
+      // Try Gemini first
+      try {
+        return await this.tryGeminiStream(text, options);
+      } catch (geminiError) {
+        console.warn("[Humanization Stream] Gemini stream failed, switching to OpenAI fallback", geminiError);
+        
+        // Fallback to OpenAI
+        return await this.tryOpenAIStream(text, options);
+      }
+    } catch (error) {
+      console.error("[Humanization Stream] All stream attempts failed", error);
+      throw error;
+    }
+  }
+
+  async tryOpenAI(
+    text: string,
+    options: HumanizeOptions = {},
+  ): Promise<HumanizeResult> {
+    try {
+      // Use fallback model (gpt-5-mini)
+      let model = options.model ?? FALLBACK_MODEL;
+
+      // If the model is a Gemini model (passed from options or default), switch to fallback OpenAI model
+      if (model.toLowerCase().includes("gemini")) {
+        console.log(`[OpenAI] Switching from ${model} to ${FALLBACK_MODEL} for OpenAI adapter`);
+        model = FALLBACK_MODEL;
+      }
+
+      console.log("[OpenAI] Preparing request");
+      console.log("[OpenAI] Model:", model);
+      console.log("[OpenAI] Text length:", text.length);
+
+      const systemMessage = buildHumanizationSystemMessage(options.isFreeUser);
+      const userMessage = buildHumanizationUserMessage(text);
+
+      // Build request body for OpenAI Responses API (as per documentation)
+      const requestBody = {
+        model: model,
+        input: [
+          {
+            role: "system",
+            content: systemMessage
+          },
+          {
+            role: "user",
+            content: userMessage
+          }
+        ],
+        reasoning: { effort: "low" }, // Set to "none" to ensure tokens are used for output, not reasoning
+        text: { verbosity: "medium" },
+        max_output_tokens: options.maxTokens ?? 6000,
+        stream: false,
+      };
+
+      const response = await fetch(OPENAI_RESPONSES_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${env.OPENAI_API_KEY}`,
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      console.log(`[OpenAI] Response status: ${response.status} ${response.statusText}`);
+
+      if (!response.ok) {
+        const errorBody = await response.text();
+        let errorMessage = `OpenAI API error: ${response.status} ${response.statusText}`;
+        
+        // Try to parse error details for better logging
+        try {
+          const errorJson = JSON.parse(errorBody);
+          if (errorJson.error?.message) {
+            errorMessage = errorJson.error.message;
+          }
+        } catch {
+          // If parsing fails, use the raw error body or default message
+          if (errorBody) {
+            errorMessage = errorBody.substring(0, 200); // Limit error message length
+          }
+        }
+
+        console.error("[OpenAI] Error response body:", errorBody);
+        console.error("[OpenAI] Error message:", errorMessage);
+
+        // Return failure result instead of throwing - this allows fallback to work
+        return {
+          success: false,
+          humanizedText: text,
+          tokensUsed: 0,
+          metadata: {
+            source: "openai",
+            model: model,
+            error: errorMessage,
+            statusCode: response.status,
+          },
+          error: errorMessage,
+        };
+      }
+
+      const data = await response.json();
+      // Responses API returns output in data.output[0].content
+      const generatedText = data.output?.[0]?.content?.trim() || data.choices?.[0]?.message?.content?.trim();
+
+      if (!generatedText || generatedText.length === 0) {
+        console.error("[OpenAI] No text returned from model");
+        return {
+          success: false,
+          humanizedText: text,
+          tokensUsed: 0,
+          metadata: {
+            source: "openai",
+            model: model,
+            error: "No text returned from OpenAI",
+          },
+          error: "No text returned from OpenAI",
+        };
+      }
+
+      console.log(`[OpenAI] Generated text length: ${generatedText.length}`);
+
+      return {
+        success: true,
+        humanizedText: generatedText,
+        tokensUsed: data.usage?.total_tokens || 0,
+        metadata: {
+          model: model,
+          finishReason: data.output?.[0]?.finish_reason || data.choices?.[0]?.finish_reason,
+          source: "openai",
+          promptTokens: data.usage?.prompt_tokens,
+          completionTokens: data.usage?.completion_tokens,
+        },
+      };
+    } catch (error) {
+      console.error("[OpenAI] Failed to generate content:", error);
+      return {
+        success: false,
+        humanizedText: text,
+        tokensUsed: 0,
+        metadata: { source: "openai", error: error instanceof Error ? error.message : String(error) },
+        error: error instanceof Error ? error.message : String(error),
+      };
+    }
+  }
+
+  async tryOpenAIStream(
+    text: string,
+    options: HumanizeOptions = {},
+  ): Promise<ReadableStream> {
+    // Use fallback model (gpt-5-mini)
+    let model = options.model ?? FALLBACK_MODEL;
+
+    // If the model is a Gemini model (passed from options or default), switch to fallback OpenAI model
+    if (model.toLowerCase().includes("gemini")) {
+      console.log(`[OpenAI Stream] Switching from ${model} to ${FALLBACK_MODEL} for OpenAI adapter`);
+      model = FALLBACK_MODEL;
+    }
+
+    const systemMessage = buildHumanizationSystemMessage(options.isFreeUser);
+    const userMessage = buildHumanizationUserMessage(text);
+
+    // Build request body for OpenAI Responses API with streaming
+    const requestBody = {
+      model: model,
+      input: [
+        {
+          role: "system",
+          content: systemMessage
+        },
+        {
+          role: "user",
+          content: userMessage
+        }
+      ],
+      reasoning: { effort: "low" }, // Changed from "low" to "none" to ensure tokens are used for output, not reasoning
+      text: { verbosity: "medium" },
+      max_output_tokens: options.maxTokens ?? 15000,
+      stream: true,
+    };
+
+    console.log("[OpenAI Stream] Request body:", JSON.stringify(requestBody, null, 2));
+
+    const response = await fetch(OPENAI_RESPONSES_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${env.OPENAI_API_KEY}`,
+      },
+      body: JSON.stringify(requestBody),
+    });
+
+    console.log(`[OpenAI Stream] Response status: ${response.status} ${response.statusText}`);
+
+    if (!response.ok) {
+      const errorBody = await response.text();
+      console.error("[OpenAI Stream] Error response:", errorBody);
+      throw new Error(`OpenAI API error: ${response.status} ${response.statusText} - ${errorBody}`);
+    }
+
+    if (!response.body) throw new Error("No response body from OpenAI");
+    
+    // Transform OpenAI Responses API streaming format to frontend format
+    return this.transformOpenAIResponsesStreamToFrontendFormat(response.body);
+  }
+
+  async tryGemini(
+    text: string,
+    options: HumanizeOptions = {},
+  ): Promise<HumanizeResult> {
+    try {
+      console.log("[Gemini] Preparing request using Vertex AI SDK");
+      console.log("[Gemini] Model:", GEMINI_MODEL);
+      
+      const systemMessage = buildHumanizationSystemMessage(options.isFreeUser);
+      const userMessage = buildHumanizationUserMessage(text);
+      const combinedPrompt = `${systemMessage}\n\n${userMessage}`;
+
+      const config = {
+        maxOutputTokens: 65535,
+        temperature: options.temperature ?? 1,
+        topP: 0.95,
+        thinkingConfig: {
+          thinkingBudget: -1,
+        },
+        safetySettings: [
+          { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "OFF" },
+          { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "OFF" },
+          { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "OFF" },
+          { category: "HARM_CATEGORY_HARASSMENT", threshold: "OFF" }
+        ],
+        tools: GOOGLE_SEARCH_TOOLS,
+      };
+
+      // Use maxOutputTokens from options if available
+      if (options.maxTokens) {
+        config.maxOutputTokens = options.maxTokens;
+      }
+
+      const req = {
+        model: GEMINI_MODEL,
+        contents: [
+          { parts: [{ text: combinedPrompt }] }
+        ],
+        config: config,
+      };
+
+      const result = await ai.models.generateContent(req);
+      const response = result.response;
+      const generatedText = response.text();
+
+      if (!generatedText || generatedText.trim().length === 0) {
+         console.error("[Gemini] No text returned from model");
+         return {
+          success: false,
+          humanizedText: text,
+          tokensUsed: 0,
+          metadata: {
+            source: "gemini",
+            model: GEMINI_MODEL,
+            error: "No text returned from Gemini",
+          },
+          error: "No text returned from Gemini",
+        };
+      }
+
+      console.log(`[Gemini] Generated text length: ${generatedText.length} chars`);
+
+      return {
+        success: true,
+        humanizedText: generatedText,
+        tokensUsed: response.usageMetadata?.totalTokenCount || 0,
+        metadata: {
+          model: GEMINI_MODEL,
+          finishReason: response.candidates?.[0]?.finishReason,
+          source: "gemini",
+        },
+      };
+
+    } catch (error) {
+      console.error("[Gemini] Failed to generate content:", error);
+      return {
+        success: false,
+        humanizedText: text,
+        tokensUsed: 0,
+        metadata: { source: "gemini", error: error instanceof Error ? error.message : String(error) },
+        error: error instanceof Error ? error.message : String(error),
+      };
+    }
+  }
+
+  async tryGeminiStream(
+    text: string,
+    options: HumanizeOptions = {},
+  ): Promise<ReadableStream> {
+    const systemMessage = buildHumanizationSystemMessage(options.isFreeUser);
+    const userMessage = buildHumanizationUserMessage(text);
+    const combinedPrompt = `${systemMessage}\n\n${userMessage}`;
+
+    console.log("[Gemini Stream] Preparing request using Vertex AI SDK");
+    console.log("[Gemini Stream] Model:", GEMINI_MODEL);
+
+    // Calculate max output tokens (similar to existing logic)
+    const inputWordCount = text.split(/\s+/).filter((w: string) => w.trim().length > 0).length;
+    let maxOutputTokens = options.maxTokens;
+    if (!maxOutputTokens) {
+      if (inputWordCount <= 500) maxOutputTokens = 8000;
+      else if (inputWordCount <= 1000) maxOutputTokens = 20000;
+      else if (inputWordCount <= 2000) maxOutputTokens = 45000;
+      else maxOutputTokens = 65535; // Updated to match requested max output tokens
+    }
+
+    const config = {
+      maxOutputTokens: maxOutputTokens,
+      temperature: options.temperature ?? 1,
+      topP: 0.95,
+      thinkingConfig: {
+        thinkingBudget: -1,
+      },
+      safetySettings: [
+        { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "OFF" },
+        { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "OFF" },
+        { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "OFF" },
+        { category: "HARM_CATEGORY_HARASSMENT", threshold: "OFF" }
+      ],
+      tools: GOOGLE_SEARCH_TOOLS,
+    };
+
+    const req = {
+      model: GEMINI_MODEL,
+      contents: [
+        { role: "user", parts: [{ text: combinedPrompt }] }
+      ],
+      config: config,
+    };
+
+    try {
+      // Logic for Vertex AI Endpoints with API Key (when SDK support is limited)
+      if (GEMINI_MODEL.includes("/endpoints/")) {
+        console.log("[Gemini Stream] Using direct fetch for Vertex AI Endpoint");
+        
+        // Construct the Vertex AI URL manually
+        // Format: https://{LOCATION}-aiplatform.googleapis.com/v1beta/{MODEL_RESOURCE_PATH}:streamGenerateContent?key={API_KEY}&alt=sse
+        // GEMINI_MODEL is full resource path: projects/.../locations/europe-west1/endpoints/...
+        const locationMatch = GEMINI_MODEL.match(/locations\/([^\/]+)/);
+        const location = locationMatch ? locationMatch[1] : "us-central1";
+        
+        const url = `https://${location}-aiplatform.googleapis.com/v1/${GEMINI_MODEL}:streamGenerateContent?key=${env.GOOGLE_CLOUD_API_KEY}&alt=sse`;
+        
+        // Prepare request body (mapping SDK config style to API style)
+        // API expects "generationConfig" and separates "safetySettings"
+        const { safetySettings, tools, ...generationConfig } = config;
+        
+        // Only keep thinkingConfig if present (it's inside generationConfig usually)
+        if (generationConfig.thinkingConfig && generationConfig.thinkingConfig.thinkingBudget === -1) {
+           // Ensure it's passed correctly if supported by the model version
+        }
+
+        const body = {
+          contents: req.contents,
+          generationConfig: generationConfig,
+          safetySettings: safetySettings,
+          tools: tools
+        };
+
+        const response = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+
+        if (!response.ok) {
+           const errText = await response.text();
+           throw new Error(`Vertex AI API Error: ${response.status} ${response.statusText} - ${errText}`);
+        }
+
+        if (!response.body) throw new Error("No response body from Vertex AI");
+
+        // Custom stream reader for SSE
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        const encoder = new TextEncoder();
+        
+        return new ReadableStream({
+          async start(controller) {
+            try {
+              let buffer = "";
+              while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                
+                buffer += decoder.decode(value, { stream: true });
+                // Split by newline to handle various SSE formats (standard is \n\n but some send \n)
+                // We will rely on "data: " prefix to identify lines
+                const lines = buffer.split("\n");
+                // Keep the last incomplete line in buffer
+                buffer = lines.pop() || "";
+                
+                for (const line of lines) {
+                   const trimmed = line.trim();
+                   if (trimmed.startsWith("data: ")) {
+                      const jsonStr = trimmed.slice(6);
+                      if (jsonStr === "[DONE]") continue;
+                      
+                      try {
+                        const data = JSON.parse(jsonStr);
+                        
+                        // Log first few chunks for debugging
+                        // if (Math.random() < 0.05) console.log("[Gemini Stream] Raw chunk data:", JSON.stringify(data).substring(0, 100));
+
+                        // Extract text from Vertex response structure
+                        const candidate = data.candidates?.[0];
+                        const content = candidate?.content?.parts?.[0]?.text;
+                        
+                        if (content) {
+                          // Sanitize content to remove smart quotes and encoding artifacts (e.g. )
+                          const sanitizedContent = content.replace(/[\u2018\u2019\u0091\u0092]/g, "'");
+
+                          const frontendChunk = {
+                            type: "content",
+                            choices: [{
+                              delta: { content: sanitizedContent },
+                              index: 0,
+                              finish_reason: null,
+                            }],
+                          };
+                          controller.enqueue(
+                            encoder.encode(`data: ${JSON.stringify(frontendChunk)}\n\n`)
+                          );
+                        } else {
+                           // Sometimes content is empty but finishReason is present, or it's just metadata
+                           if (candidate?.finishReason) {
+                              console.log("[Gemini Stream] Finish reason:", candidate.finishReason);
+                           }
+                        }
+                      } catch (e) {
+                         console.error("[Gemini Stream] Parse error:", e);
+                      }
+                   }
+                }
+              }
+              
+              // Flush buffer logic omitted for simplicity as SSE usually ends with newline
+              
+              controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+              controller.close();
+            } catch (err) {
+               console.error("[Gemini Stream] Error reading stream:", err);
+               controller.error(err);
+            }
+          }
+        });
+
+      } 
+
+      // Default SDK behavior for non-endpoint models (e.g. standard Gemini)
+      const streamingResp = await ai.models.generateContentStream(req);
+
+      const encoder = new TextEncoder();
+
+      return new ReadableStream({
+        async start(controller) {
+          try {
+            for await (const chunk of streamingResp) {
+              const content = typeof chunk.text === "function" ? chunk.text() : (chunk.text ?? "");
+              if (content) {
+                const frontendChunk = {
+                  type: "content",
+                  choices: [{
+                    delta: { content: content },
+                    index: 0,
+                    finish_reason: null,
+                  }],
+                };
+                controller.enqueue(
+                  encoder.encode(`data: ${JSON.stringify(frontendChunk)}\n\n`)
+                );
+              }
+            }
+            
+            controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+            controller.close();
+            
+          } catch (streamError) {
+             console.error("[Gemini Stream] Error in stream loop:", streamError);
+             controller.error(streamError);
+          }
+        }
+      });
+
+    } catch (error) {
+       console.error("[Gemini Stream] Failed to start stream:", error);
+       throw error;
+    }
+  }
+}
+
+export const aiStudios = new AIStudiosAdapter();

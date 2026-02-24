@@ -1,0 +1,230 @@
+/* For Google Tag Manager noscript iframe */
+.gtm-iframe-hidden {
+  display: none;
+  visibility: hidden;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --radius: 1rem;
+  /* Light Mint - Page background */
+  --background: 150 40% 98%;
+  /* Graphite - Primary text */
+  --foreground: 210 25% 15%;
+  /* Paper White - Card surfaces */
+  --card: 0 0% 100%;
+  --card-foreground: 210 25% 15%;
+  /* Paper White - Popover surfaces */
+  --popover: 0 0% 100%;
+  --popover-foreground: 210 25% 15%;
+  /* Mint Green - Primary brand color */
+  --primary: 160 84% 39%;
+  --primary-foreground: 0 0% 100%;
+  /* Coral Peach - Secondary accent */
+  --secondary: 18 100% 80%;
+  --secondary-foreground: 210 25% 15%;
+  /* Light Mint - Muted backgrounds */
+  --muted: 150 40% 98%;
+  /* Slate - Secondary text */
+  --muted-foreground: 215 16% 47%;
+  /* Mint Green - Accent/CTA color */
+  --accent: 160 84% 39%;
+  --accent-foreground: 0 0% 100%;
+  /* Tomato Red - Destructive/Error */
+  --destructive: 0 84% 60%;
+  /* Light Mint border */
+  --border: 150 30% 92%;
+  --input: 150 30% 92%;
+  /* Mint Green - Focus ring */
+  --ring: 160 84% 39%;
+  /* Chart colors using brand palette */
+  --chart-1: 160 84% 39%;
+  --chart-2: 18 100% 62%;
+  --chart-3: 18 100% 80%;
+  --chart-4: 142 76% 36%;
+  --chart-5: 38 92% 50%;
+  /* Sidebar using Light Mint */
+  --sidebar: 150 40% 98%;
+  --sidebar-foreground: 210 25% 15%;
+  --sidebar-primary: 160 84% 39%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 18 100% 80%;
+  --sidebar-accent-foreground: 210 25% 15%;
+  --sidebar-border: 150 30% 92%;
+  --sidebar-ring: 160 84% 39%;
+}
+
+.dark {
+  /* Dark Graphite - Dark background */
+  --background: 210 30% 12%;
+  /* Paper White - Dark mode text */
+  --foreground: 0 0% 98%;
+  /* Darker card surface */
+  --card: 210 28% 15%;
+  --card-foreground: 0 0% 98%;
+  /* Darker popover surface */
+  --popover: 210 28% 15%;
+  --popover-foreground: 0 0% 98%;
+  /* Lighter Mint Green for dark mode */
+  --primary: 160 84% 50%;
+  --primary-foreground: 210 30% 12%;
+  /* Darker Coral Peach */
+  --secondary: 18 80% 40%;
+  --secondary-foreground: 0 0% 98%;
+  /* Darker muted */
+  --muted: 210 25% 20%;
+  /* Lighter Slate for dark mode */
+  --muted-foreground: 215 16% 70%;
+  /* Mint Green for dark mode */
+  --accent: 160 84% 50%;
+  --accent-foreground: 0 0% 100%;
+  /* Lighter Tomato Red for dark mode */
+  --destructive: 0 84% 70%;
+  /* Dark borders */
+  --border: 210 20% 25%;
+  --input: 210 20% 25%;
+  /* Mint Green ring */
+  --ring: 160 84% 50%;
+  /* Dark mode chart colors */
+  --chart-1: 160 84% 50%;
+  --chart-2: 18 100% 62%;
+  --chart-3: 18 100% 80%;
+  --chart-4: 142 76% 45%;
+  --chart-5: 38 92% 60%;
+  /* Dark sidebar */
+  --sidebar: 210 28% 15%;
+  --sidebar-foreground: 0 0% 98%;
+  --sidebar-primary: 160 84% 50%;
+  --sidebar-primary-foreground: 210 30% 12%;
+  --sidebar-accent: 18 80% 40%;
+  --sidebar-accent-foreground: 0 0% 98%;
+  --sidebar-border: 210 20% 25%;
+  --sidebar-ring: 160 84% 50%;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Marquee animation */
+.marquee {
+  animation: marquee 60s linear infinite;
+}
+
+.marquee-container:hover .marquee {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+
+
+/* Enhanced smooth scroll with easing */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* Smooth scroll for all anchor links */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Enhanced fade in up animation with smoother easing */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in animation for elements */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Scale in animation */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Slide in from left */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Glow pulse animation for pricing */
+@keyframes glowPulse {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(59,130,246,0.3), 0 0 40px rgba(59,130,246,0.2);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(59,130,246,0.5), 0 0 60px rgba(59,130,246,0.3), 0 0 80px rgba(59,130,246,0.2);
+  }
+}
+
+/* Apply smooth transitions to sections */
+section {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Smooth hover effects */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
