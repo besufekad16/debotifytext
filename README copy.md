@@ -41,8 +41,8 @@ Welcome to the ultimate AI Text Humanizer SaaS application! This project demonst
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourusername/ai-text-humanizer-saas-app.git
-   cd ai-text-humanizer-saas-app
+   git clone https://github.com/segnia05/HumanifyLab.git
+   cd HumanifyLab
    ```
 
 2. **Install dependencies**
