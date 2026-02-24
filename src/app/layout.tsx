@@ -32,7 +32,10 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [
+    { rel: "icon", url: "/hmanify.png", type: "image/png" },
+    { rel: "apple-touch-icon", url: "/hmanify.png" }
+  ],
   openGraph: {
     type: "website",
     locale: "en_US",
