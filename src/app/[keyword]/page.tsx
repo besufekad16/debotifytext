@@ -8,12 +8,13 @@ interface PageProps {
   params: Promise<{ keyword: string }>;
 }
 
-// CRITICAL: Generate ALL 40,000 pages at build time
-// This will take longer but ensures all pages are pre-rendered
-export const dynamicParams = false; // Only allow params from generateStaticParams
-export const revalidate = false; // No ISR, all pages static
+// PROFESSIONAL ISR STRATEGY: Pre-generate high-priority pages, generate others on-demand
+// This prevents Vercel's 75MB function size limit while maintaining SEO benefits
+export const dynamicParams = true; // Allow on-demand generation for non-prerendered pages
+export const revalidate = 86400; // Revalidate pages every 24 hours (ISR)
 
-// Generate static params for ALL 40,000 keywords at build time
+// Generate static params for HIGH-PRIORITY keywords only at build time
+// Other pages will be generated on-demand when first visited (ISR)
 export async function generateStaticParams() {
   // Load all keywords from JSON
   const fs = await import('fs');
@@ -22,10 +23,27 @@ export async function generateStaticParams() {
   const keywordsContent = fs.readFileSync(keywordsPath, 'utf-8');
   const keywords: string[] = JSON.parse(keywordsContent);
 
-  console.log(`🚀 Generating ${keywords.length.toLocaleString()} static pages at build time...`);
+  // High-priority keywords for pre-generation (top 1000 most important)
+  // These are the most searched terms that should be instantly available
+  const highPriorityTerms = [
+    'humanizer', 'ai', 'detector', 'bypass', 'undetectable', 'free',
+    'chatgpt', 'turnitin', 'gptzero', 'essay', 'text', 'content',
+    'writer', 'generator', 'tool', 'online', 'best', 'paraphrase'
+  ];
 
-  // Return ALL keywords for static generation
-  return keywords.map((keyword) => ({
+  // Pre-generate only high-priority pages (reduces build size by 97.5%)
+  const priorityKeywords = keywords
+    .filter(keyword => {
+      const lower = keyword.toLowerCase();
+      return highPriorityTerms.some(term => lower.includes(term));
+    })
+    .slice(0, 1000); // Limit to 1000 pages for build time
+
+  console.log(`🚀 Pre-generating ${priorityKeywords.length} high-priority pages at build time`);
+  console.log(`📊 Remaining ${keywords.length - priorityKeywords.length} pages will be generated on-demand (ISR)`);
+
+  // Return only priority keywords for build-time generation
+  return priorityKeywords.map((keyword) => ({
     keyword: generateSlug(keyword),
   }));
 }
