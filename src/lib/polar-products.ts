@@ -34,7 +34,7 @@ const UI_DESCRIPTIONS: Record<string, string> = {
 • 7,000 words / mo
 • Up to 600 words per request
 • Basic Humanization Engine
-• Bypass all AI detectors (incl. Turnitin & GPTZero)
+• Natural human tone & style
 • Error free rewriting
 • Default humanization preset
 • All languages supported
@@ -48,7 +48,7 @@ const UI_DESCRIPTIONS: Record<string, string> = {
 • Up to 2,000 words per request
 • Faster processing
 • Advanced Humanization Engine
-• Bypass all AI detectors (incl. Turnitin & GPTZero)
+• Natural human tone & style
 • Error free rewriting
 • All core humanization presets
 • All languages supported
@@ -62,7 +62,7 @@ const UI_DESCRIPTIONS: Record<string, string> = {
 • Up to 3,000 words per request
 • Priority processing
 • Advanced Humanization Engine
-• Bypass all AI detectors (incl. Turnitin & GPTZero)
+• Natural human tone & style
 • Error free rewriting
 • All core humanization presets
 • All languages supported

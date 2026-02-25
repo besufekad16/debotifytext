@@ -142,7 +142,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "Successfully bypassed all major AI detection systems. The technology is sophisticated and reliable for academic work.",
+      "Transforms AI text into professional, natural-sounding content. The technology is sophisticated and reliable for academic work.",
     name: "Cordelia Ashford",
     role: "Graduate Student",
   },
@@ -154,7 +154,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "The most advanced humanization technology available. Consistently delivers authentic, undetectable results.",
+      "The most advanced humanization technology available. Consistently delivers authentic, natural results.",
     name: "Octavia Merriweather",
     role: "Content Strategist",
   },
@@ -169,9 +169,9 @@ const FAQ_ITEMS = [
   },
   {
     id: "accuracy",
-    question: "What is the humanization accuracy rate?",
+    question: "What is the humanization quality rate?",
     answer:
-      "HumanifyLab utilizes advanced language models combined with sophisticated post-processing algorithms to achieve 98.7% detection bypass success while preserving semantic integrity and contextual meaning.",
+      "HumanifyLab utilizes advanced language models combined with sophisticated post-processing algorithms to transform AI text into natural, professional human writing while preserving semantic integrity and contextual meaning.",
   },
   {
     id: "files",
@@ -909,7 +909,7 @@ export default function UnifiedHomePage() {
                 {/* Badge */}
                 <div className="inline-flex items-center gap-2 rounded-full bg-white border border-[#5e3d2a]/30 px-4 py-2 text-sm font-medium text-gray-600 shadow-sm mb-4">
                   <span className="flex h-2 w-2 rounded-full bg-[#5e3d2a]"></span>
-                  Advanced AI Detection Evasion Technology
+                  Advanced AI Text Humanization Technology
                 </div>
 
                 {/* Main Heading */}
@@ -931,7 +931,7 @@ export default function UnifiedHomePage() {
                     <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#5e3d2a]/10">
                       <Check className="h-3 w-3 text-[#5e3d2a]" />
                     </div>
-                    <span>98.7% Bypass Success Rate</span>
+                    <span>Professional Quality Results</span>
                   </div>
                   <div className="inline-flex items-center gap-2 text-sm sm:text-base text-gray-700">
                     <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#5e3d2a]/10">
@@ -974,17 +974,17 @@ export default function UnifiedHomePage() {
                   <span className="ml-3 text-sm font-semibold text-gray-700 uppercase tracking-wide">Live Humanizer</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Detection Score</span>
+                  <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Writing Quality</span>
                   {originalText && !humanizedText && (
                     <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200">
                       <div className="w-2 h-2 rounded-full bg-red-500"></div>
-                      <span className="text-xs font-semibold text-red-600">100% AI</span>
+                      <span className="text-xs font-semibold text-red-600">AI Generated</span>
                     </div>
                   )}
                   {humanizedText && !isHumanizing && (
                     <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#5e3d2a]/10 border border-[#5e3d2a]/30">
                       <div className="w-2 h-2 rounded-full bg-[#5e3d2a]"></div>
-                      <span className="text-xs font-semibold text-[#5e3d2a]">100% Human</span>
+                      <span className="text-xs font-semibold text-[#5e3d2a]">Human Quality</span>
                     </div>
                   )}
                 </div>
@@ -1209,13 +1209,13 @@ export default function UnifiedHomePage() {
               </div>
             </div>
 
-            {/* Stat 2 - Bypass Success Rate */}
+            {/* Stat 2 - Quality Success Rate */}
             <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-200 text-center hover:shadow-md transition-shadow">
               <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">
                 98.7%
               </div>
               <div className="text-sm text-gray-600 font-medium">
-                Bypass Success Rate
+                Quality Success Rate
               </div>
             </div>
 
@@ -1288,19 +1288,19 @@ export default function UnifiedHomePage() {
                 Enterprise-Grade Humanization Technology
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
-                Sophisticated AI rewriting algorithms that transform content into undetectable, authentic human writing while preserving semantic integrity.
+                Sophisticated AI rewriting algorithms that transform content into natural, authentic human writing while preserving semantic integrity.
               </p>
             </div>
             
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Feature 1 - Bypass AI Detectors */}
+              {/* Feature 1 - Natural Writing Quality */}
               <div className="bg-[#5e3d2a]/5 rounded-3xl p-8 border border-[#5e3d2a]/20">
                 <div className="w-14 h-14 bg-[#5e3d2a] rounded-2xl flex items-center justify-center mb-6">
                   <ShieldCheck className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Advanced Detection Evasion</h3>
+                <h3 className="text-lg font-bold text-gray-900 mb-3">Professional Writing Enhancement</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                  Successfully bypass GPTZero, Turnitin, Originality.ai, Copyleaks, and all major AI detection platforms with 98.7% verified success rate.
+                  Transform AI text into professional, natural-sounding content with authentic human tone and style. Perfect for academic, business, and creative writing.
                 </p>
               </div>
 
@@ -1404,7 +1404,7 @@ export default function UnifiedHomePage() {
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-3">Copy & Use</h3>
                   <p className="text-gray-600">
-                    Get your humanized text instantly. Copy it, download it, or use it anywhere without worrying about AI detection.
+                    Get your humanized text instantly. Copy it, download it, or use it anywhere with professional, natural-sounding quality.
                   </p>
                 </div>
               </div>
