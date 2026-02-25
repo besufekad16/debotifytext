@@ -38,9 +38,17 @@ Disallow: /static/
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
 
-# Sitemap locations (canonical domain with www)
+# Sitemap locations (all 8 sitemaps + indexes)
 Sitemap: https://www.humanifylab.com/sitemap.xml
 Sitemap: https://www.humanifylab.com/sitemaps/sitemap-index.xml
+Sitemap: https://www.humanifylab.com/sitemaps/sitemap-1.xml
+Sitemap: https://www.humanifylab.com/sitemaps/sitemap-2.xml
+Sitemap: https://www.humanifylab.com/sitemaps/sitemap-3.xml
+Sitemap: https://www.humanifylab.com/sitemaps/sitemap-4.xml
+Sitemap: https://www.humanifylab.com/sitemaps/sitemap-5.xml
+Sitemap: https://www.humanifylab.com/sitemaps/sitemap-6.xml
+Sitemap: https://www.humanifylab.com/sitemaps/sitemap-7.xml
+Sitemap: https://www.humanifylab.com/sitemaps/sitemap-8.xml
 
 # Additional metadata
 # Website: https://www.humanifylab.com
