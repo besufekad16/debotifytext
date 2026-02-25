@@ -1,46 +1,23 @@
-# robots.txt for www.humanifylab.com
-# HumanifyLab - Professional AI Humanizer
-# Allow all web crawlers to access all content except sensitive areas
+# HumanifyLab - Professional SEO Configuration
+# Website: https://www.humanifylab.com
+# Last Updated: 2026-02-25
 
 User-agent: *
 Allow: /
-Allow: /pricing
-Allow: /faq
-Allow: /contact
-Allow: /privacy
-Allow: /terms
-Allow: /responsible-use
-
-# Allow all keyword pages for SEO
-Allow: /ai-humanizer
-Allow: /humanize-ai-text
-Allow: /bypass-turnitin
-Allow: /free-ai-humanizer
-Allow: /bypass-gptzero
-Allow: /humanizer
-Allow: /*
-
-# Block API endpoints
 Disallow: /api/
-
-# Block authentication routes (handled by Clerk)
-Disallow: /auth/
-Disallow: /sign-in
-Disallow: /sign-up
-Disallow: /account
-Disallow: /api-keys
-Disallow: /team
-
-# Block internal Next.js routes
 Disallow: /_next/
-Disallow: /static/
+Disallow: /admin/
+Disallow: /account/
+Disallow: /team/
+Disallow: /api-keys/
 
-# Crawl-delay for respectful crawling
-Crawl-delay: 1
-
-# Sitemap locations (all 8 sitemaps + indexes)
+# Main Sitemap (10 main pages)
 Sitemap: https://www.humanifylab.com/sitemap.xml
+
+# Sitemap Index (references all sitemaps)
 Sitemap: https://www.humanifylab.com/sitemaps/sitemap-index.xml
+
+# Keyword Sitemaps (40,000 keyword pages)
 Sitemap: https://www.humanifylab.com/sitemaps/sitemap-1.xml
 Sitemap: https://www.humanifylab.com/sitemaps/sitemap-2.xml
 Sitemap: https://www.humanifylab.com/sitemaps/sitemap-3.xml
@@ -50,7 +27,8 @@ Sitemap: https://www.humanifylab.com/sitemaps/sitemap-6.xml
 Sitemap: https://www.humanifylab.com/sitemaps/sitemap-7.xml
 Sitemap: https://www.humanifylab.com/sitemaps/sitemap-8.xml
 
-# Additional metadata
-# Website: https://www.humanifylab.com
-# Contact: humanifylab1@gmail.com
-# Brand: HumanifyLab - AI Humanizer
+# Crawl Settings
+Crawl-delay: 0
+
+# Host
+Host: https://www.humanifylab.com

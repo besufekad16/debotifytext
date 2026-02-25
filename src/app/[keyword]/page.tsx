@@ -1,45 +1,32 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import SEOPageLayout from "~/components/SEOPageLayout";
-import { getKeywordBySlug } from "~/lib/pseo-keywords";
+import { getKeywordBySlug, generateSlug } from "~/lib/pseo-keywords";
 import { generateSEOContent } from "~/lib/pseo-content";
 
 interface PageProps {
   params: Promise<{ keyword: string }>;
 }
 
-// CRITICAL: Don't generate all pages at build time (368k pages = memory overflow)
-// Instead, use ISR (Incremental Static Regeneration) with on-demand generation
-// Pages will be generated on first visit and cached
-export const dynamicParams = true; // Allow dynamic params not in generateStaticParams
-export const revalidate = 86400; // Revalidate every 24 hours (ISR)
+// CRITICAL: Generate ALL 40,000 pages at build time
+// This will take longer but ensures all pages are pre-rendered
+export const dynamicParams = false; // Only allow params from generateStaticParams
+export const revalidate = false; // No ISR, all pages static
 
-// Generate static params for TOP PRIORITY pages only (not all 368k)
-// This prevents build timeout and memory issues
+// Generate static params for ALL 40,000 keywords at build time
 export async function generateStaticParams() {
-  // Only pre-generate top 10 highest-value keywords at build time
-  // All other pages will be generated on-demand with ISR
-  const topKeywords = [
-    'ai-humanizer',
-    'humanize-ai-text',
-    'bypass-turnitin',
-    'free-ai-humanizer',
-    'bypass-gptzero',
-    'ai-detector-bypass',
-    'humanize-chatgpt',
-    'make-ai-undetectable',
-    'undetectable-ai',
-    'bypass-ai-detection',
-    'claritybubble',
-     'humanizer',
-     'zerogpt',
-     'gptzero',
-     'quillbot',
-     'aidetector',
-  ];
+  // Load all keywords from JSON
+  const fs = await import('fs');
+  const path = await import('path');
+  const keywordsPath = path.join(process.cwd(), 'public', 'data', 'keywords.json');
+  const keywordsContent = fs.readFileSync(keywordsPath, 'utf-8');
+  const keywords: string[] = JSON.parse(keywordsContent);
 
-  return topKeywords.map((slug) => ({
-    keyword: slug,
+  console.log(`🚀 Generating ${keywords.length.toLocaleString()} static pages at build time...`);
+
+  // Return ALL keywords for static generation
+  return keywords.map((keyword) => ({
+    keyword: generateSlug(keyword),
   }));
 }
 

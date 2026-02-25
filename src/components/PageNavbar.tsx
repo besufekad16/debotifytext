@@ -65,7 +65,7 @@ export default function PageNavbar({ onHistoryClick, currentCredits, variant = "
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="/hmanify.png"
+            src="/humanify.png"
             alt="HumanifyLab logo"
             width={40}
             height={40}

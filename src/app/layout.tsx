@@ -1,7 +1,6 @@
 import "../styles/globals.css";
 
 import { type Metadata } from "next";
-import keywords from "../keywords";
 import { Toaster } from "sonner";
 import { ClerkProvider } from "@clerk/nextjs";
 import { GeistSans } from "geist/font/sans";
@@ -14,7 +13,19 @@ export const metadata: Metadata = {
     template: "%s | HumanifyLab"
   },
   description: "Enterprise-grade AI humanization technology. Transform AI-generated content into authentic human writing with 98.7% detection bypass success. Trusted by professionals worldwide.",
-  keywords,
+  keywords: [
+    'ai humanizer',
+    'humanize ai text',
+    'ai detection bypass',
+    'undetectable ai',
+    'bypass turnitin',
+    'bypass gptzero',
+    'free ai humanizer',
+    'humanifylab',
+    'humanizer',
+    'ai text converter',
+    'make ai undetectable'
+  ],
   authors: [{ name: "HumanifyLab" }],
   creator: "HumanifyLab",
   publisher: "HumanifyLab",
@@ -33,8 +44,8 @@ export const metadata: Metadata = {
     },
   },
   icons: [
-    { rel: "icon", url: "/hmanify.png", type: "image/png" },
-    { rel: "apple-touch-icon", url: "/hmanify.png" }
+    { rel: "icon", url: "/humanify.png", type: "image/png" },
+    { rel: "apple-touch-icon", url: "/humanify.png" }
   ],
   openGraph: {
     type: "website",
@@ -58,7 +69,7 @@ export const metadata: Metadata = {
       "@type": "WebSite",
       "name": "HumanifyLab",
       "url": "https://www.humanifylab.com",
-      "keywords": keywords
+      "keywords": "ai humanizer, humanize ai text, ai detection bypass, undetectable ai, bypass turnitin, bypass gptzero, free ai humanizer, humanifylab"
     })
   },
   twitter: {

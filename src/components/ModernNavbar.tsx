@@ -59,7 +59,7 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5">
           <Image
-            src="/hmanify.png"
+            src="/humanify.png"
             alt="HumanifyLab logo"
             width={40}
             height={40}
