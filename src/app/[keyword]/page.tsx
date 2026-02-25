@@ -15,24 +15,60 @@ export const revalidate = 86400; // Revalidate pages every 24 hours (ISR)
 
 // Generate static params for HIGH-PRIORITY keywords only at build time
 // Other pages will be generated on-demand when first visited (ISR)
+// 
+// Note: Main pages (/, /pricing, /faq, /contact, /sign-in, /sign-up, /terms, /privacy)
+// are separate routes and are automatically built by Next.js
 export async function generateStaticParams() {
-  // For initial deployment, pre-generate only a small set of pages
-  // This ensures the build completes successfully
-  // You can increase this number after the first successful deployment
+  try {
+    // Load keywords from JSON file
+    const fs = await import('fs');
+    const path = await import('path');
+    const keywordsPath = path.join(process.cwd(), 'public', 'data', 'keywords.json');
+    
+    // Check if file exists
+    if (fs.existsSync(keywordsPath)) {
+      const keywordsContent = fs.readFileSync(keywordsPath, 'utf-8');
+      const keywords: string[] = JSON.parse(keywordsContent);
+      
+      // High-priority terms for filtering
+      const highPriorityTerms = [
+        'humanizer', 'ai', 'detector', 'bypass', 'undetectable', 'free',
+        'chatgpt', 'turnitin', 'gptzero', 'essay', 'text', 'content',
+        'writer', 'generator', 'tool', 'online', 'best', 'paraphrase',
+        'rewrite', 'converter', 'check', 'remove', 'make', 'create'
+      ];
+      
+      // Filter to high-priority keywords
+      const priorityKeywords = keywords
+        .filter(keyword => {
+          const lower = keyword.toLowerCase();
+          return highPriorityTerms.some(term => lower.includes(term));
+        })
+        .slice(0, 1000); // Limit to 1000 pages
+      
+      console.log(`🚀 Pre-generating ${priorityKeywords.length} high-priority keyword pages at build time`);
+      console.log(`📊 Main pages (/, /pricing, /faq, /contact, /sign-in, /sign-up, /terms, /privacy) are built automatically`);
+      console.log(`📊 Remaining ${keywords.length - priorityKeywords.length} keyword pages will be generated on-demand (ISR)`);
+      
+      return priorityKeywords.map((keyword) => ({
+        keyword: generateSlug(keyword),
+      }));
+    }
+  } catch (error) {
+    console.error('⚠️  Failed to load keywords from JSON, using fallback:', error);
+  }
   
-  const priorityKeywords = [
+  // Fallback to essential keywords if JSON loading fails
+  const fallbackKeywords = [
     'ai-humanizer',
     'humanize-ai-text',
     'free-ai-humanizer',
     'chatgpt-humanizer',
-    'ai-text-humanizer',
   ];
-
-  console.log(`🚀 Pre-generating ${priorityKeywords.length} high-priority pages at build time`);
-  console.log(`📊 All other pages will be generated on-demand (ISR)`);
-
-  // Return only priority keywords for build-time generation
-  return priorityKeywords.map((keyword) => ({
+  
+  console.log(`🚀 Using fallback: Pre-generating ${fallbackKeywords.length} keyword pages`);
+  
+  return fallbackKeywords.map((keyword) => ({
     keyword: keyword,
   }));
 }
