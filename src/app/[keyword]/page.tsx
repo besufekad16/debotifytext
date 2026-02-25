@@ -16,35 +16,24 @@ export const revalidate = 86400; // Revalidate pages every 24 hours (ISR)
 // Generate static params for HIGH-PRIORITY keywords only at build time
 // Other pages will be generated on-demand when first visited (ISR)
 export async function generateStaticParams() {
-  // Load all keywords from JSON
-  const fs = await import('fs');
-  const path = await import('path');
-  const keywordsPath = path.join(process.cwd(), 'public', 'data', 'keywords.json');
-  const keywordsContent = fs.readFileSync(keywordsPath, 'utf-8');
-  const keywords: string[] = JSON.parse(keywordsContent);
-
-  // High-priority keywords for pre-generation (top 1000 most important)
-  // These are the most searched terms that should be instantly available
-  const highPriorityTerms = [
-    'humanizer', 'ai', 'detector', 'bypass', 'undetectable', 'free',
-    'chatgpt', 'turnitin', 'gptzero', 'essay', 'text', 'content',
-    'writer', 'generator', 'tool', 'online', 'best', 'paraphrase'
+  // For initial deployment, pre-generate only a small set of pages
+  // This ensures the build completes successfully
+  // You can increase this number after the first successful deployment
+  
+  const priorityKeywords = [
+    'ai-humanizer',
+    'humanize-ai-text',
+    'free-ai-humanizer',
+    'chatgpt-humanizer',
+    'ai-text-humanizer',
   ];
 
-  // Pre-generat only high-priority pages (reduces build size by 97.5%)
-  const priorityKeywords = keywords
-    .filter(keyword => {
-      const lower = keyword.toLowerCase();
-      return highPriorityTerms.some(term => lower.includes(term));
-    })
-    .slice(0, 1000); // Limit to 1000 pages for build time
-
   console.log(`🚀 Pre-generating ${priorityKeywords.length} high-priority pages at build time`);
-  console.log(`📊 Remaining ${keywords.length - priorityKeywords.length} pages will be generated on-demand (ISR)`);
+  console.log(`📊 All other pages will be generated on-demand (ISR)`);
 
   // Return only priority keywords for build-time generation
   return priorityKeywords.map((keyword) => ({
-    keyword: generateSlug(keyword),
+    keyword: keyword,
   }));
 }
 
