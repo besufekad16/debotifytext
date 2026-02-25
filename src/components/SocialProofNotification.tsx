@@ -36,6 +36,7 @@ export default function SocialProofNotification() {
   const [currentNotification, setCurrentNotification] = useState<Notification | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [isEntering, setIsEntering] = useState(false);
 
   useEffect(() => {
     // Function to show a notification
@@ -43,7 +44,13 @@ export default function SocialProofNotification() {
       const notification = generateRandomNotification();
       setCurrentNotification(notification);
       setIsVisible(true);
+      setIsEntering(true);
       setIsClosing(false);
+
+      // Remove entering state after animation completes
+      setTimeout(() => {
+        setIsEntering(false);
+      }, 700);
 
       // Auto-dismiss after 2 seconds
       setTimeout(() => {
@@ -72,15 +79,15 @@ export default function SocialProofNotification() {
       setIsVisible(false);
       setCurrentNotification(null);
       setIsClosing(false);
-    }, 300); // Match animation duration
+    }, 700); // Match animation duration (700ms)
   };
 
   if (!isVisible || !currentNotification) return null;
 
   return (
     <div
-      className={`fixed bottom-6 left-6 z-40 max-w-sm transition-all duration-300 ease-out ${
-        isClosing ? "opacity-0 -translate-x-8" : "opacity-100 translate-x-0"
+      className={`fixed bottom-6 left-6 z-40 max-w-sm transition-all duration-700 ease-in-out ${
+        isEntering ? "opacity-0 -translate-x-12" : isClosing ? "opacity-0 -translate-x-12" : "opacity-100 translate-x-0"
       }`}
     >
       <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4 pr-12 relative">
@@ -104,7 +111,7 @@ export default function SocialProofNotification() {
           <div className="flex-1 pt-1">
             <p className="text-sm text-gray-700 leading-relaxed">
               Someone just humanized{" "}
-              <span className="font-bold text-gray-900">{currentNotification.words} words</span>{" "}
+              <span className="font-bold text-gray-900">{currentNotification.words.toLocaleString()} words</span>{" "}
               using{" "}
               <span
                 className={`font-bold ${
