@@ -31,7 +31,7 @@ export async function generateStaticParams() {
     'writer', 'generator', 'tool', 'online', 'best', 'paraphrase'
   ];
 
-  // Pre-generate only high-priority pages (reduces build size by 97.5%)
+  // Pre-generat only high-priority pages (reduces build size by 97.5%)
   const priorityKeywords = keywords
     .filter(keyword => {
       const lower = keyword.toLowerCase();
