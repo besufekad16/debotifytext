@@ -112,7 +112,7 @@ export async function fetchPolarProductsFromEnv(): Promise<PolarPricingTier[]> {
       key: tier.key,
       name: canonical.name,
       description: canonical.description ?? null,
-      uiDescription: UI_DESCRIPTIONS[tier.key] ?? canonical.description ?? null,
+      uiDescription: UI_DESCRIPTIONS[tier.key] ?? canonical.description ?? undefined,
       monthly: monthly ?? null,
       yearly: yearly ?? null,
     });

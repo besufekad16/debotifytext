@@ -25,4 +25,21 @@ const SITE_URL = 'https://www.humanifylab.com';
 
 // Priority pages to request indexing for
 const PRIORITY_URLS = [
-  '/',       
+  '/',
+  '/pricing',
+  '/faq',
+  '/contact',
+  '/sign-up',
+  '/sign-in',
+];
+
+async function requestIndexing() {
+  console.log('Google Indexing API - Request indexing for priority pages');
+  console.log('Note: This is a placeholder. Implement with service account credentials.');
+  
+  for (const url of PRIORITY_URLS) {
+    console.log(`Would request indexing for: ${SITE_URL}${url}`);
+  }
+}
+
+requestIndexing().catch(console.error);

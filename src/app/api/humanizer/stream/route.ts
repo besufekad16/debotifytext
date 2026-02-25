@@ -369,11 +369,11 @@ export async function POST(request: NextRequest) {
     console.log(`[STREAM API] Starting stream with model: ${options.model || DEFAULT_MODEL}`);
   }
 
-  const isFreeUser = !isPremiumUser(billingUser.subscriptionPlan);
+  const isFreeUser = !isPremiumUser(billingUser.subscriptionPlan as any);
 
   // Select appropriate adapter based on subscription plan
-  const adapter = getHumanizationAdapter(billingUser.subscriptionPlan);
-  const adapterName = getAdapterName(billingUser.subscriptionPlan);
+  const adapter = getHumanizationAdapter(billingUser.subscriptionPlan as any);
+  const adapterName = getAdapterName(billingUser.subscriptionPlan as any);
   
   if (isDev) {
     console.log(`[STREAM API] Using ${adapterName} adapter for ${billingUser.subscriptionPlan || 'free'} user`);

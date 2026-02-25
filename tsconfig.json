@@ -39,5 +39,11 @@
     "**/*.js",
     ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "check-webhook-config.js",
+    "verify-checkout-fix.cjs",
+    "scripts/generate-sitemaps.js",
+    "test-polar-checkout.js"
+  ]
 }
