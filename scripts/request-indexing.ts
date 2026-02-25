@@ -42,4 +42,4 @@ async function requestIndexing() {
   }
 }
 
-requestIndexing().catch(console.error);
+requestIndexing().catch(console.error); 

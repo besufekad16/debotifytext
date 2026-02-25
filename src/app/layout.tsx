@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import { ClerkProvider } from "@clerk/nextjs";
 import { GeistSans } from "geist/font/sans";
 import CookieConsent from "~/components/CookieConsent";
+import { TooltipProvider } from "~/components/ui/tooltip";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.humanifylab.com'),
@@ -181,7 +182,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
           />
-          {children}
+          <TooltipProvider>
+            {children}
+          </TooltipProvider>
           <CookieConsent />
           <Toaster />
         </body>
