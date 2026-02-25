@@ -2,6 +2,19 @@
 // Total: 368827 keywords
 
 const seoKeywords = [
+  // CRITICAL BRAND KEYWORDS (Must be first for priority)
+  "humanifylab",
+  "humanify lab",
+  "humanifylab humanizer",
+  "humanify",
+  "humanifylab ai humanizer",
+  "humanifylab text humanizer",
+  "humanifylab free",
+  "humanifylab review",
+  "humanifylab pricing",
+  "humanifylab alternative",
+  
+  // Standard keywords
   "humanize",
 "humanizer",
 "humanized",
