@@ -42,6 +42,9 @@ import { cn } from "~/lib/utils";
 import { SiteFooter } from "~/components/SiteFooter";
 import HowToUseSection from "~/components/HowToUseSection";
 import FactsSection from "~/components/FactsSection";
+import PricingModal from "~/components/PricingModal";
+import { usePricingModal } from "~/hooks/usePricingModal";
+import SocialProofNotification from "~/components/SocialProofNotification";
 
 const PRESETS = [
   { value: "default", label: "Default", description: "Standard humanization for all users", isPremium: false },
@@ -208,6 +211,10 @@ interface HistoryItem {
 
 export default function UnifiedHomePage() {
   const { isSignedIn, user } = useUser();
+  
+  // Pricing Modal Hook
+  const { isOpen: isPricingModalOpen, closeModal: closePricingModal } = usePricingModal();
+  
   const [originalText, setOriginalText] = useState("");
   const [humanizedText, setHumanizedText] = useState("");
   const [preset, setPreset] = useState("default");
@@ -1503,6 +1510,12 @@ export default function UnifiedHomePage() {
         </section>
       </main>
       <SiteFooter />
+      
+      {/* Pricing Modal - Shows after sign-in for free users */}
+      <PricingModal isOpen={isPricingModalOpen} onClose={closePricingModal} />
+      
+      {/* Social Proof Notifications - Bottom-left corner */}
+      <SocialProofNotification />
     </div>
   );
 }
