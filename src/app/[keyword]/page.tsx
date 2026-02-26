@@ -32,10 +32,10 @@ export async function generateStaticParams() {
       
       // High-priority terms for filtering
       const highPriorityTerms = [
-        'humanizer', 'ai', 'detector', 'bypass', 'undetectable', 'free',
-        'chatgpt', 'turnitin', 'gptzero', 'essay', 'text', 'content',
+        'humanizer', 'ai', 'free', 'quality', 'professional',
+        'chatgpt', 'writing', 'essay', 'text', 'content',
         'writer', 'generator', 'tool', 'online', 'best', 'paraphrase',
-        'rewrite', 'converter', 'check', 'remove', 'make', 'create'
+        'rewrite', 'converter', 'enhance', 'improve', 'natural'
       ];
       
       // Filter to high-priority keywords
@@ -98,14 +98,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     keywords: [
       keywordData.keyword, 
       'ai humanizer', 
-      'ai detection bypass', 
-      'undetectable ai', 
+      'writing quality enhancement', 
+      'natural writing', 
       'humanize ai text',
-      'bypass turnitin',
-      'bypass gptzero',
+      'professional writing',
+      'authentic writing',
       'free ai humanizer',
       'ai text converter',
-      'make ai undetectable'
+      'enhance AI text naturally'
     ],
     authors: [{ name: 'HumanifyLab' }],
     creator: 'HumanifyLab',

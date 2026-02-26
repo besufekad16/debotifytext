@@ -33,8 +33,8 @@ const steps = [
   },
   {
     step: "04",
-    title: "Bypass Detection",
-    description: "Download your 100% humanified text. It's now ready to pass every major AI detector with flying colors, guaranteed.",
+    title: "Achieve Quality",
+    description: "Download your professionally humanized text. It now reads naturally with authentic human tone and style.",
     icon: ShieldCheck,
     color: "from-emerald-500 to-emerald-600",
     lightColor: "bg-brand-green/10",

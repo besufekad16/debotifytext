@@ -20,7 +20,7 @@ export function SiteFooter() {
               </span>
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed max-w-md">
-              Enterprise-grade AI humanization technology. Transform AI-generated content into authentic, professional writing that bypasses all detection systems.
+              Enterprise-grade AI humanization technology. Transform AI-generated content into authentic, professional writing that meets professional quality standards.
             </p>
           </div>
 

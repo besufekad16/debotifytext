@@ -48,10 +48,10 @@ export default function ComparisonSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-10">
           <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight mb-2">
-            The Only Humanizer That Passes All Detectors
+            Professional Writing Enhancement Technology
           </h2>
           <p className="text-sm sm:text-base text-slate-500">
-            See how our humanizer transforms AI text into natural, undetectable writing that beats GPTZero, Turnitin, and more.
+            See how our humanizer transforms AI text into natural, professional writing that reads authentically human.
            
           </p>
         </div>

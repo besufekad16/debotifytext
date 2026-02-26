@@ -21,13 +21,13 @@ export default function FactsSection() {
             <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
               <ShieldCheck className="h-6 w-6 text-primary" />
             </div>
-            <h3 className="text-xl font-bold text-foreground mb-3">99.9% Undetectable</h3>
+            <h3 className="text-xl font-bold text-foreground mb-3">Professional-Grade Quality</h3>
             <div className="mb-4">
               <span className="text-4xl font-extrabold text-foreground tracking-tight">100%</span>
               <span className="text-sm text-muted-foreground font-medium ml-2">Human Score</span>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              We bypass Turnitin, GPTZero, Originality.ai, and all major detectors by eliminating AI fingerprints.
+              We ensure your writing meets the highest professional standards with natural, authentic human tone and style.
             </p>
           </div>
 

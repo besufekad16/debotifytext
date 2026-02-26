@@ -152,7 +152,7 @@ export default function SEOPageLayout({ content, keyword }: SEOPageLayoutProps) 
             💡 Ready to Experience the Difference?
           </h2>
           <p className="text-lg mb-6 opacity-90 max-w-2xl mx-auto">
-            Transform your AI content into undetectable, human-like text in seconds. Join 450,000+ satisfied users.
+            Transform your AI content into natural, human-like text in seconds. Join 450,000+ satisfied users.
           </p>
           <Link href="/">
             <Button 
@@ -221,7 +221,7 @@ export default function SEOPageLayout({ content, keyword }: SEOPageLayoutProps) 
             Transform Your AI Content Today
           </p>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Experience the most advanced AI humanization technology. Bypass all detectors with 99.9% success rate.
+            Experience the most advanced AI humanization technology. achieve professional quality with 99.9% success rate.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/">

@@ -12,7 +12,7 @@ import SubscriptionManagement from "~/components/SubscriptionManagement";
 
 export const metadata: Metadata = {
   title: "Account - HumanifyLab | Manage Your Free AI Humanizer",
-  description: "Manage your HumanifyLab account and credits. Access your free AI humanizer and track your usage for bypassing AI detectors.",
+  description: "Manage your HumanifyLab account and credits. Access your AI humanizer and track your usage for professional writing enhancement.",
   keywords: [
     "ai humanizer",
     "humanizer",
