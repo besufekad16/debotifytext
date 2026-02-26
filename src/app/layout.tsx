@@ -10,22 +10,20 @@ import { TooltipProvider } from "~/components/ui/tooltip";
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.humanifylab.com'),
   title: {
-    default: "Professional AI Humanizer - Advanced Detection Bypass | HumanifyLab",
+    default: "Professional AI Humanizer - Advanced Text Enhancement | HumanifyLab",
     template: "%s | HumanifyLab"
   },
-  description: "Enterprise-grade AI humanization technology. Transform AI-generated content into authentic human writing with 98.7% detection bypass success. Trusted by professionals worldwide.",
+  description: "Enterprise-grade AI humanization technology. Transform AI-generated content into authentic, professional human writing. Trusted by professionals worldwide.",
   keywords: [
     'ai humanizer',
     'humanize ai text',
-    'ai detection bypass',
-    'undetectable ai',
-    'bypass turnitin',
-    'bypass gptzero',
+    'natural writing',
+    'professional writing',
     'free ai humanizer',
     'humanifylab',
     'humanizer',
     'ai text converter',
-    'make ai undetectable'
+    'writing enhancement'
   ],
   authors: [{ name: "HumanifyLab" }],
   creator: "HumanifyLab",
@@ -53,8 +51,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://www.humanifylab.com",
     siteName: "HumanifyLab",
-    title: "Professional AI Humanizer - Advanced Detection Bypass | HumanifyLab",
-    description: "Enterprise-grade AI humanization technology. Transform AI-generated content into authentic human writing. 98.7% detection bypass success.",
+    title: "Professional AI Humanizer - Advanced Text Enhancement | HumanifyLab",
+    description: "Enterprise-grade AI humanization technology. Transform AI-generated content into authentic, professional human writing.",
     images: [
       {
         url: "/forOpenGraph.png",
@@ -70,13 +68,13 @@ export const metadata: Metadata = {
       "@type": "WebSite",
       "name": "HumanifyLab",
       "url": "https://www.humanifylab.com",
-      "keywords": "ai humanizer, humanize ai text, ai detection bypass, undetectable ai, bypass turnitin, bypass gptzero, free ai humanizer, humanifylab"
+      "keywords": "ai humanizer, humanize ai text, natural writing, professional writing, free ai humanizer, humanifylab"
     })
   },
   twitter: {
     card: "summary_large_image",
-    title: "Professional AI Humanizer - Advanced Detection Bypass | HumanifyLab",
-    description: "Enterprise-grade AI humanization technology. Transform AI-generated content into authentic human writing. 98.7% detection bypass success.",
+    title: "Professional AI Humanizer - Advanced Text Enhancement | HumanifyLab",
+    description: "Enterprise-grade AI humanization technology. Transform AI-generated content into authentic, professional human writing.",
     images: ["/forOpenGraph.png"],
     site: "@humanifylab",
     creator: "@humanifylab",

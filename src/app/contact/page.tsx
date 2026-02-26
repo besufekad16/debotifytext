@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: "Connect with the HumanifyLab team. Professional support for enterprise-grade AI humanization technology and custom solutions.",
   keywords: [
     "ai humanizer",
-    "AI detection bypass",
+    "writing enhancement",
     "humanize AI text",
     "humanizer",
     "HumanifyLab contact",

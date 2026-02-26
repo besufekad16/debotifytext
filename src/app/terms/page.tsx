@@ -79,11 +79,11 @@ export default function TermsPage() {
                                 3. Description of Service
                             </h2>
                             <p className="text-base text-slate-600 leading-relaxed">
-                                HumanifyLab provides an AI-powered text humanization service that transforms AI-generated content into natural, human-like writing. Our service includes:
+                                HumanifyLab provides an AI-powered text humanization service that transforms AI-generated content into natural, human-like writing with professional quality and authentic tone. Our service includes:
                             </p>
                             <ul className="space-y-2 ml-4 list-disc list-outside text-base text-slate-600">
                                 <li>Text humanization with multiple style presets</li>
-                                <li>AI detection bypass capabilities</li>
+                                <li>Natural writing enhancement capabilities</li>
                                 <li>Credit-based usage system</li>
                                 <li>API access for ULTRA plan subscribers</li>
                                 <li>History tracking and management</li>
@@ -174,8 +174,8 @@ export default function TermsPage() {
                             </p>
                             <ul className="space-y-2 ml-4 list-disc list-outside text-base text-slate-600">
                                 <li>The service will be uninterrupted or error-free</li>
-                                <li>The humanized text will bypass all AI detection systems</li>
-                                <li>The service will meet all your specific requirements</li>
+                                <li>The humanized text will meet all your specific requirements</li>
+                                <li>The service will produce perfect results in every case</li>
                                 <li>All errors will be corrected</li>
                             </ul>
                         </section>

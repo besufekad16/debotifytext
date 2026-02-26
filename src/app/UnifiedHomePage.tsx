@@ -79,49 +79,6 @@ const HUMANIZING_PROCESSES = [
   "Ensuring natural expression"
 ];
 
-const DETECTOR_BADGES = [
-  {
-    name: "Turnitin",
-    accent: "bg-[#f7faff]", // softer red tint
-    logoSrc: "/logo/turnitin.png",
-  },
-  {
-    name: "GPTZero",
-    accent: "bg-[#f5faff]", // soft green tint
-    logoSrc: "/logo/GPTZero.png",
-  },
-  {
-    name: "Copyleaks",
-    accent: "bg-[#f5faff]", // soft blue tint
-    logoSrc: "/logo/copyleaks.png",
-  },
-  {
-    name: "ZeroGPT",
-    accent: "bg-[#f4fdfa]", // gentle purple tint
-    logoSrc: "/logo/zeroGPT.png",
-  },
-  {
-    name: "QuillBot",
-    accent: "bg-[#f5fdf7]", // subtle green tint
-    logoSrc: "/logo/quillbot.png",
-  },
-  {
-    name: "Originality.ai",
-    accent: "bg-[#faf8ff]", // light peach tint
-    logoSrc: "/logo/originality.png",
-  },
-  {
-    name: "Sapling",
-    accent: "bg-[#fdf5f5]", // light natural green
-    logoSrc: "/logo/sapling.png",
-  },
-  {
-    name: "Writer",
-    accent: "bg-[#f7faff]", // very soft blue
-    logoSrc: "/logo/writer.png",
-  },
-];
-
 const INSTITUTES = [
   { name: "Harvard University", src: "/institutes/Harvard_University_shield.png" },
   { name: "Stanford University", src: "/institutes/stanford-university-logo.png" },
@@ -1231,7 +1188,7 @@ export default function UnifiedHomePage() {
           </div>
         </section>
 
-        {/* Bypass AI Detection for Everyone */}
+        {/* Professional Solutions for Every Industry */}
         <section className="py-20 bg-[#f0f9ff] opacity-0 animate-[fadeInUp_0.8s_ease-out_0.4s_forwards]" style={{ backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">

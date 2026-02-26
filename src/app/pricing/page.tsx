@@ -7,13 +7,13 @@ import { db } from "~/server/db";
 
 export const metadata: Metadata = {
   title: "Pricing - HumanifyLab",
-  description: "Choose your free AI humanizer plan. Affordable pricing to bypass AI detectors and transform your content naturally with HumanifyLab.",
+  description: "Choose your AI humanizer plan. Affordable pricing to enhance your content naturally with professional writing quality using HumanifyLab.",
   keywords: [
     "ai humanizer pricing",
     "humanizer plans",
     "AI text humanizer cost",
     "humanize AI text pricing",
-    "AI detection bypass pricing",
+    "writing enhancement pricing",
     "text humanization plans",
     "affordable AI humanizer"
   ],
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     canonical: "https://www.humanifylab.com/pricing",
   },
   openGraph: {
-    title: "Pricing - HumanifyLab | Free AI Humanizer Plans & Credits",
-    description: "Choose your free AI humanizer plan. Affordable pricing to bypass AI detectors and transform content naturally.",
+    title: "Pricing - HumanifyLab | AI Humanizer Plans & Credits",
+    description: "Choose your AI humanizer plan. Affordable pricing to enhance content naturally with professional writing quality.",
     url: "https://www.humanifylab.com/pricing",
     siteName: "HumanifyLab",
     images: [
@@ -42,8 +42,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pricing - HumanifyLab | Free AI Humanizer Plans & Credits",
-    description: "Choose your free AI humanizer plan. Affordable pricing to bypass AI detectors and transform content naturally.",
+    title: "Pricing - HumanifyLab | AI Humanizer Plans & Credits",
+    description: "Choose your AI humanizer plan. Affordable pricing to enhance content naturally with professional writing quality.",
     images: ["/forOpengraph.png"],
     site: "@humanifylab",
     creator: "@humanifylab",

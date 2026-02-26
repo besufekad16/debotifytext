@@ -3,7 +3,7 @@ import UnifiedHomePage from "./UnifiedHomePage";
 
 export const metadata: Metadata = {
   title: "HumanifyLab - #1 AI Humanizer | Humanify AI Text Instantly",
-  description: "HumanifyLab: The most advanced AI humanizer. Transform AI text into undetectable human writing with 99.9% success rate. Trusted by 450,000+ users. Try Humanify free today!",
+  description: "HumanifyLab: The most advanced AI humanizer. Transform AI text into natural, professional human writing. Trusted by 450,000+ users. Try Humanify free today!",
   keywords: [
     "HumanifyLab",
     "humanify",
@@ -16,15 +16,13 @@ export const metadata: Metadata = {
     "humanify ai text",
     "humanify chatgpt",
     "AI text humanizer",
-    "AI detection bypass",
-    "undetectable ai",
-    "bypass turnitin",
-    "bypass gptzero",
+    "natural writing",
+    "professional writing",
     "free ai humanizer",
     "text humanizer",
     "humanize text",
     "ai to human text",
-    "make ai undetectable"
+    "writing enhancement"
   ],
   authors: [{ name: "HumanifyLab" }],
   creator: "HumanifyLab",
@@ -39,7 +37,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "HumanifyLab - #1 AI Humanizer | Humanify AI Text Instantly",
-    description: "The most advanced AI humanizer. Transform AI text into undetectable human writing with 99.9% success rate. Trusted by 450,000+ users worldwide.",
+    description: "The most advanced AI humanizer. Transform AI text into natural, professional human writing. Trusted by 450,000+ users worldwide.",
     url: "https://www.humanifylab.com",
     siteName: "HumanifyLab",
     images: [
@@ -56,7 +54,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "HumanifyLab - #1 AI Humanizer | Humanify AI Text Instantly",
-    description: "The most advanced AI humanizer. Transform AI text into undetectable human writing with 99.9% success rate. Trusted by 450,000+ users. Try free!",
+    description: "The most advanced AI humanizer. Transform AI text into natural, professional human writing. Trusted by 450,000+ users. Try free!",
     images: ["https://www.humanifylab.com/forOpenGraph.png"],
     site: "@humanifylab",
     creator: "@humanifylab",
@@ -89,7 +87,7 @@ export default function HomePage() {
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
             "name": "HumanifyLab",
-            "description": "AI Text Humanizer - Transform AI-generated text into natural, human-like writing that passes detection tests.",
+            "description": "AI Text Humanizer - Transform AI-generated text into natural, human-like writing with professional quality and authentic tone.",
             "url": "https://www.humanifylab.com",
             "applicationCategory": "BusinessApplication",
             "operatingSystem": "Web",
@@ -114,7 +112,7 @@ export default function HomePage() {
             "featureList": [
               "AI Text Humanization",
               "Smart Paraphrasing",
-              "AI Detection Bypass",
+              "Natural Writing Enhancement",
               "Multiple Presets",
               "Fast Processing",
               "History Tracking"

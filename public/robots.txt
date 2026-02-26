@@ -10,6 +10,9 @@ Disallow: /admin/
 Disallow: /account/
 Disallow: /team/
 Disallow: /api-keys/
+Disallow: /sign-in
+Disallow: /sign-up
+Disallow: /dashboard
 
 # Main Sitemap (10 main pages)
 Sitemap: https://www.humanifylab.com/sitemap.xml
