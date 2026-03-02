@@ -428,9 +428,9 @@ psql $DATABASE_URL -f check-user-status.sql
 
 ## 📞 Contact
 
-**Email:** humanifylab1@gmail.com
+**Email:** segnia05@gmail.com
 **Domain:** www.humanifylab.com
-**GitHub:** segnia05 (segnia05@gmail.com)
+**GitHub:** segnia05
 
 ---
 

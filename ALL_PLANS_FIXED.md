@@ -111,7 +111,7 @@ npm run dev
 http://localhost:3050/pricing
 
 # 3. Sign in
-segniab49@gmail.com
+segnia05@gmail.com
 
 # 4. Try clicking on ANY plan:
    - Monthly Basic → Should work ✅

@@ -7,7 +7,7 @@ const https = require('https');
 
 // Configuration
 const BASE_URL = process.env.TEST_URL || 'http://localhost:3050';
-const TEST_EMAIL = 'segniab49@gmail.com';
+const TEST_EMAIL = 'segnia05@gmail.com';
 const PRODUCT_ID = process.env.POLAR_PRODUCT_MEDIUM || '84637abc-8afb-4be3-b54f-e77e9680186f'; // Monthly Pro
 
 console.log('🧪 Testing Polar Checkout Creation');

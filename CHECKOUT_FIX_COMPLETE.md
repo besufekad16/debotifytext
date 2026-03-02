@@ -109,7 +109,7 @@ npm run dev
 
 # Test each plan:
 1. Go to http://localhost:3050/pricing
-2. Sign in with: segniab49@gmail.com
+2. Sign in with: segnia05@gmail.com
 3. Click on:
    - Basic Monthly ($5) → Should redirect to Polar ✅
    - Pro Monthly ($15) → Should redirect to Polar ✅

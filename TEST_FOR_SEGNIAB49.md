@@ -1,4 +1,4 @@
-# Testing Instructions for segniab49@gmail.com
+# Testing Instructions for segnia05@gmail.com
 
 ## ✅ Fix Status: VERIFIED
 
@@ -18,7 +18,7 @@ Go to: **http://localhost:3050**
 
 ### 3. Sign in
 - Click "Sign In"
-- Use email: **segniab49@gmail.com**
+- Use email: **segnia05@gmail.com**
 - Complete sign-in
 
 ### 4. Test checkout (ALL PLANS)
@@ -55,7 +55,7 @@ Look for these logs:
 [Polar Checkout] Creating checkout session
 [Polar Checkout] Creating checkout for: {
   userId: 'user_xxx',
-  email: 'segniab49@gmail.com',
+  email: 'segnia05@gmail.com',
   productId: '84637abc-8afb-4be3-b54f-e77e9680186f'
 }
 [Polar Checkout] Checkout created: checkout_xxx

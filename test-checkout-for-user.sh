@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🧪 Polar Checkout Test for segniab49@gmail.com"
+echo "🧪 Polar Checkout Test for segnia05@gmail.com"
 echo "=============================================="
 echo ""
 
@@ -38,7 +38,7 @@ echo ""
 echo "To complete the test, please:"
 echo ""
 echo "1. Open browser: http://localhost:3050"
-echo "2. Sign in with: segniab49@gmail.com"
+echo "2. Sign in with: segnia05@gmail.com"
 echo "3. Go to: http://localhost:3050/pricing"
 echo "4. Click on 'Monthly Pro' plan"
 echo "5. Check for these success indicators:"

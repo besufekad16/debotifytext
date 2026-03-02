@@ -1,6 +1,6 @@
 # Manual Checkout Testing Guide
 
-## Test User: segniab49@gmail.com
+## Test User: segnia05@gmail.com
 
 Follow these steps to test the Polar checkout fix:
 
@@ -13,12 +13,12 @@ Run this SQL query in your database:
 ```sql
 SELECT email, credits, "subscriptionPlan", "clerkId"
 FROM "user"
-WHERE email = 'segniab49@gmail.com';
+WHERE email = 'segnia05@gmail.com';
 ```
 
 **If user doesn't exist:**
 - Go to http://localhost:3050/sign-up
-- Sign up with: segniab49@gmail.com
+- Sign up with: segnia05@gmail.com
 - Wait for Clerk webhook to create user record
 - Run the SQL query again to verify
 
@@ -46,7 +46,7 @@ Wait for:
 
 1. Open browser: http://localhost:3050
 2. Click "Sign In"
-3. Sign in with: segniab49@gmail.com
+3. Sign in with: segnia05@gmail.com
 4. Verify you're logged in (see user menu in navbar)
 
 ---
@@ -109,7 +109,7 @@ In your terminal where `npm run dev` is running, you should see:
 [Polar Checkout] Creating checkout session
 [Polar Checkout] Creating checkout for: {
   userId: 'user_xxx',
-  email: 'segniab49@gmail.com',
+  email: 'segnia05@gmail.com',
   productId: '84637abc-8afb-4be3-b54f-e77e9680186f'
 }
 [Polar Checkout] Checkout created: checkout_xxx
@@ -148,7 +148,7 @@ In your terminal where `npm run dev` is running, you should see:
 ```sql
 SELECT email, credits, "subscriptionPlan", "maxWordsPerRequest"
 FROM "user"
-WHERE email = 'segniab49@gmail.com';
+WHERE email = 'segnia05@gmail.com';
 ```
 
 Should show:
@@ -198,7 +198,7 @@ Should show:
 
 ### Error: "Unauthorized"
 - You're not signed in
-- Sign in with segniab49@gmail.com
+- Sign in with segnia05@gmail.com
 
 ### Error: "Product ID is required"
 - Frontend not sending productId
@@ -228,7 +228,7 @@ curl http://localhost:3050/api/user/credits
 ### 2. Check user in database:
 ```bash
 # If using psql:
-psql $DATABASE_URL -c "SELECT email, credits FROM \"user\" WHERE email = 'segniab49@gmail.com';"
+psql $DATABASE_URL -c "SELECT email, credits FROM \"user\" WHERE email = 'segnia05@gmail.com';"
 ```
 
 ### 3. Restart dev server:
@@ -255,7 +255,7 @@ If the test fails, please provide:
 Copy this and fill it out:
 
 ```
-## Test Results for segniab49@gmail.com
+## Test Results for segnia05@gmail.com
 
 Date: [DATE]
 Time: [TIME]
