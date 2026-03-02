@@ -28,7 +28,7 @@ function getAllSlugs(): string[] {
   return seoKeywords.map(keyword => generateSlug(keyword));
 }
 
-const BASE_URL = 'https://www.unrobotictext.com';
+const BASE_URL = 'https://www.humanifylab.com';
 const MAX_URLS_PER_SITEMAP = 50000;
 const OUTPUT_DIR = './public/sitemaps';
 

@@ -10,20 +10,80 @@ import { TooltipProvider } from "~/components/ui/tooltip";
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.humanifylab.com'),
   title: {
-    default: "Professional AI Humanizer - Advanced Text Enhancement | HumanifyLab",
+    default: "Free AI Humanizer for Students | Bypass Turnitin, GPTZero & All AI Detectors | HumanifyLab",
     template: "%s | HumanifyLab"
   },
-  description: "Enterprise-grade AI humanization technology. Transform AI-generated content into authentic, professional human writing. Trusted by professionals worldwide.",
+  description: "Best free AI humanizer for students & essays. Bypass Turnitin, GPTZero, Originality.AI, ZeroGPT, Copyleaks & all AI detectors. 99.9% undetectable. Perfect for academic writing, essays & assignments. Transform ChatGPT text into human writing. Trusted by 450,000+ students worldwide. Try free!",
   keywords: [
+    // Core Brand
+    'humanifylab',
+    'humanify',
+    'humanify lab',
+    'humanifylab.com',
+    
+    // Student-Focused Keywords (TOP PRIORITY)
+    'ai humanizer for students',
+    'free ai humanizer for students',
+    'essay humanizer',
+    'essay ai humanizer free',
+    'student essay humanizer',
+    'college essay humanizer',
+    'academic ai humanizer',
+    'assignment humanizer',
+    'homework humanizer',
+    'chatgpt essay humanizer',
+    
+    // Primary Keywords
     'ai humanizer',
     'humanize ai text',
+    'ai text humanizer',
+    'free ai humanizer',
+    'best ai humanizer',
+    'undetectable ai',
+    'undetectable ai humanizer',
+    
+    // AI Detector Bypass (HIGH PRIORITY - STUDENT FOCUSED)
+    'bypass turnitin',
+    'bypass turnitin ai detection',
+    'how to bypass turnitin',
+    'bypass gptzero',
+    'bypass originality ai',
+    'bypass zerogpt',
+    'bypass copyleaks',
+    'bypass winston ai',
+    'bypass content at scale',
+    'bypass ai detection',
+    'avoid ai detection in essays',
+    'beat ai detectors',
+    'undetectable to turnitin',
+    
+    // Specific Detectors
+    'originality ai bypass tool',
+    'gptzero bypass tool',
+    'turnitin ai detection bypass',
+    'zerogpt bypass',
+    'copyleaks ai bypass',
+    
+    // AI Tools to Humanize
+    'humanize chatgpt',
+    'humanize gpt4',
+    'humanize claude',
+    'humanize gemini',
+    'chatgpt humanizer',
+    
+    // Use Cases
+    'essay humanizer',
+    'academic writing humanizer',
+    'blog humanizer',
+    'content humanizer',
+    
+    // Features
     'natural writing',
     'professional writing',
-    'free ai humanizer',
-    'humanifylab',
-    'humanizer',
     'ai text converter',
-    'writing enhancement'
+    'writing enhancement',
+    'ai to human text',
+    'make ai undetectable'
   ],
   authors: [{ name: "HumanifyLab" }],
   creator: "HumanifyLab",
@@ -51,8 +111,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://www.humanifylab.com",
     siteName: "HumanifyLab",
-    title: "Professional AI Humanizer - Advanced Text Enhancement | HumanifyLab",
-    description: "Enterprise-grade AI humanization technology. Transform AI-generated content into authentic, professional human writing.",
+    title: "Free AI Humanizer for Students | Bypass Turnitin, GPTZero & All AI Detectors",
+    description: "Best free AI humanizer for students & essays. Bypass Turnitin, GPTZero, Originality.AI & all AI detectors. Perfect for academic writing. 99.9% undetectable. 450,000+ students trust us.",
     images: [
       {
         url: "/forOpenGraph.png",
@@ -73,8 +133,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Professional AI Humanizer - Advanced Text Enhancement | HumanifyLab",
-    description: "Enterprise-grade AI humanization technology. Transform AI-generated content into authentic, professional human writing.",
+    title: "Free AI Humanizer for Students | Bypass Turnitin & All AI Detectors",
+    description: "Best free AI humanizer for students & essays. Bypass Turnitin, GPTZero, Originality.AI. Perfect for academic writing. 99.9% undetectable. 450,000+ students.",
     images: ["/forOpenGraph.png"],
     site: "@humanifylab",
     creator: "@humanifylab",

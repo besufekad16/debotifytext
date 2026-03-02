@@ -96,16 +96,46 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: seoTitle,
     description: content.description,
     keywords: [
-      keywordData.keyword, 
-      'ai humanizer', 
-      'writing quality enhancement', 
-      'natural writing', 
+      keywordData.keyword,
+      
+      // Core AI Humanizer Keywords
+      'ai humanizer',
       'humanize ai text',
+      'free ai humanizer',
+      'best ai humanizer',
+      'undetectable ai humanizer',
+      'ai text humanizer',
+      
+      // AI Detector Bypass Keywords (CRITICAL)
+      'bypass ai detection',
+      'bypass originality ai',
+      'bypass gptzero',
+      'bypass turnitin',
+      'bypass zerogpt',
+      'bypass copyleaks',
+      'bypass winston ai',
+      'bypass content at scale',
+      'undetectable ai',
+      'avoid ai detection',
+      'beat ai detectors',
+      
+      // Specific Detector Tools
+      'originality ai bypass',
+      'gptzero bypass tool',
+      'turnitin ai detection bypass',
+      'zerogpt bypass',
+      'copyleaks ai bypass',
+      'winston ai bypass',
+      
+      // Quality & Features
+      'natural writing',
       'professional writing',
       'authentic writing',
-      'free ai humanizer',
+      'writing enhancement',
       'ai text converter',
-      'enhance AI text naturally'
+      'humanize chatgpt',
+      'make ai undetectable',
+      '99.9% undetectable'
     ],
     authors: [{ name: 'HumanifyLab' }],
     creator: 'HumanifyLab',

@@ -7,27 +7,41 @@ import { SiteFooter } from "~/components/SiteFooter";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact Us - HumanifyLab",
-  description: "Connect with the HumanifyLab team. Professional support for enterprise-grade AI humanization technology and custom solutions.",
+  title: "Contact Us - Undetectable AI Humanizer Support | HumanifyLab",
+  description: "Contact HumanifyLab for support with bypassing AI detectors. Expert help with Originality.AI, GPTZero, Turnitin bypass. Enterprise undetectable AI solutions. 24/7 support.",
   keywords: [
+    // Contact Keywords
+    "humanifylab contact",
+    "ai humanizer support",
+    "undetectable ai support",
+    "ai detector bypass help",
+    
+    // Support Topics
+    "originality ai bypass support",
+    "gptzero bypass help",
+    "turnitin bypass support",
+    "zerogpt bypass help",
+    
+    // Core Features
     "ai humanizer",
-    "writing enhancement",
     "humanize AI text",
-    "humanizer",
-    "HumanifyLab contact",
-    "support",
+    "writing enhancement",
+    "undetectable ai",
+    
+    // Business
+    "enterprise ai humanizer",
+    "bulk ai humanization",
+    "api access support",
+    "custom solutions",
     "customer service",
-    "contact us",
-    "help",
-    "feedback",
-    "enterprise AI humanizer"
+    "technical support"
   ],
   alternates: {
     canonical: "https://www.humanifylab.com/contact",
   },
   openGraph: {
-    title: "Contact Us - HumanifyLab",
-    description: "Connect with our professional support team for enterprise solutions and assistance.",
+    title: "Contact Us - Undetectable AI Humanizer Support | HumanifyLab",
+    description: "Expert support for bypassing AI detectors. Help with Originality.AI, GPTZero, Turnitin bypass. Enterprise solutions.",
     url: "https://www.humanifylab.com/contact",
     siteName: "HumanifyLab",
     images: [
@@ -35,7 +49,7 @@ export const metadata: Metadata = {
         url: "/forOpengraph.png",
         width: 1200,
         height: 630,
-        alt: "HumanifyLab OpenGraph Image"
+        alt: "HumanifyLab Contact - Undetectable AI Support"
       }
     ],
     locale: "en_US",
@@ -43,8 +57,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact Us - HumanifyLab",
-    description: "Connect with the HumanifyLab professional support team.",
+    title: "Contact Us - Undetectable AI Humanizer Support",
+    description: "Expert support for bypassing AI detectors. Help with Originality.AI, GPTZero, Turnitin.",
     images: ["/humanify.png"],
   },
 };

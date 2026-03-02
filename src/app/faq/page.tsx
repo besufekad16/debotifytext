@@ -4,19 +4,37 @@ import PageNavbar from "~/components/PageNavbar";
 import { SiteFooter } from "~/components/SiteFooter";
 
 export const metadata: Metadata = {
-  title: "FAQ - HumanifyLab",
-  description: "Get answers about our AI humanizer. Learn how to enhance your content naturally with professional writing quality using HumanifyLab.",
+  title: "FAQ - Undetectable AI Humanizer | Bypass AI Detectors | HumanifyLab",
+  description: "Get answers about bypassing AI detectors. Learn how HumanifyLab bypasses Originality.AI, GPTZero, Turnitin, ZeroGPT with 99.9% success. Undetectable AI humanizer FAQ.",
   keywords: [
-    "ai humanizer",
-    "humanizer",
-    "AI humanizer FAQ",
+    // Core FAQ Keywords
+    "ai humanizer faq",
+    "undetectable ai faq",
+    "ai detector bypass faq",
     "humanizer questions",
-    "natural writing",
-    "writing enhancement",
+    
+    // AI Detector Bypass Questions
+    "how to bypass originality ai",
+    "how to bypass gptzero",
+    "how to bypass turnitin",
+    "how to bypass zerogpt",
+    "bypass ai detection faq",
+    "undetectable ai questions",
+    
+    // Feature Questions
+    "ai humanizer",
     "humanize AI text",
     "AI text humanizer",
+    "natural writing",
+    "writing enhancement",
     "professional writing",
-    "free AI humanizer"
+    "free AI humanizer",
+    
+    // Specific Queries
+    "does humanifylab bypass ai detectors",
+    "is humanifylab undetectable",
+    "humanifylab success rate",
+    "ai humanizer pricing questions"
   ],
   robots: {
     index: true,
@@ -26,8 +44,8 @@ export const metadata: Metadata = {
     canonical: "https://www.humanifylab.com/faq",
   },
   openGraph: {
-    title: "FAQ - HumanifyLab | AI Humanizer Questions",
-    description: "Get answers about our AI humanizer. Learn how to enhance your content naturally with professional writing quality.",
+    title: "FAQ - Undetectable AI Humanizer | Bypass All AI Detectors",
+    description: "Get answers about bypassing AI detectors. Learn how HumanifyLab bypasses Originality.AI, GPTZero, Turnitin with 99.9% success.",
     url: "https://www.humanifylab.com/faq",
     siteName: "HumanifyLab",
     images: [
@@ -35,7 +53,7 @@ export const metadata: Metadata = {
         url: "/forOpengraph.png",
         width: 1200,
         height: 630,
-        alt: "HumanifyLab - AI Humanizer",
+        alt: "HumanifyLab FAQ - Undetectable AI Humanizer",
       },
     ],
     locale: "en_US",
@@ -43,8 +61,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "FAQ - HumanifyLab | AI Humanizer Questions",
-    description: "Get answers about our AI humanizer. Learn how to enhance your content naturally with professional writing quality.",
+    title: "FAQ - Undetectable AI Humanizer | Bypass All AI Detectors",
+    description: "Get answers about bypassing AI detectors. HumanifyLab bypasses Originality.AI, GPTZero, Turnitin with 99.9% success.",
     images: ["/forOpengraph.png"],
     site: "@humanifylab",
     creator: "@humanifylab",

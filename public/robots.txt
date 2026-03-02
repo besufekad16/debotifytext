@@ -1,6 +1,166 @@
-# HumanifyLab - Professional SEO Configuration
+# ============================================
+# HumanifyLab - Advanced SEO Configuration
+# ============================================
 # Website: https://www.humanifylab.com
-# Last Updated: 2026-02-25
+# Contact: humanifylab1@gmail.com
+# Last Updated: 2026-03-02
+# ============================================
+
+# ============================================
+# SEARCH ENGINE CRAWLERS (Priority Access)
+# ============================================
+
+# Google (Primary Search Engine)
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /account/
+Disallow: /team/
+Disallow: /api-keys/
+Disallow: /sign-in
+Disallow: /sign-up
+Crawl-delay: 0
+
+# Google Images
+User-agent: Googlebot-Image
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# Bing (Microsoft Search)
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /account/
+Disallow: /team/
+Disallow: /api-keys/
+Disallow: /sign-in
+Disallow: /sign-up
+Crawl-delay: 0
+
+# Yahoo
+User-agent: Slurp
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /account/
+Disallow: /team/
+Disallow: /api-keys/
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /account/
+Disallow: /team/
+Disallow: /api-keys/
+
+# Baidu (China)
+User-agent: Baiduspider
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /account/
+Disallow: /team/
+Disallow: /api-keys/
+
+# Yandex (Russia)
+User-agent: YandexBot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /account/
+Disallow: /team/
+Disallow: /api-keys/
+
+# ============================================
+# AI CRAWLERS (Training & Indexing)
+# ============================================
+
+# OpenAI GPT
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /account/
+Disallow: /team/
+Disallow: /api-keys/
+Disallow: /sign-in
+Disallow: /sign-up
+
+# ChatGPT User Agent
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /account/
+Disallow: /team/
+Disallow: /api-keys/
+
+# Google Bard/Gemini
+User-agent: Google-Extended
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /account/
+Disallow: /team/
+Disallow: /api-keys/
+
+# Anthropic Claude
+User-agent: anthropic-ai
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /account/
+Disallow: /team/
+Disallow: /api-keys/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /account/
+Disallow: /team/
+Disallow: /api-keys/
+
+# ============================================
+# BLOCKED BOTS (SEO Tools & Scrapers)
+# ============================================
+
+# Ahrefs
+User-agent: AhrefsBot
+Disallow: /
+
+# Semrush
+User-agent: SemrushBot
+Disallow: /
+
+# Majestic
+User-agent: MJ12bot
+Disallow: /
+
+# Moz
+User-agent: DotBot
+Disallow: /
+
+# ============================================
+# DEFAULT RULE (All Other Bots)
+# ============================================
 
 User-agent: *
 Allow: /
@@ -12,15 +172,18 @@ Disallow: /team/
 Disallow: /api-keys/
 Disallow: /sign-in
 Disallow: /sign-up
-Disallow: /dashboard
 
-# Main Sitemap (10 main pages)
+# ============================================
+# SITEMAPS (40,000+ Pages)
+# ============================================
+
+# Main Sitemap (Core Pages)
 Sitemap: https://www.humanifylab.com/sitemap.xml
 
-# Sitemap Index (references all sitemaps)
+# Sitemap Index (All Keyword Pages)
 Sitemap: https://www.humanifylab.com/sitemaps/sitemap-index.xml
 
-# Keyword Sitemaps (40,000 keyword pages)
+# Individual Sitemaps (50k URLs each)
 Sitemap: https://www.humanifylab.com/sitemaps/sitemap-1.xml
 Sitemap: https://www.humanifylab.com/sitemaps/sitemap-2.xml
 Sitemap: https://www.humanifylab.com/sitemaps/sitemap-3.xml
@@ -30,8 +193,16 @@ Sitemap: https://www.humanifylab.com/sitemaps/sitemap-6.xml
 Sitemap: https://www.humanifylab.com/sitemaps/sitemap-7.xml
 Sitemap: https://www.humanifylab.com/sitemaps/sitemap-8.xml
 
-# Crawl Settings
+# ============================================
+# CRAWL SETTINGS
+# ============================================
+
+# No crawl delay (fast indexing)
 Crawl-delay: 0
 
-# Host
+# Canonical Host
 Host: https://www.humanifylab.com
+
+# ============================================
+# END OF ROBOTS.TXT
+# ============================================
