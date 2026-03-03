@@ -670,12 +670,15 @@ export class AIStudiosAdapter {
                                 const json = JSON.parse(jsonStr);
                                 const text = json.candidates?.[0]?.content?.parts?.[0]?.text || "";
                                 if (text) {
+                                    console.log(`[Gemini Stream] Sending chunk with ${text.length} chars`);
                                     // CRITICAL FIX: Add type: "content" to ensure frontend recognizes these as content chunks
                                     const sseData = JSON.stringify({
                                         type: "content",
                                         choices: [{ delta: { content: text } }]
                                     });
                                     controller.enqueue(encoder.encode(`data: ${sseData}\n\n`));
+                                } else {
+                                    console.log(`[Gemini Stream] Received chunk but no text content`);
                                 }
                             } catch (e) {
                                 console.error("[Gemini Stream] Parse error:", e);

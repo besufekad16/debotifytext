@@ -430,6 +430,14 @@ export async function POST(request: NextRequest) {
                   const data = line.slice(6);
                   const json = JSON.parse(data);
 
+                  // CRITICAL DEBUG: Log every chunk we receive
+                  if (isDev) {
+                    console.log(`[STREAM TRANSFORM] Received chunk type: ${json.type || 'no-type'}`);
+                    if (json.choices?.[0]?.delta?.content) {
+                      console.log(`[STREAM TRANSFORM] Content length: ${json.choices[0].delta.content.length}`);
+                    }
+                  }
+
                   // Handle different chunk types: thought, content, or default (for backward compatibility)
                   // Only track content chunks for fullText (thoughts are separate)
                   let content: string | undefined;
@@ -458,6 +466,7 @@ export async function POST(request: NextRequest) {
                     // Log every few words to verify streaming (dev only)
                     if (isDev && (chunkBuffer.length > 20 || content.includes(".") || content.includes("!"))) {
                       console.log(`[STREAM] Forwarded content: "${chunkBuffer.substring(0, 50)}..."`);
+                      console.log(`[STREAM] Total fullText length so far: ${fullText.length}`);
                       chunkBuffer = "";
                     } else if (!isDev) {
                       chunkBuffer = "";
@@ -465,23 +474,38 @@ export async function POST(request: NextRequest) {
                   }
                 } catch (e) {
                   // Ignore parse errors
+                  if (isDev) {
+                    console.error("[STREAM TRANSFORM] Parse error:", e);
+                  }
                 }
               }
             }
           } catch (e) {
             // Ignore any errors in tracking
+            if (isDev) {
+              console.error("[STREAM TRANSFORM] Decode error:", e);
+            }
           }
         },
 
         async flush(controller) {
+          // CRITICAL DEBUG: Log what we have when flush is called
+          if (isDev) {
+            console.log(`[STREAM FLUSH] Called with fullText length: ${fullText.length}`);
+            console.log(`[STREAM FLUSH] First 100 chars: "${fullText.substring(0, 100)}"`);
+          }
+
           // Check if we actually generated content
           const generatedWordCount = fullText.trim().split(/\s+/).filter(Boolean).length;
 
+          if (isDev) {
+            console.log(`[STREAM FLUSH] Generated word count: ${generatedWordCount}`);
+          }
+
           // If no content was generated (or very little, indicating failure), don't deduct credits
           if (generatedWordCount < 50) {
-            if (isDev) {
-              console.log(`[STREAM API] Generated content too short (${generatedWordCount} words). Skipping credit deduction.`);
-            }
+            console.error(`[STREAM API] ERROR: Generated content too short (${generatedWordCount} words). Skipping credit deduction.`);
+            console.error(`[STREAM API] fullText content: "${fullText}"`);
 
             controller.enqueue(
               new TextEncoder().encode(
@@ -489,6 +513,7 @@ export async function POST(request: NextRequest) {
                   type: "complete",
                   credits_used: 0,
                   credits_remaining: (billingUser.credits || 0) + (billingUser.extraCredits || 0),
+                  error: "Generated content too short"
                 })}\n\n`
               )
             );
