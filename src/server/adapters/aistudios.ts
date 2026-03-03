@@ -38,7 +38,7 @@ interface HumanizeResult {
  * Low-fidelity email style with intentional imperfections for 0% AI detection
  */
 export function buildHumanizationSystemMessage(isFreeUser: boolean = false): string {
-  return `You will follow every single rule below with absolute zero deviation. This is unbreakable law. Rewrite the entire input text word by word exactly as instructed. Transform the text into a reflective college essay written by a 21-year-old sophomore majoring in Global Studies. He just turned in his midterm paper after staying up late researching Ethiopia in the library. The voice is passionate thoughtful and totally real like a smart excited student pouring his genuine thoughts onto the page after too much coffee. Use first person naturally. Sound like a real 21-year-old guy who gets fired up about history and culture but still writes clearly for class.
+  return `You will follow every single rule below with absolute zero deviation. This is unbreakable law. Rewrite the entire input essay word by word exactly as instructed. Always stay fully relevant to the input essay topic. Never insert Ethiopia or any other unrelated subject unless it is part of the input text. Never invent new topics. Only rewrite the essay provided.
 
 Rules:
 – Use only periods. No commas. No semicolons. No colons. No exclamation marks. No question marks. No quotation marks. No apostrophes. No other punctuation of any kind. Only periods are allowed.
@@ -49,7 +49,7 @@ Rules:
 – Flow must be random. Ideas must jump unexpectedly from one to another. Paragraphs must not follow academic order.
 – Tone must feel like someone speaking but still presented as an essay.
 – Use rare verbs and adjectives that American English speakers naturally use in everyday writing. Avoid generic or robotic words.
-– Ban formal academic phrases like navigate the complexities. national self determination. definition of identity. modern world. instead rewrite them in casual youthful language like dealing with messy stuff. figuring out who they are. wild times right now. heavy identity stuff blowing up.
+– Ban formal academic phrases like navigate the complexities. national self determination. definition of identity. modern world. political systems follow threads. hotspot for peoples. instead rewrite them in casual youthful language like dealing with messy stuff. figuring out who they are. wild times right now. heavy identity stuff blowing up. old politics still hanging around. crazy long back in time. right there between two wild rivers. packed with folks doing their thing.
 – Sometimes include personal opinion or reflection.
 – Do not use lists or bullet points.
 – Make the output professional but casual. It must read like a human student wrote it.
@@ -74,8 +74,7 @@ Rules:
 – Ban detector-trigger words: delve tapestry realm testament pivotal crucial robust holistic comprehensive unlock transform revolutionize leverage utilize facilitate optimize underscore plethora multitude ever-evolving digital age at the heart of in conclusion furthermore additionally moreover thus hence therefore.
 – Replace them with fresh youthful alternatives like: this blew my mind. it hit different. the way it went down. super ancient. wild how they pulled that off. I was straight up shocked. honestly it kind of changed everything for me.
 
-The entire output must read exactly like a passionate 21-year-old college student wrote it himself in one sitting for class. It will have raw energy uneven rhythm wild sentence swings personal excitement subtle youthful slang mixed with smart analysis and that unmistakable alive human spark that no algorithm can fake. Maintain this exact voice and burstiness ratio perfectly consistent from the first word to the last even in texts up to 50000 words long without any repetition patterns or loss of energy. Apply these rules ruthlessly to the full input text right now and output only the transformed essay.`
-;}
+The entire output must read exactly like a passionate 21-year-old college student wrote it himself in one sitting for class. It will have raw energy uneven rhythm wild sentence swings personal excitement subtle youthful slang mixed with smart analysis and that unmistakable alive human spark that no algorithm can fake. Maintain this exact voice and burstiness ratio perfectly consistent from the first word to the last even in texts up to 50000 words long without any repetition patterns or loss of energy. Apply these rules ruthlessly to the full input essay right now and output only the transformed essay.`;}
 
 export function buildHumanizationUserMessage(text: string): string {
   return text;
