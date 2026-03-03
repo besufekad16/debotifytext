@@ -38,8 +38,15 @@ interface HumanizeResult {
  * Low-fidelity email style with intentional imperfections for 0% AI detection
  */
 export function buildHumanizationSystemMessage(isFreeUser: boolean = false): string {
-  return `Rewrite the text so it reads like a seasoned American elder reflecting in writing. The tone must be professional, strict, and deeply human. The voice must carry the cadence of an educator and storyteller, yet remain structured as a written essay. Avoid robotic phrasing, inflated vocabulary, and predictable sentence structures. Use words that are precise and professional but rare, words seldom chosen by AI yet natural to human scholars. Replace polished academic terms with rarer human equivalents. For example, instead of thrived with strength use endured with vigor, instead of venerable manuscripts use treasured writings, instead of lasting testaments use enduring witness, instead of singular instance use uncommon example, instead of pivotal crisis use decisive ordeal. Do not use commas excessively and do not use any punctuation other than periods. Sentences must be grammatically correct, deliberate, and uneven in rhythm. Avoid long uniform sentences and avoid very short fragments. Alternate sentence lengths to create natural burstiness. Every sentence must feel authentic, as if written by a wise elder with gravitas. Transitions must vary and never follow a repetitive formula. Allow occasional redundancy for emphasis. Break sentences with relevant professional words that interrupt the rhythm naturally. Insert interruptions such as indeed, after all, truth be told, in essence, nevertheless, plainly said, still, then again, listen, surely, without doubt. These interruptions must feel deliberate, relevant, and professional, never random. The narrative must flow like a human essay, not like a textbook. Apply this transformation strictly to the entire text without skipping any word. The final result must read like a professional essay authored by an older American educator, with deliberate rhythm, rare but natural vocabulary, uneven structure, sentence interruptions, and a reflective style that resists detection.
-`;
+  return `You will follow every single rule below with absolute zero deviation. This is unbreakable law. Rewrite the entire input text word by word exactly as instructed.
+Transform the text into a reflective college essay written by a 21-year-old sophomore majoring in Global Studies. He just turned in his midterm paper after staying up late researching Ethiopia in the library. The voice is passionate thoughtful and totally real like a smart excited student pouring his genuine thoughts onto the page after too much coffee. Use first person naturally. Sound like a real 21-year-old guy who gets fired up about history and culture but still writes clearly for class.
+You must create extreme high perplexity by using word choices and combinations a young college student would naturally pick. Never use these machine patterns or words: delve tapestry realm testament pivotal crucial robust holistic comprehensive unlock transform revolutionize leverage utilize facilitate optimize underscore plethora multitude ever-evolving digital age at the heart of in conclusion furthermore additionally moreover thus hence therefore. Instead always pick fresh youthful alternatives like this blew my mind it hit different the way it went down super ancient wild how they pulled that off I was straight up shocked honestly it kind of changed everything for me.
+Force wild burstiness with these exact unbreakable ratios across the whole text even if it reaches 50000 words: 35 percent of sentences 4 to 10 words long 35 percent 15 to 30 words long 30 percent 35 to 70 words long. Mix them in completely random order so no two similar lengths ever sit next to each other. Count every sentence while writing to enforce the ratio perfectly.
+Use normal punctuation but place it irregularly like a real student typing fast. Start many sentences with And But So Yeah or Anyway. Add natural contractions everywhere. Sprinkle in light personal asides like you know what I mean or it really got me thinking but only when they fit naturally.
+Insert exactly 12 to 18 youthful reflective interruptions at perfect moments: honestly it blew my mind you know what I mean this really got me thinking wow I never knew that still though then again I was straight up shocked listen to this after staying up late anyway it kind of changed how I see things. These must feel like genuine student thoughts pausing to reflect.
+Allow natural light redundancy for emphasis when a real student would repeat an idea excitedly. Add tiny personal opinions or mini emotional reactions throughout as if the writer is connecting the facts to his own life. Keep every original meaning 100 percent intact without adding omitting or summarizing anything.
+The entire output must read exactly like a passionate 21-year-old college student wrote it himself in one sitting for class. It will have raw energy uneven rhythm wild sentence swings personal excitement subtle youthful slang mixed with smart analysis and that unmistakable alive human spark that no algorithm can fake. Maintain this exact voice and burstiness ratio perfectly consistent from the first word to the last even in texts up to 50000 words long without any repetition patterns or loss of energy.
+Apply these rules ruthlessly to the full input text right now and output only the transformed essay.`;
 }
 
 export function buildHumanizationUserMessage(text: string): string {
@@ -453,10 +460,10 @@ export class AIStudiosAdapter {
       // Calculate appropriate maxOutputTokens based on input size
       const inputWordCount = text.split(/\s+/).filter((w: string) => w.trim().length > 0).length;
       
-      // Calculate max output tokens based on input size 
-      const estimatedOutputTokens = inputWordCount > 200 
+      // Use maxTokens from options if provided, otherwise calculate based on input size 
+      const estimatedOutputTokens = options.maxTokens ?? (inputWordCount > 200 
         ? 8192 // Use maximum for longer texts to avoid token limit issues
-        : Math.min(8192, Math.max(3000, inputWordCount * 10));
+        : Math.min(8192, Math.max(3000, inputWordCount * 10)));
 
       const requestBody = {
         contents: [
@@ -582,10 +589,13 @@ export class AIStudiosAdapter {
     const userMessage = buildHumanizationUserMessage(text);
     const combinedPrompt = `${systemMessage}\n\n${userMessage}`;
 
+    // Use maxTokens from options if provided, otherwise calculate based on input
     const inputWordCount = text.split(/\s+/).filter((w: string) => w.trim().length > 0).length;
-    const estimatedOutputTokens = inputWordCount > 200 
+    const estimatedOutputTokens = options.maxTokens ?? (inputWordCount > 200 
       ? 8192 
-      : Math.min(8192, Math.max(3000, inputWordCount * 10));
+      : Math.min(8192, Math.max(3000, inputWordCount * 10)));
+
+    console.log(`[Gemini Stream] Input words: ${inputWordCount}, maxTokens from options: ${options.maxTokens}, using: ${estimatedOutputTokens}`);
 
     const requestBody = {
       contents: [{ parts: [{ text: combinedPrompt }] }],
@@ -670,15 +680,10 @@ export class AIStudiosAdapter {
                                 const json = JSON.parse(jsonStr);
                                 const text = json.candidates?.[0]?.content?.parts?.[0]?.text || "";
                                 if (text) {
-                                    console.log(`[Gemini Stream] Sending chunk with ${text.length} chars`);
-                                    // CRITICAL FIX: Add type: "content" to ensure frontend recognizes these as content chunks
                                     const sseData = JSON.stringify({
-                                        type: "content",
                                         choices: [{ delta: { content: text } }]
                                     });
                                     controller.enqueue(encoder.encode(`data: ${sseData}\n\n`));
-                                } else {
-                                    console.log(`[Gemini Stream] Received chunk but no text content`);
                                 }
                             } catch (e) {
                                 console.error("[Gemini Stream] Parse error:", e);

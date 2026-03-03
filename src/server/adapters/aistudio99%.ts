@@ -666,10 +666,11 @@ export class AIStudiosAdapter {
       // Calculate appropriate maxOutputTokens based on input size
       const inputWordCount = text.split(/\s+/).filter((w: string) => w.trim().length > 0).length;
 
-      // Calculate max output tokens based on input size 
-      const estimatedOutputTokens = inputWordCount > 200
-        ? 8192 // Use maximum for longer texts to avoid token limit issues
-        : Math.min(8192, Math.max(3000, inputWordCount * 10));
+      // Use maxTokens from options if provided, otherwise calculate based on input size
+      // Humanized text is typically 1.2-1.5x the original length
+      const estimatedOutputTokens = options.maxTokens ?? Math.min(8192, Math.max(4000, Math.ceil(inputWordCount * 2.0)));
+      
+      console.log(`[Gemini 99%] Input words: ${inputWordCount}, Max output tokens: ${estimatedOutputTokens}`);
 
       const requestBody = {
         contents: [
@@ -795,10 +796,13 @@ export class AIStudiosAdapter {
     const userMessage = buildHumanizationUserMessage(text);
     const combinedPrompt = `${systemMessage}\n\n${userMessage}`;
 
+    // Use maxTokens from options if provided, otherwise calculate based on input
     const inputWordCount = text.split(/\s+/).filter((w: string) => w.trim().length > 0).length;
-    const estimatedOutputTokens = inputWordCount > 200
+    const estimatedOutputTokens = options.maxTokens ?? (inputWordCount > 200
       ? 8192
-      : Math.min(8192, Math.max(3000, inputWordCount * 10));
+      : Math.min(8192, Math.max(3000, inputWordCount * 10)));
+
+    console.log(`[Gemini 99% Stream] Input words: ${inputWordCount}, maxTokens from options: ${options.maxTokens}, using: ${estimatedOutputTokens}`);
 
     const requestBody = {
       contents: [{ parts: [{ text: combinedPrompt }] }],
@@ -883,15 +887,10 @@ export class AIStudiosAdapter {
                       const json = JSON.parse(jsonStr);
                       const text = json.candidates?.[0]?.content?.parts?.[0]?.text || "";
                       if (text) {
-                        console.log(`[Gemini Stream 99%] Sending chunk with ${text.length} chars`);
-                        // CRITICAL FIX: Add type: "content" to ensure frontend recognizes these as content chunks
                         const sseData = JSON.stringify({
-                          type: "content",
                           choices: [{ delta: { content: text } }]
                         });
                         controller.enqueue(encoder.encode(`data: ${sseData}\n\n`));
-                      } else {
-                        console.log(`[Gemini Stream 99%] Received chunk but no text content`);
                       }
                     } catch (e) {
                       console.error("[Gemini Stream] Parse error:", e);
