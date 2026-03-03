@@ -525,6 +525,10 @@ export default function UnifiedHomePage() {
                   `Text humanized! Used ${json.credits_used} credits. ${json.credits_remaining} credits remaining.`
                 );
               } else {
+                // No content received - this is the error case
+                console.error("[HUMANIZER] Stream completed but no content accumulated");
+                console.error("[HUMANIZER] First chunk received:", firstChunkReceived);
+                console.error("[HUMANIZER] Stream completed flag:", streamCompleted);
                 setIsHumanizing(false);
                 setThoughtsList([]);
                 if (processTimeoutRef.current) {
@@ -553,9 +557,10 @@ export default function UnifiedHomePage() {
             if (!json.type || json.type === "content") {
               const content = json.choices?.[0]?.delta?.content;
               if (content) {
-                // Mark that we've received the first chunk (for logging only)
+                // Mark that we've received the first chunk
                 if (!firstChunkReceived) {
                   firstChunkReceived = true;
+                  console.log("[HUMANIZER] First content chunk received:", content.substring(0, 50));
                 }
 
                 accumulatedText += content;

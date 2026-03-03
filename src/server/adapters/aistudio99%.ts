@@ -883,7 +883,9 @@ export class AIStudiosAdapter {
                       const json = JSON.parse(jsonStr);
                       const text = json.candidates?.[0]?.content?.parts?.[0]?.text || "";
                       if (text) {
+                        // CRITICAL FIX: Add type: "content" to ensure frontend recognizes these as content chunks
                         const sseData = JSON.stringify({
+                          type: "content",
                           choices: [{ delta: { content: text } }]
                         });
                         controller.enqueue(encoder.encode(`data: ${sseData}\n\n`));
