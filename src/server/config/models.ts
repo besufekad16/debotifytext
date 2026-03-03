@@ -3,15 +3,18 @@
  * Centralized configuration for AI models used throughout the application
  */
 
-// Default model used for text humanization (using Gemini as primary)
-export const DEFAULT_MODEL = "gemini-flash-latest";
+// Default model used for text humanization (Gemini 2.5 Flash as primary)
+// Gemini 2.5 Flash supports higher output token limits and better quality
+export const DEFAULT_MODEL = "gemini-2.5-flash";
 
-// Fallback model used when primary model fails (OpenAI gpt-5-mini)
+// Fallback model used when Gemini fails (OpenAI gpt-5-mini)
 export const FALLBACK_MODEL = "gpt-5-mini";
 
 // Allowed models for humanization (both Gemini and OpenAI)
 export const ALLOWED_MODELS = [
+  "gemini-2.5-flash",
   "gemini-flash-latest",
+  "gemini-2.0-flash-exp",
   "gemini-2.5-pro",
   "gpt-5-mini",
   "gpt-4o",
