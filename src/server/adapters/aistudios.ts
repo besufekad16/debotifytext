@@ -635,10 +635,17 @@ export class AIStudiosAdapter {
     return new ReadableStream({
       async start(controller) {
         let buffer = "";
+        let totalChunks = 0;
+        let totalTextLength = 0;
+        let lastFinishReason = null;
+        
         try {
           while (true) {
             const { done, value } = await reader.read();
-            if (done) break;
+            if (done) {
+              console.log(`[Gemini Stream] Stream ended. Total chunks: ${totalChunks}, Total text length: ${totalTextLength}, Last finish reason: ${lastFinishReason}`);
+              break;
+            }
             
             buffer += decoder.decode(value, { stream: true });
             
@@ -677,7 +684,21 @@ export class AIStudiosAdapter {
                             try {
                                 const json = JSON.parse(jsonStr);
                                 const text = json.candidates?.[0]?.content?.parts?.[0]?.text || "";
+                                const finishReason = json.candidates?.[0]?.finishReason;
+                                
+                                if (finishReason) {
+                                  lastFinishReason = finishReason;
+                                  console.log(`[Gemini Stream] Finish reason received: ${finishReason}`);
+                                }
+                                
                                 if (text) {
+                                    totalChunks++;
+                                    totalTextLength += text.length;
+                                    
+                                    if (totalChunks <= 3 || totalChunks % 10 === 0) {
+                                      console.log(`[Gemini Stream] Chunk ${totalChunks}: ${text.length} chars, total so far: ${totalTextLength}`);
+                                    }
+                                    
                                     const sseData = JSON.stringify({
                                         choices: [{ delta: { content: text } }]
                                     });
