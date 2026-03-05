@@ -29,13 +29,11 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/pricing", label: "Pricing" },
-    { href: "/faq", label: "FAQ" },
-    { href: "/contact", label: "Contact" },
   ];
 
   // Add Account link if user is signed in - only after hydration to prevent mismatch
   const allNavLinks = (isHydrated && isSignedIn)
-    ? [...navLinks.slice(0, 2), { href: "/account", label: "Account" }, ...navLinks.slice(2)]
+    ? [...navLinks, { href: "/account", label: "Account" }]
     : navLinks;
 
   const getNavLinkClass = (href: string) => {

@@ -32,13 +32,10 @@ export default function PageNavbar({ onHistoryClick, currentCredits, variant = "
     ? [
       { href: "/#hero", label: "Home" },
       { href: "/#pricing", label: "Pricing" },
-      { href: "/#faq", label: "FAQ" },
     ]
     : [
       { href: "/", label: "Home" },
       { href: "/pricing", label: "Pricing" },
-      { href: "/faq", label: "FAQ" },
-      { href: "/contact", label: "Contact" },
     ];
 
   // Add Account link if user is signed in (after Pricing) - only after hydration to prevent mismatch
