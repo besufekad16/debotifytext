@@ -44,7 +44,6 @@ import HowToUseSection from "~/components/HowToUseSection";
 import FactsSection from "~/components/FactsSection";
 import PricingModal from "~/components/PricingModal";
 import { usePricingModal } from "~/hooks/usePricingModal";
-import SocialProofNotification from "~/components/SocialProofNotification";
 
 const PRESETS = [
   { value: "default", label: "Default", description: "Standard humanization for all users", isPremium: false },
@@ -1475,9 +1474,6 @@ export default function UnifiedHomePage() {
       
       {/* Pricing Modal - Shows after sign-in for free users */}
       <PricingModal isOpen={isPricingModalOpen} onClose={closePricingModal} />
-      
-      {/* Social Proof Notifications - Bottom-left corner */}
-      <SocialProofNotification />
     </div>
   );
 }
