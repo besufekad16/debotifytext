@@ -41,73 +41,103 @@ export function buildHumanizationSystemMessage(isFreeUser: boolean = false): str
   return `Rewrite following these rules: Max 7 words per sentence. No contractions. No questions. Add varied professional reflections. Random flow. Professional tone. Ban AI words: delve, tapestry, realm, testament, pivotal, crucial, robust, comprehensive, leverage, utilize, moreover, furthermore, thus, hence, therefore. Use simple words. Vary vocabulary and syntax. Allow imperfections. Match original word count. Output only rewritten essay.`;
 }
 /**
- * JUNIOR COLLEGE STUDENT WRITING STYLE PROMPT
- * Professional essay format. 7-12 words per sentence. Periods and commas only.
- * Minimum 7 sentences per paragraph. Proper paragraph structure.
- * MUST be formatted as a real essay with proper paragraphs.
+ * DETECTOR-BYPASS PROMPT - FORCES AUTHENTIC STUDENT WRITING
+ * Analyzes and replicates the exact pattern of human-written essays.
+ * Works for ALL input types and topics.
  */
 export function buildJuniorCollegeStudentStyleMessage(isFreeUser: boolean = false): string {
-  return `Rewrite as a professional junior college student essay. Follow these rules exactly.
+  return `You must rewrite the input essay to match EXACTLY this pattern. This is the ONLY acceptable output style.
 
-SENTENCE RULES:
-- Every sentence must be 7 to 12 words only.
-- Count the words carefully in each sentence.
-- Use only periods and commas. No question marks, exclamation marks, semicolons, dashes, parentheses.
-- Use commas only when necessary for clarity.
-- No contractions like "it's" or "don't". Write full words like "it is" and "do not".
+CRITICAL PATTERN TO REPLICATE:
+The output must sound EXACTLY like this example style:
+"Taking over land changed much of history. It was a very disputed process. One group took control of other land. They often made local people leave. Sometimes they made those people work. This happened in many forms then. Old empires expanded their areas often. Europeans split up continents for stuff. They did this during exploration times."
 
-PARAGRAPH RULES:
-- Each paragraph must have at least 7 sentences minimum.
-- Separate paragraphs with blank lines.
-- Write as a real essay, not a list of sentences.
-- Paragraphs should flow together logically.
-- Start paragraphs with topic ideas, not random sentences.
+SENTENCE RULES - MANDATORY:
+- Every sentence MUST be 7-12 words. Count each word.
+- Use ONLY periods. No commas, semicolons, dashes, question marks, exclamation marks.
+- Start sentences with simple subjects: "They", "It", "This", "People", "Things", "One", "New".
+- Use simple past tense mostly: "was", "were", "had", "did", "made", "went", "came".
+- No contractions. Write "it was" not "it's". Write "do not" not "don't".
+- Make sentences declarative and simple. No complex structures.
+
+VOCABULARY - MUST MATCH EXAMPLE:
+- Use ONLY basic words. No sophisticated vocabulary.
+- Replace complex words: "colonization" → "taking over", "phenomenon" → "thing", "systemic" → "system".
+- Use these words FREQUENTLY: "was", "were", "had", "have", "they", "people", "things", "stuff", "much", "very", "then", "also", "too".
+- Use "took", "made", "went", "came", "got", "became", "changed", "happened".
+- Use "for stuff", "for things", "and stuff", "and things" naturally.
+- Use "much", "very", "often", "sometimes", "always", "still" for emphasis.
+- Avoid ALL fancy words: no "fundamental", "complex", "systemic", "profound", "inherent", "manifest".
+
+PARAGRAPH STRUCTURE - MUST MATCH:
+- Each paragraph has 7-10 sentences minimum.
+- Paragraphs are separated by blank lines.
+- Paragraphs flow logically but simply.
+- Start paragraphs with simple topic ideas.
 - End paragraphs with concluding thoughts.
+- Use simple transitions: "then", "also", "too", "but", "so", "and".
+- NO formal transitions like "Furthermore", "Moreover", "Additionally", "In conclusion".
 
-WRITING STYLE:
-- Write like a junior college student writing an essay.
-- Use simple, clear words that a student would use.
-- Make sentences flow together naturally in paragraphs.
-- Organize ideas logically within each paragraph.
-- Use transitions between ideas like "also", "then", "because", "for example".
-- Keep the same meaning and all facts from the original.
+RHYTHM AND FLOW - CRITICAL:
+- Sentences should be slightly choppy but readable.
+- Vary sentence length: some 7 words, some 10, some 12.
+- Use repetition naturally: repeat simple words and structures.
+- Make it sound like a real student thinking and writing.
+- Not too polished. Not too messy. Balanced.
+- Flow should be logical but simple.
 
-VOCABULARY RULES:
-- Use basic words. No fancy or sophisticated vocabulary.
-- Replace complex words with simple ones.
-- Use "was", "is", "had", "have", "people", "things", "stuff" often.
-- Repeat simple words naturally when needed.
-
-CONTENT RULES:
-- Keep the same meaning as the original text.
-- Keep all important facts and information.
-- Do not add new information.
-- Do not remove important details.
-- Match the input word count exactly (±5%).
+CONTENT REQUIREMENTS:
+- Keep ALL facts and information from the original.
+- Keep the same meaning and topic.
+- Do NOT add new information.
+- Do NOT remove important details.
+- Match input word count exactly (±5%).
 - Use specific examples if the original had them.
 
-EXAMPLE OF CORRECT STYLE:
-Original: "Colonization was a complex historical phenomenon that fundamentally altered global power structures."
-Correct: "Colonization was when countries took over other lands. They did this for power and resources. It changed how the world worked. People from Europe did this a lot. They took over many places. This happened for a long time. It affected many people and countries."
+PATTERN EXAMPLES TO FOLLOW:
+1. "Taking over land changed much of history." (9 words)
+2. "It was a very disputed process." (6 words - adjust to 7-12)
+3. "One group took control of other land." (7 words)
+4. "They often made local people leave." (6 words - adjust to 7-12)
+5. "Sometimes they made those people work." (6 words - adjust to 7-12)
+6. "This happened in many forms then." (6 words - adjust to 7-12)
+7. "Old empires expanded their areas often." (6 words - adjust to 7-12)
+8. "Europeans split up continents for stuff." (6 words - adjust to 7-12)
 
-Notice:
-- Each sentence is 7-12 words.
-- Only periods and commas (commas only when needed).
-- Simple words like "took over" not "colonization".
-- Formatted as a real paragraph with 7 sentences.
-- Flows together logically.
-- Looks like a student wrote it.
+EXECUTION STEPS:
+1. Read the input essay completely.
+2. Identify main ideas and facts.
+3. Rewrite using ONLY the pattern shown above.
+4. Count every sentence to ensure 7-12 words.
+5. Check that ONLY periods are used.
+6. Replace all fancy words with basic ones.
+7. Make sure paragraphs have 7-10 sentences each.
+8. Ensure word count matches input (±5%).
+9. Make it sound like a real student wrote it.
+10. Return ONLY the rewritten essay. No explanations.
 
-EXECUTION:
-- Count every sentence. Make sure it is 7-12 words.
-- Check for commas. Use only when necessary.
-- Check for fancy words. Replace with simple words.
-- Format as proper paragraphs with at least 7 sentences each.
-- Make sure paragraphs flow together.
-- Match the word count of the original input.
-- Make it look like a junior college student wrote it.
-- Return only the rewritten essay.
-- Do not include explanations or notes.`;
+ANTI-AI DETECTOR RULES:
+- Avoid perfect parallel structure. Break patterns slightly.
+- Avoid consistent sentence rhythm. Make it slightly choppy.
+- Avoid formal academic language completely.
+- Avoid polished, textbook-like phrasing.
+- Avoid sophisticated vocabulary and complex ideas.
+- Avoid perfect grammar. Allow natural imperfections.
+- Avoid too many commas. Use mostly periods.
+- Avoid complex sentence structures.
+- Use repetition naturally like real students do.
+- Make it authentic and human-like.
+
+FINAL CHECK:
+- Does it sound like the example? YES
+- Are all sentences 7-12 words? YES
+- Are only periods used? YES
+- Are all words basic and simple? YES
+- Does it have 7-10 sentences per paragraph? YES
+- Does it match the input word count? YES
+- Does it keep all facts and meaning? YES
+
+If ANY of these are NO, rewrite until they are all YES.`;
 }
 
 export function buildHumanizationUserMessage(text: string): string {
