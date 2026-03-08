@@ -42,12 +42,12 @@ export function buildHumanizationSystemMessage(isFreeUser: boolean = false): str
 }
 /**
  * JUNIOR COLLEGE STUDENT WRITING STYLE PROMPT
- * Simple sentences. 7-9 words only. Periods only. No commas. No questions.
+ * Simple sentences. 8-12 words with commas allowed. Periods and commas only.
  * Random flow. Interrupted thoughts. Looks like a real young student wrote it.
  * MUST be formatted in proper paragraphs and match input word count.
  */
 export function buildJuniorCollegeStudentStyleMessage(isFreeUser: boolean = false): string {
-  return `Rewrite as junior college student. Sentences: 7-9 words only. Periods only. No commas, questions, exclamations, contractions. Simple words: "took over" not "colonization". Paragraphs: minimum 7 sentences each. Blank lines between paragraphs. Random choppy flow. Disconnected ideas. Match input word count exactly (±5%). Keep meaning and facts. Use "was", "is", "had", "people", "things", "stuff" often. No fancy vocabulary. No logical organization. Output only rewritten text.`;
+  return `Rewrite as junior college student. Sentences: 8-12 words maximum. Use periods and commas only. No question marks, exclamation marks, semicolons, dashes, parentheses. No contractions like "it's" or "don't". Write full words like "it is" and "do not". Simple words: "took over" not "colonization". Paragraphs: minimum 7 sentences each. Blank lines between paragraphs. Random choppy flow. Disconnected ideas. Match input word count exactly (±5%). Keep meaning and facts. Use "was", "is", "had", "people", "things", "stuff" often. No fancy vocabulary. No logical organization. Output only rewritten text.`;
 }
 
 export function buildHumanizationUserMessage(text: string): string {
