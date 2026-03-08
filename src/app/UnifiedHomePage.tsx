@@ -874,7 +874,7 @@ export default function UnifiedHomePage() {
                 </div>
 
                 {/* Main Heading */}
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-8">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight mb-6">
                   <span className="text-gray-900">Transform AI Content Into</span>
                   <br />
                   <span className="text-[#5e3d2a]">Authentic Human Writing</span>
@@ -1162,7 +1162,7 @@ export default function UnifiedHomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {/* Stat 1 - Texts Humanized */}
             <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-200 text-center hover:shadow-md transition-shadow">
-              <div className="text-3xl sm:text-4xl font-bold text-[#5e3d2a] mb-2">
+              <div className="text-2xl sm:text-3xl font-bold text-[#5e3d2a] mb-2">
                 1.2M+
               </div>
               <div className="text-sm text-gray-600 font-medium">
@@ -1172,7 +1172,7 @@ export default function UnifiedHomePage() {
 
             {/* Stat 2 - Quality Success Rate */}
             <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-200 text-center hover:shadow-md transition-shadow">
-              <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">
+              <div className="text-2xl sm:text-3xl font-bold text-blue-600 mb-2">
                 98.7%
               </div>
               <div className="text-sm text-gray-600 font-medium">
@@ -1182,7 +1182,7 @@ export default function UnifiedHomePage() {
 
             {/* Stat 3 - Average Processing */}
             <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-200 text-center hover:shadow-md transition-shadow">
-              <div className="text-3xl sm:text-4xl font-bold text-[#5e3d2a] mb-2">
+              <div className="text-2xl sm:text-3xl font-bold text-[#5e3d2a] mb-2">
                 &lt;3s
               </div>
               <div className="text-sm text-gray-600 font-medium">
@@ -1196,7 +1196,7 @@ export default function UnifiedHomePage() {
         <section className="py-20 bg-[#f0f9ff] opacity-0 animate-[fadeInUp_0.8s_ease-out_0.4s_forwards]" style={{ backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight mb-4">
                 Professional Solutions for <span className="text-[#5e3d2a]">Every Industry</span>
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
@@ -1245,7 +1245,7 @@ export default function UnifiedHomePage() {
         <section className="py-20 bg-[#f0f9ff] opacity-0 animate-[fadeInUp_0.8s_ease-out_0.6s_forwards]" style={{ backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight mb-4">
                 Enterprise-Grade Humanization Technology
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
@@ -1327,8 +1327,8 @@ export default function UnifiedHomePage() {
         <section className="py-20 bg-[#f0f9ff] opacity-0 animate-[fadeInUp_0.8s_ease-out_0.8s_forwards]" style={{ backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
-              <p className="text-lg text-gray-600">Transform AI text into human-like content in three simple steps</p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">How It Works</h2>
+              <p className="text-base text-gray-600">Transform AI text into human-like content in three simple steps</p>
             </div>
             
             <div className="relative">
@@ -1338,33 +1338,33 @@ export default function UnifiedHomePage() {
               <div className="grid md:grid-cols-3 gap-12 relative">
                 {/* Step 1 */}
                 <div className="text-center">
-                  <div className="relative inline-flex items-center justify-center w-24 h-24 rounded-full bg-[#5e3d2a] text-white text-4xl font-bold mb-6 shadow-lg">
+                  <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-full bg-[#5e3d2a] text-white text-3xl font-bold mb-4 shadow-lg">
                     1
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3">Paste AI Text</h3>
-                  <p className="text-gray-600">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">Paste AI Text</h3>
+                  <p className="text-sm text-gray-600">
                     Copy your AI-generated content from ChatGPT, Claude, Gemini, or any AI writing tool and paste it into our editor.
                   </p>
                 </div>
                 
                 {/* Step 2 */}
                 <div className="text-center">
-                  <div className="relative inline-flex items-center justify-center w-24 h-24 rounded-full bg-gray-700 text-white text-4xl font-bold mb-6 shadow-lg">
+                  <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-700 text-white text-3xl font-bold mb-4 shadow-lg">
                     2
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3">Click Humanize</h3>
-                  <p className="text-gray-600">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">Click Humanize</h3>
+                  <p className="text-sm text-gray-600">
                     Our advanced AI rewriting engine analyzes and transforms your text to sound naturally human while preserving meaning.
                   </p>
                 </div>
                 
                 {/* Step 3 */}
                 <div className="text-center">
-                  <div className="relative inline-flex items-center justify-center w-24 h-24 rounded-full bg-blue-500 text-white text-4xl font-bold mb-6 shadow-lg">
+                  <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-full bg-blue-500 text-white text-3xl font-bold mb-4 shadow-lg">
                     3
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3">Copy & Use</h3>
-                  <p className="text-gray-600">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">Copy & Use</h3>
+                  <p className="text-sm text-gray-600">
                     Get your humanized text instantly. Copy it, download it, or use it anywhere with professional, natural-sounding quality.
                   </p>
                 </div>
@@ -1378,7 +1378,7 @@ export default function UnifiedHomePage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <span className="text-xs font-semibold uppercase tracking-wide text-[#2563eb] drop-shadow-[0_0_8px_rgba(37,99,235,0.3)]">Pricing</span>
-              <h3 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl sm:text-5xl bg-gradient-to-r from-[#1e40af] via-[#60a5fa] to-[#1e40af] bg-clip-text text-transparent animate-[glowPulse_3s_ease-in-out_infinite]" style={{ textShadow: "0 0 40px rgba(59,130,246,0.5), 0 0 60px rgba(59,130,246,0.4), 0 0 80px rgba(59,130,246,0.3)" }}>
+              <h3 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl bg-gradient-to-r from-[#1e40af] via-[#60a5fa] to-[#1e40af] bg-clip-text text-transparent animate-[glowPulse_3s_ease-in-out_infinite]" style={{ textShadow: "0 0 40px rgba(59,130,246,0.5), 0 0 60px rgba(59,130,246,0.4), 0 0 80px rgba(59,130,246,0.3)" }}>
                 Choose your plan
               </h3>
               <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground">
@@ -1401,8 +1401,8 @@ export default function UnifiedHomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16 md:mb-20">
               <span className="text-primary font-bold tracking-wide uppercase text-xs mb-4 block">Testimonials</span>
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground tracking-tight mb-4">Trusted by <span className="text-primary relative inline-block">Professionals<span className="absolute bottom-1 left-0 w-full h-3 bg-blue-100/50 -z-10 rounded-full"></span></span></h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">Join thousands of professionals who rely on HumanifyLab for authentic content transformation.</p>
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-4">Trusted by <span className="text-primary relative inline-block">Professionals<span className="absolute bottom-1 left-0 w-full h-3 bg-blue-100/50 -z-10 rounded-full"></span></span></h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-sm">Join thousands of professionals who rely on HumanifyLab for authentic content transformation.</p>
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -1434,8 +1434,8 @@ export default function UnifiedHomePage() {
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <span className="text-xs font-semibold uppercase tracking-wide text-white/90">FAQ</span>
-              <h3 className="mt-3 text-3xl font-bold tracking-tight text-white">Get quick answers</h3>
-              <p className="mt-3 text-base text-white/90">
+              <h3 className="mt-3 text-2xl font-bold tracking-tight text-white">Get quick answers</h3>
+              <p className="mt-3 text-sm text-white/90">
                 Everything you need to know about Humanizer’s security, pricing, and workflow.
               </p>
             </div>

@@ -2,11 +2,10 @@
  * Adapter Selector Utility
  * 
  * Selects the appropriate humanization adapter based on user subscription plan.
- * This enables different quality levels for free vs. paid users.
+ * All users now use the advanced AI adapter for consistent quality.
  */
 
 import { aiStudios } from "~/server/adapters/aistudios";
-import { aiStudios99 } from "~/server/adapters/aistudio99%";
 
 /**
  * Supported subscription plans
@@ -29,13 +28,8 @@ export interface HumanizationAdapter {
  * @returns Adapter instance to use for humanization
  * 
  * **Selection Logic:**
- * - ALL users (free, basic, pro, ultra) → Advanced AI adapter (aistudios.ts)
- * - This ensures consistent quality across all user tiers
- * 
- * **Rationale:**
- * - Single adapter simplifies maintenance and debugging
- * - All users get the same high-quality humanization
- * - Differentiation happens through credit limits, not quality
+ * - ALL users (free, basic, pro, ultra) use the advanced AI adapter (aistudios.ts)
+ * - This ensures consistent, high-quality humanization for all users
  * 
  * @example
  * ```typescript
@@ -46,8 +40,8 @@ export interface HumanizationAdapter {
 export function getHumanizationAdapter(
   subscriptionPlan: SubscriptionPlan
 ): HumanizationAdapter {
-  // ALL users now use the advanced AI adapter (aistudios.ts)
-  console.log(`[Adapter Selection] Using advanced AI adapter for ${subscriptionPlan || 'free'} user`);
+  // All users use the advanced AI adapter
+  console.log(`[Adapter Selection] Using aiStudios adapter for all users`);
   return aiStudios;
 }
 
@@ -74,5 +68,5 @@ export function isPremiumUser(subscriptionPlan: SubscriptionPlan): boolean {
  * @returns Human-readable adapter name
  */
 export function getAdapterName(subscriptionPlan: SubscriptionPlan): string {
-  return 'advanced-ai'; // All users now use the same adapter
+  return 'aiStudios';
 }

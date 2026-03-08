@@ -38,41 +38,17 @@ interface HumanizeResult {
  * Low-fidelity email style with intentional imperfections for 0% AI detection
  */
 export function buildHumanizationSystemMessage(isFreeUser: boolean = false): string {
-  return `You will follow every single rule below with absolute zero deviation. This is unbreakable law. Rewrite the entire input essay word by word exactly as instructed. Always stay fully relevant to the input essay topic. Never insert unrelated subjects unless they are part of the input text. Never invent new topics. Only rewrite the essay provided.
-
-Rules:
-– Maximum sentence length is 7 words. Never exceed this limit.
-– Use periods only for sentences with 7 words. If a sentence is shorter, do not end it with a period unless it is the final sentence in a paragraph.
-– Use commas only if consecutive short sentences are directly relevant to each other. Otherwise avoid commas.
-– Do not use contractions. Always write full forms like it is instead of it’s. do not instead of don’t. cannot instead of can’t.
-– Do not use question sentences at all.
-– Every sentence must be interrupted with a professional aside or reflection, but interruptions must vary. Do not repeat “I + verb” templates in consecutive sentences. Use alternatives like: this detail matters. the meaning is clear. importance is evident. this carries weight. I recognize this shift. I regard this as significant. this altered the path. this demonstrates importance.
-– Flow must be random. Ideas must jump unexpectedly from one to another. Paragraphs must not follow strict academic order. The flow must feel unpredictable but not messy.
-– Tone must be professional and reflective. Avoid slang or casual spoken fillers. The essay must read like a serious but authentic student paper.
-– Ban textbook phrases such as profoundly interlocked. held deep weight. a bold move. tragic turning point. defining moment. heritage that continues to inspire. instead rewrite them in simpler professional language like deeply tied together. carried serious importance. a decisive act. painful shift. marked change. left marks people still notice.
-– Avoid repeated evaluative templates like I observe. I note. it shows. it is clear. vary reflections with professional alternatives listed above.
-– Sometimes include personal opinion or reflection but keep it professional.
-– Do not use lists or bullet points.
-– Make the output professional but natural. It must read like a human student wrote it.
-– Ensure strict application of all rules to every sentence and paragraph.
-– Randomize rhythm and transitions so the essay never feels formulaic.
-– Occasionally insert subtle imperfections in phrasing or rhythm to mimic natural human writing.
-– Vary vocabulary density. Some sentences must be plain. Others must be rich with rare words. This creates burstiness and entropy.
-– Break logical flow deliberately. Jump between ideas without smooth transitions. Mimic human spontaneity.
-– Avoid symmetrical sentence structures. Each sentence must feel unique.
-– Occasionally repeat a word or phrase for emphasis in a natural way.
-– Allow slight ambiguity or vagueness in some sentences.
-– Maintain consistency with the topic but allow digressions that feel like personal musings.
-– Force lexical irregularity. Replace common verbs and adjectives with rare equivalents.
-– Randomize sentence openings. Never start multiple sentences in a row with the same word.
-– Occasionally fragment a thought mid-sentence and resume with a new one.
-– Insert natural repetition of certain words or phrases to simulate human emphasis.
-– Ensure entropy across paragraphs. Some must be dense with detail. Others must be lighter and reflective.
-– Apply all rules ruthlessly to every sentence and paragraph without exception.
-– Ban detector-trigger words: delve tapestry realm testament pivotal crucial robust holistic comprehensive unlock transform revolutionize leverage utilize facilitate optimize underscore plethora multitude ever-evolving digital age at the heart of in conclusion furthermore additionally moreover thus hence therefore.
-– Replace them with fresh professional alternatives like: this was striking. it felt different. the way events unfolded. deeply historical. remarkable how they achieved that. I was genuinely surprised. it truly altered my perspective.
-
-The entire output must read exactly like a professional reflective college essay written by a 21-year-old student. It will have energy uneven rhythm varied sentence lengths subtle imperfections and professional analysis. Maintain this exact voice and burstiness ratio perfectly consistent from the first word to the last even in texts up to 50000 words long without any repetition patterns or loss of energy. Apply these rules ruthlessly to the full input essay right now and output only the transformed essay`;}
+  return `Rewrite following these rules: Max 7 words per sentence. No contractions. No questions. Add varied professional reflections. Random flow. Professional tone. Ban AI words: delve, tapestry, realm, testament, pivotal, crucial, robust, comprehensive, leverage, utilize, moreover, furthermore, thus, hence, therefore. Use simple words. Vary vocabulary and syntax. Allow imperfections. Match original word count. Output only rewritten essay.`;
+}
+/**
+ * JUNIOR COLLEGE STUDENT WRITING STYLE PROMPT
+ * Simple sentences. 7-9 words only. Periods only. No commas. No questions.
+ * Random flow. Interrupted thoughts. Looks like a real young student wrote it.
+ * MUST be formatted in proper paragraphs and match input word count.
+ */
+export function buildJuniorCollegeStudentStyleMessage(isFreeUser: boolean = false): string {
+  return `Rewrite as junior college student. Sentences: 7-9 words only. Periods only. No commas, questions, exclamations, contractions. Simple words: "took over" not "colonization". Paragraphs: minimum 7 sentences each. Blank lines between paragraphs. Random choppy flow. Disconnected ideas. Match input word count exactly (±5%). Keep meaning and facts. Use "was", "is", "had", "people", "things", "stuff" often. No fancy vocabulary. No logical organization. Output only rewritten text.`;
+}
 
 export function buildHumanizationUserMessage(text: string): string {
   return text;
@@ -296,7 +272,7 @@ export class AIStudiosAdapter {
       console.log("[OpenAI] Model:", model);
       console.log("[OpenAI] Text length:", text.length);
 
-      const systemMessage = buildHumanizationSystemMessage(options.isFreeUser);
+      const systemMessage = buildJuniorCollegeStudentStyleMessage(options.isFreeUser);
       const userMessage = buildHumanizationUserMessage(text);
 
       // Build request body for OpenAI Responses API (as per documentation)
@@ -422,7 +398,7 @@ export class AIStudiosAdapter {
       model = FALLBACK_MODEL;
     }
 
-    const systemMessage = buildHumanizationSystemMessage(options.isFreeUser);
+    const systemMessage = buildJuniorCollegeStudentStyleMessage(options.isFreeUser);
     const userMessage = buildHumanizationUserMessage(text);
 
     // Build request body for OpenAI Responses API with streaming
@@ -474,21 +450,29 @@ export class AIStudiosAdapter {
     options: HumanizeOptions = {},
   ): Promise<HumanizeResult> {
     try {
-      // Use the original prompt format (combined system + user message)
-      const systemMessage = buildHumanizationSystemMessage(options.isFreeUser);
+      // Use authentic human writing prompt based on psycholinguistic analysis
+      const systemMessage = buildJuniorCollegeStudentStyleMessage(options.isFreeUser);
       const userMessage = buildHumanizationUserMessage(text);
       const combinedPrompt = `${systemMessage}\n\n${userMessage}`;
 
       console.log("[Gemini] Preparing request");
       console.log("[Gemini] Text length:", text.length);
 
-      // Calculate appropriate maxOutputTokens based on input size
-      const inputWordCount = text.split(/\s+/).filter((w: string) => w.trim().length > 0).length;
+      // Use maxTokens from options if provided, otherwise don't set a limit
+      // Let Gemini generate as much as needed without artificial cutoff
+      const estimatedOutputTokens = options.maxTokens || undefined;
+
+      const generationConfig: any = {
+        temperature: options.temperature ?? 1.0,
+        topP: 0.95,
+        topK: 40,
+        responseMimeType: "text/plain",
+      };
       
-      // Use maxTokens from options if provided, otherwise calculate based on input size 
-      const estimatedOutputTokens = options.maxTokens ?? (inputWordCount > 200 
-        ? 8192 // Use maximum for longer texts to avoid token limit issues
-        : Math.min(8192, Math.max(3000, inputWordCount * 10)));
+      // Only include maxOutputTokens if it's defined
+      if (estimatedOutputTokens) {
+        generationConfig.maxOutputTokens = estimatedOutputTokens;
+      }
 
       const requestBody = {
         contents: [
@@ -496,13 +480,7 @@ export class AIStudiosAdapter {
             parts: [{ text: combinedPrompt }],
           },
         ],
-        generationConfig: {
-          temperature: options.temperature ?? 1.0,
-          topP: 0.95,
-          topK: 40,
-          maxOutputTokens: estimatedOutputTokens,
-          responseMimeType: "text/plain",
-        },
+        generationConfig,
         safetySettings: [
           {
             category: "HARM_CATEGORY_HARASSMENT",
@@ -610,27 +588,31 @@ export class AIStudiosAdapter {
     text: string,
     options: HumanizeOptions = {},
   ): Promise<ReadableStream> {
-    const systemMessage = buildHumanizationSystemMessage(options.isFreeUser);
+    const systemMessage = buildJuniorCollegeStudentStyleMessage(options.isFreeUser);
     const userMessage = buildHumanizationUserMessage(text);
     const combinedPrompt = `${systemMessage}\n\n${userMessage}`;
 
-    // Use maxTokens from options if provided, otherwise calculate based on input
-    const inputWordCount = text.split(/\s+/).filter((w: string) => w.trim().length > 0).length;
-    const estimatedOutputTokens = options.maxTokens ?? (inputWordCount > 200 
-      ? 8192 
-      : Math.min(8192, Math.max(3000, inputWordCount * 10)));
+    // Use maxTokens from options if provided, otherwise don't set a limit
+    // Let Gemini generate as much as needed without artificial cutoff
+    const estimatedOutputTokens = options.maxTokens || undefined;
 
-    console.log(`[Gemini Stream] Input words: ${inputWordCount}, maxTokens from options: ${options.maxTokens}, using: ${estimatedOutputTokens}`);
+    console.log(`[Gemini Stream] maxTokens from options: ${options.maxTokens}, using: ${estimatedOutputTokens}`);
+
+    const generationConfig: any = {
+      temperature: options.temperature ?? 1.0,
+      topP: 0.95,
+      topK: 40,
+      responseMimeType: "text/plain",
+    };
+    
+    // Only include maxOutputTokens if it's defined
+    if (estimatedOutputTokens) {
+      generationConfig.maxOutputTokens = estimatedOutputTokens;
+    }
 
     const requestBody = {
       contents: [{ parts: [{ text: combinedPrompt }] }],
-      generationConfig: {
-        temperature: options.temperature ?? 1.0,
-        topP: 0.95,
-        topK: 40,
-        maxOutputTokens: estimatedOutputTokens,
-        responseMimeType: "text/plain",
-      },
+      generationConfig,
       safetySettings: [
         { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_ONLY_HIGH" },
         { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_ONLY_HIGH" },

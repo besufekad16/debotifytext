@@ -28,16 +28,14 @@ export const dynamic = "force-dynamic";
  * Returns appropriate token limit for different word count ranges
  * 
  * IMPORTANT: Gemini 2.5 Flash supports 8K output tokens
- * We use conservative limits to ensure complete generation
+ * With the optimized short prompt (~80 words), we have more room for output
  */
 function calculateMaxTokens(wordCount: number): number {
-  // Gemini 2.5 Flash supports up to 8K tokens output
-  // We use conservative estimates to avoid hitting limits
-  if (wordCount <= 500) return 6000;
-  if (wordCount <= 1000) return 8000;
-  if (wordCount <= 2000) return 8000;
-  if (wordCount <= 3000) return 8000;
-  return 8000; // Cap at 8000 tokens for Gemini 2.5 Flash
+  // With the optimized short prompt (~80 words), we have more room for output
+  // Gemini 2.5 Flash supports up to 8000 output tokens
+  // For 527 input words, we need ~700-800 tokens for output
+  // Use maximum to ensure complete generation without cutoff
+  return 8000;
 }
 
 /**
