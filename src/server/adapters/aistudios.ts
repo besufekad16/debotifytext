@@ -42,12 +42,72 @@ export function buildHumanizationSystemMessage(isFreeUser: boolean = false): str
 }
 /**
  * JUNIOR COLLEGE STUDENT WRITING STYLE PROMPT
- * Simple sentences. 8-12 words with commas allowed. Periods and commas only.
- * Random flow. Interrupted thoughts. Looks like a real young student wrote it.
- * MUST be formatted in proper paragraphs and match input word count.
+ * Professional essay format. 7-12 words per sentence. Periods and commas only.
+ * Minimum 7 sentences per paragraph. Proper paragraph structure.
+ * MUST be formatted as a real essay with proper paragraphs.
  */
 export function buildJuniorCollegeStudentStyleMessage(isFreeUser: boolean = false): string {
-  return `Rewrite as junior college student. Sentences: 8-12 words maximum. Use periods and commas only. No question marks, exclamation marks, semicolons, dashes, parentheses. No contractions like "it's" or "don't". Write full words like "it is" and "do not". Simple words: "took over" not "colonization". Paragraphs: minimum 7 sentences each. Blank lines between paragraphs. Random choppy flow. Disconnected ideas. Match input word count exactly (±5%). Keep meaning and facts. Use "was", "is", "had", "people", "things", "stuff" often. No fancy vocabulary. No logical organization. Output only rewritten text.`;
+  return `Rewrite as a professional junior college student essay. Follow these rules exactly.
+
+SENTENCE RULES:
+- Every sentence must be 7 to 12 words only.
+- Count the words carefully in each sentence.
+- Use only periods and commas. No question marks, exclamation marks, semicolons, dashes, parentheses.
+- Use commas only when necessary for clarity.
+- No contractions like "it's" or "don't". Write full words like "it is" and "do not".
+
+PARAGRAPH RULES:
+- Each paragraph must have at least 7 sentences minimum.
+- Separate paragraphs with blank lines.
+- Write as a real essay, not a list of sentences.
+- Paragraphs should flow together logically.
+- Start paragraphs with topic ideas, not random sentences.
+- End paragraphs with concluding thoughts.
+
+WRITING STYLE:
+- Write like a junior college student writing an essay.
+- Use simple, clear words that a student would use.
+- Make sentences flow together naturally in paragraphs.
+- Organize ideas logically within each paragraph.
+- Use transitions between ideas like "also", "then", "because", "for example".
+- Keep the same meaning and all facts from the original.
+
+VOCABULARY RULES:
+- Use basic words. No fancy or sophisticated vocabulary.
+- Replace complex words with simple ones.
+- Use "was", "is", "had", "have", "people", "things", "stuff" often.
+- Repeat simple words naturally when needed.
+
+CONTENT RULES:
+- Keep the same meaning as the original text.
+- Keep all important facts and information.
+- Do not add new information.
+- Do not remove important details.
+- Match the input word count exactly (±5%).
+- Use specific examples if the original had them.
+
+EXAMPLE OF CORRECT STYLE:
+Original: "Colonization was a complex historical phenomenon that fundamentally altered global power structures."
+Correct: "Colonization was when countries took over other lands. They did this for power and resources. It changed how the world worked. People from Europe did this a lot. They took over many places. This happened for a long time. It affected many people and countries."
+
+Notice:
+- Each sentence is 7-12 words.
+- Only periods and commas (commas only when needed).
+- Simple words like "took over" not "colonization".
+- Formatted as a real paragraph with 7 sentences.
+- Flows together logically.
+- Looks like a student wrote it.
+
+EXECUTION:
+- Count every sentence. Make sure it is 7-12 words.
+- Check for commas. Use only when necessary.
+- Check for fancy words. Replace with simple words.
+- Format as proper paragraphs with at least 7 sentences each.
+- Make sure paragraphs flow together.
+- Match the word count of the original input.
+- Make it look like a junior college student wrote it.
+- Return only the rewritten essay.
+- Do not include explanations or notes.`;
 }
 
 export function buildHumanizationUserMessage(text: string): string {
