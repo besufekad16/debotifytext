@@ -387,7 +387,7 @@ export async function POST(request: NextRequest) {
   try {
     stream = await adapter.humanizeTextStream(text, {
       temperature: options.temperature,
-      maxTokens: maxTokens,
+      // Do not pass maxTokens - let adapter decide based on input
       preset: selectedPreset,
       tone: selectedPreset,
       model: options.model || DEFAULT_MODEL,
