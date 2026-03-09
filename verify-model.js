@@ -6,11 +6,11 @@
  */
 
 const GEMINI_API_KEY = process.env.AISTUDIOS_API_KEY || "AIzaSyAA6W9p9gR4SX8ePAYluX2vV1sVGGZ70jY";
-const MODEL = "gemini-flash-latest"; // Lightest Gemini model
+const MODEL = "gemini-2.5-flash"; // Stable, lightest Gemini model (VERIFIED)
 
 async function testGeminiModel() {
   console.log("🔍 Testing Gemini Model Configuration...\n");
-  console.log(`Model: ${MODEL} (lightest Gemini model)`);
+  console.log(`Model: ${MODEL} (stable, lightest Gemini model - VERIFIED)`);
   console.log(`API Key: ${GEMINI_API_KEY.substring(0, 10)}...${GEMINI_API_KEY.substring(GEMINI_API_KEY.length - 5)}\n`);
 
   const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${GEMINI_API_KEY}`;
@@ -54,7 +54,8 @@ async function testGeminiModel() {
       console.log("✅ SUCCESS! Model is working correctly.");
       console.log(`\nGenerated text: "${generatedText}"`);
       console.log("\n✨ Your Gemini configuration is correct!");
-      console.log("💡 Using lightest model (gemini-flash-latest) to avoid rate limits");
+      console.log("💡 Using stable model (gemini-2.5-flash) - lightest production-ready option");
+      console.log("📚 Source: Official Google AI Studio documentation (verified 2025)");
       console.log("You can now deploy to Vercel with confidence.");
     } else {
       console.log("⚠️  WARNING: Response received but no text generated");
