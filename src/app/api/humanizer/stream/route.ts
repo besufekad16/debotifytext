@@ -152,11 +152,12 @@ export async function POST(request: NextRequest) {
 
   const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
 
-  // CRITICAL: Check minimum word count (50 words) BEFORE any processing
-  if (wordCount < 50) {
-    console.error(`[STREAM API] ERROR: Word count ${wordCount} is below minimum of 50 words`);
+  // CRITICAL: Check minimum word count (100 words) BEFORE any processing
+  // This is REQUIRED for ALL users (free and paid)
+  if (wordCount < 100) {
+    console.error(`[STREAM API] ERROR: Word count ${wordCount} is below minimum of 100 words`);
     return new Response(
-      JSON.stringify({ error: "Text must contain at least 50 words to be humanized" }),
+      JSON.stringify({ error: "Text must contain at least 100 words to be humanized. Please add more content." }),
       { status: 400, headers: { "Content-Type": "application/json" } }
     );
   }
