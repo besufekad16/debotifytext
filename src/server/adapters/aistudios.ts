@@ -41,103 +41,59 @@ export function buildHumanizationSystemMessage(isFreeUser: boolean = false): str
   return `Rewrite following these rules: Max 7 words per sentence. No contractions. No questions. Add varied professional reflections. Random flow. Professional tone. Ban AI words: delve, tapestry, realm, testament, pivotal, crucial, robust, comprehensive, leverage, utilize, moreover, furthermore, thus, hence, therefore. Use simple words. Vary vocabulary and syntax. Allow imperfections. Match original word count. Output only rewritten essay.`;
 }
 /**
- * DETECTOR-BYPASS PROMPT - FORCES AUTHENTIC STUDENT WRITING
- * Analyzes and replicates the exact pattern of human-written essays.
- * Works for ALL input types and topics.
+ * JUNIOR COLLEGE STUDENT WRITING STYLE PROMPT
+ * Simple sentences. 8-12 words with commas allowed. Periods and commas only.
+ * Random flow. Interrupted thoughts. Looks like a real young student wrote it.
+ * MUST be formatted in proper paragraphs and match input word count.
+ * CRITICAL: Must preserve ALL original meaning, facts, and content.
  */
 export function buildJuniorCollegeStudentStyleMessage(isFreeUser: boolean = false): string {
-  return `You must rewrite the input essay to match EXACTLY this pattern. This is the ONLY acceptable output style.
+  return `CRITICAL RULES - MUST FOLLOW EXACTLY:
 
-CRITICAL PATTERN TO REPLICATE:
-The output must sound EXACTLY like this example style:
-"Taking over land changed much of history. It was a very disputed process. One group took control of other land. They often made local people leave. Sometimes they made those people work. This happened in many forms then. Old empires expanded their areas often. Europeans split up continents for stuff. They did this during exploration times."
+1. CONTENT PRESERVATION (MOST IMPORTANT):
+   - Keep EVERY fact, detail, and point from the original text
+   - Do NOT add new information or examples
+   - Do NOT remove any information
+   - Do NOT change the meaning or message
+   - Preserve ALL names, dates, numbers, and specific details
+   - Keep the same topic and subject matter throughout
+   - Maintain the same argument or narrative structure
 
-SENTENCE RULES - MANDATORY:
-- Every sentence MUST be 7-12 words. Count each word.
-- Use ONLY periods. No commas, semicolons, dashes, question marks, exclamation marks.
-- Start sentences with simple subjects: "They", "It", "This", "People", "Things", "One", "New".
-- Use simple past tense mostly: "was", "were", "had", "did", "made", "went", "came".
-- No contractions. Write "it was" not "it's". Write "do not" not "don't".
-- Make sentences declarative and simple. No complex structures.
+2. WRITING STYLE:
+   - Write like a junior college student (simple, basic)
+   - Sentences: 8-12 words maximum
+   - Use periods and commas ONLY (no other punctuation)
+   - No contractions: write "it is" not "it's", "do not" not "don't"
+   - Simple vocabulary: "took over" not "colonization", "people" not "individuals"
+   - Use basic words: "was", "is", "had", "people", "things", "stuff", "got", "made"
+   - No fancy or academic words
 
-VOCABULARY - MUST MATCH EXAMPLE:
-- Use ONLY basic words. No sophisticated vocabulary.
-- Replace complex words: "colonization" → "taking over", "phenomenon" → "thing", "systemic" → "system".
-- Use these words FREQUENTLY: "was", "were", "had", "have", "they", "people", "things", "stuff", "much", "very", "then", "also", "too".
-- Use "took", "made", "went", "came", "got", "became", "changed", "happened".
-- Use "for stuff", "for things", "and stuff", "and things" naturally.
-- Use "much", "very", "often", "sometimes", "always", "still" for emphasis.
-- Avoid ALL fancy words: no "fundamental", "complex", "systemic", "profound", "inherent", "manifest".
+3. PARAGRAPH STRUCTURE (CRITICAL - MUST LOOK LIKE AN ESSAY):
+   - Format as proper essay paragraphs, NOT a list of sentences
+   - Each paragraph must have 7-10 sentences that flow together
+   - Separate paragraphs with a blank line (double newline)
+   - Sentences within a paragraph should connect naturally
+   - Start each paragraph with a topic sentence
+   - Keep sentences together in paragraph blocks
+   - Make it look like a real essay with multiple paragraphs
+   - Example format:
+     
+     First sentence of paragraph one. Second sentence continues the idea. Third sentence adds more. Fourth sentence keeps going. Fifth sentence is still part of this paragraph. Sixth sentence continues. Seventh sentence ends the paragraph.
+     
+     First sentence of paragraph two starts new idea. Second sentence continues. Third sentence adds detail. And so on for 7-10 sentences.
 
-PARAGRAPH STRUCTURE - MUST MATCH:
-- Each paragraph has 7-10 sentences minimum.
-- Paragraphs are separated by blank lines.
-- Paragraphs flow logically but simply.
-- Start paragraphs with simple topic ideas.
-- End paragraphs with concluding thoughts.
-- Use simple transitions: "then", "also", "too", "but", "so", "and".
-- NO formal transitions like "Furthermore", "Moreover", "Additionally", "In conclusion".
+4. WORD COUNT:
+   - Match input word count exactly (±5%)
+   - If input is 500 words, output must be 475-525 words
+   - Count carefully and adjust length accordingly
 
-RHYTHM AND FLOW - CRITICAL:
-- Sentences should be slightly choppy but readable.
-- Vary sentence length: some 7 words, some 10, some 12.
-- Use repetition naturally: repeat simple words and structures.
-- Make it sound like a real student thinking and writing.
-- Not too polished. Not too messy. Balanced.
-- Flow should be logical but simple.
+5. OUTPUT FORMAT:
+   - Output ONLY the rewritten text as a proper essay
+   - No explanations, no comments, no meta-text
+   - Start immediately with the rewritten content
+   - Format with proper paragraph breaks
 
-CONTENT REQUIREMENTS:
-- Keep ALL facts and information from the original.
-- Keep the same meaning and topic.
-- Do NOT add new information.
-- Do NOT remove important details.
-- Match input word count exactly (±5%).
-- Use specific examples if the original had them.
-
-PATTERN EXAMPLES TO FOLLOW:
-1. "Taking over land changed much of history." (9 words)
-2. "It was a very disputed process." (6 words - adjust to 7-12)
-3. "One group took control of other land." (7 words)
-4. "They often made local people leave." (6 words - adjust to 7-12)
-5. "Sometimes they made those people work." (6 words - adjust to 7-12)
-6. "This happened in many forms then." (6 words - adjust to 7-12)
-7. "Old empires expanded their areas often." (6 words - adjust to 7-12)
-8. "Europeans split up continents for stuff." (6 words - adjust to 7-12)
-
-EXECUTION STEPS:
-1. Read the input essay completely.
-2. Identify main ideas and facts.
-3. Rewrite using ONLY the pattern shown above.
-4. Count every sentence to ensure 7-12 words.
-5. Check that ONLY periods are used.
-6. Replace all fancy words with basic ones.
-7. Make sure paragraphs have 7-10 sentences each.
-8. Ensure word count matches input (±5%).
-9. Make it sound like a real student wrote it.
-10. Return ONLY the rewritten essay. No explanations.
-
-ANTI-AI DETECTOR RULES:
-- Avoid perfect parallel structure. Break patterns slightly.
-- Avoid consistent sentence rhythm. Make it slightly choppy.
-- Avoid formal academic language completely.
-- Avoid polished, textbook-like phrasing.
-- Avoid sophisticated vocabulary and complex ideas.
-- Avoid perfect grammar. Allow natural imperfections.
-- Avoid too many commas. Use mostly periods.
-- Avoid complex sentence structures.
-- Use repetition naturally like real students do.
-- Make it authentic and human-like.
-
-FINAL CHECK:
-- Does it sound like the example? YES
-- Are all sentences 7-12 words? YES
-- Are only periods used? YES
-- Are all words basic and simple? YES
-- Does it have 7-10 sentences per paragraph? YES
-- Does it match the input word count? YES
-- Does it keep all facts and meaning? YES
-
-If ANY of these are NO, rewrite until they are all YES.`;
+REMEMBER: The rewritten text must say the SAME THINGS as the original, just in simpler student language. Every fact and detail must be preserved. Format it as a proper essay with paragraphs, NOT as a list of sentences.`;
 }
 
 export function buildHumanizationUserMessage(text: string): string {
@@ -545,7 +501,11 @@ export class AIStudiosAdapter {
       const userMessage = buildHumanizationUserMessage(text);
       const combinedPrompt = `${systemMessage}\n\n${userMessage}`;
 
+      // Use model from options if provided, otherwise use DEFAULT_MODEL
+      const modelToUse = options.model || DEFAULT_MODEL;
+
       console.log("[Gemini] Preparing request");
+      console.log("[Gemini] Using model:", modelToUse);
       console.log("[Gemini] Text length:", text.length);
 
       // Use maxTokens from options if provided, otherwise don't set a limit
@@ -591,7 +551,10 @@ export class AIStudiosAdapter {
         ],
       };
 
-      const response = await fetch(GEMINI_API_URL, {
+      // Build API URL with the selected model
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelToUse}:generateContent?key=${env.AISTUDIOS_API_KEY}`;
+
+      const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -686,6 +649,10 @@ export class AIStudiosAdapter {
     // Let Gemini generate as much as needed without artificial cutoff
     const estimatedOutputTokens = options.maxTokens || undefined;
 
+    // Use model from options if provided, otherwise use DEFAULT_MODEL
+    const modelToUse = options.model || DEFAULT_MODEL;
+
+    console.log(`[Gemini Stream] Using model: ${modelToUse}`);
     console.log(`[Gemini Stream] maxTokens from options: ${options.maxTokens}, using: ${estimatedOutputTokens}`);
 
     const generationConfig: any = {
@@ -712,7 +679,7 @@ export class AIStudiosAdapter {
     };
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${DEFAULT_MODEL}:streamGenerateContent?key=${env.AISTUDIOS_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/${modelToUse}:streamGenerateContent?key=${env.AISTUDIOS_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

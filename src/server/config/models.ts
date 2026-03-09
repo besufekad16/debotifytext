@@ -3,15 +3,16 @@
  * Centralized configuration for AI models used throughout the application
  */
 
-// Default model used for text humanization (Gemini 2.5 Flash)
-// Gemini 2.5 Flash provides excellent quality with good output token limits
-export const DEFAULT_MODEL = "gemini-2.5-flash";
+// Single model for all requests - Gemini 3 Flash Preview
+// This model provides excellent quality with optimal cost/performance
+export const DEFAULT_MODEL = "gemini-3-flash-preview";
 
 // Fallback model used when Gemini fails (OpenAI gpt-5-mini)
 export const FALLBACK_MODEL = "gpt-5-mini";
 
 // Allowed models for humanization (both Gemini and OpenAI)
 export const ALLOWED_MODELS = [
+  "gemini-3-flash-preview",
   "gemini-2.5-flash",
   "gemini-2.0-flash-thinking-exp-01-21",
   "gemini-flash-latest",
@@ -67,5 +68,37 @@ export function getDefaultModel(): string {
  */
 export function getFallbackModel(): string {
   return FALLBACK_MODEL;
+}
+
+/**
+ * Get the model to use for humanization
+ * Always returns gemini-3-flash-preview for all users and word counts
+ * 
+ * @param wordCount - Number of words in the text (unused, kept for compatibility)
+ * @param subscriptionPlan - User's subscription plan (unused, kept for compatibility)
+ * @returns The model to use (always gemini-3-flash-preview)
+ */
+export function selectModelByComplexity(
+  wordCount: number,
+  subscriptionPlan?: string | null
+): string {
+  // Always use gemini-3-flash-preview for all requests
+  return DEFAULT_MODEL;
+}
+
+/**
+ * Determines if a request should be batched
+ * Batching is used for free users with small texts to reduce costs
+ * 
+ * @param wordCount - Number of words in the text
+ * @param subscriptionPlan - User's subscription plan
+ * @returns true if request should be batched
+ */
+export function shouldBatchRequest(
+  wordCount: number,
+  subscriptionPlan?: string | null
+): boolean {
+  // Only batch for free users with texts under 300 words
+  return !subscriptionPlan && wordCount < 300;
 }
 

@@ -8,13 +8,18 @@ export async function GET(request: NextRequest) {
   if (corsResponse) return corsResponse;
 
   try {
-    console.log("🔍 [API] Starting credits fetch at", new Date().toISOString());
+    // Only log in development to reduce CPU usage
+    if (process.env.NODE_ENV === 'development') {
+      console.log("🔍 [API] Starting credits fetch at", new Date().toISOString());
+    }
     const startTime = Date.now();
 
     const { userId } = await auth();
 
     if (!userId) {
-      console.log("❌ [API] No session found for credits");
+      if (process.env.NODE_ENV === 'development') {
+        console.log("❌ [API] No session found for credits");
+      }
       const response = NextResponse.json({ credits: 0 }, { status: 401 });
       return addCorsHeaders(response, request);
     }
@@ -41,7 +46,9 @@ export async function GET(request: NextRequest) {
 
     // Fallback: If user not found in DB (webhook delay), try to sync from Clerk
     if (!user) {
-      console.log("⚠️ [API] User not found in DB, attempting to sync from Clerk...");
+      if (process.env.NODE_ENV === 'development') {
+        console.log("⚠️ [API] User not found in DB, attempting to sync from Clerk...");
+      }
       try {
         const clerkUser = await currentUser();
         if (clerkUser) {
@@ -60,7 +67,9 @@ export async function GET(request: NextRequest) {
             }
           });
 
-          console.log(`✅ [API] Created missing user ${userId} on the fly`);
+          if (process.env.NODE_ENV === 'development') {
+            console.log(`✅ [API] Created missing user ${userId} on the fly`);
+          }
           
           // Use the new user data
           user = {
@@ -87,7 +96,9 @@ export async function GET(request: NextRequest) {
     const isTeamMember = !!user.team?.owner;
 
     const endTime = Date.now();
-    console.log(`✅ [API] Credits fetched in ${endTime - startTime}ms:`, effectiveCredits + effectiveExtraCredits);
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`✅ [API] Credits fetched in ${endTime - startTime}ms:`, effectiveCredits + effectiveExtraCredits);
+    }
 
     const response = NextResponse.json(
       { 
@@ -99,7 +110,7 @@ export async function GET(request: NextRequest) {
       {
         status: 200,
         headers: {
-          "Cache-Control": "no-store",
+          "Cache-Control": "private, max-age=30",
         },
       }
     );
@@ -111,7 +122,7 @@ export async function GET(request: NextRequest) {
       {
         status: 500,
         headers: {
-          "Cache-Control": "no-store",
+          "Cache-Control": "private, max-age=30",
         },
       }
     );

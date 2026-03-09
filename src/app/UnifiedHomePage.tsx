@@ -951,68 +951,75 @@ export default function UnifiedHomePage() {
                 </div>
               </div>
 
-              {/* Content Grid - Conditional Layout */}
-              <div className="p-6">
+              {/* Content Grid - Dynamic Layout */}
+              <div className="p-4 sm:p-6 lg:p-8">
                 <div className={cn(
-                  "grid gap-6",
+                  "grid gap-4 lg:gap-6 transition-all duration-300",
                   (humanizedText || isHumanizing) ? "grid-cols-1 lg:grid-cols-2" : "grid-cols-1"
                 )}>
-                  {/* Left Column - Input (always visible) */}
-                  <div className="space-y-4">
+                  {/* Left Column - Input Box */}
+                  <div className="flex flex-col h-full">
+                    {/* Header */}
                     <div className="flex items-center justify-between mb-3">
-                      <label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">
-                        AI-Generated Text
-                      </label>
-                      {originalText && (
-                        <span className="text-xs font-medium text-red-600 uppercase tracking-wide">
-                          Robotic
-                        </span>
-                      )}
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+                        <label className="text-sm font-semibold text-gray-700">
+                          Input Text
+                        </label>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs text-gray-500">
+                        <span>{originalText.trim().split(/\s+/).filter(Boolean).length} words</span>
+                        <span>•</span>
+                        <span>{originalText.length} chars</span>
+                      </div>
                     </div>
 
-                    <div className="relative">
-                      <ScrollArea className={cn(
-                        "h-[320px] w-full rounded-2xl border-2 transition-all",
+                    {/* Input Box */}
+                    <div className="relative flex-1">
+                      <div className={cn(
+                        "h-[350px] rounded-xl border-2 transition-all duration-200 overflow-hidden",
                         isDragging
-                          ? "border-[#5e3d2a] bg-[#5e3d2a]/5"
-                          : "border-gray-200 focus-within:border-[#5e3d2a] focus-within:bg-white bg-gray-50"
+                          ? "border-[#8B6F47] bg-[#8B6F47]/10 shadow-lg shadow-[#8B6F47]/20"
+                          : originalText
+                          ? "border-[#A0826D] bg-white shadow-sm"
+                          : "border-gray-200 bg-gray-50/50"
                       )}>
-                        <Textarea
-                          value={originalText}
-                          onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
-                            setOriginalText(e.target.value);
-                            setUploadedFileName(null);
-                          }}
-                          onDragOver={handleDragOver}
-                          onDragLeave={handleDragLeave}
-                          onDrop={handleDrop}
-                          placeholder="Paste your AI-generated text here..."
-                          className={cn(
-                            "w-full resize-none border-0 bg-transparent p-4 text-base leading-relaxed focus:outline-none focus:ring-0",
-                            isDragging && "bg-emerald-50/50"
-                          )}
-                          disabled={isHumanizing}
-                          style={{ minHeight: '320px' }}
-                        />
-                      </ScrollArea>
+                        <ScrollArea className="h-full">
+                          <Textarea
+                            value={originalText}
+                            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
+                              setOriginalText(e.target.value);
+                              setUploadedFileName(null);
+                            }}
+                            onDragOver={handleDragOver}
+                            onDragLeave={handleDragLeave}
+                            onDrop={handleDrop}
+                            placeholder="Paste or type the text you want to humanize..."
+                            className="w-full min-h-[350px] resize-none border-0 bg-transparent p-4 sm:p-5 text-[15px] leading-relaxed text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-0 focus-visible:ring-0"
+                            disabled={isHumanizing}
+                          />
+                        </ScrollArea>
+                      </div>
 
                       {/* Drop Zone Overlay */}
                       {!originalText && !isHumanizing && (
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                          <div className="text-center">
-                            <div className="inline-flex flex-col items-center gap-3 px-8 py-6 rounded-2xl border-2 border-dashed border-[#5e3d2a]/40 bg-[#5e3d2a]/5">
-                              <UploadCloud className="w-10 h-10 text-[#5e3d2a]" />
+                          <div className="text-center max-w-sm px-4">
+                            <div className="inline-flex flex-col items-center gap-3 px-6 py-6 rounded-xl border-2 border-dashed border-[#A0826D] bg-white/80 backdrop-blur-sm">
+                              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#F5E6D3] to-[#E8D4BF] flex items-center justify-center">
+                                <UploadCloud className="w-6 h-6 text-[#8B6F47]" />
+                              </div>
                               <div>
-                                <p className="text-sm font-semibold text-gray-700">
+                                <p className="text-sm font-medium text-gray-700 mb-1">
                                   Drop files here or{" "}
                                   <button
                                     onClick={() => fileInputRef.current?.click()}
-                                    className="text-[#5e3d2a] hover:text-[#4a2f1f] underline pointer-events-auto"
+                                    className="text-[#8B6F47] hover:text-[#6D5635] font-semibold underline pointer-events-auto transition-colors"
                                   >
                                     browse
                                   </button>
                                 </p>
-                                <p className="text-xs text-gray-500 mt-1">
+                                <p className="text-xs text-gray-500">
                                   Supports .txt, .md, .docx • Max 2MB
                                 </p>
                               </div>
@@ -1020,42 +1027,55 @@ export default function UnifiedHomePage() {
                           </div>
                         </div>
                       )}
+                    </div>
 
-                      {/* Character Counter */}
-                      {originalText && (
-                        <div className="absolute bottom-3 right-3 text-xs text-gray-400">
-                          {originalText.length} / 5000
+                    {/* Warning for < 250 words */}
+                    {originalText && originalText.trim().split(/\s+/).filter(Boolean).length < 250 && (
+                      <div className="mt-3 p-3 rounded-lg bg-amber-50 border border-amber-200">
+                        <div className="flex items-start gap-2">
+                          <Info className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
+                          <p className="text-xs text-amber-800 font-medium">
+                            For better results, use 250+ words
+                          </p>
                         </div>
+                      </div>
+                    )}
+
+                    {/* Action Buttons */}
+                    <div className="mt-4 space-y-3">
+                      <Button
+                        onClick={handleHumanize}
+                        disabled={!originalText.trim() || isHumanizing}
+                        className="w-full h-12 rounded-lg bg-gradient-to-r from-[#8B6F47] to-[#6D5635] hover:from-[#6D5635] hover:to-[#5A4529] text-white font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-md"
+                      >
+                        {isHumanizing ? (
+                          <>
+                            <Loader2 className="w-5 h-5 animate-spin mr-2 text-white" />
+                            Humanizing...
+                          </>
+                        ) : (
+                          <>
+                            <Sparkles className="w-5 h-5 mr-2" />
+                            Humanize text
+                          </>
+                        )}
+                      </Button>
+
+                      {originalText && (
+                        <Button
+                          onClick={() => {
+                            setOriginalText("");
+                            setHumanizedText("");
+                            setUploadedFileName(null);
+                          }}
+                          variant="outline"
+                          className="w-full h-10 rounded-lg border-gray-300 text-gray-700 hover:bg-gray-50 font-medium text-sm"
+                        >
+                          <RotateCcw className="w-4 h-4 mr-2" />
+                          Reset
+                        </Button>
                       )}
                     </div>
-
-                    {/* Info Text */}
-                    <div className="flex items-start gap-2">
-                      <Info className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
-                      <p className="text-xs text-gray-500">
-                        Paste content from ChatGPT, Claude, Gemini, or any AI writing tool
-                      </p>
-                    </div>
-
-                    {/* Humanize Button */}
-                    <Button
-                      onClick={handleHumanize}
-                      disabled={!originalText.trim() || isHumanizing}
-                      className="w-full h-14 rounded-2xl bg-gradient-to-r from-[#5e3d2a] via-[#4a2f1f] to-[#3d2519] hover:from-[#4a2f1f] hover:via-[#3d2519] hover:to-[#2f1d13] text-white font-bold text-lg shadow-lg shadow-[#5e3d2a]/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {isHumanizing ? (
-                        <>
-                          <Loader2 className="w-5 h-5 animate-spin" />
-                          Humanizing...
-                        </>
-                      ) : (
-                        <>
-                          <Sparkles className="w-5 h-5" />
-                          Humanize Text
-                          <Sparkles className="w-5 h-5" />
-                        </>
-                      )}
-                    </Button>
 
                     {/* Hidden File Input */}
                     <input
@@ -1067,41 +1087,81 @@ export default function UnifiedHomePage() {
                     />
                   </div>
 
-                  {/* Right Column - Output (only when humanizing or complete) */}
+                  {/* Right Column - Output Box (Only shows when humanizing or has output) */}
                   {(humanizedText || isHumanizing) && (
-                    <div className="space-y-4">
+                    <div className="flex flex-col h-full">
+                      {/* Header */}
                       <div className="flex items-center justify-between mb-3">
-                        <label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">
-                          Humanized Text
-                        </label>
-                        {humanizedText && !isHumanizing && (
-                          <span className="text-xs font-medium text-emerald-600 uppercase tracking-wide">
-                            Human-Like
+                        <div className="flex items-center gap-2">
+                          <div className={cn(
+                            "w-2 h-2 rounded-full transition-colors",
+                            humanizedText && !isHumanizing ? "bg-green-500" : "bg-gray-300"
+                          )}></div>
+                          <label className="text-sm font-semibold text-gray-700">
+                            Humanized output
+                          </label>
+                        </div>
+                      {humanizedText && !isHumanizing && (
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-gray-500">
+                            {humanizedText.trim().split(/\s+/).filter(Boolean).length} words
                           </span>
-                        )}
-                      </div>
+                          <span className="text-xs px-2 py-1 rounded-full bg-green-100 text-green-700 font-medium">
+                            100% Human
+                          </span>
+                        </div>
+                      )}
+                    </div>
 
-                      <div className="relative">
-                        <ScrollArea className="h-[320px] w-full rounded-2xl border-2 border-gray-200 bg-white p-4">
-                          {isHumanizing ? (
-                            <div className="flex flex-col items-center justify-center h-full gap-4 min-h-[320px]">
-                              <Loader2 className="w-8 h-8 animate-spin text-[#5e3d2a]" />
-                              {thoughtsList.length > 0 && (
-                                <p className="text-sm text-gray-600 text-center animate-pulse">
-                                  {thoughtsList[0]}
+                    {/* Output Box */}
+                    <div className="relative flex-1">
+                      <div className={cn(
+                        "h-[350px] rounded-xl border-2 transition-all duration-200 overflow-hidden",
+                        humanizedText && !isHumanizing
+                          ? "border-green-300 bg-white shadow-sm"
+                          : "border-gray-200 bg-gray-50/50"
+                      )}>
+                        <ScrollArea className="h-full">
+                          <div className="p-4 sm:p-5">
+                            {isHumanizing ? (
+                              <div className="flex flex-col items-center justify-center min-h-[310px] gap-4">
+                                <div className="relative">
+                                  <div className="w-14 h-14 rounded-full border-4 border-[#F5E6D3]"></div>
+                                  <div className="absolute inset-0 w-14 h-14 rounded-full border-4 border-t-[#8B6F47] animate-spin"></div>
+                                </div>
+                                {thoughtsList.length > 0 && (
+                                  <p className="text-sm text-gray-600 text-center animate-pulse max-w-xs">
+                                    {thoughtsList[0]}
+                                  </p>
+                                )}
+                              </div>
+                            ) : humanizedText ? (
+                              <div className="prose prose-sm max-w-none">
+                                <p className="text-[15px] leading-relaxed text-gray-800 whitespace-pre-wrap">
+                                  {humanizedText}
                                 </p>
-                              )}
-                            </div>
-                          ) : (
-                            <p className="text-base leading-relaxed text-gray-800 whitespace-pre-wrap">
-                              {humanizedText}
-                            </p>
-                          )}
+                              </div>
+                            ) : (
+                              <div className="flex items-center justify-center min-h-[310px]">
+                                <div className="text-center max-w-xs px-4">
+                                  <div className="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-3">
+                                    <FileText className="w-7 h-7 text-gray-400" />
+                                  </div>
+                                  <p className="text-sm font-medium text-gray-500 mb-1">
+                                    Your natural, detection-safe copy appears here.
+                                  </p>
+                                  <p className="text-xs text-gray-400">
+                                    Enter text on the left to get started
+                                  </p>
+                                </div>
+                              </div>
+                            )}
+                          </div>
                         </ScrollArea>
 
                         {/* Character Counter */}
                         {humanizedText && !isHumanizing && (
-                          <div className="absolute bottom-3 right-3 text-xs text-gray-400">
+                          <div className="absolute bottom-3 right-3 text-xs text-gray-400 bg-white/80 px-2 py-1 rounded">
                             {humanizedText.length} characters
                           </div>
                         )}
@@ -1109,20 +1169,20 @@ export default function UnifiedHomePage() {
 
                       {/* Action Buttons */}
                       {humanizedText && !isHumanizing && (
-                        <div className="flex items-center gap-3">
+                        <div className="mt-4 flex items-center gap-2">
                           <Button
                             onClick={handleCopy}
                             variant="outline"
-                            className="flex-1 h-11 rounded-xl border-2 border-gray-200 hover:border-[#5e3d2a] hover:bg-[#5e3d2a]/5 hover:text-[#5e3d2a]"
+                            className="flex-1 h-10 rounded-lg border-gray-300 hover:border-[#8B6F47] hover:bg-[#F5E6D3] hover:text-[#6D5635] transition-colors"
                           >
                             {copied ? (
                               <>
-                                <Check className="w-4 h-4 text-[#5e3d2a]" />
-                                Copied!
+                                <Check className="w-4 h-4 mr-2 text-green-600" />
+                                Copied
                               </>
                             ) : (
                               <>
-                                <Copy className="w-4 h-4" />
+                                <Copy className="w-4 h-4 mr-2" />
                                 Copy
                               </>
                             )}
@@ -1130,26 +1190,44 @@ export default function UnifiedHomePage() {
                           <Button
                             onClick={() => handleDownload("txt")}
                             variant="outline"
-                            className="flex-1 h-11 rounded-xl border-2 border-gray-200 hover:border-[#5e3d2a] hover:bg-[#5e3d2a]/5 hover:text-[#5e3d2a]"
+                            className="h-10 px-4 rounded-lg border-gray-300 hover:border-[#8B6F47] hover:bg-[#F5E6D3] hover:text-[#6D5635] transition-colors"
                           >
-                            <Download className="w-4 h-4" />
-                            Download
+                            <Download className="w-4 h-4 mr-2" />
+                            .txt
                           </Button>
                           <Button
-                            onClick={() => {
-                              setOriginalText("");
-                              setHumanizedText("");
-                              setCurrentAiScore(null);
-                            }}
+                            onClick={() => handleDownload("docx")}
                             variant="outline"
-                            className="h-11 px-4 rounded-xl border-2 border-gray-200 hover:border-red-400 hover:bg-red-50"
+                            className="h-10 px-4 rounded-lg border-gray-300 hover:border-[#8B6F47] hover:bg-[#F5E6D3] hover:text-[#6D5635] transition-colors"
                           >
-                            <RotateCcw className="w-4 h-4" />
+                            <Download className="w-4 h-4 mr-2" />
+                            .docx
                           </Button>
                         </div>
                       )}
+                      </div>
                     </div>
                   )}
+                </div>
+
+                {/* Bottom Info Section */}
+                <div className="mt-6 pt-6 border-t border-gray-200">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div className="flex items-start gap-2 text-xs text-gray-500">
+                      <Info className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                      <p>
+                        Add text to see estimated credits. Tip: Trim repeated sections before you humanize.
+                      </p>
+                    </div>
+                    {humanizedText && !isHumanizing && (
+                      <div className="flex items-center gap-2 text-xs">
+                        <span className="text-gray-500">Version history:</span>
+                        <button className="text-[#8B6F47] hover:text-[#6D5635] font-medium underline">
+                          2 saved outputs
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

@@ -10,8 +10,9 @@ import {
   sanitizeText
 } from "~/server/utils/request-validator";
 import { getHumanizationAdapter, isPremiumUser, getAdapterName } from "~/server/utils/adapter-selector";
-import { DEFAULT_MODEL } from "~/server/config/models";
+import { DEFAULT_MODEL, selectModelByComplexity, shouldBatchRequest } from "~/server/config/models";
 import { trackWordUsage } from "~/server/utils/polar-client";
+import { getBatcher } from "~/server/utils/request-batcher";
 
 export const dynamic = "force-dynamic";
 
@@ -22,21 +23,6 @@ export const dynamic = "force-dynamic";
  * - System message: Simple role definition
  * - User message: Contains the original prompt format with all rules and the text to humanize
  */
-
-/**
- * Calculates max tokens based on word count
- * Returns appropriate token limit for different word count ranges
- * 
- * IMPORTANT: Gemini 2.5 Flash supports 8K output tokens
- * With the optimized short prompt (~80 words), we have more room for output
- */
-function calculateMaxTokens(wordCount: number): number {
-  // With the optimized short prompt (~80 words), we have more room for output
-  // Gemini 2.5 Flash supports up to 8000 output tokens
-  // For 527 input words, we need ~700-800 tokens for output
-  // Use maximum to ensure complete generation without cutoff
-  return 8000;
-}
 
 /**
  * Chunks text for streaming while preserving paragraph structure
@@ -175,13 +161,10 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const maxTokens = calculateMaxTokens(wordCount);
-
   // CRITICAL: Perform ALL validations FIRST before starting stream
   // This prevents API costs when validations fail
   if (isDev) {
     console.log(`[STREAM API] Word count: ${wordCount}`);
-    console.log(`[STREAM API] Calculated max tokens: ${maxTokens}`);
   }
 
   // Get user from database FIRST (before starting stream)
@@ -374,6 +357,214 @@ export async function POST(request: NextRequest) {
 
   const isFreeUser = !isPremiumUser(billingUser.subscriptionPlan as any);
 
+  // Smart model selection based on word count and subscription plan
+  const selectedModel = selectModelByComplexity(wordCount, billingUser.subscriptionPlan);
+  
+  if (isDev) {
+    console.log(`[STREAM API] Smart model selection: ${selectedModel} (Plan: ${billingUser.subscriptionPlan || 'free'}, Words: ${wordCount})`);
+  }
+
+  // Check if request should be batched (free users with <300 words)
+  const shouldBatch = shouldBatchRequest(wordCount, billingUser.subscriptionPlan);
+  
+  if (shouldBatch) {
+    if (isDev) {
+      console.log(`[STREAM API] Request eligible for batching (free user, ${wordCount} words)`);
+    }
+
+    try {
+      // Add to batch queue and wait for result
+      const batcher = getBatcher();
+      const humanizedText = await batcher.addRequest(
+        userId,
+        text,
+        wordCount,
+        {
+          ...options,
+          model: selectedModel,
+          isFreeUser: true,
+          preset: selectedPreset,
+          tone: selectedPreset,
+        }
+      );
+
+      // Create a simple stream that returns the batched result
+      const encoder = new TextEncoder();
+      const stream = new ReadableStream({
+        start(controller) {
+          // Send the humanized text in chunks
+          const chunks = humanizedText.match(/.{1,50}/g) || [humanizedText];
+          
+          for (const chunk of chunks) {
+            const sseData = JSON.stringify({
+              type: "content",
+              choices: [{ delta: { content: chunk } }]
+            });
+            controller.enqueue(encoder.encode(`data: ${sseData}\n\n`));
+          }
+
+          // Send completion
+          controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+          controller.close();
+        }
+      });
+
+      // Process the batched stream response (same as regular stream)
+      let fullText = "";
+      let chunkBuffer = "";
+
+      const transformedStream = stream.pipeThrough(
+        new TransformStream({
+          transform(chunk, controller) {
+            controller.enqueue(chunk);
+
+            try {
+              const text = new TextDecoder().decode(chunk);
+              const lines = text.split("\n");
+
+              for (const line of lines) {
+                if (line.startsWith("data: ") && line !== "data: [DONE]") {
+                  try {
+                    const data = line.slice(6);
+                    const json = JSON.parse(data);
+                    const content = json.choices?.[0]?.delta?.content;
+
+                    if (content) {
+                      fullText += content;
+                      chunkBuffer += content;
+
+                      if (isDev && (chunkBuffer.length > 20 || content.includes(".") || content.includes("!"))) {
+                        console.log(`[STREAM BATCHED] Forwarded content: "${chunkBuffer.substring(0, 50)}..."`);
+                        chunkBuffer = "";
+                      }
+                    }
+                  } catch (e) {
+                    // Ignore parse errors
+                  }
+                }
+              }
+            } catch (e) {
+              // Ignore decode errors
+            }
+          },
+
+          async flush(controller) {
+            const generatedWordCount = fullText.trim().split(/\s+/).filter(Boolean).length;
+
+            if (generatedWordCount < 50) {
+              console.error(`[STREAM API BATCHED] Generated content too short (${generatedWordCount} words)`);
+              controller.enqueue(
+                new TextEncoder().encode(
+                  `data: ${JSON.stringify({
+                    type: "complete",
+                    credits_used: 0,
+                    credits_remaining: (billingUser.credits || 0) + (billingUser.extraCredits || 0),
+                    error: "Generated content too short"
+                  })}\n\n`
+                )
+              );
+              return;
+            }
+
+            // Calculate deduction
+            let newCredits = billingUser.credits || 0;
+            let newExtraCredits = billingUser.extraCredits || 0;
+            let remainingToDeduct = wordCount;
+
+            if (newCredits >= remainingToDeduct) {
+              newCredits -= remainingToDeduct;
+              remainingToDeduct = 0;
+            } else {
+              remainingToDeduct -= newCredits;
+              newCredits = 0;
+            }
+
+            if (remainingToDeduct > 0) {
+              newExtraCredits = Math.max(0, newExtraCredits - remainingToDeduct);
+            }
+
+            const creditsRemaining = newCredits + newExtraCredits;
+
+            controller.enqueue(
+              new TextEncoder().encode(
+                `data: ${JSON.stringify({
+                  type: "complete",
+                  credits_used: wordCount,
+                  credits_remaining: creditsRemaining,
+                  batched: true,
+                })}\n\n`
+              )
+            );
+
+            // DB operations in background
+            setImmediate(() => {
+              void (async () => {
+                try {
+                  await db.user.update({
+                    where: { id: billingUser.id },
+                    data: {
+                      credits: newCredits,
+                      extraCredits: newExtraCredits
+                    },
+                  });
+
+                  await db.humanizerHistory.create({
+                    data: {
+                      originalText: rawText,
+                      humanizedText: fullText || text,
+                      preset: selectedPreset,
+                      tokensUsed: wordCount,
+                      aiScore: 100,
+                      metadata: {
+                        source: "gemini-batched",
+                        preset: selectedPreset,
+                        model: selectedModel,
+                        batched: true,
+                        originalLength: text.length,
+                        humanizedLength: fullText.length,
+                        billedTo: isTeamMember ? billingUser.id : undefined
+                      },
+                      userId: dbUser.id,
+                    },
+                  });
+
+                  trackWordUsage(billingUser.id, wordCount, {
+                    preset: selectedPreset,
+                    plan: billingUser.subscriptionPlan,
+                    model: selectedModel,
+                    stream: true,
+                    batched: true,
+                    teamMemberId: isTeamMember ? dbUser.id : undefined
+                  }).catch((error) => {
+                    console.error(`[STREAM API BATCHED] Error tracking usage:`, error);
+                  });
+
+                  if (isDev) {
+                    console.log(`[STREAM API BATCHED] Database record saved successfully`);
+                  }
+                } catch (dbError) {
+                  console.error("[STREAM API BATCHED] Background database save failed:", dbError);
+                }
+              })();
+            });
+          },
+        })
+      );
+
+      return new Response(transformedStream, {
+        headers: {
+          "Content-Type": "text/event-stream",
+          "Cache-Control": "no-cache, no-transform",
+          "Connection": "keep-alive",
+          "X-Accel-Buffering": "no",
+        },
+      });
+    } catch (batchError) {
+      console.error("[STREAM API] Batching failed, falling back to direct processing:", batchError);
+      // Fall through to regular processing if batching fails
+    }
+  }
+
   // Select appropriate adapter based on subscription plan
   const adapter = getHumanizationAdapter(billingUser.subscriptionPlan as any);
   const adapterName = getAdapterName(billingUser.subscriptionPlan as any);
@@ -390,7 +581,7 @@ export async function POST(request: NextRequest) {
       // Do not pass maxTokens - let adapter decide based on input
       preset: selectedPreset,
       tone: selectedPreset,
-      model: options.model || DEFAULT_MODEL,
+      model: selectedModel, // Use smart model selection
       isFreeUser: isFreeUser,
       ...options,
     });
@@ -597,6 +788,7 @@ export async function POST(request: NextRequest) {
                   metadata: {
                     source: "gemini-stream",
                     preset: selectedPreset,
+                    model: selectedModel,
                     originalLength: text.length,
                     humanizedLength: fullText.length,
                     billedTo: isTeamMember ? billingUser.id : undefined
@@ -610,7 +802,7 @@ export async function POST(request: NextRequest) {
               trackWordUsage(billingUser.id, wordCount, {
                 preset: selectedPreset,
                 plan: billingUser.subscriptionPlan,
-                model: "gemini",
+                model: selectedModel,
                 stream: true,
                 teamMemberId: isTeamMember ? dbUser.id : undefined
               }).then((result) => {
