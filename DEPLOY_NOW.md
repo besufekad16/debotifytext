@@ -1,248 +1,106 @@
-﻿# 🚀 DEPLOY NOW - Quick Start Guide
+﻿# 🚀 DEPLOY NOW - Fix "Failed to humanize text" Error
 
-## ✅ BUILD SUCCESSFUL - READY TO DEPLOY!
+## The Problem
+Your LOCAL code is fixed, but Vercel is still running the OLD code with the broken model name.
 
-Your production-grade programmatic SEO system with **368,879 pages** is ready.
+## The Solution
+You need to commit and push the changes to trigger a Vercel deployment.
 
----
+## Step-by-Step Deployment
 
-## 🎯 QUICK DEPLOYMENT (10 minutes)
-
-### Step 1: Deploy to Vercel (5 min)
-
+### 1. Check what changed
 ```bash
-# Option A: Using Vercel CLI
-vercel --prod
+cd humanify
+git status
+git diff src/server/config/models.ts
+```
 
-# Option B: Using Git (if connected to Vercel)
+### 2. Add all changes
+```bash
 git add .
-git commit -m "Production SEO system ready"
+```
+
+### 3. Commit with a clear message
+```bash
+git commit -m "fix: use verified stable Gemini model (gemini-2.5-flash) to fix humanization errors"
+```
+
+### 4. Push to trigger Vercel deployment
+```bash
 git push origin main
 ```
 
-**Expected Output**:
-```
-✅ Production: https://www.humanifylab.com
-✅ Build time: ~1-2 minutes
-✅ All 368,879 pages accessible
-```
+### 5. Wait for Vercel to deploy (2-3 minutes)
+- Go to your Vercel dashboard
+- Watch the deployment progress
+- Wait for "Deployment Complete" status
 
-### Step 2: Verify Deployment (2 min)
+### 6. Test on production
+- Go to your live website
+- Try humanizing some text
+- Should work now!
 
-Test these URLs in your browser:
+## What Was Fixed
 
-**Pre-generated pages (instant load)**:
-- https://www.humanifylab.com/ai-humanizer
-- https://www.humanifylab.com/bypass-turnitin
-- https://www.humanifylab.com/free-ai-humanizer
-
-**On-demand pages (1-2s first visit, then instant)**:
-- https://www.humanifylab.com/humanize-gpt-4
-- https://www.humanifylab.com/ai-essay-humanizer
-- https://www.humanifylab.com/bypass-copyleaks
-
-**Sitemap**:
-- https://www.humanifylab.com/sitemap.xml
-- https://www.humanifylab.com/sitemaps/sitemap-1.xml
-
-### Step 3: Submit to Google (3 min)
-
-1. Go to [Google Search Console](https://search.google.com/search-console)
-2. Add property: `www.humanifylab.com`
-3. Verify ownership (DNS or HTML file method)
-4. Go to "Sitemaps" section
-5. Submit: `https://www.humanifylab.com/sitemap.xml`
-6. Click "Submit"
-
-**Expected Result**:
-```
-✅ Sitemap submitted successfully
-📊 368,879 URLs discovered
-⏳ Indexing will begin within 24-48 hours
+### Before (BROKEN)
+```typescript
+export const DEFAULT_MODEL = "gemini-3-flash-preview"; // ❌ Doesn't exist
 ```
 
----
+### After (FIXED)
+```typescript
+export const DEFAULT_MODEL = "gemini-2.5-flash"; // ✅ Verified stable model
+```
 
-## 📊 WHAT HAPPENS NEXT
+## If It Still Fails After Deployment
 
-### Immediate (0-24 hours):
-- ✅ Site deployed and live
-- ✅ All 368,879 pages accessible
-- ✅ Sitemap submitted to Google
-- ⏳ Google starts crawling
+### Check Vercel Environment Variables
+Make sure these are set in Vercel:
+1. Go to Vercel Dashboard → Your Project → Settings → Environment Variables
+2. Verify these exist:
+   - `AISTUDIOS_API_KEY` = Your Google AI Studio API key
+   - `OPENAI_API_KEY` = Your OpenAI API key
 
-### Week 1:
-- 📈 1,000-5,000 pages indexed
-- 👥 First organic visitors arrive
-- 📊 Search Console shows impressions
+### Check Vercel Logs
+1. Go to Vercel Dashboard → Your Project → Deployments
+2. Click on the latest deployment
+3. Click "View Function Logs"
+4. Look for errors related to Gemini API
 
-### Month 1:
-- 📈 50,000-100,000 pages indexed
-- 👥 1,000-5,000 organic visitors/month
-- 🎯 Rankings for long-tail keywords
+### Common Issues
 
-### Month 3:
-- 📈 150,000-200,000 pages indexed
-- 👥 10,000-30,000 organic visitors/month
-- 🎯 Rankings for competitive keywords
+**Issue**: "Model not found" in logs
+**Solution**: API key might be invalid or doesn't have access to gemini-2.5-flash
 
-### Month 6-12:
-- 📈 300,000-368,879 pages indexed
-- 👥 100,000-300,000 organic visitors/month
-- 🎯 Top rankings for target keywords
+**Issue**: "Rate limit exceeded"
+**Solution**: You're hitting Google's free tier limits (15 requests/minute)
 
----
+**Issue**: "Failed to humanize text" but no logs
+**Solution**: Check if the deployment actually updated (look at commit hash)
 
-## 🎯 SYSTEM ARCHITECTURE
+## Quick Test Command
 
-### How It Works:
-
-**Build Time (49 seconds)**:
-- 10 high-priority pages pre-generated
-- Sitemap with 368,879 URLs ready
-- All routes configured for ISR
-
-**Runtime (On-Demand)**:
-- Remaining 368,869 pages generate on first visit
-- Generated pages cached for 24 hours
-- Subsequent visits served instantly from cache
-
-**Google Crawling**:
-- Google reads sitemap (368,879 URLs)
-- Google crawls pages over time
-- Pages generate on-demand when crawled
-- Pages get indexed and ranked
-
----
-
-## 📈 EXPECTED TRAFFIC GROWTH
-
-### Conservative Projections:
-
-| Timeline | Pages Indexed | Organic Visitors/Month |
-|----------|---------------|------------------------|
-| Week 1   | 1,000-5,000   | 10-100                 |
-| Month 1  | 50,000-100,000| 1,000-5,000            |
-| Month 3  | 150,000-200,000| 10,000-30,000         |
-| Month 6  | 250,000-300,000| 30,000-100,000        |
-| Month 12 | 368,879       | 100,000-300,000        |
-
-**Factors**:
-- Domain authority
-- Backlink profile
-- Content quality
-- User engagement
-- Competition
-
----
-
-## 🔧 MAINTENANCE
-
-### Weekly Tasks (10 min):
-- Check Search Console for crawl errors
-- Monitor indexing progress
-- Review top performing pages
-- Check Core Web Vitals
-
-### Monthly Tasks (30 min):
-- Analyze traffic trends
-- Optimize underperforming pages
-- Add new keywords (if needed)
-- Update content templates
-
-### Quarterly Tasks (2 hours):
-- Comprehensive SEO audit
-- Competitor analysis
-- Backlink building
-- Content refresh
-
----
-
-## 📝 USEFUL COMMANDS
-
+After deployment, test the API directly:
 ```bash
-# Regenerate sitemaps (after adding keywords)
-npm run seo:generate-sitemaps
-
-# Build for production
-npm run build
-
-# Test locally
-npm run start
-
-# Full deployment
-npm run seo:full-deploy
+curl -X POST https://your-domain.vercel.app/api/humanizer/stream \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_CLERK_TOKEN" \
+  -d '{"text":"This is a test. It should work now.","preset":"default"}'
 ```
 
----
+## Verification Checklist
 
-## 🎉 SUCCESS CHECKLIST
+- [ ] Changes committed locally
+- [ ] Changes pushed to GitHub
+- [ ] Vercel deployment triggered
+- [ ] Deployment completed successfully
+- [ ] Environment variables set in Vercel
+- [ ] Tested on production website
+- [ ] Humanization works!
 
-- [x] Build successful (49 seconds)
-- [x] 368,879 pages ready
-- [x] Sitemaps generated (8 files)
-- [x] ISR configured
-- [x] SEO optimized
-- [ ] **Deploy to Vercel** ← YOU ARE HERE
-- [ ] Submit sitemap to Google
-- [ ] Monitor indexing
+## Need Help?
 
----
-
-## 🚀 DEPLOY COMMAND
-
-Run this now:
-
-```bash
-vercel --prod
-```
-
-Or push to your connected Git repository:
-
-```bash
-git add .
-git commit -m "Production SEO system - 368k pages ready"
-git push origin main
-```
-
----
-
-## 📞 SUPPORT
-
-If you encounter any issues:
-
-1. Check build logs in Vercel dashboard
-2. Verify environment variables are set
-3. Test locally with `npm run build && npm run start`
-4. Check Search Console for crawl errors
-
----
-
-## 🎯 NEXT STEPS AFTER DEPLOYMENT
-
-1. **Submit sitemap to Google Search Console**
-2. **Request indexing for top 10 pages**
-3. **Set up Google Analytics** (if not already)
-4. **Monitor Core Web Vitals**
-5. **Track keyword rankings**
-6. **Build backlinks** (white-hat methods)
-7. **Engage with users** (improve content based on feedback)
-
----
-
-## 🎉 YOU'RE READY!
-
-Your production-grade programmatic SEO system is complete.
-
-**Time to deploy**: 5 minutes  
-**Time to first traffic**: 1-2 weeks  
-**Time to significant traffic**: 3-6 months  
-**Long-term potential**: 100k-300k+ visitors/month
-
-**Run this command now**:
-
-```bash
-vercel --prod
-```
-
-🚀 **LET'S DOMINATE SEARCH RESULTS!**
+If it still doesn't work after deployment:
+1. Share the Vercel deployment logs
+2. Share any browser console errors
+3. Confirm the environment variables are set correctly

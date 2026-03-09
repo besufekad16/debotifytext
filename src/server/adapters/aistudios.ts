@@ -581,7 +581,7 @@ export class AIStudiosAdapter {
           tokensUsed: 0,
           metadata: {
             source: "gemini",
-            model: FALLBACK_MODEL,
+            model: modelToUse,
             error: "No candidates in Gemini response",
           },
           error: "No candidates in Gemini response",
@@ -604,7 +604,7 @@ export class AIStudiosAdapter {
           tokensUsed: 0,
           metadata: {
             source: "gemini",
-            model: FALLBACK_MODEL,
+            model: modelToUse,
             finishReason: candidate.finishReason,
             safetyRatings: candidate?.safetyRatings,
             error: `No text returned from Gemini. Finish reason: ${candidate.finishReason || "unknown"}`,
@@ -620,7 +620,7 @@ export class AIStudiosAdapter {
         humanizedText: generatedText,
         tokensUsed: data.usageMetadata?.totalTokenCount || 0,
         metadata: {
-          model: FALLBACK_MODEL,
+          model: modelToUse,
           finishReason: candidate?.finishReason,
           source: "gemini",
         },
