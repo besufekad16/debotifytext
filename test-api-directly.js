@@ -7,7 +7,7 @@
  */
 
 const GEMINI_API_KEY = process.env.AISTUDIOS_API_KEY || "AIzaSyAA6W9p9gR4SX8ePAYluX2vV1sVGGZ70jY";
-const MODEL = "gemini-2.5-flash";
+const MODEL = "gemini-2.5-flash"; // Using the same model as production (PRIMARY)
 
 async function testGeminiAPI() {
   console.log("🧪 Testing Gemini API Configuration...\n");

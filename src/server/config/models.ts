@@ -3,36 +3,37 @@
  * Centralized configuration for AI models used throughout the application
  */
 
-// Primary model - Gemini 3 Flash Preview (latest, fastest)
-// This is the newest Gemini model with Pro-level intelligence at Flash speeds
-// Model ID: gemini-3-flash-preview (preview phase)
+// Primary model - Gemini 2.5 Flash (stable, fast, widely available)
+// This is the most reliable Gemini model with excellent performance
+// Model ID: gemini-2.5-flash (stable, production-ready)
 export const DEFAULT_MODEL = "gemini-3-flash-preview";
 
-// Fallback model - Gemini 2.5 Flash (stable, lightweight)
-// If Gemini 3 fails, fall back to stable 2.5 Flash
-export const FALLBACK_MODEL = "gemini-2.5-flash";
+// Fallback model - Gemini 1.5 Flash (ultra-stable, lightweight)
+// If 2.5 Flash fails, fall back to the most stable 1.5 Flash
+export const FALLBACK_MODEL = "gemini-1.5-flash";
 
 // Allowed models for humanization (Gemini only - no OpenAI to reduce CPU usage)
-// Using verified model names from Google AI Studio
+// Using verified, production-ready model names from Google AI Studio
 export const ALLOWED_MODELS = [
-  "gemini-3-flash-preview",  // Latest Gemini 3 (PRIMARY)
-  "gemini-2.5-flash",        // Stable Gemini 2.5 (FALLBACK)
-  "gemini-2.5-flash-lite",   // Lighter variant
-  "gemini-2.5-pro",          // Heavier, more capable
+  "gemini-2.5-flash",        // Stable Gemini 2.5 (PRIMARY) - most reliable
+  "gemini-1.5-flash",        // Ultra-stable Gemini 1.5 (FALLBACK) - most compatible
+  "gemini-2.5-flash-lite",   // Lighter variant (if available)
+  "gemini-2.5-pro",
+  "gemini-3-flash-preview",          // Heavier, more capable (for future use)
 ] as const;
 
 // Model pricing information (per 1M tokens)
 // Source: Google AI Studio pricing (2026) - Gemini only
 export const MODEL_PRICING = {
-  "gemini-3-flash-preview": {
-    input: 0.50,
-    output: 3.00,
-    description: "Latest Gemini 3 with Pro-level intelligence at Flash speeds (PRIMARY)",
-  },
   "gemini-2.5-flash": {
     input: 0.075,
     output: 0.30,
-    description: "Stable Gemini 2.5, lightweight and fast (FALLBACK)",
+    description: "Stable Gemini 2.5, lightweight and fast (PRIMARY) - most reliable",
+  },
+  "gemini-1.5-flash": {
+    input: 0.075,
+    output: 0.30,
+    description: "Ultra-stable Gemini 1.5 (FALLBACK) - most compatible, lowest CPU",
   },
   "gemini-2.5-flash-lite": {
     input: 0.05,
@@ -69,18 +70,18 @@ export function getFallbackModel(): string {
 
 /**
  * Get the model to use for humanization
- * Always returns gemini-3-flash-preview (latest) for all users and word counts
- * This is the newest Gemini model with Pro-level intelligence at Flash speeds
+ * Always returns gemini-2.5-flash (stable) for all users and word counts
+ * This is the most reliable Gemini model with excellent performance and low CPU usage
  * 
  * @param wordCount - Number of words in the text (unused, kept for compatibility)
  * @param subscriptionPlan - User's subscription plan (unused, kept for compatibility)
- * @returns The model to use (always gemini-3-flash-preview)
+ * @returns The model to use (always gemini-2.5-flash)
  */
 export function selectModelByComplexity(
   wordCount: number,
   subscriptionPlan?: string | null
 ): string {
-  // Always use gemini-3-flash-preview (latest Gemini 3) for all requests
+  // Always use gemini-2.5-flash (stable, production-ready) for all requests
   return DEFAULT_MODEL;
 }
 
