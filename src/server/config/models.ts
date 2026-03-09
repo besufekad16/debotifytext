@@ -3,23 +3,23 @@
  * Centralized configuration for AI models used throughout the application
  */
 
-// Primary model - Gemini 3 Flash Preview (for longer texts ≥500 words)
+// Primary model - Gemini 3 Flash Preview (for longer texts >1800 words)
 // Best quality for longer content, premium model
 // Model ID: gemini-3-flash-preview
 export const DEFAULT_MODEL = "gemini-3-flash-preview";
 
-// Fallback model - Gemini 2.5 Flash-Lite (for shorter texts <500 words)
+// Fallback model - Gemini 2.5 Flash-Lite (for shorter texts ≤1800 words)
 // Faster and more cost-effective for shorter content
 export const FALLBACK_MODEL = "gemini-2.5-flash-lite";
 
 // Word count threshold for model selection
-export const MODEL_SELECTION_THRESHOLD = 500;
+export const MODEL_SELECTION_THRESHOLD = 1800;
 
 // Allowed models for humanization (Gemini only)
 // Smart model selection based on word count
 export const ALLOWED_MODELS = [
-  "gemini-3-flash-preview",  // Premium model for longer texts (≥500 words)
-  "gemini-2.5-flash-lite",   // Lighter model for shorter texts (<500 words)
+  "gemini-3-flash-preview",  // Premium model for longer texts (>1800 words)
+  "gemini-2.5-flash-lite",   // Lighter model for shorter texts (≤1800 words)
   "gemini-2.5-flash",        // Backup option
   "gemini-1.5-flash",        // Legacy fallback
 ] as const;
@@ -30,12 +30,12 @@ export const MODEL_PRICING = {
   "gemini-3-flash-preview": {
     input: 0.50,
     output: 3.00,
-    description: "Premium Gemini 3 for longer texts (≥500 words) - Best quality",
+    description: "Premium Gemini 3 for longer texts (>1800 words) - Best quality",
   },
   "gemini-2.5-flash-lite": {
     input: 0.05,
     output: 0.20,
-    description: "Lighter model for shorter texts (<500 words) - Fast and cost-effective",
+    description: "Lighter model for shorter texts (≤1800 words) - Fast and cost-effective",
   },
   "gemini-2.5-flash": {
     input: 0.075,
@@ -75,8 +75,8 @@ export function getFallbackModel(): string {
  * Smart selection: lighter model for short texts, premium model for longer texts
  * 
  * STRATEGY:
- * - Word count < 500: Use gemini-2.5-flash-lite (faster, cheaper, sufficient quality)
- * - Word count ≥ 500: Use gemini-3-flash-preview (best quality for longer content)ontent)
+ * - Word count ≤ 1800: Use gemini-2.5-flash-lite (faster, cheaper, sufficient quality)
+ * - Word count > 1800: Use gemini-3-flash-preview (best quality for longer content)ontent)
  * 
  * This approach:
  * 1. Saves costs on short texts (most common use case)
@@ -93,13 +93,13 @@ export function selectModelByComplexity(
   subscriptionPlan?: string | null
 ): string {
   // Smart selection based on word count
-  if (wordCount < MODEL_SELECTION_THRESHOLD) {
-    // Short texts: Use lighter, faster model
-    console.log(`[Model Selection] Using ${FALLBACK_MODEL} for ${wordCount} words (< ${MODEL_SELECTION_THRESHOLD})`);
+  if (wordCount <= MODEL_SELECTION_THRESHOLD) {
+    // Short/Medium texts: Use lighter, faster model
+    console.log(`[Model Selection] Using ${FALLBACK_MODEL} for ${wordCount} words (≤ ${MODEL_SELECTION_THRESHOLD})`);
     return FALLBACK_MODEL; // gemini-2.5-flash-lite
   } else {
     // Longer texts: Use premium model for best quality
-    console.log(`[Model Selection] Using ${DEFAULT_MODEL} for ${wordCount} words (≥ ${MODEL_SELECTION_THRESHOLD})`);
+    console.log(`[Model Selection] Using ${DEFAULT_MODEL} for ${wordCount} words (> ${MODEL_SELECTION_THRESHOLD})`);
     return DEFAULT_MODEL; // gemini-3-flash-preview
   }
 }
