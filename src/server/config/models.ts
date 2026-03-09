@@ -3,47 +3,46 @@
  * Centralized configuration for AI models used throughout the application
  */
 
-// Primary model - Gemini 2.5 Flash (stable, fast, widely available)
-// This is the most reliable Gemini model with excellent performance
-// Model ID: gemini-2.5-flash (stable, production-ready)
+// Primary model - Gemini 3 Flash Preview (latest, using NEW Interactions API)
+// This uses the NEW Interactions API (v1beta) with gemini-3-flash-preview
+// Model ID: gemini-3-flash-preview (Interactions API compatible)
 export const DEFAULT_MODEL = "gemini-3-flash-preview";
 
-// Fallback model - Gemini 1.5 Flash (ultra-stable, lightweight)
-// If 2.5 Flash fails, fall back to the most stable 1.5 Flash
-export const FALLBACK_MODEL = "gemini-1.5-flash";
+// Fallback model - Gemini 2.5 Flash (stable, Interactions API compatible)
+// If Gemini 3 fails, fall back to stable 2.5 Flash
+export const FALLBACK_MODEL = "gemini-2.5-flash";
 
-// Allowed models for humanization (Gemini only - no OpenAI to reduce CPU usage)
-// Using verified, production-ready model names from Google AI Studio
+// Allowed models for humanization (Gemini only - using NEW Interactions API)
+// Using Interactions API compatible models from Google AI Studio
 export const ALLOWED_MODELS = [
-  "gemini-2.5-flash",        // Stable Gemini 2.5 (PRIMARY) - most reliable
-  "gemini-1.5-flash",        // Ultra-stable Gemini 1.5 (FALLBACK) - most compatible
-  "gemini-2.5-flash-lite",   // Lighter variant (if available)
-  "gemini-2.5-pro",
-  "gemini-3-flash-preview",          // Heavier, more capable (for future use)
+  "gemini-3-flash-preview",  // Latest Gemini 3 (PRIMARY) - Interactions API
+  "gemini-2.5-flash",        // Stable Gemini 2.5 (FALLBACK) - Interactions API
+  "gemini-2.5-flash-lite",   // Lighter variant - Interactions API
+  "gemini-2.5-pro",          // Heavier, more capable - Interactions API
 ] as const;
 
 // Model pricing information (per 1M tokens)
-// Source: Google AI Studio pricing (2026) - Gemini only
+// Source: Google AI Studio pricing (2026) - Interactions API models
 export const MODEL_PRICING = {
+  "gemini-3-flash-preview": {
+    input: 0.50,
+    output: 3.00,
+    description: "Latest Gemini 3 with Pro-level intelligence (PRIMARY) - Interactions API",
+  },
   "gemini-2.5-flash": {
     input: 0.075,
     output: 0.30,
-    description: "Stable Gemini 2.5, lightweight and fast (PRIMARY) - most reliable",
-  },
-  "gemini-1.5-flash": {
-    input: 0.075,
-    output: 0.30,
-    description: "Ultra-stable Gemini 1.5 (FALLBACK) - most compatible, lowest CPU",
+    description: "Stable Gemini 2.5 (FALLBACK) - Interactions API compatible",
   },
   "gemini-2.5-flash-lite": {
     input: 0.05,
     output: 0.20,
-    description: "Lightest Gemini model, ultra-fast, lowest CPU usage",
+    description: "Lightest Gemini model - Interactions API compatible",
   },
   "gemini-2.5-pro": {
     input: 1.25,
     output: 5.00,
-    description: "Most capable Gemini model, heavier and more expensive",
+    description: "Most capable Gemini model - Interactions API compatible",
   },
 } as const;
 
@@ -70,18 +69,18 @@ export function getFallbackModel(): string {
 
 /**
  * Get the model to use for humanization
- * Always returns gemini-2.5-flash (stable) for all users and word counts
- * This is the most reliable Gemini model with excellent performance and low CPU usage
+ * Always returns gemini-3-flash-preview (latest) for all users and word counts
+ * This uses the NEW Interactions API with the latest Gemini 3 model
  * 
  * @param wordCount - Number of words in the text (unused, kept for compatibility)
  * @param subscriptionPlan - User's subscription plan (unused, kept for compatibility)
- * @returns The model to use (always gemini-2.5-flash)
+ * @returns The model to use (always gemini-3-flash-preview)
  */
 export function selectModelByComplexity(
   wordCount: number,
   subscriptionPlan?: string | null
 ): string {
-  // Always use gemini-2.5-flash (stable, production-ready) for all requests
+  // Always use gemini-3-flash-preview (latest Gemini 3 with Interactions API) for all requests
   return DEFAULT_MODEL;
 }
 

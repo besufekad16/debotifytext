@@ -10,7 +10,8 @@
       "maxDuration": 15
     },
     "src/app/api/humanizer/stream/route.ts": {
-      "maxDuration": 30
+      "maxDuration": 60,
+      "memory": 1024
     },
     "src/app/api/cron/**/*.ts": {
       "maxDuration": 60

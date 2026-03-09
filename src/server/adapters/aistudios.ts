@@ -205,10 +205,10 @@ export class AIStudiosAdapter {
       console.log("[Humanization] Starting humanization process...");
       console.log(`[Humanization] Using primary model: ${DEFAULT_MODEL}`);
 
-      // Try Gemini 2.5 Flash first (primary model - stable and reliable)
+      // Try Gemini Flash first (primary model)
       const geminiResult = await this.tryGemini(text, options);
       if (geminiResult.success) {
-        console.log("[Humanization] Gemini 2.5 Flash humanization successful");
+        console.log("[Humanization] Gemini Flash humanization successful");
         return {
           ...geminiResult,
           metadata: {
@@ -217,17 +217,17 @@ export class AIStudiosAdapter {
         };
       }
 
-      console.warn("[Humanization] Gemini 2.5 Flash failed, falling back to Gemini 1.5 Flash", {
+      console.warn("[Humanization] Gemini Flash failed, falling back to Gemini Flash-Lite", {
         error: geminiResult.error,
       });
 
-      // Fallback to Gemini 1.5 Flash (ultra-stable, most compatible)
+      // Fallback to Gemini Flash-Lite (lighter, faster)
       const fallbackResult = await this.tryGemini(text, {
         ...options,
-        model: FALLBACK_MODEL, // Use gemini-1.5-flash
+        model: FALLBACK_MODEL, // Use gemini-2.5-flash
       });
       if (fallbackResult.success) {
-        console.log("[Humanization] Gemini 1.5 Flash humanization successful (fallback)");
+        console.log("[Humanization] Gemini Flash-Lite humanization successful (fallback)");
         return {
           ...fallbackResult,
           metadata: {
@@ -237,7 +237,7 @@ export class AIStudiosAdapter {
         };
       }
 
-      console.error("[Humanization] All Gemini attempts failed (tried 2.5 Flash and 1.5 Flash)");
+      console.error("[Humanization] All Gemini attempts failed");
       return {
         success: false,
         humanizedText: text,
@@ -270,15 +270,15 @@ export class AIStudiosAdapter {
     try {
       console.log("[Humanization Stream] Starting humanization stream...");
       
-      // Try Gemini 2.5 Flash first (primary model - stable and reliable)
+      // Try Gemini Flash first (primary model)
       try {
         return await this.tryGeminiStream(text, options);
       } catch (geminiError) {
-        console.warn("[Humanization Stream] Gemini 2.5 Flash failed, falling back to Gemini 1.5 Flash", geminiError);
-        // Fallback to Gemini 1.5 Flash (ultra-stable, most compatible)
+        console.warn("[Humanization Stream] Gemini Flash failed, falling back to Gemini Flash-Lite", geminiError);
+        // Fallback to Gemini Flash-Lite (lighter, faster)
         return await this.tryGeminiStream(text, {
           ...options,
-          model: FALLBACK_MODEL, // Use gemini-1.5-flash
+          model: FALLBACK_MODEL, // Use gemini-2.5-flash
         });
       }
     } catch (error) {
