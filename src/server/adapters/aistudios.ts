@@ -5,8 +5,8 @@ import {
   FALLBACK_MODEL,
 } from "~/server/config/models";
 
-// OpenAI Responses API endpoint (as per documentation)
-const OPENAI_RESPONSES_API_URL = "https://api.openai.com/v1/responses";
+// OpenAI Chat Completions API endpoint (standard endpoint)
+const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${DEFAULT_MODEL}:generateContent?key=${env.AISTUDIOS_API_KEY}`;
 
 interface HumanizeOptions {
@@ -104,12 +104,12 @@ export class AIStudiosAdapter {
   constructor() {}
 
   /**
-   * Transforms OpenAI Responses API streaming format to frontend format
-   * Responses API uses semantic events like response.output_text.delta
+   * Transforms OpenAI Chat Completions API streaming format to frontend format
+   * Chat Completions uses delta format: {"choices": [{"delta": {"content": "..."}}]}
    * Frontend expects: {"choices": [{"delta": {"content": "..."}}]}
    */
-  private transformOpenAIResponsesStreamToFrontendFormat(
-    responsesStream: ReadableStream<Uint8Array>
+  private transformOpenAIChatStreamToFrontendFormat(
+    chatStream: ReadableStream<Uint8Array>
   ): ReadableStream {
     const decoder = new TextDecoder();
     const encoder = new TextEncoder();
@@ -117,7 +117,7 @@ export class AIStudiosAdapter {
 
     return new ReadableStream({
       async start(controller) {
-        const reader = responsesStream.getReader();
+        const reader = chatStream.getReader();
         let chunkCount = 0;
 
         try {
@@ -154,51 +154,32 @@ export class AIStudiosAdapter {
               }
 
               try {
-                const event = JSON.parse(data);
+                const json = JSON.parse(data);
                 
                 // Log event types for first few chunks (for debugging)
                 if (chunkCount <= 5) {
-                  console.log(`[OpenAI Stream] Event type: ${event.type}`);
+                  console.log(`[OpenAI Stream] Chunk type: ${json.object || 'unknown'}`);
                 }
                 
-                // Handle response.output_text.delta events (contains actual content)
-                // According to Responses API docs: response.output_text.delta
-                if (event.type === "response.output_text.delta") {
-                  // In Responses API, the text can be in event.delta or event.delta.text
-                  // Check both locations for compatibility
-                  let textContent = "";
-                  
-                  if (typeof event.delta === "string") {
-                    textContent = event.delta;
-                  } else if (event.delta?.text && typeof event.delta.text === "string") {
-                    textContent = event.delta.text;
-                  } else if (event.delta?.content && typeof event.delta.content === "string") {
-                    textContent = event.delta.content;
+                // Handle chat.completion.chunk events (standard Chat Completions format)
+                const content = json.choices?.[0]?.delta?.content;
+                
+                if (content && content.length > 0) {
+                  if (chunkCount <= 5) {
+                    console.log(`[OpenAI Stream] ✓ Text delta received (${content.length} chars): "${content.substring(0, 50)}${content.length > 50 ? '...' : ''}"`);
                   }
-                  
-                  if (textContent && textContent.length > 0) {
-                    if (chunkCount <= 5) {
-                      console.log(`[OpenAI Stream] ✓ Text delta received (${textContent.length} chars): "${textContent.substring(0, 50)}${textContent.length > 50 ? '...' : ''}"`);
-                    }
-                    // Transform to frontend format
-                    const frontendChunk = {
-                      type: "content",
-                      choices: [{
-                        delta: { content: textContent },
-                        index: 0,
-                        finish_reason: null,
-                      }],
-                    };
-                    controller.enqueue(
-                      encoder.encode(`data: ${JSON.stringify(frontendChunk)}\n\n`)
-                    );
-                  } else if (chunkCount <= 5) {
-                    console.log(`[OpenAI Stream] ⚠ response.output_text.delta event but no text content found. Event structure:`, JSON.stringify(event, null, 2).substring(0, 300));
-                  }
-                }
-                // Handle completion event
-                else if (event.type === "response.completed" || event.type === "response.done") {
-                  console.log("[OpenAI Stream] Response completed");
+                  // Already in correct format, just forward it
+                  const frontendChunk = {
+                    type: "content",
+                    choices: [{
+                      delta: { content: content },
+                      index: 0,
+                      finish_reason: json.choices?.[0]?.finish_reason || null,
+                    }],
+                  };
+                  controller.enqueue(
+                    encoder.encode(`data: ${JSON.stringify(frontendChunk)}\n\n`)
+                  );
                 }
               } catch (parseError) {
                 console.warn("[OpenAI Stream] Failed to parse event:", parseError);
@@ -222,12 +203,12 @@ export class AIStudiosAdapter {
   ): Promise<HumanizeResult> {
     try {
       console.log("[Humanization] Starting humanization process...");
-      console.log(`[Humanization] Using default model: ${DEFAULT_MODEL}`);
+      console.log(`[Humanization] Using primary model: ${DEFAULT_MODEL}`);
 
-      // Try Gemini first (primary model)
+      // Try Gemini Flash first (primary model)
       const geminiResult = await this.tryGemini(text, options);
       if (geminiResult.success) {
-        console.log("[Humanization] Gemini humanization successful");
+        console.log("[Humanization] Gemini Flash humanization successful");
         return {
           ...geminiResult,
           metadata: {
@@ -236,24 +217,27 @@ export class AIStudiosAdapter {
         };
       }
 
-      console.warn("[Humanization] Gemini failed, falling back to OpenAI", {
+      console.warn("[Humanization] Gemini Flash failed, falling back to Gemini Flash-Lite", {
         error: geminiResult.error,
       });
 
-      // Fallback to OpenAI
-      const openaiResult = await this.tryOpenAI(text, options);
-      if (openaiResult.success) {
-        console.log("[Humanization] OpenAI humanization successful (fallback)");
+      // Fallback to Gemini Flash-Lite (lighter, faster)
+      const fallbackResult = await this.tryGemini(text, {
+        ...options,
+        model: FALLBACK_MODEL, // Use gemini-2.5-flash-lite
+      });
+      if (fallbackResult.success) {
+        console.log("[Humanization] Gemini Flash-Lite humanization successful (fallback)");
         return {
-          ...openaiResult,
+          ...fallbackResult,
           metadata: {
-            ...openaiResult.metadata,
+            ...fallbackResult.metadata,
             fallback: true,
           },
         };
       }
 
-      console.error("[Humanization] All API attempts failed");
+      console.error("[Humanization] All Gemini attempts failed");
       return {
         success: false,
         humanizedText: text,
@@ -286,16 +270,19 @@ export class AIStudiosAdapter {
     try {
       console.log("[Humanization Stream] Starting humanization stream...");
       
-      // Try Gemini first (primary model)
+      // Try Gemini Flash first (primary model)
       try {
         return await this.tryGeminiStream(text, options);
       } catch (geminiError) {
-        console.warn("[Humanization Stream] Gemini stream failed, falling back to OpenAI", geminiError);
-        // Fallback to OpenAI
-        return await this.tryOpenAIStream(text, options);
+        console.warn("[Humanization Stream] Gemini Flash failed, falling back to Gemini Flash-Lite", geminiError);
+        // Fallback to Gemini Flash-Lite (lighter, faster)
+        return await this.tryGeminiStream(text, {
+          ...options,
+          model: FALLBACK_MODEL, // Use gemini-2.5-flash-lite
+        });
       }
     } catch (error) {
-      console.error("[Humanization Stream] All stream attempts failed", error);
+      console.error("[Humanization Stream] All Gemini stream attempts failed", error);
       throw error;
     }
   }
@@ -321,10 +308,10 @@ export class AIStudiosAdapter {
       const systemMessage = buildJuniorCollegeStudentStyleMessage(options.isFreeUser);
       const userMessage = buildHumanizationUserMessage(text);
 
-      // Build request body for OpenAI Responses API (as per documentation)
+      // Build request body for OpenAI Chat Completions API (standard format)
       const requestBody = {
         model: model,
-        input: [
+        messages: [
           {
             role: "system",
             content: systemMessage
@@ -334,13 +321,12 @@ export class AIStudiosAdapter {
             content: userMessage
           }
         ],
-        reasoning: { effort: "low" }, // Set to "none" to ensure tokens are used for output, not reasoning
-        text: { verbosity: "medium" },
-        max_output_tokens: options.maxTokens ?? 6000,
+        temperature: options.temperature ?? 1.0,
+        max_tokens: options.maxTokens ?? 6000,
         stream: false,
       };
 
-      const response = await fetch(OPENAI_RESPONSES_API_URL, {
+      const response = await fetch(OPENAI_API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -387,8 +373,8 @@ export class AIStudiosAdapter {
       }
 
       const data = await response.json();
-      // Responses API returns output in data.output[0].content
-      const generatedText = data.output?.[0]?.content?.trim() || data.choices?.[0]?.message?.content?.trim();
+      // Chat Completions API returns content in data.choices[0].message.content
+      const generatedText = data.choices?.[0]?.message?.content?.trim();
 
       if (!generatedText || generatedText.length === 0) {
         console.error("[OpenAI] No text returned from model");
@@ -413,7 +399,7 @@ export class AIStudiosAdapter {
         tokensUsed: data.usage?.total_tokens || 0,
         metadata: {
           model: model,
-          finishReason: data.output?.[0]?.finish_reason || data.choices?.[0]?.finish_reason,
+          finishReason: data.choices?.[0]?.finish_reason,
           source: "openai",
           promptTokens: data.usage?.prompt_tokens,
           completionTokens: data.usage?.completion_tokens,
@@ -435,7 +421,7 @@ export class AIStudiosAdapter {
     text: string,
     options: HumanizeOptions = {},
   ): Promise<ReadableStream> {
-    // Use fallback model (gpt-5-mini)
+    // Use fallback model (gpt-4o-mini)
     let model = options.model ?? FALLBACK_MODEL;
 
     // If the model is a Gemini model (passed from options or default), switch to fallback OpenAI model
@@ -447,10 +433,10 @@ export class AIStudiosAdapter {
     const systemMessage = buildJuniorCollegeStudentStyleMessage(options.isFreeUser);
     const userMessage = buildHumanizationUserMessage(text);
 
-    // Build request body for OpenAI Responses API with streaming
+    // Build request body for OpenAI Chat Completions API with streaming
     const requestBody = {
       model: model,
-      input: [
+      messages: [
         {
           role: "system",
           content: systemMessage
@@ -460,15 +446,14 @@ export class AIStudiosAdapter {
           content: userMessage
         }
       ],
-      reasoning: { effort: "low" }, // Changed from "low" to "none" to ensure tokens are used for output, not reasoning
-      text: { verbosity: "medium" },
-      max_output_tokens: options.maxTokens ?? 15000,
+      temperature: options.temperature ?? 1.0,
+      max_tokens: options.maxTokens ?? 15000,
       stream: true,
     };
 
-    console.log("[OpenAI Stream] Request body:", JSON.stringify(requestBody, null, 2));
+    console.log("[OpenAI Stream] Using model:", model);
 
-    const response = await fetch(OPENAI_RESPONSES_API_URL, {
+    const response = await fetch(OPENAI_API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -487,8 +472,8 @@ export class AIStudiosAdapter {
 
     if (!response.body) throw new Error("No response body from OpenAI");
     
-    // Transform OpenAI Responses API streaming format to frontend format
-    return this.transformOpenAIResponsesStreamToFrontendFormat(response.body);
+    // Transform OpenAI Chat Completions streaming format to frontend format
+    return this.transformOpenAIChatStreamToFrontendFormat(response.body);
   }
 
   async tryGemini(

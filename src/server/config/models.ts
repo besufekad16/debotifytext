@@ -3,65 +3,46 @@
  * Centralized configuration for AI models used throughout the application
  */
 
-// Single model for all requests - Gemini 2.5 Flash (stable, lightest)
-// Using the stable model name (not alias) as recommended by Google for production
-// This is the lightest production-ready Gemini model to avoid hitting rate limits
-export const DEFAULT_MODEL = "gemini-2.5-flash";
+// Primary model - Gemini 3 Flash Preview (latest, fastest)
+// This is the newest Gemini model with Pro-level intelligence at Flash speeds
+// Model ID: gemini-3-flash-preview (preview phase)
+export const DEFAULT_MODEL = "gemini-3-flash-preview";
 
-// Fallback model used when Gemini fails (OpenAI gpt-4o-mini - lighter and faster)
-// gpt-4o-mini is the lightest OpenAI model, perfect for fallback
-export const FALLBACK_MODEL = "gpt-4o-mini";
+// Fallback model - Gemini 2.5 Flash (stable, lightweight)
+// If Gemini 3 fails, fall back to stable 2.5 Flash
+export const FALLBACK_MODEL = "gemini-2.5-flash";
 
-// Allowed models for humanization (both Gemini and OpenAI)
-// Using stable model names as recommended by Google (not aliases like gemini-flash-latest)
+// Allowed models for humanization (Gemini only - no OpenAI to reduce CPU usage)
+// Using verified model names from Google AI Studio
 export const ALLOWED_MODELS = [
-  "gemini-2.5-flash",        // Stable, lightest Gemini (RECOMMENDED)
-  "gemini-2.5-flash-lite",   // Even lighter variant
+  "gemini-3-flash-preview",  // Latest Gemini 3 (PRIMARY)
+  "gemini-2.5-flash",        // Stable Gemini 2.5 (FALLBACK)
+  "gemini-2.5-flash-lite",   // Lighter variant
   "gemini-2.5-pro",          // Heavier, more capable
-  "gemini-2.0-flash-exp",    // Experimental 2.0
-  "gpt-4o-mini",             // Lightest OpenAI (RECOMMENDED for fallback)
-  "gpt-4o",
-  "gpt-4-turbo",
-  "gpt-3.5-turbo",
 ] as const;
 
 // Model pricing information (per 1M tokens)
-// Source: Google AI Studio and OpenAI pricing pages (2025)
+// Source: Google AI Studio pricing (2026) - Gemini only
 export const MODEL_PRICING = {
+  "gemini-3-flash-preview": {
+    input: 0.50,
+    output: 3.00,
+    description: "Latest Gemini 3 with Pro-level intelligence at Flash speeds (PRIMARY)",
+  },
   "gemini-2.5-flash": {
     input: 0.075,
     output: 0.30,
-    description: "Lightest stable Gemini model, extremely fast and cheap (RECOMMENDED)",
+    description: "Stable Gemini 2.5, lightweight and fast (FALLBACK)",
   },
   "gemini-2.5-flash-lite": {
     input: 0.05,
     output: 0.20,
-    description: "Even lighter variant, ultra-fast",
+    description: "Lightest Gemini model, ultra-fast, lowest CPU usage",
   },
   "gemini-2.5-pro": {
     input: 1.25,
     output: 5.00,
     description: "Most capable Gemini model, heavier and more expensive",
-  },
-  "gpt-4o-mini": {
-    input: 0.15,
-    output: 0.60,
-    description: "Lightest OpenAI model, fast and cost-effective (RECOMMENDED for fallback)",
-  },
-  "gpt-4o": {
-    input: 2.50,
-    output: 10.00,
-    description: "Higher quality OpenAI model, more expensive",
-  },
-  "gpt-4-turbo": {
-    input: 10.00,
-    output: 30.00,
-    description: "Premium OpenAI option",
-  },
-  "gpt-3.5-turbo": {
-    input: 0.50,
-    output: 1.50,
-    description: "Older OpenAI model, still cost-effective",
   },
 } as const;
 
@@ -88,18 +69,18 @@ export function getFallbackModel(): string {
 
 /**
  * Get the model to use for humanization
- * Always returns gemini-2.5-flash (stable) for all users and word counts
- * This is the lightest production-ready model to avoid rate limits and reduce costs
+ * Always returns gemini-3-flash-preview (latest) for all users and word counts
+ * This is the newest Gemini model with Pro-level intelligence at Flash speeds
  * 
  * @param wordCount - Number of words in the text (unused, kept for compatibility)
  * @param subscriptionPlan - User's subscription plan (unused, kept for compatibility)
- * @returns The model to use (always gemini-2.5-flash)
+ * @returns The model to use (always gemini-3-flash-preview)
  */
 export function selectModelByComplexity(
   wordCount: number,
   subscriptionPlan?: string | null
 ): string {
-  // Always use gemini-2.5-flash (stable, lightest) for all requests
+  // Always use gemini-3-flash-preview (latest Gemini 3) for all requests
   return DEFAULT_MODEL;
 }
 
