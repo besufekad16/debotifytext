@@ -926,29 +926,20 @@ export default function UnifiedHomePage() {
             <div className="bg-white rounded-3xl shadow-xl border border-gray-200 overflow-hidden">
               {/* Header */}
               <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-gray-50">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   <div className="flex items-center gap-1.5">
                     <div className="w-3 h-3 rounded-full bg-red-500"></div>
                     <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-[#5e3d2a]"></div>
+                    <div className="w-3 h-3 rounded-full bg-[#8B6F47]"></div>
                   </div>
-                  <span className="ml-3 text-sm font-semibold text-gray-700 uppercase tracking-wide">Live Humanizer</span>
+                  <span className="text-sm font-semibold text-gray-700">LIVE HUMANIZER</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Writing Quality</span>
-                  {originalText && !humanizedText && (
-                    <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200">
-                      <div className="w-2 h-2 rounded-full bg-red-500"></div>
-                      <span className="text-xs font-semibold text-red-600">AI Generated</span>
-                    </div>
-                  )}
-                  {humanizedText && !isHumanizing && (
-                    <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#5e3d2a]/10 border border-[#5e3d2a]/30">
-                      <div className="w-2 h-2 rounded-full bg-[#5e3d2a]"></div>
-                      <span className="text-xs font-semibold text-[#5e3d2a]">Human Quality</span>
-                    </div>
-                  )}
-                </div>
+                {currentCredits !== undefined && isSignedIn && (
+                  <div className="flex items-center gap-2 text-xs text-gray-700 bg-white px-3 py-1.5 rounded-lg border border-gray-200">
+                    <ShieldCheck className="h-3.5 w-3.5 text-emerald-500 flex-shrink-0" />
+                    <span className="font-medium">{currentCredits} credits</span>
+                  </div>
+                )}
               </div>
 
               {/* Content Grid - Dynamic Layout */}
@@ -1208,26 +1199,6 @@ export default function UnifiedHomePage() {
                       </div>
                     </div>
                   )}
-                </div>
-
-                {/* Bottom Info Section */}
-                <div className="mt-6 pt-6 border-t border-gray-200">
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div className="flex items-start gap-2 text-xs text-gray-500">
-                      <Info className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                      <p>
-                        Add text to see estimated credits. Tip: Trim repeated sections before you humanize.
-                      </p>
-                    </div>
-                    {humanizedText && !isHumanizing && (
-                      <div className="flex items-center gap-2 text-xs">
-                        <span className="text-gray-500">Version history:</span>
-                        <button className="text-[#8B6F47] hover:text-[#6D5635] font-medium underline">
-                          2 saved outputs
-                        </button>
-                      </div>
-                    )}
-                  </div>
                 </div>
               </div>
             </div>
