@@ -376,9 +376,9 @@ export default function UnifiedHomePage() {
 
     const wordCount = originalText.trim().split(/\s+/).filter(Boolean).length;
 
-    // Check minimum word count (50 words)
-    if (wordCount < 50) {
-      toast.error("Text must contain at least 50 words to be humanized");
+    // Check minimum word count (100 words) - REQUIRED FOR ALL USERS
+    if (wordCount < 100) {
+      toast.error("Text must contain at least 100 words to be humanized. Please add more content.");
       return;
     }
 
@@ -1036,13 +1036,18 @@ export default function UnifiedHomePage() {
                     <div className="mt-4 space-y-3">
                       <Button
                         onClick={handleHumanize}
-                        disabled={!originalText.trim() || isHumanizing}
+                        disabled={!originalText.trim() || isHumanizing || wordCount < 100}
                         className="w-full h-12 rounded-lg bg-gradient-to-r from-[#8B6F47] to-[#6D5635] hover:from-[#6D5635] hover:to-[#5A4529] text-white font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-md"
                       >
                         {isHumanizing ? (
                           <>
                             <Loader2 className="w-5 h-5 animate-spin mr-2 text-white" />
                             Humanizing...
+                          </>
+                        ) : wordCount < 100 && originalText.trim() ? (
+                          <>
+                            <Lock className="w-5 h-5 mr-2" />
+                            Need {100 - wordCount} more words
                           </>
                         ) : (
                           <>
