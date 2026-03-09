@@ -3,20 +3,21 @@
  * Centralized configuration for AI models used throughout the application
  */
 
-// Single model for all requests - Gemini 3 Flash Preview
-// This model provides excellent quality with optimal cost/performance
-export const DEFAULT_MODEL = "gemini-3-flash-preview";
+// Single model for all requests - Gemini Flash (lightest, fastest)
+// This is the lightest Gemini model to avoid hitting rate limits
+// "gemini-flash-latest" always points to the latest stable flash model
+export const DEFAULT_MODEL = "gemini-flash-latest";
 
-// Fallback model used when Gemini fails (OpenAI gpt-5-mini)
-export const FALLBACK_MODEL = "gpt-5-mini";
+// Fallback model used when Gemini fails (OpenAI gpt-4o-mini - lighter than gpt-5-mini)
+// gpt-4o-mini is faster and cheaper while maintaining good quality
+export const FALLBACK_MODEL = "gpt-4o-mini";
 
 // Allowed models for humanization (both Gemini and OpenAI)
 export const ALLOWED_MODELS = [
-  "gemini-3-flash-preview",
+  "gemini-2.0-flash-exp",
   "gemini-2.5-flash",
   "gemini-2.0-flash-thinking-exp-01-21",
   "gemini-flash-latest",
-  "gemini-2.0-flash-exp",
   "gemini-2.5-pro",
   "gpt-5-mini",
   "gpt-4o",
@@ -30,7 +31,7 @@ export const MODEL_PRICING = {
   "gpt-4o-mini": {
     input: 0.15,
     output: 0.60,
-    description: "Cheapest option, recommended for most use cases",
+    description: "Lightest OpenAI option, fast and cost-effective",
   },
   "gpt-4o": {
     input: 2.50,
@@ -46,6 +47,11 @@ export const MODEL_PRICING = {
     input: 0.50,
     output: 1.50,
     description: "Older model, still cost-effective",
+  },
+  "gemini-flash-latest": {
+    input: 0.075,
+    output: 0.30,
+    description: "Lightest Gemini model, extremely fast and cheap",
   },
 } as const;
 
@@ -72,17 +78,18 @@ export function getFallbackModel(): string {
 
 /**
  * Get the model to use for humanization
- * Always returns gemini-3-flash-preview for all users and word counts
+ * Always returns gemini-flash-latest for all users and word counts
+ * This is the lightest model to avoid rate limits and reduce costs
  * 
  * @param wordCount - Number of words in the text (unused, kept for compatibility)
  * @param subscriptionPlan - User's subscription plan (unused, kept for compatibility)
- * @returns The model to use (always gemini-3-flash-preview)
+ * @returns The model to use (always gemini-flash-latest)
  */
 export function selectModelByComplexity(
   wordCount: number,
   subscriptionPlan?: string | null
 ): string {
-  // Always use gemini-3-flash-preview for all requests
+  // Always use gemini-flash-latest (lightest model) for all requests
   return DEFAULT_MODEL;
 }
 
