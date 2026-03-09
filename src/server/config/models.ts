@@ -3,46 +3,49 @@
  * Centralized configuration for AI models used throughout the application
  */
 
-// Primary model - Gemini 3 Flash Preview (latest, using NEW Interactions API)
-// This uses the NEW Interactions API (v1beta) with gemini-3-flash-preview
-// Model ID: gemini-3-flash-preview (Interactions API compatible)
+// Primary model - Gemini 3 Flash Preview (for longer texts ≥500 words)
+// Best quality for longer content, premium model
+// Model ID: gemini-3-flash-preview
 export const DEFAULT_MODEL = "gemini-3-flash-preview";
 
-// Fallback model - Gemini 2.5 Flash (stable, Interactions API compatible)
-// If Gemini 3 fails, fall back to stable 2.5 Flash
-export const FALLBACK_MODEL = "gemini-2.5-flash";
+// Fallback model - Gemini 2.5 Flash-Lite (for shorter texts <500 words)
+// Faster and more cost-effective for shorter content
+export const FALLBACK_MODEL = "gemini-2.5-flash-lite";
 
-// Allowed models for humanization (Gemini only - using NEW Interactions API)
-// Using Interactions API compatible models from Google AI Studio
+// Word count threshold for model selection
+export const MODEL_SELECTION_THRESHOLD = 500;
+
+// Allowed models for humanization (Gemini only)
+// Smart model selection based on word count
 export const ALLOWED_MODELS = [
-  "gemini-3-flash-preview",  // Latest Gemini 3 (PRIMARY) - Interactions API
-  "gemini-2.5-flash",        // Stable Gemini 2.5 (FALLBACK) - Interactions API
-  "gemini-2.5-flash-lite",   // Lighter variant - Interactions API
-  "gemini-2.5-pro",          // Heavier, more capable - Interactions API
+  "gemini-3-flash-preview",  // Premium model for longer texts (≥500 words)
+  "gemini-2.5-flash-lite",   // Lighter model for shorter texts (<500 words)
+  "gemini-2.5-flash",        // Backup option
+  "gemini-1.5-flash",        // Legacy fallback
 ] as const;
 
 // Model pricing information (per 1M tokens)
-// Source: Google AI Studio pricing (2026) - Interactions API models
+// Source: Google AI Studio pricing (2026)
 export const MODEL_PRICING = {
   "gemini-3-flash-preview": {
     input: 0.50,
     output: 3.00,
-    description: "Latest Gemini 3 with Pro-level intelligence (PRIMARY) - Interactions API",
-  },
-  "gemini-2.5-flash": {
-    input: 0.075,
-    output: 0.30,
-    description: "Stable Gemini 2.5 (FALLBACK) - Interactions API compatible",
+    description: "Premium Gemini 3 for longer texts (≥500 words) - Best quality",
   },
   "gemini-2.5-flash-lite": {
     input: 0.05,
     output: 0.20,
-    description: "Lightest Gemini model - Interactions API compatible",
+    description: "Lighter model for shorter texts (<500 words) - Fast and cost-effective",
   },
-  "gemini-2.5-pro": {
-    input: 1.25,
-    output: 5.00,
-    description: "Most capable Gemini model - Interactions API compatible",
+  "gemini-2.5-flash": {
+    input: 0.075,
+    output: 0.30,
+    description: "Backup option - Balanced performance",
+  },
+  "gemini-1.5-flash": {
+    input: 0.075,
+    output: 0.30,
+    description: "Legacy fallback - Stable and reliable",
   },
 } as const;
 
@@ -68,20 +71,37 @@ export function getFallbackModel(): string {
 }
 
 /**
- * Get the model to use for humanization
- * Always returns gemini-3-flash-preview (latest) for all users and word counts
- * This uses the NEW Interactions API with the latest Gemini 3 model
+ * Get the model to use for humanization based on word count
+ * Smart selection: lighter model for short texts, premium model for longer texts
  * 
- * @param wordCount - Number of words in the text (unused, kept for compatibility)
+ * STRATEGY:
+ * - Word count < 500: Use gemini-2.5-flash-lite (faster, cheaper, sufficient quality)
+ * - Word count ≥ 500: Use gemini-3-flash-preview (best quality for longer content)ontent)
+ * 
+ * This approach:
+ * 1. Saves costs on short texts (most common use case)
+ * 2. Provides best quality for longer texts (where quality matters most)
+ * 3. Faster response times for short texts
+ * 4. Better user experience overall
+ * 
+ * @param wordCount - Number of words in the text
  * @param subscriptionPlan - User's subscription plan (unused, kept for compatibility)
- * @returns The model to use (always gemini-3-flash-preview)
+ * @returns The model to use based on word count
  */
 export function selectModelByComplexity(
   wordCount: number,
   subscriptionPlan?: string | null
 ): string {
-  // Always use gemini-3-flash-preview (latest Gemini 3 with Interactions API) for all requests
-  return DEFAULT_MODEL;
+  // Smart selection based on word count
+  if (wordCount < MODEL_SELECTION_THRESHOLD) {
+    // Short texts: Use lighter, faster model
+    console.log(`[Model Selection] Using ${FALLBACK_MODEL} for ${wordCount} words (< ${MODEL_SELECTION_THRESHOLD})`);
+    return FALLBACK_MODEL; // gemini-2.5-flash-lite
+  } else {
+    // Longer texts: Use premium model for best quality
+    console.log(`[Model Selection] Using ${DEFAULT_MODEL} for ${wordCount} words (≥ ${MODEL_SELECTION_THRESHOLD})`);
+    return DEFAULT_MODEL; // gemini-3-flash-preview
+  }
 }
 
 /**

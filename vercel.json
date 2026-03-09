@@ -3,14 +3,14 @@
   "buildCommand": "next build",
   "functions": {
     "app/[keyword]/page.tsx": {
-      "maxDuration": 10,
+      "maxDuration": 30,
       "memory": 1024
     },
     "src/app/api/**/*.ts": {
-      "maxDuration": 15
+      "maxDuration": 300
     },
     "src/app/api/humanizer/stream/route.ts": {
-      "maxDuration": 60,
+      "maxDuration": 300,
       "memory": 1024
     },
     "src/app/api/cron/**/*.ts": {

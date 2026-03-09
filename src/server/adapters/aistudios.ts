@@ -203,12 +203,12 @@ export class AIStudiosAdapter {
   ): Promise<HumanizeResult> {
     try {
       console.log("[Humanization] Starting humanization process...");
-      console.log(`[Humanization] Using primary model: ${DEFAULT_MODEL}`);
+      console.log(`[Humanization] Using model: ${options.model || DEFAULT_MODEL}`);
 
-      // Try Gemini Flash first (primary model)
+      // Try primary model first (selected based on word count)
       const geminiResult = await this.tryGemini(text, options);
       if (geminiResult.success) {
-        console.log("[Humanization] Gemini Flash humanization successful");
+        console.log("[Humanization] Primary model humanization successful");
         return {
           ...geminiResult,
           metadata: {
@@ -217,17 +217,18 @@ export class AIStudiosAdapter {
         };
       }
 
-      console.warn("[Humanization] Gemini Flash failed, falling back to Gemini Flash-Lite", {
+      console.warn("[Humanization] Primary model failed, trying fallback", {
         error: geminiResult.error,
       });
 
-      // Fallback to Gemini Flash-Lite (lighter, faster)
+      // Fallback: try the opposite model
+      const fallbackModel = options.model === DEFAULT_MODEL ? FALLBACK_MODEL : DEFAULT_MODEL;
       const fallbackResult = await this.tryGemini(text, {
         ...options,
-        model: FALLBACK_MODEL, // Use gemini-2.5-flash
+        model: fallbackModel,
       });
       if (fallbackResult.success) {
-        console.log("[Humanization] Gemini Flash-Lite humanization successful (fallback)");
+        console.log("[Humanization] Fallback model humanization successful");
         return {
           ...fallbackResult,
           metadata: {
@@ -237,7 +238,7 @@ export class AIStudiosAdapter {
         };
       }
 
-      console.error("[Humanization] All Gemini attempts failed");
+      console.error("[Humanization] All model attempts failed");
       return {
         success: false,
         humanizedText: text,
@@ -269,16 +270,18 @@ export class AIStudiosAdapter {
   ): Promise<ReadableStream> {
     try {
       console.log("[Humanization Stream] Starting humanization stream...");
+      console.log(`[Humanization Stream] Model will be selected based on word count`);
       
-      // Try Gemini Flash first (primary model)
+      // Try primary model first (selected based on word count in route)
       try {
         return await this.tryGeminiStream(text, options);
       } catch (geminiError) {
-        console.warn("[Humanization Stream] Gemini Flash failed, falling back to Gemini Flash-Lite", geminiError);
-        // Fallback to Gemini Flash-Lite (lighter, faster)
+        console.warn("[Humanization Stream] Primary model failed, trying fallback", geminiError);
+        // Fallback: try the opposite model
+        const fallbackModel = options.model === DEFAULT_MODEL ? FALLBACK_MODEL : DEFAULT_MODEL;
         return await this.tryGeminiStream(text, {
           ...options,
-          model: FALLBACK_MODEL, // Use gemini-2.5-flash
+          model: fallbackModel,
         });
       }
     } catch (error) {
@@ -501,7 +504,6 @@ export class AIStudiosAdapter {
         temperature: options.temperature ?? 1.0,
         topP: 0.95,
         topK: 40,
-        responseMimeType: "text/plain",
       };
       
       // Only include maxOutputTokens if it's defined
@@ -644,7 +646,6 @@ export class AIStudiosAdapter {
       temperature: options.temperature ?? 1.0,
       topP: 0.95,
       topK: 40,
-      responseMimeType: "text/plain",
     };
     
     // Only include maxOutputTokens if it's defined
