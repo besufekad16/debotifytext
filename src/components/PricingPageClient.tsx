@@ -220,10 +220,10 @@ export default function PricingPageClient({ isTeamMember = false, hasSubscriptio
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#f0f9ff]" style={{ backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+      <div className="min-h-screen bg-white">
         <div className="flex min-h-[80vh] items-center justify-center">
-          <div className="inline-flex items-center gap-3 rounded-full border border-[#bfdbfe] bg-white px-5 py-3 text-sm font-medium text-slate-600 shadow-sm">
-            <Loader2 className="h-4 w-4 animate-spin text-[#3b82f6]" /> Fetching plans…
+          <div className="inline-flex items-center gap-3 rounded-full border border-gray-200 bg-white px-5 py-3 text-sm font-medium text-gray-500 shadow-sm">
+            <Loader2 className="h-4 w-4 animate-spin text-[#5e3d2a]" /> Fetching plans…
           </div>
         </div>
       </div>
@@ -232,7 +232,7 @@ export default function PricingPageClient({ isTeamMember = false, hasSubscriptio
 
   if (error || !products?.length) {
     return (
-      <div className="min-h-screen bg-[#f0f9ff]" style={{ backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+      <div className="min-h-screen bg-white">
         <PageNavbar isTeamMember={isTeamMember} />
         <div className="container mx-auto max-w-6xl px-4 py-12">
           <Button
@@ -245,8 +245,8 @@ export default function PricingPageClient({ isTeamMember = false, hasSubscriptio
           </Button>
 
           <div className="mx-auto max-w-3xl rounded-3xl border border-red-200 bg-red-50/70 p-8 text-center shadow-sm">
-            <h3 className="text-lg font-semibold text-red-700">We couldn&apos;t load pricing</h3>
-            <p className="mt-2 text-sm text-red-600">
+            <h3 className="text-[14px] font-semibold text-red-700">We couldn&apos;t load pricing</h3>
+            <p className="mt-2 text-[13px] text-red-600">
               {error || "No products are currently configured in Polar."}
             </p>
             <p className="mt-4 text-xs text-red-500">
@@ -260,7 +260,7 @@ export default function PricingPageClient({ isTeamMember = false, hasSubscriptio
   }
 
   return (
-    <div className="min-h-screen bg-[#f0f9ff]" style={{ backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+    <div className="min-h-screen bg-white">
       <div className="container mx-auto max-w-7xl px-4 pb-4">
 
         <section id="pricing">
@@ -274,17 +274,17 @@ export default function PricingPageClient({ isTeamMember = false, hasSubscriptio
           </div>
         </section>
 
-        <div className="mt-16 rounded-xl border border-slate-200 bg-gradient-to-r from-slate-50 to-blue-50 p-8 text-center">
-          <h3 className="mb-3 text-2xl font-bold text-slate-900">
+        <div className="mt-16 rounded-xl border border-gray-200 bg-[#faf7f4] p-8 text-center">
+          <h3 className="mb-3 text-[1.15rem] font-bold text-gray-900">
             Need Help Choosing?
           </h3>
-          <p className="mb-6 text-slate-600">
+          <p className="mb-4 text-[13px] text-gray-500">
             Not sure which plan is right for you? Contact our support team for personalized recommendations.
           </p>
           <Button
             variant="outline"
             size="lg"
-            className="border-2 border-[#3b82f6] text-[#3b82f6] hover:bg-[#3b82f6] hover:text-white"
+            className="border-2 border-[#5e3d2a] text-[#5e3d2a] hover:bg-[#5e3d2a] hover:text-white transition-colors"
             onClick={() => router.push("/contact")}
           >
             Contact Support

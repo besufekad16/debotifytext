@@ -855,58 +855,72 @@ export default function UnifiedHomePage() {
       />
 
       <main className="flex-1 w-full">
-        {/* Hero and Workspace Section with Seamless Gradient */}
-        <div
-          className="relative w-full overflow-x-hidden bg-[#f0f9ff] pb-20"
-          style={{ backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', backgroundSize: '20px 20px' }}
-        >
+        {/* Hero and Workspace Section */}
+        <div className="relative w-full overflow-x-hidden bg-white pb-16">
+          {/* Subtle top gradient wash */}
+          <div className="absolute inset-x-0 top-0 h-[420px] bg-gradient-to-b from-[#faf7f4] to-white pointer-events-none" />
+
           {/* Hero Section */}
-          <section className="relative py-8 sm:py-12 lg:py-16 overflow-hidden">
-            {/* Background gradient */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#5e3d2a]/5 via-white to-white pointer-events-none" />
-            
-            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <section className="relative pt-14 pb-4 sm:pt-20 sm:pb-6 overflow-hidden">
+
+            <div className="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center">
-                {/* Badge */}
-                <div className="inline-flex items-center gap-2 rounded-full bg-white border border-[#5e3d2a]/30 px-4 py-2 text-sm font-medium text-gray-600 shadow-sm mb-4">
-                  <span className="flex h-2 w-2 rounded-full bg-[#5e3d2a]"></span>
-                  Advanced AI Text Humanization Technology
+
+                {/* Eyebrow badge */}
+                <div className="inline-flex items-center gap-2 rounded-full bg-[#faf7f4] border border-[#e8ddd5] px-3.5 py-1.5 text-[11px] font-medium text-[#7a5c44] mb-7 tracking-widest uppercase">
+                  <span className="flex h-1.5 w-1.5 rounded-full bg-[#5e3d2a]" />
+                  Trusted by 500,000+ writers worldwide
                 </div>
 
                 {/* Main Heading */}
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight mb-6">
-                  <span className="text-gray-900">Transform AI Content Into</span>
-                  <br />
-                  <span className="text-[#5e3d2a]">Authentic Human Writing</span>
+                <h1 className="mb-5 tracking-tight">
+                  <span
+                    className="block text-[2rem] sm:text-[2.75rem] lg:text-[3.1rem] font-bold text-gray-950 leading-[1.15]"
+                    style={{ fontFamily: 'Inter, sans-serif', letterSpacing: '-0.03em' }}
+                  >
+                    AI text that reads like
+                  </span>
+                  <span
+                    className="block text-[2.2rem] sm:text-[3rem] lg:text-[3.4rem] text-[#5e3d2a] leading-[1.1] mt-0.5"
+                    style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: 'italic', fontWeight: 500 }}
+                  >
+                    you wrote it
+                  </span>
                 </h1>
 
-                {/* Feature Pills */}
-                <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mb-10">
-                  <div className="inline-flex items-center gap-2 text-sm sm:text-base text-gray-700">
-                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#5e3d2a]/10">
-                      <Check className="h-3 w-3 text-[#5e3d2a]" />
-                    </div>
-                    <span>Enterprise-Grade Security</span>
-                  </div>
-                  <div className="inline-flex items-center gap-2 text-sm sm:text-base text-gray-700">
-                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#5e3d2a]/10">
-                      <Check className="h-3 w-3 text-[#5e3d2a]" />
-                    </div>
-                    <span>Professional Quality Results</span>
-                  </div>
-                  <div className="inline-flex items-center gap-2 text-sm sm:text-base text-gray-700">
-                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#5e3d2a]/10">
-                      <Check className="h-3 w-3 text-[#5e3d2a]" />
-                    </div>
-                    <span>Instant Processing</span>
-                  </div>
+                {/* Subheadline */}
+                <p
+                  className="text-[14.5px] text-gray-400 leading-[1.7] max-w-md mx-auto mb-8 font-normal"
+                  style={{ fontFamily: 'Inter, sans-serif' }}
+                >
+                  Paste any AI-generated content and get back clean, natural writing —
+                  undetectable, meaning-preserved, ready to use.
+                </p>
+
+                {/* Trust signals */}
+                <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-[12px] text-gray-400">
+                  <span className="flex items-center gap-1.5">
+                    <Check className="h-3 w-3 text-[#5e3d2a]" />
+                    No AI footprint
+                  </span>
+                  <span className="text-gray-200 hidden sm:block">·</span>
+                  <span className="flex items-center gap-1.5">
+                    <Check className="h-3 w-3 text-[#5e3d2a]" />
+                    Meaning intact
+                  </span>
+                  <span className="text-gray-200 hidden sm:block">·</span>
+                  <span className="flex items-center gap-1.5">
+                    <Check className="h-3 w-3 text-[#5e3d2a]" />
+                    Results in under 3 seconds
+                  </span>
                 </div>
+
               </div>
             </div>
           </section>
 
           {/* Main Workspace - Humanizer Tool */}
-          <section id="tool" className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8">
+          <section id="tool" className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
             {showSignInPrompt && !isSignedIn && (
               <div className="mb-8 rounded-3xl border border-[#bfdbfe] bg-[#e0f2fe] p-6 text-center shadow-sm">
                 <h3 className="text-lg font-semibold text-foreground">Sign in to humanize your text</h3>
@@ -1091,7 +1105,7 @@ export default function UnifiedHomePage() {
                         <div className="flex items-center gap-2">
                           <div className={cn(
                             "w-2 h-2 rounded-full transition-colors",
-                            humanizedText && !isHumanizing ? "bg-green-500" : "bg-gray-300"
+                            humanizedText && !isHumanizing ? "bg-[#5e3d2a]" : "bg-gray-300"
                           )}></div>
                           <label className="text-sm font-semibold text-gray-700">
                             Humanized output
@@ -1102,7 +1116,7 @@ export default function UnifiedHomePage() {
                           <span className="text-xs text-gray-500">
                             {humanizedText.trim().split(/\s+/).filter(Boolean).length} words
                           </span>
-                          <span className="text-xs px-2 py-1 rounded-full bg-green-100 text-green-700 font-medium">
+                          <span className="text-xs px-2 py-1 rounded-full bg-[#f5ede6] text-[#5e3d2a] font-medium">
                             100% Human
                           </span>
                         </div>
@@ -1114,7 +1128,7 @@ export default function UnifiedHomePage() {
                       <div className={cn(
                         "h-[350px] rounded-xl border-2 transition-all duration-200 overflow-hidden",
                         humanizedText && !isHumanizing
-                          ? "border-green-300 bg-white shadow-sm"
+                          ? "border-[#A0826D] bg-white shadow-sm"
                           : "border-gray-200 bg-gray-50/50"
                       )}>
                         <ScrollArea className="h-full">
@@ -1173,7 +1187,7 @@ export default function UnifiedHomePage() {
                           >
                             {copied ? (
                               <>
-                                <Check className="w-4 h-4 mr-2 text-green-600" />
+                                <Check className="w-4 h-4 mr-2 text-[#5e3d2a]" />
                                 Copied
                               </>
                             ) : (
@@ -1209,86 +1223,111 @@ export default function UnifiedHomePage() {
             </div>
           </section>
 
+          {/* AI Detector Logos */}
+          <section className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-4">
+            <p className="text-center text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-400 mb-7">
+              Our AI bypasses industry standard detectors
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-6">
+              {[
+                { src: "/logo/turnitin.png", label: "Turnitin" },
+                { src: "/logo/GPTZero.png", label: "GPTZero" },
+                { src: "/logo/zeroGPT.png", label: "ZeroGPT" },
+                { src: "/logo/quillbot.png", label: "QuillBot" },
+                { src: "/logo/writer.png", label: "Writer" },
+                { src: "/logo/copyleaks.png", label: "Copyleaks" },
+                { src: "/logo/originality.png", label: "Originality.ai" },
+                { src: "/logo/sapling.png", label: "Sapling" },
+              ].map(({ src, label }) => (
+                <div key={label} className="flex flex-col items-center gap-1.5 opacity-50 hover:opacity-80 transition-opacity">
+                  <Image src={src} alt={label} width={72} height={28} className="object-contain h-7 w-auto grayscale" />
+                  <span className="text-[10px] text-gray-400 tracking-wide">{label}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+
         </div>
 
         {/* Stats Section - Below Humanizer Tool */}
-        <section className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-[#f0f9ff] opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]" style={{ backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+        <section className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {/* Stat 1 - Texts Humanized */}
-            <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-200 text-center hover:shadow-md transition-shadow">
-              <div className="text-2xl sm:text-3xl font-bold text-[#5e3d2a] mb-2">
+            {/* Stat 1 */}
+            <div className="bg-white rounded-xl p-5 shadow-none border border-gray-100 text-center hover:shadow-sm transition-shadow">
+              <div className="text-[1.4rem] font-bold text-[#5e3d2a] mb-0.5 tracking-tight">
                 1.2M+
               </div>
-              <div className="text-sm text-gray-600 font-medium">
-                Texts Humanized
+              <div className="text-[12px] text-gray-400 tracking-wide">
+                Documents humanized
               </div>
             </div>
 
-            {/* Stat 2 - Quality Success Rate */}
-            <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-200 text-center hover:shadow-md transition-shadow">
-              <div className="text-2xl sm:text-3xl font-bold text-blue-600 mb-2">
+            {/* Stat 2 */}
+            <div className="bg-white rounded-xl p-5 shadow-none border border-gray-100 text-center hover:shadow-sm transition-shadow">
+              <div className="text-[1.4rem] font-bold text-[#5e3d2a] mb-0.5 tracking-tight">
                 98.7%
               </div>
-              <div className="text-sm text-gray-600 font-medium">
-                Quality Success Rate
+              <div className="text-[12px] text-gray-400 tracking-wide">
+                Detection bypass rate
               </div>
             </div>
 
-            {/* Stat 3 - Average Processing */}
-            <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-200 text-center hover:shadow-md transition-shadow">
-              <div className="text-2xl sm:text-3xl font-bold text-[#5e3d2a] mb-2">
+            {/* Stat 3 */}
+            <div className="bg-white rounded-xl p-5 shadow-none border border-gray-100 text-center hover:shadow-sm transition-shadow">
+              <div className="text-[1.4rem] font-bold text-[#5e3d2a] mb-0.5 tracking-tight">
                 &lt;3s
               </div>
-              <div className="text-sm text-gray-600 font-medium">
-                Average Processing
+              <div className="text-[12px] text-gray-400 tracking-wide">
+                Average turnaround
               </div>
             </div>
           </div>
         </section>
 
         {/* Professional Solutions for Every Industry */}
-        <section className="py-20 bg-[#f0f9ff] opacity-0 animate-[fadeInUp_0.8s_ease-out_0.4s_forwards]" style={{ backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+        <section className="py-16 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.4s_forwards]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight mb-4">
-                Professional Solutions for <span className="text-[#5e3d2a]">Every Industry</span>
+            <div className="text-center mb-10">
+              <h2 className="text-[1.6rem] sm:text-[2.2rem] font-extrabold tracking-tight text-gray-900 mb-3 leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
+                Built for{" "}
+                <span style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: '1.15em' }} className="text-[#5e3d2a]">every use case</span>
               </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                Advanced AI humanization technology trusted by professionals across academia, content creation, and enterprise sectors.
+              <p className="text-gray-400 max-w-md mx-auto text-[13px] leading-relaxed">
+                Whether you're a student, a content team, or an enterprise — the output always sounds like a person wrote it.
               </p>
             </div>
             
             <div className="grid md:grid-cols-3 gap-6">
-              {/* Card 1 - For Students */}
-              <div className="bg-[#5e3d2a]/5 rounded-3xl p-8 border border-[#5e3d2a]/20 hover:shadow-lg transition-all duration-300">
-                <div className="w-12 h-12 bg-[#5e3d2a] rounded-2xl flex items-center justify-center mb-6">
-                  <GraduationCap className="w-6 h-6 text-white" />
+              {/* Card 1 */}
+              <div className="bg-[#5e3d2a]/5 rounded-2xl p-6 border border-[#e8ddd5] hover:shadow-md transition-all duration-300">
+                <div className="w-10 h-10 bg-[#5e3d2a] rounded-xl flex items-center justify-center mb-4">
+                  <GraduationCap className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Academic Excellence</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Maintain academic integrity while leveraging AI assistance. Transform drafts into polished, authentic submissions that meet institutional standards.
+                <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Students & Academia</h3>
+                <p className="text-gray-400 text-[13px] leading-relaxed">
+                  Use AI to draft, then submit work that reads as your own. Passes institutional checks without altering your argument.
                 </p>
               </div>
 
-              {/* Card 2 - For Content Writers */}
-              <div className="bg-white rounded-3xl p-8 border border-gray-200 hover:shadow-lg transition-all duration-300">
-                <div className="w-12 h-12 bg-[#5e3d2a] rounded-2xl flex items-center justify-center mb-6">
-                  <FileText className="w-6 h-6 text-white" />
+              {/* Card 2 */}
+              <div className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-all duration-300">
+                <div className="w-10 h-10 bg-[#5e3d2a] rounded-xl flex items-center justify-center mb-4">
+                  <FileText className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Content Production</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Scale content operations without compromising quality or authenticity. Maintain brand voice while optimizing production workflows.
+                <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Content Teams</h3>
+                <p className="text-gray-400 text-[13px] leading-relaxed">
+                  Scale output without losing brand voice. Every piece sounds like it came from your best writer, not a language model.
                 </p>
               </div>
 
-              {/* Card 3 - For Professionals */}
-              <div className="bg-[#5e3d2a]/5 rounded-3xl p-8 border border-[#5e3d2a]/20 hover:shadow-lg transition-all duration-300">
-                <div className="w-12 h-12 bg-[#5e3d2a] rounded-2xl flex items-center justify-center mb-6">
-                  <Users className="w-6 h-6 text-white" />
+              {/* Card 3 */}
+              <div className="bg-[#5e3d2a]/5 rounded-2xl p-6 border border-[#e8ddd5] hover:shadow-md transition-all duration-300">
+                <div className="w-10 h-10 bg-[#5e3d2a] rounded-xl flex items-center justify-center mb-4">
+                  <Users className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Enterprise Communications</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Ensure professional correspondence maintains authentic human tone. Optimize business communications while preserving relationship quality.
+                <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Business & Enterprise</h3>
+                <p className="text-gray-400 text-[13px] leading-relaxed">
+                  Keep client-facing communications warm and human. AI-assisted drafts, human-quality delivery — every time.
                 </p>
               </div>
             </div>
@@ -1296,81 +1335,82 @@ export default function UnifiedHomePage() {
         </section>
 
         {/* Powerful Humanization Features */}
-        <section className="py-20 bg-[#f0f9ff] opacity-0 animate-[fadeInUp_0.8s_ease-out_0.6s_forwards]" style={{ backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+        <section className="py-16 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.6s_forwards]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight mb-4">
-                Enterprise-Grade Humanization Technology
+            <div className="text-center mb-10">
+              <h2 className="text-[1.6rem] sm:text-[2.2rem] font-extrabold tracking-tight text-gray-900 mb-3 leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
+                What makes{" "}
+                <span style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: '1.15em' }} className="text-[#5e3d2a]">it work</span>
               </h2>
-              <p className="text-gray-600 max-w-3xl mx-auto">
-                Sophisticated AI rewriting algorithms that transform content into natural, authentic human writing while preserving semantic integrity.
+              <p className="text-gray-400 max-w-lg mx-auto text-[13px] leading-relaxed">
+                Under the hood, a purpose-built rewriting engine — not a generic LLM wrapper — handles every nuance of natural language.
               </p>
             </div>
             
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Feature 1 - Natural Writing Quality */}
-              <div className="bg-[#5e3d2a]/5 rounded-3xl p-8 border border-[#5e3d2a]/20">
-                <div className="w-14 h-14 bg-[#5e3d2a] rounded-2xl flex items-center justify-center mb-6">
-                  <ShieldCheck className="w-7 h-7 text-white" />
+              {/* Feature 1 */}
+              <div className="bg-[#5e3d2a]/5 rounded-2xl p-6 border border-[#e8ddd5]">
+                <div className="w-10 h-10 bg-[#5e3d2a] rounded-xl flex items-center justify-center mb-4">
+                  <ShieldCheck className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Professional Writing Enhancement</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Transform AI text into professional, natural-sounding content with authentic human tone and style. Perfect for academic, business, and creative writing.
+                <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Undetectable output</h3>
+                <p className="text-gray-400 text-[13px] leading-relaxed">
+                  Rewrites pass GPTZero, Turnitin, and Originality.ai. The result reads like a person — because it's engineered to.
                 </p>
               </div>
 
-              {/* Feature 2 - Preserve Meaning */}
-              <div className="bg-blue-50/50 rounded-3xl p-8 border border-blue-100">
-                <div className="w-14 h-14 bg-blue-500 rounded-2xl flex items-center justify-center mb-6">
-                  <FileText className="w-7 h-7 text-white" />
+              {/* Feature 2 */}
+              <div className="bg-[#faf7f4] rounded-2xl p-6 border border-[#e8ddd5]">
+                <div className="w-10 h-10 bg-[#5e3d2a] rounded-xl flex items-center justify-center mb-4">
+                  <FileText className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Semantic Preservation</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Advanced NLP algorithms maintain original context, tone, and critical information while rewriting for authentic human characteristics.
+                <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Meaning preserved</h3>
+                <p className="text-gray-400 text-[13px] leading-relaxed">
+                  Your facts, arguments, and structure stay intact. Only the phrasing changes — nothing gets lost in translation.
                 </p>
               </div>
 
-              {/* Feature 3 - Lightning Fast */}
-              <div className="bg-[#5e3d2a]/5 rounded-3xl p-8 border border-[#5e3d2a]/20">
-                <div className="w-14 h-14 bg-[#5e3d2a] rounded-2xl flex items-center justify-center mb-6">
-                  <Zap className="w-7 h-7 text-white" />
+              {/* Feature 3 */}
+              <div className="bg-[#5e3d2a]/5 rounded-2xl p-6 border border-[#e8ddd5]">
+                <div className="w-10 h-10 bg-[#5e3d2a] rounded-xl flex items-center justify-center mb-4">
+                  <Zap className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">High-Performance Processing</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Process up to 5,000 words in under 3 seconds. Zero queuing, instant humanization with enterprise-grade infrastructure.
+                <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Fast at any scale</h3>
+                <p className="text-gray-400 text-[13px] leading-relaxed">
+                  5,000 words processed in under 3 seconds. No queue, no wait — just instant results on demand.
                 </p>
               </div>
 
-              {/* Feature 4 - 100% Private */}
-              <div className="bg-blue-50/50 rounded-3xl p-8 border border-blue-100">
-                <div className="w-14 h-14 bg-blue-500 rounded-2xl flex items-center justify-center mb-6">
-                  <Lock className="w-7 h-7 text-white" />
+              {/* Feature 4 */}
+              <div className="bg-[#faf7f4] rounded-2xl p-6 border border-[#e8ddd5]">
+                <div className="w-10 h-10 bg-[#5e3d2a] rounded-xl flex items-center justify-center mb-4">
+                  <Lock className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Enterprise Security</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Military-grade encryption with zero data retention. Your content is never logged, tracked, or shared with third parties.
+                <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Private by design</h3>
+                <p className="text-gray-400 text-[13px] leading-relaxed">
+                  Your content is never stored, logged, or used for training. What you paste stays yours — full stop.
                 </p>
               </div>
 
-              {/* Feature 5 - Multi-Language */}
-              <div className="bg-[#5e3d2a]/5 rounded-3xl p-8 border border-[#5e3d2a]/20">
-                <div className="w-14 h-14 bg-[#5e3d2a] rounded-2xl flex items-center justify-center mb-6">
-                  <Sparkles className="w-7 h-7 text-white" />
+              {/* Feature 5 */}
+              <div className="bg-[#5e3d2a]/5 rounded-2xl p-6 border border-[#e8ddd5]">
+                <div className="w-10 h-10 bg-[#5e3d2a] rounded-xl flex items-center justify-center mb-4">
+                  <Sparkles className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Global Language Support</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Comprehensive support for 50+ languages including English, Spanish, French, German, Chinese, Japanese, and more.
+                <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">50+ languages</h3>
+                <p className="text-gray-400 text-[13px] leading-relaxed">
+                  English, Spanish, French, German, Chinese, Japanese, and more — all with the same quality and naturalness.
                 </p>
               </div>
 
-              {/* Feature 6 - No Sign-Up */}
-              <div className="bg-blue-50/50 rounded-3xl p-8 border border-blue-100">
-                <div className="w-14 h-14 bg-blue-500 rounded-2xl flex items-center justify-center mb-6">
-                  <FileText className="w-7 h-7 text-white" />
+              {/* Feature 6 */}
+              <div className="bg-[#faf7f4] rounded-2xl p-6 border border-[#e8ddd5]">
+                <div className="w-10 h-10 bg-[#5e3d2a] rounded-xl flex items-center justify-center mb-4">
+                  <FileText className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Instant Access</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Begin humanizing immediately. No registration barriers, no email verification, no payment required for initial access.
+                <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">No friction to start</h3>
+                <p className="text-gray-400 text-[13px] leading-relaxed">
+                  Paste and go. No account required to try it — sign up only when you're ready for more.
                 </p>
               </div>
             </div>
@@ -1378,48 +1418,51 @@ export default function UnifiedHomePage() {
         </section>
 
         {/* How It Works Section */}
-        <section className="py-20 bg-[#f0f9ff] opacity-0 animate-[fadeInUp_0.8s_ease-out_0.8s_forwards]" style={{ backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+        <section className="py-16 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.8s_forwards]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">How It Works</h2>
-              <p className="text-base text-gray-600">Transform AI text into human-like content in three simple steps</p>
+            <div className="text-center mb-10">
+              <h2 className="text-[1.6rem] sm:text-[2.2rem] font-extrabold tracking-tight text-gray-900 mb-2 leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
+                How it{" "}
+                <span style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: '1.15em' }} className="text-[#5e3d2a]">works</span>
+              </h2>
+              <p className="text-[12px] text-gray-400 tracking-wide">Three steps. Under 30 seconds.</p>
             </div>
             
             <div className="relative">
               {/* Progress Line */}
-              <div className="absolute top-24 left-0 right-0 h-1 bg-gradient-to-r from-[#5e3d2a] via-gray-700 to-blue-500 hidden lg:block" style={{ width: 'calc(100% - 200px)', left: '100px' }} />
+              <div className="absolute top-24 left-0 right-0 h-px bg-gradient-to-r from-[#5e3d2a] via-gray-200 to-[#5e3d2a]/30 hidden lg:block" style={{ width: 'calc(100% - 200px)', left: '100px' }} />
               
               <div className="grid md:grid-cols-3 gap-12 relative">
                 {/* Step 1 */}
                 <div className="text-center">
-                  <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-full bg-[#5e3d2a] text-white text-3xl font-bold mb-4 shadow-lg">
+                  <div className="relative inline-flex items-center justify-center w-11 h-11 rounded-full bg-[#5e3d2a] text-white text-sm font-semibold mb-4 shadow-sm">
                     1
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">Paste AI Text</h3>
-                  <p className="text-sm text-gray-600">
-                    Copy your AI-generated content from ChatGPT, Claude, Gemini, or any AI writing tool and paste it into our editor.
+                  <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Paste your text</h3>
+                  <p className="text-[13px] text-gray-400 leading-relaxed">
+                    Drop in content from ChatGPT, Claude, Gemini, or any AI tool. Supports plain text, .docx, and .pdf.
                   </p>
                 </div>
                 
                 {/* Step 2 */}
                 <div className="text-center">
-                  <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-700 text-white text-3xl font-bold mb-4 shadow-lg">
+                  <div className="relative inline-flex items-center justify-center w-11 h-11 rounded-full bg-gray-800 text-white text-sm font-semibold mb-4 shadow-sm">
                     2
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">Click Humanize</h3>
-                  <p className="text-sm text-gray-600">
-                    Our advanced AI rewriting engine analyzes and transforms your text to sound naturally human while preserving meaning.
+                  <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Hit Humanize</h3>
+                  <p className="text-[13px] text-gray-400 leading-relaxed">
+                    Our engine rewrites for natural flow, varied sentence rhythm, and authentic tone — while keeping your meaning.
                   </p>
                 </div>
                 
                 {/* Step 3 */}
                 <div className="text-center">
-                  <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-full bg-blue-500 text-white text-3xl font-bold mb-4 shadow-lg">
+                  <div className="relative inline-flex items-center justify-center w-11 h-11 rounded-full bg-[#5e3d2a] text-white text-sm font-semibold mb-4 shadow-sm">
                     3
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">Copy & Use</h3>
-                  <p className="text-sm text-gray-600">
-                    Get your humanized text instantly. Copy it, download it, or use it anywhere with professional, natural-sounding quality.
+                  <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Copy and use</h3>
+                  <p className="text-[13px] text-gray-400 leading-relaxed">
+                    Download as .txt or .docx, or copy directly. Ready for submission, publication, or wherever you need it.
                   </p>
                 </div>
               </div>
@@ -1428,15 +1471,16 @@ export default function UnifiedHomePage() {
         </section>
 
         {/* Pricing Section (Untouched logic, just moved) */}
-        <section id="pricing" className="py-10 sm:py-16 bg-[#f0f9ff] opacity-0 animate-[fadeInUp_0.8s_ease-out_1s_forwards]" style={{ backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+        <section id="pricing" className="py-10 sm:py-16 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_1s_forwards]">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <span className="text-xs font-semibold uppercase tracking-wide text-[#2563eb] drop-shadow-[0_0_8px_rgba(37,99,235,0.3)]">Pricing</span>
-              <h3 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl bg-gradient-to-r from-[#1e40af] via-[#60a5fa] to-[#1e40af] bg-clip-text text-transparent animate-[glowPulse_3s_ease-in-out_infinite]" style={{ textShadow: "0 0 40px rgba(59,130,246,0.5), 0 0 60px rgba(59,130,246,0.4), 0 0 80px rgba(59,130,246,0.3)" }}>
-                Choose your plan
+              <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[#5e3d2a]">Pricing</span>
+              <h3 className="mt-3 text-[1.6rem] sm:text-[2.2rem] font-extrabold tracking-tight text-gray-900 leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
+                Simple,{" "}
+                <span style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: '1.15em' }} className="text-[#2563eb]">transparent pricing</span>
               </h3>
-              <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground">
-                Transparent pricing with zero lock-in. Upgrade or cancel anytime.
+              <p className="mx-auto mt-2 max-w-sm text-[13px] text-gray-400">
+                No hidden fees. Upgrade or cancel anytime.
               </p>
             </div>
 
@@ -1449,14 +1493,17 @@ export default function UnifiedHomePage() {
         </section>
 
         {/* Redesigned Testimonials Section */}
-        <section id="testimonials" className="py-24 sm:py-32 bg-[#f0f9ff] overflow-hidden relative opacity-0 animate-[fadeInUp_0.8s_ease-in-out_1.2s_forwards]" style={{ backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+        <section id="testimonials" className="py-16 sm:py-20 bg-[#faf7f4] overflow-hidden relative opacity-0 animate-[fadeInUp_0.8s_ease-in-out_1.2s_forwards]">
           <div className="absolute top-0 inset-x-0 h-px bg-muted" />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16 md:mb-20">
-              <span className="text-primary font-bold tracking-wide uppercase text-xs mb-4 block">Testimonials</span>
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-4">Trusted by <span className="text-primary relative inline-block">Professionals<span className="absolute bottom-1 left-0 w-full h-3 bg-blue-100/50 -z-10 rounded-full"></span></span></h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto text-sm">Join thousands of professionals who rely on HumanifyLab for authentic content transformation.</p>
+              <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[#5e3d2a] mb-3 block">Testimonials</span>
+              <h2 className="text-[1.6rem] md:text-[2.2rem] font-extrabold text-foreground tracking-tight mb-3 leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
+                What people{" "}
+                <span style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: '1.15em' }} className="text-primary">are saying</span>
+              </h2>
+              <p className="text-gray-400 max-w-sm mx-auto text-[13px]">Thousands of writers, students, and teams use HumanifyLab every day.</p>
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -1469,7 +1516,7 @@ export default function UnifiedHomePage() {
                   </div>
                   <p className="text-foreground text-sm leading-relaxed mb-6 flex-1">"{t.quote}"</p>
                   <div className="flex items-center gap-3 pt-4 border-t border-slate-50">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center text-xs font-bold text-blue-700">
+                    <div className="w-8 h-8 rounded-full bg-[#f5ede6] flex items-center justify-center text-xs font-bold text-[#5e3d2a]">
                       {t.name[0]}
                     </div>
                     <div className="overflow-hidden">
@@ -1487,7 +1534,7 @@ export default function UnifiedHomePage() {
         <section id="faq" className="relative py-20 sm:py-24 bg-gradient-to-br from-[#8b6f47] via-[#5e3d2a] to-[#4a2f1f] overflow-hidden opacity-0 animate-[fadeInUp_0.8s_ease-out_1.4s_forwards]">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <span className="text-xs font-semibold uppercase tracking-wide text-white/90">FAQ</span>
+              <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-white/40">FAQ</span>
               <h3 className="mt-3 text-2xl font-bold tracking-tight text-white">Get quick answers</h3>
               <p className="mt-3 text-sm text-white/90">
                 Everything you need to know about Humanizer’s security, pricing, and workflow.
@@ -1507,13 +1554,13 @@ export default function UnifiedHomePage() {
                       onClick={() => setFaqOpen(isOpen ? null : item.id)}
                       className="flex w-full items-center justify-between px-6 py-4 text-left"
                     >
-                      <span className="text-base font-semibold text-gray-900">{item.question}</span>
+                      <span className="text-[14px] font-semibold text-gray-900">{item.question}</span>
                       <ChevronDown
                         className={`h-5 w-5 text-gray-600 transition-transform ${isOpen ? "rotate-180" : ""}`}
                       />
                     </button>
                     {isOpen && (
-                      <div className="px-6 pb-5 text-sm leading-relaxed text-gray-700 border-t border-gray-100 pt-4">
+                      <div className="px-6 pb-4 text-[13px] leading-relaxed text-gray-500 border-t border-gray-100 pt-3">
                         {item.answer}
                       </div>
                     )}

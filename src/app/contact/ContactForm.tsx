@@ -99,7 +99,7 @@ export default function ContactForm({ initialEmail, isEmailReadOnly }: ContactFo
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div className="space-y-2">
-          <label htmlFor="name" className="text-sm font-medium text-slate-700">
+          <label htmlFor="name" className="text-[12px] font-medium text-gray-600">
             Full name
           </label>
           <Input
@@ -114,7 +114,7 @@ export default function ContactForm({ initialEmail, isEmailReadOnly }: ContactFo
           />
         </div>
         <div className="space-y-2">
-          <label htmlFor="email" className="text-sm font-medium text-slate-700">
+          <label htmlFor="email" className="text-[12px] font-medium text-gray-600">
             Email address
           </label>
           <Input
@@ -134,7 +134,7 @@ export default function ContactForm({ initialEmail, isEmailReadOnly }: ContactFo
       </div>
 
       <div className="space-y-2">
-        <label htmlFor="message" className="text-sm font-medium text-slate-700">
+        <label htmlFor="message" className="text-[12px] font-medium text-gray-600">
           Message
         </label>
         <Textarea
@@ -147,7 +147,7 @@ export default function ContactForm({ initialEmail, isEmailReadOnly }: ContactFo
           required
           className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-500 focus:border-[#3b82f6] focus:ring-2 focus:ring-[#bfdbfe]"
         />
-        <p className="text-[12px] text-slate-500">Minimum 10 characters.</p>
+        <p className="text-[12px] text-[13px] text-gray-400">Minimum 10 characters.</p>
       </div>
 
       {feedback ? (
@@ -165,7 +165,7 @@ export default function ContactForm({ initialEmail, isEmailReadOnly }: ContactFo
       <Button
         type="submit"
         disabled={isPending}
-        className="w-full justify-center rounded-full bg-blue-600 px-6 py-3 text-lg font-semibold text-white shadow-[0_16px_30px_-18px_rgba(59,130,246,0.45)] transition hover:bg-blue-700"
+        className="w-full justify-center rounded-full bg-[#5e3d2a] px-6 py-2.5 text-[14px] font-semibold text-white shadow-[0_16px_30px_-18px_rgba(59,130,246,0.45)] transition hover:bg-blue-700"
       >
         {isPending ? "Sending…" : "Send message"}
       </Button>

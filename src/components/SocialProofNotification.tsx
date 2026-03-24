@@ -103,7 +103,7 @@ export default function SocialProofNotification() {
         {/* Content */}
         <div className="flex items-start gap-3">
           {/* Icon */}
-          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#5e3d2a] flex items-center justify-center">
             <Sparkles className="h-5 w-5 text-white" />
           </div>
 
@@ -114,15 +114,7 @@ export default function SocialProofNotification() {
               <span className="font-bold text-gray-900">{currentNotification.words.toLocaleString()} words</span>{" "}
               using{" "}
               <span
-                className={`font-bold ${
-                  currentNotification.plan === "Basic"
-                    ? "text-green-600"
-                    : currentNotification.plan === "Pro"
-                    ? "text-blue-600"
-                    : currentNotification.plan === "Ultra"
-                    ? "text-purple-600"
-                    : "text-gray-600"
-                }`}
+                className="font-bold text-[#5e3d2a]"
               >
                 {currentNotification.plan}
               </span>

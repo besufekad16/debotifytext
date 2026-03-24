@@ -115,14 +115,14 @@ export default async function AccountPage() {
   }) : "Unknown";
 
   return (
-    <div className="min-h-screen bg-[#f0f9ff]" style={{ backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+    <div className="min-h-screen bg-white">
       <PageNavbar currentCredits={userCredits + userExtraCredits} isTeamMember={isTeamMember} />
       <main className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-extrabold tracking-tight text-foreground">
+          <h1 className="text-[1.6rem] sm:text-[2rem] font-bold tracking-tight text-gray-950">
             Manage Your Account Settings
           </h1>
-          <p className="mt-2 text-lg text-muted-foreground">
+          <p className="mt-2 text-[14px] text-gray-400">
             Manage your HumanifyLab account and view your usage
           </p>
         </div>
@@ -144,28 +144,28 @@ export default async function AccountPage() {
                 <User className="h-5 w-5 text-[#3b82f6]" />
                 Profile Information
               </CardTitle>
-              <CardDescription>Your personal details</CardDescription>
+              <CardDescription className="text-[12px] text-gray-400">Your personal details</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <label className="text-sm font-medium text-muted-foreground">Full Name</label>
-                <p className="mt-1 text-base font-semibold text-foreground">{userName}</p>
+                <label className="text-[12px] font-medium text-gray-400">Full Name</label>
+                <p className="mt-1 text-[13.5px] font-semibold text-gray-900">{userName}</p>
               </div>
               <Separator />
               <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                <label className="flex items-center gap-2 text-[12px] font-medium text-gray-400">
                   <Mail className="h-4 w-4" />
                   Email Address
                 </label>
-                <p className="mt-1 text-base font-semibold text-foreground">{userEmail}</p>
+                <p className="mt-1 text-[13.5px] font-semibold text-gray-900">{userEmail}</p>
               </div>
               <Separator />
               <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                <label className="flex items-center gap-2 text-[12px] font-medium text-gray-400">
                   <Calendar className="h-4 w-4" />
                   Member Since
                 </label>
-                <p className="mt-1 text-base font-semibold text-foreground">{createdAt}</p>
+                <p className="mt-1 text-[13.5px] font-semibold text-gray-900">{createdAt}</p>
               </div>
             </CardContent>
           </Card>
@@ -177,15 +177,15 @@ export default async function AccountPage() {
                 <CreditCard className="h-5 w-5 text-[#3b82f6]" />
                 Credits & Usage
               </CardTitle>
-              <CardDescription>Your current credit balance</CardDescription>
+              <CardDescription className="text-[12px] text-gray-400">Your current credit balance</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <label className="text-sm font-medium text-muted-foreground">Available Credits</label>
-                <p className="mt-2 text-4xl font-bold text-[#3b82f6]">
+                <label className="text-[12px] font-medium text-gray-400">Available Credits</label>
+                <p className="mt-1.5 text-[1.8rem] font-bold text-[#3b82f6]">
                   {(userCredits + userExtraCredits).toLocaleString()}
                 </p>
-                <div className="mt-2 flex gap-4 text-sm text-muted-foreground">
+                <div className="mt-2 flex gap-4 text-[13px] text-gray-400">
                   <div>
                     <span className="font-medium text-foreground">Plan:</span> {userCredits.toLocaleString()}
                   </div>
@@ -195,14 +195,14 @@ export default async function AccountPage() {
                     </div>
                   )}
                 </div>
-                <p className="mt-2 text-sm text-muted-foreground">
+                <p className="mt-2 text-[13px] text-gray-400">
                   Credits are used to humanize your AI-generated text. Plan credits reset monthly, while top-up credits never expire.
                 </p>
               </div>
               <Separator />
               <div className="rounded-lg bg-primary/10 p-4">
-                <p className="text-sm font-medium text-foreground">Need more credits?</p>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-[13px] font-medium text-gray-900">Need more credits?</p>
+                <p className="mt-1 text-[13px] text-gray-400">
                   Visit our pricing page to purchase more credits and continue humanizing your content.
                 </p>
                 <Link
@@ -221,7 +221,7 @@ export default async function AccountPage() {
           <Card className="border-white/60 bg-white/80 shadow-md backdrop-blur">
             <CardHeader>
               <CardTitle>Quick Links</CardTitle>
-              <CardDescription>Access important resources and support</CardDescription>
+              <CardDescription className="text-[12px] text-gray-400">Access important resources and support</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
@@ -229,15 +229,15 @@ export default async function AccountPage() {
                   href="/"
                   className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#3b82f6] hover:shadow-md"
                 >
-                  <p className="font-semibold text-foreground">Humanizer Tool</p>
-                  <p className="mt-1 text-xs text-muted-foreground">Transform your text</p>
+                  <p className="text-[13.5px] font-semibold text-gray-900">Humanizer Tool</p>
+                  <p className="mt-0.5 text-[11px] text-gray-400">Transform your text</p>
                 </Link>
                 <Link
                   href="/pricing"
                   className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#3b82f6] hover:shadow-md"
                 >
-                  <p className="font-semibold text-foreground">Pricing</p>
-                  <p className="mt-1 text-xs text-muted-foreground">View credit packages</p>
+                  <p className="text-[13.5px] font-semibold text-gray-900">Pricing</p>
+                  <p className="mt-0.5 text-[11px] text-gray-400">View credit packages</p>
                 </Link>
                 {(isTeamMember || hasApiAccess) && (
                   <Link
@@ -247,8 +247,8 @@ export default async function AccountPage() {
                     <div className="flex justify-center mb-1">
                       <Users className="h-5 w-5 text-[#3b82f6]" />
                     </div>
-                    <p className="font-semibold text-foreground">Team</p>
-                    <p className="mt-1 text-xs text-muted-foreground">Manage team</p>
+                    <p className="text-[13.5px] font-semibold text-gray-900">Team</p>
+                    <p className="mt-0.5 text-[11px] text-gray-400">Manage team</p>
                   </Link>
                 )}
                 {hasApiAccess && (
@@ -259,23 +259,23 @@ export default async function AccountPage() {
                     <div className="flex justify-center mb-1">
                       <Key className="h-5 w-5 text-[#3b82f6]" />
                     </div>
-                    <p className="font-semibold text-foreground">API Keys</p>
-                    <p className="mt-1 text-xs text-muted-foreground">Manage integrations</p>
+                    <p className="text-[13.5px] font-semibold text-gray-900">API Keys</p>
+                    <p className="mt-0.5 text-[11px] text-gray-400">Manage integrations</p>
                   </Link>
                 )}
                 <Link
                   href="/faq"
                   className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#3b82f6] hover:shadow-md"
                 >
-                  <p className="font-semibold text-foreground">FAQ</p>
-                  <p className="mt-1 text-xs text-muted-foreground">Common questions</p>
+                  <p className="text-[13.5px] font-semibold text-gray-900">FAQ</p>
+                  <p className="mt-0.5 text-[11px] text-gray-400">Common questions</p>
                 </Link>
                 <Link
                   href="/contact"
                   className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#3b82f6] hover:shadow-md"
                 >
-                  <p className="font-semibold text-foreground">Contact</p>
-                  <p className="mt-1 text-xs text-muted-foreground">Get support</p>
+                  <p className="text-[13.5px] font-semibold text-gray-900">Contact</p>
+                  <p className="mt-0.5 text-[11px] text-gray-400">Get support</p>
                 </Link>
               </div>
             </CardContent>

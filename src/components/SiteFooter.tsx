@@ -15,18 +15,18 @@ export function SiteFooter() {
               <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-[#8b6f47] to-[#5e3d2a] flex items-center justify-center">
                 <span className="text-white font-bold text-lg">H</span>
               </div>
-              <span className="text-xl font-bold text-white">
+              <span className="text-[15px] font-bold text-white">
                 Humanify<span className="text-[#5e3d2a]">Lab</span>
               </span>
             </Link>
-            <p className="text-sm text-gray-400 leading-relaxed max-w-md">
+            <p className="text-[13px] text-gray-500 leading-relaxed max-w-md">
               Enterprise-grade AI humanization technology. Transform AI-generated content into authentic, professional writing that meets professional quality standards.
             </p>
           </div>
 
           {/* Product Column */}
           <div className="md:col-span-3 md:col-start-7">
-            <h3 className="font-semibold text-white mb-4">Product</h3>
+            <h3 className="text-[12px] font-semibold text-white/70 uppercase tracking-widest mb-3">Product</h3>
             <ul className="space-y-3 text-sm">
               <li>
                 <Link href="/" className="text-gray-400 hover:text-[#5e3d2a] transition-colors">
@@ -53,7 +53,7 @@ export function SiteFooter() {
 
           {/* Company Column */}
           <div className="md:col-span-3">
-            <h3 className="font-semibold text-white mb-4">Company</h3>
+            <h3 className="text-[12px] font-semibold text-white/70 uppercase tracking-widest mb-3">Company</h3>
             <ul className="space-y-3 text-sm">
               <li>
                 <Link href="/contact" className="text-gray-400 hover:text-[#5e3d2a] transition-colors">

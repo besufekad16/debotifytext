@@ -339,8 +339,6 @@ export default function PolarPricing({ isTeamMember = false }: PolarPricingProps
               className={`relative flex h-full flex-col rounded-[24px] sm:rounded-[28px] md:rounded-[30px] border transition duration-300 p-5 sm:p-6 md:p-8 w-full ${
                 isPopular
                   ? "bg-gradient-to-br from-[#5e3d2a] via-[#5e3d2a] to-[#4a2f1f] border-[#5e3d2a]/30 shadow-2xl shadow-[#5e3d2a]/20 scale-105 z-10"
-                  : index === 2
-                  ? "bg-white border-blue-200 shadow-lg hover:shadow-xl"
                   : "bg-white border-gray-200 shadow-lg hover:shadow-xl"
               }`}
             >
@@ -358,8 +356,8 @@ export default function PolarPricing({ isTeamMember = false }: PolarPricingProps
 
               <div className="flex flex-1 flex-col w-full">
                 <div>
-                  <h4 className={`text-lg sm:text-xl font-semibold ${isPopular ? "text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" : "text-foreground"}`}>{product.name}</h4>
-                  <div className={`mt-2 sm:mt-3 flex flex-wrap items-baseline gap-1.5 sm:gap-2 ${isPopular ? "text-white" : "text-foreground"}`}>
+                  <h4 className={`text-xl sm:text-2xl font-semibold tracking-tight ${isPopular ? "text-white" : "text-gray-900"}`}>{product.name}</h4>
+                  <div className={`mt-2 sm:mt-3 flex flex-wrap items-baseline gap-1.5 sm:gap-2 ${isPopular ? "text-white" : "text-gray-900"}`}>
                     {activeCycle === "yearly" && product.yearly?.priceAmount ? (
                       <>
                         {/* Show monthly (original) price struck out if available */}
@@ -379,26 +377,26 @@ export default function PolarPricing({ isTeamMember = false }: PolarPricingProps
                             product.yearly.priceCurrency
                           )}
                         </span>
-                        <span className={`text-xs sm:text-sm w-full sm:w-auto ${isPopular ? "text-white/90" : "text-muted-foreground"}`}>per month (billed annually)</span>
+                        <span className={`text-sm w-full sm:w-auto ${isPopular ? "text-white/90" : "text-gray-400"}`}>per month (billed annually)</span>
                       </>
                     ) : (
                       <>
                         <span className="text-3xl sm:text-4xl font-semibold">
                           {primaryPrice || "Contact us"}
                         </span>
-                        <span className={`text-xs sm:text-sm ${isPopular ? "text-white/90" : "text-muted-foreground"}`}>per month</span>
+                        <span className={`text-sm ${isPopular ? "text-white/90" : "text-gray-400"}`}>per month</span>
                       </>
                     )}
                   </div>
 
                   {activeCycle === "yearly" ? (
-                    <p className={`mt-2 text-xs ${isPopular ? "text-white/90" : ""}`}>
+                    <p className={`mt-2 text-[13px] ${isPopular ? "text-white/80" : "text-gray-400"}`}>
                       {annualBillingAmount != null
-                        ? `Billed annually at ${formatCurrency(annualBillingAmount, activeOption?.priceCurrency)} - Save 50%!`
+                        ? `Billed annually at ${formatCurrency(annualBillingAmount, activeOption?.priceCurrency)} — save 50%`
                         : "Billed annually"}
                     </p>
                   ) : (
-                    <p className={`mt-2 text-xs ${isPopular ? "text-white/90" : ""}`}>Billed monthly</p>
+                    <p className={`mt-2 text-[13px] ${isPopular ? "text-white/80" : "text-gray-400"}`}>Billed monthly</p>
                   )}
                 </div>
 
@@ -411,13 +409,11 @@ export default function PolarPricing({ isTeamMember = false }: PolarPricingProps
                       Managed by Team Owner
                     </Button>
                   ) : (
-                    <Button
-                      className={`w-full h-11 sm:h-12 rounded-xl sm:rounded-2xl py-3 sm:py-4 text-xs sm:text-sm font-semibold shadow-sm transition-all ${
+                      <Button
+                      className={`w-full h-11 sm:h-12 rounded-xl sm:rounded-2xl py-3 sm:py-4 text-sm sm:text-[15px] font-semibold shadow-sm transition-all ${
                         isPopular
-                          ? "bg-white text-[#5e3d2a] hover:bg-[#5e3d2a]/10 hover:text-[#4a2f1f]"
-                          : index === 2
-                          ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700"
-                          : "bg-gray-900 text-white hover:bg-gray-800"
+                          ? "bg-white text-[#5e3d2a] hover:bg-[#f5ede6] hover:text-[#4a2f1f]"
+                          : "bg-gray-900 text-white hover:bg-[#5e3d2a]"
                       }`}
                       onClick={() => activeProductId && onSubscribe(activeProductId)}
                       disabled={!activeProductId || !!ctaLoadingId}
@@ -427,12 +423,12 @@ export default function PolarPricing({ isTeamMember = false }: PolarPricingProps
                         : "Subscribe"}
                     </Button>
                   )}
-                  <p className={`text-center text-[10px] sm:text-xs ${isPopular ? "text-white/80" : "text-muted-foreground"}`}>No hidden fees · Cancel anytime · Secure checkout</p>
+                <p className={`text-center text-xs sm:text-[13px] ${isPopular ? "text-white/80" : "text-gray-400"}`}>No hidden fees · Cancel anytime · Secure checkout</p>
                 </div>
 
-                <p className={`mt-3 sm:mt-4 text-xs sm:text-sm leading-relaxed ${isPopular ? "text-white/90" : "text-muted-foreground"}`}>{headline}</p>
+                <p className={`mt-3 sm:mt-4 text-sm leading-relaxed ${isPopular ? "text-white/90" : "text-gray-500"}`}>{headline}</p>
 
-                <ul className={`mt-3 sm:mt-4 space-y-2.5 sm:space-y-3 text-xs sm:text-sm ${isPopular ? "text-white/90" : "text-muted-foreground"}`}>
+                <ul className={`mt-3 sm:mt-4 space-y-2.5 sm:space-y-3 text-sm ${isPopular ? "text-white/90" : "text-gray-600"}`}>
                   {features.map((feature, featureIndex) => (
                     <li key={`${product.key}-feature-${featureIndex}`} className="flex items-start gap-2 sm:gap-3">
                       <ShieldCheck className={`mt-0.5 sm:mt-1 h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0 ${isPopular ? "text-white" : "text-[#5e3d2a]"}`} />

@@ -131,7 +131,7 @@ export default async function ContactPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#f0f9ff]">
+    <div className="min-h-screen bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -148,10 +148,10 @@ export default async function ContactPage() {
               <span className="inline-flex items-center gap-2 rounded-full  border border-[#bfdbfe] bg-card px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#2563eb]">
                 We’d love to hear from you
               </span>
-              <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+              <h1 className="text-[1.6rem] sm:text-[2rem] font-semibold tracking-tight text-gray-950">
                 Contact the HumanifyLab team
               </h1>
-              <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
+              <p className="max-w-xl text-[14px] leading-relaxed text-gray-400">
                 Tell us about your use case, partnership idea, or anything else on your mind. We’ll reply within one business day.
               </p>
             </div>
@@ -170,7 +170,7 @@ export default async function ContactPage() {
                     </span>
                   </div>
                   <div className="space-y-1 text-center sm:text-left">
-                    <p className="text-base font-semibold text-foreground">{title}</p>
+                    <p className="text-[13.5px] font-semibold text-gray-900">{title}</p>
                     <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
                   </div>
                 </div>
@@ -178,14 +178,14 @@ export default async function ContactPage() {
             </div>
 
             <div className="rounded-2xl border border-[#bfdbfe] bg-white/90 p-6 shadow-sm">
-              <p className="text-sm font-semibold text-foreground">Availability</p>
-              <p className="mt-1 text-sm text-muted-foreground">24/7 Customer Support</p>
+              <p className="text-[13px] font-semibold text-gray-900">Availability</p>
+              <p className="mt-1 text-[13px] text-gray-400">24/7 Customer Support</p>
             </div>
           </div>
 
           <div className="rounded-[28px] border border-[#bfdbfe] bg-card p-8 shadow-[0_26px_55px_-38px_rgba(24,18,54,0.45)]">
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground">Send us a message</h2>
-            <p className="mt-2 text-sm text-muted-foreground">
+            <h2 className="text-[1.15rem] font-semibold tracking-tight text-gray-900">Send us a message</h2>
+            <p className="mt-2 text-[13px] text-gray-400">
               Fill out the form and we’ll follow up with the best next step.
             </p>
             <div className="mt-8">

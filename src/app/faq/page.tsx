@@ -187,10 +187,10 @@ export default function FAQPage() {
           <span className="inline-flex items-center gap-2 rounded-full bg-[#dbeafe] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#2563eb] shadow-sm">
             Frequently Asked Questions
           </span>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
+          <h1 className="mt-4 text-[1.6rem] sm:text-[2rem] font-bold tracking-tight text-gray-950 sm:text-5xl">
             Everything You Need to Know
           </h1>
-          <p className="mt-4 text-xl text-muted-foreground">
+          <p className="mt-4 text-[14px] text-gray-400">
             Get answers about our AI humanizer and how to enhance your writing naturally
           </p>
         </div>
@@ -198,7 +198,7 @@ export default function FAQPage() {
         <div className="mt-16 space-y-12">
           {faqs.map((category, categoryIndex) => (
             <div key={categoryIndex}>
-              <h2 className="mb-6 text-2xl font-bold text-foreground">
+              <h2 className="mb-6 text-[1.15rem] font-bold text-gray-900">
                 {category.category}
               </h2>
               <div className="space-y-6">
@@ -207,10 +207,10 @@ export default function FAQPage() {
                     key={faqIndex}
                     className="rounded-2xl border border-white/60 bg-white/80 p-6 shadow-sm backdrop-blur transition hover:shadow-md"
                   >
-                    <h3 className="text-lg font-semibold text-foreground">
+                    <h3 className="text-[14px] font-semibold text-gray-900">
                       {faq.question}
                     </h3>
-                    <p className="mt-3 text-base leading-relaxed text-foreground">
+                    <p className="mt-3 text-[13.5px] leading-relaxed text-gray-600">
                       {faq.answer}
                     </p>
                   </div>
@@ -221,10 +221,10 @@ export default function FAQPage() {
         </div>
 
         <div className="mt-16 rounded-3xl border border-white/60 bg-white/80 p-8 text-center shadow-md backdrop-blur">
-          <h2 className="text-2xl font-bold text-foreground">
+          <h2 className="text-[1.15rem] font-bold text-gray-900">
             Still have questions?
           </h2>
-          <p className="mt-2 text-lg text-muted-foreground">
+          <p className="mt-2 text-[14px] text-gray-400">
             Can&apos;t find the answer you&apos;re looking for? Our support team is here to help.
           </p>
           <div className="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row">

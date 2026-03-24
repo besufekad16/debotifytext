@@ -242,8 +242,8 @@ export default function TeamPage() {
       <main className="flex-1 py-12">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <h1 className="text-3xl font-semibold text-foreground">Team Management</h1>
-            <p className="mt-2 text-muted-foreground">
+            <h1 className="text-[1.4rem] font-semibold text-gray-900">Team Management</h1>
+            <p className="mt-1.5 text-[13px] text-gray-400">
               Manage your team members and collaborate on humanization projects.
             </p>
           </div>
@@ -253,8 +253,8 @@ export default function TeamPage() {
               <div className="flex items-start gap-4">
                 <Shield className="h-6 w-6 text-amber-600" />
                 <div>
-                  <h3 className="font-semibold text-amber-900">Upgrade to Ultra Plan</h3>
-                  <p className="mt-1 text-sm text-amber-700">
+                  <h3 className="text-[13.5px] font-semibold text-amber-900">Upgrade to Ultra Plan</h3>
+                  <p className="mt-1 text-[13px] text-amber-700">
                     Team support is available exclusively for Ultra plan subscribers. Upgrade your plan to create and manage teams.
                   </p>
                   <Button
@@ -272,8 +272,8 @@ export default function TeamPage() {
             <div className="mb-8 rounded-3xl border border-border bg-card p-8 shadow-lg">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-xl font-semibold text-foreground">Your Team</h2>
-                  <p className="text-sm text-muted-foreground">Team: {teamData.team.name}</p>
+                  <h2 className="text-[1.05rem] font-semibold text-gray-900">Your Team</h2>
+                  <p className="text-[13px] text-gray-400">Team: {teamData.team.name}</p>
                 </div>
                 {teamData.team.ownerId !== teamData.team.members.find(m => m.email === currentUserEmail)?.id && (
                   <Button
@@ -287,13 +287,13 @@ export default function TeamPage() {
                 )}
               </div>
               <div className="mt-6">
-                <h3 className="text-sm font-semibold text-foreground">Team Owner</h3>
+                <h3 className="text-[13px] font-semibold text-gray-900">Team Owner</h3>
                 <div className="mt-2 rounded-2xl border border-border bg-background p-4">
                   <div className="flex items-center gap-3">
                     <Crown className="h-5 w-5 text-amber-500" />
                     <div>
-                      <p className="font-medium text-foreground">{teamData.team.owner?.name}</p>
-                      <p className="text-sm text-muted-foreground">{teamData.team.owner?.email}</p>
+                      <p className="text-[13.5px] font-medium text-gray-900">{teamData.team.owner?.name}</p>
+                      <p className="text-[13px] text-gray-400">{teamData.team.owner?.email}</p>
                     </div>
                   </div>
                 </div>
@@ -307,8 +307,8 @@ export default function TeamPage() {
                 <div key={team.id} className="rounded-3xl border border-border bg-card p-8 shadow-lg">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h2 className="text-xl font-semibold text-foreground">{team.name}</h2>
-                      <p className="text-sm text-muted-foreground">{team.members.length} members</p>
+                      <h2 className="text-[1.05rem] font-semibold text-gray-900">{team.name}</h2>
+                      <p className="text-[13px] text-gray-400">{team.members.length} members</p>
                     </div>
                     <Button
                       variant="outline"
@@ -323,7 +323,7 @@ export default function TeamPage() {
 
                   <div className="mt-6">
                     <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-foreground">Team Members</h3>
+                      <h3 className="text-[13px] font-semibold text-gray-900">Team Members</h3>
                       <Button
                         size="sm"
                         onClick={() => setSelectedTeamId(selectedTeamId === team.id ? null : team.id)}
@@ -354,7 +354,7 @@ export default function TeamPage() {
 
                     <div className="mt-4 space-y-2">
                       {team.members.length === 0 ? (
-                        <p className="text-sm text-muted-foreground">No members yet. Add members to start collaborating.</p>
+                        <p className="text-[13px] text-gray-400">No members yet. Add members to start collaborating.</p>
                       ) : (
                         team.members.map((member) => (
                           <div
@@ -364,8 +364,8 @@ export default function TeamPage() {
                             <div className="flex items-center gap-3">
                               <Users className="h-5 w-5 text-muted-foreground/70" />
                               <div>
-                                <p className="font-medium text-foreground">{member.name}</p>
-                                <p className="text-sm text-muted-foreground">{member.email}</p>
+                                <p className="text-[13.5px] font-medium text-gray-900">{member.name}</p>
+                                <p className="text-[13px] text-gray-400">{member.email}</p>
                               </div>
                             </div>
                             <Button
@@ -398,10 +398,10 @@ export default function TeamPage() {
                 </Button>
               ) : (
                 <div className="rounded-3xl border border-border bg-card p-8 shadow-lg">
-                  <h2 className="text-xl font-semibold text-foreground">Create New Team</h2>
+                  <h2 className="text-[1.05rem] font-semibold text-gray-900">Create New Team</h2>
                   <div className="mt-6 space-y-4">
                     <div>
-                      <label className="text-sm font-medium text-foreground">Team Name</label>
+                      <label className="text-[13px] font-medium text-gray-900">Team Name</label>
                       <input
                         type="text"
                         placeholder="Enter team name"

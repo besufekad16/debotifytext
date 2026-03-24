@@ -48,7 +48,7 @@ export default async function ApiKeysPage() {
     userInfo?.subscriptionPlan?.toLowerCase().includes("ultra"));
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-white">
       <PageNavbar currentCredits={userInfo?.credits} />
       <main className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         <ApiKeysClient hasApiAccess={hasApiAccess} />

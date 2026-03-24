@@ -12,7 +12,7 @@ export default function NotFound() {
       <div className="relative z-10 w-full max-w-xl text-center">
         {/* 404 Number */}
         <div className="mb-4">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-blue-600 leading-none">
+          <h1 className="text-[3rem] sm:text-[4rem] font-bold text-[#5e3d2a] leading-none">
             404
           </h1>
         </div>
@@ -34,10 +34,10 @@ export default function NotFound() {
 
         {/* Title and Description */}
         <div className="mb-6">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2">
+          <h2 className="text-[1.2rem] sm:text-[1.4rem] font-semibold text-gray-900 mb-1.5">
             Page Not Found
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 max-w-sm mx-auto leading-relaxed">
+          <p className="text-[13px] text-gray-400 max-w-sm mx-auto leading-relaxed">
             The page you&apos;re looking for seems to have drifted away like a bubble in the wind.
           </p>
         </div>

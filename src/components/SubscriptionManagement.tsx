@@ -139,7 +139,7 @@ export default function SubscriptionManagement({
           <Package className="h-5 w-5 text-[#3b82f6]" />
           Subscription
         </CardTitle>
-        <CardDescription>Manage your subscription and billing</CardDescription>
+        <CardDescription className="text-[12px] text-gray-400">Manage your subscription and billing</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         {isLoading ? (
@@ -149,31 +149,31 @@ export default function SubscriptionManagement({
         ) : hasActiveSubscription ? (
           <>
             <div>
-              <label className="text-sm font-medium text-muted-foreground">Current Plan</label>
-              <p className="mt-1 text-2xl font-bold text-[#3b82f6]">{planName}</p>
+              <label className="text-[12px] font-medium text-gray-400">Current Plan</label>
+              <p className="mt-1 text-[1.4rem] font-bold text-[#3b82f6]">{planName}</p>
               {details.cancelAtPeriodEnd && (
-                <p className="mt-1 text-sm text-amber-600">
+                <p className="mt-1 text-[12px] text-amber-600">
                   Cancels at period end
                 </p>
               )}
             </div>
             <Separator />
             <div>
-              <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+              <label className="flex items-center gap-2 text-[12px] font-medium text-gray-400">
                 <CreditCard className="h-4 w-4" />
                 Billing Cycle
               </label>
-              <p className="mt-1 text-base font-semibold text-foreground">{billingCycle}</p>
+              <p className="mt-1 text-[13.5px] font-semibold text-gray-900">{billingCycle}</p>
             </div>
             {nextResetDate && (
               <>
                 <Separator />
                 <div>
-                  <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                  <label className="flex items-center gap-2 text-[12px] font-medium text-gray-400">
                     <Calendar className="h-4 w-4" />
                     Next Renewal
                   </label>
-                  <p className="mt-1 text-base font-semibold text-foreground">
+                  <p className="mt-1 text-[13.5px] font-semibold text-gray-900">
                     {new Date(nextResetDate).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",
@@ -214,16 +214,16 @@ export default function SubscriptionManagement({
         ) : (
           <>
             <div>
-              <label className="text-sm font-medium text-muted-foreground">Current Plan</label>
-              <p className="mt-1 text-2xl font-bold text-muted-foreground">Free</p>
-              <p className="mt-1 text-sm text-muted-foreground">
+              <label className="text-[12px] font-medium text-gray-400">Current Plan</label>
+              <p className="mt-1 text-[1.4rem] font-bold text-gray-400">Free</p>
+              <p className="mt-1 text-[13px] text-gray-400">
                 Upgrade to unlock more credits and premium features
               </p>
             </div>
             <Separator />
             <div className="rounded-lg bg-gradient-to-r from-[#e0f2fe] to-[#bae6fd] p-4">
-              <p className="text-sm font-medium text-foreground">Ready to upgrade?</p>
-              <p className="mt-1 text-sm text-muted-foreground">
+              <p className="text-[13px] font-medium text-gray-900">Ready to upgrade?</p>
+              <p className="mt-1 text-[13px] text-gray-400">
                 Get more credits, priority support, and API access with our premium plans.
               </p>
               <Link href="/pricing">

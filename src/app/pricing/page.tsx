@@ -142,10 +142,10 @@ export default async function PricingPage() {
   return (<>
     <PageNavbar />
     <div className="mb-12 text-center pt-4">
-      <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+      <h1 className="mb-4 text-[1.6rem] sm:text-[2rem] font-bold tracking-tight text-gray-950">
         Choose Your Perfect Plan
       </h1>
-      <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+      <p className="mx-auto max-w-2xl text-[14px] text-gray-400">
         Transform AI-generated content into natural, human-like writing. All plans include our advanced humanization features.
       </p>
 

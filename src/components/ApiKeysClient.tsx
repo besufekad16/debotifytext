@@ -127,10 +127,10 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
     return (
       <div>
         <div className="mb-8">
-          <h1 className="text-4xl font-extrabold tracking-tight text-slate-900">
+          <h1 className="text-[1.6rem] sm:text-[2rem] font-bold tracking-tight text-gray-950">
             API Access
           </h1>
-          <p className="mt-2 text-lg text-slate-600">
+          <p className="mt-2 text-[14px] text-gray-400">
             Integrate HumanifyLab into your applications
           </p>
         </div>
@@ -147,8 +147,8 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="rounded-lg bg-white p-4">
-              <h3 className="font-semibold text-slate-900 mb-2">With API access, you can:</h3>
-              <ul className="space-y-2 text-sm text-slate-600">
+              <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">With API access, you can:</h3>
+              <ul className="space-y-2 text-[13px] text-gray-500">
                 <li className="flex items-start gap-2">
                   <CheckCircle className="h-4 w-4 text-emerald-500 mt-0.5 flex-shrink-0" />
                   <span>Integrate AI humanization into your own applications</span>
@@ -189,10 +189,10 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-4xl font-extrabold tracking-tight text-slate-900">
+        <h1 className="text-[1.6rem] sm:text-[2rem] font-bold tracking-tight text-gray-950">
           API Keys
         </h1>
-        <p className="mt-2 text-lg text-slate-600">
+        <p className="mt-2 text-[14px] text-gray-400">
           Manage your API keys for integrating HumanifyLab into your applications
         </p>
       </div>
@@ -228,7 +228,7 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
               {creating ? "Creating..." : "Create Key"}
             </Button>
           </div>
-          <p className="mt-2 text-xs text-slate-500">
+          <p className="mt-2 text-[11px] text-gray-400">
             Give your API key a descriptive name to help you remember what it&apos;s used for.
           </p>
         </CardContent>
@@ -247,11 +247,11 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
         </CardHeader>
         <CardContent>
           {loading ? (
-            <p className="text-center text-slate-500 py-8">Loading...</p>
+            <p className="text-center text-[13px] text-gray-400 py-8">Loading...</p>
           ) : apiKeys.length === 0 ? (
             <div className="text-center py-8">
               <Key className="h-12 w-12 text-slate-300 mx-auto mb-3" />
-              <p className="text-slate-500">No API keys yet. Create one to get started!</p>
+              <p className="text-[13px] text-gray-400">No API keys yet. Create one to get started!</p>
             </div>
           ) : (
             <div className="space-y-4">
@@ -262,7 +262,7 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <h3 className="font-semibold text-slate-900">{apiKey.name}</h3>
+                      <h3 className="text-[13.5px] font-semibold text-gray-900">{apiKey.name}</h3>
                       <div className="mt-2 flex items-center gap-2">
                         <code className="flex-1 rounded bg-white px-3 py-2 text-sm font-mono text-slate-700 border border-slate-200">
                           {showKeys[apiKey.id] ? apiKey.key : maskApiKey(apiKey.key)}
@@ -282,7 +282,7 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
                           <Copy className="h-4 w-4" />
                         </Button>
                       </div>
-                      <div className="mt-2 flex gap-4 text-xs text-slate-500">
+                      <div className="mt-2 flex gap-4 text-[11px] text-gray-400">
                         <span>Created: {new Date(apiKey.createdAt).toLocaleDateString()}</span>
                         {apiKey.lastUsedAt && (
                           <span>Last used: {new Date(apiKey.lastUsedAt).toLocaleDateString()}</span>
@@ -315,15 +315,15 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <h3 className="font-semibold text-slate-900 mb-2">Base URL</h3>
+            <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Base URL</h3>
             <code className="block rounded bg-slate-100 px-3 py-2 text-sm">
               https://www.humanifylab.com/api
             </code>
           </div>
 
           <div>
-            <h3 className="font-semibold text-slate-900 mb-2">Authentication</h3>
-            <p className="text-sm text-slate-600 mb-2">
+            <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Authentication</h3>
+            <p className="text-[13px] text-gray-500 mb-2">
               Include your API key in the request headers:
             </p>
             <code className="block rounded bg-slate-100 px-3 py-2 text-sm">
@@ -332,7 +332,7 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
           </div>
 
           <div>
-            <h3 className="font-semibold text-slate-900 mb-2">Example Request</h3>
+            <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Example Request</h3>
             <pre className="rounded bg-slate-100 px-3 py-2 text-xs overflow-x-auto">
               {`curl -X POST https://www.humanifylab.com/api/humanizer \
   -H "Authorization: Bearer YOUR_API_KEY" \
