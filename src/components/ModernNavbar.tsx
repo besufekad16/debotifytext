@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "~/lib/utils";
+import YearlyDiscountBanner from "./YearlyDiscountBanner";
 
 interface ModernNavbarProps {
   onHistoryClick?: () => void;
@@ -46,8 +47,9 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
   };
 
   return (
+    <div className="sticky top-0 z-50 w-full">
     <nav 
-      className="sticky top-0 z-50 w-full bg-[#f0f9ff] border-b-2 border-[#5e3d2a] shadow-md"
+      className="w-full bg-[#f0f9ff] border-b-2 border-[#5e3d2a] shadow-md"
       style={{ 
         backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', 
         backgroundSize: '20px 20px' 
@@ -231,6 +233,8 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
         </div>
       )}
     </nav>
+    <YearlyDiscountBanner />
+    </div>
   );
 }
 

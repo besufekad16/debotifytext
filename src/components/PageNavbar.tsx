@@ -8,6 +8,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { cn } from "~/lib/utils";
+import YearlyDiscountBanner from "./YearlyDiscountBanner";
 
 interface PageNavbarProps {
   onHistoryClick?: () => void;
@@ -57,7 +58,8 @@ export default function PageNavbar({ onHistoryClick, currentCredits, variant = "
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-[#f0f9ff] border-b-2 border-[#5e3d2a] shadow-md" style={{ backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+    <div className="sticky top-0 z-50 w-full">
+    <nav className="w-full bg-[#f0f9ff] border-b-2 border-[#5e3d2a] shadow-md" style={{ backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-20 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
@@ -234,5 +236,7 @@ export default function PageNavbar({ onHistoryClick, currentCredits, variant = "
         </div>
       )}
     </nav>
+    <YearlyDiscountBanner />
+    </div>
   );
 }
