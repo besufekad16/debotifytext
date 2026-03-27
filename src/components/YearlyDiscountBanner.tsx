@@ -48,13 +48,14 @@ export default function YearlyDiscountBanner() {
   }, []);
 
   return (
-    <div
-      className="relative w-full overflow-hidden"
-      style={{
-        background:
-          "linear-gradient(90deg, #0f0c29 0%, #1a1040 30%, #24243e 60%, #0f0c29 100%)",
-      }}
-    >
+    <div className="w-full">
+      <div
+        className="relative w-full overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(90deg, #0f0c29 0%, #1a1040 30%, #24243e 60%, #0f0c29 100%)",
+        }}
+      >
       {/* Animated gradient sweep */}
       <div
         className="pointer-events-none absolute inset-0"
@@ -71,7 +72,7 @@ export default function YearlyDiscountBanner() {
         className="absolute top-0 left-0 right-0 h-[2px]"
         style={{
           background:
-            "linear-gradient(90deg, #7c3aed, #f59e0b, #10b981, #7c3aed)",
+            "linear-gradient(90deg, #7c3aed, #f59e0b, #8B6F47, #7c3aed)",
         }}
       />
 
@@ -177,6 +178,7 @@ export default function YearlyDiscountBanner() {
           50% OFF →
         </span>
       </Link>
+      </div>
     </div>
   );
 }

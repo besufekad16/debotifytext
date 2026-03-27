@@ -32,14 +32,14 @@ export default function SEOPageLayout({ content, keyword }: SEOPageLayoutProps) 
       <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         {/* Breadcrumbs */}
         <nav className="mb-8 text-sm text-muted-foreground">
-          <Link href="/" className="hover:text-[#2563eb]">Home</Link>
+          <Link href="/" className="hover:text-[#6D5635]">Home</Link>
           <span className="mx-2">/</span>
           <span className="text-foreground">{keyword}</span>
         </nav>
 
         {/* Hero Section */}
         <div className="mb-16 text-center">
-          <div className="mb-6 inline-block rounded-full bg-gradient-to-r from-[#3b82f6]/10 via-[#2563eb]/10 to-[#1d4ed8]/10 px-6 py-2.5 text-sm font-semibold text-[#2563eb] shadow-sm border border-[#3b82f6]/20">
+          <div className="mb-6 inline-block rounded-full bg-gradient-to-r from-[#8B6F47]/10 via-[#6D5635]/10 to-[#1d4ed8]/10 px-6 py-2.5 text-sm font-semibold text-[#6D5635] shadow-sm border border-[#8B6F47]/20">
             <Sparkles className="inline-block h-4 w-4 mr-2" />
             AI Humanization Technology
           </div>
@@ -59,11 +59,11 @@ export default function SEOPageLayout({ content, keyword }: SEOPageLayoutProps) 
               <span className="font-semibold">4.9/5</span> Rating
             </div>
             <div className="flex items-center gap-2">
-              <Users className="h-5 w-5 text-[#2563eb]" />
+              <Users className="h-5 w-5 text-[#6D5635]" />
               <span className="font-semibold">450,000+</span> Users
             </div>
             <div className="flex items-center gap-2">
-              <Target className="h-5 w-5 text-green-600" />
+              <Target className="h-5 w-5 text-#8B6F47" />
               <span className="font-semibold">99.9%</span> Success Rate
             </div>
           </div>
@@ -73,7 +73,7 @@ export default function SEOPageLayout({ content, keyword }: SEOPageLayoutProps) 
             <Link href="/">
               <Button 
                 size="lg"
-                className="bg-gradient-to-r from-[#3b82f6] via-[#2563eb] to-[#1d4ed8] hover:from-[#2563eb] hover:via-[#1d4ed8] hover:to-[#1e40af] text-white font-semibold px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-gradient-to-r from-[#8B6F47] via-[#6D5635] to-[#1d4ed8] hover:from-[#6D5635] hover:via-[#1d4ed8] hover:to-[#1e40af] text-white font-semibold px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 🚀 Start Humanizing Free
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -83,7 +83,7 @@ export default function SEOPageLayout({ content, keyword }: SEOPageLayoutProps) 
               <Button 
                 size="lg"
                 variant="outline"
-                className="border-2 border-[#2563eb] text-[#2563eb] hover:bg-[#2563eb] hover:text-white font-semibold px-8 py-6 text-lg rounded-full transition-all duration-300"
+                className="border-2 border-[#6D5635] text-[#6D5635] hover:bg-[#6D5635] hover:text-white font-semibold px-8 py-6 text-lg rounded-full transition-all duration-300"
               >
                 View Pricing
               </Button>
@@ -102,7 +102,7 @@ export default function SEOPageLayout({ content, keyword }: SEOPageLayoutProps) 
                 key={index}
                 className="rounded-2xl border border-border bg-card p-6 shadow-sm hover:shadow-md transition-shadow"
               >
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#3b82f6]/10 to-[#2563eb]/10 text-[#2563eb]">
+                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#8B6F47]/10 to-[#6D5635]/10 text-[#6D5635]">
                   {iconMap[feature.icon] || <Star className="h-6 w-6" />}
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-2">
@@ -126,7 +126,7 @@ export default function SEOPageLayout({ content, keyword }: SEOPageLayoutProps) 
               <thead>
                 <tr className="border-b-2 border-border">
                   <th className="text-left py-4 px-4 font-semibold text-foreground">Feature</th>
-                  <th className="text-left py-4 px-4 font-semibold text-[#2563eb]">HumanifyLab</th>
+                  <th className="text-left py-4 px-4 font-semibold text-[#6D5635]">HumanifyLab</th>
                   <th className="text-left py-4 px-4 font-semibold text-muted-foreground">Competitors</th>
                 </tr>
               </thead>
@@ -134,7 +134,7 @@ export default function SEOPageLayout({ content, keyword }: SEOPageLayoutProps) 
                 {content.comparison.map((row, index) => (
                   <tr key={index} className="border-b border-border">
                     <td className="py-4 px-4 font-medium text-foreground">{row.feature}</td>
-                    <td className="py-4 px-4 text-[#2563eb] font-semibold">
+                    <td className="py-4 px-4 text-[#6D5635] font-semibold">
                       <CheckCircle2 className="inline-block h-5 w-5 mr-2" />
                       {row.humanifylab}
                     </td>
@@ -147,7 +147,7 @@ export default function SEOPageLayout({ content, keyword }: SEOPageLayoutProps) 
         </div>
 
         {/* CTA #2: Mid-Content */}
-        <div className="mb-16 rounded-3xl bg-gradient-to-r from-[#3b82f6] via-[#2563eb] to-[#1d4ed8] p-8 md:p-12 text-center text-white shadow-2xl">
+        <div className="mb-16 rounded-3xl bg-gradient-to-r from-[#8B6F47] via-[#6D5635] to-[#1d4ed8] p-8 md:p-12 text-center text-white shadow-2xl">
           <h2 className="text-3xl font-bold mb-4">
             💡 Ready to Experience the Difference?
           </h2>
@@ -157,7 +157,7 @@ export default function SEOPageLayout({ content, keyword }: SEOPageLayoutProps) 
           <Link href="/">
             <Button 
               size="lg"
-              className="bg-card text-[#2563eb] hover:bg-slate-100 font-semibold px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-card text-[#6D5635] hover:bg-slate-100 font-semibold px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
             >
               Start Humanizing Now - It&apos;s Free
               <ArrowRight className="ml-2 h-5 w-5" />
@@ -213,7 +213,7 @@ export default function SEOPageLayout({ content, keyword }: SEOPageLayoutProps) 
         </div>
 
         {/* CTA #3: Final */}
-        <div className="rounded-3xl border-2 border-[#2563eb] bg-gradient-to-br from-white to-[#f0f9ff] p-8 md:p-12 text-center shadow-xl">
+        <div className="rounded-3xl border-2 border-[#6D5635] bg-gradient-to-br from-white to-[#f0f9ff] p-8 md:p-12 text-center shadow-xl">
           <h2 className="text-4xl font-bold text-foreground mb-4">
             🎉 Join 450,000+ Happy Users
           </h2>
@@ -227,7 +227,7 @@ export default function SEOPageLayout({ content, keyword }: SEOPageLayoutProps) 
             <Link href="/">
               <Button 
                 size="lg"
-                className="bg-gradient-to-r from-[#3b82f6] via-[#2563eb] to-[#1d4ed8] hover:from-[#2563eb] hover:via-[#1d4ed8] hover:to-[#1e40af] text-white font-semibold px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-gradient-to-r from-[#8B6F47] via-[#6D5635] to-[#1d4ed8] hover:from-[#6D5635] hover:via-[#1d4ed8] hover:to-[#1e40af] text-white font-semibold px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 🚀 Start Free Trial Now
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -237,7 +237,7 @@ export default function SEOPageLayout({ content, keyword }: SEOPageLayoutProps) 
               <Button 
                 size="lg"
                 variant="outline"
-                className="border-2 border-[#2563eb] text-[#2563eb] hover:bg-[#2563eb] hover:text-white font-semibold px-8 py-6 text-lg rounded-full transition-all duration-300"
+                className="border-2 border-[#6D5635] text-[#6D5635] hover:bg-[#6D5635] hover:text-white font-semibold px-8 py-6 text-lg rounded-full transition-all duration-300"
               >
                 View All Plans
               </Button>

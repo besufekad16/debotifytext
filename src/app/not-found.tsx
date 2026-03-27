@@ -47,7 +47,7 @@ export default function NotFound() {
           <Link href="/">
             <Button
               size="lg"
-              className="rounded-full bg-blue-600 px-5 py-4 text-sm font-semibold text-white shadow-[0_12px_24px_-8px_rgba(59,130,246,0.5)] transition-all hover:bg-blue-700 hover:shadow-[0_14px_28px_-10px_rgba(59,130,246,0.6)] hover:scale-105"
+              className="rounded-full bg-#8B6F47 px-5 py-4 text-sm font-semibold text-white shadow-[0_12px_24px_-8px_rgba(59,130,246,0.5)] transition-all hover:bg-#6D5635 hover:shadow-[0_14px_28px_-10px_rgba(59,130,246,0.6)] hover:scale-105"
             >
               Go to Homepage
             </Button>
@@ -55,7 +55,7 @@ export default function NotFound() {
           <Button
             size="lg"
             variant="outline"
-            className="rounded-full border-2 border-slate-200 bg-white/90 px-5 py-4 text-sm font-semibold text-slate-700 hover:border-[#3b82f6]/30 hover:bg-white hover:scale-105 transition-all"
+            className="rounded-full border-2 border-slate-200 bg-white/90 px-5 py-4 text-sm font-semibold text-slate-700 hover:border-[#8B6F47]/30 hover:bg-white hover:scale-105 transition-all"
             onClick={() => window.history.back()}
           >
             Go Back
@@ -67,14 +67,14 @@ export default function NotFound() {
           <div className="flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm">
             <Link
               href="/pricing"
-              className="text-slate-600 hover:text-[#2563eb] font-medium transition-colors"
+              className="text-slate-600 hover:text-[#6D5635] font-medium transition-colors"
             >
               Pricing
             </Link>
             <span className="text-slate-300">•</span>
             <Link
               href="/contact"
-              className="text-slate-600 hover:text-[#2563eb] font-medium transition-colors"
+              className="text-slate-600 hover:text-[#6D5635] font-medium transition-colors"
             >
               Contact
             </Link>

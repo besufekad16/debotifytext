@@ -147,16 +147,16 @@ export default function ComparisonSection() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1], delay: 0.1 }}
-              className="group relative overflow-hidden rounded-3xl border border-emerald-100 bg-emerald-50/30 p-6 sm:p-8 transition-all hover:border-emerald-200 hover:bg-emerald-50/50 hover:shadow-xl hover:shadow-emerald-100/20"
+              className="group relative overflow-hidden rounded-3xl border border-#D4C4B0 bg-#F5E6D3/30 p-6 sm:p-8 transition-all hover:border-#A0826D hover:bg-#F5E6D3/50 hover:shadow-xl hover:shadow-#D4C4B0/20"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <div className="h-8 w-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+                  <div className="h-8 w-8 rounded-full bg-#D4C4B0 flex items-center justify-center text-#6D5635">
                     <Check className="h-4 w-4" />
                   </div>
                   <span className="text-sm font-semibold text-slate-700">After (Humanized)</span>
                 </div>
-                <span className="text-xs font-medium text-emerald-600 bg-emerald-100/50 px-2 py-1 rounded-md border border-emerald-100">
+                <span className="text-xs font-medium text-#6D5635 bg-#D4C4B0/50 px-2 py-1 rounded-md border border-#D4C4B0">
                   100% Human Score
                 </span>
               </div>
@@ -186,13 +186,13 @@ export default function ComparisonSection() {
 
                 {/* Gradient fade for truncated view */}
                 {viewMode === "split" && (
-                  <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-emerald-50/90 to-transparent" />
+                  <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-#F5E6D3/90 to-transparent" />
                 )}
               </div>
 
               <button 
                 onClick={() => setViewMode(prev => prev === "split" ? "compare" : "split")}
-                className="mt-4 text-xs font-medium text-emerald-600 hover:text-emerald-700 flex items-center gap-1 transition-colors"
+                className="mt-4 text-xs font-medium text-#6D5635 hover:text-#5A4529 flex items-center gap-1 transition-colors"
               >
                 {viewMode === "split" ? "Read full text" : "Show less"} <ArrowRight className={cn("h-3 w-3 transition-transform", viewMode === "compare" && "rotate-180")} />
               </button>

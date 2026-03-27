@@ -136,7 +136,7 @@ export default function SubscriptionManagement({
     <Card className="border-white/60 bg-white/80 shadow-md backdrop-blur">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Package className="h-5 w-5 text-[#3b82f6]" />
+          <Package className="h-5 w-5 text-[#8B6F47]" />
           Subscription
         </CardTitle>
         <CardDescription className="text-[12px] text-gray-400">Manage your subscription and billing</CardDescription>
@@ -144,13 +144,13 @@ export default function SubscriptionManagement({
       <CardContent className="space-y-4">
         {isLoading ? (
           <div className="flex items-center justify-center py-8">
-            <Loader2 className="h-6 w-6 animate-spin text-[#3b82f6]" />
+            <Loader2 className="h-6 w-6 animate-spin text-[#8B6F47]" />
           </div>
         ) : hasActiveSubscription ? (
           <>
             <div>
               <label className="text-[12px] font-medium text-gray-400">Current Plan</label>
-              <p className="mt-1 text-[1.4rem] font-bold text-[#3b82f6]">{planName}</p>
+              <p className="mt-1 text-[1.4rem] font-bold text-[#8B6F47]">{planName}</p>
               {details.cancelAtPeriodEnd && (
                 <p className="mt-1 text-[12px] text-amber-600">
                   Cancels at period end
@@ -227,7 +227,7 @@ export default function SubscriptionManagement({
                 Get more credits, priority support, and API access with our premium plans.
               </p>
               <Link href="/pricing">
-                <Button className="mt-3 w-full bg-[#3b82f6] hover:bg-[#2563eb]">
+                <Button className="mt-3 w-full bg-[#8B6F47] hover:bg-[#6D5635]">
                   View Premium Plans
                   <ExternalLink className="ml-2 h-4 w-4" />
                 </Button>

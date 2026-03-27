@@ -34,7 +34,7 @@ export default function PrivacyPage() {
             <main className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-10">
-                    <div className="inline-block rounded-full bg-blue-50 px-6 py-2.5 text-sm font-semibold text-[#2563eb] mb-6 shadow-sm border border-[#3b82f6]/20">
+                    <div className="inline-block rounded-full bg-#F5E6D3 px-6 py-2.5 text-sm font-semibold text-[#6D5635] mb-6 shadow-sm border border-[#8B6F47]/20">
                         Legal & Privacy
                     </div>
                     <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
