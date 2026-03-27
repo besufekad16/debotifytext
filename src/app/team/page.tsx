@@ -230,7 +230,7 @@ export default function TeamPage() {
   if (loading || !isLoaded) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-[#3b82f6]" />
+        <Loader2 className="h-8 w-8 animate-spin text-[#8B6F47]" />
       </div>
     );
   }
@@ -327,7 +327,7 @@ export default function TeamPage() {
                       <Button
                         size="sm"
                         onClick={() => setSelectedTeamId(selectedTeamId === team.id ? null : team.id)}
-                        className="rounded-full bg-[#3b82f6]"
+                        className="rounded-full bg-[#8B6F47]"
                       >
                         <UserPlus className="h-4 w-4" />
                       </Button>
@@ -345,7 +345,7 @@ export default function TeamPage() {
                         <Button
                           onClick={() => addMember(team.id)}
                           disabled={actionLoading}
-                          className="rounded-full bg-[#3b82f6]"
+                          className="rounded-full bg-[#8B6F47]"
                         >
                           {actionLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Add"}
                         </Button>
@@ -414,7 +414,7 @@ export default function TeamPage() {
                       <Button
                         onClick={createTeam}
                         disabled={actionLoading}
-                        className="rounded-full bg-[#3b82f6]"
+                        className="rounded-full bg-[#8B6F47]"
                       >
                         {actionLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Create Team"}
                       </Button>

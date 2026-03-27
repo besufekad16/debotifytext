@@ -34,7 +34,7 @@ export default function ResponsibleUsePage() {
             <main className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-16">
-                    <div className="inline-block rounded-full bg-blue-50 px-6 py-2.5 text-sm font-semibold text-[#2563eb] mb-6 shadow-sm border border-[#3b82f6]/20">
+                    <div className="inline-block rounded-full bg-#F5E6D3 px-6 py-2.5 text-sm font-semibold text-[#6D5635] mb-6 shadow-sm border border-[#8B6F47]/20">
                         Ethical Guidelines
                     </div>
                     <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl md:text-6xl">
@@ -48,11 +48,11 @@ export default function ResponsibleUsePage() {
                 {/* Content */}
                 <div className="space-y-6 animate-in fade-in duration-500">
                     {/* Important Notice Card - Prominent */}
-                    <div className="relative rounded-3xl border-2 border-[#3b82f6]/30 bg-white p-8 shadow-2xl overflow-hidden">
+                    <div className="relative rounded-3xl border-2 border-[#8B6F47]/30 bg-white p-8 shadow-2xl overflow-hidden">
 
                         <div className="relative">
                             <div className="inline-block mb-4">
-                                <span className="text-xs font-bold uppercase tracking-wider text-[#3b82f6] bg-[#3b82f6]/10 px-3 py-1.5 rounded-full">Important</span>
+                                <span className="text-xs font-bold uppercase tracking-wider text-[#8B6F47] bg-[#8B6F47]/10 px-3 py-1.5 rounded-full">Important</span>
                             </div>
                             <h3 className="text-2xl font-bold text-slate-900 mb-3">Important Notice</h3>
                             <p className="text-base text-slate-700 leading-relaxed">
@@ -81,7 +81,7 @@ export default function ResponsibleUsePage() {
                             ].map((item, index) => (
                                 <li key={index} className="flex items-start gap-3 text-base text-slate-600 pl-1">
                                     <div className="flex-shrink-0 mt-2">
-                                        <div className="h-1.5 w-1.5 rounded-full bg-blue-600" />
+                                        <div className="h-1.5 w-1.5 rounded-full bg-#8B6F47" />
                                     </div>
                                     <span className="leading-relaxed">{item}</span>
                                 </li>
@@ -131,7 +131,7 @@ export default function ResponsibleUsePage() {
                                 { title: "Respect policies", desc: "Follow your institution&apos;s guidelines on AI-assisted writing" },
                                 { title: "Be transparent", desc: "When required, disclose your use of writing assistance tools" }
                             ].map((item, index) => (
-                                <div key={index} className="rounded-2xl bg-white p-5 border border-slate-200/60 hover:border-[#3b82f6]/30 transition-colors">
+                                <div key={index} className="rounded-2xl bg-white p-5 border border-slate-200/60 hover:border-[#8B6F47]/30 transition-colors">
                                     <h3 className="font-bold text-slate-900 mb-2">{item.title}</h3>
                                     <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
                                 </div>
@@ -150,13 +150,13 @@ export default function ResponsibleUsePage() {
                     </div>
 
                     {/* Contact Card */}
-                    <div className="rounded-3xl border-2 border-[#3b82f6]/20 bg-white p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                    <div className="rounded-3xl border-2 border-[#8B6F47]/20 bg-white p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
                         <h3 className="text-xl font-bold text-slate-900 mb-4">
                             Questions about responsible use?
                         </h3>
                         <p className="text-base text-slate-600 leading-relaxed">
                             If you have concerns or questions about how to use HumanifyLab ethically in your context, please reach out to us at{" "}
-                            <Link href="mailto:humanifylab1@gmail.com" className="text-[#2563eb] hover:text-[#1d4ed8] hover:underline font-semibold transition-colors">
+                            <Link href="mailto:humanifylab1@gmail.com" className="text-[#6D5635] hover:text-[#1d4ed8] hover:underline font-semibold transition-colors">
                                 humanifylab1@gmail.com
                             </Link>
                             {" "}or consult with your academic advisor or institution&apos;s integrity office.

@@ -97,11 +97,11 @@ export default async function ContactPage() {
   const contactHighlights = [
     {
       badge: "Support",
-      badgeStyles: "border-2 border-[#bfdbfe] text-[#2563eb]",
+      badgeStyles: "border-2 border-[#D4C4B0] text-[#6D5635]",
       title: "Email us anytime",
       description: (
         <>
-          <a href="mailto:humanifylab1@gmail.com" className="font-semibold text-[#2563eb] underline underline-offset-4">
+          <a href="mailto:humanifylab1@gmail.com" className="font-semibold text-[#6D5635] underline underline-offset-4">
             humanifylab1@gmail.com
           </a>{" "}
           • We respond in under 24 hours.
@@ -110,12 +110,12 @@ export default async function ContactPage() {
     },
     {
       badge: "Help",
-      badgeStyles: "border-2 border-[#bfdbfe] text-[#2563eb]",
+      badgeStyles: "border-2 border-[#D4C4B0] text-[#6D5635]",
       title: "Prefer self-serve answers?",
       description: (
         <>
           Visit{" "}
-          <Link className="font-semibold text-[#2563eb] underline underline-offset-4" href="/faq">
+          <Link className="font-semibold text-[#6D5635] underline underline-offset-4" href="/faq">
             our FAQ
           </Link>{" "}
           for tutorials, billing, and compliance docs.
@@ -124,7 +124,7 @@ export default async function ContactPage() {
     },
     {
       badge: "Enterprise",
-      badgeStyles: "border-2 border-[#bfdbfe] text-[#2563eb]",
+      badgeStyles: "border-2 border-[#D4C4B0] text-[#6D5635]",
       title: "Need a custom plan?",
       description: "Share your compliance requirements and volume. We’ll schedule a call with our solutions team.",
     },
@@ -145,7 +145,7 @@ export default async function ContactPage() {
         <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-16">
           <div className="space-y-8">
             <div className="space-y-4">
-              <span className="inline-flex items-center gap-2 rounded-full  border border-[#bfdbfe] bg-card px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#2563eb]">
+              <span className="inline-flex items-center gap-2 rounded-full  border border-[#D4C4B0] bg-card px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#6D5635]">
                 We’d love to hear from you
               </span>
               <h1 className="text-[1.6rem] sm:text-[2rem] font-semibold tracking-tight text-gray-950">
@@ -160,7 +160,7 @@ export default async function ContactPage() {
               {contactHighlights.map(({ badge, badgeStyles, title, description }) => (
                 <div
                   key={badge}
-                  className="flex flex-col gap-4 rounded-2xl border border-[#bfdbfe] bg-white/95 p-5 shadow-sm sm:flex-row sm:items-center sm:gap-6"
+                  className="flex flex-col gap-4 rounded-2xl border border-[#D4C4B0] bg-white/95 p-5 shadow-sm sm:flex-row sm:items-center sm:gap-6"
                 >
                   <div className="flex justify-center sm:justify-start">
                     <span
@@ -177,13 +177,13 @@ export default async function ContactPage() {
               ))}
             </div>
 
-            <div className="rounded-2xl border border-[#bfdbfe] bg-white/90 p-6 shadow-sm">
+            <div className="rounded-2xl border border-[#D4C4B0] bg-white/90 p-6 shadow-sm">
               <p className="text-[13px] font-semibold text-gray-900">Availability</p>
               <p className="mt-1 text-[13px] text-gray-400">24/7 Customer Support</p>
             </div>
           </div>
 
-          <div className="rounded-[28px] border border-[#bfdbfe] bg-card p-8 shadow-[0_26px_55px_-38px_rgba(24,18,54,0.45)]">
+          <div className="rounded-[28px] border border-[#D4C4B0] bg-card p-8 shadow-[0_26px_55px_-38px_rgba(24,18,54,0.45)]">
             <h2 className="text-[1.15rem] font-semibold tracking-tight text-gray-900">Send us a message</h2>
             <p className="mt-2 text-[13px] text-gray-400">
               Fill out the form and we’ll follow up with the best next step.

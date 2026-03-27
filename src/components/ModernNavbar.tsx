@@ -20,6 +20,7 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
   const { isSignedIn } = useUser();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
   // Prevent hydration mismatch by waiting for client-side hydration
@@ -27,9 +28,21 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
     setIsHydrated(true);
   }, []);
 
+  // Track scroll position for shadow effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/pricing", label: "Pricing" },
+    { href: "/faq", label: "FAQ" },
+    { href: "/contact", label: "Contact" },
   ];
 
   // Add Account link if user is signed in - only after hydration to prevent mismatch
@@ -47,15 +60,18 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
   };
 
   return (
-    <div className="sticky top-0 z-50 w-full">
-    <nav 
-      className="w-full bg-[#f0f9ff] border-b-2 border-[#5e3d2a] shadow-md"
-      style={{ 
-        backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', 
-        backgroundSize: '20px 20px' 
-      }}
+    <div 
+      className={cn(
+        "fixed top-0 left-0 right-0 z-[100] w-full bg-white/95 backdrop-blur-sm transition-shadow duration-300",
+        isScrolled && "shadow-lg"
+      )} 
+      style={{ position: 'fixed' }}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="w-full py-4">
+        <nav 
+          className="mx-auto max-w-6xl bg-white rounded-full border border-gray-200 shadow-sm px-6"
+        >
+          <div className="flex h-14 items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5">
           <Image
@@ -71,8 +87,8 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden items-center gap-10 lg:flex">
-          <div className="flex items-center gap-8">
+        <div className="hidden items-center gap-8 lg:flex">
+          <div className="flex items-center gap-6">
             {allNavLinks.map((item) => (
               <Link
                 key={item.href}
@@ -84,7 +100,7 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
             ))}
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {isHydrated && isSignedIn ? (
               <>
                 {isTeamMember && (
@@ -152,11 +168,7 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div 
-          className="border-t border-[#eff8ff] bg-[#f0f9ff] shadow-lg lg:hidden absolute w-full left-0 z-50"
-          style={{ 
-            backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', 
-            backgroundSize: '20px 20px' 
-          }}
+          className="border-t border-gray-200 bg-white shadow-lg lg:hidden absolute w-full left-0 top-full mt-2 rounded-2xl"
         >
           <div className="mx-auto flex flex-col p-4 space-y-4">
             <div className="flex flex-col space-y-1">
@@ -168,7 +180,7 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
                     href={item.href}
                     className={cn(
                       "rounded-lg px-4 py-3 text-sm font-medium transition-colors",
-                      isActive ? "bg-[#5e3d2a]/10 text-[#5e3d2a]" : "text-muted-foreground hover:bg-background hover:text-[#5e3d2a]"
+                      isActive ? "bg-gray-100 text-[#5e3d2a]" : "text-muted-foreground hover:bg-gray-50 hover:text-[#5e3d2a]"
                     )}
                     onClick={() => setMobileMenuOpen(false)}
                   >
@@ -178,7 +190,7 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
               })}
             </div>
 
-            <div className="pt-4 border-t border-[#eff8ff]">
+            <div className="pt-4 border-t border-gray-200">
               {isHydrated && isSignedIn ? (
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-between px-2">
@@ -189,7 +201,7 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
                   </div>
 
                   {currentCredits !== undefined && (
-                    <div className="flex items-center justify-between rounded-xl bg-background px-4 py-3 border border-[#eff8ff]">
+                    <div className="flex items-center justify-between rounded-xl bg-gray-50 px-4 py-3 border border-gray-200">
                       <span className="text-sm text-muted-foreground">Available Credits</span>
                       <span className="text-sm font-bold text-[#5e3d2a]">{currentCredits}</span>
                     </div>
@@ -199,7 +211,7 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
                     {onHistoryClick && (
                       <Button
                         variant="outline"
-                        className="flex-1 gap-2 rounded-xl border-[#eff8ff] hover:border-[#5e3d2a] hover:text-[#5e3d2a] h-11"
+                        className="flex-1 gap-2 rounded-xl border-gray-200 hover:border-[#5e3d2a] hover:text-[#5e3d2a] h-11"
                         onClick={() => {
                           onHistoryClick();
                           setMobileMenuOpen(false);
@@ -217,7 +229,7 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
               ) : (
                 <div className="flex flex-col gap-3">
                   <SignInButton mode="modal">
-                    <Button variant="outline" className="w-full rounded-xl h-11 border-[#eff8ff] text-foreground hover:border-[#5e3d2a] hover:text-[#5e3d2a]">
+                    <Button variant="outline" className="w-full rounded-xl h-11 border-gray-200 text-foreground hover:border-[#5e3d2a] hover:text-[#5e3d2a]">
                       Log in
                     </Button>
                   </SignInButton>
@@ -233,6 +245,7 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
         </div>
       )}
     </nav>
+    </div>
     <YearlyDiscountBanner />
     </div>
   );

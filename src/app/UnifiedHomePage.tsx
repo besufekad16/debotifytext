@@ -44,6 +44,9 @@ import HowToUseSection from "~/components/HowToUseSection";
 import FactsSection from "~/components/FactsSection";
 import PricingModal from "~/components/PricingModal";
 import { usePricingModal } from "~/hooks/usePricingModal";
+import DetectorShowcase from "~/components/DetectorShowcase";
+import LargeDiscountBanner from "~/components/LargeDiscountBanner";
+import ResponsibleUseDisclaimer from "~/components/ResponsibleUseDisclaimer";
 
 const PRESETS = [
   { value: "default", label: "Default", description: "Standard humanization for all users", isPremium: false },
@@ -854,7 +857,7 @@ export default function UnifiedHomePage() {
         }}
       />
 
-      <main className="flex-1 w-full">
+      <main className="flex-1 w-full pt-32">
         {/* Hero and Workspace Section */}
         <div className="relative w-full overflow-x-hidden bg-white pb-16">
           {/* Subtle top gradient wash */}
@@ -862,6 +865,13 @@ export default function UnifiedHomePage() {
 
           {/* Hero Section */}
           <section className="relative pt-14 pb-4 sm:pt-20 sm:pb-6 overflow-hidden">
+            {/* Small bubble pattern background - perfectly aligned grid */}
+            <div className="absolute inset-0 opacity-[0.08]" style={{
+              backgroundImage: `radial-gradient(circle, #8B6F47 3px, transparent 3px)`,
+              backgroundSize: '40px 40px',
+              backgroundPosition: 'center'
+            }}></div>
+
 
             <div className="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center">
@@ -922,7 +932,7 @@ export default function UnifiedHomePage() {
           {/* Main Workspace - Humanizer Tool */}
           <section id="tool" className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
             {showSignInPrompt && !isSignedIn && (
-              <div className="mb-8 rounded-3xl border border-[#bfdbfe] bg-[#e0f2fe] p-6 text-center shadow-sm">
+              <div className="mb-8 border border-[#D4C4B0] bg-[#F5E6D3] p-6 text-center shadow-sm">
                 <h3 className="text-lg font-semibold text-foreground">Sign in to humanize your text</h3>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Create a free account to get 50 starter credits and keep track of every version you humanize.
@@ -937,20 +947,21 @@ export default function UnifiedHomePage() {
               </div>
             )}
 
-            <div className="bg-white rounded-3xl shadow-xl border border-gray-200 overflow-hidden">
+            <div className="bg-white shadow-xl border border-gray-200 overflow-hidden">
               {/* Header */}
               <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-gray-50">
                 <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-[#8B6F47]"></div>
+                  <div className="flex items-center gap-2">
+                    <div className="relative">
+                      <div className="w-4 h-4 rounded-full bg-[#8B6F47] animate-[glow_2s_ease-in-out_infinite]"></div>
+                      <div className="absolute inset-0 w-4 h-4 rounded-full bg-[#8B6F47] opacity-50 animate-[ping_2s_ease-in-out_infinite]"></div>
+                    </div>
                   </div>
                   <span className="text-sm font-semibold text-gray-700">LIVE HUMANIZER</span>
                 </div>
                 {currentCredits !== undefined && isSignedIn && (
-                  <div className="flex items-center gap-2 text-xs text-gray-700 bg-white px-3 py-1.5 rounded-lg border border-gray-200">
-                    <ShieldCheck className="h-3.5 w-3.5 text-emerald-500 flex-shrink-0" />
+                  <div className="flex items-center gap-2 text-xs text-gray-700 bg-white px-3 py-1.5 border border-gray-200">
+                    <ShieldCheck className="h-3.5 w-3.5 text-#F5E6D30 flex-shrink-0" />
                     <span className="font-medium">{currentCredits} credits</span>
                   </div>
                 )}
@@ -958,36 +969,30 @@ export default function UnifiedHomePage() {
 
               {/* Content Grid - Dynamic Layout */}
               <div className="p-4 sm:p-6 lg:p-8">
-                <div className={cn(
-                  "grid gap-4 lg:gap-6 transition-all duration-300",
-                  (humanizedText || isHumanizing) ? "grid-cols-1 lg:grid-cols-2" : "grid-cols-1"
-                )}>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
                   {/* Left Column - Input Box */}
                   <div className="flex flex-col h-full">
                     {/* Header */}
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-gray-400"></div>
                         <label className="text-sm font-semibold text-gray-700">
                           Input Text
                         </label>
                       </div>
                       <div className="flex items-center gap-2 text-xs text-gray-500">
                         <span>{originalText.trim().split(/\s+/).filter(Boolean).length} words</span>
-                        <span>•</span>
-                        <span>{originalText.length} chars</span>
                       </div>
                     </div>
 
                     {/* Input Box */}
                     <div className="relative flex-1">
                       <div className={cn(
-                        "h-[350px] rounded-xl border-2 transition-all duration-200 overflow-hidden",
+                        "h-[450px] border-2 transition-all duration-200 overflow-hidden",
                         isDragging
-                          ? "border-[#8B6F47] bg-[#8B6F47]/10 shadow-lg shadow-[#8B6F47]/20"
+                          ? "border-[#8B6F47] bg-[#F5E6D3]/30 shadow-lg shadow-[#8B6F47]/20"
                           : originalText
                           ? "border-[#A0826D] bg-white shadow-sm"
-                          : "border-gray-200 bg-gray-50/50"
+                          : "border-[#D4C4B0] bg-[#F5E6D3]/20"
                       )}>
                         <ScrollArea className="h-full">
                           <Textarea
@@ -999,8 +1004,8 @@ export default function UnifiedHomePage() {
                             onDragOver={handleDragOver}
                             onDragLeave={handleDragLeave}
                             onDrop={handleDrop}
-                            placeholder="Paste or type the text you want to humanize..."
-                            className="w-full min-h-[350px] resize-none border-0 bg-transparent p-4 sm:p-5 text-[15px] leading-relaxed text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-0 focus-visible:ring-0"
+                            placeholder="Paste your AI-generated text here (Ctrl+V)..."
+                            className="w-full min-h-[450px] resize-none border-0 bg-transparent p-4 sm:p-5 text-[15px] leading-relaxed text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-0 focus-visible:ring-0"
                             disabled={isHumanizing}
                           />
                         </ScrollArea>
@@ -1010,33 +1015,40 @@ export default function UnifiedHomePage() {
                       {!originalText && !isHumanizing && (
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                           <div className="text-center max-w-sm px-4">
-                            <div className="inline-flex flex-col items-center gap-3 px-6 py-6 rounded-xl border-2 border-dashed border-[#A0826D] bg-white/80 backdrop-blur-sm">
-                              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#F5E6D3] to-[#E8D4BF] flex items-center justify-center">
-                                <UploadCloud className="w-6 h-6 text-[#8B6F47]" />
+                            <div className="inline-flex flex-col items-center gap-3 px-6 py-6 border-2 border-dashed border-[#8B6F47] bg-white/80 backdrop-blur-sm">
+                              <div className="w-12 h-12 bg-[#8B6F47]/10 flex items-center justify-center">
+                                <FileText className="w-6 h-6 text-[#8B6F47]" />
                               </div>
                               <div>
                                 <p className="text-sm font-medium text-gray-700 mb-1">
-                                  Drop files here or{" "}
+                                  Paste your text or{" "}
                                   <button
                                     onClick={() => fileInputRef.current?.click()}
                                     className="text-[#8B6F47] hover:text-[#6D5635] font-semibold underline pointer-events-auto transition-colors"
                                   >
-                                    browse
+                                    upload a file
                                   </button>
                                 </p>
                                 <p className="text-xs text-gray-500">
-                                  Supports .txt, .md, .docx • Max 2MB
+                                  Supports .pdf, .docx, and .txt
                                 </p>
                               </div>
                             </div>
                           </div>
                         </div>
                       )}
+
+                      {/* Word Counter Badge */}
+                      {originalText && (
+                        <div className="absolute bottom-3 left-3 px-3 py-1 bg-[#8B6F47] text-white text-xs font-medium">
+                          {originalText.trim().split(/\s+/).filter(Boolean).length} words
+                        </div>
+                      )}
                     </div>
 
                     {/* Warning for < 250 words */}
                     {originalText && originalText.trim().split(/\s+/).filter(Boolean).length < 250 && (
-                      <div className="mt-3 p-3 rounded-lg bg-amber-50 border border-amber-200">
+                      <div className="mt-3 p-3 bg-amber-50 border border-amber-200">
                         <div className="flex items-start gap-2">
                           <Info className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
                           <p className="text-xs text-amber-800 font-medium">
@@ -1051,7 +1063,7 @@ export default function UnifiedHomePage() {
                       <Button
                         onClick={handleHumanize}
                         disabled={!originalText.trim() || isHumanizing || wordCount < 100}
-                        className="w-full h-12 rounded-lg bg-gradient-to-r from-[#8B6F47] to-[#6D5635] hover:from-[#6D5635] hover:to-[#5A4529] text-white font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-md"
+                        className="w-full h-12 bg-gradient-to-r from-[#8B6F47] to-[#6D5635] hover:from-[#6D5635] hover:to-[#5A4529] text-white font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-md"
                       >
                         {isHumanizing ? (
                           <>
@@ -1079,7 +1091,7 @@ export default function UnifiedHomePage() {
                             setUploadedFileName(null);
                           }}
                           variant="outline"
-                          className="w-full h-10 rounded-lg border-gray-300 text-gray-700 hover:bg-gray-50 font-medium text-sm"
+                          className="w-full h-10 border-gray-300 text-gray-700 hover:bg-gray-50 font-medium text-sm"
                         >
                           <RotateCcw className="w-4 h-4 mr-2" />
                           Reset
@@ -1097,26 +1109,18 @@ export default function UnifiedHomePage() {
                     />
                   </div>
 
-                  {/* Right Column - Output Box (Only shows when humanizing or has output) */}
-                  {(humanizedText || isHumanizing) && (
-                    <div className="flex flex-col h-full">
-                      {/* Header */}
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-2">
-                          <div className={cn(
-                            "w-2 h-2 rounded-full transition-colors",
-                            humanizedText && !isHumanizing ? "bg-[#5e3d2a]" : "bg-gray-300"
-                          )}></div>
-                          <label className="text-sm font-semibold text-gray-700">
-                            Humanized output
-                          </label>
-                        </div>
+                  {/* Right Column - Output Box (Always visible) */}
+                  <div className="flex flex-col h-full">
+                    {/* Header */}
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-2">
+                        <label className="text-sm font-semibold text-gray-700">
+                          Humanized Output
+                        </label>
+                      </div>
                       {humanizedText && !isHumanizing && (
                         <div className="flex items-center gap-2">
-                          <span className="text-xs text-gray-500">
-                            {humanizedText.trim().split(/\s+/).filter(Boolean).length} words
-                          </span>
-                          <span className="text-xs px-2 py-1 rounded-full bg-[#f5ede6] text-[#5e3d2a] font-medium">
+                          <span className="text-xs px-2 py-1 bg-[#8B6F47] text-white font-medium">
                             100% Human
                           </span>
                         </div>
@@ -1126,10 +1130,10 @@ export default function UnifiedHomePage() {
                     {/* Output Box */}
                     <div className="relative flex-1">
                       <div className={cn(
-                        "h-[350px] rounded-xl border-2 transition-all duration-200 overflow-hidden",
+                        "h-[450px] border-2 transition-all duration-200 overflow-hidden",
                         humanizedText && !isHumanizing
                           ? "border-[#A0826D] bg-white shadow-sm"
-                          : "border-gray-200 bg-gray-50/50"
+                          : "border-[#D4C4B0] bg-gray-50"
                       )}>
                         <ScrollArea className="h-full">
                           <div className="p-4 sm:p-5">
@@ -1152,13 +1156,13 @@ export default function UnifiedHomePage() {
                                 </p>
                               </div>
                             ) : (
-                              <div className="flex items-center justify-center min-h-[310px]">
+                              <div className="flex flex-col items-center justify-center min-h-[410px]">
                                 <div className="text-center max-w-xs px-4">
-                                  <div className="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-3">
-                                    <FileText className="w-7 h-7 text-gray-400" />
+                                  <div className="w-14 h-14 bg-[#8B6F47]/10 flex items-center justify-center mx-auto mb-3">
+                                    <Sparkles className="w-7 h-7 text-[#8B6F47]" />
                                   </div>
                                   <p className="text-sm font-medium text-gray-500 mb-1">
-                                    Your natural, detection-safe copy appears here.
+                                    Humanized output will appear here
                                   </p>
                                   <p className="text-xs text-gray-400">
                                     Enter text on the left to get started
@@ -1171,7 +1175,7 @@ export default function UnifiedHomePage() {
 
                         {/* Character Counter */}
                         {humanizedText && !isHumanizing && (
-                          <div className="absolute bottom-3 right-3 text-xs text-gray-400 bg-white/80 px-2 py-1 rounded">
+                          <div className="absolute bottom-3 right-3 text-xs text-gray-400 bg-white/80 px-2 py-1">
                             {humanizedText.length} characters
                           </div>
                         )}
@@ -1183,7 +1187,7 @@ export default function UnifiedHomePage() {
                           <Button
                             onClick={handleCopy}
                             variant="outline"
-                            className="flex-1 h-10 rounded-lg border-gray-300 hover:border-[#8B6F47] hover:bg-[#F5E6D3] hover:text-[#6D5635] transition-colors"
+                            className="flex-1 h-10 border-gray-300 hover:border-[#8B6F47] hover:bg-[#F5E6D3] hover:text-[#6D5635] transition-colors"
                           >
                             {copied ? (
                               <>
@@ -1200,7 +1204,7 @@ export default function UnifiedHomePage() {
                           <Button
                             onClick={() => handleDownload("txt")}
                             variant="outline"
-                            className="h-10 px-4 rounded-lg border-gray-300 hover:border-[#8B6F47] hover:bg-[#F5E6D3] hover:text-[#6D5635] transition-colors"
+                            className="h-10 px-4 border-gray-300 hover:border-[#8B6F47] hover:bg-[#F5E6D3] hover:text-[#6D5635] transition-colors"
                           >
                             <Download className="w-4 h-4 mr-2" />
                             .txt
@@ -1208,46 +1212,78 @@ export default function UnifiedHomePage() {
                           <Button
                             onClick={() => handleDownload("docx")}
                             variant="outline"
-                            className="h-10 px-4 rounded-lg border-gray-300 hover:border-[#8B6F47] hover:bg-[#F5E6D3] hover:text-[#6D5635] transition-colors"
+                            className="h-10 px-4 border-gray-300 hover:border-[#8B6F47] hover:bg-[#F5E6D3] hover:text-[#6D5635] transition-colors"
                           >
                             <Download className="w-4 h-4 mr-2" />
                             .docx
                           </Button>
                         </div>
                       )}
-                      </div>
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* AI Detector Logos */}
-          <section className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-4">
-            <p className="text-center text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-400 mb-7">
+          {/* AI Detector Logos - Horizontal Scrolling */}
+          <section className="relative w-full py-10 overflow-hidden bg-gradient-to-b from-white to-gray-50">
+            <p className="text-center text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-400 mb-8">
               Our AI bypasses industry standard detectors
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-6">
-              {[
-                { src: "/logo/turnitin.png", label: "Turnitin" },
-                { src: "/logo/GPTZero.png", label: "GPTZero" },
-                { src: "/logo/zeroGPT.png", label: "ZeroGPT" },
-                { src: "/logo/quillbot.png", label: "QuillBot" },
-                { src: "/logo/writer.png", label: "Writer" },
-                { src: "/logo/copyleaks.png", label: "Copyleaks" },
-                { src: "/logo/originality.png", label: "Originality.ai" },
-                { src: "/logo/sapling.png", label: "Sapling" },
-              ].map(({ src, label }) => (
-                <div key={label} className="flex flex-col items-center gap-1.5 opacity-50 hover:opacity-80 transition-opacity">
-                  <Image src={src} alt={label} width={72} height={28} className="object-contain h-7 w-auto grayscale" />
-                  <span className="text-[10px] text-gray-400 tracking-wide">{label}</span>
+            
+            <div className="relative">
+              {/* Gradient overlays for fade effect */}
+              <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none"></div>
+              
+              {/* Scrolling container */}
+              <div className="marquee-container overflow-hidden">
+                <div className="marquee flex items-center gap-12 py-4">
+                  {[
+                    { src: "/logo/turnitin.png", label: "Turnitin" },
+                    { src: "/logo/GPTZero.png", label: "GPTZero" },
+                    { src: "/logo/zeroGPT.png", label: "ZeroGPT" },
+                    { src: "/logo/quillbot.png", label: "QuillBot" },
+                    { src: "/logo/writer.png", label: "Writer" },
+                    { src: "/logo/copyleaks.png", label: "Copyleaks" },
+                    { src: "/logo/originality.png", label: "Originality.ai" },
+                    { src: "/logo/sapling.png", label: "Sapling" },
+                  ].concat([
+                    { src: "/logo/turnitin.png", label: "Turnitin" },
+                    { src: "/logo/GPTZero.png", label: "GPTZero" },
+                    { src: "/logo/zeroGPT.png", label: "ZeroGPT" },
+                    { src: "/logo/quillbot.png", label: "QuillBot" },
+                    { src: "/logo/writer.png", label: "Writer" },
+                    { src: "/logo/copyleaks.png", label: "Copyleaks" },
+                    { src: "/logo/originality.png", label: "Originality.ai" },
+                    { src: "/logo/sapling.png", label: "Sapling" },
+                  ]).map(({ src, label }, index) => (
+                    <div 
+                      key={`${label}-${index}`} 
+                      className="flex-shrink-0 flex items-center justify-center px-6 py-3 bg-white border border-gray-200 transition-all duration-300 hover:border-[#8B6F47] hover:shadow-md group"
+                      style={{ minWidth: '140px' }}
+                    >
+                      <Image 
+                        src={src} 
+                        alt={label} 
+                        width={100} 
+                        height={32} 
+                        className="object-contain h-8 w-auto grayscale group-hover:grayscale-0 transition-all duration-300" 
+                      />
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </section>
 
         </div>
+
+        {/* AI Detector Showcase Section - Interactive */}
+        <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-white">
+          <DetectorShowcase />
+        </section>
 
         {/* Stats Section - Below Humanizer Tool */}
         <section className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]">
@@ -1284,59 +1320,107 @@ export default function UnifiedHomePage() {
           </div>
         </section>
 
-        {/* Professional Solutions for Every Industry */}
-        <section className="py-16 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.4s_forwards]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* How It Works Section */}
+        <section className="py-16 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.8s_forwards] relative overflow-hidden">
+          {/* Diagonal stripe pattern background */}
+          <div className="absolute inset-0 opacity-[0.04]" style={{
+            backgroundImage: `repeating-linear-gradient(
+              45deg,
+              #8B6F47,
+              #8B6F47 2px,
+              transparent 2px,
+              transparent 20px
+            )`
+          }}></div>
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-10">
-              <h2 className="text-[1.6rem] sm:text-[2.2rem] font-extrabold tracking-tight text-gray-900 mb-3 leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
-                Built for{" "}
-                <span style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: '1.15em' }} className="text-[#5e3d2a]">every use case</span>
+              <h2 className="text-[1.6rem] sm:text-[2.2rem] font-extrabold tracking-tight text-gray-900 mb-2 leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
+                How it{" "}
+                <span style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: '1.15em' }} className="text-[#5e3d2a]">works</span>
               </h2>
-              <p className="text-gray-400 max-w-md mx-auto text-[13px] leading-relaxed">
-                Whether you're a student, a content team, or an enterprise — the output always sounds like a person wrote it.
-              </p>
+              <p className="text-[12px] text-gray-400 tracking-wide">Three steps. Under 30 seconds.</p>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-6">
-              {/* Card 1 */}
-              <div className="bg-[#5e3d2a]/5 rounded-2xl p-6 border border-[#e8ddd5] hover:shadow-md transition-all duration-300">
-                <div className="w-10 h-10 bg-[#5e3d2a] rounded-xl flex items-center justify-center mb-4">
-                  <GraduationCap className="w-5 h-5 text-white" />
+            <div className="relative">
+              {/* Progress Line */}
+              <div className="absolute top-24 left-0 right-0 h-px bg-gradient-to-r from-[#5e3d2a] via-gray-200 to-[#5e3d2a]/30 hidden lg:block" style={{ width: 'calc(100% - 200px)', left: '100px' }} />
+              
+              <div className="grid md:grid-cols-3 gap-12 relative">
+                {/* Step 1 */}
+                <div className="text-center">
+                  <div className="relative inline-flex items-center justify-center w-11 h-11 rounded-full bg-[#5e3d2a] text-white text-sm font-semibold mb-4 shadow-sm">
+                    1
+                  </div>
+                  <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Paste your text</h3>
+                  <p className="text-[13px] text-gray-400 leading-relaxed">
+                    Drop in content from ChatGPT, Claude, Gemini, or any AI tool. Supports plain text, .docx, and .pdf.
+                  </p>
                 </div>
-                <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Students & Academia</h3>
-                <p className="text-gray-400 text-[13px] leading-relaxed">
-                  Use AI to draft, then submit work that reads as your own. Passes institutional checks without altering your argument.
-                </p>
-              </div>
-
-              {/* Card 2 */}
-              <div className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-all duration-300">
-                <div className="w-10 h-10 bg-[#5e3d2a] rounded-xl flex items-center justify-center mb-4">
-                  <FileText className="w-5 h-5 text-white" />
+                
+                {/* Step 2 */}
+                <div className="text-center">
+                  <div className="relative inline-flex items-center justify-center w-11 h-11 rounded-full bg-gray-800 text-white text-sm font-semibold mb-4 shadow-sm">
+                    2
+                  </div>
+                  <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Hit Humanize</h3>
+                  <p className="text-[13px] text-gray-400 leading-relaxed">
+                    Our engine rewrites for natural flow, varied sentence rhythm, and authentic tone — while keeping your meaning.
+                  </p>
                 </div>
-                <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Content Teams</h3>
-                <p className="text-gray-400 text-[13px] leading-relaxed">
-                  Scale output without losing brand voice. Every piece sounds like it came from your best writer, not a language model.
-                </p>
-              </div>
-
-              {/* Card 3 */}
-              <div className="bg-[#5e3d2a]/5 rounded-2xl p-6 border border-[#e8ddd5] hover:shadow-md transition-all duration-300">
-                <div className="w-10 h-10 bg-[#5e3d2a] rounded-xl flex items-center justify-center mb-4">
-                  <Users className="w-5 h-5 text-white" />
+                
+                {/* Step 3 */}
+                <div className="text-center">
+                  <div className="relative inline-flex items-center justify-center w-11 h-11 rounded-full bg-[#5e3d2a] text-white text-sm font-semibold mb-4 shadow-sm">
+                    3
+                  </div>
+                  <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Copy and use</h3>
+                  <p className="text-[13px] text-gray-400 leading-relaxed">
+                    Download as .txt or .docx, or copy directly. Ready for submission, publication, or wherever you need it.
+                  </p>
                 </div>
-                <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Business & Enterprise</h3>
-                <p className="text-gray-400 text-[13px] leading-relaxed">
-                  Keep client-facing communications warm and human. AI-assisted drafts, human-quality delivery — every time.
-                </p>
               </div>
             </div>
           </div>
         </section>
 
+        {/* Large Discount Banner - Above Pricing */}
+        <LargeDiscountBanner />
+
+        {/* Pricing Section (Untouched logic, just moved) */}
+        <section id="pricing" className="py-10 sm:py-16 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_1s_forwards]">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[#5e3d2a]">Pricing</span>
+              <h3 className="mt-3 text-[1.6rem] sm:text-[2.2rem] font-extrabold tracking-tight text-gray-900 leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
+                Simple,{" "}
+                <span style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: '1.15em' }} className="text-[#8B6F47]">transparent pricing</span>
+              </h3>
+              <p className="mx-auto mt-2 max-w-sm text-[13px] text-gray-400">
+                No hidden fees. Upgrade or cancel anytime.
+              </p>
+            </div>
+
+            <div className="mt-12">
+              <PolarPricing isTeamMember={isTeamMember} />
+            </div>
+
+            {subscriptionPlan && <TopUpSection />}
+          </div>
+        </section>
+
         {/* Powerful Humanization Features */}
-        <section className="py-16 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.6s_forwards]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-16 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.6s_forwards] relative overflow-hidden">
+          {/* Square grid background pattern */}
+          <div className="absolute inset-0 opacity-[0.08]" style={{
+            backgroundImage: `
+              linear-gradient(to right, #8B6F47 1.5px, transparent 1.5px),
+              linear-gradient(to bottom, #8B6F47 1.5px, transparent 1.5px)
+            `,
+            backgroundSize: '40px 40px'
+          }}></div>
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-10">
               <h2 className="text-[1.6rem] sm:text-[2.2rem] font-extrabold tracking-tight text-gray-900 mb-3 leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
                 What makes{" "}
@@ -1417,81 +1501,6 @@ export default function UnifiedHomePage() {
           </div>
         </section>
 
-        {/* How It Works Section */}
-        <section className="py-16 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.8s_forwards]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-10">
-              <h2 className="text-[1.6rem] sm:text-[2.2rem] font-extrabold tracking-tight text-gray-900 mb-2 leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
-                How it{" "}
-                <span style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: '1.15em' }} className="text-[#5e3d2a]">works</span>
-              </h2>
-              <p className="text-[12px] text-gray-400 tracking-wide">Three steps. Under 30 seconds.</p>
-            </div>
-            
-            <div className="relative">
-              {/* Progress Line */}
-              <div className="absolute top-24 left-0 right-0 h-px bg-gradient-to-r from-[#5e3d2a] via-gray-200 to-[#5e3d2a]/30 hidden lg:block" style={{ width: 'calc(100% - 200px)', left: '100px' }} />
-              
-              <div className="grid md:grid-cols-3 gap-12 relative">
-                {/* Step 1 */}
-                <div className="text-center">
-                  <div className="relative inline-flex items-center justify-center w-11 h-11 rounded-full bg-[#5e3d2a] text-white text-sm font-semibold mb-4 shadow-sm">
-                    1
-                  </div>
-                  <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Paste your text</h3>
-                  <p className="text-[13px] text-gray-400 leading-relaxed">
-                    Drop in content from ChatGPT, Claude, Gemini, or any AI tool. Supports plain text, .docx, and .pdf.
-                  </p>
-                </div>
-                
-                {/* Step 2 */}
-                <div className="text-center">
-                  <div className="relative inline-flex items-center justify-center w-11 h-11 rounded-full bg-gray-800 text-white text-sm font-semibold mb-4 shadow-sm">
-                    2
-                  </div>
-                  <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Hit Humanize</h3>
-                  <p className="text-[13px] text-gray-400 leading-relaxed">
-                    Our engine rewrites for natural flow, varied sentence rhythm, and authentic tone — while keeping your meaning.
-                  </p>
-                </div>
-                
-                {/* Step 3 */}
-                <div className="text-center">
-                  <div className="relative inline-flex items-center justify-center w-11 h-11 rounded-full bg-[#5e3d2a] text-white text-sm font-semibold mb-4 shadow-sm">
-                    3
-                  </div>
-                  <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Copy and use</h3>
-                  <p className="text-[13px] text-gray-400 leading-relaxed">
-                    Download as .txt or .docx, or copy directly. Ready for submission, publication, or wherever you need it.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Pricing Section (Untouched logic, just moved) */}
-        <section id="pricing" className="py-10 sm:py-16 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_1s_forwards]">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[#5e3d2a]">Pricing</span>
-              <h3 className="mt-3 text-[1.6rem] sm:text-[2.2rem] font-extrabold tracking-tight text-gray-900 leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
-                Simple,{" "}
-                <span style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: '1.15em' }} className="text-[#2563eb]">transparent pricing</span>
-              </h3>
-              <p className="mx-auto mt-2 max-w-sm text-[13px] text-gray-400">
-                No hidden fees. Upgrade or cancel anytime.
-              </p>
-            </div>
-
-            <div className="mt-12">
-              <PolarPricing isTeamMember={isTeamMember} />
-            </div>
-
-            {subscriptionPlan && <TopUpSection />}
-          </div>
-        </section>
-
         {/* Redesigned Testimonials Section */}
         <section id="testimonials" className="py-16 sm:py-20 bg-[#faf7f4] overflow-hidden relative opacity-0 animate-[fadeInUp_0.8s_ease-in-out_1.2s_forwards]">
           <div className="absolute top-0 inset-x-0 h-px bg-muted" />
@@ -1501,7 +1510,7 @@ export default function UnifiedHomePage() {
               <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[#5e3d2a] mb-3 block">Testimonials</span>
               <h2 className="text-[1.6rem] md:text-[2.2rem] font-extrabold text-foreground tracking-tight mb-3 leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
                 What people{" "}
-                <span style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: '1.15em' }} className="text-primary">are saying</span>
+                <span style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: '1.15em' }} className="text-[#8B6F47]">are saying</span>
               </h2>
               <p className="text-gray-400 max-w-sm mx-auto text-[13px]">Thousands of writers, students, and teams use HumanifyLab every day.</p>
             </div>
@@ -1531,46 +1540,53 @@ export default function UnifiedHomePage() {
         </section>
 
         {/* FAQ Section */}
-        <section id="faq" className="relative py-20 sm:py-24 bg-gradient-to-br from-[#8b6f47] via-[#5e3d2a] to-[#4a2f1f] overflow-hidden opacity-0 animate-[fadeInUp_0.8s_ease-out_1.4s_forwards]">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-white/40">FAQ</span>
-              <h3 className="mt-3 text-2xl font-bold tracking-tight text-white">Get quick answers</h3>
-              <p className="mt-3 text-sm text-white/90">
-                Everything you need to know about Humanizer’s security, pricing, and workflow.
-              </p>
+        <section id="faq" className="relative py-20 sm:py-24 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_1.4s_forwards] overflow-hidden">
+          {/* Small triangle pattern background */}
+          <div className="absolute inset-0 opacity-[0.06]" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 2 L14 10 L6 10 Z' fill='%238B6F47' /%3E%3C/svg%3E")`,
+            backgroundSize: '20px 20px',
+            backgroundRepeat: 'repeat'
+          }}></div>
+          
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-12">
+              <h3 className="text-3xl font-bold tracking-tight text-gray-900">FAQ</h3>
             </div>
 
-            <div className="mt-12 space-y-4">
-              {FAQ_ITEMS.map((item) => {
+            <div className="space-y-0">
+              {FAQ_ITEMS.map((item, index) => {
                 const isOpen = faqOpen === item.id;
                 return (
                   <div
                     key={item.id}
-                    className="rounded-2xl bg-white/95 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all"
+                    className={`border-b border-gray-200 ${index === 0 ? 'border-t' : ''}`}
                   >
                     <button
                       type="button"
                       onClick={() => setFaqOpen(isOpen ? null : item.id)}
-                      className="flex w-full items-center justify-between px-6 py-4 text-left"
+                      className="flex w-full items-center justify-between py-5 text-left hover:bg-gray-50 transition-colors px-2"
                     >
-                      <span className="text-[14px] font-semibold text-gray-900">{item.question}</span>
+                      <span className="text-base font-semibold text-gray-900 pr-8">{item.question}</span>
                       <ChevronDown
-                        className={`h-5 w-5 text-gray-600 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                        className={`h-5 w-5 text-gray-400 transition-transform flex-shrink-0 ${isOpen ? "rotate-180" : ""}`}
                       />
                     </button>
                     {isOpen && (
-                      <div className="px-6 pb-4 text-[13px] leading-relaxed text-gray-500 border-t border-gray-100 pt-3">
+                      <div className="px-2 pb-5 text-sm leading-relaxed text-gray-600">
                         {item.answer}
                       </div>
                     )}
                   </div>
-  );
+                );
               })}
             </div>
           </div>
         </section>
       </main>
+      
+      {/* Responsible Use Disclaimer - Above Footer */}
+      <ResponsibleUseDisclaimer />
+      
       <SiteFooter />
       
       {/* Pricing Modal - Shows after sign-in for free users */}

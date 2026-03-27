@@ -182,37 +182,33 @@ export default function FAQPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <PageNavbar />
-      <main className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-[#dbeafe] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#2563eb] shadow-sm">
-            Frequently Asked Questions
-          </span>
-          <h1 className="mt-4 text-[1.6rem] sm:text-[2rem] font-bold tracking-tight text-gray-950 sm:text-5xl">
-            Everything You Need to Know
+      <main className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+            FAQ
           </h1>
-          <p className="mt-4 text-[14px] text-gray-400">
-            Get answers about our AI humanizer and how to enhance your writing naturally
-          </p>
         </div>
 
-        <div className="mt-16 space-y-12">
+        <div className="space-y-12">
           {faqs.map((category, categoryIndex) => (
             <div key={categoryIndex}>
-              <h2 className="mb-6 text-[1.15rem] font-bold text-gray-900">
+              <h2 className="mb-6 text-xl font-bold text-gray-900 border-b border-gray-200 pb-3">
                 {category.category}
               </h2>
-              <div className="space-y-6">
+              <div className="space-y-0">
                 {category.questions.map((faq, faqIndex) => (
                   <div
                     key={faqIndex}
-                    className="rounded-2xl border border-white/60 bg-white/80 p-6 shadow-sm backdrop-blur transition hover:shadow-md"
+                    className="border-b border-gray-200"
                   >
-                    <h3 className="text-[14px] font-semibold text-gray-900">
-                      {faq.question}
-                    </h3>
-                    <p className="mt-3 text-[13.5px] leading-relaxed text-gray-600">
-                      {faq.answer}
-                    </p>
+                    <div className="py-5 px-2 hover:bg-gray-50 transition-colors">
+                      <h3 className="text-base font-semibold text-gray-900 mb-3">
+                        {faq.question}
+                      </h3>
+                      <p className="text-sm leading-relaxed text-gray-600">
+                        {faq.answer}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -220,21 +216,21 @@ export default function FAQPage() {
           ))}
         </div>
 
-        <div className="mt-16 rounded-3xl border border-white/60 bg-white/80 p-8 text-center shadow-md backdrop-blur">
-          <h2 className="text-[1.15rem] font-bold text-gray-900">
+        <div className="mt-16 border-t border-gray-200 pt-8 text-center">
+          <h2 className="text-xl font-bold text-gray-900">
             Still have questions?
           </h2>
-          <p className="mt-2 text-[14px] text-gray-400">
+          <p className="mt-2 text-sm text-gray-600">
             Can&apos;t find the answer you&apos;re looking for? Our support team is here to help.
           </p>
           <div className="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link href="/contact">
-              <button className="rounded-full bg-[#3b82f6] px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-[#2563eb]">
+              <button className="bg-[#8B6F47] px-6 py-3 font-semibold text-white shadow-sm transition hover:bg-[#6D5635]">
                 Contact Support
               </button>
             </Link>
             <Link href="/pricing">
-              <button className="rounded-full border-2 border-[#3b82f6] px-6 py-3 font-semibold text-[#3b82f6] transition hover:bg-[#3b82f6] hover:text-white">
+              <button className="border-2 border-[#8B6F47] px-6 py-3 font-semibold text-[#8B6F47] transition hover:bg-[#8B6F47] hover:text-white">
                 View Pricing Plans
               </button>
             </Link>

@@ -166,7 +166,7 @@ export default function FAQPage() {
       <PageNavbar />
       <main className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-[#dbeafe] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#2563eb] shadow-sm">
+          <span className="inline-flex items-center gap-2 rounded-full bg-[#F5E6D3] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#6D5635] shadow-sm">
             Frequently Asked Questions
           </span>
           <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
@@ -211,12 +211,12 @@ export default function FAQPage() {
           </p>
           <div className="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link href="/contact">
-              <button className="rounded-full bg-[#3b82f6] px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-[#2563eb]">
+              <button className="rounded-full bg-[#8B6F47] px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-[#6D5635]">
                 Contact Support
               </button>
             </Link>
             <Link href="/pricing">
-              <button className="rounded-full border-2 border-[#3b82f6] px-6 py-3 font-semibold text-[#3b82f6] transition hover:bg-[#3b82f6] hover:text-white">
+              <button className="rounded-full border-2 border-[#8B6F47] px-6 py-3 font-semibold text-[#8B6F47] transition hover:bg-[#8B6F47] hover:text-white">
                 View Pricing Plans
               </button>
             </Link>

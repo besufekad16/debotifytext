@@ -141,7 +141,7 @@ export default async function AccountPage() {
           <Card className="border-white/60 bg-white/80 shadow-md backdrop-blur">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <User className="h-5 w-5 text-[#3b82f6]" />
+                <User className="h-5 w-5 text-[#8B6F47]" />
                 Profile Information
               </CardTitle>
               <CardDescription className="text-[12px] text-gray-400">Your personal details</CardDescription>
@@ -174,7 +174,7 @@ export default async function AccountPage() {
           <Card className="border-white/60 bg-white/80 shadow-md backdrop-blur">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <CreditCard className="h-5 w-5 text-[#3b82f6]" />
+                <CreditCard className="h-5 w-5 text-[#8B6F47]" />
                 Credits & Usage
               </CardTitle>
               <CardDescription className="text-[12px] text-gray-400">Your current credit balance</CardDescription>
@@ -182,7 +182,7 @@ export default async function AccountPage() {
             <CardContent className="space-y-4">
               <div>
                 <label className="text-[12px] font-medium text-gray-400">Available Credits</label>
-                <p className="mt-1.5 text-[1.8rem] font-bold text-[#3b82f6]">
+                <p className="mt-1.5 text-[1.8rem] font-bold text-[#8B6F47]">
                   {(userCredits + userExtraCredits).toLocaleString()}
                 </p>
                 <div className="mt-2 flex gap-4 text-[13px] text-gray-400">
@@ -207,7 +207,7 @@ export default async function AccountPage() {
                 </p>
                 <Link
                   href="/pricing"
-                  className="mt-3 inline-block rounded-full bg-[#3b82f6] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2563eb]"
+                  className="mt-3 inline-block bg-[#8B6F47] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#6D5635]"
                 >
                   View Pricing Plans
                 </Link>
@@ -227,14 +227,14 @@ export default async function AccountPage() {
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
                 <Link
                   href="/"
-                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#3b82f6] hover:shadow-md"
+                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#8B6F47] hover:shadow-md"
                 >
                   <p className="text-[13.5px] font-semibold text-gray-900">Humanizer Tool</p>
                   <p className="mt-0.5 text-[11px] text-gray-400">Transform your text</p>
                 </Link>
                 <Link
                   href="/pricing"
-                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#3b82f6] hover:shadow-md"
+                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#8B6F47] hover:shadow-md"
                 >
                   <p className="text-[13.5px] font-semibold text-gray-900">Pricing</p>
                   <p className="mt-0.5 text-[11px] text-gray-400">View credit packages</p>
@@ -242,10 +242,10 @@ export default async function AccountPage() {
                 {(isTeamMember || hasApiAccess) && (
                   <Link
                     href="/team"
-                    className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#3b82f6] hover:shadow-md"
+                    className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#8B6F47] hover:shadow-md"
                   >
                     <div className="flex justify-center mb-1">
-                      <Users className="h-5 w-5 text-[#3b82f6]" />
+                      <Users className="h-5 w-5 text-[#8B6F47]" />
                     </div>
                     <p className="text-[13.5px] font-semibold text-gray-900">Team</p>
                     <p className="mt-0.5 text-[11px] text-gray-400">Manage team</p>
@@ -254,10 +254,10 @@ export default async function AccountPage() {
                 {hasApiAccess && (
                   <Link
                     href="/api-keys"
-                    className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#3b82f6] hover:shadow-md"
+                    className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#8B6F47] hover:shadow-md"
                   >
                     <div className="flex justify-center mb-1">
-                      <Key className="h-5 w-5 text-[#3b82f6]" />
+                      <Key className="h-5 w-5 text-[#8B6F47]" />
                     </div>
                     <p className="text-[13.5px] font-semibold text-gray-900">API Keys</p>
                     <p className="mt-0.5 text-[11px] text-gray-400">Manage integrations</p>
@@ -265,14 +265,14 @@ export default async function AccountPage() {
                 )}
                 <Link
                   href="/faq"
-                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#3b82f6] hover:shadow-md"
+                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#8B6F47] hover:shadow-md"
                 >
                   <p className="text-[13.5px] font-semibold text-gray-900">FAQ</p>
                   <p className="mt-0.5 text-[11px] text-gray-400">Common questions</p>
                 </Link>
                 <Link
                   href="/contact"
-                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#3b82f6] hover:shadow-md"
+                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#8B6F47] hover:shadow-md"
                 >
                   <p className="text-[13.5px] font-semibold text-gray-900">Contact</p>
                   <p className="mt-0.5 text-[11px] text-gray-400">Get support</p>

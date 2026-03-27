@@ -19,8 +19,8 @@
   /* Paper White - Popover surfaces */
   --popover: 0 0% 100%;
   --popover-foreground: 210 25% 15%;
-  /* Mint Green - Primary brand color */
-  --primary: 160 84% 39%;
+  /* Coffee Brown - Primary brand color */
+  --primary: 28 35% 49%;
   --primary-foreground: 0 0% 100%;
   /* Coral Peach - Secondary accent */
   --secondary: 18 100% 80%;
@@ -67,8 +67,8 @@
   /* Darker popover surface */
   --popover: 210 28% 15%;
   --popover-foreground: 0 0% 98%;
-  /* Lighter Mint Green for dark mode */
-  --primary: 160 84% 50%;
+  /* Coffee Brown for dark mode */
+  --primary: 28 35% 55%;
   --primary-foreground: 210 30% 12%;
   /* Darker Coral Peach */
   --secondary: 18 80% 40%;
@@ -214,6 +214,26 @@ html {
   }
 }
 
+/* Coffee glow animation for live indicator */
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(139, 111, 71, 0.4), 0 0 16px rgba(139, 111, 71, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(139, 111, 71, 0.8), 0 0 24px rgba(139, 111, 71, 0.4), 0 0 32px rgba(139, 111, 71, 0.2);
+  }
+}
+
+/* Shimmer animation for glassy card effect */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(200%) rotate(45deg);
+  }
+}
+
 /* Apply smooth transitions to sections */
 section {
   transition: all 0.3s ease-in-out;
@@ -227,4 +247,19 @@ section {
 .hover-lift:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Global override: Remove all rounded corners except navbar */
+* :not(nav):not(nav *):not(.navbar):not(.navbar *):not([class*="navbar"]):not([class*="navbar"] *) {
+  border-radius: 0 !important;
+}
+
+/* Preserve navbar rounded corners */
+nav,
+nav *,
+.navbar,
+.navbar *,
+[class*="navbar"],
+[class*="navbar"] * {
+  /* Navbar keeps its rounded corners */
 }
