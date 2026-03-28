@@ -2,10 +2,12 @@
  * Adapter Selector Utility
  * 
  * Selects the appropriate humanization adapter based on user subscription plan.
- * All users now use the advanced AI adapter for consistent quality.
+ * - Free users  → aistudio99% adapter (template-based human writing)
+ * - Paid users  → aistudios adapter (advanced Gemini with junior college style)
  */
 
 import { aiStudios } from "~/server/adapters/aistudios";
+import { aiStudios99 } from "~/server/adapters/aistudio99%";
 
 /**
  * Supported subscription plans
@@ -24,37 +26,22 @@ export interface HumanizationAdapter {
 /**
  * Selects the appropriate humanization adapter based on subscription plan
  * 
- * @param subscriptionPlan - User's subscription plan
- * @returns Adapter instance to use for humanization
- * 
- * **Selection Logic:**
- * - ALL users (free, basic, pro, ultra) use the advanced AI adapter (aistudios.ts)
- * - This ensures consistent, high-quality humanization for all users
- * 
- * @example
- * ```typescript
- * const adapter = getHumanizationAdapter(user.subscriptionPlan);
- * const result = await adapter.humanizeText(text, options);
- * ```
+ * - free / null / undefined → aiStudios99 (template-based, aistudio99%.ts)
+ * - basic / pro / ultra     → aiStudios   (advanced AI, aistudios.ts)
  */
 export function getHumanizationAdapter(
   subscriptionPlan: SubscriptionPlan
 ): HumanizationAdapter {
-  // All users use the advanced AI adapter
-  console.log(`[Adapter Selection] Using aiStudios adapter for all users`);
-  return aiStudios;
+  if (isPremiumUser(subscriptionPlan)) {
+    console.log(`[Adapter Selection] Plan "${subscriptionPlan}" → aiStudios (premium adapter)`);
+    return aiStudios;
+  }
+  console.log(`[Adapter Selection] Plan "${subscriptionPlan ?? 'free'}" → aiStudios99 (free adapter)`);
+  return aiStudios99;
 }
 
 /**
- * Helper to determine if user should use premium adapter
- * 
- * @param subscriptionPlan - User's subscription plan
- * @returns true if user has basic, pro, or ultra plan
- * 
- * @example
- * ```typescript
- * const isFreeUser = !isPremiumUser(user.subscriptionPlan);
- * ```
+ * Returns true if the user has an active paid plan (basic, pro, or ultra).
  */
 export function isPremiumUser(subscriptionPlan: SubscriptionPlan): boolean {
   const plan = subscriptionPlan?.toLowerCase();
@@ -63,10 +50,7 @@ export function isPremiumUser(subscriptionPlan: SubscriptionPlan): boolean {
 
 /**
  * Get adapter name for logging purposes
- * 
- * @param subscriptionPlan - User's subscription plan
- * @returns Human-readable adapter name
  */
 export function getAdapterName(subscriptionPlan: SubscriptionPlan): string {
-  return 'aiStudios';
+  return isPremiumUser(subscriptionPlan) ? 'aiStudios' : 'aiStudios99';
 }
