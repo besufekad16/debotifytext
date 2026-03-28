@@ -11,7 +11,7 @@
  * 4. Results are split and returned to individual users
  */
 
-import { AIStudiosAdapter } from "../adapters/aistudios";
+import { AIStudiosAdapter } from "../adapters/aistudio99";
 
 interface BatchRequest {
   id: string;

@@ -7,7 +7,7 @@
  */
 
 import { aiStudios } from "~/server/adapters/aistudios";
-import { aiStudios99 } from "~/server/adapters/aistudio99%";
+import { aiStudios99 } from "~/server/adapters/aistudio99";
 
 /**
  * Supported subscription plans
