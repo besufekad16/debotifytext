@@ -1,15 +1,8 @@
 # Documentation
 
-This folder contains all project documentation organized by category.
+This folder contains all project documentation files (190 files).
 
-## Folder Structure
-
-- **seo/** - SEO-related documentation (Google Search Console, sitemaps, PSEO, indexing)
-- **deployment/** - Deployment guides and build configurations (Vercel, production)
-- **setup/** - Initial setup and configuration guides (Clerk, Polar, database)
-- **fixes/** - Bug fixes and troubleshooting documentation
-- **guides/** - General guides, checklists, strategies, and reference materials
-- **archive/** - Historical documentation, summaries, and completed tasks
+All historical documentation, guides, setup instructions, fixes, and summaries are stored here to keep the root directory clean.
 
 ## Main Documentation
 
