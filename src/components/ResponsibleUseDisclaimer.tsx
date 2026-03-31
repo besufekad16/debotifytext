@@ -18,7 +18,7 @@ export default function ResponsibleUseDisclaimer() {
           {/* Content */}
           <div className="flex-1">
             <p className="text-sm sm:text-base text-[#5A4529] leading-relaxed">
-              <span className="font-semibold text-[#6D5635]">PurifyText is not a tool for academic dishonesty or cheating.</span> We encourage responsible use that enhances your work while respecting academic integrity.
+              <span className="font-semibold text-[#6D5635]">HumanifyLab is not a tool for academic dishonesty or cheating.</span> We encourage responsible use that enhances your work while respecting academic integrity.
             </p>
           </div>
 
