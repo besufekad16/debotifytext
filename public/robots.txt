@@ -174,24 +174,20 @@ Disallow: /sign-in
 Disallow: /sign-up
 
 # ============================================
-# SITEMAPS (40,000+ Pages)
+# SITEMAPS — Submit all 4 to Google & Bing
 # ============================================
 
-# Main Sitemap (Core Pages)
-Sitemap: https://www.humanifylab.com/sitemap.xml
+# Cluster 1: AI Detector Bypass (520 URLs)
+Sitemap: https://www.humanifylab.com/sitemap-bypass.xml
 
-# Sitemap Index (All Keyword Pages)
-Sitemap: https://www.humanifylab.com/sitemaps/sitemap-index.xml
+# Cluster 2: AI Humanizer Tools (526 URLs)
+Sitemap: https://www.humanifylab.com/sitemap-humanizer.xml
 
-# Individual Sitemaps (50k URLs each)
-Sitemap: https://www.humanifylab.com/sitemaps/sitemap-1.xml
-Sitemap: https://www.humanifylab.com/sitemaps/sitemap-2.xml
-Sitemap: https://www.humanifylab.com/sitemaps/sitemap-3.xml
-Sitemap: https://www.humanifylab.com/sitemaps/sitemap-4.xml
-Sitemap: https://www.humanifylab.com/sitemaps/sitemap-5.xml
-Sitemap: https://www.humanifylab.com/sitemaps/sitemap-6.xml
-Sitemap: https://www.humanifylab.com/sitemaps/sitemap-7.xml
-Sitemap: https://www.humanifylab.com/sitemaps/sitemap-8.xml
+# Cluster 3: How-To Guides (469 URLs)
+Sitemap: https://www.humanifylab.com/sitemap-howto.xml
+
+# Cluster 4: Use Case / Audience (485 URLs)
+Sitemap: https://www.humanifylab.com/sitemap-usecase.xml
 
 # ============================================
 # CRAWL SETTINGS

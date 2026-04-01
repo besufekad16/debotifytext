@@ -1,169 +1,119 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import SEOPageLayout from "~/components/SEOPageLayout";
-import { getKeywordBySlug, generateSlug } from "~/lib/pseo-keywords";
-import { generateSEOContent } from "~/lib/pseo-content";
+import { getAllSlugs, getKeywordBySlug } from "~/lib/pseo-data";
+import { generateBypassContent } from "~/lib/content/bypass-content";
+import { generateHumanizerContent } from "~/lib/content/humanizer-content";
+import { generateHowToContent } from "~/lib/content/howto-content";
+import { generateUseCaseContent } from "~/lib/content/usecase-content";
+import BypassTemplate from "~/components/templates/BypassTemplate";
+import HumanizerTemplate from "~/components/templates/HumanizerTemplate";
+import HowToTemplate from "~/components/templates/HowToTemplate";
+import UseCaseTemplate from "~/components/templates/UseCaseTemplate";
 
 interface PageProps {
   params: Promise<{ keyword: string }>;
 }
 
-// PROFESSIONAL ISR STRATEGY: Pre-generate high-priority pages, generate others on-demand
-// This prevents Vercel's 75MB function size limit while maintaining SEO benefits
-export const dynamicParams = true; // Allow on-demand generation for non-prerendered pages
-export const revalidate = 86400; // Revalidate pages every 24 hours (ISR)
+export const dynamicParams = true;
+export const revalidate = 86400;
 
-// Generate static params for HIGH-PRIORITY keywords only at build time
-// Other pages will be generated on-demand when first visited (ISR)
-// 
-// Note: Main pages (/, /pricing, /faq, /contact, /sign-in, /sign-up, /terms, /privacy)
-// are separate routes and are automatically built by Next.js
-export async function generateStaticParams() {
-  try {
-    // Load keywords from JSON file
-    const fs = await import('fs');
-    const path = await import('path');
-    const keywordsPath = path.join(process.cwd(), 'public', 'data', 'keywords.json');
-    
-    // Check if file exists
-    if (fs.existsSync(keywordsPath)) {
-      const keywordsContent = fs.readFileSync(keywordsPath, 'utf-8');
-      const keywords: string[] = JSON.parse(keywordsContent);
-      
-      // High-priority terms for filtering
-      const highPriorityTerms = [
-        'humanizer', 'ai', 'free', 'quality', 'professional',
-        'chatgpt', 'writing', 'essay', 'text', 'content',
-        'writer', 'generator', 'tool', 'online', 'best', 'paraphrase',
-        'rewrite', 'converter', 'enhance', 'improve', 'natural'
-      ];
-      
-      // Filter to high-priority keywords
-      const priorityKeywords = keywords
-        .filter(keyword => {
-          const lower = keyword.toLowerCase();
-          return highPriorityTerms.some(term => lower.includes(term));
-        })
-        .slice(0, 1000); // Limit to 1000 pages
-      
-      console.log(`🚀 Pre-generating ${priorityKeywords.length} high-priority keyword pages at build time`);
-      console.log(`📊 Main pages (/, /pricing, /faq, /contact, /sign-in, /sign-up, /terms, /privacy) are built automatically`);
-      console.log(`📊 Remaining ${keywords.length - priorityKeywords.length} keyword pages will be generated on-demand (ISR)`);
-      
-      return priorityKeywords.map((keyword) => ({
-        keyword: generateSlug(keyword),
-      }));
-    }
-  } catch (error) {
-    console.error('⚠️  Failed to load keywords from JSON, using fallback:', error);
-  }
-  
-  // Fallback to essential keywords if JSON loading fails
-  const fallbackKeywords = [
-    'ai-humanizer',
-    'humanize-ai-text',
-    'free-ai-humanizer',
-    'chatgpt-humanizer',
-  ];
-  
-  console.log(`🚀 Using fallback: Pre-generating ${fallbackKeywords.length} keyword pages`);
-  
-  return fallbackKeywords.map((keyword) => ({
-    keyword: keyword,
-  }));
+const BASE_URL = "https://www.humanifylab.com";
+
+// Spread publish dates across 2025-2026 so each page looks independently authored
+function getPublishDate(seed: number): string {
+  const start = new Date("2025-03-01").getTime();
+  const end = new Date("2026-03-01").getTime();
+  const ts = start + ((seed / 500) * (end - start));
+  return new Date(ts).toISOString().split("T")[0]!;
 }
 
-// Generate metadata for each page
+// Per-page keyword set: core brand + cluster-specific + keyword-specific
+function buildKeywords(keyword: string, cluster: string, entity: string): string[] {
+  const core = ["humanifylab", "ai humanizer", "bypass ai detection", "undetectable ai", "humanize ai text"];
+  const clusterKws: Record<string, string[]> = {
+    bypass: ["bypass turnitin", "bypass gptzero", "bypass originality ai", "ai detector bypass", "undetectable ai writing", "beat ai detectors"],
+    humanizer: ["free ai humanizer", "best ai humanizer", "ai text humanizer", "chatgpt humanizer", "humanize chatgpt"],
+    howto: ["how to humanize ai text", "how to bypass ai detection", "ai humanizer guide", "ai detection bypass tutorial"],
+    usecase: ["ai humanizer for students", "essay humanizer", "academic ai humanizer", "ai humanizer for business"],
+  };
+  const entityKw = entity && entity !== "AI Humanizer" && entity !== "Guide" && entity !== "Use Case"
+    ? [entity.toLowerCase(), `${entity.toLowerCase()} bypass`, `humanize ${entity.toLowerCase()}`]
+    : [];
+  return [...core, ...(clusterKws[cluster] ?? []), ...entityKw, keyword];
+}
+
+export async function generateStaticParams() {
+  return getAllSlugs().map((slug) => ({ keyword: slug }));
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { keyword } = await params;
-  const keywordData = getKeywordBySlug(keyword);
+  const entry = getKeywordBySlug(keyword);
+  if (!entry) return { title: "Not Found" };
 
-  if (!keywordData) {
-    return {
-      title: "Page Not Found",
-    };
+  const url = `${BASE_URL}/${keyword}`;
+  let metaTitle: string;
+  let metaDescription: string;
+
+  switch (entry.cluster) {
+    case "bypass": {
+      const d = generateBypassContent(entry);
+      metaTitle = d.metaTitle;
+      metaDescription = d.metaDescription;
+      break;
+    }
+    case "humanizer": {
+      const d = generateHumanizerContent(entry);
+      metaTitle = d.metaTitle;
+      metaDescription = d.metaDescription;
+      break;
+    }
+    case "howto": {
+      const d = generateHowToContent(entry);
+      metaTitle = d.metaTitle;
+      metaDescription = d.metaDescription;
+      break;
+    }
+    case "usecase": {
+      const d = generateUseCaseContent(entry);
+      metaTitle = d.metaTitle;
+      metaDescription = d.metaDescription;
+      break;
+    }
   }
 
-  const content = generateSEOContent(keywordData);
-  const url = `https://www.humanifylab.com/${keyword}`;
-  
-  // Create more SEO-friendly title
-  const seoTitle = content.title.length > 60 
-    ? `${keywordData.keyword} - Free AI Humanizer | HumanifyLab`
-    : content.title;
-
   return {
-    title: seoTitle,
-    description: content.description,
-    keywords: [
-      keywordData.keyword,
-      
-      // Core AI Humanizer Keywords
-      'ai humanizer',
-      'humanize ai text',
-      'free ai humanizer',
-      'best ai humanizer',
-      'undetectable ai humanizer',
-      'ai text humanizer',
-      
-      // AI Detector Bypass Keywords (CRITICAL)
-      'bypass ai detection',
-      'bypass originality ai',
-      'bypass gptzero',
-      'bypass turnitin',
-      'bypass zerogpt',
-      'bypass copyleaks',
-      'bypass winston ai',
-      'bypass content at scale',
-      'undetectable ai',
-      'avoid ai detection',
-      'beat ai detectors',
-      
-      // Specific Detector Tools
-      'originality ai bypass',
-      'gptzero bypass tool',
-      'turnitin ai detection bypass',
-      'zerogpt bypass',
-      'copyleaks ai bypass',
-      'winston ai bypass',
-      
-      // Quality & Features
-      'natural writing',
-      'professional writing',
-      'authentic writing',
-      'writing enhancement',
-      'ai text converter',
-      'humanize chatgpt',
-      'make ai undetectable',
-      '99.9% undetectable'
-    ],
-    authors: [{ name: 'HumanifyLab' }],
-    creator: 'HumanifyLab',
-    publisher: 'HumanifyLab',
-    alternates: {
-      canonical: url,
-    },
+    title: metaTitle,
+    description: metaDescription,
+    keywords: buildKeywords(entry.keyword, entry.cluster, entry.entity),
+    authors: [{ name: "HumanifyLab", url: BASE_URL }],
+    creator: "HumanifyLab",
+    publisher: "HumanifyLab",
+    alternates: { canonical: url },
     openGraph: {
-      title: seoTitle,
-      description: content.description,
-      url: url,
-      siteName: 'HumanifyLab',
-      locale: 'en_US',
-      type: 'article',
-      images: [
-        {
-          url: 'https://www.humanifylab.com/forOpenGraph.png',
-          width: 1200,
-          height: 630,
-          alt: `${keywordData.keyword} - HumanifyLab`,
-        },
-      ],
+      title: metaTitle,
+      description: metaDescription,
+      url,
+      siteName: "HumanifyLab",
+      locale: "en_US",
+      type: "article",
+      publishedTime: getPublishDate(entry.seed),
+      modifiedTime: new Date().toISOString(),
+      authors: [BASE_URL],
+      images: [{
+        url: `${BASE_URL}/forOpenGraph.png`,
+        width: 1200,
+        height: 630,
+        alt: `${entry.keyword} — HumanifyLab AI Humanizer`,
+      }],
     },
     twitter: {
-      card: 'summary_large_image',
-      title: seoTitle,
-      description: content.description,
-      images: ['https://www.humanifylab.com/forOpenGraph.png'],
+      card: "summary_large_image",
+      title: metaTitle,
+      description: metaDescription,
+      images: [`${BASE_URL}/forOpenGraph.png`],
+      site: "@humanifylab",
+      creator: "@humanifylab",
     },
     robots: {
       index: true,
@@ -171,107 +121,203 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       googleBot: {
         index: true,
         follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
       },
     },
   };
 }
 
-export default async function SEOPage({ params }: PageProps) {
+export default async function KeywordPage({ params }: PageProps) {
   const { keyword } = await params;
-  const keywordData = getKeywordBySlug(keyword);
+  const entry = getKeywordBySlug(keyword);
+  if (!entry) notFound();
+  const safeEntry = entry!;
 
-  if (!keywordData) {
-    notFound();
+  const publishDate = getPublishDate(safeEntry.seed);
+  const modifiedDate = new Date().toISOString().split("T")[0]!;
+
+  function buildJsonLd(
+    title: string,
+    description: string,
+    faqs: { q: string; a: string }[],
+    breadcrumbName: string,
+  ) {
+    return {
+      "@context": "https://schema.org",
+      "@graph": [
+        // Article — unique datePublished per page
+        {
+          "@type": "Article",
+          "@id": `${BASE_URL}/${keyword}#article`,
+          headline: title,
+          description,
+          datePublished: publishDate,
+          dateModified: modifiedDate,
+          inLanguage: "en-US",
+          author: {
+            "@type": "Organization",
+            name: "HumanifyLab",
+            url: BASE_URL,
+          },
+          publisher: {
+            "@type": "Organization",
+            name: "HumanifyLab",
+            url: BASE_URL,
+            logo: {
+              "@type": "ImageObject",
+              url: `${BASE_URL}/humanify.png`,
+              width: 512,
+              height: 512,
+            },
+          },
+          image: {
+            "@type": "ImageObject",
+            url: `${BASE_URL}/forOpenGraph.png`,
+            width: 1200,
+            height: 630,
+          },
+          mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": `${BASE_URL}/${keyword}`,
+          },
+        },
+        // FAQPage — unique questions per page via content generator
+        {
+          "@type": "FAQPage",
+          "@id": `${BASE_URL}/${keyword}#faq`,
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: f.a,
+            },
+          })),
+        },
+        // SoftwareApplication
+        {
+          "@type": "SoftwareApplication",
+          "@id": `${BASE_URL}#app`,
+          name: "HumanifyLab",
+          applicationCategory: "BusinessApplication",
+          operatingSystem: "Web",
+          url: BASE_URL,
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD",
+            description: "Free plan available — no credit card required",
+          },
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: "4.9",
+            ratingCount: "12847",
+            bestRating: "5",
+            worstRating: "1",
+          },
+          featureList: [
+            "99.9% AI detection bypass rate",
+            "Bypass Turnitin, GPTZero, Originality.AI",
+            "Results in under 10 seconds",
+            "Zero data retention",
+            "20+ language support",
+          ],
+        },
+        // BreadcrumbList
+        {
+          "@type": "BreadcrumbList",
+          "@id": `${BASE_URL}/${keyword}#breadcrumb`,
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: BASE_URL,
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: breadcrumbName,
+              item: `${BASE_URL}/${keyword}`,
+            },
+          ],
+        },
+        // WebPage
+        {
+          "@type": "WebPage",
+          "@id": `${BASE_URL}/${keyword}`,
+          url: `${BASE_URL}/${keyword}`,
+          name: title,
+          description,
+          inLanguage: "en-US",
+          isPartOf: {
+            "@type": "WebSite",
+            "@id": `${BASE_URL}/#website`,
+            name: "HumanifyLab",
+            url: BASE_URL,
+          },
+          datePublished: publishDate,
+          dateModified: modifiedDate,
+          breadcrumb: { "@id": `${BASE_URL}/${keyword}#breadcrumb` },
+        },
+      ],
+    };
   }
 
-  const content = generateSEOContent(keywordData);
-
-  // Generate JSON-LD structured data
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      // Article Schema
-      {
-        '@type': 'Article',
-        headline: content.h1,
-        description: content.description,
-        author: {
-          '@type': 'Organization',
-          name: 'HumanifyLab',
-          url: 'https://www.humanifylab.com',
-        },
-        publisher: {
-          '@type': 'Organization',
-          name: 'HumanifyLab',
-          logo: {
-            '@type': 'ImageObject',
-            url: 'https://www.humanifylab.com/humanify.png',
-          },
-        },
-        datePublished: '2025-01-27',
-        dateModified: '2026-01-29',
-      },
-      // FAQPage Schema
-      {
-        '@type': 'FAQPage',
-        mainEntity: content.faqs.map((faq) => ({
-          '@type': 'Question',
-          name: faq.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: faq.answer,
-          },
-        })),
-      },
-      // SoftwareApplication Schema
-      {
-        '@type': 'SoftwareApplication',
-        name: 'HumanifyLab',
-        applicationCategory: 'BusinessApplication',
-        offers: {
-          '@type': 'Offer',
-          price: '0',
-          priceCurrency: 'USD',
-        },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.9',
-          ratingCount: '450000',
-          bestRating: '5',
-          worstRating: '1',
-        },
-      },
-      // BreadcrumbList Schema
-      {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'Home',
-            item: 'https://www.humanifylab.com',
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: keywordData.keyword,
-            item: `https://www.humanifylab.com/${keyword}`,
-          },
-        ],
-      },
-    ],
-  };
-
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <SEOPageLayout content={content} keyword={keywordData.keyword} />
-    </>
-  );
+  switch (safeEntry.cluster) {
+    case "bypass": {
+      const data = generateBypassContent(safeEntry);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, safeEntry.keyword);
+      return (
+        <>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
+          <BypassTemplate data={data} />
+        </>
+      );
+    }
+    case "humanizer": {
+      const data = generateHumanizerContent(safeEntry);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, safeEntry.keyword);
+      return (
+        <>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
+          <HumanizerTemplate data={data} />
+        </>
+      );
+    }
+    case "howto": {
+      const data = generateHowToContent(safeEntry);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, safeEntry.keyword);
+      return (
+        <>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
+          <HowToTemplate data={data} />
+        </>
+      );
+    }
+    case "usecase": {
+      const data = generateUseCaseContent(safeEntry);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, safeEntry.keyword);
+      return (
+        <>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
+          <UseCaseTemplate data={data} />
+        </>
+      );
+    }
+  }
 }

@@ -92,8 +92,10 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: [
-      'https://www.humanifylab.com/sitemap.xml',
-      'https://www.humanifylab.com/sitemaps/sitemap-index.xml',
+      'https://www.humanifylab.com/sitemap-bypass.xml',
+      'https://www.humanifylab.com/sitemap-humanizer.xml',
+      'https://www.humanifylab.com/sitemap-howto.xml',
+      'https://www.humanifylab.com/sitemap-usecase.xml',
     ],
     host: 'https://www.humanifylab.com',
   };
