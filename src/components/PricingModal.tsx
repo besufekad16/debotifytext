@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Loader2, ShieldCheck } from "lucide-react";
+import { X, Loader2, ShieldCheck, Flame, Clock, ArrowRight } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
@@ -122,6 +122,31 @@ function computePlanSavings(plan: Product): number {
   return Math.round(savings * 100);
 }
 
+function pad(n: number) { return String(n).padStart(2, "0"); }
+
+function useCountdown() {
+  const [timeLeft, setTimeLeft] = useState({ d: "06", h: "23", m: "59", s: "59" });
+  useEffect(() => {
+    let deadline: number;
+    try {
+      const stored = localStorage.getItem("banner_deadline_v2");
+      deadline = stored ? parseInt(stored, 10) : Date.now() + 7 * 24 * 60 * 60 * 1000;
+      if (!stored) localStorage.setItem("banner_deadline_v2", String(deadline));
+    } catch { deadline = Date.now() + 7 * 24 * 60 * 60 * 1000; }
+
+    const tick = () => {
+      const diff = deadline - Date.now();
+      if (diff <= 0) { setTimeLeft({ d: "00", h: "00", m: "00", s: "00" }); return; }
+      const t = Math.floor(diff / 1000);
+      setTimeLeft({ d: pad(Math.floor(t / 86400)), h: pad(Math.floor((t % 86400) / 3600)), m: pad(Math.floor((t % 3600) / 60)), s: pad(t % 60) });
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return timeLeft;
+}
+
 export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
   const router = useRouter();
   const { isSignedIn } = useUser();
@@ -130,6 +155,7 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
   const [loading, setLoading] = useState(true);
   const [ctaLoadingId, setCtaLoadingId] = useState<string | null>(null);
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
+  const timeLeft = useCountdown();
 
   useEffect(() => {
     if (isOpen) {
@@ -197,47 +223,119 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300 ${
+      className={`fixed inset-0 z-[200] overflow-y-auto transition-all duration-300 ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
     >
-      {/* Backdrop */}
+      {/* Backdrop — covers navbar, banner, everything */}
       <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        className="fixed inset-0 z-[200] bg-black/75 backdrop-blur-md"
         onClick={handleClose}
       />
 
-      {/* Modal */}
-      <div
-        className={`relative w-full max-w-6xl max-h-[90vh] overflow-y-auto bg-[#f0f9ff] rounded-2xl shadow-2xl transform transition-all duration-300 ${
-          isVisible ? "scale-100 translate-y-0" : "scale-95 translate-y-4"
-        }`}
-        style={{ 
-          backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)', 
-          backgroundSize: '20px 20px' 
-        }}
-      >
-        {/* Close Button */}
-        <button
-          onClick={handleClose}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white hover:bg-gray-100 transition-colors shadow-md"
-          aria-label="Close"
+      {/* Scroll container */}
+      <div className="relative z-[201] flex min-h-full items-start justify-center p-4 pt-6 sm:items-center sm:p-6">
+
+        {/* Modal wrapper */}
+        <div className="relative w-full max-w-6xl">
+          {/* Close Button — top-right corner of modal, always visible */}
+          <button
+            onClick={handleClose}
+            className="absolute right-3 top-3 z-[60] flex h-9 w-9 items-center justify-center rounded-full bg-white/90 shadow-lg hover:bg-white transition-colors sm:right-4 sm:top-4 sm:h-10 sm:w-10"
+            aria-label="Close pricing modal"
+          >
+            <X className="h-4 w-4 text-gray-700 sm:h-5 sm:w-5" />
+          </button>
+
+        {/* Modal content */}
+        <div
+          className={`relative w-full bg-[#f0f9ff] rounded-2xl shadow-2xl transform transition-all duration-300 ${
+            isVisible ? "scale-100 translate-y-0" : "scale-95 translate-y-4"
+          }`}
+          style={{
+            backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)',
+            backgroundSize: '20px 20px'
+          }}
         >
-          <X className="h-5 w-5 text-gray-600" />
-        </button>
+          {/* Discount Banner — matches homepage YearlyDiscountBanner */}
+          <div
+            className="relative w-full overflow-hidden rounded-t-2xl"
+            style={{ background: "linear-gradient(90deg, #0f0c29 0%, #1a1040 30%, #24243e 60%, #0f0c29 100%)" }}
+          >
+            {/* Animated sweep */}
+            <div
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background: "linear-gradient(105deg, transparent 35%, rgba(139,92,246,0.12) 50%, transparent 65%)",
+                backgroundSize: "250% 100%",
+                animation: "sweep 4s ease-in-out infinite",
+              }}
+            />
+            {/* Top accent line */}
+            <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: "linear-gradient(90deg, #7c3aed, #f59e0b, #8B6F47, #7c3aed)" }} />
+            <style>{`@keyframes sweep{0%{background-position:200% center}100%{background-position:-200% center}}@keyframes flicker{0%,100%{opacity:1}45%{opacity:.75}50%{opacity:1}55%{opacity:.8}}`}</style>
 
-        {/* Header */}
-        <div className="bg-gradient-to-r from-[#8B6F47] via-[#6D5635] to-[#5A4529] text-white p-6 md:p-8 text-center rounded-t-2xl">
-          <h2 className="text-2xl md:text-3xl font-bold mb-2">
-            🎉 Welcome to HumanifyLab!
-          </h2>
-          <p className="text-base md:text-lg opacity-90 max-w-2xl mx-auto">
-            Choose your perfect plan and start transforming AI text into natural, human-like writing
-          </p>
-        </div>
+            <div className="flex w-full flex-wrap items-center justify-center gap-2 px-4 py-3 sm:gap-3 sm:px-8 sm:py-4">
+              {/* Badge */}
+              <span className="flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-400/10 px-2.5 py-0.5">
+                <Flame className="h-3 w-3 text-amber-400" style={{ animation: "flicker 2.4s ease-in-out infinite" }} />
+                <span className="text-[10px] font-bold uppercase tracking-widest text-amber-300">500K Users</span>
+              </span>
 
-        {/* Content */}
-        <div className="p-6 md:p-8">
+              {/* Message */}
+              <p className="flex flex-wrap items-center justify-center gap-x-1.5 gap-y-0.5 text-center text-xs font-medium text-white/90 sm:text-sm">
+                <span className="font-semibold text-white">Celebrating with</span>
+                <span
+                  className="rounded px-1.5 py-0.5 text-xs font-extrabold tracking-tight text-white sm:text-sm"
+                  style={{ background: "linear-gradient(135deg,#7c3aed,#a855f7)", boxShadow: "0 0 12px rgba(139,92,246,0.5)" }}
+                >
+                  50% OFF
+                </span>
+                <span className="font-semibold text-white">all Yearly plans</span>
+                <span className="hidden text-white/50 sm:inline">·</span>
+                <span className="hidden text-xs text-white/70 sm:inline">Save up to $120/yr</span>
+              </p>
+
+              {/* Countdown */}
+              <span className="flex items-center gap-1">
+                <Clock className="h-3 w-3 text-white/40" />
+                <span className="mr-0.5 text-[10px] font-medium text-white/50">Ends in</span>
+                {([
+                  { val: timeLeft.d, label: "d" },
+                  { val: timeLeft.h, label: "h" },
+                  { val: timeLeft.m, label: "m" },
+                  { val: timeLeft.s, label: "s" },
+                ] as { val: string; label: string }[]).map((unit, i) => (
+                  <span key={i} className="flex items-center gap-0.5">
+                    <span className="flex flex-col items-center">
+                      <span className="inline-flex min-w-[1.75rem] items-center justify-center rounded border border-white/10 bg-white/10 px-1.5 py-0.5 text-[11px] font-bold tabular-nums text-white">
+                        {unit.val}
+                      </span>
+                      <span className="mt-0.5 text-[8px] font-medium leading-none text-white/30">{unit.label}</span>
+                    </span>
+                    {i < 3 && <span className="mb-2 text-xs font-bold text-white/40">:</span>}
+                  </span>
+                ))}
+              </span>
+
+              {/* CTA pill */}
+              <span
+                className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-bold text-white"
+                style={{ background: "linear-gradient(135deg,#7c3aed 0%,#6d28d9 100%)", boxShadow: "0 0 10px rgba(139,92,246,0.35)" }}
+              >
+                Claim 50% Off <ArrowRight className="h-3 w-3" />
+              </span>
+            </div>
+          </div>
+
+          {/* Header */}
+          <div className="bg-gradient-to-r from-[#8B6F47] via-[#6D5635] to-[#5A4529] px-6 py-5 text-center text-white md:px-8 md:py-6">
+            <h2 className="mb-1 text-xl font-bold md:text-2xl">🎉 Welcome to HumanifyLab!</h2>
+            <p className="text-sm opacity-90 md:text-base">Choose your plan and start humanizing AI text today</p>
+          </div>
+
+          {/* Content */}
+          <div className="p-6 md:p-8">
           {loading ? (
               <div className="flex justify-center py-10">
               <div className="inline-flex items-center gap-2 rounded-full border border-[#A0826D] bg-white px-4 py-2 text-xs font-medium text-slate-600 shadow-sm">
@@ -415,13 +513,19 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
                   onClick={handleClose}
                   className="text-gray-500 hover:text-gray-700 underline text-xs"
                 >
-                  I'll decide later
+                  I'll decide later — use my free credits
                 </button>
               </div>
             </>
           )}
+          </div>
+          {/* end content */}
         </div>
+        {/* end modal content */}
       </div>
+      {/* end modal wrapper */}
+      </div>
+      {/* end scroll container */}
     </div>
   );
 }
