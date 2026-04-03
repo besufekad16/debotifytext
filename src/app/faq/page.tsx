@@ -96,8 +96,8 @@ export default function FAQPage() {
           answer: "Credits are used to humanize your text. Typically, one credit equals one word of text processed. The exact number of credits required depends on the length and complexity of your content. You can view your remaining credits on your account.",
         },
         {
-          question: "Can I get a refund if I'm not satisfied?",
-          answer: "We're confident in the quality of our AI humanizer. If you're not satisfied with the results, please contact our support team within 7 days of purchase, and we'll work with you to find a solution.",
+          question: "Can I cancel my subscription?",
+          answer: "Yes, you can cancel your subscription at any time from your account settings. After cancellation, you will retain access to your plan until the end of the current billing period. All sales are final — we do not offer refunds.",
         },
       ],
     },

@@ -133,7 +133,7 @@ export default function TermsPage() {
                                 <li><strong className="text-slate-900">Free Plan:</strong> Limited credits provided at signup</li>
                                 <li><strong className="text-slate-900">Paid Plans:</strong> Subscription-based with monthly or yearly billing</li>
                                 <li><strong className="text-slate-900">Credits:</strong> One credit typically equals processing of 1 word</li>
-                                <li><strong className="text-slate-900">Refunds:</strong> We&apos;re confident in the quality of our AI humanizer. If you&apos;re not satisfied with the results, please contact our support team within 7 days of purchase, and we&apos;ll work with you to find a solution.</li>
+                                <li><strong className="text-slate-900">All Sales Final:</strong> All purchases are non-refundable. We do not offer refunds on subscriptions or credit top-ups. You may cancel your subscription at any time to prevent future charges.</li>
                                 <li><strong className="text-slate-900">Cancellation:</strong> You may cancel your subscription at any time</li>
                             </ul>
                         </section>
