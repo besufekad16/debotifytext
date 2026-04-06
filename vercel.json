@@ -1,6 +1,12 @@
 {
   "framework": "nextjs",
   "buildCommand": "next build",
+  "crons": [
+    {
+      "path": "/api/indexnow",
+      "schedule": "0 6 * * 1"
+    }
+  ],
   "functions": {
     "app/[keyword]/page.tsx": {
       "maxDuration": 30,
@@ -16,6 +22,10 @@
     },
     "src/app/api/cron/**/*.ts": {
       "maxDuration": 60,
+      "memory": 512
+    },
+    "src/app/api/indexnow/route.ts": {
+      "maxDuration": 120,
       "memory": 512
     }
   }
