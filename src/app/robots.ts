@@ -96,6 +96,12 @@ export default function robots(): MetadataRoute.Robots {
       'https://www.humanifylab.com/sitemap-humanizer.xml',
       'https://www.humanifylab.com/sitemap-howto.xml',
       'https://www.humanifylab.com/sitemap-usecase.xml',
+      'https://www.humanifylab.com/sitemap-competitor.xml',
+      'https://www.humanifylab.com/sitemap-academic.xml',
+      'https://www.humanifylab.com/sitemap-professional.xml',
+      'https://www.humanifylab.com/sitemap-detector.xml',
+      'https://www.humanifylab.com/sitemap-language.xml',
+      'https://www.humanifylab.com/sitemap-niche.xml',
     ],
     host: 'https://www.humanifylab.com',
   };

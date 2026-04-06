@@ -1,21 +1,14 @@
-# ============================================
-# HumanifyLab - Advanced SEO Configuration
-# ============================================
-# Website: https://www.humanifylab.com
-# Contact: humanifylab1@gmail.com
-# Last Updated: 2026-03-02
-# ============================================
+# ============================================================
+# HumanifyLab — robots.txt
+# https://www.humanifylab.com
+# Updated: 2026-04-06
+# ============================================================
 
-# ============================================
-# SEARCH ENGINE CRAWLERS (Priority Access)
-# ============================================
-
-# Google (Primary Search Engine)
+# ── Google ───────────────────────────────────────────────────
 User-agent: Googlebot
 Allow: /
 Disallow: /api/
 Disallow: /_next/
-Disallow: /admin/
 Disallow: /account/
 Disallow: /team/
 Disallow: /api-keys/
@@ -23,19 +16,21 @@ Disallow: /sign-in
 Disallow: /sign-up
 Crawl-delay: 0
 
-# Google Images
 User-agent: Googlebot-Image
 Allow: /
 Disallow: /api/
 Disallow: /_next/
-Disallow: /admin/
 
-# Bing (Microsoft Search)
+User-agent: Googlebot-Video
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+# ── Bing ─────────────────────────────────────────────────────
 User-agent: Bingbot
 Allow: /
 Disallow: /api/
 Disallow: /_next/
-Disallow: /admin/
 Disallow: /account/
 Disallow: /team/
 Disallow: /api-keys/
@@ -43,162 +38,129 @@ Disallow: /sign-in
 Disallow: /sign-up
 Crawl-delay: 0
 
-# Yahoo
+# ── Yahoo ────────────────────────────────────────────────────
 User-agent: Slurp
 Allow: /
 Disallow: /api/
 Disallow: /_next/
-Disallow: /admin/
 Disallow: /account/
 Disallow: /team/
 Disallow: /api-keys/
 
-# DuckDuckGo
+# ── DuckDuckGo ───────────────────────────────────────────────
 User-agent: DuckDuckBot
 Allow: /
 Disallow: /api/
 Disallow: /_next/
-Disallow: /admin/
 Disallow: /account/
 Disallow: /team/
 Disallow: /api-keys/
 
-# Baidu (China)
+# ── Baidu ────────────────────────────────────────────────────
 User-agent: Baiduspider
 Allow: /
 Disallow: /api/
 Disallow: /_next/
-Disallow: /admin/
 Disallow: /account/
 Disallow: /team/
 Disallow: /api-keys/
 
-# Yandex (Russia)
+# ── Yandex ───────────────────────────────────────────────────
 User-agent: YandexBot
 Allow: /
 Disallow: /api/
 Disallow: /_next/
-Disallow: /admin/
 Disallow: /account/
 Disallow: /team/
 Disallow: /api-keys/
 
-# ============================================
-# AI CRAWLERS (Training & Indexing)
-# ============================================
+# ── Naver (South Korea) ──────────────────────────────────────
+User-agent: Yeti
+Allow: /
+Disallow: /api/
+Disallow: /_next/
 
-# OpenAI GPT
+# ── AI Crawlers (allow for LLM training & visibility) ────────
 User-agent: GPTBot
 Allow: /
 Disallow: /api/
 Disallow: /_next/
-Disallow: /admin/
 Disallow: /account/
 Disallow: /team/
 Disallow: /api-keys/
-Disallow: /sign-in
-Disallow: /sign-up
 
-# ChatGPT User Agent
 User-agent: ChatGPT-User
 Allow: /
 Disallow: /api/
 Disallow: /_next/
-Disallow: /admin/
-Disallow: /account/
-Disallow: /team/
-Disallow: /api-keys/
 
-# Google Bard/Gemini
 User-agent: Google-Extended
 Allow: /
 Disallow: /api/
 Disallow: /_next/
-Disallow: /admin/
-Disallow: /account/
-Disallow: /team/
-Disallow: /api-keys/
 
-# Anthropic Claude
 User-agent: anthropic-ai
 Allow: /
 Disallow: /api/
 Disallow: /_next/
-Disallow: /admin/
-Disallow: /account/
-Disallow: /team/
-Disallow: /api-keys/
 
 User-agent: ClaudeBot
 Allow: /
 Disallow: /api/
 Disallow: /_next/
-Disallow: /admin/
-Disallow: /account/
-Disallow: /team/
-Disallow: /api-keys/
 
-# ============================================
-# BLOCKED BOTS (SEO Tools & Scrapers)
-# ============================================
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
 
-# Ahrefs
+User-agent: cohere-ai
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+# ── Block SEO scrapers ───────────────────────────────────────
 User-agent: AhrefsBot
 Disallow: /
 
-# Semrush
 User-agent: SemrushBot
 Disallow: /
 
-# Majestic
 User-agent: MJ12bot
 Disallow: /
 
-# Moz
 User-agent: DotBot
 Disallow: /
 
-# ============================================
-# DEFAULT RULE (All Other Bots)
-# ============================================
+User-agent: BLEXBot
+Disallow: /
 
+User-agent: DataForSeoBot
+Disallow: /
+
+# ── Default ──────────────────────────────────────────────────
 User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /_next/
-Disallow: /admin/
 Disallow: /account/
 Disallow: /team/
 Disallow: /api-keys/
 Disallow: /sign-in
 Disallow: /sign-up
 
-# ============================================
-# SITEMAPS — Submit all 4 to Google & Bing
-# ============================================
-
-# Cluster 1: AI Detector Bypass (520 URLs)
-Sitemap: https://www.humanifylab.com/sitemap-bypass.xml
-
-# Cluster 2: AI Humanizer Tools (526 URLs)
-Sitemap: https://www.humanifylab.com/sitemap-humanizer.xml
-
-# Cluster 3: How-To Guides (469 URLs)
-Sitemap: https://www.humanifylab.com/sitemap-howto.xml
-
-# Cluster 4: Use Case / Audience (485 URLs)
-Sitemap: https://www.humanifylab.com/sitemap-usecase.xml
-
-# ============================================
-# CRAWL SETTINGS
-# ============================================
-
-# No crawl delay (fast indexing)
-Crawl-delay: 0
-
-# Canonical Host
+# ── Canonical host ───────────────────────────────────────────
 Host: https://www.humanifylab.com
 
-# ============================================
-# END OF ROBOTS.TXT
-# ============================================
+# ── Sitemaps (10 clusters, 5000+ pages) ──────────────────────
+Sitemap: https://www.humanifylab.com/sitemap.xml
+Sitemap: https://www.humanifylab.com/sitemap-bypass.xml
+Sitemap: https://www.humanifylab.com/sitemap-humanizer.xml
+Sitemap: https://www.humanifylab.com/sitemap-howto.xml
+Sitemap: https://www.humanifylab.com/sitemap-usecase.xml
+Sitemap: https://www.humanifylab.com/sitemap-competitor.xml
+Sitemap: https://www.humanifylab.com/sitemap-academic.xml
+Sitemap: https://www.humanifylab.com/sitemap-professional.xml
+Sitemap: https://www.humanifylab.com/sitemap-detector.xml
+Sitemap: https://www.humanifylab.com/sitemap-language.xml
+Sitemap: https://www.humanifylab.com/sitemap-niche.xml

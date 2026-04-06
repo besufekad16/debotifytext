@@ -1539,6 +1539,41 @@ export default function UnifiedHomePage() {
           </div>
         </section>
 
+        {/* Affiliate Program Banner */}
+        <section className="py-16 bg-[#0f1419] relative overflow-hidden">
+          <div className="absolute inset-0 opacity-10" style={{
+            backgroundImage: `radial-gradient(circle at 20% 50%, #8b6f47 0%, transparent 50%), radial-gradient(circle at 80% 50%, #5e3d2a 0%, transparent 50%)`
+          }} />
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+              <div className="text-center md:text-left">
+                <span className="inline-block text-[10px] font-medium uppercase tracking-[0.15em] text-[#8b6f47] mb-3">Affiliate Program</span>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3 leading-tight">
+                  Earn 25% on every referral
+                </h2>
+                <p className="text-gray-400 text-sm max-w-md leading-relaxed">
+                  Share your unique link. When someone signs up and pays, you earn 25% of their first payment — paid in USDT directly to your wallet.
+                </p>
+                <div className="flex flex-wrap gap-4 mt-5 justify-center md:justify-start text-xs text-gray-400">
+                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#8b6f47] inline-block" />25% commission</span>
+                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#8b6f47] inline-block" />Paid in USDT</span>
+                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#8b6f47] inline-block" />$15 minimum payout</span>
+                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#8b6f47] inline-block" />Open to everyone</span>
+                </div>
+              </div>
+              <div className="flex-shrink-0">
+                <a
+                  href="/affiliate"
+                  className="inline-flex items-center gap-2 bg-[#8b6f47] hover:bg-[#7a6040] text-white font-semibold px-8 py-4 rounded-xl transition-colors text-sm whitespace-nowrap"
+                >
+                  Start Earning
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* FAQ Section */}
         <section id="faq" className="relative py-20 sm:py-24 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_1.4s_forwards] overflow-hidden">
           {/* Small triangle pattern background */}

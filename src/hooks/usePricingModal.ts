@@ -1,37 +1,30 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useUser } from "@clerk/nextjs";
 
 export function usePricingModal() {
   const [isOpen, setIsOpen] = useState(false);
   const { user, isLoaded } = useUser();
+  // Track the last userId so the modal re-triggers on every fresh sign-in
+  const lastUserIdRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (!isLoaded || !user) return;
 
-    // Check if user is on a paid plan
+    // Don't show for paid users
     const userPlan = user.publicMetadata?.subscriptionPlan as string | undefined;
-    const hasPaidPlan = userPlan && userPlan !== "free";
+    if (userPlan && userPlan !== "free") return;
 
-    // Don't show modal if user has a paid plan
-    if (hasPaidPlan) return;
+    // Only show once per userId session — resets when a different user signs in
+    if (lastUserIdRef.current === user.id) return;
+    lastUserIdRef.current = user.id;
 
-    // Show modal every time for free users
-    // Delay to let the page load first
-    const timer = setTimeout(() => {
-      setIsOpen(true);
-    }, 2000); // Show after 2 seconds
-
+    const timer = setTimeout(() => setIsOpen(true), 1500);
     return () => clearTimeout(timer);
   }, [user, isLoaded]);
 
-  const closeModal = () => {
-    setIsOpen(false);
-  };
+  const closeModal = () => setIsOpen(false);
 
-  return {
-    isOpen,
-    closeModal,
-  };
+  return { isOpen, closeModal };
 }

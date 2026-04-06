@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { Polar } from "@polar-sh/sdk";
 import { currentUser } from "@clerk/nextjs/server";
+import { cookies } from "next/headers";
 import { env } from "~/env";
 import { db } from "~/server/db";
 
@@ -62,6 +63,10 @@ export async function POST(req: NextRequest) {
     // Get the base URL for success/cancel redirects
     const baseUrl = req.headers.get("origin") || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3050";
 
+    // Read referral code from cookie if present
+    const cookieStore = await cookies();
+    const refCode = cookieStore.get("ref")?.value;
+
     // Create checkout session - products should be an array of product IDs
     const checkout = await polarClient.checkouts.create({
       products: [productId],
@@ -69,6 +74,7 @@ export async function POST(req: NextRequest) {
       customerName: user.fullName || undefined,
       metadata: {
         clerkId: user.id,
+        ...(refCode ? { ref: refCode } : {}),
       },
       successUrl: `${baseUrl}/?purchase=success`,
     } as any);

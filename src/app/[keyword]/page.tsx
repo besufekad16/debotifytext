@@ -1,14 +1,27 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getAllSlugs, getKeywordBySlug } from "~/lib/pseo-data";
+import { getAllV2Slugs, getV2KeywordBySlug } from "~/lib/pseo-data-v2";
 import { generateBypassContent } from "~/lib/content/bypass-content";
 import { generateHumanizerContent } from "~/lib/content/humanizer-content";
 import { generateHowToContent } from "~/lib/content/howto-content";
 import { generateUseCaseContent } from "~/lib/content/usecase-content";
+import { generateCompetitorContent } from "~/lib/content/competitor-content";
+import { generateAcademicContent } from "~/lib/content/academic-content";
+import { generateProfessionalContent } from "~/lib/content/professional-content";
+import { generateDetectorContent } from "~/lib/content/detector-content";
+import { generateLanguageContent } from "~/lib/content/language-content";
+import { generateNicheContent } from "~/lib/content/niche-content";
 import BypassTemplate from "~/components/templates/BypassTemplate";
 import HumanizerTemplate from "~/components/templates/HumanizerTemplate";
 import HowToTemplate from "~/components/templates/HowToTemplate";
 import UseCaseTemplate from "~/components/templates/UseCaseTemplate";
+import CompetitorTemplate from "~/components/templates/CompetitorTemplate";
+import AcademicTemplate from "~/components/templates/AcademicTemplate";
+import ProfessionalTemplate from "~/components/templates/ProfessionalTemplate";
+import DetectorTemplate from "~/components/templates/DetectorTemplate";
+import LanguageTemplate from "~/components/templates/LanguageTemplate";
+import NicheTemplate from "~/components/templates/NicheTemplate";
 
 interface PageProps {
   params: Promise<{ keyword: string }>;
@@ -43,49 +56,98 @@ function buildKeywords(keyword: string, cluster: string, entity: string): string
 }
 
 export async function generateStaticParams() {
-  return getAllSlugs().map((slug) => ({ keyword: slug }));
+  const v1 = getAllSlugs().map((slug) => ({ keyword: slug }));
+  const v2 = getAllV2Slugs().map((slug) => ({ keyword: slug }));
+  return [...v1, ...v2];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { keyword } = await params;
   const entry = getKeywordBySlug(keyword);
-  if (!entry) return { title: "Not Found" };
+  const entryV2 = entry ? null : getV2KeywordBySlug(keyword);
+  if (!entry && !entryV2) return { title: "Not Found" };
 
   const url = `${BASE_URL}/${keyword}`;
   let metaTitle: string;
   let metaDescription: string;
 
-  switch (entry.cluster) {
-    case "bypass": {
-      const d = generateBypassContent(entry);
-      metaTitle = d.metaTitle;
-      metaDescription = d.metaDescription;
-      break;
+  if (entry) {
+    switch (entry.cluster) {
+      case "bypass": {
+        const d = generateBypassContent(entry);
+        metaTitle = d.metaTitle;
+        metaDescription = d.metaDescription;
+        break;
+      }
+      case "humanizer": {
+        const d = generateHumanizerContent(entry);
+        metaTitle = d.metaTitle;
+        metaDescription = d.metaDescription;
+        break;
+      }
+      case "howto": {
+        const d = generateHowToContent(entry);
+        metaTitle = d.metaTitle;
+        metaDescription = d.metaDescription;
+        break;
+      }
+      case "usecase": {
+        const d = generateUseCaseContent(entry);
+        metaTitle = d.metaTitle;
+        metaDescription = d.metaDescription;
+        break;
+      }
     }
-    case "humanizer": {
-      const d = generateHumanizerContent(entry);
-      metaTitle = d.metaTitle;
-      metaDescription = d.metaDescription;
-      break;
-    }
-    case "howto": {
-      const d = generateHowToContent(entry);
-      metaTitle = d.metaTitle;
-      metaDescription = d.metaDescription;
-      break;
-    }
-    case "usecase": {
-      const d = generateUseCaseContent(entry);
-      metaTitle = d.metaTitle;
-      metaDescription = d.metaDescription;
-      break;
+  } else {
+    const e2 = entryV2!;
+    switch (e2.cluster) {
+      case "competitor": {
+        const d = generateCompetitorContent(e2);
+        metaTitle = d.metaTitle;
+        metaDescription = d.metaDescription;
+        break;
+      }
+      case "academic": {
+        const d = generateAcademicContent(e2);
+        metaTitle = d.metaTitle;
+        metaDescription = d.metaDescription;
+        break;
+      }
+      case "professional": {
+        const d = generateProfessionalContent(e2);
+        metaTitle = d.metaTitle;
+        metaDescription = d.metaDescription;
+        break;
+      }
+      case "detector": {
+        const d = generateDetectorContent(e2);
+        metaTitle = d.metaTitle;
+        metaDescription = d.metaDescription;
+        break;
+      }
+      case "language": {
+        const d = generateLanguageContent(e2);
+        metaTitle = d.metaTitle;
+        metaDescription = d.metaDescription;
+        break;
+      }
+      case "niche": {
+        const d = generateNicheContent(e2);
+        metaTitle = d.metaTitle;
+        metaDescription = d.metaDescription;
+        break;
+      }
     }
   }
+
+  const clusterForKeywords = entry?.cluster ?? entryV2!.cluster;
+  const entityForKeywords = entry?.entity ?? entryV2!.entity;
+  const keywordStr = entry?.keyword ?? entryV2!.keyword;
 
   return {
     title: metaTitle,
     description: metaDescription,
-    keywords: buildKeywords(entry.keyword, entry.cluster, entry.entity),
+    keywords: buildKeywords(keywordStr, clusterForKeywords, entityForKeywords),
     authors: [{ name: "HumanifyLab", url: BASE_URL }],
     creator: "HumanifyLab",
     publisher: "HumanifyLab",
@@ -97,14 +159,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: "HumanifyLab",
       locale: "en_US",
       type: "article",
-      publishedTime: getPublishDate(entry.seed),
+      publishedTime: getPublishDate(entry?.seed ?? entryV2!.seed),
       modifiedTime: new Date().toISOString(),
       authors: [BASE_URL],
       images: [{
         url: `${BASE_URL}/forOpenGraph.png`,
         width: 1200,
         height: 630,
-        alt: `${entry.keyword} — HumanifyLab AI Humanizer`,
+        alt: `${keywordStr} — HumanifyLab AI Humanizer`,
       }],
     },
     twitter: {
@@ -132,10 +194,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function KeywordPage({ params }: PageProps) {
   const { keyword } = await params;
   const entry = getKeywordBySlug(keyword);
-  if (!entry) notFound();
-  const safeEntry = entry!;
+  const entryV2 = entry ? null : getV2KeywordBySlug(keyword);
+  if (!entry && !entryV2) notFound();
 
-  const publishDate = getPublishDate(safeEntry.seed);
+  const seed = entry?.seed ?? entryV2!.seed;
+  const publishDate = getPublishDate(seed);
   const modifiedDate = new Date().toISOString().split("T")[0]!;
 
   function buildJsonLd(
@@ -266,10 +329,10 @@ export default async function KeywordPage({ params }: PageProps) {
     };
   }
 
-  switch (safeEntry.cluster) {
+  switch (entry?.cluster) {
     case "bypass": {
-      const data = generateBypassContent(safeEntry);
-      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, safeEntry.keyword);
+      const data = generateBypassContent(entry!);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, entry!.keyword);
       return (
         <>
           <script
@@ -281,8 +344,8 @@ export default async function KeywordPage({ params }: PageProps) {
       );
     }
     case "humanizer": {
-      const data = generateHumanizerContent(safeEntry);
-      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, safeEntry.keyword);
+      const data = generateHumanizerContent(entry!);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, entry!.keyword);
       return (
         <>
           <script
@@ -294,8 +357,8 @@ export default async function KeywordPage({ params }: PageProps) {
       );
     }
     case "howto": {
-      const data = generateHowToContent(safeEntry);
-      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, safeEntry.keyword);
+      const data = generateHowToContent(entry!);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, entry!.keyword);
       return (
         <>
           <script
@@ -307,8 +370,8 @@ export default async function KeywordPage({ params }: PageProps) {
       );
     }
     case "usecase": {
-      const data = generateUseCaseContent(safeEntry);
-      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, safeEntry.keyword);
+      const data = generateUseCaseContent(entry!);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, entry!.keyword);
       return (
         <>
           <script
@@ -316,6 +379,71 @@ export default async function KeywordPage({ params }: PageProps) {
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
           />
           <UseCaseTemplate data={data} />
+        </>
+      );
+    }
+  }
+
+  // V2 clusters
+  const e2 = entryV2!;
+  switch (e2.cluster) {
+    case "competitor": {
+      const data = generateCompetitorContent(e2);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
+      return (
+        <>
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+          <CompetitorTemplate data={data} />
+        </>
+      );
+    }
+    case "academic": {
+      const data = generateAcademicContent(e2);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
+      return (
+        <>
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+          <AcademicTemplate data={data} />
+        </>
+      );
+    }
+    case "professional": {
+      const data = generateProfessionalContent(e2);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
+      return (
+        <>
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+          <ProfessionalTemplate data={data} />
+        </>
+      );
+    }
+    case "detector": {
+      const data = generateDetectorContent(e2);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
+      return (
+        <>
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+          <DetectorTemplate data={data} />
+        </>
+      );
+    }
+    case "language": {
+      const data = generateLanguageContent(e2);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
+      return (
+        <>
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+          <LanguageTemplate data={data} />
+        </>
+      );
+    }
+    case "niche": {
+      const data = generateNicheContent(e2);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
+      return (
+        <>
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+          <NicheTemplate data={data} />
         </>
       );
     }

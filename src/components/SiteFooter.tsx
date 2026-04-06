@@ -79,6 +79,11 @@ export function SiteFooter() {
                   Blog
                 </Link>
               </li>
+              <li>
+                <Link href="/affiliate" className="text-[#8b6f47] hover:text-[#a07d55] transition-colors font-medium">
+                  Affiliate Program ✦
+                </Link>
+              </li>
             </ul>
           </div>
 

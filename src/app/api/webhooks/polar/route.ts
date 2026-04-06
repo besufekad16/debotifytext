@@ -37,6 +37,7 @@ type PolarWebhookPayload = {
     };
     metadata?: {
       clerkId?: string;
+      ref?: string;
     };
   };
 };
@@ -75,6 +76,76 @@ function getNextResetDate(_type: string): Date {
   nextMonth.setDate(1);
   nextMonth.setHours(0, 0, 0, 0);
   return nextMonth;
+}
+
+/**
+ * Processes affiliate commission for an order.
+ * Wrapped in try/catch — MUST NEVER throw or affect order fulfillment.
+ */
+async function processAffiliateCommission(params: {
+  orderId: string;
+  refCode: string | undefined;
+  buyerClerkId: string;
+  priceAmountCents: number;
+}): Promise<void> {
+  const { orderId, refCode, buyerClerkId, priceAmountCents } = params;
+
+  if (!refCode) return;
+
+  try {
+    // Look up affiliate by referral code
+    const affiliate = await db.affiliate.findUnique({
+      where: { referralCode: refCode },
+    });
+
+    if (!affiliate) {
+      console.log(`[Affiliate] No affiliate found for code: ${refCode}`);
+      return;
+    }
+
+    // Block self-referral
+    if (affiliate.clerkId === buyerClerkId) {
+      console.warn(`[Affiliate] Self-referral blocked for affiliate ${affiliate.id}`);
+      return;
+    }
+
+    // Calculate 25% commission (price is in cents → convert to dollars)
+    const commissionAmount = Math.round((priceAmountCents / 100) * 0.25 * 100) / 100;
+
+    // availableAt = now + 7 days
+    const availableAt = new Date();
+    availableAt.setDate(availableAt.getDate() + 7);
+
+    // Create conversion + increment pendingBalance atomically
+    // orderId @unique prevents duplicate processing (idempotency)
+    await db.$transaction(async (tx) => {
+      await tx.affiliateConversion.create({
+        data: {
+          affiliateId: affiliate.id,
+          referredClerkId: buyerClerkId,
+          orderId,
+          commission: commissionAmount,
+          status: "pending",
+          availableAt,
+        },
+      });
+
+      await tx.affiliate.update({
+        where: { id: affiliate.id },
+        data: { pendingBalance: { increment: commissionAmount } },
+      });
+    });
+
+    console.log(`[Affiliate] Commission $${commissionAmount} created for affiliate ${affiliate.referralCode}`);
+  } catch (error) {
+    // Unique constraint violation = duplicate order — silently skip
+    const msg = error instanceof Error ? error.message : String(error);
+    if (msg.includes("Unique constraint")) {
+      console.log(`[Affiliate] Duplicate orderId ${orderId} — skipping commission`);
+    } else {
+      console.error("[Affiliate] Commission processing error:", error);
+    }
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -229,7 +300,7 @@ export async function POST(req: NextRequest) {
           const user = await db.user.update({
             where: { clerkId },
             data: {
-              extraCredits: { increment: planConfig.credits }, // Add to PERMANENT balance
+              extraCredits: { increment: planConfig.credits },
               polarCustomerId: customerId,
             },
           });
@@ -241,19 +312,18 @@ export async function POST(req: NextRequest) {
           });
         } else {
           // For subscriptions: SET credits (replace old value) and update plan
-          // Set next reset date for annual plans (monthly resets)
           const shouldSetResetDate = planConfig.type === 'annual';
           const nextReset = shouldSetResetDate ? getNextResetDate(planConfig.type) : null;
           
           const user = await db.user.update({
             where: { clerkId },
             data: {
-              credits: planConfig.credits, // SET credits, replacing old value
+              credits: planConfig.credits,
               subscriptionPlan: planConfig.plan,
               subscriptionType: planConfig.type,
               productId: productId,
-              polarCustomerId: customerId, // Store Polar customer ID for usage tracking
-              polarSubscriptionId: subscriptionId || null, // Store subscription ID (or null for one-time)
+              polarCustomerId: customerId,
+              polarSubscriptionId: subscriptionId || null,
               maxWordsPerRequest: planConfig.maxWords,
               nextResetDate: nextReset,
             },
@@ -267,6 +337,23 @@ export async function POST(req: NextRequest) {
             nextReset: user.nextResetDate,
           });
         }
+
+        // Process affiliate commission AFTER successful fulfillment
+        // Wrapped in its own try/catch — never affects the 200 response
+        const refCode =
+          data.metadata?.ref ??
+          (data as any).checkout?.metadata?.ref ??
+          (data as any).order?.metadata?.ref;
+
+        const orderId = (data as any).id ?? (data as any).order_id;
+        const priceAmountCents = data.product_price?.price_amount ?? 0;
+
+        await processAffiliateCommission({
+          orderId: String(orderId),
+          refCode,
+          buyerClerkId: clerkId,
+          priceAmountCents,
+        });
 
         return NextResponse.json({
           success: true,

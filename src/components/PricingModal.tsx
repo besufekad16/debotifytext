@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { X, Loader2, ShieldCheck, Flame, Clock, ArrowRight } from "lucide-react";
-import { Button } from "~/components/ui/button";
+import { useState, useEffect, useRef } from "react";
+import { X, Loader2, ShieldCheck, Flame } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 
@@ -37,59 +36,36 @@ type ParsedDescription = {
 };
 
 function parseProductDescription(description?: string | null): ParsedDescription {
-  if (!description) {
-    return {
-      headline: "Everything you need to humanize confidently.",
-      features: [
-        "Instant AI-to-human conversions",
-        "Copy & export in one click",
-        "Cancel or upgrade any time",
-      ],
-    };
-  }
-
-  const lines = description.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
+  if (!description) return {
+    headline: "Everything you need to humanize confidently.",
+    features: ["Instant AI-to-human conversions", "Copy & export in one click", "Cancel or upgrade any time"],
+  };
+  const lines = description.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
   let headline = "Everything you need to humanize confidently.";
-  let features: string[] = [];
+  const features: string[] = [];
   const headlineLines: string[] = [];
-  let foundBulletSection = false;
-
+  let foundBullet = false;
   for (const line of lines) {
-    if (line.includes('**Credits reset:**')) {
-      continue;
-    }
-
-    if (line.startsWith('•') || line.startsWith('-')) {
-      foundBulletSection = true;
-      const cleaned = line.replace(/^[•\-]\s*/, '').trim();
-      if (cleaned) {
-        features.push(cleaned);
-      }
-    } else if (!foundBulletSection) {
+    if (line.includes("**Credits reset:**")) continue;
+    if (line.startsWith("•") || line.startsWith("-")) {
+      foundBullet = true;
+      const cleaned = line.replace(/^[•\-]\s*/, "").trim();
+      if (cleaned) features.push(cleaned);
+    } else if (!foundBullet) {
       headlineLines.push(line);
     }
   }
-
-  if (headlineLines.length > 0) {
-    headline = headlineLines.join(' ');
-  }
-
-  if (features.length === 0) {
-    features = [
-      "Instant AI-to-human conversions",
-      "Copy & export in one click",
-      "Cancel or upgrade any time",
-    ];
-  }
-
-  return { headline, features };
+  if (headlineLines.length > 0) headline = headlineLines.join(" ");
+  return {
+    headline,
+    features: features.length > 0 ? features : ["Instant AI-to-human conversions", "Copy & export in one click", "Cancel or upgrade any time"],
+  };
 }
 
 function formatCurrency(amount: number, currency?: string | null) {
-  const resolvedCurrency = currency ?? "USD";
   return amount.toLocaleString(undefined, {
     style: "currency",
-    currency: resolvedCurrency,
+    currency: currency ?? "USD",
     maximumFractionDigits: amount % 1 === 0 ? 0 : 2,
     minimumFractionDigits: amount % 1 === 0 ? 0 : 2,
   });
@@ -97,54 +73,17 @@ function formatCurrency(amount: number, currency?: string | null) {
 
 function getAnnualBillingAmount(option: ProductPriceOption | null): number | null {
   if (!option?.priceAmount) return null;
-  if (option.recurringInterval === "year") {
-    return option.priceAmount / 100;
-  }
-  if (option.recurringInterval === "month") {
-    return (option.priceAmount * 12) / 100;
-  }
+  if (option.recurringInterval === "year") return option.priceAmount / 100;
+  if (option.recurringInterval === "month") return (option.priceAmount * 12) / 100;
   return null;
 }
 
 function computePlanSavings(plan: Product): number {
-  const monthlyAmount = plan.monthly?.priceAmount;
-  const yearlyAmount = plan.yearly?.priceAmount;
-
-  if (!monthlyAmount || !yearlyAmount) return 0;
-
-  const monthlyYearTotal = monthlyAmount * 12;
-  const yearlyYearTotal = yearlyAmount * 12;
-  if (monthlyYearTotal <= 0) return 0;
-
-  const savings = 1 - yearlyYearTotal / monthlyYearTotal;
-  if (savings <= 0) return 0;
-
-  return Math.round(savings * 100);
-}
-
-function pad(n: number) { return String(n).padStart(2, "0"); }
-
-function useCountdown() {
-  const [timeLeft, setTimeLeft] = useState({ d: "06", h: "23", m: "59", s: "59" });
-  useEffect(() => {
-    let deadline: number;
-    try {
-      const stored = localStorage.getItem("banner_deadline_v2");
-      deadline = stored ? parseInt(stored, 10) : Date.now() + 7 * 24 * 60 * 60 * 1000;
-      if (!stored) localStorage.setItem("banner_deadline_v2", String(deadline));
-    } catch { deadline = Date.now() + 7 * 24 * 60 * 60 * 1000; }
-
-    const tick = () => {
-      const diff = deadline - Date.now();
-      if (diff <= 0) { setTimeLeft({ d: "00", h: "00", m: "00", s: "00" }); return; }
-      const t = Math.floor(diff / 1000);
-      setTimeLeft({ d: pad(Math.floor(t / 86400)), h: pad(Math.floor((t % 86400) / 3600)), m: pad(Math.floor((t % 3600) / 60)), s: pad(t % 60) });
-    };
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
-  return timeLeft;
+  const m = plan.monthly?.priceAmount;
+  const y = plan.yearly?.priceAmount;
+  if (!m || !y) return 0;
+  const savings = 1 - (y * 12) / (m * 12);
+  return savings <= 0 ? 0 : Math.round(savings * 100);
 }
 
 export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
@@ -153,29 +92,42 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [products, setProducts] = useState<Product[] | null>(null);
   const [loading, setLoading] = useState(true);
-  const [ctaLoadingId, setCtaLoadingId] = useState<string | null>(null);
+  const [ctaLoading, setCtaLoading] = useState(false);
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
-  const timeLeft = useCountdown();
+
+  // 59-second countdown — resets every time modal opens, stops at 0, never auto-dismisses
+  const [seconds, setSeconds] = useState(59);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      setSeconds(59);
+      if (timerRef.current) clearInterval(timerRef.current);
+      timerRef.current = setInterval(() => {
+        setSeconds(prev => {
+          if (prev <= 1) { clearInterval(timerRef.current!); return 0; }
+          return prev - 1;
+        });
+      }, 1000);
+    } else {
+      if (timerRef.current) clearInterval(timerRef.current);
+    }
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => setIsVisible(true), 10);
-      
-      // Fetch products
-      (async () => {
-        try {
-          const res = await fetch("/api/polar/products");
-          if (!res.ok) {
-            throw new Error("Failed to load products");
-          }
-          const data = (await res.json()) as Product[];
+      setLoading(true);
+      fetch("/api/polar/products")
+        .then(r => r.json())
+        .then((data: Product[]) => {
           setProducts(data);
-        } catch (e) {
-          console.error('[PricingModal] Error:', e);
-        } finally {
-          setLoading(false);
-        }
-      })();
+          // Default to yearly if available
+          if (data.some((p: Product) => p.yearly)) setBillingCycle("yearly");
+        })
+        .catch(console.error)
+        .finally(() => setLoading(false));
     } else {
       setIsVisible(false);
     }
@@ -183,349 +135,224 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
 
   if (!isOpen) return null;
 
+  // Ultra plan = last product (index 2), same as pricing page
+  const ultraPlan = products?.find(p => p.name.toLowerCase().includes("ultra")) ?? products?.[products.length - 1];
+
+  const desiredOption = billingCycle === "yearly" ? ultraPlan?.yearly : ultraPlan?.monthly;
+  const activeOption = desiredOption ?? ultraPlan?.monthly ?? ultraPlan?.yearly;
+  const activeCycle: BillingCycle = activeOption && ultraPlan?.yearly && activeOption.id === ultraPlan.yearly.id ? "yearly" : "monthly";
+
+  const annualBillingAmount = activeCycle === "yearly" ? getAnnualBillingAmount(ultraPlan?.yearly ?? null) : null;
+  const planSavings = ultraPlan ? computePlanSavings(ultraPlan) : 0;
+  const showSavingsBadge = activeCycle === "yearly" && planSavings > 0;
+  const hasYearly = !!ultraPlan?.yearly;
+
+  const { headline, features } = parseProductDescription(ultraPlan?.uiDescription ?? ultraPlan?.description);
+
+  const pad = (n: number) => String(n).padStart(2, "0");
+
   const handleClose = () => {
     setIsVisible(false);
     setTimeout(() => onClose(), 300);
   };
 
-  const onSubscribe = async (productId: string) => {
+  const onSubscribe = async () => {
+    if (!activeOption?.id) return;
     try {
-      setCtaLoadingId(productId);
-      if (!isSignedIn) {
-        router.push("/sign-in");
-        setCtaLoadingId(null);
-        return;
-      }
-
+      setCtaLoading(true);
+      if (!isSignedIn) { router.push("/sign-in"); setCtaLoading(false); return; }
       const res = await fetch("/api/polar/checkout", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ productId }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productId: activeOption.id }),
       });
-
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || "Failed to create checkout");
-      }
-
+      if (!res.ok) throw new Error((await res.json()).error ?? "Checkout failed");
       const { checkoutUrl } = await res.json();
       window.location.href = checkoutUrl;
-    } catch (error) {
-      console.error('[PricingModal] Error:', error);
-      alert(error instanceof Error ? error.message : "Failed to create checkout. Please try again.");
-      setCtaLoadingId(null);
+    } catch (e) {
+      console.error(e);
+      setCtaLoading(false);
     }
   };
 
-  const hasYearlyPlans = products?.some((plan) => plan.yearly) ?? false;
-
   return (
     <div
-      className={`fixed inset-0 z-[200] overflow-y-auto transition-all duration-300 ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}
+      className={`fixed inset-0 z-[300] overflow-y-auto transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
+      style={{ background: "linear-gradient(160deg, #fdf8f2 0%, #f5e9d8 50%, #ede0cc 100%)" }}
     >
-      {/* Backdrop — covers navbar, banner, everything */}
-      <div
-        className="fixed inset-0 z-[200] bg-black/75 backdrop-blur-md"
-        onClick={handleClose}
-      />
+      {/* Dot texture */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.035]"
+        style={{ backgroundImage: "radial-gradient(#5e3d2a 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
 
-      {/* Scroll container */}
-      <div className="relative z-[201] flex min-h-full items-start justify-center p-4 pt-6 sm:items-center sm:p-6">
+      {/* X button */}
+      <button onClick={handleClose}
+        className="fixed top-4 right-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white border border-[#d4b896] shadow-sm hover:bg-[#fdf0e4] transition-colors"
+        aria-label="Dismiss">
+        <X className="h-4 w-4 text-[#3b1f0e]" />
+      </button>
 
-        {/* Modal wrapper */}
-        <div className="relative w-full max-w-6xl">
-          {/* Close Button — top-right corner of modal, always visible */}
-          <button
-            onClick={handleClose}
-            className="absolute right-3 top-3 z-[60] flex h-9 w-9 items-center justify-center rounded-full bg-white/90 shadow-lg hover:bg-white transition-colors sm:right-4 sm:top-4 sm:h-10 sm:w-10"
-            aria-label="Close pricing modal"
-          >
-            <X className="h-4 w-4 text-gray-700 sm:h-5 sm:w-5" />
-          </button>
+      <div className="min-h-screen flex flex-col items-center justify-start px-4 pt-10 pb-12 sm:justify-center sm:pt-12">
+        <div className={`w-full max-w-sm transition-all duration-500 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}>
 
-        {/* Modal content */}
-        <div
-          className={`relative w-full bg-[#f0f9ff] rounded-2xl shadow-2xl transform transition-all duration-300 ${
-            isVisible ? "scale-100 translate-y-0" : "scale-95 translate-y-4"
-          }`}
-          style={{
-            backgroundImage: 'linear-gradient(#eff8ff 1px, transparent 1px), linear-gradient(90deg, #eff8ff 1px, transparent 1px)',
-            backgroundSize: '20px 20px'
-          }}
-        >
-          {/* Discount Banner — matches homepage YearlyDiscountBanner */}
-          <div
-            className="relative w-full overflow-hidden rounded-t-2xl"
-            style={{ background: "linear-gradient(90deg, #0f0c29 0%, #1a1040 30%, #24243e 60%, #0f0c29 100%)" }}
-          >
-            {/* Animated sweep */}
-            <div
-              className="pointer-events-none absolute inset-0"
-              style={{
-                background: "linear-gradient(105deg, transparent 35%, rgba(139,92,246,0.12) 50%, transparent 65%)",
-                backgroundSize: "250% 100%",
-                animation: "sweep 4s ease-in-out infinite",
-              }}
-            />
-            {/* Top accent line */}
-            <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: "linear-gradient(90deg, #7c3aed, #f59e0b, #8B6F47, #7c3aed)" }} />
-            <style>{`@keyframes sweep{0%{background-position:200% center}100%{background-position:-200% center}}@keyframes flicker{0%,100%{opacity:1}45%{opacity:.75}50%{opacity:1}55%{opacity:.8}}`}</style>
+          {/* ── HEADLINE ── */}
+          <div className="text-center mb-5">
+            <h1 className="text-[1.6rem] sm:text-[1.9rem] font-extrabold text-[#1a0a00] leading-tight tracking-tight mb-2">
+              Unlock Ultra at <span className="text-[#8b6f47]">50% OFF</span>
+            </h1>
+            <p className="text-[#5e3d2a]/70 text-sm leading-relaxed max-w-xs mx-auto">
+              Claim this one-time welcome offer to unlock our most powerful AI Humanizer at 50% off.
+            </p>
+          </div>
 
-            <div className="flex w-full flex-wrap items-center justify-center gap-2 px-4 py-3 sm:gap-3 sm:px-8 sm:py-4">
-              {/* Badge */}
-              <span className="flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-400/10 px-2.5 py-0.5">
-                <Flame className="h-3 w-3 text-amber-400" style={{ animation: "flicker 2.4s ease-in-out infinite" }} />
-                <span className="text-[10px] font-bold uppercase tracking-widest text-amber-300">500K Users</span>
+          {/* ── COUNTDOWN PILL ── */}
+          <div className="flex justify-center mb-5">
+            <div className="inline-flex items-center gap-2 bg-white border border-[#d4b896] rounded-full px-5 py-2.5 shadow-sm">
+              <span className="text-[#3b1f0e] font-semibold text-sm">Offer ends in</span>
+              <span className={`font-black text-base tabular-nums tracking-tight ${seconds === 0 ? "text-[#8b6f47]/40" : "text-[#3b1f0e]"}`}>
+                00:{pad(seconds)}
               </span>
-
-              {/* Message */}
-              <p className="flex flex-wrap items-center justify-center gap-x-1.5 gap-y-0.5 text-center text-xs font-medium text-white/90 sm:text-sm">
-                <span className="font-semibold text-white">Celebrating with</span>
-                <span
-                  className="rounded px-1.5 py-0.5 text-xs font-extrabold tracking-tight text-white sm:text-sm"
-                  style={{ background: "linear-gradient(135deg,#7c3aed,#a855f7)", boxShadow: "0 0 12px rgba(139,92,246,0.5)" }}
-                >
-                  50% OFF
-                </span>
-                <span className="font-semibold text-white">all Yearly plans</span>
-                <span className="hidden text-white/50 sm:inline">·</span>
-                <span className="hidden text-xs text-white/70 sm:inline">Save up to $120/yr</span>
-              </p>
-
-              {/* Countdown */}
-              <span className="flex items-center gap-1">
-                <Clock className="h-3 w-3 text-white/40" />
-                <span className="mr-0.5 text-[10px] font-medium text-white/50">Ends in</span>
-                {([
-                  { val: timeLeft.d, label: "d" },
-                  { val: timeLeft.h, label: "h" },
-                  { val: timeLeft.m, label: "m" },
-                  { val: timeLeft.s, label: "s" },
-                ] as { val: string; label: string }[]).map((unit, i) => (
-                  <span key={i} className="flex items-center gap-0.5">
-                    <span className="flex flex-col items-center">
-                      <span className="inline-flex min-w-[1.75rem] items-center justify-center rounded border border-white/10 bg-white/10 px-1.5 py-0.5 text-[11px] font-bold tabular-nums text-white">
-                        {unit.val}
-                      </span>
-                      <span className="mt-0.5 text-[8px] font-medium leading-none text-white/30">{unit.label}</span>
-                    </span>
-                    {i < 3 && <span className="mb-2 text-xs font-bold text-white/40">:</span>}
-                  </span>
-                ))}
-              </span>
-
-              {/* CTA pill */}
-              <span
-                className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-bold text-white"
-                style={{ background: "linear-gradient(135deg,#7c3aed 0%,#6d28d9 100%)", boxShadow: "0 0 10px rgba(139,92,246,0.35)" }}
-              >
-                Claim 50% Off <ArrowRight className="h-3 w-3" />
-              </span>
+              {seconds === 0 && <span className="text-[10px] text-[#8b6f47]/60 italic">still available</span>}
             </div>
           </div>
 
-          {/* Header */}
-          <div className="bg-gradient-to-r from-[#8B6F47] via-[#6D5635] to-[#5A4529] px-6 py-5 text-center text-white md:px-8 md:py-6">
-            <h2 className="mb-1 text-xl font-bold md:text-2xl">🎉 Welcome to HumanifyLab!</h2>
-            <p className="text-sm opacity-90 md:text-base">Choose your plan and start humanizing AI text today</p>
-          </div>
-
-          {/* Content */}
-          <div className="p-6 md:p-8">
-          {loading ? (
-              <div className="flex justify-center py-10">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#A0826D] bg-white px-4 py-2 text-xs font-medium text-slate-600 shadow-sm">
-                <Loader2 className="h-4 w-4 animate-spin text-[#8B6F47]" /> Loading plans…
+          {/* ── BILLING TOGGLE — same as pricing page ── */}
+          {hasYearly && (
+            <div className="flex justify-center mb-5">
+              <div className="inline-flex items-center border border-[#d4b896] bg-white p-1 shadow-sm rounded-sm">
+                <button
+                  onClick={() => setBillingCycle("monthly")}
+                  className={`min-w-[100px] px-4 py-2 text-xs sm:text-sm font-semibold transition whitespace-nowrap ${
+                    billingCycle === "monthly"
+                      ? "bg-gradient-to-r from-[#5e3d2a] to-[#4a2f1f] text-white shadow-sm"
+                      : "text-[#8b6f47] hover:text-[#5e3d2a] bg-transparent"
+                  }`}
+                >
+                  Monthly billing
+                </button>
+                <button
+                  onClick={() => setBillingCycle("yearly")}
+                  className={`min-w-[100px] px-3 py-2 text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-1.5 whitespace-nowrap ${
+                    billingCycle === "yearly"
+                      ? "bg-gradient-to-r from-[#5e3d2a] to-[#4a2f1f] text-white shadow-sm"
+                      : "text-[#8b6f47] hover:text-[#5e3d2a] bg-transparent"
+                  }`}
+                >
+                  Yearly billing
+                  {billingCycle === "yearly" && (
+                    <span className="px-1.5 py-0.5 text-[9px] font-bold bg-white/25 text-white border border-white/40">
+                      Save 50%
+                    </span>
+                  )}
+                </button>
               </div>
             </div>
-          ) : !products?.length ? (
-            <div className="text-center py-10">
-              <p className="text-sm text-red-600">Unable to load pricing plans. Please try again later.</p>
+          )}
+
+          {/* ── ULTRA CARD — exact same as pricing page (index 2, white card) ── */}
+          {loading ? (
+            <div className="flex justify-center py-10">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#d4b896] bg-white px-4 py-2 text-xs font-medium text-[#5e3d2a] shadow-sm">
+                <Loader2 className="h-4 w-4 animate-spin text-[#8b6f47]" /> Loading plan…
+              </div>
             </div>
+          ) : !ultraPlan ? (
+            <p className="text-center text-sm text-red-600 py-6">Unable to load plan. Please try again.</p>
           ) : (
-            <>
-              {/* Toggle Button */}
-              {hasYearlyPlans && (
-                <div className="flex flex-col items-center gap-2 text-center mb-6">
-                  <div className="inline-flex items-center rounded-full border border-border bg-white p-1 shadow-sm">
-                    <button
-                      type="button"
-                      onClick={() => setBillingCycle("monthly")}
-                      className={`min-w-[90px] rounded-full px-3 py-1.5 text-xs font-semibold transition whitespace-nowrap ${
-                        billingCycle === "monthly"
-                          ? "bg-gradient-to-r from-[#8B6F47] to-[#6D5635] text-white shadow-sm"
-                          : "text-muted-foreground hover:text-foreground bg-transparent"
-                      }`}
-                    >
-                      Monthly billing
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setBillingCycle("yearly")}
-                      className={`min-w-[90px] rounded-full px-3 py-1.5 text-xs font-semibold transition relative flex items-center justify-center gap-1.5 whitespace-nowrap ${
-                        billingCycle === "yearly"
-                          ? "bg-gradient-to-r from-[#8B6F47] to-[#6D5635] text-white shadow-sm"
-                          : "text-muted-foreground hover:text-foreground bg-transparent"
-                      }`}
-                    >
-                      <span>Yearly billing</span>
-                      {billingCycle === "yearly" && (
-                        <span className="rounded-full px-1.5 py-0.5 text-[9px] font-bold whitespace-nowrap bg-white/25 text-white border border-white/40">
-                          Save 50%
-                        </span>
-                      )}
-                    </button>
-                  </div>
+            <div className="relative flex flex-col bg-white border border-[#d4b896] shadow-lg hover:shadow-xl overflow-hidden rounded-2xl p-8 w-full">
+
+              {/* 50% OFF badge — top-right corner */}
+              <div className="absolute top-3 right-3 flex items-center gap-1 bg-[#fff3e0] border border-[#f5c87a] text-[#8b5e00] text-[11px] font-bold px-2.5 py-1 rounded-full shadow-sm">
+                <Flame className="w-3 h-3 text-orange-500" />
+                50% OFF
+              </div>
+
+              {/* Save badge (yearly) */}
+              {showSavingsBadge && (
+                <div className="absolute top-3 left-3 bg-[#5e3d2a]/10 px-2 py-0.5 text-[10px] font-semibold text-[#5e3d2a] whitespace-nowrap rounded-full">
+                  Save {planSavings}%
                 </div>
               )}
 
-              {/* Pricing Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto">
-                {products.map((product, index) => {
-                  const { headline, features } = parseProductDescription(product.uiDescription ?? product.description);
-                  const isPopular = index === 1 && products.length > 1;
-                  const desiredOption = billingCycle === "yearly" ? product.yearly : product.monthly;
-                  const fallbackOption = product.monthly ?? product.yearly;
-                  const activeOption = desiredOption ?? fallbackOption;
-                  const activeCycle: BillingCycle = activeOption && product.yearly && activeOption.id === product.yearly.id ? "yearly" : "monthly";
-                  const activeProductId = activeOption?.id;
-                  const annualBillingAmount = activeCycle === "yearly" ? getAnnualBillingAmount(product.yearly) : null;
-                  const planSavings = computePlanSavings(product);
-                  const showSavingsBadge = activeCycle === "yearly" && planSavings > 0;
+              <div className="flex flex-1 flex-col w-full">
+                {/* Plan name */}
+                <h4 className="text-xl sm:text-2xl font-semibold tracking-tight mb-6 text-gray-900">
+                  {ultraPlan.name}
+                </h4>
 
-                  return (
-                    <div
-                      key={product.key}
-                      className={`relative flex h-full flex-col rounded-2xl border transition duration-300 p-5 md:p-6 w-full ${
-                        isPopular
-                          ? "bg-gradient-to-br from-[#8B6F47] to-[#6D5635] border-[#8B6F47]/30 shadow-2xl shadow-[#8B6F47]/20 scale-105 z-10"
-                          : index === 2
-                          ? "bg-white border-[#A0826D] shadow-lg hover:shadow-xl"
-                          : "bg-white border-gray-200 shadow-lg hover:shadow-xl"
-                      }`}
-                    >
-                      {isPopular && (
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-white px-3 py-1 text-[10px] font-semibold text-[#8B6F47] shadow-lg whitespace-nowrap">
-                          Most Loved
-                        </div>
+                {/* Price — identical logic to PolarPricing */}
+                <div className="flex flex-wrap items-baseline gap-1.5 sm:gap-2 text-gray-900">
+                  {activeCycle === "yearly" && ultraPlan.yearly?.priceAmount ? (
+                    <>
+                      {ultraPlan.monthly?.priceAmount && (
+                        <span className="text-xl sm:text-2xl font-semibold line-through decoration-2 text-slate-400">
+                          {formatCurrency(ultraPlan.monthly.priceAmount / 100, ultraPlan.monthly.priceCurrency)}
+                        </span>
                       )}
+                      <span className="text-3xl sm:text-4xl font-semibold">
+                        {formatCurrency((ultraPlan.yearly.priceAmount / 12) / 100, ultraPlan.yearly.priceCurrency)}
+                      </span>
+                      <span className="text-sm text-gray-400 w-full sm:w-auto">per month (billed annually)</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-3xl sm:text-4xl font-semibold">
+                        {activeOption?.priceAmount ? formatCurrency(activeOption.priceAmount / 100, activeOption.priceCurrency) : "Contact us"}
+                      </span>
+                      <span className="text-sm text-gray-400">per month</span>
+                    </>
+                  )}
+                </div>
 
-                      {showSavingsBadge && (
-                        <div className="absolute top-3 right-3 rounded-full bg-[#8B6F47]/10 px-2 py-0.5 text-[10px] font-semibold text-[#8B6F47] whitespace-nowrap">
-                          Save {planSavings}%
-                        </div>
-                      )}
+                {activeCycle === "yearly" ? (
+                  <p className="mt-2 text-[13px] text-gray-400">
+                    {annualBillingAmount != null
+                      ? `Billed annually at ${formatCurrency(annualBillingAmount, activeOption?.priceCurrency)} — save 50%`
+                      : "Billed annually"}
+                  </p>
+                ) : (
+                  <p className="mt-2 text-[13px] text-gray-400">Billed monthly</p>
+                )}
 
-                      <div className="flex flex-1 flex-col w-full">
-                        <div>
-                          <h4 className={`text-base font-semibold ${isPopular ? "text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" : "text-foreground"}`}>
-                            {product.name}
-                          </h4>
-                          <div className={`mt-2 flex flex-wrap items-baseline gap-1.5 ${isPopular ? "text-white" : "text-foreground"}`}>
-                            {activeCycle === "yearly" && product.yearly?.priceAmount ? (
-                              <>
-                                {product.monthly?.priceAmount && (
-                                  <span className={`text-lg font-semibold line-through decoration-2 ${isPopular ? "text-white/60" : "text-slate-400"}`}>
-                                    {formatCurrency(
-                                      product.monthly.priceAmount / 100,
-                                      product.monthly.priceCurrency
-                                    )}
-                                  </span>
-                                )}
-                                <span className="text-2xl font-semibold">
-                                  {formatCurrency(
-                                    (product.yearly.priceAmount / 12) / 100,
-                                    product.yearly.priceCurrency
-                                  )}
-                                </span>
-                                <span className={`text-xs w-full ${isPopular ? "text-white/90" : "text-muted-foreground"}`}>
-                                  per month (billed annually)
-                                </span>
-                              </>
-                            ) : (
-                              <>
-                                <span className="text-2xl font-semibold">
-                                  {activeOption?.priceAmount ? formatCurrency(activeOption.priceAmount / 100, activeOption.priceCurrency) : "Contact us"}
-                                </span>
-                                <span className={`text-xs ${isPopular ? "text-white/90" : "text-muted-foreground"}`}>per month</span>
-                              </>
-                            )}
-                          </div>
+                {/* CTA — same as pricing page non-popular card */}
+                <div className="mt-8 flex flex-col gap-4">
+                  <button
+                    onClick={onSubscribe}
+                    disabled={ctaLoading || !activeOption}
+                    className="w-full h-14 rounded-xl py-4 text-sm font-semibold shadow-lg transition-all duration-300 bg-gray-900 text-white hover:bg-[#5e3d2a] disabled:opacity-50 flex items-center justify-center gap-2"
+                  >
+                    {ctaLoading ? (
+                      <><Loader2 className="w-4 h-4 animate-spin" /> Processing…</>
+                    ) : "Subscribe"}
+                  </button>
+                  <p className="text-center text-xs text-gray-400">No hidden fees · Cancel anytime · Secure checkout</p>
+                </div>
 
-                          {activeCycle === "yearly" ? (
-                            <p className={`mt-1.5 text-[11px] ${isPopular ? "text-white/90" : ""}`}>
-                              {annualBillingAmount != null
-                                ? `Billed annually at ${formatCurrency(annualBillingAmount, activeOption?.priceCurrency)} - Save 50%!`
-                                : "Billed annually"}
-                            </p>
-                          ) : (
-                            <p className={`mt-1.5 text-[11px] ${isPopular ? "text-white/90" : ""}`}>Billed monthly</p>
-                          )}
-                        </div>
+                {/* Headline */}
+                <p className="mt-6 text-sm leading-relaxed text-gray-500">{headline}</p>
 
-                        <div className="mt-4 flex flex-col gap-3">
-                          <Button
-                            className={`w-full h-10 rounded-xl py-2.5 text-xs font-semibold shadow-sm transition-all ${
-                              isPopular
-                                ? "bg-white text-[#8B6F47] hover:bg-[#F5E6D3] hover:text-[#6D5635]"
-                                : index === 2
-                                ? "bg-gradient-to-r from-[#8B6F47] to-[#6D5635] text-white hover:from-[#6D5635] hover:to-[#5A4529]"
-                                : "bg-gray-900 text-white hover:bg-gray-800"
-                            }`}
-                            onClick={() => activeProductId && onSubscribe(activeProductId)}
-                            disabled={!activeProductId || !!ctaLoadingId}
-                          >
-                            {ctaLoadingId === activeProductId ? "Processing…" : "Subscribe"}
-                          </Button>
-                          <p className={`text-center text-[10px] ${isPopular ? "text-white/80" : "text-muted-foreground"}`}>
-                            No hidden fees · Cancel anytime · Secure checkout
-                          </p>
-                        </div>
-
-                        <p className={`mt-3 text-xs leading-relaxed ${isPopular ? "text-white/90" : "text-muted-foreground"}`}>
-                          {headline}
-                        </p>
-
-                        <ul className={`mt-3 space-y-2 text-xs ${isPopular ? "text-white/90" : "text-muted-foreground"}`}>
-                          {features.map((feature, featureIndex) => (
-                            <li key={`${product.key}-feature-${featureIndex}`} className="flex items-start gap-2">
-                              <ShieldCheck className={`mt-0.5 h-3.5 w-3.5 flex-shrink-0 ${isPopular ? "text-white" : "text-[#8B6F47]"}`} />
-                              <span className="flex-1">{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  );
-                })}
+                {/* Features — same as pricing page */}
+                <ul className="mt-6 space-y-4 text-sm text-gray-600">
+                  {features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <ShieldCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#5e3d2a]" />
+                      <span className="flex-1">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-
-              {/* Bottom CTA */}
-              <div className="mt-6 text-center">
-                <p className="text-sm text-gray-600 mb-3">
-                  ✨ All plans include 99.9% writing quality enhancement and unlimited humanizations
-                </p>
-                <button
-                  onClick={handleClose}
-                  className="text-gray-500 hover:text-gray-700 underline text-xs"
-                >
-                  I'll decide later — use my free credits
-                </button>
-              </div>
-            </>
+            </div>
           )}
+
+          {/* Dismiss */}
+          <div className="text-center mt-5">
+            <button onClick={handleClose}
+              className="text-xs text-[#8b6f47]/50 hover:text-[#5e3d2a] transition-colors underline underline-offset-2">
+              No thanks, I'll use my free credits
+            </button>
           </div>
-          {/* end content */}
+
         </div>
-        {/* end modal content */}
       </div>
-      {/* end modal wrapper */}
-      </div>
-      {/* end scroll container */}
     </div>
   );
 }
