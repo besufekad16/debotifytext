@@ -1,4 +1,5 @@
 import type { KeywordEntry } from '~/lib/pseo-data';
+import { uniqueIdx, uniqueNum } from '~/lib/content/content-utils';
 
 export interface HumanizerPageData {
   metaTitle: string;
@@ -179,14 +180,15 @@ export function generateHumanizerContent(entry: KeywordEntry): HumanizerPageData
   const toolMeta = TOOL_META[entity] ?? { displayName: 'AI', description: 'AI-generated content' };
   const toolName = toolMeta.displayName;
 
-  const titleFn = META_TITLES[seed % META_TITLES.length]!;
-  const descFn = META_DESCS[seed % META_DESCS.length]!;
-  const h1Fn = H1S[seed % H1S.length]!;
-  const heroFn = HERO_SUBTITLES[seed % HERO_SUBTITLES.length]!;
-  const features = FEATURES_POOL[seed % FEATURES_POOL.length]!;
-  const steps = STEPS_POOL[seed % STEPS_POOL.length]!;
-  const testimonials = TESTIMONIALS_POOL[seed % TESTIMONIALS_POOL.length]!;
-  const faqFn = FAQ_POOL[seed % FAQ_POOL.length]!;
+  const titleFn = META_TITLES[uniqueIdx(seed, keyword, META_TITLES.length, 0)]!;
+  const descFn = META_DESCS[uniqueIdx(seed, keyword, META_DESCS.length, 1)]!;
+  const h1Fn = H1S[uniqueIdx(seed, keyword, H1S.length, 2)]!;
+  const heroFn = HERO_SUBTITLES[uniqueIdx(seed, keyword, HERO_SUBTITLES.length, 3)]!;
+  const features = FEATURES_POOL[uniqueIdx(seed, keyword, FEATURES_POOL.length, 4)]!;
+  const steps = STEPS_POOL[uniqueIdx(seed, keyword, STEPS_POOL.length, 5)]!;
+  const testimonials = TESTIMONIALS_POOL[uniqueIdx(seed, keyword, TESTIMONIALS_POOL.length, 6)]!;
+  const faqFn = FAQ_POOL[uniqueIdx(seed, keyword, FAQ_POOL.length, 7)]!;
+  const activeUsers = `${uniqueNum(seed, keyword, 420, 490, 8)}K+`;
   const capitalizedKeyword = keyword.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
   const badges = [
@@ -201,7 +203,7 @@ export function generateHumanizerContent(entry: KeywordEntry): HumanizerPageData
     metaDescription: descFn(capitalizedKeyword, toolName),
     h1: h1Fn(capitalizedKeyword, toolName),
     heroSubtitle: heroFn(toolName),
-    badgeText: badges[seed % badges.length]!,
+    badgeText: badges[uniqueIdx(seed, keyword, badges.length, 9)]!,
     toolName,
     featuresTitle: 'Why HumanifyLab Outperforms Every Alternative',
     featuresSubtitle: 'Built from the ground up to bypass AI detection — not just paraphrase text.',
@@ -216,6 +218,6 @@ export function generateHumanizerContent(entry: KeywordEntry): HumanizerPageData
     faqTitle: `Everything You Need to Know About ${capitalizedKeyword}`,
     faqs: faqFn(keyword, toolName),
     finalCtaTitle: `Start Humanizing ${toolName} Content — Free`,
-    finalCtaSubtitle: `Join 450,000+ users who trust HumanifyLab to make their AI content completely undetectable. No credit card required.`,
+    finalCtaSubtitle: `Join ${activeUsers} users who trust HumanifyLab to make their AI content completely undetectable. No credit card required.`,
   };
 }

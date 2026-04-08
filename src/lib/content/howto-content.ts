@@ -1,4 +1,5 @@
 import type { KeywordEntry } from '~/lib/pseo-data';
+import { uniqueIdx, uniqueNum } from '~/lib/content/content-utils';
 
 export interface HowToPageData {
   metaTitle: string;
@@ -175,12 +176,12 @@ export function generateHowToContent(entry: KeywordEntry): HowToPageData {
   const { keyword, seed } = entry;
   const capitalizedKeyword = keyword.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
-  const introFn = INTROS[seed % INTROS.length]!;
-  const steps = STEPS_POOL[seed % STEPS_POOL.length]!;
-  const keyTakeaways = KEY_TAKEAWAYS_POOL[seed % KEY_TAKEAWAYS_POOL.length]!;
-  const whyPoints = WHY_POINTS_POOL[seed % WHY_POINTS_POOL.length]!;
-  const faqFn = FAQ_POOL[seed % FAQ_POOL.length]!;
-  const category = CATEGORIES[seed % CATEGORIES.length]!;
+  const introFn = INTROS[uniqueIdx(seed, keyword, INTROS.length, 0)]!;
+  const steps = STEPS_POOL[uniqueIdx(seed, keyword, STEPS_POOL.length, 1)]!;
+  const keyTakeaways = KEY_TAKEAWAYS_POOL[uniqueIdx(seed, keyword, KEY_TAKEAWAYS_POOL.length, 2)]!;
+  const whyPoints = WHY_POINTS_POOL[uniqueIdx(seed, keyword, WHY_POINTS_POOL.length, 3)]!;
+  const faqFn = FAQ_POOL[uniqueIdx(seed, keyword, FAQ_POOL.length, 4)]!;
+  const category = CATEGORIES[uniqueIdx(seed, keyword, CATEGORIES.length, 5)]!;
 
   const tocItems = [
     'What AI detectors actually measure',
@@ -196,7 +197,7 @@ export function generateHowToContent(entry: KeywordEntry): HowToPageData {
     { title: 'See the Results for Yourself', subtitle: 'Paste your AI content into HumanifyLab right now and watch it become completely undetectable.' },
     { title: 'Put This Guide Into Practice', subtitle: 'HumanifyLab makes everything in this guide automatic. Try it free — no credit card required.' },
   ];
-  const inlineCta = inlineCtas[seed % inlineCtas.length]!;
+  const inlineCta = inlineCtas[uniqueIdx(seed, keyword, inlineCtas.length, 6)]!;
 
   const importantNotes = [
     'HumanifyLab is a writing enhancement tool designed to improve the quality and naturalness of AI-generated content. Always review your institution\'s or employer\'s policies regarding AI use before submitting humanized content. HumanifyLab is widely used by content creators, marketers, and professionals in contexts where no such restrictions apply.',
@@ -205,24 +206,24 @@ export function generateHowToContent(entry: KeywordEntry): HowToPageData {
   ];
 
   return {
-    metaTitle: META_TITLES[seed % META_TITLES.length]!(capitalizedKeyword),
-    metaDescription: META_DESCS[seed % META_DESCS.length]!(capitalizedKeyword),
-    h1: H1S[seed % H1S.length]!(capitalizedKeyword),
+    metaTitle: META_TITLES[uniqueIdx(seed, keyword, META_TITLES.length, 7)]!(capitalizedKeyword),
+    metaDescription: META_DESCS[uniqueIdx(seed, keyword, META_DESCS.length, 8)]!(capitalizedKeyword),
+    h1: H1S[uniqueIdx(seed, keyword, H1S.length, 9)]!(capitalizedKeyword),
     category,
-    readTime: 7 + (seed % 6),
+    readTime: uniqueNum(seed, keyword, 6, 12, 10),
     updatedDate: 'April 2026',
     intro: introFn(keyword),
     tocItems,
     keyTakeaways,
     stepsTitle: `Step-by-Step: ${capitalizedKeyword}`,
     steps,
-    importantNote: importantNotes[seed % importantNotes.length]!,
+    importantNote: importantNotes[uniqueIdx(seed, keyword, importantNotes.length, 11)]!,
     whyHumanifyLabTitle: 'Why HumanifyLab is the Most Reliable Solution',
     whyPoints,
     inlineCtaTitle: inlineCta.title,
     inlineCtaSubtitle: inlineCta.subtitle,
     faqTitle: 'Frequently Asked Questions',
     faqs: faqFn(keyword),
-    relatedGuides: RELATED_GUIDES.slice(seed % 3, (seed % 3) + 4),
+    relatedGuides: RELATED_GUIDES.slice(uniqueIdx(seed, keyword, 3, 12), uniqueIdx(seed, keyword, 3, 12) + 4),
   };
 }

@@ -21,13 +21,13 @@ const config = {
   
   // Optimize for large-scale programmatic SEO
   experimental: {
-    // Optimize memory usage for large builds
-    workerThreads: false,
-    cpus: 1,
+    // Use worker threads for parallel page generation
+    workerThreads: true,
+    cpus: 4,
   },
   
-  // Increase build timeout for large sites
-  staticPageGenerationTimeout: 180, // 3 minutes per page
+  // Increase build timeout for large sites — 5000+ pages need more time
+  staticPageGenerationTimeout: 300, // 5 minutes per page batch
   
   images: {
     remotePatterns: [

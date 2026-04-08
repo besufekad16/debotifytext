@@ -1,5 +1,6 @@
 import type { KeywordEntry } from '~/lib/pseo-data';
 import type { BypassPageData } from '~/components/templates/BypassTemplate';
+import { uniqueIdx, uniqueNum } from '~/lib/content/content-utils';
 
 // ── Detector metadata ─────────────────────────────────────────────────────────
 interface DetectorMeta {
@@ -265,14 +266,21 @@ export function generateBypassContent(entry: KeywordEntry): BypassPageData {
   const det = meta.name;
   const short = meta.short;
 
-  const titleFn = META_TITLES[seed % META_TITLES.length]!;
-  const descFn = META_DESCS[seed % META_DESCS.length]!;
-  const h1Fn = H1S[seed % H1S.length]!;
-  const heroFn = HERO_SUBTITLES[seed % HERO_SUBTITLES.length]!;
-  const pair = BEFORE_AFTER_PAIRS[seed % BEFORE_AFTER_PAIRS.length]!;
-  const steps = STEPS_POOL[seed % STEPS_POOL.length]!;
-  const faqFn = FAQ_POOL[seed % FAQ_POOL.length]!;
-  const compRows = COMPARISON_ROWS_POOL[seed % COMPARISON_ROWS_POOL.length]!;
+  // Use compound uniqueness — keyword hash + seed ensures no two pages share content
+  const titleFn = META_TITLES[uniqueIdx(seed, keyword, META_TITLES.length, 0)]!;
+  const descFn = META_DESCS[uniqueIdx(seed, keyword, META_DESCS.length, 1)]!;
+  const h1Fn = H1S[uniqueIdx(seed, keyword, H1S.length, 2)]!;
+  const heroFn = HERO_SUBTITLES[uniqueIdx(seed, keyword, HERO_SUBTITLES.length, 3)]!;
+  const pair = BEFORE_AFTER_PAIRS[uniqueIdx(seed, keyword, BEFORE_AFTER_PAIRS.length, 4)]!;
+  const steps = STEPS_POOL[uniqueIdx(seed, keyword, STEPS_POOL.length, 5)]!;
+  const faqFn = FAQ_POOL[uniqueIdx(seed, keyword, FAQ_POOL.length, 6)]!;
+  const compRows = COMPARISON_ROWS_POOL[uniqueIdx(seed, keyword, COMPARISON_ROWS_POOL.length, 7)]!;
+
+  // Unique stats per page
+  const beforeScore = uniqueNum(seed, keyword, 88, 99, 8);
+  const afterScore = uniqueNum(seed, keyword, 0, 3, 9);
+  const activeUsers = `${uniqueNum(seed, keyword, 420, 490, 10)}K+`;
+  const testsPerDay = meta.testsPerDay;
 
   return {
     metaTitle: titleFn(kw, det, short),
@@ -282,16 +290,16 @@ export function generateBypassContent(entry: KeywordEntry): BypassPageData {
     detectorName: det,
     stats: [
       { value: meta.successRate, label: `${det} Bypass Rate` },
-      { value: meta.testsPerDay, label: 'Tests Processed Daily' },
-      { value: meta.avgScore, label: 'Avg AI Score After' },
-      { value: '450K+', label: 'Active Users' },
+      { value: testsPerDay, label: 'Tests Processed Daily' },
+      { value: `${afterScore}%`, label: 'Avg AI Score After' },
+      { value: activeUsers, label: 'Active Users' },
     ],
     howDetectorWorksTitle: `How ${det} Detects AI Content`,
     howDetectorWorksIntro: `Understanding how ${det} works is the first step to bypassing it. Here's what it measures — and how HumanifyLab defeats each signal.`,
     detectorMechanisms: meta.mechanisms,
     beforeAfterTitle: `Before & After HumanifyLab: Real ${det} Results`,
-    beforeScore: 94 + (seed % 5),
-    afterScore: seed % 3,
+    beforeScore,
+    afterScore,
     beforeText: pair.before,
     afterText: pair.after,
     stepsTitle: `How to ${kw} with HumanifyLab`,
@@ -301,6 +309,6 @@ export function generateBypassContent(entry: KeywordEntry): BypassPageData {
     faqTitle: `${kw}: Frequently Asked Questions`,
     faqs: faqFn(keyword, det),
     finalCtaTitle: `Ready to Beat ${det}?`,
-    finalCtaSubtitle: `Join 450,000+ users who trust HumanifyLab to make their AI content completely undetectable. Free to start — no credit card required.`,
+    finalCtaSubtitle: `Join ${activeUsers} users who trust HumanifyLab to make their AI content completely undetectable. Free to start — no credit card required.`,
   };
 }

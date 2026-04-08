@@ -1,4 +1,5 @@
 import type { KeywordEntry } from '~/lib/pseo-data';
+import { uniqueIdx } from '~/lib/content/content-utils';
 
 export interface UseCasePageData {
   metaTitle: string;
@@ -227,8 +228,8 @@ export function generateUseCaseContent(entry: KeywordEntry): UseCasePageData {
     (aud) => `Stop worrying about AI detection. HumanifyLab is purpose-built for ${aud} — delivering 99.9% undetectable content that reads naturally and passes every detector your context requires.`,
   ];
 
-  const heroFn = heroSubtitles[seed % heroSubtitles.length]!;
-  const faqFn = FAQ_POOL[seed % FAQ_POOL.length]!;
+  const heroFn = heroSubtitles[uniqueIdx(seed, keyword, heroSubtitles.length, 0)]!;
+  const faqFn = FAQ_POOL[uniqueIdx(seed, keyword, FAQ_POOL.length, 1)]!;
 
   const problemsByAudience = {
     student: STUDENT_PROBLEMS,
@@ -252,7 +253,7 @@ export function generateUseCaseContent(entry: KeywordEntry): UseCasePageData {
   };
 
   const testimonialPool = TESTIMONIALS_BY_AUDIENCE[audience.type] ?? TESTIMONIALS_BY_AUDIENCE['business']!;
-  const testimonials = testimonialPool[seed % testimonialPool.length]!;
+  const testimonials = testimonialPool[uniqueIdx(seed, keyword, testimonialPool.length, 2)]!;
 
   const painBadgesByAudience: Record<string, string[]> = {
     student: ['Bypass Turnitin', 'Pass GPTZero', 'Academic tone', 'Zero detection risk', 'Results in 10 seconds'],
@@ -262,9 +263,9 @@ export function generateUseCaseContent(entry: KeywordEntry): UseCasePageData {
   };
 
   return {
-    metaTitle: META_TITLES[seed % META_TITLES.length]!(capitalizedKeyword, audience.label),
-    metaDescription: META_DESCS[seed % META_DESCS.length]!(capitalizedKeyword, audience.label),
-    h1: H1S[seed % H1S.length]!(capitalizedKeyword, audience.label),
+    metaTitle: META_TITLES[uniqueIdx(seed, keyword, META_TITLES.length, 3)]!(capitalizedKeyword, audience.label),
+    metaDescription: META_DESCS[uniqueIdx(seed, keyword, META_DESCS.length, 4)]!(capitalizedKeyword, audience.label),
+    h1: H1S[uniqueIdx(seed, keyword, H1S.length, 5)]!(capitalizedKeyword, audience.label),
     heroSubtitle: heroFn(audience.label, keyword),
     audienceLabel: audience.label,
     audienceType: audience.type,

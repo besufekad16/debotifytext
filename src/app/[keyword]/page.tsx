@@ -27,8 +27,11 @@ interface PageProps {
   params: Promise<{ keyword: string }>;
 }
 
-export const dynamicParams = true;
-export const revalidate = 86400;
+// dynamicParams = false: any slug NOT in generateStaticParams returns a proper 404
+// This prevents Google from seeing blank/loading pages as 404s
+export const dynamicParams = false;
+// revalidate = false: pages are fully static — built once, served forever (fastest)
+export const revalidate = false;
 
 const BASE_URL = "https://www.humanifylab.com";
 
