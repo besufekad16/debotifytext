@@ -27,11 +27,11 @@ interface PageProps {
   params: Promise<{ keyword: string }>;
 }
 
-// dynamicParams = false: any slug NOT in generateStaticParams returns a proper 404
-// This prevents Google from seeing blank/loading pages as 404s
-export const dynamicParams = false;
-// revalidate = false: pages are fully static — built once, served forever (fastest)
-export const revalidate = false;
+// dynamicParams = true: unknown slugs are rendered on-demand (ISR)
+// Pages in generateStaticParams are pre-built; others are built on first request
+export const dynamicParams = true;
+// revalidate = 86400: pages are cached for 24 hours, then regenerated
+export const revalidate = 86400;
 
 const BASE_URL = "https://www.humanifylab.com";
 
@@ -59,8 +59,11 @@ function buildKeywords(keyword: string, cluster: string, entity: string): string
 }
 
 export async function generateStaticParams() {
-  const v1 = getAllSlugs().map((slug) => ({ keyword: slug }));
-  const v2 = getAllV2Slugs().map((slug) => ({ keyword: slug }));
+  // Only pre-render the first 500 pages at build time to avoid Vercel timeout.
+  // The remaining ~4500 pages are rendered on-demand via ISR (dynamicParams = true).
+  // This keeps build time under Vercel's 45-minute limit while still serving all pages.
+  const v1 = getAllSlugs().slice(0, 300).map((slug) => ({ keyword: slug }));
+  const v2 = getAllV2Slugs().slice(0, 200).map((slug) => ({ keyword: slug }));
   return [...v1, ...v2];
 }
 

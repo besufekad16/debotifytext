@@ -21,8 +21,8 @@ const config = {
   
   // Optimize for large-scale programmatic SEO
   experimental: {
-    // Use worker threads for parallel page generation
-    workerThreads: true,
+    // Parallel page generation for faster builds
+    workerThreads: false,
     cpus: 4,
   },
   
