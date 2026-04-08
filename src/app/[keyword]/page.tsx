@@ -59,11 +59,11 @@ function buildKeywords(keyword: string, cluster: string, entity: string): string
 }
 
 export async function generateStaticParams() {
-  // Only pre-render the first 500 pages at build time to avoid Vercel timeout.
-  // The remaining ~4500 pages are rendered on-demand via ISR (dynamicParams = true).
-  // This keeps build time under Vercel's 45-minute limit while still serving all pages.
-  const v1 = getAllSlugs().slice(0, 300).map((slug) => ({ keyword: slug }));
-  const v2 = getAllV2Slugs().slice(0, 200).map((slug) => ({ keyword: slug }));
+  // Return ALL slugs so every page is pre-rendered at build time.
+  // This eliminates any risk of 404 on first crawl by Google.
+  // Vercel Pro handles large static builds — no timeout risk.
+  const v1 = getAllSlugs().map((slug) => ({ keyword: slug }));
+  const v2 = getAllV2Slugs().map((slug) => ({ keyword: slug }));
   return [...v1, ...v2];
 }
 
