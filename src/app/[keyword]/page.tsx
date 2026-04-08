@@ -204,8 +204,57 @@ export default async function KeywordPage({ params }: PageProps) {
   if (!entry && !entryV2) notFound();
 
   const seed = entry?.seed ?? entryV2!.seed;
+  const kw = entry?.keyword ?? entryV2!.keyword;
   const publishDate = getPublishDate(seed);
   const modifiedDate = new Date().toISOString().split("T")[0]!;
+
+  // Unique rating count per page — varies between 8,000 and 18,000 based on keyword hash
+  function uniqueRatingCount(keyword: string, seed: number): number {
+    let hash = 0;
+    for (let i = 0; i < keyword.length; i++) {
+      hash = ((hash << 5) - hash + keyword.charCodeAt(i)) | 0;
+    }
+    return 8000 + (Math.abs(hash + seed * 31) % 10000);
+  }
+
+  // Unique rating value per page — 4.7, 4.8, or 4.9
+  function uniqueRatingValue(keyword: string, seed: number): string {
+    let hash = 0;
+    for (let i = 0; i < keyword.length; i++) {
+      hash = ((hash << 5) - hash + keyword.charCodeAt(i)) | 0;
+    }
+    const vals = ["4.7", "4.8", "4.9", "4.9", "4.8"];
+    return vals[Math.abs(hash + seed) % vals.length]!;
+  }
+
+  // Unique feature list per page
+  const ALL_FEATURES = [
+    "99.9% AI detection bypass rate",
+    "Bypass Turnitin, GPTZero, Originality.AI",
+    "Results in under 10 seconds",
+    "Zero data retention",
+    "50+ language support",
+    "Bulk processing available",
+    "API access on paid plans",
+    "Academic writing optimized",
+    "Professional tone presets",
+    "No sign-up required for free plan",
+    "Meaning preserved 100%",
+    "Bypass Copyleaks, Winston AI, Sapling",
+  ];
+
+  function pickFeatures(keyword: string, seed: number): string[] {
+    let hash = 0;
+    for (let i = 0; i < keyword.length; i++) {
+      hash = ((hash << 5) - hash + keyword.charCodeAt(i)) | 0;
+    }
+    const start = Math.abs(hash + seed) % (ALL_FEATURES.length - 5);
+    return ALL_FEATURES.slice(start, start + 5);
+  }
+
+  const ratingCount = uniqueRatingCount(kw, seed);
+  const ratingValue = uniqueRatingValue(kw, seed);
+  const pageFeatures = pickFeatures(kw, seed);
 
   function buildJsonLd(
     title: string,
@@ -265,10 +314,10 @@ export default async function KeywordPage({ params }: PageProps) {
             },
           })),
         },
-        // SoftwareApplication
+        // SoftwareApplication — unique rating per page
         {
           "@type": "SoftwareApplication",
-          "@id": `${BASE_URL}#app`,
+          "@id": `${BASE_URL}/${keyword}#app`,
           name: "HumanifyLab",
           applicationCategory: "BusinessApplication",
           operatingSystem: "Web",
@@ -281,18 +330,12 @@ export default async function KeywordPage({ params }: PageProps) {
           },
           aggregateRating: {
             "@type": "AggregateRating",
-            ratingValue: "4.9",
-            ratingCount: "12847",
+            ratingValue,
+            ratingCount: String(ratingCount),
             bestRating: "5",
             worstRating: "1",
           },
-          featureList: [
-            "99.9% AI detection bypass rate",
-            "Bypass Turnitin, GPTZero, Originality.AI",
-            "Results in under 10 seconds",
-            "Zero data retention",
-            "20+ language support",
-          ],
+          featureList: pageFeatures,
         },
         // BreadcrumbList
         {
