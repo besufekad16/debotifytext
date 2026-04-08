@@ -37,15 +37,16 @@ const META_TITLES: ((kw: string, tool: string) => string)[] = [
 ];
 
 // ── 8 Meta description formulas ───────────────────────────────────────────────
+// CRITICAL: Every description MUST start with the exact keyword
 const META_DESCS: ((kw: string, tool: string) => string)[] = [
   (kw, tool) => `${kw}: Transform ${tool} output into authentic human writing. Bypass Turnitin, GPTZero, Originality.AI & all AI detectors. Free to start. Results in under 10 seconds. 450,000+ users trust HumanifyLab.`,
-  (kw, tool) => `Stop getting flagged for ${tool} content. HumanifyLab humanizes ${tool} text with 99.9% bypass rate. Meaning preserved. Zero data stored. Try free — no credit card needed.`,
+  (kw, tool) => `${kw} — stop getting flagged for ${tool} content. HumanifyLab humanizes ${tool} text with 99.9% bypass rate. Meaning preserved. Zero data stored. Try free — no credit card needed.`,
   (kw, tool) => `${kw} solved. HumanifyLab transforms ${tool} output into undetectable human writing. Beats Turnitin, GPTZero, Originality.AI. 450,000+ users. Free plan available today.`,
-  (kw, tool) => `Make ${tool} text undetectable with HumanifyLab. 99.9% bypass rate against all major AI detectors. Results in 10 seconds. Zero data retention. Start free now.`,
+  (kw, tool) => `${kw}: make ${tool} text undetectable with HumanifyLab. 99.9% bypass rate against all major AI detectors. Results in 10 seconds. Zero data retention. Start free now.`,
   (kw, tool) => `${kw}: HumanifyLab's 47-dimensional engine transforms ${tool} content into authentic human writing. Verified 99.9% bypass rate. Free to start. No sign-up required.`,
-  (kw, tool) => `Humanize ${tool} text instantly with HumanifyLab. Bypass Turnitin, GPTZero, Copyleaks & more. 99.9% success rate. Meaning preserved. 450,000+ users. Try free today.`,
-  (kw, tool) => `${kw}: Turn ${tool} output into undetectable writing. HumanifyLab beats every AI detector with 99.9% accuracy. Zero data stored. Free plan — no card required.`,
-  (kw, tool) => `Best ${kw} tool in 2026. HumanifyLab transforms ${tool} content into human writing that passes all detectors. 450,000+ users. Free to start. Results in seconds.`,
+  (kw, tool) => `${kw} — humanize ${tool} text instantly with HumanifyLab. Bypass Turnitin, GPTZero, Copyleaks & more. 99.9% success rate. Meaning preserved. 450,000+ users. Try free today.`,
+  (kw, tool) => `${kw}: turn ${tool} output into undetectable writing. HumanifyLab beats every AI detector with 99.9% accuracy. Zero data stored. Free plan — no card required.`,
+  (kw, tool) => `${kw} — best ${tool} humanizer tool in 2026. HumanifyLab transforms ${tool} content into human writing that passes all detectors. 450,000+ users. Free to start. Results in seconds.`,
 ];
 
 // ── 8 H1 formulas ─────────────────────────────────────────────────────────────

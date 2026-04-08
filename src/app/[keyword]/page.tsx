@@ -44,6 +44,7 @@ function getPublishDate(seed: number): string {
 }
 
 // Per-page keyword set: core brand + cluster-specific + keyword-specific
+// CRITICAL: keyword must appear first and multiple times for Google to understand page topic
 function buildKeywords(keyword: string, cluster: string, entity: string): string[] {
   const core = ["humanifylab", "ai humanizer", "bypass ai detection", "undetectable ai", "humanize ai text"];
   const clusterKws: Record<string, string[]> = {
@@ -51,11 +52,18 @@ function buildKeywords(keyword: string, cluster: string, entity: string): string
     humanizer: ["free ai humanizer", "best ai humanizer", "ai text humanizer", "chatgpt humanizer", "humanize chatgpt"],
     howto: ["how to humanize ai text", "how to bypass ai detection", "ai humanizer guide", "ai detection bypass tutorial"],
     usecase: ["ai humanizer for students", "essay humanizer", "academic ai humanizer", "ai humanizer for business"],
+    competitor: ["ai humanizer alternative", "best ai humanizer", "ai humanizer comparison", "undetectable ai alternative"],
+    academic: ["humanize ai essay", "bypass turnitin academic", "ai humanizer for students", "academic ai writing"],
+    professional: ["humanize ai content", "ai content humanizer", "professional ai humanizer", "seo ai humanizer"],
+    detector: ["bypass ai detector", "ai detector bypass", "beat ai detection", "pass ai detector"],
+    language: ["multilingual ai humanizer", "ai humanizer languages", "humanize ai text language"],
+    niche: ["ai humanizer niche", "humanize ai content", "ai writing humanizer"],
   };
-  const entityKw = entity && entity !== "AI Humanizer" && entity !== "Guide" && entity !== "Use Case"
-    ? [entity.toLowerCase(), `${entity.toLowerCase()} bypass`, `humanize ${entity.toLowerCase()}`]
+  const entityKw = entity && !["AI Humanizer", "Guide", "Use Case", "Academic", "Professional", "AI Detector", "Multilingual", "Niche", "Competitor"].includes(entity)
+    ? [entity.toLowerCase(), `${entity.toLowerCase()} bypass`, `humanize ${entity.toLowerCase()}`, `${entity.toLowerCase()} ai humanizer`]
     : [];
-  return [...core, ...(clusterKws[cluster] ?? []), ...entityKw, keyword];
+  // keyword appears first — signals to Google this is the primary topic
+  return [keyword, ...core, ...(clusterKws[cluster] ?? []), ...entityKw];
 }
 
 export async function generateStaticParams() {
@@ -384,10 +392,8 @@ export default async function KeywordPage({ params }: PageProps) {
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, entry!.keyword);
       return (
         <>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          />
+          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
           <BypassTemplate data={data} />
         </>
       );
@@ -397,10 +403,8 @@ export default async function KeywordPage({ params }: PageProps) {
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, entry!.keyword);
       return (
         <>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          />
+          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
           <HumanizerTemplate data={data} />
         </>
       );
@@ -410,10 +414,8 @@ export default async function KeywordPage({ params }: PageProps) {
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, entry!.keyword);
       return (
         <>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          />
+          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
           <HowToTemplate data={data} />
         </>
       );
@@ -423,10 +425,8 @@ export default async function KeywordPage({ params }: PageProps) {
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, entry!.keyword);
       return (
         <>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          />
+          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
           <UseCaseTemplate data={data} />
         </>
       );
@@ -441,6 +441,7 @@ export default async function KeywordPage({ params }: PageProps) {
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
       return (
         <>
+          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
           <CompetitorTemplate data={data} />
         </>
@@ -451,6 +452,7 @@ export default async function KeywordPage({ params }: PageProps) {
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
       return (
         <>
+          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
           <AcademicTemplate data={data} />
         </>
@@ -461,6 +463,7 @@ export default async function KeywordPage({ params }: PageProps) {
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
       return (
         <>
+          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
           <ProfessionalTemplate data={data} />
         </>
@@ -471,6 +474,7 @@ export default async function KeywordPage({ params }: PageProps) {
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
       return (
         <>
+          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
           <DetectorTemplate data={data} />
         </>
@@ -481,6 +485,7 @@ export default async function KeywordPage({ params }: PageProps) {
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
       return (
         <>
+          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
           <LanguageTemplate data={data} />
         </>
@@ -491,6 +496,7 @@ export default async function KeywordPage({ params }: PageProps) {
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
       return (
         <>
+          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
           <NicheTemplate data={data} />
         </>

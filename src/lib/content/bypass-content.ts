@@ -111,15 +111,16 @@ const META_TITLES: ((kw: string, det: string, short: string) => string)[] = [
 ];
 
 // ── 8 Meta description formulas (140-160 chars) ───────────────────────────────
+// CRITICAL: Every description MUST start with the exact keyword to signal uniqueness to Google
 const META_DESCS: ((kw: string, det: string, usedBy: string) => string)[] = [
   (kw, det, usedBy) => `${kw}: HumanifyLab bypasses ${det} with 99.9% success. Used by ${usedBy}. Zero data retention. Free to start. Results in under 10 seconds.`,
-  (kw, det) => `Stop getting flagged by ${det}. HumanifyLab transforms AI text into undetectable human writing. Trusted by 450,000+ users. Free plan available.`,
+  (kw, det, usedBy) => `${kw} — stop getting flagged by ${det}. HumanifyLab transforms AI text into undetectable human writing. Trusted by 450,000+ users. Free plan, no card needed.`,
   (kw, det, usedBy) => `${kw} solved. HumanifyLab defeats ${det} every time — used by ${usedBy} worldwide. 99.9% bypass rate. No sign-up required to start.`,
-  (kw, det) => `Beat ${det} with HumanifyLab. Our AI humanizer achieves 99.9% undetectable results. Meaning preserved. Zero data stored. Try free today.`,
-  (kw, det, usedBy) => `${det} bypass made easy. HumanifyLab is trusted by ${usedBy} for 99.9% undetectable AI content. Free to start, results in 10 seconds.`,
-  (kw, det) => `${kw}: HumanifyLab's deep linguistic engine defeats ${det} with 99.9% accuracy. 450,000+ users. Zero retention. Start free — no card needed.`,
-  (kw, det, usedBy) => `Bypass ${det} instantly with HumanifyLab. Used by ${usedBy}. 99.9% success rate, meaning preserved, zero data stored. Free to try now.`,
-  (kw, det) => `${kw} — HumanifyLab eliminates every ${det} flag. Deep transformation, 99.9% bypass rate, results in under 10 seconds. Start free today.`,
+  (kw, det, usedBy) => `${kw}: beat ${det} with HumanifyLab. 99.9% undetectable results. Meaning preserved. Zero data stored. Used by ${usedBy}. Try free today.`,
+  (kw, det, usedBy) => `${kw} — ${det} bypass made easy. HumanifyLab is trusted by ${usedBy} for 99.9% undetectable AI content. Free to start, results in 10 seconds.`,
+  (kw, det, usedBy) => `${kw}: HumanifyLab's deep linguistic engine defeats ${det} with 99.9% accuracy. Used by ${usedBy}. Zero retention. Start free — no card needed.`,
+  (kw, det, usedBy) => `${kw} — bypass ${det} instantly with HumanifyLab. Used by ${usedBy}. 99.9% success rate, meaning preserved, zero data stored. Free to try now.`,
+  (kw, det, usedBy) => `${kw}: HumanifyLab eliminates every ${det} flag. Used by ${usedBy}. Deep transformation, 99.9% bypass rate, results in under 10 seconds. Start free.`,
 ];
 
 // ── 8 H1 formulas ─────────────────────────────────────────────────────────────
