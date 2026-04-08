@@ -475,7 +475,7 @@ const PROFESSIONAL: string[] = [
   "humanize ai for headline copy","humanize ai for tagline copy","humanize ai for slogan copy",
   "humanize ai for brand copy","humanize ai for brand voice","humanize ai for brand messaging",
   "humanize ai for brand storytelling","humanize ai for brand positioning","humanize ai for brand identity",
-  "humanize ai for brand guidelines","humanize ai for brand strategy",
+  "humanize ai for brand guidelines","humanize ai for brand strategy", 
   // Business documents (40)
   "humanize ai for business reports","humanize ai for business proposals","humanize ai for business plans",
   "humanize ai for business presentations","humanize ai for business emails","humanize ai for business letters",
