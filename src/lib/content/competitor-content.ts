@@ -1,4 +1,6 @@
 import type { KeywordEntryV2 } from '~/lib/pseo-data-v2';
+import { uniqueIdx } from '~/lib/content/content-utils';
+import { buildPageStrings, buildFaqs, buildStats } from '~/lib/content/content-combinator';
 
 export interface CompetitorContentData {
   metaTitle: string;
@@ -69,37 +71,9 @@ const FAQ_POOL: { q: string; a: string }[] = [
 export function generateCompetitorContent(entry: KeywordEntryV2): CompetitorContentData {
   const { keyword, entity, seed } = entry;
   const comp = entity === 'Competitor' ? 'AI Humanizer Tools' : entity;
-  const isComparison = keyword.includes('vs') || keyword.includes('alternative') || keyword.includes('comparison');
-  const isReview = keyword.includes('review') || keyword.includes('rating') || keyword.includes('rated');
   const year = 2026;
 
-  // Unique title variations based on seed
-  const titleVariants = [
-    `HumanifyLab vs ${comp} — Which AI Humanizer Wins in ${year}?`,
-    `${comp} Alternative: Why HumanifyLab Beats It in ${year}`,
-    `Best ${comp} Replacement — Full Comparison & Review (${year})`,
-    `HumanifyLab vs ${comp}: Bypass Rate, Pricing & Features Compared`,
-    `${comp} vs HumanifyLab — Independent Test Results ${year}`,
-    `Switch from ${comp} to HumanifyLab — Here's Why (${year})`,
-  ];
-
-  const descVariants = [
-    `Compare HumanifyLab vs ${comp}. See bypass rates, pricing, features, and which tool actually passes Turnitin, GPTZero, and Originality.AI in ${year}.`,
-    `Looking for a ${comp} alternative? HumanifyLab offers 99.9% bypass rate, no watermark, 50+ languages, and a free plan. Try it instantly — no sign-up needed.`,
-    `Independent ${year} comparison: HumanifyLab vs ${comp}. We tested both on ${50 + (seed % 50)} texts across 6 AI detectors. See the full results.`,
-    `${comp} vs HumanifyLab: pricing, accuracy, free plan, and real-world bypass rates compared. Find out which tool is right for you in ${year}.`,
-    `Tired of ${comp}? HumanifyLab achieves 99.9% bypass rate, supports 50+ languages, and has no watermark. See the full comparison.`,
-    `${comp} alternative review ${year}: We tested HumanifyLab against ${comp} on Turnitin, GPTZero, and Originality.AI. Here are the results.`,
-  ];
-
-  const h1Variants = [
-    `HumanifyLab vs ${comp}: Full Comparison (${year})`,
-    `The Best ${comp} Alternative: HumanifyLab`,
-    `${comp} vs HumanifyLab — Which Is Better?`,
-    `Why HumanifyLab Outperforms ${comp} in ${year}`,
-    `${comp} Review & Best Alternative (${year})`,
-    `HumanifyLab vs ${comp}: Independent Test Results`,
-  ];
+  const combo = buildPageStrings(keyword, seed, comp, 'competitor');
 
   const introVariants = [
     `If you're deciding between HumanifyLab and ${comp}, this comparison covers everything — bypass rates, pricing, free plans, language support, and real-world performance across Turnitin, GPTZero, and Originality.AI. We tested both tools on ${50 + (seed % 50)} different texts across ${3 + (seed % 5)} AI detectors.`,
@@ -110,12 +84,7 @@ export function generateCompetitorContent(entry: KeywordEntryV2): CompetitorCont
     `After testing ${comp} and HumanifyLab on ${30 + (seed % 70)} texts across 6 major AI detectors, we found clear differences in bypass rate, output quality, and value for money. Here's the full breakdown.`,
   ];
 
-  const idx = seed % titleVariants.length;
-
-  const metaTitle = titleVariants[idx]!;
-  const metaDescription = descVariants[idx]!;
-  const h1 = h1Variants[idx]!;
-  const intro = introVariants[idx]!;
+  const intro = introVariants[uniqueIdx(seed, keyword, introVariants.length, 20)]!;
 
   const comparisonRows = FEATURES.map((feature, i) => ({
     feature,
@@ -125,12 +94,21 @@ export function generateCompetitorContent(entry: KeywordEntryV2): CompetitorCont
 
   const whySwitchPoints = WHY_SWITCH[comp] ?? WHY_SWITCH.default!;
 
-  const faqs = FAQ_POOL.slice(seed % 3, (seed % 3) + 4).map(f => ({
-    q: f.q.replace('{entity}', comp),
-    a: f.a.replace('{entity}', comp),
-  }));
+  const ctaVariants = [
+    `Try HumanifyLab free — no sign-up, no watermark, instant results`,
+    `Switch to HumanifyLab — free plan, no credit card required`,
+    `Try HumanifyLab now — better than ${comp}, free to start`,
+    `Get started with HumanifyLab — no sign-up, instant results`,
+  ];
 
-  const cta = `Try HumanifyLab free — no sign-up, no watermark, instant results`;
-
-  return { metaTitle, metaDescription, h1, intro, comparisonRows, whySwitchPoints, faqs, cta };
+  return {
+    metaTitle: combo.metaTitle,
+    metaDescription: combo.metaDescription,
+    h1: combo.h1,
+    intro,
+    comparisonRows,
+    whySwitchPoints,
+    faqs: buildFaqs(keyword, seed, comp, 'competitor'),
+    cta: ctaVariants[uniqueIdx(seed, keyword, ctaVariants.length, 21)]!,
+  };
 }

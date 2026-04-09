@@ -1,4 +1,6 @@
 import type { KeywordEntryV2 } from '~/lib/pseo-data-v2';
+import { uniqueIdx } from '~/lib/content/content-utils';
+import { buildPageStrings, buildFaqs, buildStats } from '~/lib/content/content-combinator';
 
 export interface NicheContentData {
   metaTitle: string;
@@ -58,59 +60,53 @@ const FAQ_POOL: { q: string; a: string }[] = [
 ];
 
 export function generateNicheContent(entry: KeywordEntryV2): NicheContentData {
-  const { entity, seed } = entry;
+  const { entity, seed, keyword } = entry;
   const ctx = NICHE_CONTEXT[entity] ?? NICHE_CONTEXT['Niche']!;
   const nicheLabel = entity === 'Niche' ? 'specialized content' : entity.toLowerCase();
-  const year = 2026;
 
-  const titleVariants = [
-    `Humanize AI Content for ${entity} ${ctx.icon} — Natural, Undetectable | HumanifyLab`,
-    `${entity} AI Humanizer ${ctx.icon} — Pass Every Detector | HumanifyLab`,
-    `AI ${entity} Content That Sounds Human ${ctx.icon} | HumanifyLab`,
-    `Undetectable AI Content for ${entity} ${ctx.icon} — Free | HumanifyLab`,
-    `${entity} ${ctx.icon} — Humanize AI Text Instantly | HumanifyLab`,
-    `Best AI Humanizer for ${entity} ${ctx.icon} in ${year} | HumanifyLab`,
-  ];
-
-  const descVariants = [
-    `HumanifyLab helps ${ctx.audience} create ${ctx.benefit}. 99.9% AI detection bypass rate. Free to try — no sign-up required.`,
-    `Transform AI-generated ${nicheLabel} content into natural, human-sounding writing. HumanifyLab achieves 99.9% bypass rate. Instant results, no sign-up.`,
-    `The best AI humanizer for ${entity} content in ${year}. HumanifyLab processes text in under 5 seconds and produces ${ctx.benefit}. Free plan available.`,
-    `${entity} creators use HumanifyLab to humanize AI content and pass every detector. 99.9% bypass rate, no watermark, 50+ languages. Try free.`,
-    `Humanize AI ${nicheLabel} content with HumanifyLab. Passes Turnitin, GPTZero, Originality.AI, and platform-specific detectors. Free to try.`,
-    `${ctx.audience.charAt(0).toUpperCase() + ctx.audience.slice(1)} trust HumanifyLab for ${nicheLabel} content that sounds authentically human. 99.9% bypass rate. No sign-up needed.`,
-  ];
-
-  const h1Variants = [
-    `Humanize AI Content for ${entity} ${ctx.icon} — Sound Authentically Human`,
-    `${entity} AI Humanizer ${ctx.icon} — Undetectable Results`,
-    `AI ${entity} Content That Passes Every Detector ${ctx.icon}`,
-    `${entity} ${ctx.icon} — The Best AI Humanizer for Your Niche`,
-    `Undetectable AI Content for ${entity} ${ctx.icon}`,
-    `${entity} ${ctx.icon} — Humanize AI Text in Under 5 Seconds`,
-  ];
+  const combo = buildPageStrings(keyword, seed, entity, 'niche');
 
   const introVariants = [
     `${ctx.audience.charAt(0).toUpperCase() + ctx.audience.slice(1)} rely on AI to speed up content creation — but AI-generated ${nicheLabel} content is easy to spot. HumanifyLab transforms AI-generated ${nicheLabel} content into ${ctx.benefit}, passing every AI detection tool while preserving your original message. Over ${500 + seed * 7} ${ctx.audience} use HumanifyLab every month.`,
     `AI detection is now a real concern for ${ctx.audience}. Whether it's platform algorithms, academic detectors, or professional review processes, AI-generated ${nicheLabel} content gets flagged. HumanifyLab solves this in under 5 seconds with a 99.9% bypass rate.`,
     `The challenge for ${ctx.audience} isn't creating ${nicheLabel} content with AI — it's making it sound human. HumanifyLab is specifically designed to eliminate the AI writing patterns that detectors and audiences notice, while preserving your original message and tone.`,
     `${entity} content creation has been transformed by AI — but so has AI detection. HumanifyLab helps ${ctx.audience} stay ahead by producing ${nicheLabel} content that passes every detector and resonates with real audiences. Tested on ${200 + seed * 6} ${nicheLabel} pieces.`,
-    `In ${year}, ${ctx.audience} need AI content that sounds genuinely human. HumanifyLab achieves this with a 99.9% bypass rate, processing ${nicheLabel} content in under 5 seconds while preserving your voice, style, and key messages.`,
+    `In 2026, ${ctx.audience} need AI content that sounds genuinely human. HumanifyLab achieves this with a 99.9% bypass rate, processing ${nicheLabel} content in under 5 seconds while preserving your voice, style, and key messages.`,
     `${ctx.audience.charAt(0).toUpperCase() + ctx.audience.slice(1)} who use AI for ${nicheLabel} content face a growing challenge: detection. HumanifyLab has helped ${300 + seed * 9} ${ctx.audience} produce undetectable ${nicheLabel} content that performs better and passes every check.`,
   ];
 
-  const idx = seed % titleVariants.length;
+  const ctaVariants = [
+    `Humanize your ${nicheLabel} content now — free, instant, no sign-up`,
+    `Get undetectable ${nicheLabel} content — try HumanifyLab free`,
+    `Humanize AI ${nicheLabel} content instantly — no account needed`,
+    `Start humanizing ${nicheLabel} content — free plan available`,
+  ];
+
+  const useCasePointSets = [
+    USE_CASE_POOL[entity] ?? USE_CASE_POOL.default!,
+    [
+      `Transform AI-generated ${nicheLabel} into authentic, human-sounding content`,
+      `Eliminate AI writing patterns that ${ctx.audience} and algorithms detect`,
+      `Preserve your original message, tone, and key information`,
+      `Pass AI detection tools used by platforms and institutions`,
+      `Scale ${nicheLabel} production without sacrificing authenticity`,
+    ],
+    [
+      `HumanifyLab produces ${ctx.benefit} in under 5 seconds`,
+      `99.9% bypass rate for ${nicheLabel} content across all major detectors`,
+      `Preserves your unique voice and style throughout the transformation`,
+      `Works with any AI tool — ChatGPT, Claude, Gemini, and more`,
+      `Free plan available — no sign-up required to get started`,
+    ],
+  ];
 
   return {
-    metaTitle: titleVariants[idx]!,
-    metaDescription: descVariants[idx]!,
-    h1: h1Variants[idx]!,
-    intro: introVariants[idx]!,
-    useCasePoints: USE_CASE_POOL[entity] ?? USE_CASE_POOL.default!,
-    faqs: FAQ_POOL.slice(seed % 2, (seed % 2) + 4).map(f => ({
-      q: f.q.replace('{niche}', nicheLabel).replace('{audience}', ctx.audience),
-      a: f.a.replace(/{niche}/g, nicheLabel).replace('{audience}', ctx.audience),
-    })),
-    cta: `Humanize your ${nicheLabel} content now — free, instant, no sign-up`,
+    metaTitle: combo.metaTitle,
+    metaDescription: combo.metaDescription,
+    h1: combo.h1,
+    intro: introVariants[uniqueIdx(seed, keyword, introVariants.length, 20)]!,
+    useCasePoints: useCasePointSets[uniqueIdx(seed, keyword, useCasePointSets.length, 21)]!,
+    faqs: buildFaqs(keyword, seed, entity, 'niche'),
+    cta: ctaVariants[uniqueIdx(seed, keyword, ctaVariants.length, 22)]!,
   };
 }

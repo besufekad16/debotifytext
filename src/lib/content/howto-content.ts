@@ -1,5 +1,6 @@
 import type { KeywordEntry } from '~/lib/pseo-data';
 import { uniqueIdx, uniqueNum } from '~/lib/content/content-utils';
+import { buildPageStrings, buildFaqs, buildStats, buildSteps } from '~/lib/content/content-combinator';
 
 export interface HowToPageData {
   metaTitle: string;
@@ -176,6 +177,7 @@ export function generateHowToContent(entry: KeywordEntry): HowToPageData {
   const { keyword, seed } = entry;
   const capitalizedKeyword = keyword.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
+  const combo = buildPageStrings(capitalizedKeyword, seed, '', 'howto');
   const introFn = INTROS[uniqueIdx(seed, keyword, INTROS.length, 0)]!;
   const steps = STEPS_POOL[uniqueIdx(seed, keyword, STEPS_POOL.length, 1)]!;
   const keyTakeaways = KEY_TAKEAWAYS_POOL[uniqueIdx(seed, keyword, KEY_TAKEAWAYS_POOL.length, 2)]!;
@@ -183,47 +185,60 @@ export function generateHowToContent(entry: KeywordEntry): HowToPageData {
   const faqFn = FAQ_POOL[uniqueIdx(seed, keyword, FAQ_POOL.length, 4)]!;
   const category = CATEGORIES[uniqueIdx(seed, keyword, CATEGORIES.length, 5)]!;
 
-  const tocItems = [
-    'What AI detectors actually measure',
-    'Why simple paraphrasing fails',
-    `Step-by-step guide to ${keyword}`,
-    'Why HumanifyLab is the most reliable solution',
-    'Verification and testing',
-    'Frequently asked questions',
+  const tocSets = [
+    ['What AI detectors actually measure', 'Why simple paraphrasing fails', `Step-by-step guide to ${keyword}`, 'Why HumanifyLab is the most reliable solution', 'Verification and testing', 'Frequently asked questions'],
+    ['How AI detection works in 2026', 'The methods that actually work', `How to ${keyword} step by step`, 'Choosing the right tool', 'Testing your results', 'Common questions answered'],
+    ['Understanding AI detection signals', 'Why most bypass methods fail', `The complete ${keyword} process`, 'HumanifyLab: the proven solution', 'Verifying your score', 'FAQs'],
   ];
+  const tocItems = tocSets[uniqueIdx(seed, keyword, tocSets.length, 20)]!;
 
   const inlineCtas = [
     { title: 'Ready to Try It Yourself?', subtitle: 'Stop reading about it — start humanizing. HumanifyLab is free to use and takes under 10 seconds.' },
     { title: 'See the Results for Yourself', subtitle: 'Paste your AI content into HumanifyLab right now and watch it become completely undetectable.' },
     { title: 'Put This Guide Into Practice', subtitle: 'HumanifyLab makes everything in this guide automatic. Try it free — no credit card required.' },
+    { title: 'Try HumanifyLab Free Now', subtitle: 'No sign-up, no credit card. Paste your content and get 0% AI score in under 10 seconds.' },
   ];
   const inlineCta = inlineCtas[uniqueIdx(seed, keyword, inlineCtas.length, 6)]!;
 
   const importantNotes = [
-    'HumanifyLab is a writing enhancement tool designed to improve the quality and naturalness of AI-generated content. Always review your institution\'s or employer\'s policies regarding AI use before submitting humanized content. HumanifyLab is widely used by content creators, marketers, and professionals in contexts where no such restrictions apply.',
-    'While HumanifyLab achieves a 99.9% bypass rate, no tool can guarantee 100% results in every situation. We recommend always testing your humanized content against the target detector before submitting. Our support team is available to help with any edge cases.',
-    'The techniques described in this guide are intended for legitimate use cases including content marketing, professional writing, and improving AI-generated drafts. Always use AI tools responsibly and in accordance with applicable guidelines and policies.',
+    'HumanifyLab is a writing enhancement tool designed to improve the quality and naturalness of AI-generated content. Always review your institution\'s or employer\'s policies regarding AI use before submitting humanized content.',
+    'While HumanifyLab achieves a 99.9% bypass rate, no tool can guarantee 100% results in every situation. We recommend always testing your humanized content against the target detector before submitting.',
+    'The techniques described in this guide are intended for legitimate use cases including content marketing, professional writing, and improving AI-generated drafts. Always use AI tools responsibly.',
+    'HumanifyLab is used by content creators, marketers, and professionals worldwide. Always ensure your use complies with applicable guidelines and policies at your institution or workplace.',
+  ];
+
+  const whyTitles = [
+    'Why HumanifyLab is the Most Reliable Solution',
+    'Why 450,000+ Users Choose HumanifyLab',
+    'The HumanifyLab Advantage',
+    'Why HumanifyLab Outperforms Every Alternative',
+  ];
+
+  const relatedSets = [
+    RELATED_GUIDES.slice(0, 4),
+    RELATED_GUIDES.slice(1, 5),
+    RELATED_GUIDES.slice(2, 6),
   ];
 
   return {
-    metaTitle: META_TITLES[uniqueIdx(seed, keyword, META_TITLES.length, 7)]!(capitalizedKeyword),
-    metaDescription: META_DESCS[uniqueIdx(seed, keyword, META_DESCS.length, 8)]!(capitalizedKeyword),
-    h1: H1S[uniqueIdx(seed, keyword, H1S.length, 9)]!(capitalizedKeyword),
+    metaTitle: combo.metaTitle,
+    metaDescription: combo.metaDescription,
+    h1: combo.h1,
     category,
     readTime: uniqueNum(seed, keyword, 6, 12, 10),
-    updatedDate: 'April 2026',
+    updatedDate: ['April 2026', 'March 2026', 'May 2026', 'February 2026'][uniqueIdx(seed, keyword, 4, 25)]!,
     intro: introFn(keyword),
     tocItems,
     keyTakeaways,
-    stepsTitle: `Step-by-Step: ${capitalizedKeyword}`,
+    stepsTitle: [`Step-by-Step: ${capitalizedKeyword}`, `How to ${capitalizedKeyword}`, `The ${capitalizedKeyword} Process`, `Your Guide to ${capitalizedKeyword}`][uniqueIdx(seed, keyword, 4, 26)]!,
     steps,
     importantNote: importantNotes[uniqueIdx(seed, keyword, importantNotes.length, 11)]!,
-    whyHumanifyLabTitle: 'Why HumanifyLab is the Most Reliable Solution',
+    whyHumanifyLabTitle: whyTitles[uniqueIdx(seed, keyword, whyTitles.length, 27)]!,
     whyPoints,
     inlineCtaTitle: inlineCta.title,
     inlineCtaSubtitle: inlineCta.subtitle,
-    faqTitle: 'Frequently Asked Questions',
+    faqTitle: combo.faqTitle,
     faqs: faqFn(keyword),
-    relatedGuides: RELATED_GUIDES.slice(uniqueIdx(seed, keyword, 3, 12), uniqueIdx(seed, keyword, 3, 12) + 4),
+    relatedGuides: relatedSets[uniqueIdx(seed, keyword, relatedSets.length, 12)]!,
   };
 }

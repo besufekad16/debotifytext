@@ -1,5 +1,6 @@
 import type { KeywordEntry } from '~/lib/pseo-data';
 import { uniqueIdx } from '~/lib/content/content-utils';
+import { buildPageStrings, buildFaqs, buildStats } from '~/lib/content/content-combinator';
 
 export interface UseCasePageData {
   metaTitle: string;
@@ -219,6 +220,9 @@ export function generateUseCaseContent(entry: KeywordEntry): UseCasePageData {
   const audience = detectAudience(keyword, entity);
   const capitalizedKeyword = keyword.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
+  const combo = buildPageStrings(capitalizedKeyword, seed, audience.label, 'usecase');
+  const faqFn = FAQ_POOL[uniqueIdx(seed, keyword, FAQ_POOL.length, 1)]!;
+
   const heroSubtitles: ((aud: string, kw: string) => string)[] = [
     (aud) => `${aud} face unique challenges with AI detection. HumanifyLab is built to solve them — delivering 99.9% undetectable content that preserves your voice, meets your standards, and passes every detector your institution or client uses.`,
     (aud) => `Whether you're submitting an essay, delivering client content, or publishing your work, AI detection is a real risk. HumanifyLab gives ${aud} the confidence to use AI assistance without the fear of getting flagged.`,
@@ -227,30 +231,11 @@ export function generateUseCaseContent(entry: KeywordEntry): UseCasePageData {
     (aud) => `${aud} who use AI assistance need a reliable way to ensure their work passes detection. HumanifyLab delivers — 99.9% bypass rate, zero data retention, results in under 10 seconds.`,
     (aud) => `Stop worrying about AI detection. HumanifyLab is purpose-built for ${aud} — delivering 99.9% undetectable content that reads naturally and passes every detector your context requires.`,
   ];
-
   const heroFn = heroSubtitles[uniqueIdx(seed, keyword, heroSubtitles.length, 0)]!;
-  const faqFn = FAQ_POOL[uniqueIdx(seed, keyword, FAQ_POOL.length, 1)]!;
 
-  const problemsByAudience = {
-    student: STUDENT_PROBLEMS,
-    business: BUSINESS_PROBLEMS,
-    writer: WRITER_PROBLEMS,
-    default: DEFAULT_PROBLEMS,
-  };
-
-  const solutionsByAudience = {
-    student: STUDENT_SOLUTIONS,
-    business: BUSINESS_SOLUTIONS,
-    writer: WRITER_SOLUTIONS,
-    default: BUSINESS_SOLUTIONS,
-  };
-
-  const workflowByAudience = {
-    student: STUDENT_WORKFLOW,
-    business: BUSINESS_WORKFLOW,
-    writer: WRITER_WORKFLOW,
-    default: BUSINESS_WORKFLOW,
-  };
+  const problemsByAudience = { student: STUDENT_PROBLEMS, business: BUSINESS_PROBLEMS, writer: WRITER_PROBLEMS, default: DEFAULT_PROBLEMS };
+  const solutionsByAudience = { student: STUDENT_SOLUTIONS, business: BUSINESS_SOLUTIONS, writer: WRITER_SOLUTIONS, default: BUSINESS_SOLUTIONS };
+  const workflowByAudience = { student: STUDENT_WORKFLOW, business: BUSINESS_WORKFLOW, writer: WRITER_WORKFLOW, default: BUSINESS_WORKFLOW };
 
   const testimonialPool = TESTIMONIALS_BY_AUDIENCE[audience.type] ?? TESTIMONIALS_BY_AUDIENCE['business']!;
   const testimonials = testimonialPool[uniqueIdx(seed, keyword, testimonialPool.length, 2)]!;
@@ -262,30 +247,49 @@ export function generateUseCaseContent(entry: KeywordEntry): UseCasePageData {
     default: ['99.9% bypass rate', 'All detectors', 'Zero data retention', 'Free to start', 'Under 10 seconds'],
   };
 
+  const problemTitles = [
+    `The Challenges ${audience.label} Face with AI Detection`,
+    `Why ${audience.label} Struggle with AI Detection`,
+    `AI Detection Problems for ${audience.label}`,
+    `What ${audience.label} Are Up Against`,
+  ];
+  const solutionTitles = [
+    `How HumanifyLab Solves These Problems`,
+    `The HumanifyLab Solution for ${audience.label}`,
+    `Why ${audience.label} Choose HumanifyLab`,
+    `HumanifyLab: Built for ${audience.label}`,
+  ];
+  const workflowTitles = [
+    `The ${audience.label} Workflow with HumanifyLab`,
+    `How ${audience.label} Use HumanifyLab`,
+    `Your ${audience.label} Process with HumanifyLab`,
+    `${audience.label} + HumanifyLab: The Workflow`,
+  ];
+
   return {
-    metaTitle: META_TITLES[uniqueIdx(seed, keyword, META_TITLES.length, 3)]!(capitalizedKeyword, audience.label),
-    metaDescription: META_DESCS[uniqueIdx(seed, keyword, META_DESCS.length, 4)]!(capitalizedKeyword, audience.label),
-    h1: H1S[uniqueIdx(seed, keyword, H1S.length, 5)]!(capitalizedKeyword, audience.label),
+    metaTitle: combo.metaTitle,
+    metaDescription: combo.metaDescription,
+    h1: combo.h1,
     heroSubtitle: heroFn(audience.label, keyword),
     audienceLabel: audience.label,
     audienceType: audience.type,
     painPointBadges: painBadgesByAudience[audience.type] ?? painBadgesByAudience['default']!,
-    problemTitle: `The Challenges ${audience.label} Face with AI Detection`,
-    problemIntro: `AI detection has become a serious obstacle for ${audience.label.toLowerCase()}. Here's what you're up against — and how HumanifyLab solves it.`,
+    problemTitle: problemTitles[uniqueIdx(seed, keyword, problemTitles.length, 20)]!,
+    problemIntro: [`AI detection has become a serious obstacle for ${audience.label.toLowerCase()}. Here's what you're up against — and how HumanifyLab solves it.`, `${audience.label} face growing AI detection challenges. Understanding them is the first step to solving them.`, `Here's why AI detection is a real problem for ${audience.label} — and exactly how HumanifyLab fixes it.`, `AI detectors are getting smarter. Here's what ${audience.label} are dealing with in 2026.`][uniqueIdx(seed, keyword, 4, 21)]!,
     problems: problemsByAudience[audience.type],
-    solutionTitle: `How HumanifyLab Solves These Problems`,
-    solutionIntro: `HumanifyLab is purpose-built for ${audience.label.toLowerCase()}. Every feature is designed to address the specific challenges you face.`,
+    solutionTitle: solutionTitles[uniqueIdx(seed, keyword, solutionTitles.length, 22)]!,
+    solutionIntro: [`HumanifyLab is purpose-built for ${audience.label.toLowerCase()}. Every feature is designed to address the specific challenges you face.`, `Here's how HumanifyLab solves every AI detection challenge ${audience.label.toLowerCase()} face.`, `HumanifyLab was built with ${audience.label.toLowerCase()} in mind. Here's what that means for you.`, `Every HumanifyLab feature exists to solve a real problem for ${audience.label.toLowerCase()}.`][uniqueIdx(seed, keyword, 4, 23)]!,
     solutions: solutionsByAudience[audience.type],
-    workflowTitle: `The ${audience.label} Workflow with HumanifyLab`,
+    workflowTitle: workflowTitles[uniqueIdx(seed, keyword, workflowTitles.length, 24)]!,
     workflowSteps: workflowByAudience[audience.type],
-    testimonialsTitle: `What ${audience.label} Say About HumanifyLab`,
+    testimonialsTitle: [`What ${audience.label} Say About HumanifyLab`, `Real Results from ${audience.label}`, `${audience.label} Trust HumanifyLab`, `Hear from ${audience.label}`][uniqueIdx(seed, keyword, 4, 25)]!,
     testimonials,
-    pricingTitle: 'Simple, Transparent Pricing',
-    pricingSubtitle: `Start free. Upgrade when you need more. No hidden fees.`,
+    pricingTitle: ['Simple, Transparent Pricing', 'Plans for Every Need', 'Choose Your Plan', 'Pricing That Works for You'][uniqueIdx(seed, keyword, 4, 26)]!,
+    pricingSubtitle: ['Start free. Upgrade when you need more. No hidden fees.', 'Free plan available. No credit card required.', 'No contracts, no commitments. Pay only for what you need.', 'Start free, scale as you grow.'][uniqueIdx(seed, keyword, 4, 27)]!,
     pricingTiers: PRICING_TIERS,
-    faqTitle: `Frequently Asked Questions for ${audience.label}`,
+    faqTitle: combo.faqTitle,
     faqs: faqFn(keyword, audience.label),
-    finalCtaTitle: `Start Free — Built for ${audience.label}`,
-    finalCtaSubtitle: `Join 450,000+ ${audience.label.toLowerCase()} who trust HumanifyLab to make their AI content completely undetectable. No credit card required.`,
+    finalCtaTitle: combo.finalCtaTitle,
+    finalCtaSubtitle: combo.finalCtaSubtitle,
   };
 }

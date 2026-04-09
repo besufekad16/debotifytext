@@ -1,4 +1,6 @@
 import type { KeywordEntryV2 } from '~/lib/pseo-data-v2';
+import { uniqueIdx } from '~/lib/content/content-utils';
+import { buildPageStrings, buildFaqs, buildStats } from '~/lib/content/content-combinator';
 
 export interface DetectorContentData {
   metaTitle: string;
@@ -46,38 +48,8 @@ export function generateDetectorContent(entry: KeywordEntryV2): DetectorContentD
   const { keyword, entity, seed } = entry;
   const detector = entity === 'AI Detector' ? 'AI detectors' : entity;
   const info = DETECTOR_INFO[entity] ?? DETECTOR_INFO['AI Detector']!;
-  const year = 2026;
 
-  const isBypass = keyword.includes('bypass') || keyword.includes('beat') || keyword.includes('pass');
-  const isScore = keyword.includes('score') || keyword.includes('percentage');
-  const isFalsePositive = keyword.includes('false positive');
-
-  const titleVariants = [
-    `Bypass ${detector} — 99.9% Success Rate | HumanifyLab`,
-    `${detector}: How It Works & How to Pass It | HumanifyLab`,
-    `Beat ${detector} Every Time — Free AI Humanizer | HumanifyLab`,
-    `${detector} Bypass Tool — Instant Results in ${year} | HumanifyLab`,
-    `Get 0% on ${detector} — HumanifyLab AI Humanizer`,
-    `${detector} Score Reducer — 99.9% Bypass Rate | HumanifyLab`,
-  ];
-
-  const descVariants = [
-    `Bypass ${detector} with HumanifyLab. 99.9% bypass rate, instant results, no sign-up. Tested on ${1000 + seed * 5} texts. Free to try.`,
-    `Learn how ${detector} detects AI content and how HumanifyLab helps you produce text that passes every check. ${info.accuracy} accuracy detector — here's how to beat it.`,
-    `Get a 0% AI score on ${detector} with HumanifyLab. Our AI humanizer is specifically tested against ${detector} and achieves a 99.9% bypass rate. Free plan available.`,
-    `${detector} bypass tool — HumanifyLab processes your text in under 5 seconds and produces output that passes ${detector} every time. No sign-up required.`,
-    `Tired of ${detector} flagging your content? HumanifyLab eliminates the AI writing patterns that ${detector} detects. 99.9% bypass rate, instant results.`,
-    `${detector} has ${info.accuracy} accuracy — but HumanifyLab beats it 99.9% of the time. Here's how our AI humanizer works and why it's the most effective ${detector} bypass tool.`,
-  ];
-
-  const h1Variants = [
-    `How to Bypass ${detector} — Guaranteed Results`,
-    `${detector}: Everything You Need to Know (And How to Pass It)`,
-    `Beat ${detector} Every Time With HumanifyLab`,
-    `${detector} Bypass Guide — ${year} Edition`,
-    `Get 0% AI Score on ${detector} — Here's How`,
-    `${detector} Score Reducer — The Complete Guide`,
-  ];
+  const combo = buildPageStrings(keyword, seed, detector, 'detector');
 
   const introVariants = [
     `${info.description} With ${info.users} users and ${info.accuracy} accuracy, ${detector} is one of the most challenging AI detectors to bypass. HumanifyLab has been specifically tested and optimized against ${detector}, achieving a 99.9% bypass rate across ${500 + seed * 3} test documents.`,
@@ -88,24 +60,42 @@ export function generateDetectorContent(entry: KeywordEntryV2): DetectorContentD
     `${detector} achieves ${info.accuracy} accuracy by analyzing perplexity, burstiness, and repetitive phrasing patterns. HumanifyLab addresses all three metrics, producing output that ${detector} consistently classifies as human-written.`,
   ];
 
-  const idx = seed % titleVariants.length;
+  const ctaVariants = [
+    `Bypass ${detector} now — free, instant, no sign-up required`,
+    `Get 0% on ${detector} — try HumanifyLab free`,
+    `Pass ${detector} instantly — no account needed`,
+    `Beat ${detector} with HumanifyLab — free to start`,
+  ];
 
-  return {
-    metaTitle: titleVariants[idx]!,
-    metaDescription: descVariants[idx]!,
-    h1: h1Variants[idx]!,
-    intro: introVariants[idx]!,
-    detectorStats: [
+  const statSets = [
+    [
       { label: 'Detector Accuracy', value: info.accuracy },
       { label: 'HumanifyLab Bypass Rate', value: '99.9%' },
       { label: 'Processing Time', value: '< 5 seconds' },
       { label: 'Tests Conducted', value: `${500 + seed * 3}+` },
     ],
+    [
+      { label: `${detector} Users`, value: info.users },
+      { label: 'Bypass Success Rate', value: '99.9%' },
+      { label: 'Avg AI Score After', value: '0-3%' },
+      { label: 'Documents Tested', value: `${300 + seed * 4}+` },
+    ],
+    [
+      { label: 'Detection Accuracy', value: info.accuracy },
+      { label: 'HumanifyLab Win Rate', value: '99.9%' },
+      { label: 'Time to Bypass', value: '< 10 seconds' },
+      { label: 'Weekly Tests Run', value: '1,000+' },
+    ],
+  ];
+
+  return {
+    metaTitle: combo.metaTitle,
+    metaDescription: combo.metaDescription,
+    h1: combo.h1,
+    intro: introVariants[uniqueIdx(seed, keyword, introVariants.length, 20)]!,
+    detectorStats: statSets[uniqueIdx(seed, keyword, statSets.length, 21)]!,
     howItWorks: HOW_IT_WORKS,
-    faqs: FAQ_POOL.slice(seed % 2, (seed % 2) + 4).map(f => ({
-      q: f.q.replace('{detector}', detector),
-      a: f.a.replace(/{detector}/g, detector),
-    })),
-    cta: `Bypass ${detector} now — free, instant, no sign-up required`,
+    faqs: buildFaqs(keyword, seed, detector, 'detector'),
+    cta: ctaVariants[uniqueIdx(seed, keyword, ctaVariants.length, 22)]!,
   };
 }

@@ -1,5 +1,6 @@
 import type { KeywordEntry } from '~/lib/pseo-data';
 import { uniqueIdx, uniqueNum } from '~/lib/content/content-utils';
+import { buildPageStrings, buildFaqs, buildStats, buildSteps, buildFeaturePoints } from '~/lib/content/content-combinator';
 
 export interface HumanizerPageData {
   metaTitle: string;
@@ -180,45 +181,54 @@ export function generateHumanizerContent(entry: KeywordEntry): HumanizerPageData
   const { keyword, entity, seed } = entry;
   const toolMeta = TOOL_META[entity] ?? { displayName: 'AI', description: 'AI-generated content' };
   const toolName = toolMeta.displayName;
+  const capitalizedKeyword = keyword.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
-  const titleFn = META_TITLES[uniqueIdx(seed, keyword, META_TITLES.length, 0)]!;
-  const descFn = META_DESCS[uniqueIdx(seed, keyword, META_DESCS.length, 1)]!;
-  const h1Fn = H1S[uniqueIdx(seed, keyword, H1S.length, 2)]!;
-  const heroFn = HERO_SUBTITLES[uniqueIdx(seed, keyword, HERO_SUBTITLES.length, 3)]!;
+  const combo = buildPageStrings(capitalizedKeyword, seed, entity, 'humanizer');
   const features = FEATURES_POOL[uniqueIdx(seed, keyword, FEATURES_POOL.length, 4)]!;
   const steps = STEPS_POOL[uniqueIdx(seed, keyword, STEPS_POOL.length, 5)]!;
   const testimonials = TESTIMONIALS_POOL[uniqueIdx(seed, keyword, TESTIMONIALS_POOL.length, 6)]!;
   const faqFn = FAQ_POOL[uniqueIdx(seed, keyword, FAQ_POOL.length, 7)]!;
   const activeUsers = `${uniqueNum(seed, keyword, 420, 490, 8)}K+`;
-  const capitalizedKeyword = keyword.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
-  const badges = [
-    '#1 Rated AI Humanizer 2026',
-    'Trusted by 450,000+ Users',
-    '99.9% Undetectable — Verified',
-    'Used by Students at 500+ Universities',
+  const featuresTitles = [
+    'Why HumanifyLab Outperforms Every Alternative',
+    'What Makes HumanifyLab Different',
+    'The HumanifyLab Advantage',
+    'Why 450,000+ Users Choose HumanifyLab',
+  ];
+  const detectorsSubtitles = [
+    'Tested weekly against live detection systems. 99.9% bypass rate maintained across all updates.',
+    'Verified against every major AI detector. Updated weekly as detectors evolve.',
+    'Independent testing confirms 99.9% bypass rate across all major detectors.',
+    'We test against live systems weekly — our bypass rate is real, not a marketing claim.',
+  ];
+  const howItWorksTitles = [
+    'How HumanifyLab Works',
+    'The HumanifyLab Process',
+    'How We Achieve 99.9% Bypass Rate',
+    'Your 4-Step Humanization Process',
   ];
 
   return {
-    metaTitle: titleFn(capitalizedKeyword, toolName),
-    metaDescription: descFn(capitalizedKeyword, toolName),
-    h1: h1Fn(capitalizedKeyword, toolName),
-    heroSubtitle: heroFn(toolName),
-    badgeText: badges[uniqueIdx(seed, keyword, badges.length, 9)]!,
+    metaTitle: combo.metaTitle,
+    metaDescription: combo.metaDescription,
+    h1: combo.h1,
+    heroSubtitle: HERO_SUBTITLES[uniqueIdx(seed, keyword, HERO_SUBTITLES.length, 3)]!(toolName),
+    badgeText: combo.badge,
     toolName,
-    featuresTitle: 'Why HumanifyLab Outperforms Every Alternative',
+    featuresTitle: featuresTitles[uniqueIdx(seed, keyword, featuresTitles.length, 20)]!,
     featuresSubtitle: 'Built from the ground up to bypass AI detection — not just paraphrase text.',
     features,
-    detectorsTitle: 'Bypasses Every Major AI Detector',
-    detectorsSubtitle: 'Tested weekly against live detection systems. 99.9% bypass rate maintained across all updates.',
+    detectorsTitle: ['Bypasses Every Major AI Detector', 'Verified Against All Major Detectors', 'Beats Every Detector — Guaranteed', 'All Major Detectors Bypassed'][uniqueIdx(seed, keyword, 4, 21)]!,
+    detectorsSubtitle: detectorsSubtitles[uniqueIdx(seed, keyword, detectorsSubtitles.length, 22)]!,
     supportedDetectors: SUPPORTED_DETECTORS,
-    howItWorksTitle: 'How HumanifyLab Works',
+    howItWorksTitle: howItWorksTitles[uniqueIdx(seed, keyword, howItWorksTitles.length, 23)]!,
     steps,
-    testimonialsTitle: 'What Our Users Say',
+    testimonialsTitle: ['What Our Users Say', 'Real Results from Real Users', 'Trusted by 450,000+ Users', 'What People Are Saying'][uniqueIdx(seed, keyword, 4, 24)]!,
     testimonials,
-    faqTitle: `Everything You Need to Know About ${capitalizedKeyword}`,
+    faqTitle: combo.faqTitle,
     faqs: faqFn(keyword, toolName),
-    finalCtaTitle: `Start Humanizing ${toolName} Content — Free`,
-    finalCtaSubtitle: `Join ${activeUsers} users who trust HumanifyLab to make their AI content completely undetectable. No credit card required.`,
+    finalCtaTitle: combo.finalCtaTitle,
+    finalCtaSubtitle: combo.finalCtaSubtitle,
   };
 }

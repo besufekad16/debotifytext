@@ -1,4 +1,6 @@
 import type { KeywordEntryV2 } from '~/lib/pseo-data-v2';
+import { uniqueIdx } from '~/lib/content/content-utils';
+import { buildPageStrings, buildFaqs, buildStats } from '~/lib/content/content-combinator';
 
 export interface LanguageContentData {
   metaTitle: string;
@@ -41,37 +43,11 @@ const FAQ_POOL: { q: string; a: string }[] = [
 ];
 
 export function generateLanguageContent(entry: KeywordEntryV2): LanguageContentData {
-  const { entity, seed } = entry;
+  const { entity, seed, keyword } = entry;
   const lang = entity === 'Multilingual' ? 'multiple languages' : entity;
   const info = LANGUAGE_INFO[entity] ?? { native: lang, speakers: 'millions', flag: '🌍' };
-  const year = 2026;
 
-  const titleVariants = [
-    `AI Humanizer for ${lang} ${info.flag} — Bypass Detection in ${lang} | HumanifyLab`,
-    `${lang} AI Text Humanizer ${info.flag} — 99.9% Bypass Rate | HumanifyLab`,
-    `Humanize AI Text in ${lang} ${info.flag} — Free & Instant | HumanifyLab`,
-    `${lang} AI Humanizer ${info.flag} — Pass Turnitin & GPTZero | HumanifyLab`,
-    `Undetectable AI Text in ${lang} ${info.flag} — HumanifyLab`,
-    `Bypass AI Detection in ${lang} ${info.flag} — ${year} | HumanifyLab`,
-  ];
-
-  const descVariants = [
-    `Humanize AI-generated ${lang} text instantly. HumanifyLab supports ${lang} (${info.native}) with 99.9% bypass rate for Turnitin, GPTZero, and Originality.AI. Free to try.`,
-    `The best AI humanizer for ${lang} text in ${year}. HumanifyLab supports ${info.native} with native language models. 99.9% bypass rate. No sign-up required.`,
-    `Transform AI-generated ${lang} text into natural, human-sounding ${info.native}. Passes Turnitin, GPTZero, and Originality.AI. Free plan available.`,
-    `${lang} AI humanizer — HumanifyLab processes ${info.native} text in under 5 seconds. 99.9% bypass rate across all major AI detectors. Trusted by ${info.speakers} ${lang} speakers.`,
-    `Bypass AI detection for ${lang} text with HumanifyLab. Our ${info.native} language model produces authentic, natural-sounding output that passes every detector.`,
-    `Need your ${lang} AI text to pass Turnitin or GPTZero? HumanifyLab supports ${info.native} with a 99.9% bypass rate. Free to try — no sign-up needed.`,
-  ];
-
-  const h1Variants = [
-    `AI Text Humanizer for ${lang} ${info.flag} — Undetectable Results`,
-    `${lang} AI Humanizer ${info.flag} — Pass Every Detector`,
-    `Humanize AI Text in ${lang} ${info.flag} — Free & Instant`,
-    `${lang} ${info.flag} — Bypass AI Detection With HumanifyLab`,
-    `Undetectable AI Writing in ${lang} ${info.flag}`,
-    `${lang} AI Humanizer ${info.flag} — 99.9% Bypass Rate`,
-  ];
+  const combo = buildPageStrings(keyword, seed, lang, 'language');
 
   const introVariants = [
     `HumanifyLab supports ${lang} (${info.native}), spoken by ${info.speakers} people worldwide. Whether you're a student, professional, or content creator writing in ${lang}, HumanifyLab transforms AI-generated ${lang} text into natural, human-sounding writing that passes every major AI detector. Tested on ${200 + seed * 4} ${lang} texts across Turnitin, GPTZero, and Originality.AI.`,
@@ -82,14 +58,15 @@ export function generateLanguageContent(entry: KeywordEntryV2): LanguageContentD
     `AI detection in ${lang} is just as sophisticated as in English. HumanifyLab's ${info.native} humanizer addresses the specific patterns that detectors look for in ${lang} text, achieving a 99.9% bypass rate across ${100 + seed * 7} tested documents.`,
   ];
 
-  const idx = seed % titleVariants.length;
+  const ctaVariants = [
+    `Humanize your ${lang} text now — free, instant, no sign-up`,
+    `Get 0% AI score in ${lang} — try HumanifyLab free`,
+    `Bypass AI detection in ${lang} — no account needed`,
+    `Humanize ${lang} AI text instantly — free plan available`,
+  ];
 
-  return {
-    metaTitle: titleVariants[idx]!,
-    metaDescription: descVariants[idx]!,
-    h1: h1Variants[idx]!,
-    intro: introVariants[idx]!,
-    languageFeatures: [
+  const featureSets = [
+    [
       `Native ${lang} language model — trained on authentic ${lang} writing`,
       `Preserves ${lang} grammar rules, idioms, and cultural expressions`,
       `Supports formal and informal ${lang} registers`,
@@ -97,11 +74,32 @@ export function generateLanguageContent(entry: KeywordEntryV2): LanguageContentD
       `Handles ${lang} punctuation and formatting correctly`,
       `Maintains ${lang} sentence structure and natural flow`,
     ],
+    [
+      `Deep ${lang} linguistic transformation — not just synonym replacement`,
+      `Trained on ${info.speakers} native ${lang} speakers' writing patterns`,
+      `Preserves ${lang} academic and professional writing standards`,
+      `Supports all ${lang} dialects and regional variations`,
+      `Maintains ${lang} cultural context and idiomatic expressions`,
+      `Produces ${lang} output that reads as genuinely native-written`,
+    ],
+    [
+      `${lang} (${info.native}) fully supported with 99.9% bypass rate`,
+      `Preserves ${lang} sentence structure and natural rhythm`,
+      `Academic ${lang} tone preset for university submissions`,
+      `Professional ${lang} tone for business and marketing content`,
+      `Casual ${lang} tone for blogs and social media`,
+      `Zero data retention — your ${lang} content is never stored`,
+    ],
+  ];
+
+  return {
+    metaTitle: combo.metaTitle,
+    metaDescription: combo.metaDescription,
+    h1: combo.h1,
+    intro: introVariants[uniqueIdx(seed, keyword, introVariants.length, 20)]!,
+    languageFeatures: featureSets[uniqueIdx(seed, keyword, featureSets.length, 21)]!,
     supportedDetectors: ['Turnitin', 'GPTZero', 'Originality.AI', 'ZeroGPT', 'Copyleaks', 'Winston AI'],
-    faqs: FAQ_POOL.slice(seed % 2, (seed % 2) + 4).map(f => ({
-      q: f.q.replace('{language}', lang).replace('{native}', info.native),
-      a: f.a.replace(/{language}/g, lang).replace('{native}', info.native),
-    })),
-    cta: `Humanize your ${lang} text now — free, instant, no sign-up`,
+    faqs: buildFaqs(keyword, seed, lang, 'language'),
+    cta: ctaVariants[uniqueIdx(seed, keyword, ctaVariants.length, 22)]!,
   };
 }
