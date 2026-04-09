@@ -43,6 +43,7 @@ import ProblemTemplate from "~/components/templates/ProblemTemplate";
 import WorkflowTemplate from "~/components/templates/WorkflowTemplate";
 import ScoreTemplate from "~/components/templates/ScoreTemplate";
 import RegionTemplate from "~/components/templates/RegionTemplate";
+import SEOPageWrapper from "~/components/templates/SEOPageWrapper";
 
 interface PageProps {
   params: Promise<{ keyword: string }>;
@@ -385,46 +386,22 @@ export default async function KeywordPage({ params }: PageProps) {
     case "bypass": {
       const data = generateBypassContent(entry!);
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, entry!.keyword);
-      return (
-        <>
-          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-          <BypassTemplate data={data} />
-        </>
-      );
+      return (<SEOPageWrapper keyword={kw} cluster="bypass" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><BypassTemplate data={data} /></SEOPageWrapper>);
     }
     case "humanizer": {
       const data = generateHumanizerContent(entry!);
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, entry!.keyword);
-      return (
-        <>
-          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-          <HumanizerTemplate data={data} />
-        </>
-      );
+      return (<SEOPageWrapper keyword={kw} cluster="humanizer" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><HumanizerTemplate data={data} /></SEOPageWrapper>);
     }
     case "howto": {
       const data = generateHowToContent(entry!);
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, entry!.keyword);
-      return (
-        <>
-          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-          <HowToTemplate data={data} />
-        </>
-      );
+      return (<SEOPageWrapper keyword={kw} cluster="howto" publishDate={publishDate} readTime={data.readTime}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><HowToTemplate data={data} /></SEOPageWrapper>);
     }
     case "usecase": {
       const data = generateUseCaseContent(entry!);
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, entry!.keyword);
-      return (
-        <>
-          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-          <UseCaseTemplate data={data} />
-        </>
-      );
+      return (<SEOPageWrapper keyword={kw} cluster="usecase" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><UseCaseTemplate data={data} /></SEOPageWrapper>);
     }
   }
 
@@ -435,32 +412,32 @@ export default async function KeywordPage({ params }: PageProps) {
       case "competitor": {
         const data = generateCompetitorContent(e2);
         const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
-        return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><CompetitorTemplate data={data} /></>);
+        return (<SEOPageWrapper keyword={kw} cluster="competitor" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><CompetitorTemplate data={data} /></SEOPageWrapper>);
       }
       case "academic": {
         const data = generateAcademicContent(e2);
         const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
-        return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><AcademicTemplate data={data} /></>);
+        return (<SEOPageWrapper keyword={kw} cluster="academic" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><AcademicTemplate data={data} /></SEOPageWrapper>);
       }
       case "professional": {
         const data = generateProfessionalContent(e2);
         const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
-        return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><ProfessionalTemplate data={data} /></>);
+        return (<SEOPageWrapper keyword={kw} cluster="professional" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><ProfessionalTemplate data={data} /></SEOPageWrapper>);
       }
       case "detector": {
         const data = generateDetectorContent(e2);
         const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
-        return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><DetectorTemplate data={data} /></>);
+        return (<SEOPageWrapper keyword={kw} cluster="detector" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><DetectorTemplate data={data} /></SEOPageWrapper>);
       }
       case "language": {
         const data = generateLanguageContent(e2);
         const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
-        return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><LanguageTemplate data={data} /></>);
+        return (<SEOPageWrapper keyword={kw} cluster="language" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><LanguageTemplate data={data} /></SEOPageWrapper>);
       }
       case "niche": {
         const data = generateNicheContent(e2);
         const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
-        return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><NicheTemplate data={data} /></>);
+        return (<SEOPageWrapper keyword={kw} cluster="niche" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><NicheTemplate data={data} /></SEOPageWrapper>);
       }
     }
   }
@@ -471,52 +448,52 @@ export default async function KeywordPage({ params }: PageProps) {
     case "pricing": {
       const data = generatePricingContent(e3);
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
-      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><PricingTemplate data={data} /></>);
+      return (<SEOPageWrapper keyword={kw} cluster="pricing" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><PricingTemplate data={data} /></SEOPageWrapper>);
     }
     case "industry": {
       const data = generateIndustryContent(e3);
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
-      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><IndustryTemplate data={data} /></>);
+      return (<SEOPageWrapper keyword={kw} cluster="industry" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><IndustryTemplate data={data} /></SEOPageWrapper>);
     }
     case "format": {
       const data = generateFormatContent(e3);
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
-      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><FormatTemplate data={data} /></>);
+      return (<SEOPageWrapper keyword={kw} cluster="format" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><FormatTemplate data={data} /></SEOPageWrapper>);
     }
     case "speed": {
       const data = generateSpeedContent(e3);
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
-      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><SpeedTemplate data={data} /></>);
+      return (<SEOPageWrapper keyword={kw} cluster="speed" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><SpeedTemplate data={data} /></SEOPageWrapper>);
     }
     case "quality": {
       const data = generateQualityContent(e3);
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
-      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><QualityTemplate data={data} /></>);
+      return (<SEOPageWrapper keyword={kw} cluster="quality" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><QualityTemplate data={data} /></SEOPageWrapper>);
     }
     case "tool": {
       const data = generateToolContent(e3);
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
-      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><ToolTemplate data={data} /></>);
+      return (<SEOPageWrapper keyword={kw} cluster="tool" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><ToolTemplate data={data} /></SEOPageWrapper>);
     }
     case "problem": {
       const data = generateProblemContent(e3);
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
-      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><ProblemTemplate data={data} /></>);
+      return (<SEOPageWrapper keyword={kw} cluster="problem" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><ProblemTemplate data={data} /></SEOPageWrapper>);
     }
     case "workflow": {
       const data = generateWorkflowContent(e3);
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
-      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><WorkflowTemplate data={data} /></>);
+      return (<SEOPageWrapper keyword={kw} cluster="workflow" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><WorkflowTemplate data={data} /></SEOPageWrapper>);
     }
     case "score": {
       const data = generateScoreContent(e3);
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
-      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><ScoreTemplate data={data} /></>);
+      return (<SEOPageWrapper keyword={kw} cluster="score" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><ScoreTemplate data={data} /></SEOPageWrapper>);
     }
     case "region": {
       const data = generateRegionContent(e3);
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
-      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><RegionTemplate data={data} /></>);
+      return (<SEOPageWrapper keyword={kw} cluster="region" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><RegionTemplate data={data} /></SEOPageWrapper>);
     }
   }
 }
