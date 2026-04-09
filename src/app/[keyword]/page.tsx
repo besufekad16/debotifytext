@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getAllSlugs, getKeywordBySlug } from "~/lib/pseo-data";
 import { getAllV2Slugs, getV2KeywordBySlug } from "~/lib/pseo-data-v2";
+import { getAllV3Slugs, getV3KeywordBySlug } from "~/lib/pseo-data-v3";
 import { generateBypassContent } from "~/lib/content/bypass-content";
 import { generateHumanizerContent } from "~/lib/content/humanizer-content";
 import { generateHowToContent } from "~/lib/content/howto-content";
@@ -12,6 +13,16 @@ import { generateProfessionalContent } from "~/lib/content/professional-content"
 import { generateDetectorContent } from "~/lib/content/detector-content";
 import { generateLanguageContent } from "~/lib/content/language-content";
 import { generateNicheContent } from "~/lib/content/niche-content";
+import { generatePricingContent } from "~/lib/content/pricing-content";
+import { generateIndustryContent } from "~/lib/content/industry-content";
+import { generateFormatContent } from "~/lib/content/format-content";
+import { generateSpeedContent } from "~/lib/content/speed-content";
+import { generateQualityContent } from "~/lib/content/quality-content";
+import { generateToolContent } from "~/lib/content/tool-content";
+import { generateProblemContent } from "~/lib/content/problem-content";
+import { generateWorkflowContent } from "~/lib/content/workflow-content";
+import { generateScoreContent } from "~/lib/content/score-content";
+import { generateRegionContent } from "~/lib/content/region-content";
 import BypassTemplate from "~/components/templates/BypassTemplate";
 import HumanizerTemplate from "~/components/templates/HumanizerTemplate";
 import HowToTemplate from "~/components/templates/HowToTemplate";
@@ -22,6 +33,16 @@ import ProfessionalTemplate from "~/components/templates/ProfessionalTemplate";
 import DetectorTemplate from "~/components/templates/DetectorTemplate";
 import LanguageTemplate from "~/components/templates/LanguageTemplate";
 import NicheTemplate from "~/components/templates/NicheTemplate";
+import PricingTemplate from "~/components/templates/PricingTemplate";
+import IndustryTemplate from "~/components/templates/IndustryTemplate";
+import FormatTemplate from "~/components/templates/FormatTemplate";
+import SpeedTemplate from "~/components/templates/SpeedTemplate";
+import QualityTemplate from "~/components/templates/QualityTemplate";
+import ToolTemplate from "~/components/templates/ToolTemplate";
+import ProblemTemplate from "~/components/templates/ProblemTemplate";
+import WorkflowTemplate from "~/components/templates/WorkflowTemplate";
+import ScoreTemplate from "~/components/templates/ScoreTemplate";
+import RegionTemplate from "~/components/templates/RegionTemplate";
 
 interface PageProps {
   params: Promise<{ keyword: string }>;
@@ -58,8 +79,18 @@ function buildKeywords(keyword: string, cluster: string, entity: string): string
     detector: ["bypass ai detector", "ai detector bypass", "beat ai detection", "pass ai detector"],
     language: ["multilingual ai humanizer", "ai humanizer languages", "humanize ai text language"],
     niche: ["ai humanizer niche", "humanize ai content", "ai writing humanizer"],
+    pricing: ["ai humanizer pricing", "free ai humanizer", "ai humanizer cost", "ai humanizer plans"],
+    industry: ["ai humanizer for professionals", "industry ai humanizer", "professional ai content"],
+    format: ["ai humanizer for content", "format ai humanizer", "humanize ai format"],
+    speed: ["instant ai humanizer", "fast ai humanizer", "ai humanizer speed"],
+    quality: ["best quality ai humanizer", "natural ai humanizer", "human-like ai text"],
+    tool: ["ai humanizer integration", "ai humanizer tool", "ai humanizer platform"],
+    problem: ["fix ai detection", "ai detection problem", "ai flagged content fix"],
+    workflow: ["ai humanizer bulk", "ai humanizer workflow", "ai humanizer for teams"],
+    score: ["reduce ai score", "ai score reducer", "get 0 ai score"],
+    region: ["ai humanizer for students", "bypass turnitin university", "ai humanizer global"],
   };
-  const entityKw = entity && !["AI Humanizer", "Guide", "Use Case", "Academic", "Professional", "AI Detector", "Multilingual", "Niche", "Competitor"].includes(entity)
+  const entityKw = entity && !["AI Humanizer", "Guide", "Use Case", "Academic", "Professional", "AI Detector", "Multilingual", "Niche", "Competitor", "Pricing", "Speed", "Quality", "Problem", "Workflow", "Score", "HumanifyLab"].includes(entity)
     ? [entity.toLowerCase(), `${entity.toLowerCase()} bypass`, `humanize ${entity.toLowerCase()}`, `${entity.toLowerCase()} ai humanizer`]
     : [];
   // keyword appears first — signals to Google this is the primary topic
@@ -67,96 +98,59 @@ function buildKeywords(keyword: string, cluster: string, entity: string): string
 }
 
 export async function generateStaticParams() {
-  // Return ALL slugs so every page is pre-rendered at build time.
-  // This eliminates any risk of 404 on first crawl by Google.
-  // Vercel Pro handles large static builds — no timeout risk.
   const v1 = getAllSlugs().map((slug) => ({ keyword: slug }));
   const v2 = getAllV2Slugs().map((slug) => ({ keyword: slug }));
-  return [...v1, ...v2];
+  const v3 = getAllV3Slugs().map((slug) => ({ keyword: slug }));
+  return [...v1, ...v2, ...v3];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { keyword } = await params;
   const entry = getKeywordBySlug(keyword);
   const entryV2 = entry ? null : getV2KeywordBySlug(keyword);
-  if (!entry && !entryV2) return { title: "Not Found" };
+  const entryV3 = entry || entryV2 ? null : getV3KeywordBySlug(keyword);
+  if (!entry && !entryV2 && !entryV3) return { title: "Not Found" };
 
   const url = `${BASE_URL}/${keyword}`;
-  let metaTitle: string;
-  let metaDescription: string;
+  let metaTitle = "";
+  let metaDescription = "";
 
   if (entry) {
     switch (entry.cluster) {
-      case "bypass": {
-        const d = generateBypassContent(entry);
-        metaTitle = d.metaTitle;
-        metaDescription = d.metaDescription;
-        break;
-      }
-      case "humanizer": {
-        const d = generateHumanizerContent(entry);
-        metaTitle = d.metaTitle;
-        metaDescription = d.metaDescription;
-        break;
-      }
-      case "howto": {
-        const d = generateHowToContent(entry);
-        metaTitle = d.metaTitle;
-        metaDescription = d.metaDescription;
-        break;
-      }
-      case "usecase": {
-        const d = generateUseCaseContent(entry);
-        metaTitle = d.metaTitle;
-        metaDescription = d.metaDescription;
-        break;
-      }
+      case "bypass": { const d = generateBypassContent(entry); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "humanizer": { const d = generateHumanizerContent(entry); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "howto": { const d = generateHowToContent(entry); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "usecase": { const d = generateUseCaseContent(entry); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+    }
+  } else if (entryV2) {
+    switch (entryV2.cluster) {
+      case "competitor": { const d = generateCompetitorContent(entryV2); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "academic": { const d = generateAcademicContent(entryV2); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "professional": { const d = generateProfessionalContent(entryV2); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "detector": { const d = generateDetectorContent(entryV2); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "language": { const d = generateLanguageContent(entryV2); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "niche": { const d = generateNicheContent(entryV2); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
     }
   } else {
-    const e2 = entryV2!;
-    switch (e2.cluster) {
-      case "competitor": {
-        const d = generateCompetitorContent(e2);
-        metaTitle = d.metaTitle;
-        metaDescription = d.metaDescription;
-        break;
-      }
-      case "academic": {
-        const d = generateAcademicContent(e2);
-        metaTitle = d.metaTitle;
-        metaDescription = d.metaDescription;
-        break;
-      }
-      case "professional": {
-        const d = generateProfessionalContent(e2);
-        metaTitle = d.metaTitle;
-        metaDescription = d.metaDescription;
-        break;
-      }
-      case "detector": {
-        const d = generateDetectorContent(e2);
-        metaTitle = d.metaTitle;
-        metaDescription = d.metaDescription;
-        break;
-      }
-      case "language": {
-        const d = generateLanguageContent(e2);
-        metaTitle = d.metaTitle;
-        metaDescription = d.metaDescription;
-        break;
-      }
-      case "niche": {
-        const d = generateNicheContent(e2);
-        metaTitle = d.metaTitle;
-        metaDescription = d.metaDescription;
-        break;
-      }
+    const e3 = entryV3!;
+    switch (e3.cluster) {
+      case "pricing": { const d = generatePricingContent(e3); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "industry": { const d = generateIndustryContent(e3); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "format": { const d = generateFormatContent(e3); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "speed": { const d = generateSpeedContent(e3); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "quality": { const d = generateQualityContent(e3); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "tool": { const d = generateToolContent(e3); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "problem": { const d = generateProblemContent(e3); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "workflow": { const d = generateWorkflowContent(e3); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "score": { const d = generateScoreContent(e3); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "region": { const d = generateRegionContent(e3); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
     }
   }
 
-  const clusterForKeywords = entry?.cluster ?? entryV2!.cluster;
-  const entityForKeywords = entry?.entity ?? entryV2!.entity;
-  const keywordStr = entry?.keyword ?? entryV2!.keyword;
+  const clusterForKeywords = entry?.cluster ?? entryV2?.cluster ?? entryV3!.cluster;
+  const entityForKeywords = entry?.entity ?? entryV2?.entity ?? entryV3!.entity;
+  const keywordStr = entry?.keyword ?? entryV2?.keyword ?? entryV3!.keyword;
+  const seedVal = entry?.seed ?? entryV2?.seed ?? entryV3!.seed;
 
   return {
     title: metaTitle,
@@ -173,7 +167,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: "HumanifyLab",
       locale: "en_US",
       type: "article",
-      publishedTime: getPublishDate(entry?.seed ?? entryV2!.seed),
+      publishedTime: getPublishDate(entry?.seed ?? entryV2?.seed ?? entryV3!.seed),
       modifiedTime: new Date().toISOString(),
       authors: [BASE_URL],
       images: [{
@@ -209,10 +203,11 @@ export default async function KeywordPage({ params }: PageProps) {
   const { keyword } = await params;
   const entry = getKeywordBySlug(keyword);
   const entryV2 = entry ? null : getV2KeywordBySlug(keyword);
-  if (!entry && !entryV2) notFound();
+  const entryV3 = entry || entryV2 ? null : getV3KeywordBySlug(keyword);
+  if (!entry && !entryV2 && !entryV3) notFound();
 
-  const seed = entry?.seed ?? entryV2!.seed;
-  const kw = entry?.keyword ?? entryV2!.keyword;
+  const seed = entry?.seed ?? entryV2?.seed ?? entryV3!.seed;
+  const kw = entry?.keyword ?? entryV2?.keyword ?? entryV3!.keyword;
   const publishDate = getPublishDate(seed);
   const modifiedDate = new Date().toISOString().split("T")[0]!;
 
@@ -434,73 +429,94 @@ export default async function KeywordPage({ params }: PageProps) {
   }
 
   // V2 clusters
-  const e2 = entryV2!;
-  switch (e2.cluster) {
-    case "competitor": {
-      const data = generateCompetitorContent(e2);
-      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
-      return (
-        <>
-          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-          <CompetitorTemplate data={data} />
-        </>
-      );
+  if (entryV2) {
+    const e2 = entryV2;
+    switch (e2.cluster) {
+      case "competitor": {
+        const data = generateCompetitorContent(e2);
+        const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
+        return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><CompetitorTemplate data={data} /></>);
+      }
+      case "academic": {
+        const data = generateAcademicContent(e2);
+        const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
+        return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><AcademicTemplate data={data} /></>);
+      }
+      case "professional": {
+        const data = generateProfessionalContent(e2);
+        const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
+        return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><ProfessionalTemplate data={data} /></>);
+      }
+      case "detector": {
+        const data = generateDetectorContent(e2);
+        const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
+        return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><DetectorTemplate data={data} /></>);
+      }
+      case "language": {
+        const data = generateLanguageContent(e2);
+        const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
+        return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><LanguageTemplate data={data} /></>);
+      }
+      case "niche": {
+        const data = generateNicheContent(e2);
+        const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
+        return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><NicheTemplate data={data} /></>);
+      }
     }
-    case "academic": {
-      const data = generateAcademicContent(e2);
-      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
-      return (
-        <>
-          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-          <AcademicTemplate data={data} />
-        </>
-      );
+  }
+
+  // V3 clusters
+  const e3 = entryV3!;
+  switch (e3.cluster) {
+    case "pricing": {
+      const data = generatePricingContent(e3);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
+      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><PricingTemplate data={data} /></>);
     }
-    case "professional": {
-      const data = generateProfessionalContent(e2);
-      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
-      return (
-        <>
-          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-          <ProfessionalTemplate data={data} />
-        </>
-      );
+    case "industry": {
+      const data = generateIndustryContent(e3);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
+      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><IndustryTemplate data={data} /></>);
     }
-    case "detector": {
-      const data = generateDetectorContent(e2);
-      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
-      return (
-        <>
-          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-          <DetectorTemplate data={data} />
-        </>
-      );
+    case "format": {
+      const data = generateFormatContent(e3);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
+      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><FormatTemplate data={data} /></>);
     }
-    case "language": {
-      const data = generateLanguageContent(e2);
-      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
-      return (
-        <>
-          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-          <LanguageTemplate data={data} />
-        </>
-      );
+    case "speed": {
+      const data = generateSpeedContent(e3);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
+      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><SpeedTemplate data={data} /></>);
     }
-    case "niche": {
-      const data = generateNicheContent(e2);
-      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e2.keyword);
-      return (
-        <>
-          <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-          <NicheTemplate data={data} />
-        </>
-      );
+    case "quality": {
+      const data = generateQualityContent(e3);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
+      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><QualityTemplate data={data} /></>);
+    }
+    case "tool": {
+      const data = generateToolContent(e3);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
+      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><ToolTemplate data={data} /></>);
+    }
+    case "problem": {
+      const data = generateProblemContent(e3);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
+      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><ProblemTemplate data={data} /></>);
+    }
+    case "workflow": {
+      const data = generateWorkflowContent(e3);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
+      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><WorkflowTemplate data={data} /></>);
+    }
+    case "score": {
+      const data = generateScoreContent(e3);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
+      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><ScoreTemplate data={data} /></>);
+    }
+    case "region": {
+      const data = generateRegionContent(e3);
+      const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
+      return (<><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><RegionTemplate data={data} /></>);
     }
   }
 }

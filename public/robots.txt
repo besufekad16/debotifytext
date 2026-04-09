@@ -152,7 +152,7 @@ Disallow: /sign-up
 # ── Canonical host ───────────────────────────────────────────
 Host: https://www.humanifylab.com
 
-# ── Sitemaps (10 clusters, 5000+ pages) ──────────────────────
+# ── Sitemaps (20 clusters, 20k+ pages) ───────────────────────
 Sitemap: https://www.humanifylab.com/sitemap.xml
 Sitemap: https://www.humanifylab.com/sitemap-bypass.xml
 Sitemap: https://www.humanifylab.com/sitemap-humanizer.xml
@@ -164,3 +164,13 @@ Sitemap: https://www.humanifylab.com/sitemap-professional.xml
 Sitemap: https://www.humanifylab.com/sitemap-detector.xml
 Sitemap: https://www.humanifylab.com/sitemap-language.xml
 Sitemap: https://www.humanifylab.com/sitemap-niche.xml
+Sitemap: https://www.humanifylab.com/sitemap-pricing.xml
+Sitemap: https://www.humanifylab.com/sitemap-industry.xml
+Sitemap: https://www.humanifylab.com/sitemap-format.xml
+Sitemap: https://www.humanifylab.com/sitemap-speed.xml
+Sitemap: https://www.humanifylab.com/sitemap-quality.xml
+Sitemap: https://www.humanifylab.com/sitemap-tool.xml
+Sitemap: https://www.humanifylab.com/sitemap-problem.xml
+Sitemap: https://www.humanifylab.com/sitemap-workflow.xml
+Sitemap: https://www.humanifylab.com/sitemap-score.xml
+Sitemap: https://www.humanifylab.com/sitemap-region.xml

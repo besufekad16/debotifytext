@@ -20,11 +20,11 @@ const config = {
   outputFileTracingRoot: process.cwd(),
   
   // Optimize for large-scale programmatic SEO
-  experimental: {
-    // Parallel page generation for faster builds
-    workerThreads: false,
-    cpus: 4,
-  },
+  // NOTE: experimental.workerThreads and cpus are intentionally NOT set.
+  // Next.js 15 static generation with worker threads causes DataCloneError
+  // when module-level function arrays are present in content generators.
+  // Single-threaded generation is slower but reliable.
+  experimental: {},
   
   // Increase build timeout for large sites — 5000+ pages need more time
   staticPageGenerationTimeout: 300, // 5 minutes per page batch
