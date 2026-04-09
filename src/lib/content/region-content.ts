@@ -176,7 +176,9 @@ const FINAL_CTA_SUBTITLES = [
   'Trusted by students at universities worldwide. Free to start, no commitment.',
 ];
 
-export export function generateRegionContent(entry: KeywordEntryV3): RegionContentData {
+const DEFAULT_REGION = { flag: '🌍', institutions: 'universities worldwide', detector: 'Turnitin and GPTZero', note: 'AI detection is now standard at universities globally' };
+
+export function generateRegionContent(entry: KeywordEntryV3): RegionContentData {
   const { keyword, seed } = entry;
   const regionKey = Object.keys(REGION_CONTEXT).find(k => keyword.toLowerCase().includes(k)) ?? '';
   const ctx = REGION_CONTEXT[regionKey] ?? DEFAULT_REGION;

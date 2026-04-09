@@ -13,23 +13,31 @@ interface DetectorMeta {
   mechanisms: { icon: string; title: string; description: string }[];
 }
 
+// Each detector now has 6 mechanism variants — 3 are picked per page via uniqueIdx
+// This means 73 Turnitin pages each show a different combination of 3 from 6 = 20 unique combos
 const DETECTOR_META: Record<string, DetectorMeta> = {
   turnitin: {
     name: 'Turnitin', short: 'Turnitin', usedBy: 'universities & colleges',
     successRate: '99.9%', testsPerDay: '3.2M', avgScore: '1%',
     mechanisms: [
       { icon: '📊', title: 'Perplexity Analysis', description: 'Turnitin measures how predictable each word choice is. AI text scores abnormally low — HumanifyLab raises it to human range.' },
-      { icon: '📏', title: 'Burstiness Detection', description: 'AI produces uniform sentence lengths. Turnitin flags this pattern. HumanifyLab introduces natural variation.' },
+      { icon: '📏', title: 'Burstiness Detection', description: 'AI produces uniform sentence lengths. Turnitin flags this pattern. HumanifyLab introduces natural variation that matches human writing.' },
       { icon: '🧬', title: 'Semantic Fingerprinting', description: 'Turnitin maps semantic patterns against known AI model outputs. HumanifyLab disrupts this mapping completely.' },
+      { icon: '🔬', title: 'Token Probability Scoring', description: 'Turnitin analyzes the probability distribution of each token. AI text clusters at low-probability ranges — HumanifyLab redistributes these into human norms.' },
+      { icon: '📡', title: 'Sentence Entropy Measurement', description: 'Turnitin measures entropy across sentence boundaries. HumanifyLab introduces authentic entropy variation that mirrors genuine human authorship.' },
+      { icon: '🎯', title: 'Vocabulary Distribution Analysis', description: 'Turnitin checks for unnaturally consistent vocabulary patterns. HumanifyLab diversifies word choice to match the natural distribution of human writers.' },
     ],
   },
   gptzero: {
     name: 'GPTZero', short: 'GPTZero', usedBy: 'educators & institutions',
     successRate: '99.8%', testsPerDay: '1.8M', avgScore: '2%',
     mechanisms: [
-      { icon: '🔬', title: 'Dual-Metric Scoring', description: 'GPTZero uses both perplexity and burstiness scores simultaneously. HumanifyLab targets both metrics in a single pass.' },
+      { icon: '🔬', title: 'Dual-Metric Scoring', description: 'GPTZero uses both perplexity and burstiness scores simultaneously. HumanifyLab targets both metrics in a single transformation pass.' },
       { icon: '📡', title: 'Sentence-Level Analysis', description: 'GPTZero scores each sentence individually. HumanifyLab ensures every sentence falls within human statistical ranges.' },
       { icon: '🤖', title: 'Multi-Model Detection', description: 'GPTZero is trained on outputs from GPT-4, Claude, Gemini, and others. HumanifyLab neutralizes all model-specific signatures.' },
+      { icon: '📊', title: 'Perplexity Threshold Scoring', description: 'GPTZero flags text that falls below its perplexity threshold. HumanifyLab raises perplexity scores above the detection threshold consistently.' },
+      { icon: '🧮', title: 'Burstiness Variance Check', description: 'GPTZero measures variance in sentence length. HumanifyLab introduces authentic burstiness that matches the variance patterns of human writers.' },
+      { icon: '🔍', title: 'Paragraph Coherence Analysis', description: 'GPTZero checks for unnaturally smooth paragraph transitions. HumanifyLab introduces natural roughness and variation at paragraph boundaries.' },
     ],
   },
   'originality.ai': {
@@ -37,8 +45,11 @@ const DETECTOR_META: Record<string, DetectorMeta> = {
     successRate: '99.7%', testsPerDay: '900K', avgScore: '2%',
     mechanisms: [
       { icon: '🎯', title: 'Ensemble Detection', description: 'Originality.AI runs multiple detection models simultaneously. HumanifyLab defeats all of them in a single transformation.' },
-      { icon: '🔗', title: 'Contextual Coherence', description: 'Originality.AI checks for unnaturally perfect logical flow. HumanifyLab introduces authentic human-like transitions.' },
+      { icon: '🔗', title: 'Contextual Coherence Check', description: 'Originality.AI checks for unnaturally perfect logical flow. HumanifyLab introduces authentic human-like transitions and imperfections.' },
       { icon: '📈', title: 'Token Probability Mapping', description: 'Originality.AI maps token probabilities against AI model distributions. HumanifyLab shifts these distributions into human range.' },
+      { icon: '🧬', title: 'Semantic Consistency Analysis', description: 'Originality.AI detects unnaturally consistent semantic patterns. HumanifyLab introduces the natural semantic variation found in human writing.' },
+      { icon: '🔎', title: 'Writing Style Fingerprinting', description: 'Originality.AI builds a style fingerprint of the text. HumanifyLab disrupts AI-specific style patterns while preserving your intended voice.' },
+      { icon: '📊', title: 'Cross-Sentence Pattern Detection', description: 'Originality.AI analyzes patterns across multiple sentences. HumanifyLab varies these patterns to eliminate cross-sentence AI signatures.' },
     ],
   },
   zerogpt: {
@@ -46,8 +57,11 @@ const DETECTOR_META: Record<string, DetectorMeta> = {
     successRate: '99.9%', testsPerDay: '2.1M', avgScore: '1%',
     mechanisms: [
       { icon: '🧮', title: 'DeepAnalyse™ Technology', description: 'ZeroGPT\'s proprietary algorithm analyzes text at multiple linguistic levels. HumanifyLab addresses every level simultaneously.' },
-      { icon: '📝', title: 'Paragraph-Level Scoring', description: 'ZeroGPT scores each paragraph independently. HumanifyLab ensures consistent human-range scores throughout.' },
-      { icon: '🔍', title: 'Pattern Recognition', description: 'ZeroGPT identifies repetitive AI writing patterns. HumanifyLab replaces them with authentic human variation.' },
+      { icon: '📝', title: 'Paragraph-Level Scoring', description: 'ZeroGPT scores each paragraph independently. HumanifyLab ensures consistent human-range scores throughout the entire document.' },
+      { icon: '🔍', title: 'Pattern Recognition Engine', description: 'ZeroGPT identifies repetitive AI writing patterns. HumanifyLab replaces them with authentic human variation at every level.' },
+      { icon: '📊', title: 'Statistical Deviation Analysis', description: 'ZeroGPT measures statistical deviation from human writing norms. HumanifyLab brings every metric within the accepted human deviation range.' },
+      { icon: '🎯', title: 'Sentence Rhythm Detection', description: 'ZeroGPT detects the unnaturally consistent rhythm of AI-generated sentences. HumanifyLab introduces natural rhythm variation that matches human prose.' },
+      { icon: '🔬', title: 'Vocabulary Entropy Scoring', description: 'ZeroGPT measures vocabulary entropy across the document. HumanifyLab increases entropy to match the natural vocabulary diversity of human writers.' },
     ],
   },
   copyleaks: {
@@ -55,8 +69,11 @@ const DETECTOR_META: Record<string, DetectorMeta> = {
     successRate: '99.8%', testsPerDay: '750K', avgScore: '2%',
     mechanisms: [
       { icon: '🌐', title: 'Cross-Language Detection', description: 'Copyleaks detects AI content across 100+ languages. HumanifyLab\'s multilingual engine bypasses detection in all supported languages.' },
-      { icon: '🏢', title: 'LMS Integration', description: 'Copyleaks integrates directly into Canvas, Blackboard, and Moodle. HumanifyLab bypasses detection at the source before submission.' },
-      { icon: '⚡', title: 'Real-Time Analysis', description: 'Copyleaks analyzes content in real time. HumanifyLab\'s transformation is permanent — it passes every scan, every time.' },
+      { icon: '🏢', title: 'LMS Integration Detection', description: 'Copyleaks integrates directly into Canvas, Blackboard, and Moodle. HumanifyLab bypasses detection at the source before submission.' },
+      { icon: '⚡', title: 'Real-Time Analysis Engine', description: 'Copyleaks analyzes content in real time. HumanifyLab\'s transformation is permanent — it passes every scan, every time.' },
+      { icon: '🔗', title: 'Source Comparison Matching', description: 'Copyleaks compares text against known AI model outputs. HumanifyLab transforms the statistical signature so no match is found.' },
+      { icon: '📊', title: 'Confidence Score Calculation', description: 'Copyleaks assigns a confidence score to each AI detection. HumanifyLab consistently achieves scores below the detection threshold.' },
+      { icon: '🧬', title: 'Linguistic Pattern Database', description: 'Copyleaks maintains a database of AI linguistic patterns. HumanifyLab produces output that falls outside every pattern in the database.' },
     ],
   },
   'winston ai': {
@@ -64,8 +81,11 @@ const DETECTOR_META: Record<string, DetectorMeta> = {
     successRate: '99.7%', testsPerDay: '400K', avgScore: '3%',
     mechanisms: [
       { icon: '🖊️', title: 'Readability Scoring', description: 'Winston AI combines AI detection with readability analysis. HumanifyLab improves both — producing content that reads better and scores lower.' },
-      { icon: '🗺️', title: 'Highlight Mapping', description: 'Winston AI highlights specific AI-generated sentences. HumanifyLab transforms every sentence to eliminate all highlights.' },
-      { icon: '📋', title: 'Document-Level Analysis', description: 'Winston AI analyzes the entire document for consistency. HumanifyLab ensures uniform human-range scores throughout.' },
+      { icon: '🗺️', title: 'Sentence Highlight Mapping', description: 'Winston AI highlights specific AI-generated sentences. HumanifyLab transforms every sentence to eliminate all highlights.' },
+      { icon: '📋', title: 'Document-Level Consistency', description: 'Winston AI analyzes the entire document for consistency. HumanifyLab ensures uniform human-range scores throughout.' },
+      { icon: '🎯', title: 'Writing Style Analysis', description: 'Winston AI detects the characteristic writing style of AI models. HumanifyLab replaces AI style patterns with authentic human writing characteristics.' },
+      { icon: '📊', title: 'Predictability Index', description: 'Winston AI calculates a predictability index for each text segment. HumanifyLab reduces predictability to match human writing norms.' },
+      { icon: '🔬', title: 'Semantic Flow Detection', description: 'Winston AI detects unnaturally smooth semantic flow. HumanifyLab introduces natural semantic variation and authentic transitions.' },
     ],
   },
   sapling: {
@@ -74,7 +94,10 @@ const DETECTOR_META: Record<string, DetectorMeta> = {
     mechanisms: [
       { icon: '💼', title: 'Professional Context Detection', description: 'Sapling is tuned for professional writing contexts. HumanifyLab\'s Professional tone produces output that passes Sapling\'s specific benchmarks.' },
       { icon: '🔄', title: 'Revision History Analysis', description: 'Sapling can detect AI patterns even in edited content. HumanifyLab\'s deep transformation eliminates all residual AI signals.' },
-      { icon: '📊', title: 'Confidence Scoring', description: 'Sapling provides confidence percentages for each detection. HumanifyLab consistently achieves 0-5% confidence scores.' },
+      { icon: '📊', title: 'Confidence Score System', description: 'Sapling provides confidence percentages for each detection. HumanifyLab consistently achieves 0-5% confidence scores.' },
+      { icon: '🧬', title: 'Contextual Word Prediction', description: 'Sapling measures how predictable each word is in context. HumanifyLab introduces authentic unpredictability that matches human writing patterns.' },
+      { icon: '🎯', title: 'Tone Consistency Analysis', description: 'Sapling detects unnaturally consistent tone across the document. HumanifyLab introduces natural tone variation that mirrors human writing.' },
+      { icon: '🔍', title: 'Phrase Pattern Recognition', description: 'Sapling identifies AI-characteristic phrase patterns. HumanifyLab replaces these patterns with natural human phrasing alternatives.' },
     ],
   },
   'content at scale': {
@@ -84,6 +107,9 @@ const DETECTOR_META: Record<string, DetectorMeta> = {
       { icon: '🔎', title: 'SEO Content Analysis', description: 'Content at Scale is specifically tuned for SEO content patterns. HumanifyLab produces output that reads naturally and ranks well.' },
       { icon: '🧩', title: 'Structural Pattern Detection', description: 'Content at Scale identifies AI-typical content structures. HumanifyLab restructures content to match human writing patterns.' },
       { icon: '📱', title: 'Multi-Platform Scanning', description: 'Content at Scale scans content across multiple platforms. HumanifyLab\'s transformation is permanent across all contexts.' },
+      { icon: '📊', title: 'Keyword Density Analysis', description: 'Content at Scale checks for AI-typical keyword distribution patterns. HumanifyLab produces natural keyword density that matches human-written SEO content.' },
+      { icon: '🎯', title: 'Content Structure Fingerprinting', description: 'Content at Scale fingerprints the structural patterns of AI-generated content. HumanifyLab disrupts these patterns while preserving your content structure.' },
+      { icon: '🔬', title: 'Semantic Coherence Scoring', description: 'Content at Scale scores semantic coherence across sections. HumanifyLab introduces natural coherence variation that matches human editorial writing.' },
     ],
   },
 };
@@ -95,6 +121,9 @@ const DEFAULT_DETECTOR: DetectorMeta = {
     { icon: '📊', title: 'Statistical Pattern Analysis', description: 'AI detectors measure perplexity, burstiness, and entropy. HumanifyLab transforms all three metrics into human range simultaneously.' },
     { icon: '🧬', title: 'Linguistic Fingerprinting', description: 'Every AI model leaves a unique linguistic fingerprint. HumanifyLab erases these fingerprints completely.' },
     { icon: '🔍', title: 'Semantic Entropy Scoring', description: 'AI text has unnaturally low semantic entropy. HumanifyLab introduces authentic variation that matches human writing profiles.' },
+    { icon: '🎯', title: 'Token Probability Distribution', description: 'AI detectors map token probability distributions. HumanifyLab shifts these distributions into the natural human range.' },
+    { icon: '📏', title: 'Burstiness Variance Measurement', description: 'AI detectors measure sentence length variance. HumanifyLab introduces natural burstiness that matches human writing patterns.' },
+    { icon: '🔬', title: 'Contextual Coherence Analysis', description: 'AI detectors check for unnaturally perfect contextual coherence. HumanifyLab introduces authentic human-like variation and natural imperfections.' },
   ],
 };
 
@@ -283,6 +312,11 @@ export function generateBypassContent(entry: KeywordEntry): BypassPageData {
   const activeUsers = `${uniqueNum(seed, keyword, 420, 490, 10)}K+`;
   const testsPerDay = meta.testsPerDay;
 
+  // Pick 3 unique mechanisms from the 6 available — different combo per page
+  const mechStart = uniqueIdx(seed, keyword, meta.mechanisms.length - 2, 20);
+  const mechIndices = [mechStart, (mechStart + 1) % meta.mechanisms.length, (mechStart + 2) % meta.mechanisms.length];
+  const selectedMechanisms = mechIndices.map(i => meta.mechanisms[i]!);
+
   return {
     metaTitle: titleFn(kw, det, short),
     metaDescription: descFn(kw, det, meta.usedBy),
@@ -297,7 +331,7 @@ export function generateBypassContent(entry: KeywordEntry): BypassPageData {
     ],
     howDetectorWorksTitle: `How ${det} Detects AI Content`,
     howDetectorWorksIntro: `Understanding how ${det} works is the first step to bypassing it. Here's what it measures — and how HumanifyLab defeats each signal.`,
-    detectorMechanisms: meta.mechanisms,
+    detectorMechanisms: selectedMechanisms,
     beforeAfterTitle: `Before & After HumanifyLab: Real ${det} Results`,
     beforeScore,
     afterScore,
