@@ -193,7 +193,8 @@ OUTPUT FORMAT:
 - No "Here is the rewritten text:" prefix
 - Start directly with the first sentence
 - Keep same number of paragraphs as input
-- Match input word count within 20%`;
+- Match input word count within 20%
+- HEADINGS AND TITLES: If the input contains headings or titles (lines starting with #, ##, ###, or short standalone title lines), keep them EXACTLY as-is on their own lines. Do NOT rewrite or remove headings. Only rewrite the body text under each heading.
 
   if (isFreeUser) {
     return coreRules;

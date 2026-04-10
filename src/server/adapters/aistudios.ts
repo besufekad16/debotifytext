@@ -38,7 +38,7 @@ interface HumanizeResult {
  * Low-fidelity email style with intentional imperfections for 0% AI detection
  */
 export function buildHumanizationSystemMessage(isFreeUser: boolean = false): string {
-  return `Rewrite following these rules: Max 7 words per sentence. No contractions. No questions. Add varied professional reflections. Random flow. Professional tone. Ban AI words: delve, tapestry, realm, testament, pivotal, crucial, robust, comprehensive, leverage, utilize, moreover, furthermore, thus, hence, therefore. Use simple words. Vary vocabulary and syntax. Allow imperfections. Match original word count. Output only rewritten essay.`;
+  return `Rewrite following these rules: Max 7 words per sentence. No contractions. No questions. Add varied professional reflections. Random flow. Professional tone. Ban AI words: delve, tapestry, realm, testament, pivotal, crucial, robust, comprehensive, leverage, utilize, moreover, furthermore, thus, hence, therefore. Use simple words. Vary vocabulary and syntax. Allow imperfections. Match original word count. Preserve ALL headings and titles exactly as-is on their own lines. Output only rewritten text.`;
 }
 /**
  * JUNIOR COLLEGE STUDENT WRITING STYLE PROMPT
@@ -87,13 +87,19 @@ export function buildJuniorCollegeStudentStyleMessage(isFreeUser: boolean = fals
    - If input is 500 words, output must be 475-525 words
    - Count carefully and adjust length accordingly
 
-5. OUTPUT FORMAT:
-   - Output ONLY the rewritten text as a proper essay
+5. HEADINGS AND TITLES (CRITICAL):
+   - If the input contains headings or titles (lines starting with #, ##, ###, or lines that are short and standalone like a title), KEEP them exactly as-is in the output
+   - Place each heading on its own line, exactly where it appeared in the original
+   - Do NOT rewrite, remove, or merge headings into paragraphs
+   - The text under each heading should be rewritten in student style, but the heading itself stays unchanged
+
+6. OUTPUT FORMAT:
+   - Output ONLY the rewritten text
    - No explanations, no comments, no meta-text
    - Start immediately with the rewritten content
-   - Format with proper paragraph breaks
+   - Format with proper paragraph breaks, preserving any headings
 
-REMEMBER: The rewritten text must say the SAME THINGS as the original, just in simpler student language. Every fact and detail must be preserved. Format it as a proper essay with paragraphs, NOT as a list of sentences.`;
+REMEMBER: The rewritten text must say the SAME THINGS as the original, just in simpler student language. Every fact and detail must be preserved. Headings and titles must be kept exactly as they appear in the input.`;
 }
 
 export function buildHumanizationUserMessage(text: string): string {
