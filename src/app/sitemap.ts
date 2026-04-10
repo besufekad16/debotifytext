@@ -19,30 +19,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   // V1
-  const bypassPages = getClusterKeywords('bypass').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.9 }));
-  const humanizerPages = getClusterKeywords('humanizer').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 }));
-  const howtoPages = getClusterKeywords('howto').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.8 }));
-  const usecasePages = getClusterKeywords('usecase').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.75 }));
+  const bypassPages = getClusterKeywords('bypass').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.95 }));
+  const humanizerPages = getClusterKeywords('humanizer').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.92 }));
+  const howtoPages = getClusterKeywords('howto').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.90 }));
+  const usecasePages = getClusterKeywords('usecase').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.88 }));
 
   // V2
-  const competitorPages = getV2ClusterKeywords('competitor').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.88 }));
-  const academicPages = getV2ClusterKeywords('academic').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 }));
-  const professionalPages = getV2ClusterKeywords('professional').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.83 }));
-  const detectorPages = getV2ClusterKeywords('detector').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.87 }));
-  const languagePages = getV2ClusterKeywords('language').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.82 }));
-  const nichePages = getV2ClusterKeywords('niche').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.80 }));
+  const competitorPages = getV2ClusterKeywords('competitor').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.93 }));
+  const academicPages = getV2ClusterKeywords('academic').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.91 }));
+  const professionalPages = getV2ClusterKeywords('professional').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.90 }));
+  const detectorPages = getV2ClusterKeywords('detector').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.92 }));
+  const languagePages = getV2ClusterKeywords('language').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.88 }));
+  const nichePages = getV2ClusterKeywords('niche').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.87 }));
 
   // V3
-  const pricingPages = getV3ClusterKeywords('pricing').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.82 }));
-  const industryPages = getV3ClusterKeywords('industry').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.80 }));
-  const formatPages = getV3ClusterKeywords('format').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.78 }));
-  const speedPages = getV3ClusterKeywords('speed').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.78 }));
-  const qualityPages = getV3ClusterKeywords('quality').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.78 }));
-  const toolPages = getV3ClusterKeywords('tool').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.77 }));
-  const problemPages = getV3ClusterKeywords('problem').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.80 }));
-  const workflowPages = getV3ClusterKeywords('workflow').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.77 }));
-  const scorePages = getV3ClusterKeywords('score').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.82 }));
-  const regionPages = getV3ClusterKeywords('region').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.79 }));
+  const pricingPages = getV3ClusterKeywords('pricing').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.88 }));
+  const industryPages = getV3ClusterKeywords('industry').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.87 }));
+  const formatPages = getV3ClusterKeywords('format').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.86 }));
+  const speedPages = getV3ClusterKeywords('speed').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.86 }));
+  const qualityPages = getV3ClusterKeywords('quality').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.86 }));
+  const toolPages = getV3ClusterKeywords('tool').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.85 }));
+  const problemPages = getV3ClusterKeywords('problem').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.88 }));
+  const workflowPages = getV3ClusterKeywords('workflow').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.85 }));
+  const scorePages = getV3ClusterKeywords('score').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.90 }));
+  const regionPages = getV3ClusterKeywords('region').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.87 }));
 
   return [
     ...mainPages,

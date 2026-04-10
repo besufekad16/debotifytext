@@ -1,7 +1,8 @@
 # ============================================================
 # HumanifyLab — robots.txt
 # https://www.humanifylab.com
-# Updated: 2026-04-06
+# Updated: 2026-04-10
+# Strategy: Maximum crawl speed, all SEO pages indexed
 # ============================================================
 
 # ── Google ───────────────────────────────────────────────────
@@ -20,11 +21,19 @@ User-agent: Googlebot-Image
 Allow: /
 Disallow: /api/
 Disallow: /_next/
+Crawl-delay: 0
 
 User-agent: Googlebot-Video
 Allow: /
 Disallow: /api/
 Disallow: /_next/
+Crawl-delay: 0
+
+User-agent: Googlebot-News
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Crawl-delay: 0
 
 # ── Bing ─────────────────────────────────────────────────────
 User-agent: Bingbot
@@ -46,6 +55,7 @@ Disallow: /_next/
 Disallow: /account/
 Disallow: /team/
 Disallow: /api-keys/
+Crawl-delay: 0
 
 # ── DuckDuckGo ───────────────────────────────────────────────
 User-agent: DuckDuckBot
@@ -55,6 +65,7 @@ Disallow: /_next/
 Disallow: /account/
 Disallow: /team/
 Disallow: /api-keys/
+Crawl-delay: 0
 
 # ── Baidu ────────────────────────────────────────────────────
 User-agent: Baiduspider
@@ -64,6 +75,7 @@ Disallow: /_next/
 Disallow: /account/
 Disallow: /team/
 Disallow: /api-keys/
+Crawl-delay: 0
 
 # ── Yandex ───────────────────────────────────────────────────
 User-agent: YandexBot
@@ -73,12 +85,14 @@ Disallow: /_next/
 Disallow: /account/
 Disallow: /team/
 Disallow: /api-keys/
+Crawl-delay: 0
 
 # ── Naver (South Korea) ──────────────────────────────────────
 User-agent: Yeti
 Allow: /
 Disallow: /api/
 Disallow: /_next/
+Crawl-delay: 0
 
 # ── AI Crawlers (allow for LLM training & visibility) ────────
 User-agent: GPTBot
@@ -153,6 +167,7 @@ Disallow: /sign-up
 Host: https://www.humanifylab.com
 
 # ── Sitemaps (20 clusters, 20k+ pages) ───────────────────────
+# All sitemaps use changeFrequency=daily and high priority for fast indexing
 Sitemap: https://www.humanifylab.com/sitemap.xml
 Sitemap: https://www.humanifylab.com/sitemap-bypass.xml
 Sitemap: https://www.humanifylab.com/sitemap-humanizer.xml
