@@ -38,6 +38,12 @@ const PLATFORM_CONTEXT: Record<string, { icon: string; audience: string; workflo
   'zapier':             { icon: '⚡', audience: 'automation users', workflow: 'automate humanization workflows with Zapier' },
 };
 
+const DEFAULT_PLATFORM: { icon: string; audience: string; workflow: string } = {
+  icon: '🤖',
+  audience: 'content creators and writers',
+  workflow: 'paste your AI-generated content and get human-sounding output instantly',
+};
+
 const HERO_SUBTITLES = [
   `Works with any tool. 99.9% bypass rate, instant results, no sign-up required.`,
   `Seamless integration with your existing workflow. 99.9% bypass rate, zero data stored.`,
