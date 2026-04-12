@@ -35,6 +35,33 @@ type ParsedDescription = {
   features: string[];
 };
 
+// ── Module-level cache so products load once per session ──────────────────────
+let cachedProducts: Product[] | null = null;
+let fetchPromise: Promise<Product[]> | null = null;
+
+function fetchProducts(): Promise<Product[]> {
+  if (cachedProducts) return Promise.resolve(cachedProducts);
+  if (fetchPromise) return fetchPromise;
+  fetchPromise = fetch("/api/polar/products")
+    .then(r => r.json())
+    .then((data: Product[]) => {
+      cachedProducts = data;
+      fetchPromise = null;
+      return data;
+    })
+    .catch(err => {
+      fetchPromise = null;
+      throw err;
+    });
+  return fetchPromise;
+}
+
+// Pre-warm the cache as soon as this module loads (before modal even opens)
+if (typeof window !== "undefined") {
+  void fetchProducts();
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
 function parseProductDescription(description?: string | null): ParsedDescription {
   if (!description) return {
     headline: "Everything you need to humanize confidently.",
@@ -95,16 +122,16 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
   const [ctaLoading, setCtaLoading] = useState(false);
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
 
-  // 59-second countdown — resets every time modal opens, stops at 0, never auto-dismisses
-  const [seconds, setSeconds] = useState(59);
+  // Countdown: 59 seconds, resets fresh every time modal opens
+  const [countdown, setCountdown] = useState(59);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (isOpen) {
-      setSeconds(59);
+      setCountdown(59);
       if (timerRef.current) clearInterval(timerRef.current);
       timerRef.current = setInterval(() => {
-        setSeconds(prev => {
+        setCountdown(prev => {
           if (prev <= 1) { clearInterval(timerRef.current!); return 0; }
           return prev - 1;
         });
@@ -118,16 +145,21 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => setIsVisible(true), 10);
-      setLoading(true);
-      fetch("/api/polar/products")
-        .then(r => r.json())
-        .then((data: Product[]) => {
-          setProducts(data);
-          // Default to yearly if available
-          if (data.some((p: Product) => p.yearly)) setBillingCycle("yearly");
-        })
-        .catch(console.error)
-        .finally(() => setLoading(false));
+      // Use cached products if available — instant display
+      if (cachedProducts) {
+        setProducts(cachedProducts);
+        if (cachedProducts.some((p: Product) => p.yearly)) setBillingCycle("yearly");
+        setLoading(false);
+      } else {
+        setLoading(true);
+        fetchProducts()
+          .then((data: Product[]) => {
+            setProducts(data);
+            if (data.some((p: Product) => p.yearly)) setBillingCycle("yearly");
+          })
+          .catch(console.error)
+          .finally(() => setLoading(false));
+      }
     } else {
       setIsVisible(false);
     }
@@ -150,6 +182,8 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
   const { headline, features } = parseProductDescription(ultraPlan?.uiDescription ?? ultraPlan?.description);
 
   const pad = (n: number) => String(n).padStart(2, "0");
+  const countdownMins = pad(Math.floor(countdown / 60));
+  const countdownSecs = pad(countdown % 60);
 
   const handleClose = () => {
     setIsVisible(false);
@@ -196,8 +230,30 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
 
           {/* ── HEADLINE ── */}
           <div className="text-center mb-5">
+            <style>{`
+              @keyframes heartbeat-glow-modal {
+                0%   { filter: drop-shadow(0 0 4px rgba(234,88,12,0.4)) drop-shadow(0 0 12px rgba(234,88,12,0.2)); transform: scale(1); }
+                14%  { filter: drop-shadow(0 0 14px rgba(234,88,12,1)) drop-shadow(0 0 30px rgba(234,88,12,0.7)) drop-shadow(0 0 50px rgba(234,88,12,0.4)); transform: scale(1.1); }
+                28%  { filter: drop-shadow(0 0 4px rgba(234,88,12,0.4)) drop-shadow(0 0 12px rgba(234,88,12,0.2)); transform: scale(1); }
+                42%  { filter: drop-shadow(0 0 10px rgba(234,88,12,0.9)) drop-shadow(0 0 24px rgba(234,88,12,0.6)) drop-shadow(0 0 40px rgba(234,88,12,0.3)); transform: scale(1.06); }
+                70%  { filter: drop-shadow(0 0 4px rgba(234,88,12,0.4)) drop-shadow(0 0 12px rgba(234,88,12,0.2)); transform: scale(1); }
+                100% { filter: drop-shadow(0 0 4px rgba(234,88,12,0.4)) drop-shadow(0 0 12px rgba(234,88,12,0.2)); transform: scale(1); }
+              }
+            `}</style>
             <h1 className="text-[1.6rem] sm:text-[1.9rem] font-extrabold text-[#1a0a00] leading-tight tracking-tight mb-2">
-              Unlock Ultra at <span className="text-[#8b6f47]">50% OFF</span>
+              Unlock Ultra at{" "}
+              <span
+                className="inline-block font-black"
+                style={{
+                  background: "linear-gradient(135deg, #ea580c, #f97316, #fb923c)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                  animation: "heartbeat-glow-modal 1.6s ease-in-out infinite",
+                }}
+              >
+                50% OFF
+              </span>
             </h1>
             <p className="text-[#5e3d2a]/70 text-sm leading-relaxed max-w-xs mx-auto">
               Claim this one-time welcome offer to unlock our most powerful AI Humanizer at 50% off.
@@ -208,10 +264,10 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
           <div className="flex justify-center mb-5">
             <div className="inline-flex items-center gap-2 bg-white border border-[#d4b896] rounded-full px-5 py-2.5 shadow-sm">
               <span className="text-[#3b1f0e] font-semibold text-sm">Offer ends in</span>
-              <span className={`font-black text-base tabular-nums tracking-tight ${seconds === 0 ? "text-[#8b6f47]/40" : "text-[#3b1f0e]"}`}>
-                00:{pad(seconds)}
+              <span className={`font-black text-base tabular-nums tracking-tight ${countdown === 0 ? "text-[#8b6f47]/40" : "text-[#3b1f0e]"}`}>
+                {countdownMins}:{countdownSecs}
               </span>
-              {seconds === 0 && <span className="text-[10px] text-[#8b6f47]/60 italic">still available</span>}
+              {countdown === 0 && <span className="text-[10px] text-[#8b6f47]/60 italic">still available</span>}
             </div>
           </div>
 
