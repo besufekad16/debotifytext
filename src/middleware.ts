@@ -34,29 +34,37 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
     await auth.protect()
   }
 
-  // Referral cookie tracking — runs on every request
+  // Referral cookie tracking — only runs when ?ref= param is present
   const refParam = request.nextUrl.searchParams.get(COOKIE_NAME)
 
   if (refParam) {
-    try {
-      // Validate the code exists in DB before setting cookie
-      const affiliate = await db.affiliate.findUnique({
-        where: { referralCode: refParam },
-        select: { referralCode: true },
-      })
+    // Skip DB lookup for API routes, static files, and internal Next.js paths
+    const pathname = request.nextUrl.pathname
+    const isApiOrInternal = pathname.startsWith('/api/') || 
+      pathname.startsWith('/_next/') ||
+      pathname.includes('.')
 
-      if (affiliate) {
-        const response = NextResponse.next()
-        response.cookies.set(COOKIE_NAME, affiliate.referralCode, {
-          maxAge: COOKIE_MAX_AGE,
-          path: '/',
-          sameSite: 'lax',
-          httpOnly: true,
+    if (!isApiOrInternal) {
+      try {
+        // Validate the code exists in DB before setting cookie
+        const affiliate = await db.affiliate.findUnique({
+          where: { referralCode: refParam },
+          select: { referralCode: true },
         })
-        return response
+
+        if (affiliate) {
+          const response = NextResponse.next()
+          response.cookies.set(COOKIE_NAME, affiliate.referralCode, {
+            maxAge: COOKIE_MAX_AGE,
+            path: '/',
+            sameSite: 'lax',
+            httpOnly: true,
+          })
+          return response
+        }
+      } catch {
+        // DB error — silently skip, don't break the request
       }
-    } catch {
-      // DB error — silently skip, don't break the request
     }
   }
 })

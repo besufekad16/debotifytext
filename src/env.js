@@ -26,8 +26,7 @@ export const env = createEnv({
     AISTUDIOS_API_KEY: z.string(),
     OPENAI_API_KEY: z.string(),
     RESEND_API_KEY: z.string(),
-    CRYPTOMUS_MERCHANT_ID: z.string().optional(),
-    CRYPTOMUS_API_KEY: z.string().optional(),
+    OXAPAY_PAYOUT_API_KEY: z.string().optional(),
     CRON_SECRET: z.string().optional(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
@@ -68,8 +67,7 @@ export const env = createEnv({
     AISTUDIOS_API_KEY: process.env.AISTUDIOS_API_KEY,
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
-    CRYPTOMUS_MERCHANT_ID: process.env.CRYPTOMUS_MERCHANT_ID,
-    CRYPTOMUS_API_KEY: process.env.CRYPTOMUS_API_KEY,
+    OXAPAY_PAYOUT_API_KEY: process.env.OXAPAY_PAYOUT_API_KEY,
     CRON_SECRET: process.env.CRON_SECRET,
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
   },

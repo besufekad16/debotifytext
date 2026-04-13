@@ -2,7 +2,7 @@
 
 import { auth } from "@clerk/nextjs/server";
 import { db } from "~/server/db";
-import { sendPayout } from "~/server/utils/cryptomus-client";
+import { sendPayout } from "~/server/utils/oxapay-client";
 
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://humanifylab.com";
 
@@ -19,7 +19,7 @@ export async function registerAffiliate(): Promise<{
   const { userId } = await auth();
   if (!userId) return { success: false, error: "Unauthorized" };
 
-  // Idempotent
+  // Idempotent — return existing record if already registered
   const existing = await db.affiliate.findUnique({ where: { clerkId: userId } });
   if (existing) {
     return {
@@ -32,18 +32,30 @@ export async function registerAffiliate(): Promise<{
   const count = await db.affiliate.count();
   const referralCode = generateReferralCode(count);
 
-  const affiliate = await db.affiliate.create({
-    data: { clerkId: userId, referralCode },
-  });
-
-  return {
-    success: true,
-    referralCode: affiliate.referralCode,
-    referralUrl: `${BASE_URL}/?ref=${affiliate.referralCode}`,
-  };
+  try {
+    const affiliate = await db.affiliate.create({
+      data: { clerkId: userId, referralCode },
+    });
+    return {
+      success: true,
+      referralCode: affiliate.referralCode,
+      referralUrl: `${BASE_URL}/?ref=${affiliate.referralCode}`,
+    };
+  } catch {
+    // Race condition: another request created the record — return existing
+    const retry = await db.affiliate.findUnique({ where: { clerkId: userId } });
+    if (retry) {
+      return {
+        success: true,
+        referralCode: retry.referralCode,
+        referralUrl: `${BASE_URL}/?ref=${retry.referralCode}`,
+      };
+    }
+    return { success: false, error: "Registration failed. Please try again." };
+  }
 }
 
-export async function requestPayout(walletAddress: string): Promise<{
+export async function requestPayout(walletAddress: string, network = "TRX"): Promise<{
   success: boolean;
   payoutId?: string;
   amount?: string;
@@ -60,6 +72,7 @@ export async function requestPayout(walletAddress: string): Promise<{
     return { success: false, error: `Wallet address must be ${MIN_WALLET}–${MAX_WALLET} characters` };
   }
 
+  // Fast pre-check before entering transaction
   const affiliate = await db.affiliate.findUnique({
     where: { clerkId: userId },
     include: { payouts: { where: { status: "processing" }, take: 1 } },
@@ -68,40 +81,75 @@ export async function requestPayout(walletAddress: string): Promise<{
   if (!affiliate) return { success: false, error: "Not an affiliate" };
   if (affiliate.payouts.length > 0) return { success: false, error: "A payout is already in progress" };
 
-  const available = Number(affiliate.availableBalance);
-  if (available < MIN_PAYOUT) {
-    return { success: false, error: `Minimum payout is $${MIN_PAYOUT}.00. Your balance is $${available.toFixed(2)}` };
+  const preCheckBalance = Number(affiliate.availableBalance);
+  if (preCheckBalance < MIN_PAYOUT) {
+    return { success: false, error: `Minimum payout is $${MIN_PAYOUT}.00. Your balance is $${preCheckBalance.toFixed(2)}` };
   }
 
-  // Create payout + deduct balance atomically
-  const payout = await db.$transaction(async (tx) => {
-    await tx.affiliate.update({
-      where: { id: affiliate.id },
-      data: { availableBalance: { decrement: available } },
-    });
-    return tx.affiliatePayout.create({
-      data: { affiliateId: affiliate.id, amount: available, walletAddress, status: "processing" },
-    });
-  });
+  // Atomically re-read balance inside transaction to prevent race conditions
+  let payout: { id: string; amount: { toString(): string } };
+  try {
+    payout = await db.$transaction(async (tx) => {
+      // Re-read with fresh data inside the transaction
+      const fresh = await tx.affiliate.findUnique({
+        where: { id: affiliate.id },
+        include: { payouts: { where: { status: "processing" }, take: 1 } },
+      });
+      if (!fresh) throw new Error("Affiliate not found");
+      if (fresh.payouts.length > 0) throw new Error("A payout is already in progress");
 
+      const freshAvailable = Number(fresh.availableBalance);
+      if (freshAvailable < MIN_PAYOUT) {
+        throw new Error(`Minimum payout is $${MIN_PAYOUT}.00. Your balance is $${freshAvailable.toFixed(2)}`);
+      }
+
+      await tx.affiliate.update({
+        where: { id: affiliate.id },
+        data: { availableBalance: { decrement: freshAvailable } },
+      });
+
+      return tx.affiliatePayout.create({
+        data: {
+          affiliateId: affiliate.id,
+          amount: freshAvailable,
+          walletAddress,
+          status: "processing",
+        },
+      });
+    });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Payout failed. Please try again.";
+    return { success: false, error: msg };
+  }
+
+  const payoutAmount = Number(payout.amount.toString());
+
+  // Call OxaPay to send USDT
   const result = await sendPayout({
-    amount: available.toFixed(2),
+    amount: payoutAmount.toFixed(2),
     walletAddress,
     orderId: payout.id,
+    network,
   });
 
   if (result.success) {
     await db.affiliatePayout.update({
       where: { id: payout.id },
-      data: { status: "completed", cryptomusId: result.cryptomusId },
+      data: { status: "completed", cryptomusId: result.trackId },
     });
-    return { success: true, payoutId: payout.id, amount: available.toFixed(2) };
+    return { success: true, payoutId: payout.id, amount: payoutAmount.toFixed(2) };
   }
 
-  // Rollback
+  // OxaPay failed — rollback: restore balance and mark payout as failed
   await db.$transaction(async (tx) => {
-    await tx.affiliatePayout.update({ where: { id: payout.id }, data: { status: "failed" } });
-    await tx.affiliate.update({ where: { id: affiliate.id }, data: { availableBalance: { increment: available } } });
+    await tx.affiliatePayout.update({
+      where: { id: payout.id },
+      data: { status: "failed" },
+    });
+    await tx.affiliate.update({
+      where: { id: affiliate.id },
+      data: { availableBalance: { increment: payoutAmount } },
+    });
   });
 
   return { success: false, error: result.error ?? "Payout failed. Please try again." };
