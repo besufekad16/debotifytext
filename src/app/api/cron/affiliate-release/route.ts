@@ -4,28 +4,28 @@ import { env } from "~/env";
 
 export const dynamic = "force-dynamic";
 
-export async function POST(request: NextRequest) {
-  // Validate cron secret
+// Supports both:
+// - Vercel Cron: GET with Authorization: Bearer <CRON_SECRET>
+// - Manual trigger: POST with Authorization: Bearer <CRON_SECRET>
+async function handleRelease(request: NextRequest): Promise<NextResponse> {
   const authHeader = request.headers.get("Authorization");
   const cronSecret = env.CRON_SECRET;
 
-  if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
+  // Accept either your own CRON_SECRET or Vercel's automation token
+  const vercelCronSecret = process.env.VERCEL_AUTOMATION_BYPASS_SECRET;
+  const isAuthorized =
+    (cronSecret && authHeader === `Bearer ${cronSecret}`) ||
+    (vercelCronSecret && authHeader === `Bearer ${vercelCronSecret}`);
+
+  if (!isAuthorized) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const now = new Date();
 
-  // Find all pending conversions whose hold period has passed
   const dueConversions = await db.affiliateConversion.findMany({
-    where: {
-      status: "pending",
-      availableAt: { lte: now },
-    },
-    select: {
-      id: true,
-      affiliateId: true,
-      commission: true,
-    },
+    where: { status: "pending", availableAt: { lte: now } },
+    select: { id: true, affiliateId: true, commission: true },
   });
 
   if (dueConversions.length === 0) {
@@ -35,7 +35,6 @@ export async function POST(request: NextRequest) {
   let released = 0;
   const errors: string[] = [];
 
-  // Process each conversion individually so one failure doesn't block others
   for (const conversion of dueConversions) {
     try {
       await db.$transaction(async (tx) => {
@@ -43,7 +42,6 @@ export async function POST(request: NextRequest) {
           where: { id: conversion.id },
           data: { status: "available" },
         });
-
         await tx.affiliate.update({
           where: { id: conversion.affiliateId },
           data: {
@@ -52,7 +50,6 @@ export async function POST(request: NextRequest) {
           },
         });
       });
-
       released++;
     } catch (error) {
       const msg = error instanceof Error ? error.message : String(error);
@@ -68,4 +65,12 @@ export async function POST(request: NextRequest) {
     total: dueConversions.length,
     errors: errors.length > 0 ? errors : undefined,
   });
+}
+
+export async function GET(request: NextRequest) {
+  return handleRelease(request);
+}
+
+export async function POST(request: NextRequest) {
+  return handleRelease(request);
 }

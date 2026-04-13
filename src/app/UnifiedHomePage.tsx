@@ -1549,13 +1549,13 @@ export default function UnifiedHomePage() {
               <div className="text-center md:text-left">
                 <span className="inline-block text-[10px] font-medium uppercase tracking-[0.15em] text-[#8b6f47] mb-3">Affiliate Program</span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3 leading-tight">
-                  Earn 25% on every referral
+                  Earn 10% on every referral
                 </h2>
                 <p className="text-gray-400 text-sm max-w-md leading-relaxed">
-                  Share your unique link. When someone signs up and pays, you earn 25% of their first payment — paid in USDT directly to your wallet.
+                  Share your unique link. When someone signs up and pays, you earn 10% of their first payment — paid in USDT directly to your wallet.
                 </p>
                 <div className="flex flex-wrap gap-4 mt-5 justify-center md:justify-start text-xs text-gray-400">
-                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#8b6f47] inline-block" />25% commission</span>
+                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#8b6f47] inline-block" />10% commission</span>
                   <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#8b6f47] inline-block" />Paid in USDT</span>
                   <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#8b6f47] inline-block" />$15 minimum payout</span>
                   <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#8b6f47] inline-block" />Open to everyone</span>
