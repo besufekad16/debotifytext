@@ -67,6 +67,8 @@ export async function POST(req: NextRequest) {
     const cookieStore = await cookies();
     const refCode = cookieStore.get("ref")?.value;
 
+    console.log("[Polar Checkout] Referral cookie:", refCode ?? "NONE — no ref cookie found");
+
     // Create checkout session - products should be an array of product IDs
     const checkout = await polarClient.checkouts.create({
       products: [productId],

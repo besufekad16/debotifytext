@@ -348,6 +348,19 @@ export async function POST(req: NextRequest) {
         const orderId = (data as any).id ?? (data as any).order_id;
         const priceAmountCents = data.product_price?.price_amount ?? 0;
 
+        // Debug log — shows exactly what we have for affiliate attribution
+        console.log("[Affiliate Debug] Commission check:", {
+          eventType: payload.type,
+          orderId: String(orderId),
+          refCode: refCode ?? "NONE — no ref in metadata",
+          buyerClerkId: clerkId,
+          priceAmountCents,
+          rawMetadata: data.metadata,
+          checkoutMetadata: (data as any).checkout?.metadata,
+          orderMetadata: (data as any).order?.metadata,
+          allDataKeys: Object.keys(data),
+        });
+
         await processAffiliateCommission({
           orderId: String(orderId),
           refCode,
