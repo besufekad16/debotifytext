@@ -281,6 +281,20 @@ export default async function AccountPage() {
             </CardContent>
           </Card>
         </div>
+
+        {/* Affiliate nudge */}
+        <div className="mt-8 rounded-xl border border-violet-200 bg-gradient-to-r from-violet-50 to-purple-50 p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <p className="text-sm font-semibold text-gray-900">💸 Earn 10% for every referral</p>
+            <p className="text-xs text-gray-500 mt-0.5">Share your link. Get paid in USDT when someone subscribes.</p>
+          </div>
+          <a
+            href="/affiliate"
+            className="shrink-0 inline-flex items-center gap-1.5 rounded-lg bg-violet-600 px-4 py-2 text-sm font-semibold text-white hover:bg-violet-700 transition-colors whitespace-nowrap"
+          >
+            View Affiliate Dashboard →
+          </a>
+        </div>
       </main>
       <SiteFooter />
     </div>

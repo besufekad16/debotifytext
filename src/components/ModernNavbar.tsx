@@ -41,6 +41,7 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/pricing", label: "Pricing" },
+    { href: "/affiliate", label: "Earn 10% 💸" },
     { href: "/faq", label: "FAQ" },
     { href: "/contact", label: "Contact" },
   ];

@@ -110,7 +110,7 @@ async function processAffiliateCommission(params: {
     }
 
     // Calculate 25% commission (price is in cents → convert to dollars)
-    const commissionAmount = Math.round((priceAmountCents / 100) * 0.25 * 100) / 100;
+    const commissionAmount = Math.round((priceAmountCents / 100) * 0.10 * 100) / 100;
 
     // availableAt = now + 7 days
     const availableAt = new Date();

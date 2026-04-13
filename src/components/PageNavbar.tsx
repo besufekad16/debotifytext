@@ -33,12 +33,14 @@ export default function PageNavbar({ onHistoryClick, currentCredits, variant = "
     ? [
       { href: "/#hero", label: "Home" },
       { href: "/#pricing", label: "Pricing" },
+      { href: "/affiliate", label: "Earn 10% 💸" },
       { href: "/faq", label: "FAQ" },
       { href: "/contact", label: "Contact" },
     ]
     : [
       { href: "/", label: "Home" },
       { href: "/pricing", label: "Pricing" },
+      { href: "/affiliate", label: "Earn 10% 💸" },
       { href: "/faq", label: "FAQ" },
       { href: "/contact", label: "Contact" },
     ];

@@ -31,6 +31,14 @@ const NETWORKS = [
   { value: "BSC", label: "BNB Chain", sublabel: "BEP-20 · Low fees" },
 ];
 
+const COMMISSION_RATE = 0.10;
+
+const PLANS = [
+  { plan: "Basic",  monthly: 6.99,  yearlyAnnual: 6.99  * 12 * 0.5, borderColor: "border-gray-200",   badgeClass: "bg-gray-100 text-gray-600" },
+  { plan: "Pro",    monthly: 23.99, yearlyAnnual: 23.99 * 12 * 0.5, borderColor: "border-violet-200", badgeClass: "bg-violet-50 text-violet-700" },
+  { plan: "Ultra",  monthly: 42.99, yearlyAnnual: 42.99 * 12 * 0.5, borderColor: "border-amber-200",  badgeClass: "bg-amber-50 text-amber-700" },
+];
+
 export default function AffiliateDashboard({ affiliate: initialAffiliate }: Props) {
   const [affiliate, setAffiliate] = useState<AffiliateData | null>(initialAffiliate);
   const [registering, setRegistering] = useState(false);
@@ -84,19 +92,13 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
     }
   };
 
-  const statusColor = (status: string) => {
-    if (status === "completed") return "text-green-600";
-    if (status === "failed") return "text-red-500";
-    return "text-yellow-600";
-  };
-
   if (!affiliate) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 max-w-md w-full text-center">
           <h1 className="text-2xl font-semibold text-gray-900 mb-2">Affiliate Program</h1>
           <p className="text-gray-500 mb-6">
-            Earn 25% commission on every user you refer. Payouts in USDT once you reach $15.
+            Earn 10% commission on every user you refer. Payouts in USDT once you reach $15.
           </p>
           <button
             onClick={handleRegister}
@@ -123,14 +125,62 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
           {[
             { label: "Referral Code", value: affiliate.referralCode },
             { label: "Conversions", value: String(affiliate.conversionCount) },
-            { label: "Pending ($)", value: `$${affiliate.pendingBalance}` },
-            { label: "Available ($)", value: `$${affiliate.availableBalance}` },
+            { label: "Pending", value: "$" + affiliate.pendingBalance },
+            { label: "Available", value: "$" + affiliate.availableBalance },
           ].map((stat) => (
             <div key={stat.label} className="bg-white rounded-xl border border-gray-200 p-4">
               <p className="text-xs text-gray-500 mb-1">{stat.label}</p>
               <p className="text-lg font-semibold text-gray-900 truncate">{stat.value}</p>
             </div>
           ))}
+        </div>
+
+        {/* Earnings breakdown */}
+        <div className="bg-white rounded-xl border border-gray-200 p-5">
+          <p className="text-sm font-semibold text-gray-900 mb-1">💰 What You Earn Per Referral</p>
+          <p className="text-xs text-gray-400 mb-4">
+            You earn 10% of the first payment from every user who signs up through your link.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {PLANS.map((tier) => {
+              const monthlyEarn  = (tier.monthly * COMMISSION_RATE).toFixed(2);
+              const yearlyEarn   = (tier.yearlyAnnual * COMMISSION_RATE).toFixed(2);
+              const x10monthly   = (tier.monthly * COMMISSION_RATE * 10).toFixed(2);
+              const x10yearly    = (tier.yearlyAnnual * COMMISSION_RATE * 10).toFixed(2);
+              return (
+                <div key={tier.plan} className={"rounded-xl border-2 p-4 flex flex-col gap-2 " + tier.borderColor}>
+                  <span className={"self-start text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full " + tier.badgeClass}>
+                    {tier.plan}
+                  </span>
+
+                  <div className="mt-1">
+                    <p className="text-[10px] text-gray-400 uppercase tracking-wide font-medium mb-0.5">Monthly plan</p>
+                    <p className="text-2xl font-black text-gray-900">${monthlyEarn}</p>
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] text-gray-400 uppercase tracking-wide font-medium mb-0.5">Yearly plan</p>
+                    <p className="text-xl font-bold text-green-600">${yearlyEarn}</p>
+                  </div>
+
+                  <div className="mt-1 pt-3 border-t border-gray-100">
+                    <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-wide mb-1.5">If 10 users buy</p>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-700 font-bold">${x10monthly}</span>
+                      <span className="text-xs text-gray-400 self-end">monthly</span>
+                    </div>
+                    <div className="flex justify-between text-sm mt-0.5">
+                      <span className="text-green-600 font-bold">${x10yearly}</span>
+                      <span className="text-xs text-gray-400 self-end">yearly</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <p className="text-[10px] text-gray-400 mt-3 text-center">
+            Yearly commission is based on the 50% discounted annual price · 7-day hold before funds are available
+          </p>
         </div>
 
         {/* Referral link */}
@@ -150,7 +200,7 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
             </button>
           </div>
           <p className="text-xs text-gray-400 mt-2">
-            Share this link. When someone signs up and pays, you earn 25% commission.
+            Share this link. When someone signs up and pays, you earn 10% commission.
           </p>
         </div>
 
@@ -162,7 +212,6 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
           </p>
 
           <form onSubmit={handlePayout} className="space-y-3">
-            {/* Network selector */}
             <div>
               <p className="text-xs text-gray-500 mb-2 font-medium">1. Select Network</p>
               <div className="grid grid-cols-3 gap-2">
@@ -172,14 +221,15 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
                     type="button"
                     onClick={() => setNetwork(n.value)}
                     disabled={!canPayout || payingOut}
-                    className={`rounded-lg border px-3 py-2.5 text-left transition disabled:opacity-40 ${
-                      network === n.value
+                    className={
+                      "rounded-lg border px-3 py-2.5 text-left transition disabled:opacity-40 " +
+                      (network === n.value
                         ? "border-black bg-black text-white"
-                        : "border-gray-200 text-gray-700 hover:border-gray-400 bg-white"
-                    }`}
+                        : "border-gray-200 text-gray-700 hover:border-gray-400 bg-white")
+                    }
                   >
                     <span className="block text-xs font-bold">{n.label}</span>
-                    <span className={`block text-[10px] mt-0.5 ${network === n.value ? "text-white/70" : "text-gray-400"}`}>
+                    <span className={"block text-[10px] mt-0.5 " + (network === n.value ? "text-white/70" : "text-gray-400")}>
                       {n.sublabel}
                     </span>
                   </button>
@@ -187,12 +237,11 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
               </div>
             </div>
 
-            {/* Wallet address */}
             <div>
               <p className="text-xs text-gray-500 mb-2 font-medium">2. Enter Your USDT Wallet Address</p>
               <input
                 type="text"
-                placeholder={`Your USDT ${NETWORKS.find(n => n.value === network)?.label} address`}
+                placeholder={"Your USDT " + (NETWORKS.find((n) => n.value === network)?.label ?? "") + " address"}
                 value={walletAddress}
                 onChange={(e) => setWalletAddress(e.target.value)}
                 disabled={!canPayout || payingOut}
@@ -203,7 +252,6 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
               </p>
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
               disabled={!canPayout || payingOut || !walletAddress.trim()}
@@ -212,8 +260,8 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
               {payingOut
                 ? "Processing withdrawal..."
                 : canPayout
-                ? `Withdraw $${affiliate.availableBalance} USDT`
-                : `Need $15.00 minimum (you have $${affiliate.availableBalance})`}
+                ? "Withdraw $" + affiliate.availableBalance + " USDT"
+                : "Need $15.00 minimum (you have $" + affiliate.availableBalance + ")"}
             </button>
           </form>
         </div>
@@ -232,11 +280,12 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
                     </span>
                   </div>
                   <div className="text-right">
-                    <span className={`text-xs font-semibold capitalize px-2 py-0.5 rounded-full ${
-                      p.status === "completed" ? "bg-green-50 text-green-700" :
-                      p.status === "failed" ? "bg-red-50 text-red-600" :
-                      "bg-yellow-50 text-yellow-700"
-                    }`}>
+                    <span className={
+                      "text-xs font-semibold capitalize px-2 py-0.5 rounded-full " +
+                      (p.status === "completed" ? "bg-green-50 text-green-700" :
+                       p.status === "failed"    ? "bg-red-50 text-red-600" :
+                                                  "bg-yellow-50 text-yellow-700")
+                    }>
                       {p.status}
                     </span>
                     {p.cryptomusId && (

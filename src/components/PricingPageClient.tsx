@@ -290,6 +290,39 @@ export default function PricingPageClient({ isTeamMember = false, hasSubscriptio
             Contact Support
           </Button>
         </div>
+
+        {/* Affiliate callout */}
+        <div className="mt-8 rounded-xl border-2 border-dashed border-violet-200 bg-gradient-to-r from-violet-50 to-purple-50 p-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="text-center sm:text-left">
+              <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
+                <span className="text-2xl">💸</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-violet-600 bg-violet-100 px-2 py-0.5 rounded-full">
+                  Affiliate Program
+                </span>
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-1">
+                Share HumanifyLab. Earn 10% in USDT.
+              </h3>
+              <p className="text-sm text-gray-500 max-w-md">
+                Refer a friend and earn 10% of their first payment — paid directly to your crypto wallet. No cap, no expiry.
+              </p>
+              <div className="flex flex-wrap gap-4 mt-3 justify-center sm:justify-start text-xs text-gray-500">
+                <span className="flex items-center gap-1"><span className="text-green-500 font-bold">✓</span> Paid in USDT</span>
+                <span className="flex items-center gap-1"><span className="text-green-500 font-bold">✓</span> No KYC needed</span>
+                <span className="flex items-center gap-1"><span className="text-green-500 font-bold">✓</span> Instant signup</span>
+                <span className="flex items-center gap-1"><span className="text-green-500 font-bold">✓</span> Works worldwide</span>
+              </div>
+            </div>
+            <Button
+              size="lg"
+              className="shrink-0 bg-violet-600 hover:bg-violet-700 text-white font-semibold px-8"
+              onClick={() => router.push("/affiliate")}
+            >
+              Start Earning →
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );
