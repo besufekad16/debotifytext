@@ -29,84 +29,71 @@ const META_TITLES: ((kw: string) => string)[] = [
 ];
 
 const META_DESCS: ((kw: string) => string)[] = [
-  (kw) => `${kw} with HumanifyLab — completely free, no sign-up required. 99.9% bypass rate against Turnitin, GPTZero, and Originality.AI. 500 words per run, instant results.`,
-  (kw) => `${kw}: HumanifyLab's free plan gives you 500 words per run, no credit card, no account. 99.9% bypass rate. Start in seconds.`,
-  (kw) => `${kw} — free forever with HumanifyLab. No sign-up, no watermark, no credit card. 99.9% bypass rate, results in under 10 seconds.`,
-  (kw) => `${kw}: the best free option in 2026. HumanifyLab's free plan — 500 words, no card, no sign-up. 99.9% bypass rate. Try now.`,
-  (kw) => `${kw} — HumanifyLab is free to start. No credit card, no account, no watermark. 99.9% bypass rate against all major AI detectors.`,
-  (kw) => `${kw}: free plan available at HumanifyLab. 500 words per run, instant results, 99.9% bypass rate. No sign-up required.`,
-  (kw) => `${kw} — free AI humanizer with 99.9% bypass rate. No sign-up, no credit card, no watermark. 450,000+ users trust HumanifyLab.`,
-  (kw) => `${kw}: start free today with HumanifyLab. 500 words per run, no card needed, instant results. 99.9% bypass rate guaranteed.`,
+  (kw) => `${kw}: HumanifyLab is 100% free to start — no sign-up, no credit card, no watermark. 99.9% bypass rate, results in under 10 seconds. Try it now.`,
+  (kw) => `${kw} — HumanifyLab's free plan gives you 500 words per run with no restrictions. 99.9% bypass rate, zero data stored. Start free today.`,
+  (kw) => `${kw}: the best free option in 2026. HumanifyLab: 99.9% bypass rate, free plan with no card, instant results. No sign-up required.`,
+  (kw) => `${kw} — free, instant, and 99.9% effective. HumanifyLab's free plan: 500 words per run, no sign-up, no credit card, zero data stored.`,
+  (kw) => `${kw}: HumanifyLab is free to start. 99.9% bypass rate against Turnitin, GPTZero, and Originality.AI. No card, no sign-up, no watermark.`,
+  (kw) => `${kw} — the free AI humanizer that actually works. HumanifyLab: 99.9% bypass rate, free plan, no sign-up, results in under 10 seconds.`,
+  (kw) => `${kw}: start free with HumanifyLab. 500 words per run, no credit card, no sign-up. 99.9% bypass rate, zero data retention. Try now.`,
+  (kw) => `${kw} — HumanifyLab's free plan is permanent, not a trial. 99.9% bypass rate, no card, no sign-up, no watermark. Start humanizing now.`,
 ];
 
 const H1S: ((kw: string) => string)[] = [
-  (kw) => `${kw} — 100% Free, No Sign-Up Required`,
-  (kw) => `${kw}: Free Plan with 99.9% Bypass Rate`,
-  (kw) => `${kw} — Free Forever, No Credit Card`,
-  (kw) => `${kw}: The Best Free AI Humanizer in 2026`,
+  (kw) => `${kw}: 100% Free, No Sign-Up Required`,
+  (kw) => `${kw} — Free Forever with 99.9% Bypass Rate`,
+  (kw) => `${kw}: The Best Free Tool in 2026`,
   (kw) => `${kw} — Instant, Free & 99.9% Effective`,
-  (kw) => `${kw}: Free, Fast & Undetectable`,
-  (kw) => `${kw} — Free AI Humanizer That Actually Works`,
-  (kw) => `${kw}: Start Free — No Card, No Sign-Up`,
+  (kw) => `${kw}: Free Plan, No Card, No Watermark`,
+  (kw) => `${kw} — Free AI Humanizer That Delivers`,
+  (kw) => `${kw}: Start Free Today`,
+  (kw) => `${kw} — No Sign-Up, No Credit Card, Just Results`,
 ];
 
 const HERO_SUBTITLES: ((kw: string) => string)[] = [
-  (kw) => `HumanifyLab's free plan gives you everything you need to ${kw.toLowerCase()} — 500 words per run, no credit card, no sign-up, no watermark. Just paste your content and get 0% AI score in under 10 seconds. 450,000+ users trust HumanifyLab's free plan.`,
-  (kw) => `You don't need to pay to ${kw.toLowerCase()}. HumanifyLab's free plan includes 500 words per run, instant results, and a 99.9% bypass rate against Turnitin, GPTZero, and Originality.AI. No account required — start immediately.`,
-  (kw) => `The best things in life are free — including the ability to ${kw.toLowerCase()} with HumanifyLab. Our free plan gives you 500 words per run, zero data retention, and a 99.9% bypass rate. No credit card, no sign-up, no catch.`,
-  (kw) => `HumanifyLab is the only free tool that actually delivers on ${kw.toLowerCase()}. 99.9% bypass rate, results in under 10 seconds, and a free plan that never expires. No credit card, no sign-up, no watermark.`,
-];
-
-const FEATURES_POOL: { icon: string; title: string; description: string }[][] = [
-  [
-    { icon: '🆓', title: 'Free Forever Plan', description: '500 words per run, unlimited runs, no expiry. The free plan never expires and requires no credit card.' },
-    { icon: '🚫', title: 'No Sign-Up Required', description: 'Paste your content and click Humanize. No account, no email, no registration needed.' },
-    { icon: '🎯', title: '99.9% Bypass Rate', description: 'The free plan achieves the same 99.9% bypass rate as paid plans. No compromise on quality.' },
-    { icon: '⚡', title: 'Instant Results', description: 'Results in under 10 seconds. No queues, no waiting — even on the free plan.' },
-  ],
-  [
-    { icon: '💧', title: 'No Watermark', description: 'Your humanized content has no watermark, no branding, no indication it was processed by HumanifyLab.' },
-    { icon: '🔒', title: 'Zero Data Retention', description: 'Your content is deleted immediately after processing — even on the free plan. Complete privacy.' },
-    { icon: '🌍', title: '50+ Languages Free', description: 'The free plan supports all 50+ languages with the same 99.9% bypass rate.' },
-    { icon: '📱', title: 'Works on Any Device', description: 'Use HumanifyLab free on desktop, tablet, or mobile. No app download required.' },
-  ],
-];
-
-const STEPS_POOL: { number: string; title: string; description: string }[][] = [
-  [
-    { number: '1', title: 'Open HumanifyLab.com', description: 'No account needed. The free plan is available immediately — just open the site.' },
-    { number: '2', title: 'Paste your content', description: 'Copy your AI-generated text and paste it in. Up to 500 words on the free plan.' },
-    { number: '3', title: 'Click Humanize — free', description: 'Results appear in under 10 seconds. No payment, no sign-up, no waiting.' },
-    { number: '4', title: 'Copy and use', description: 'Your humanized content is ready. 0% AI score, no watermark, ready to submit.' },
-  ],
+  (kw) => `HumanifyLab's free plan gives you everything you need to ${kw.toLowerCase()} — 500 words per run, no sign-up, no credit card, no watermark. 99.9% bypass rate against Turnitin, GPTZero, and Originality.AI. Start in seconds.`,
+  (kw) => `Looking for a free way to ${kw.toLowerCase()}? HumanifyLab's free plan is permanent — not a trial. 500 words per run, instant results, zero data stored. No credit card, no sign-up, no commitment.`,
+  (kw) => `${kw.charAt(0).toUpperCase() + kw.slice(1)} for free with HumanifyLab. Our free plan includes 500 words per run, 99.9% bypass rate, and zero data retention. No sign-up required — start immediately.`,
+  (kw) => `HumanifyLab makes it free to ${kw.toLowerCase()}. 500 words per run, no credit card, no sign-up, no watermark. 99.9% bypass rate verified weekly against live detectors. The best free option in 2026.`,
 ];
 
 const FAQ_POOL: ((kw: string) => { q: string; a: string }[])[] = [
   (kw) => [
-    { q: `Is HumanifyLab really free for ${kw.toLowerCase()}?`, a: `Yes. HumanifyLab's free plan gives you 500 words per run with no credit card, no sign-up, and no expiry. The free plan is permanent — not a trial.` },
-    { q: `What's the word limit on the free plan?`, a: `The free plan handles up to 500 words per run. There's no daily cap on the number of runs. Upgrade to Pro or Ultra for higher word limits per run.` },
-    { q: `Do I need to create an account to ${kw.toLowerCase()} for free?`, a: `No. HumanifyLab's free plan requires no account, no email, and no registration. Just paste your content and click Humanize.` },
-    { q: `Is the free plan as effective as paid plans?`, a: `Yes. The free plan uses the same 47-dimensional transformation engine as paid plans, achieving the same 99.9% bypass rate. The only difference is the 500-word limit per run.` },
-    { q: `Does the free plan have a watermark?`, a: `No. HumanifyLab's free plan produces clean output with no watermark, no branding, and no indication it was processed by HumanifyLab.` },
-    { q: `How long does the free plan last?`, a: `Forever. HumanifyLab's free plan never expires. You can use it indefinitely with no credit card required.` },
+    { q: `Is HumanifyLab really free for ${kw.toLowerCase()}?`, a: `Yes. HumanifyLab's free plan is permanent — not a trial. You get 500 words per run with no sign-up and no credit card required. No expiry, no hidden limits.` },
+    { q: `Do I need to sign up to ${kw.toLowerCase()} for free?`, a: `No. HumanifyLab's free plan requires no sign-up and no account creation. Just go to HumanifyLab.com, paste your content, and click Humanize. Results in under 10 seconds.` },
+    { q: `Is there a watermark on free results?`, a: `No. HumanifyLab never adds watermarks to your output — on any plan, including the free plan. Your humanized content is completely clean and ready to use.` },
+    { q: `What's the word limit on the free plan?`, a: `The free plan handles up to 500 words per run. There's no daily cap — you can run as many times as you need. Upgrade to paid plans for higher word limits and bulk processing.` },
+    { q: `Does the free plan have the same bypass rate as paid plans?`, a: `Yes. HumanifyLab's free plan achieves the same 99.9% bypass rate as paid plans. The difference is word limit per run, not quality or effectiveness.` },
+  ],
+  (kw) => [
+    { q: `How long is HumanifyLab's free plan available?`, a: `Forever. HumanifyLab's free plan is permanent — not a limited trial. You can use it indefinitely with 500 words per run and no credit card required.` },
+    { q: `Does the free plan work for Turnitin?`, a: `Yes. HumanifyLab's free plan achieves the same 99.9% Turnitin bypass rate as paid plans. The free plan is fully functional — just limited to 500 words per run.` },
+    { q: `Can I ${kw.toLowerCase()} on mobile for free?`, a: `Yes. HumanifyLab works on any device — desktop, tablet, or mobile — with no app download required. The free plan is fully accessible on mobile.` },
+    { q: `Is my content safe on the free plan?`, a: `Yes. HumanifyLab has a strict zero data retention policy on all plans, including the free plan. Your content is processed and immediately deleted. We never store or share your text.` },
+    { q: `What do I get if I upgrade from the free plan?`, a: `Paid plans start at $6.99/month and offer higher word limits (up to unlimited), bulk processing, API access, and priority processing speed. The free plan is a great starting point.` },
   ],
 ];
 
 export function generateFreeContent(entry: KeywordEntryV4): FreePageData {
   const { keyword, seed } = entry;
-  const capitalizedKeyword = keyword.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-  const combo = buildPageStrings(capitalizedKeyword, seed, 'Free', 'free');
+  const combo = buildPageStrings(keyword, seed, 'Free', 'free');
+
+  const ti = uniqueIdx(seed, keyword, META_TITLES.length, 0);
+  const di = uniqueIdx(seed, keyword, META_DESCS.length, 1);
+  const hi = uniqueIdx(seed, keyword, H1S.length, 2);
+  const hsi = uniqueIdx(seed, keyword, HERO_SUBTITLES.length, 3);
+  const fqi = uniqueIdx(seed, keyword, FAQ_POOL.length, 6);
 
   return {
-    metaTitle: META_TITLES[uniqueIdx(seed, keyword, META_TITLES.length, 0)]!(capitalizedKeyword),
-    metaDescription: META_DESCS[uniqueIdx(seed, keyword, META_DESCS.length, 1)]!(capitalizedKeyword),
-    h1: H1S[uniqueIdx(seed, keyword, H1S.length, 2)]!(capitalizedKeyword),
-    heroSubtitle: HERO_SUBTITLES[uniqueIdx(seed, keyword, HERO_SUBTITLES.length, 3)]!(capitalizedKeyword),
+    metaTitle: META_TITLES[ti]!(keyword),
+    metaDescription: META_DESCS[di]!(keyword),
+    h1: H1S[hi]!(keyword),
+    heroSubtitle: HERO_SUBTITLES[hsi]!(keyword),
     badge: combo.badge,
-    features: FEATURES_POOL[uniqueIdx(seed, keyword, FEATURES_POOL.length, 4)]!,
-    steps: STEPS_POOL[uniqueIdx(seed, keyword, STEPS_POOL.length, 5)]!,
+    features: buildFeaturePoints(keyword, seed, 'free'),
+    steps: buildSteps(keyword, seed, 'free'),
     stats: buildStats(keyword, seed),
-    faqs: FAQ_POOL[uniqueIdx(seed, keyword, FAQ_POOL.length, 6)]!(keyword),
+    faqs: FAQ_POOL[fqi]!(keyword),
     faqTitle: combo.faqTitle,
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,

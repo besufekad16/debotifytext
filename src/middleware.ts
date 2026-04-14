@@ -1,9 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 import { NextResponse, type NextRequest } from 'next/server'
-import { db } from '~/server/db'
 
-// Note: With ISR and dynamicParams=true, we don't need to list all SEO routes
-// All routes are public by default unless explicitly protected
 const isPublicRoute = createRouteMatcher([
   '/',
   '/sign-in(.*)',
@@ -22,48 +19,39 @@ const isPublicRoute = createRouteMatcher([
   '/robots.txt',
   '/sitemap',
   '/robots',
-  // All dynamic [keyword] routes are public (handled by dynamicParams)
   '/:keyword',
 ])
 
 const COOKIE_NAME = 'ref'
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 30 // 30 days in seconds
+const COOKIE_MAX_AGE = 60 * 60 * 24 * 30 // 30 days
 
 export default clerkMiddleware(async (auth, request: NextRequest) => {
   if (!isPublicRoute(request)) {
     await auth.protect()
   }
 
-  // Referral cookie tracking — only runs when ?ref= param is present
+  // Referral cookie tracking — set directly from URL param, no DB call needed
+  // (Edge runtime can't use Prisma — validation happens in the webhook instead)
   const refParam = request.nextUrl.searchParams.get(COOKIE_NAME)
 
-  if (refParam) {
-    // Skip DB lookup for API routes, static files, and internal Next.js paths
+  if (refParam && refParam.length > 0 && refParam.length < 64) {
     const pathname = request.nextUrl.pathname
-    const isApiOrInternal = pathname.startsWith('/api/') || 
+    const isApiOrInternal = pathname.startsWith('/api/') ||
       pathname.startsWith('/_next/') ||
       pathname.includes('.')
 
     if (!isApiOrInternal) {
-      try {
-        // Validate the code exists in DB before setting cookie
-        const affiliate = await db.affiliate.findUnique({
-          where: { referralCode: refParam },
-          select: { referralCode: true },
+      const existingCookie = request.cookies.get(COOKIE_NAME)?.value
+      if (existingCookie !== refParam) {
+        const response = NextResponse.next()
+        response.cookies.set(COOKIE_NAME, refParam, {
+          maxAge: COOKIE_MAX_AGE,
+          path: '/',
+          sameSite: 'lax',
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
         })
-
-        if (affiliate) {
-          const response = NextResponse.next()
-          response.cookies.set(COOKIE_NAME, affiliate.referralCode, {
-            maxAge: COOKIE_MAX_AGE,
-            path: '/',
-            sameSite: 'lax',
-            httpOnly: true,
-          })
-          return response
-        }
-      } catch {
-        // DB error — silently skip, don't break the request
+        return response
       }
     }
   }
@@ -71,10 +59,7 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    // Also skip SEO files: sitemap.xml, robots.txt
     '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest|xml|txt)).*)',
-    // Always run for API routes
     '/(api|trpc)(.*)',
   ],
 }

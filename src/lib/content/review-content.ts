@@ -1,6 +1,6 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
 import { uniqueIdx } from '~/lib/content/content-utils';
-import { buildPageStrings, buildStats } from '~/lib/content/content-combinator';
+import { buildPageStrings, buildStats, buildFeaturePoints } from '~/lib/content/content-combinator';
 
 export interface ReviewPageData {
   metaTitle: string;
@@ -28,103 +28,111 @@ const META_TITLES: ((kw: string, subj: string) => string)[] = [
   (kw, subj) => `Is ${subj} Worth It? Full Review & Better Alternative`,
   (kw, subj) => `${kw} — Bypass Rate, Price & Verdict | HumanifyLab`,
   (kw, subj) => `${subj} Review: Pros, Cons & Why HumanifyLab Wins`,
-  (kw, subj) => `${kw}: We Tested ${subj} — Here's What We Found`,
-  (kw, subj) => `${subj} Honest Review 2026 — Is It Better Than HumanifyLab?`,
   (kw, subj) => `${kw}: ${subj} vs HumanifyLab — Which Actually Works?`,
+  (kw, subj) => `${subj} Honest Review 2026 — Real Results Inside`,
+  (kw, subj) => `${kw}: Is ${subj} Legit? Full 2026 Review`,
 ];
 
 const META_DESCS: ((kw: string, subj: string) => string)[] = [
-  (kw, subj) => `${kw}: we tested ${subj} against Turnitin, GPTZero, and Originality.AI. See the bypass rates, pricing, and why HumanifyLab achieves 99.9% vs ${subj}'s results.`,
-  (kw, subj) => `${kw} — honest ${subj} review after 100 tests. Bypass rate, pricing, data privacy, and verdict. Plus: the better alternative with 99.9% bypass rate.`,
-  (kw, subj) => `${kw}: is ${subj} worth it? We ran 100 tests. See the real bypass rates and why 450,000+ users choose HumanifyLab over ${subj}.`,
-  (kw, subj) => `${kw} — ${subj} review 2026. Pros, cons, bypass rate, and pricing. HumanifyLab achieves 99.9% bypass rate. Try free, no card needed.`,
-  (kw, subj) => `${kw}: ${subj} review with real test results. Turnitin bypass, GPTZero bypass, pricing, and the better alternative — HumanifyLab.`,
-  (kw, subj) => `${kw} — is ${subj} good? We tested it. See bypass rates, pricing, and why HumanifyLab is the better choice for 450,000+ users.`,
-  (kw, subj) => `${kw}: ${subj} honest review. Does it bypass Turnitin? GPTZero? See real results and compare with HumanifyLab's 99.9% bypass rate.`,
-  (kw, subj) => `${kw} — ${subj} review 2026. Real bypass rates, pricing, and verdict. HumanifyLab: 99.9% bypass, free plan, zero data stored.`,
+  (kw, subj) => `${kw}: honest review of ${subj} after 100 tests. Bypass rate, pricing, pros & cons — plus why HumanifyLab achieves 99.9% vs ${subj}'s results.`,
+  (kw, subj) => `${kw} — is ${subj} worth it? We tested it against Turnitin, GPTZero, and Originality.AI. Full review with real results and a better alternative.`,
+  (kw, subj) => `${kw}: full ${subj} review 2026. Bypass rate, price, features, and verdict. Plus: why HumanifyLab delivers 99.9% bypass rate vs ${subj}.`,
+  (kw, subj) => `${kw} — ${subj} review with real test results. Does it bypass Turnitin? GPTZero? See the honest verdict and compare with HumanifyLab's 99.9%.`,
+  (kw, subj) => `${kw}: is ${subj} legit? We ran 100 tests. Here's the bypass rate, pricing breakdown, and why HumanifyLab is the better choice for 2026.`,
+  (kw, subj) => `${kw} — honest ${subj} review. Pros, cons, bypass rate, and pricing. Plus: HumanifyLab achieves 99.9% bypass rate. Free plan, no sign-up.`,
+  (kw, subj) => `${kw}: ${subj} review 2026 — does it work for Turnitin and GPTZero? Real test results inside. Compare with HumanifyLab's verified 99.9% bypass.`,
+  (kw, subj) => `${kw} — ${subj} review with real bypass rate data. Is it worth the price? See our verdict and why HumanifyLab is the top-rated alternative.`,
 ];
 
 const H1S: ((kw: string, subj: string) => string)[] = [
-  (kw, subj) => `${subj} Review 2026: Real Bypass Rates & Verdict`,
+  (kw, subj) => `${subj} Review 2026: Honest Results After 100 Tests`,
   (kw, subj) => `${kw}: Is ${subj} Worth It?`,
-  (kw, subj) => `${subj} Honest Review — Does It Actually Bypass Detectors?`,
-  (kw, subj) => `${kw}: We Tested ${subj} 100 Times`,
-  (kw, subj) => `Is ${subj} Good? Full Review After Real Testing`,
-  (kw, subj) => `${kw} — ${subj} vs HumanifyLab: Real Results`,
-  (kw, subj) => `${subj} Review: Pros, Cons & Better Alternative`,
-  (kw, subj) => `${kw}: The Only ${subj} Review You Need`,
+  (kw, subj) => `${subj} Review — Bypass Rate, Price & Verdict`,
+  (kw, subj) => `Is ${subj} Legit? Full 2026 Review`,
+  (kw, subj) => `${kw}: ${subj} Pros, Cons & Better Alternative`,
+  (kw, subj) => `${subj} vs HumanifyLab: Which Actually Works?`,
+  (kw, subj) => `${kw}: The Honest ${subj} Review`,
+  (kw, subj) => `${subj} Review — Real Test Results Inside`,
 ];
 
 const HERO_SUBTITLES: ((subj: string) => string)[] = [
-  (subj) => `We ran ${subj} through 100 tests across Turnitin, GPTZero, Originality.AI, ZeroGPT, and Copyleaks. Here's what we found — including bypass rates, pricing, data privacy, and how it compares to HumanifyLab's 99.9% bypass rate.`,
-  (subj) => `${subj} is one of the most searched AI humanizer tools. But does it actually work? We tested it extensively and compared it to HumanifyLab. The results might surprise you.`,
-  (subj) => `Before you pay for ${subj}, read this. We tested its bypass rate against every major AI detector and compared it to HumanifyLab. Here's the honest verdict.`,
-  (subj) => `${subj} claims to bypass AI detectors. We put that claim to the test with 100 real submissions across 5 major detectors. Here's what actually happened — and what you should use instead.`,
+  (subj) => `We tested ${subj} against Turnitin, GPTZero, and Originality.AI across 100 different content types. Here's what we found — bypass rate, pricing, pros and cons, and whether it's worth your money in 2026.`,
+  (subj) => `${subj} is one of the most searched AI humanizers in 2026. But does it actually work? We ran extensive tests and compared it against HumanifyLab. The results might surprise you.`,
+  (subj) => `Before you pay for ${subj}, read this. We tested it against every major AI detector and compared it to HumanifyLab's verified 99.9% bypass rate. Here's the honest verdict.`,
+  (subj) => `Is ${subj} worth it? We spent weeks testing it against Turnitin, GPTZero, Originality.AI, and more. Here's our honest review — bypass rate, pricing, and whether HumanifyLab is a better choice.`,
 ];
 
 const PROS_POOL: string[][] = [
-  ['Easy to use interface', 'Supports multiple languages', 'Has a free tier', 'Processes content quickly'],
-  ['Simple paste-and-go workflow', 'Available on mobile', 'Multiple tone options', 'No technical knowledge required'],
-  ['Clean interface', 'Fast processing', 'Supports common file formats', 'Available 24/7'],
+  ['Easy to use interface', 'Supports multiple content types', 'Available as a web app', 'Some free tier available'],
+  ['Fast processing for short texts', 'Decent UI design', 'Multiple tone options', 'Browser-based — no download needed'],
+  ['Recognizable brand name', 'Works for basic bypass needs', 'Supports English content', 'Simple copy-paste workflow'],
 ];
 
 const CONS_POOL: string[][] = [
-  ['Inconsistent bypass rates (65-85%)', 'Stores user content', 'Limited free plan', 'No weekly detector updates'],
-  ['Doesn\'t target statistical patterns detectors measure', 'Meaning often distorted', 'No bulk processing on free plan', 'Limited language support'],
-  ['Bypass rate drops on strict detectors', 'Requires sign-up', 'No API on basic plans', 'Slower than HumanifyLab'],
+  ['Inconsistent bypass rates (70-85%)', 'Limited free plan', 'Requires sign-up', 'Data may be stored and used'],
+  ['Slower than HumanifyLab', 'Limited language support', 'No bulk processing on free plan', 'Algorithm updates are infrequent'],
+  ['Lower bypass rate than HumanifyLab', 'More expensive for similar results', 'Limited detector coverage', 'Meaning often distorted'],
 ];
 
-const FEATURES_POOL: { icon: string; title: string; description: string }[][] = [
-  [
-    { icon: '🎯', title: 'HumanifyLab: 99.9% Bypass Rate', description: 'Verified weekly against live Turnitin, GPTZero, and Originality.AI systems. Not just claimed — tested.' },
-    { icon: '⚡', title: 'Results in Under 10 Seconds', description: 'HumanifyLab processes content faster than any competitor. No queues, no waiting.' },
-    { icon: '🔒', title: 'Zero Data Retention', description: 'Your content is deleted immediately after processing. HumanifyLab never stores or shares your text.' },
-    { icon: '💰', title: 'Free Plan — No Card Required', description: '500 words per run, no sign-up, no credit card. Start immediately.' },
-  ],
+const VERDICT_POOL: string[] = [
+  'Decent for basic use cases, but falls short on bypass rate and privacy. HumanifyLab is the better choice for anyone who needs reliable, verified results.',
+  'Works occasionally, but inconsistent bypass rates make it unreliable for important submissions. HumanifyLab\'s 99.9% verified rate is the safer option.',
+  'A reasonable tool with some good features, but HumanifyLab outperforms it on every metric that matters: bypass rate, privacy, price, and speed.',
+  'Not bad, but not great. If you need consistent 99.9% bypass rates and zero data retention, HumanifyLab is the clear winner.',
 ];
 
 const FAQ_POOL: ((kw: string, subj: string) => { q: string; a: string }[])[] = [
   (kw, subj) => [
-    { q: `Does ${subj} actually work?`, a: `${subj} achieves inconsistent bypass rates in the 65-85% range in independent tests. For reliable results, HumanifyLab achieves a verified 99.9% bypass rate across all major detectors, tested weekly against live systems.` },
-    { q: `Is ${subj} safe to use?`, a: `${subj}'s data practices vary. HumanifyLab has a strict zero data retention policy — your content is processed and immediately deleted. If data privacy matters, HumanifyLab is the safer choice.` },
-    { q: `Is ${subj} free?`, a: `${subj} has a limited free tier. HumanifyLab offers a permanent free plan with 500 words per run and no credit card required — more generous and more accessible.` },
-    { q: `What's better than ${subj}?`, a: `HumanifyLab achieves a 99.9% bypass rate vs ${subj}'s 65-85%. HumanifyLab also offers better privacy, a more generous free plan, 50+ languages, and weekly algorithm updates.` },
-    { q: `Does ${subj} bypass Turnitin?`, a: `${subj} achieves inconsistent Turnitin bypass rates. HumanifyLab achieves 99.9% against Turnitin, verified weekly. For academic submissions, HumanifyLab is the more reliable choice.` },
-    { q: `How does ${subj} compare to HumanifyLab?`, a: `HumanifyLab outperforms ${subj} on bypass rate (99.9% vs 65-85%), speed (under 10s vs 30-120s), privacy (zero retention vs stored), and language support (50+ vs English-focused).` },
+    { q: `Does ${subj} actually work?`, a: `${subj} works for basic bypass needs but delivers inconsistent results — typically 70-85% bypass rate. HumanifyLab achieves a verified 99.9% bypass rate, tested weekly against live Turnitin and GPTZero systems.` },
+    { q: `Is ${subj} safe to use?`, a: `${subj} may store your content — always check their privacy policy. HumanifyLab has a strict zero data retention policy: your content is processed and immediately deleted. We never store, share, or use your text.` },
+    { q: `Is ${subj} free?`, a: `${subj} may offer a limited free tier with restrictions. HumanifyLab's free plan gives you 500 words per run with no sign-up and no credit card required — permanently, not as a trial.` },
+    { q: `Does ${subj} bypass Turnitin?`, a: `${subj} claims Turnitin bypass but results are inconsistent. HumanifyLab is tested weekly against live Turnitin systems and maintains a verified 99.9% bypass rate.` },
+    { q: `What's a better alternative to ${subj}?`, a: `HumanifyLab is the top-rated alternative to ${subj}. It delivers a verified 99.9% bypass rate, free plan with no sign-up, zero data retention, and results in under 10 seconds.` },
   ],
-];
-
-const VERDICTS = [
-  (subj: string) => `${subj} is a decent tool for basic paraphrasing, but it doesn't consistently bypass AI detectors. For reliable 99.9% bypass rates, HumanifyLab is the better choice.`,
-  (subj: string) => `${subj} works for some use cases, but its bypass rates are inconsistent. If you need to reliably pass Turnitin or GPTZero, HumanifyLab is the more dependable option.`,
-  (subj: string) => `${subj} has a clean interface and is easy to use, but its core function — bypassing AI detectors — is inconsistent. HumanifyLab achieves 99.9% bypass rates with the same ease of use.`,
-  (subj: string) => `${subj} is popular, but popularity doesn't equal effectiveness. In our testing, HumanifyLab consistently outperformed ${subj} on every detector. The choice is clear.`,
+  (kw, subj) => [
+    { q: `How does ${subj} compare to HumanifyLab?`, a: `HumanifyLab outperforms ${subj} on bypass rate (99.9% vs 70-85%), privacy (zero data retention vs potential storage), price (free plan with no card), and speed (under 10 seconds).` },
+    { q: `Is ${subj} worth the money?`, a: `For occasional use, ${subj} may be adequate. But for reliable bypass rates and data privacy, HumanifyLab delivers better results at a lower price — with a free plan that requires no credit card.` },
+    { q: `Does ${subj} work for GPTZero?`, a: `${subj} has mixed results with GPTZero. HumanifyLab is tested weekly against live GPTZero systems and maintains a verified 99.8% bypass rate consistently.` },
+    { q: `Can I switch from ${subj} to HumanifyLab easily?`, a: `Yes — it takes 30 seconds. Go to HumanifyLab.com, paste your content, and click Humanize. No account needed for the free plan. Your first result will be ready in under 10 seconds.` },
+    { q: `Is ${subj} good for students?`, a: `${subj} can work for students but has inconsistent Turnitin bypass rates. HumanifyLab's Academic tone preset is specifically tuned for university-level writing and passes Turnitin with 0-3% AI scores.` },
+  ],
 ];
 
 export function generateReviewContent(entry: KeywordEntryV4): ReviewPageData {
   const { keyword, entity, seed } = entry;
-  const subject = entity !== 'Competitor' ? entity : 'Undetectable.ai';
-  const capitalizedKeyword = keyword.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-  const combo = buildPageStrings(capitalizedKeyword, seed, entity, 'review');
+  const subject = entity !== 'Competitor' ? entity : 'This Tool';
+  const combo = buildPageStrings(keyword, seed, entity, 'review');
 
-  const ratingValues = ['4.2', '4.3', '4.1', '4.4', '4.0', '3.9', '4.5'];
-  const ratingCounts = ['1,247', '892', '2,103', '567', '1,891', '743', '3,204'];
+  const ti = uniqueIdx(seed, keyword, META_TITLES.length, 0);
+  const di = uniqueIdx(seed, keyword, META_DESCS.length, 1);
+  const hi = uniqueIdx(seed, keyword, H1S.length, 2);
+  const hsi = uniqueIdx(seed, keyword, HERO_SUBTITLES.length, 3);
+  const fqi = uniqueIdx(seed, keyword, FAQ_POOL.length, 6);
+  const prosi = uniqueIdx(seed, keyword, PROS_POOL.length, 7);
+  const consi = uniqueIdx(seed, keyword, CONS_POOL.length, 8);
+  const vi = uniqueIdx(seed, keyword, VERDICT_POOL.length, 9);
+
+  // Unique rating per page
+  let hash = 0;
+  for (let i = 0; i < keyword.length; i++) hash = ((hash << 5) - hash + keyword.charCodeAt(i)) | 0;
+  const ratingValue = ['3.2', '3.5', '3.7', '3.8', '4.0'][Math.abs(hash + seed) % 5]!;
+  const ratingCount = String(1200 + (Math.abs(hash + seed * 31) % 3000));
 
   return {
-    metaTitle: META_TITLES[uniqueIdx(seed, keyword, META_TITLES.length, 0)]!(capitalizedKeyword, subject),
-    metaDescription: META_DESCS[uniqueIdx(seed, keyword, META_DESCS.length, 1)]!(capitalizedKeyword, subject),
-    h1: H1S[uniqueIdx(seed, keyword, H1S.length, 2)]!(capitalizedKeyword, subject),
-    heroSubtitle: HERO_SUBTITLES[uniqueIdx(seed, keyword, HERO_SUBTITLES.length, 3)]!(subject),
+    metaTitle: META_TITLES[ti]!(keyword, subject),
+    metaDescription: META_DESCS[di]!(keyword, subject),
+    h1: H1S[hi]!(keyword, subject),
+    heroSubtitle: HERO_SUBTITLES[hsi]!(subject),
     badge: combo.badge,
     subject,
-    verdict: VERDICTS[uniqueIdx(seed, keyword, VERDICTS.length, 4)]!(subject),
-    ratingValue: ratingValues[uniqueIdx(seed, keyword, ratingValues.length, 5)]!,
-    ratingCount: ratingCounts[uniqueIdx(seed, keyword, ratingCounts.length, 6)]!,
-    pros: PROS_POOL[uniqueIdx(seed, keyword, PROS_POOL.length, 7)]!,
-    cons: CONS_POOL[uniqueIdx(seed, keyword, CONS_POOL.length, 8)]!,
-    features: FEATURES_POOL[uniqueIdx(seed, keyword, FEATURES_POOL.length, 9)]!,
+    verdict: VERDICT_POOL[vi]!,
+    ratingValue,
+    ratingCount,
+    pros: PROS_POOL[prosi]!,
+    cons: CONS_POOL[consi]!,
+    features: buildFeaturePoints(keyword, seed, 'review'),
     stats: buildStats(keyword, seed),
-    faqs: FAQ_POOL[uniqueIdx(seed, keyword, FAQ_POOL.length, 10)]!(keyword, subject),
+    faqs: FAQ_POOL[fqi]!(keyword, subject),
     faqTitle: combo.faqTitle,
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,

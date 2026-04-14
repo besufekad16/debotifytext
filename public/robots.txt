@@ -189,3 +189,13 @@ Sitemap: https://www.humanifylab.com/sitemap-problem.xml
 Sitemap: https://www.humanifylab.com/sitemap-workflow.xml
 Sitemap: https://www.humanifylab.com/sitemap-score.xml
 Sitemap: https://www.humanifylab.com/sitemap-region.xml
+Sitemap: https://www.humanifylab.com/sitemap-comparison.xml
+Sitemap: https://www.humanifylab.com/sitemap-alternative.xml
+Sitemap: https://www.humanifylab.com/sitemap-review.xml
+Sitemap: https://www.humanifylab.com/sitemap-free.xml
+Sitemap: https://www.humanifylab.com/sitemap-detection.xml
+Sitemap: https://www.humanifylab.com/sitemap-writing.xml
+Sitemap: https://www.humanifylab.com/sitemap-education.xml
+Sitemap: https://www.humanifylab.com/sitemap-platform-v4.xml
+Sitemap: https://www.humanifylab.com/sitemap-output.xml
+Sitemap: https://www.humanifylab.com/sitemap-bulk.xml

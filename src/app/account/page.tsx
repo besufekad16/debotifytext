@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/com
 import { Separator } from "~/components/ui/separator";
 import { CreditCard, Mail, User, Calendar, Key, Users } from "lucide-react";
 import SubscriptionManagement from "~/components/SubscriptionManagement";
+import ReferralCodeInput from "~/components/ReferralCodeInput";
 
 export const metadata: Metadata = {
   title: "Account - HumanifyLab | Manage Your Free AI Humanizer",
@@ -46,6 +47,7 @@ export default async function AccountPage() {
   let productId: string | null = null;
   let hasApiAccess = false;
   let isTeamMember = false;
+  let referredByCode: string | null = null;
 
   try {
     let dbUser = await db.user.findUnique({
@@ -100,6 +102,7 @@ export default async function AccountPage() {
     nextResetDate = effectiveUser?.nextResetDate ?? null;
     productId = effectiveUser?.productId ?? null;
     hasApiAccess = subscriptionPlan?.toLowerCase().includes("large") || subscriptionPlan?.toLowerCase().includes("ultra") || false;
+    referredByCode = dbUser?.referredByCode ?? null;
   } catch (error) {
     console.error("Error fetching user information:", error);
   }
@@ -284,9 +287,10 @@ export default async function AccountPage() {
 
         {/* Affiliate nudge */}
         <div className="mt-8 rounded-xl border border-violet-200 bg-gradient-to-r from-violet-50 to-purple-50 p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>
+          <div className="flex-1">
             <p className="text-sm font-semibold text-gray-900">💸 Earn 10% for every referral</p>
             <p className="text-xs text-gray-500 mt-0.5">Share your link. Get paid in USDT when someone subscribes.</p>
+            <ReferralCodeInput alreadyApplied={!!referredByCode} />
           </div>
           <a
             href="/affiliate"

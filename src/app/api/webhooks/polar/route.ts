@@ -69,6 +69,23 @@ function getPlanConfig(productId: string): { credits: number; plan: string; maxW
   return null;
 }
 
+/**
+ * Returns the price in cents for a given product ID.
+ * Used as a reliable fallback when Polar doesn't include price in the webhook payload.
+ */
+function getPlanPriceCents(productId: string): number {
+  if (productId === env.POLAR_PRODUCT_SMALL)         return 699;   // $6.99/mo
+  if (productId === env.POLAR_PRODUCT_MEDIUM)        return 2399;  // $23.99/mo
+  if (productId === env.POLAR_PRODUCT_LARGE)         return 4299;  // $42.99/mo
+  if (productId === env.POLAR_PRODUCT_YEARLY_SMALL)  return Math.round(699  * 12 * 0.5); // yearly 50% off
+  if (productId === env.POLAR_PRODUCT_YEARLY_MEDIUM) return Math.round(2399 * 12 * 0.5);
+  if (productId === env.POLAR_PRODUCT_YEARLY_LARGE)  return Math.round(4299 * 12 * 0.5);
+  if (productId === env.POLAR_CREDITS_5000)          return 500;   // approximate
+  if (productId === env.POLAR_CREDITS_20000)         return 1500;
+  if (productId === env.POLAR_CREDITS_45000)         return 3000;
+  return 0;
+}
+
 function getNextResetDate(_type: string): Date {
   const now = new Date();
   const nextMonth = new Date(now);
@@ -84,15 +101,30 @@ function getNextResetDate(_type: string): Date {
  */
 async function processAffiliateCommission(params: {
   orderId: string;
-  refCode: string | undefined;
   buyerClerkId: string;
   priceAmountCents: number;
 }): Promise<void> {
-  const { orderId, refCode, buyerClerkId, priceAmountCents } = params;
+  const { orderId, buyerClerkId, priceAmountCents } = params;
 
-  if (!refCode) return;
+  if (!buyerClerkId) {
+    console.log("[Affiliate] Skipping — no buyer clerkId");
+    return;
+  }
 
   try {
+    // Look up the buyer's referral code from their user record
+    const buyer = await db.user.findUnique({
+      where: { clerkId: buyerClerkId },
+      select: { referredByCode: true },
+    });
+
+    const refCode = buyer?.referredByCode;
+
+    if (!refCode) {
+      console.log(`[Affiliate] No referral code on buyer ${buyerClerkId} — skipping`);
+      return;
+    }
+
     // Look up affiliate by referral code
     const affiliate = await db.affiliate.findUnique({
       where: { referralCode: refCode },
@@ -103,21 +135,25 @@ async function processAffiliateCommission(params: {
       return;
     }
 
-    // Block self-referral
+    // Block self-referral (extra safety — should be blocked at apply-code time too)
     if (affiliate.clerkId === buyerClerkId) {
       console.warn(`[Affiliate] Self-referral blocked for affiliate ${affiliate.id}`);
       return;
     }
 
-    // Calculate 10% commission (price is in cents → convert to dollars)
-    const commissionAmount = Math.round((priceAmountCents / 100) * 0.10 * 100) / 100;
+    // Calculate 10% commission
+    const commissionAmount = priceAmountCents > 0
+      ? Math.round((priceAmountCents / 100) * 0.10 * 100) / 100
+      : 0;
 
-    // availableAt = now + 7 days
     const availableAt = new Date();
     availableAt.setDate(availableAt.getDate() + 7);
 
-    // Create conversion + increment pendingBalance atomically
-    // orderId @unique prevents duplicate processing (idempotency)
+    console.log(`[Affiliate] Creating commission $${commissionAmount} for ${refCode} (buyer: ${buyerClerkId}, order: ${orderId})`);
+
+    // Atomic: create conversion + increment pendingBalance
+    // orderId @unique = idempotency key (safe to retry)
+    // @@unique([affiliateId, referredClerkId]) = one commission per referred user per affiliate
     await db.$transaction(async (tx) => {
       await tx.affiliateConversion.create({
         data: {
@@ -130,20 +166,21 @@ async function processAffiliateCommission(params: {
         },
       });
 
-      await tx.affiliate.update({
-        where: { id: affiliate.id },
-        data: { pendingBalance: { increment: commissionAmount } },
-      });
+      if (commissionAmount > 0) {
+        await tx.affiliate.update({
+          where: { id: affiliate.id },
+          data: { pendingBalance: { increment: commissionAmount } },
+        });
+      }
     });
 
-    console.log(`[Affiliate] Commission $${commissionAmount} created for affiliate ${affiliate.referralCode}`);
+    console.log(`[Affiliate] ✅ Commission $${commissionAmount} created for ${refCode}`);
   } catch (error) {
-    // Unique constraint violation = duplicate order — silently skip
     const msg = error instanceof Error ? error.message : String(error);
-    if (msg.includes("Unique constraint")) {
-      console.log(`[Affiliate] Duplicate orderId ${orderId} — skipping commission`);
+    if (msg.includes("Unique constraint") || msg.includes("unique constraint")) {
+      console.log(`[Affiliate] Duplicate — orderId ${orderId} or buyer already converted. Skipping.`);
     } else {
-      console.error("[Affiliate] Commission processing error:", error);
+      console.error("[Affiliate] Commission error:", error);
     }
   }
 }
@@ -339,33 +376,28 @@ export async function POST(req: NextRequest) {
         }
 
         // Process affiliate commission AFTER successful fulfillment
-        // Wrapped in its own try/catch — never affects the 200 response
-        const refCode =
-          data.metadata?.ref ??
-          (data as any).checkout?.metadata?.ref ??
-          (data as any).order?.metadata?.ref;
+        // Read referredByCode from the user's DB record — reliable, no cookies needed
+        const orderId = (data as any).order?.id ?? (data as any).id ?? (data as any).order_id;
 
-        const orderId = (data as any).id ?? (data as any).order_id;
-        const priceAmountCents = data.product_price?.price_amount ?? 0;
+        // Use our hardcoded price map as primary source (most reliable)
+        // Fall back to what Polar sends in the payload
+        const polarPrice =
+          data.product_price?.price_amount ??
+          (data as any).amount ??
+          (data as any).order?.amount ??
+          (data as any).net_amount ??
+          0;
 
-        // Debug log — shows exactly what we have for affiliate attribution
-        console.log("[Affiliate Debug] Commission check:", {
-          eventType: payload.type,
-          orderId: String(orderId),
-          refCode: refCode ?? "NONE — no ref in metadata",
-          buyerClerkId: clerkId,
-          priceAmountCents,
-          rawMetadata: data.metadata,
-          checkoutMetadata: (data as any).checkout?.metadata,
-          orderMetadata: (data as any).order?.metadata,
-          allDataKeys: Object.keys(data),
-        });
+        const finalPriceCents = (typeof polarPrice === 'number' && polarPrice > 0)
+          ? polarPrice
+          : getPlanPriceCents(productId); // reliable fallback from our config
+
+        console.log("[Affiliate] Commission check — clerkId:", clerkId, "orderId:", String(orderId), "priceCents:", finalPriceCents, "productId:", productId);
 
         await processAffiliateCommission({
           orderId: String(orderId),
-          refCode,
           buyerClerkId: clerkId,
-          priceAmountCents,
+          priceAmountCents: finalPriceCents,
         });
 
         return NextResponse.json({

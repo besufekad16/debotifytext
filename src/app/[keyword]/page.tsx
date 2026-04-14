@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getAllSlugs, getKeywordBySlug } from "~/lib/pseo-data";
 import { getAllV2Slugs, getV2KeywordBySlug } from "~/lib/pseo-data-v2";
 import { getAllV3Slugs, getV3KeywordBySlug } from "~/lib/pseo-data-v3";
+import { getAllV4Slugs, getV4KeywordBySlug } from "~/lib/pseo-data-v4";
 import { generateBypassContent } from "~/lib/content/bypass-content";
 import { generateHumanizerContent } from "~/lib/content/humanizer-content";
 import { generateHowToContent } from "~/lib/content/howto-content";
@@ -23,6 +24,17 @@ import { generateProblemContent } from "~/lib/content/problem-content";
 import { generateWorkflowContent } from "~/lib/content/workflow-content";
 import { generateScoreContent } from "~/lib/content/score-content";
 import { generateRegionContent } from "~/lib/content/region-content";
+// V4 content generators
+import { generateComparisonContent } from "~/lib/content/comparison-content";
+import { generateAlternativeContent } from "~/lib/content/alternative-content";
+import { generateReviewContent } from "~/lib/content/review-content";
+import { generateFreeContent } from "~/lib/content/free-content";
+import { generateDetectionContent } from "~/lib/content/detection-content";
+import { generateWritingContent } from "~/lib/content/writing-content";
+import { generateEducationContent } from "~/lib/content/education-content";
+import { generatePlatformV4Content } from "~/lib/content/platform-content-v4";
+import { generateOutputContent } from "~/lib/content/output-content";
+import { generateBulkContent } from "~/lib/content/bulk-content";
 import BypassTemplate from "~/components/templates/BypassTemplate";
 import HumanizerTemplate from "~/components/templates/HumanizerTemplate";
 import HowToTemplate from "~/components/templates/HowToTemplate";
@@ -43,6 +55,7 @@ import ProblemTemplate from "~/components/templates/ProblemTemplate";
 import WorkflowTemplate from "~/components/templates/WorkflowTemplate";
 import ScoreTemplate from "~/components/templates/ScoreTemplate";
 import RegionTemplate from "~/components/templates/RegionTemplate";
+import V4Template from "~/components/templates/V4Template";
 import SEOPageWrapper from "~/components/templates/SEOPageWrapper";
 
 interface PageProps {
@@ -102,7 +115,8 @@ export async function generateStaticParams() {
   const v1 = getAllSlugs().map((slug) => ({ keyword: slug }));
   const v2 = getAllV2Slugs().map((slug) => ({ keyword: slug }));
   const v3 = getAllV3Slugs().map((slug) => ({ keyword: slug }));
-  return [...v1, ...v2, ...v3];
+  const v4 = getAllV4Slugs().map((slug) => ({ keyword: slug }));
+  return [...v1, ...v2, ...v3, ...v4];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -110,7 +124,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const entry = getKeywordBySlug(keyword);
   const entryV2 = entry ? null : getV2KeywordBySlug(keyword);
   const entryV3 = entry || entryV2 ? null : getV3KeywordBySlug(keyword);
-  if (!entry && !entryV2 && !entryV3) return { title: "Not Found" };
+  const entryV4 = entry || entryV2 || entryV3 ? null : getV4KeywordBySlug(keyword);
+  if (!entry && !entryV2 && !entryV3 && !entryV4) return { title: "Not Found" };
 
   const url = `${BASE_URL}/${keyword}`;
   let metaTitle = "";
@@ -132,8 +147,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       case "language": { const d = generateLanguageContent(entryV2); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
       case "niche": { const d = generateNicheContent(entryV2); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
     }
-  } else {
-    const e3 = entryV3!;
+  } else if (entryV3) {
+    const e3 = entryV3;
     switch (e3.cluster) {
       case "pricing": { const d = generatePricingContent(e3); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
       case "industry": { const d = generateIndustryContent(e3); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
@@ -146,12 +161,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       case "score": { const d = generateScoreContent(e3); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
       case "region": { const d = generateRegionContent(e3); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
     }
+  } else {
+    const e4 = entryV4!;
+    switch (e4.cluster) {
+      case "comparison": { const d = generateComparisonContent(e4); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "alternative": { const d = generateAlternativeContent(e4); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "review": { const d = generateReviewContent(e4); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "free": { const d = generateFreeContent(e4); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "detection": { const d = generateDetectionContent(e4); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "writing": { const d = generateWritingContent(e4); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "education": { const d = generateEducationContent(e4); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "platform": { const d = generatePlatformV4Content(e4); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "output": { const d = generateOutputContent(e4); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "bulk": { const d = generateBulkContent(e4); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+    }
   }
 
-  const clusterForKeywords = entry?.cluster ?? entryV2?.cluster ?? entryV3!.cluster;
-  const entityForKeywords = entry?.entity ?? entryV2?.entity ?? entryV3!.entity;
-  const keywordStr = entry?.keyword ?? entryV2?.keyword ?? entryV3!.keyword;
-  const seedVal = entry?.seed ?? entryV2?.seed ?? entryV3!.seed;
+  const clusterForKeywords = entry?.cluster ?? entryV2?.cluster ?? entryV3?.cluster ?? entryV4!.cluster;
+  const entityForKeywords = entry?.entity ?? entryV2?.entity ?? entryV3?.entity ?? entryV4!.entity;
+  const keywordStr = entry?.keyword ?? entryV2?.keyword ?? entryV3?.keyword ?? entryV4!.keyword;
+  const seedVal = entry?.seed ?? entryV2?.seed ?? entryV3?.seed ?? entryV4!.seed;
 
   return {
     title: metaTitle,
@@ -205,10 +234,11 @@ export default async function KeywordPage({ params }: PageProps) {
   const entry = getKeywordBySlug(keyword);
   const entryV2 = entry ? null : getV2KeywordBySlug(keyword);
   const entryV3 = entry || entryV2 ? null : getV3KeywordBySlug(keyword);
-  if (!entry && !entryV2 && !entryV3) notFound();
+  const entryV4 = entry || entryV2 || entryV3 ? null : getV4KeywordBySlug(keyword);
+  if (!entry && !entryV2 && !entryV3 && !entryV4) notFound();
 
-  const seed = entry?.seed ?? entryV2?.seed ?? entryV3!.seed;
-  const kw = entry?.keyword ?? entryV2?.keyword ?? entryV3!.keyword;
+  const seed = entry?.seed ?? entryV2?.seed ?? entryV3?.seed ?? entryV4!.seed;
+  const kw = entry?.keyword ?? entryV2?.keyword ?? entryV3?.keyword ?? entryV4!.keyword;
   const publishDate = getPublishDate(seed);
   const modifiedDate = new Date().toISOString().split("T")[0]!;
 
@@ -495,5 +525,33 @@ export default async function KeywordPage({ params }: PageProps) {
       const jsonLd = buildJsonLd(data.h1, data.metaDescription, data.faqs, e3.keyword);
       return (<SEOPageWrapper keyword={kw} cluster="region" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><RegionTemplate data={data} /></SEOPageWrapper>);
     }
+  }
+
+  // V4 clusters — all use V4Template
+  if (entryV4) {
+    const e4 = entryV4;
+    let v4Data;
+    switch (e4.cluster) {
+      case "comparison":  v4Data = generateComparisonContent(e4); break;
+      case "alternative": v4Data = generateAlternativeContent(e4); break;
+      case "review":      v4Data = generateReviewContent(e4); break;
+      case "free":        v4Data = generateFreeContent(e4); break;
+      case "detection":   v4Data = generateDetectionContent(e4); break;
+      case "writing":     v4Data = generateWritingContent(e4); break;
+      case "education":   v4Data = generateEducationContent(e4); break;
+      case "platform":    v4Data = generatePlatformV4Content(e4); break;
+      case "output":      v4Data = generateOutputContent(e4); break;
+      case "bulk":        v4Data = generateBulkContent(e4); break;
+      default: notFound();
+    }
+    if (!v4Data) notFound();
+    const jsonLd = buildJsonLd(v4Data.h1, v4Data.metaDescription, v4Data.faqs, e4.keyword);
+    return (
+      <SEOPageWrapper keyword={kw} cluster={e4.cluster} publishDate={publishDate}>
+        <link rel="canonical" href={`${BASE_URL}/${keyword}`} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <V4Template data={v4Data} cluster={e4.cluster} />
+      </SEOPageWrapper>
+    );
   }
 }

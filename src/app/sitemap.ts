@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import { getAllSlugs, getClusterKeywords } from '~/lib/pseo-data';
 import { getV2ClusterKeywords } from '~/lib/pseo-data-v2';
 import { getV3ClusterKeywords } from '~/lib/pseo-data-v3';
+import { getV4ClusterKeywords } from '~/lib/pseo-data-v4';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.humanifylab.com';
@@ -44,6 +45,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const scorePages = getV3ClusterKeywords('score').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.90 }));
   const regionPages = getV3ClusterKeywords('region').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.87 }));
 
+  // V4
+  const comparisonPages = getV4ClusterKeywords('comparison').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.95 }));
+  const alternativePages = getV4ClusterKeywords('alternative').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.94 }));
+  const reviewPages = getV4ClusterKeywords('review').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.93 }));
+  const freePages = getV4ClusterKeywords('free').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.92 }));
+  const detectionPages = getV4ClusterKeywords('detection').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.91 }));
+  const writingPages = getV4ClusterKeywords('writing').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.90 }));
+  const educationPages = getV4ClusterKeywords('education').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.90 }));
+  const platformV4Pages = getV4ClusterKeywords('platform').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.89 }));
+  const outputPages = getV4ClusterKeywords('output').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.91 }));
+  const bulkPages = getV4ClusterKeywords('bulk').map(e => ({ url: `${baseUrl}/${e.slug}`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.88 }));
+
   return [
     ...mainPages,
     ...bypassPages, ...humanizerPages, ...howtoPages, ...usecasePages,
@@ -51,5 +64,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...detectorPages, ...languagePages, ...nichePages,
     ...pricingPages, ...industryPages, ...formatPages, ...speedPages, ...qualityPages,
     ...toolPages, ...problemPages, ...workflowPages, ...scorePages, ...regionPages,
+    // V4
+    ...comparisonPages, ...alternativePages, ...reviewPages, ...freePages, ...detectionPages,
+    ...writingPages, ...educationPages, ...platformV4Pages, ...outputPages, ...bulkPages,
   ];
 }

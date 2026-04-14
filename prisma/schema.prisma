@@ -26,6 +26,7 @@ model User {
   nextResetDate       DateTime?
   maxWordsPerRequest  Int                @default(1000)
   teamId              String?
+  referredByCode      String?   // referral code used at signup (optional)
   apiKeys             ApiKey[]
   humanizerHistory    HumanizerHistory[]
   projects            Project[]

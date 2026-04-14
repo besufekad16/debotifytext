@@ -185,6 +185,35 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
   const countdownMins = pad(Math.floor(countdown / 60));
   const countdownSecs = pad(countdown % 60);
 
+  // Referral code state
+  const [refCode, setRefCode] = useState("");
+  const [refStatus, setRefStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [refMessage, setRefMessage] = useState("");
+
+  const applyReferralCode = async () => {
+    const code = refCode.trim().toLowerCase();
+    if (!code) return;
+    setRefStatus("loading");
+    try {
+      const res = await fetch("/api/affiliate/apply-code", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ referralCode: code }),
+      });
+      const data = await res.json() as { success?: boolean; error?: string; message?: string; alreadySet?: boolean };
+      if (res.ok && data.success) {
+        setRefStatus("success");
+        setRefMessage(data.alreadySet ? "Referral code already applied." : "Referral code applied! ✓");
+      } else {
+        setRefStatus("error");
+        setRefMessage(data.error ?? "Invalid code");
+      }
+    } catch {
+      setRefStatus("error");
+      setRefMessage("Something went wrong. Try again.");
+    }
+  };
+
   const handleClose = () => {
     setIsVisible(false);
     setTimeout(() => onClose(), 300);
@@ -270,6 +299,38 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
               {countdown === 0 && <span className="text-[10px] text-[#8b6f47]/60 italic">still available</span>}
             </div>
           </div>
+
+          {/* ── REFERRAL CODE ── */}
+          {refStatus !== "success" && (
+            <div className="mb-5">
+              <p className="text-xs text-[#8b6f47]/70 text-center mb-2">Have a referral code? Enter it below</p>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="e.g. humanify-002"
+                  value={refCode}
+                  onChange={(e) => { setRefCode(e.target.value); setRefStatus("idle"); }}
+                  className="flex-1 text-sm border border-[#d4b896] rounded-lg px-3 py-2 bg-white text-[#3b1f0e] placeholder-[#8b6f47]/40 focus:outline-none focus:ring-2 focus:ring-[#8b6f47]/30"
+                  disabled={refStatus === "loading"}
+                />
+                <button
+                  onClick={applyReferralCode}
+                  disabled={!refCode.trim() || refStatus === "loading"}
+                  className="px-3 py-2 text-xs font-semibold bg-[#5e3d2a] text-white rounded-lg hover:bg-[#4a2f1f] disabled:opacity-40 transition whitespace-nowrap"
+                >
+                  {refStatus === "loading" ? "..." : "Apply"}
+                </button>
+              </div>
+              {refStatus === "error" && (
+                <p className="text-xs text-red-500 mt-1 text-center">{refMessage}</p>
+              )}
+            </div>
+          )}
+          {refStatus === "success" && (
+            <div className="mb-5 text-center">
+              <p className="text-xs text-green-600 font-medium">{refMessage}</p>
+            </div>
+          )}
 
           {/* ── BILLING TOGGLE — same as pricing page ── */}
           {hasYearly && (
