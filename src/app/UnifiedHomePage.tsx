@@ -1551,7 +1551,7 @@ export default function UnifiedHomePage() {
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3 leading-tight">
                   Earn 10% on every referral
                 </h2>
-                <p className="text-gray-400 text-sm max-w-md leading-relaxed">
+                <p className="text-gray-400 text-sm max-w-md leading-relaxed" suppressHydrationWarning>
                   Share your unique referral code. When someone signs up and enters your code, you earn 10% of their first payment — paid in USDT directly to your wallet.
                 </p>
                 <div className="flex flex-wrap gap-4 mt-5 justify-center md:justify-start text-xs text-gray-400">

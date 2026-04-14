@@ -126,6 +126,11 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
   const [countdown, setCountdown] = useState(59);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Referral code state — must be declared before any early returns
+  const [refCode, setRefCode] = useState("");
+  const [refStatus, setRefStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [refMessage, setRefMessage] = useState("");
+
   useEffect(() => {
     if (isOpen) {
       setCountdown(59);
@@ -184,11 +189,6 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
   const pad = (n: number) => String(n).padStart(2, "0");
   const countdownMins = pad(Math.floor(countdown / 60));
   const countdownSecs = pad(countdown % 60);
-
-  // Referral code state
-  const [refCode, setRefCode] = useState("");
-  const [refStatus, setRefStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [refMessage, setRefMessage] = useState("");
 
   const applyReferralCode = async () => {
     const code = refCode.trim().toLowerCase();
