@@ -5,6 +5,7 @@ import { Button } from "~/components/ui/button";
 import { Loader2, ShieldCheck } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import ReferralCodeStep from "~/components/ReferralCodeStep";
 
 type BillingCycle = "monthly" | "yearly";
 
@@ -155,6 +156,8 @@ export default function PolarPricing({ isTeamMember = false }: PolarPricingProps
   const [loading, setLoading] = useState(true);
   const [ctaLoadingId, setCtaLoadingId] = useState<string | null>(null);
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
+  // Referral code step state
+  const [pendingProductId, setPendingProductId] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -187,13 +190,18 @@ export default function PolarPricing({ isTeamMember = false }: PolarPricingProps
   }, []);
 
   const onSubscribe = async (productId: string) => {
+    if (!isSignedIn) {
+      router.push("/sign-in");
+      return;
+    }
+    // Show referral code step before proceeding to checkout
+    setPendingProductId(productId);
+  };
+
+  const doCheckout = async (productId: string) => {
     try {
       setCtaLoadingId(productId);
-      if (!isSignedIn) {
-        router.push("/sign-in");
-        setCtaLoadingId(null);
-        return;
-      }
+      setPendingProductId(null);
 
       console.log('[PolarPricing] Creating checkout for product:', productId);
 
@@ -214,7 +222,6 @@ export default function PolarPricing({ isTeamMember = false }: PolarPricingProps
       const { checkoutUrl } = await res.json();
       console.log('[PolarPricing] Redirecting to checkout:', checkoutUrl);
 
-      // Redirect to Polar checkout
       window.location.href = checkoutUrl;
     } catch (error) {
       console.error('[PolarPricing] Error:', error);
@@ -279,6 +286,16 @@ export default function PolarPricing({ isTeamMember = false }: PolarPricingProps
   }
 
   return (
+    <>
+      {/* Referral code step overlay — shown before checkout */}
+      {pendingProductId && (
+        <ReferralCodeStep
+          onProceed={() => doCheckout(pendingProductId)}
+          onCancel={() => setPendingProductId(null)}
+          isLoading={!!ctaLoadingId}
+        />
+      )}
+
     <div className="space-y-12">
       {hasYearlyPlans && (
         <div className="flex flex-col items-center gap-2 text-center">
@@ -485,6 +502,7 @@ export default function PolarPricing({ isTeamMember = false }: PolarPricingProps
         })}
       </div>
     </div>
+    </>
   );
 }
 
