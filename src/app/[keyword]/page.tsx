@@ -177,10 +177,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
   }
 
-  const clusterForKeywords = entry?.cluster ?? entryV2?.cluster ?? entryV3?.cluster ?? entryV4!.cluster;
-  const entityForKeywords = entry?.entity ?? entryV2?.entity ?? entryV3?.entity ?? entryV4!.entity;
-  const keywordStr = entry?.keyword ?? entryV2?.keyword ?? entryV3?.keyword ?? entryV4!.keyword;
-  const seedVal = entry?.seed ?? entryV2?.seed ?? entryV3?.seed ?? entryV4!.seed;
+  const clusterForKeywords = entry?.cluster ?? entryV2?.cluster ?? entryV3?.cluster ?? entryV4?.cluster ?? 'bypass';
+  const entityForKeywords = entry?.entity ?? entryV2?.entity ?? entryV3?.entity ?? entryV4?.entity ?? '';
+  const keywordStr = entry?.keyword ?? entryV2?.keyword ?? entryV3?.keyword ?? entryV4?.keyword ?? keyword;
+  const seedVal = entry?.seed ?? entryV2?.seed ?? entryV3?.seed ?? entryV4?.seed ?? 0;
 
   return {
     title: metaTitle,
@@ -197,7 +197,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: "HumanifyLab",
       locale: "en_US",
       type: "article",
-      publishedTime: getPublishDate(entry?.seed ?? entryV2?.seed ?? entryV3!.seed),
+      publishedTime: getPublishDate(entry?.seed ?? entryV2?.seed ?? entryV3?.seed ?? entryV4?.seed ?? 0),
       modifiedTime: new Date().toISOString(),
       authors: [BASE_URL],
       images: [{
@@ -237,8 +237,8 @@ export default async function KeywordPage({ params }: PageProps) {
   const entryV4 = entry || entryV2 || entryV3 ? null : getV4KeywordBySlug(keyword);
   if (!entry && !entryV2 && !entryV3 && !entryV4) notFound();
 
-  const seed = entry?.seed ?? entryV2?.seed ?? entryV3?.seed ?? entryV4!.seed;
-  const kw = entry?.keyword ?? entryV2?.keyword ?? entryV3?.keyword ?? entryV4!.keyword;
+  const seed = entry?.seed ?? entryV2?.seed ?? entryV3?.seed ?? entryV4?.seed ?? 0;
+  const kw = entry?.keyword ?? entryV2?.keyword ?? entryV3?.keyword ?? entryV4?.keyword ?? keyword;
   const publishDate = getPublishDate(seed);
   const modifiedDate = new Date().toISOString().split("T")[0]!;
 
@@ -473,7 +473,8 @@ export default async function KeywordPage({ params }: PageProps) {
   }
 
   // V3 clusters
-  const e3 = entryV3!;
+  if (entryV3) {
+  const e3 = entryV3;
   switch (e3.cluster) {
     case "pricing": {
       const data = generatePricingContent(e3);
@@ -526,7 +527,7 @@ export default async function KeywordPage({ params }: PageProps) {
       return (<SEOPageWrapper keyword={kw} cluster="region" publishDate={publishDate}><link rel="canonical" href={`${BASE_URL}/${keyword}`} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><RegionTemplate data={data} /></SEOPageWrapper>);
     }
   }
-
+  } // end if (entryV3)
   // V4 clusters — all use V4Template
   if (entryV4) {
     const e4 = entryV4;
