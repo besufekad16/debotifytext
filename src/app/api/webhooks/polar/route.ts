@@ -89,7 +89,7 @@ function getPlanPriceCents(productId: string): number {
   if (productId === env.POLAR_CREDITS_5000)          return 500;   // approximate
   if (productId === env.POLAR_CREDITS_20000)         return 1500;
   if (productId === env.POLAR_CREDITS_45000)         return 3000;
-  if (productId === env.POLAR_PRODUCT_UNLIMITED_2M || productId === '683dbfe2-edf6-454b-95a7-a69f489a2ba6') return 15000; // $150.00
+  if (productId === env.POLAR_PRODUCT_UNLIMITED_2M)  return 15000; // $150.00
   return 0;
 }
 
