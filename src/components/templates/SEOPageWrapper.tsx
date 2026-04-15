@@ -31,6 +31,17 @@ const CLUSTER_LABELS: Record<string, string> = {
   workflow: "Workflows",
   score: "AI Scores",
   region: "Regions",
+  // V4 clusters
+  comparison: "Tool Comparisons",
+  alternative: "Alternatives",
+  review: "Reviews",
+  free: "Free Tools",
+  detection: "AI Detection",
+  writing: "Writing Types",
+  education: "Education",
+  platform: "Platforms",
+  output: "AI Output",
+  bulk: "Bulk Processing",
 };
 
 const CLUSTER_HREFS: Record<string, string> = {
@@ -54,6 +65,17 @@ const CLUSTER_HREFS: Record<string, string> = {
   workflow: "/ai-humanizer-for-agencies",
   score: "/get-0-percent-ai-score",
   region: "/ai-humanizer-for-uk-students",
+  // V4 clusters
+  comparison: "/humanifylab-vs-undetectable-ai",
+  alternative: "/undetectable-ai-alternative",
+  review: "/humanifylab-review",
+  free: "/ai-humanizer-free-no-sign-up",
+  detection: "/does-turnitin-detect-chatgpt",
+  writing: "/ai-humanizer-for-essay",
+  education: "/history-essay-ai-humanizer",
+  platform: "/ai-humanizer-for-google-docs",
+  output: "/make-chatgpt-sound-human",
+  bulk: "/bulk-ai-humanizer",
 };
 
 // Internal links shown at bottom of every page — drives crawl depth

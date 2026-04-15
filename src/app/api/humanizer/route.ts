@@ -40,9 +40,9 @@ async function validateApiKey(key: string) {
     return null;
   }
 
-  // Check if the user's plan allows API access (e.g., ultra plan)
-  if (apiKey.user.subscriptionPlan !== "ultra") {
-    return null; // Or return a specific error about plan requirements
+  // Check if the user's plan allows API access (ultra or unlimited plan)
+  if (apiKey.user.subscriptionPlan !== "ultra" && apiKey.user.subscriptionPlan !== "unlimited") {
+    return null;
   }
   
   // Update last used timestamp
@@ -166,7 +166,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check if annual subscription needs credit reset
+    // Check if annual subscription needs credit reset (not for unlimited — it has a fixed expiry)
     if (billingUser.subscriptionType === 'annual' && billingUser.nextResetDate && new Date() >= billingUser.nextResetDate) {
       // Credits now represent word count (1 credit = 1 word)
       const planCredits = billingUser.subscriptionPlan === 'basic' ? 7000 : billingUser.subscriptionPlan === 'pro' ? 25000 : 50000;
@@ -206,7 +206,7 @@ export async function POST(request: NextRequest) {
     // Validate preset access - only pro and ultra users can use presets (except "default" which is available to all)
     const effectivePlan = billingUser.subscriptionPlan;
     if (selectedTone !== "default" && (effectivePlan === "basic" || !effectivePlan)) {
-      // Basic users can only use "default" preset, other presets require pro/ultra
+      // Basic and free users can only use "default" preset; pro/ultra/unlimited get all presets
       console.error(`[HUMANIZER API] Preset access denied for ${effectivePlan || "free"} user. Preset: ${selectedTone}`);
       return NextResponse.json({ 
         error: "This preset is only available for Pro and Ultra subscribers. Please upgrade to access all presets.",
@@ -380,31 +380,32 @@ export async function POST(request: NextRequest) {
     
     let newCredits = billingUser.credits || 0;
     let newExtraCredits = billingUser.extraCredits || 0;
-    let remainingToDeduct = creditsToDeduct;
 
-    // 1. Deduct from monthly plan credits first
-    if (newCredits >= remainingToDeduct) {
-      newCredits -= remainingToDeduct;
-      remainingToDeduct = 0;
-    } else {
-      remainingToDeduct -= newCredits;
-      newCredits = 0;
-    }
+    // Unlimited plan: do not deduct credits — they have a fixed 2-month expiry
+    if (billingUser.subscriptionPlan !== 'unlimited') {
+      let remainingToDeduct = creditsToDeduct;
 
-    // 2. Deduct remaining from extra credits
-    if (remainingToDeduct > 0) {
-      newExtraCredits = Math.max(0, newExtraCredits - remainingToDeduct);
+      // 1. Deduct from monthly plan credits first
+      if (newCredits >= remainingToDeduct) {
+        newCredits -= remainingToDeduct;
+        remainingToDeduct = 0;
+      } else {
+        remainingToDeduct -= newCredits;
+        newCredits = 0;
+      }
+
+      // 2. Deduct remaining from extra credits
+      if (remainingToDeduct > 0) {
+        newExtraCredits = Math.max(0, newExtraCredits - remainingToDeduct);
+      }
+
+      await db.user.update({
+        where: { id: billingUser.id },
+        data: { credits: newCredits, extraCredits: newExtraCredits },
+      });
     }
 
     const creditsRemaining = newCredits + newExtraCredits;
-
-    await db.user.update({
-      where: { id: billingUser.id },
-      data: { 
-        credits: newCredits,
-        extraCredits: newExtraCredits
-      },
-    });
 
     // Track usage in Polar for billing
     // This allows Polar to track customer usage for metered billing

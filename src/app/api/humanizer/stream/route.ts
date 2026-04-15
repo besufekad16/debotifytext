@@ -273,7 +273,7 @@ export async function POST(request: NextRequest) {
 
   // Check if annual subscription needs credit reset
   if (billingUser.subscriptionType === 'annual' && billingUser.nextResetDate && new Date() >= billingUser.nextResetDate) {
-    // Credits now represent word count (1 credit = 1 word)
+    // Credits now represent word count (1 credit = 1 word) — not for unlimited plan
     const planCredits = billingUser.subscriptionPlan === 'basic' ? 7000 : billingUser.subscriptionPlan === 'pro' ? 25000 : 50000;
     const nextMonth = new Date();
     nextMonth.setMonth(nextMonth.getMonth() + 1);
@@ -318,10 +318,10 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Validate preset access - only pro and ultra users can use presets (except "default" which is available to all)
+  // Validate preset access - pro, ultra, and unlimited users get all presets
   const effectivePlan = billingUser.subscriptionPlan;
   if (selectedPreset !== "default" && (effectivePlan === "basic" || !effectivePlan)) {
-    // Basic users can only use "default" preset, other presets require pro/ultra
+    // Basic and free users can only use "default" preset
     console.error(`[STREAM API] Preset access denied for ${effectivePlan || "free"} user. Preset: ${selectedPreset}`);
     return new Response(
       JSON.stringify({

@@ -70,7 +70,23 @@ const UI_DESCRIPTIONS: Record<string, string> = {
 • Team support
 • Dedicated support & onboarding
 
-**Credits reset:** Monthly for subscriptions`
+**Credits reset:** Monthly for subscriptions`,
+
+  "unlimited_2m": `
+
+• Unlimited words for 2 months
+• Up to 2,000 words per request
+• One-time purchase — no subscription
+• Priority processing
+• Advanced Humanization Engine
+• Natural human tone & style
+• Error free rewriting
+• All core humanization presets
+• All languages supported
+• API access for integrations
+• Dedicated support
+
+**Valid for:** 2 months from purchase date`,
 };
 
 export async function fetchPolarProductsFromEnv(): Promise<PolarPricingTier[]> {
@@ -90,6 +106,12 @@ export async function fetchPolarProductsFromEnv(): Promise<PolarPricingTier[]> {
       monthlyId: env.POLAR_PRODUCT_LARGE,
       yearlyId: env.POLAR_PRODUCT_YEARLY_LARGE,
     },
+    // Unlimited 2-Month plan — one-time purchase, no yearly variant
+    ...(env.POLAR_PRODUCT_UNLIMITED_2M ? [{
+      key: "unlimited_2m",
+      monthlyId: env.POLAR_PRODUCT_UNLIMITED_2M,
+      yearlyId: undefined,
+    }] : []),
   ].filter((config) => config.monthlyId || config.yearlyId);
 
   if (tierConfigs.length === 0) return [];

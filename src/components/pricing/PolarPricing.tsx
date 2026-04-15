@@ -6,8 +6,10 @@ import { Loader2, ShieldCheck } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import ReferralCodeStep from "~/components/ReferralCodeStep";
+import UnlimitedCard from "~/components/pricing/UnlimitedCard";
+import { Infinity as InfinityIcon } from "lucide-react";
 
-type BillingCycle = "monthly" | "yearly";
+type BillingCycle = "monthly" | "yearly" | "unlimited";
 
 type ProductPriceOption = {
   id: string;
@@ -155,28 +157,35 @@ export default function PolarPricing({ isTeamMember = false }: PolarPricingProps
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [ctaLoadingId, setCtaLoadingId] = useState<string | null>(null);
-  const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>("unlimited");
   // Referral code step state
   const [pendingProductId, setPendingProductId] = useState<string | null>(null);
+  // Unlimited spots counter
+  const [spots, setSpots] = useState<{ taken: number; max: number; remaining: number; isFull: boolean } | null>(null);
 
   useEffect(() => {
     let active = true;
     (async () => {
       try {
         console.log('[PolarPricing] Fetching products from API...');
-        const res = await fetch("/api/polar/products");
-        console.log('[PolarPricing] Response status:', res.status);
+        const [productsRes, spotsRes] = await Promise.all([
+          fetch("/api/polar/products"),
+          fetch("/api/polar/unlimited-spots"),
+        ]);
 
-        if (!res.ok) {
-          const errorData = await res.json();
+        if (!productsRes.ok) {
+          const errorData = await productsRes.json();
           console.error('[PolarPricing] API error:', errorData);
           throw new Error(errorData.error || "Failed to load products");
         }
 
-        const data = (await res.json()) as Product[];
-        console.log('[PolarPricing] Products loaded:', data);
-
+        const data = (await productsRes.json()) as Product[];
         if (active) setProducts(data);
+
+        if (spotsRes.ok) {
+          const spotsData = await spotsRes.json();
+          if (active) setSpots(spotsData);
+        }
       } catch (e) {
         console.error('[PolarPricing] Error:', e);
         setError((e as Error).message);
@@ -184,9 +193,7 @@ export default function PolarPricing({ isTeamMember = false }: PolarPricingProps
         if (active) setLoading(false);
       }
     })();
-    return () => {
-      active = false;
-    };
+    return () => { active = false; };
   }, []);
 
   const onSubscribe = async (productId: string) => {
@@ -240,20 +247,20 @@ export default function PolarPricing({ isTeamMember = false }: PolarPricingProps
   // ];
 
   const hasYearlyPlans = useMemo(() => !!products?.some((plan) => plan.yearly), [products]);
+  const hasUnlimitedPlan = useMemo(() => !!products?.some((p) => p.key === 'unlimited_2m'), [products]);
   const [hasUserChangedBilling, setHasUserChangedBilling] = useState(false);
 
   useEffect(() => {
-    // Only adjust billing cycle after products have loaded
     if (!loading && products) {
-      if (!hasYearlyPlans && billingCycle === "yearly") {
-        // No yearly plans available, switch to monthly
+      if (hasUnlimitedPlan && !hasUserChangedBilling) {
+        setBillingCycle("unlimited");
+      } else if (!hasYearlyPlans && billingCycle === "yearly") {
         setBillingCycle("monthly");
       } else if (hasYearlyPlans && billingCycle === "monthly" && !hasUserChangedBilling) {
-        // Yearly plans are available and user hasn't manually changed it, ensure yearly is selected
         setBillingCycle("yearly");
       }
     }
-  }, [hasYearlyPlans, billingCycle, products, loading, hasUserChangedBilling]);
+  }, [hasYearlyPlans, hasUnlimitedPlan, billingCycle, products, loading, hasUserChangedBilling]);
 
   const maxSavings = useMemo(() => {
     if (!products) return 0;
@@ -297,46 +304,73 @@ export default function PolarPricing({ isTeamMember = false }: PolarPricingProps
       )}
 
     <div className="space-y-12">
-      {hasYearlyPlans && (
+      {(hasYearlyPlans || hasUnlimitedPlan) && (
         <div className="flex flex-col items-center gap-2 text-center">
           <div className="inline-flex items-center border border-border bg-card p-1 shadow-sm">
             <button
               type="button"
-              onClick={() => {
-                setBillingCycle("monthly");
-                setHasUserChangedBilling(true);
-              }}
-              className={`min-w-[100px] px-4 py-2 text-xs sm:text-sm font-semibold transition whitespace-nowrap ${billingCycle === "monthly"
-                ? "bg-gradient-to-r from-[#5e3d2a] via-[#5e3d2a] to-[#4a2f1f] text-white shadow-sm"
-                : "text-muted-foreground hover:text-foreground bg-transparent"
-                }`}
+              onClick={() => { setBillingCycle("monthly"); setHasUserChangedBilling(true); }}
+              className={`min-w-[100px] px-4 py-2 text-xs sm:text-sm font-semibold transition whitespace-nowrap ${
+                billingCycle === "monthly"
+                  ? "bg-gradient-to-r from-[#5e3d2a] via-[#5e3d2a] to-[#4a2f1f] text-white shadow-sm"
+                  : "text-muted-foreground hover:text-foreground bg-transparent"
+              }`}
             >
-              Monthly billing
+              Monthly
             </button>
-            <button
-              type="button"
-              onClick={() => {
-                setBillingCycle("yearly");
-                setHasUserChangedBilling(true);
-              }}
-              className={`min-w-[100px] px-3 py-2 text-xs sm:text-sm font-semibold transition relative flex items-center justify-center gap-1.5 whitespace-nowrap ${billingCycle === "yearly"
-                ? "bg-gradient-to-r from-[#5e3d2a] via-[#5e3d2a] to-[#4a2f1f] text-white shadow-sm"
-                : "text-muted-foreground hover:text-foreground bg-transparent"
+
+            {hasUnlimitedPlan && (
+              <button
+                type="button"
+                onClick={() => { setBillingCycle("unlimited"); setHasUserChangedBilling(true); }}
+                className={`relative min-w-[120px] px-3 py-2 text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-1.5 whitespace-nowrap ${
+                  billingCycle === "unlimited"
+                    ? "bg-gradient-to-r from-[#5e3d2a] via-[#5e3d2a] to-[#4a2f1f] text-white shadow-sm"
+                    : "text-muted-foreground hover:text-foreground bg-transparent"
                 }`}
-            >
-              <span>Yearly billing</span>
-              {billingCycle === "yearly" && (
-                <span className="px-1.5 py-0.5 text-[9px] sm:text-[10px] font-bold whitespace-nowrap bg-white/25 text-white border border-white/40">
-                  Save 50%
-                </span>
-              )}
-            </button>
+              >
+                <InfinityIcon className="h-3.5 w-3.5" />
+                <span>Unlimited</span>
+                {billingCycle === "unlimited" && (
+                  <span className="px-1.5 py-0.5 text-[9px] sm:text-[10px] font-bold whitespace-nowrap bg-white/25 text-white border border-white/40">
+                    2 Months
+                  </span>
+                )}
+                {/* Hot badge when not selected */}
+                {billingCycle !== "unlimited" && (
+                  <span className="absolute -top-2 -right-1 bg-orange-500 text-white text-[8px] font-bold px-1 py-0.5 rounded-full leading-none">
+                    HOT
+                  </span>
+                )}
+              </button>
+            )}
+
+            {hasYearlyPlans && (
+              <button
+                type="button"
+                onClick={() => { setBillingCycle("yearly"); setHasUserChangedBilling(true); }}
+                className={`min-w-[100px] px-3 py-2 text-xs sm:text-sm font-semibold transition relative flex items-center justify-center gap-1.5 whitespace-nowrap ${
+                  billingCycle === "yearly"
+                    ? "bg-gradient-to-r from-[#5e3d2a] via-[#5e3d2a] to-[#4a2f1f] text-white shadow-sm"
+                    : "text-muted-foreground hover:text-foreground bg-transparent"
+                }`}
+              >
+                <span>Yearly</span>
+                {billingCycle === "yearly" && (
+                  <span className="px-1.5 py-0.5 text-[9px] sm:text-[10px] font-bold whitespace-nowrap bg-white/25 text-white border border-white/40">
+                    Save 50%
+                  </span>
+                )}
+              </button>
+            )}
           </div>
         </div>
       )}
 
+      {/* Regular plans grid — hidden when Unlimited tab is active */}
+      {billingCycle !== 'unlimited' && (
       <div className="mx-auto grid max-w-6xl gap-5 sm:gap-6 lg:grid-cols-3 lg:gap-8 w-full px-2 sm:px-0 overflow-visible">
-        {products.map((product, index) => {
+        {products.filter(p => p.key !== 'unlimited_2m').map((product, index) => {
           const { headline, features } = parseProductDescription(product.uiDescription ?? product.description);
           const isPopular = index === 1 && products.length > 1;
           const desiredOption = billingCycle === "yearly" ? product.yearly : product.monthly;
@@ -501,6 +535,21 @@ export default function PolarPricing({ isTeamMember = false }: PolarPricingProps
           );
         })}
       </div>
+      )} {/* end billingCycle !== 'unlimited' */}
+
+      {/* Unlimited 2-Month Plan — shown ONLY when Unlimited tab is selected */}
+      {billingCycle === 'unlimited' && (() => {
+        const unlimitedProduct = products.find(p => p.key === 'unlimited_2m');
+        const unlimitedProductId = unlimitedProduct?.monthly?.id ?? unlimitedProduct?.yearly?.id;
+        if (!unlimitedProductId) return null;
+        return (
+          <UnlimitedCard
+            productId={unlimitedProductId}
+            isTeamMember={isTeamMember}
+            spots={spots}
+          />
+        );
+      })()}
     </div>
     </>
   );

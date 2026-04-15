@@ -172,8 +172,10 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
 
   if (!isOpen) return null;
 
-  // Ultra plan = last product (index 2), same as pricing page
-  const ultraPlan = products?.find(p => p.name.toLowerCase().includes("ultra")) ?? products?.[products.length - 1];
+  // Unlimited plan = the unlimited_2m product; fall back to Ultra if not available
+  const ultraPlan = products?.find(p => p.key === 'unlimited_2m')
+    ?? products?.find(p => p.name.toLowerCase().includes("ultra"))
+    ?? products?.[products.length - 1];
 
   const desiredOption = billingCycle === "yearly" ? ultraPlan?.yearly : ultraPlan?.monthly;
   const activeOption = desiredOption ?? ultraPlan?.monthly ?? ultraPlan?.yearly;
@@ -255,31 +257,33 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
           <div className="text-center mb-5">
             <style>{`
               @keyframes heartbeat-glow-modal {
-                0%   { filter: drop-shadow(0 0 4px rgba(234,88,12,0.4)) drop-shadow(0 0 12px rgba(234,88,12,0.2)); transform: scale(1); }
-                14%  { filter: drop-shadow(0 0 14px rgba(234,88,12,1)) drop-shadow(0 0 30px rgba(234,88,12,0.7)) drop-shadow(0 0 50px rgba(234,88,12,0.4)); transform: scale(1.1); }
-                28%  { filter: drop-shadow(0 0 4px rgba(234,88,12,0.4)) drop-shadow(0 0 12px rgba(234,88,12,0.2)); transform: scale(1); }
-                42%  { filter: drop-shadow(0 0 10px rgba(234,88,12,0.9)) drop-shadow(0 0 24px rgba(234,88,12,0.6)) drop-shadow(0 0 40px rgba(234,88,12,0.3)); transform: scale(1.06); }
-                70%  { filter: drop-shadow(0 0 4px rgba(234,88,12,0.4)) drop-shadow(0 0 12px rgba(234,88,12,0.2)); transform: scale(1); }
-                100% { filter: drop-shadow(0 0 4px rgba(234,88,12,0.4)) drop-shadow(0 0 12px rgba(234,88,12,0.2)); transform: scale(1); }
+                0%   { filter: drop-shadow(0 0 4px rgba(212,168,85,0.5)) drop-shadow(0 0 12px rgba(212,168,85,0.2)); transform: scale(1); }
+                14%  { filter: drop-shadow(0 0 14px rgba(212,168,85,1)) drop-shadow(0 0 30px rgba(212,168,85,0.7)) drop-shadow(0 0 50px rgba(212,168,85,0.4)); transform: scale(1.1); }
+                28%  { filter: drop-shadow(0 0 4px rgba(212,168,85,0.5)) drop-shadow(0 0 12px rgba(212,168,85,0.2)); transform: scale(1); }
+                42%  { filter: drop-shadow(0 0 10px rgba(212,168,85,0.9)) drop-shadow(0 0 24px rgba(212,168,85,0.6)) drop-shadow(0 0 40px rgba(212,168,85,0.3)); transform: scale(1.06); }
+                70%  { filter: drop-shadow(0 0 4px rgba(212,168,85,0.5)) drop-shadow(0 0 12px rgba(212,168,85,0.2)); transform: scale(1); }
+                100% { filter: drop-shadow(0 0 4px rgba(212,168,85,0.5)) drop-shadow(0 0 12px rgba(212,168,85,0.2)); transform: scale(1); }
               }
             `}</style>
             <h1 className="text-[1.6rem] sm:text-[1.9rem] font-extrabold text-[#1a0a00] leading-tight tracking-tight mb-2">
-              Unlock Ultra at{" "}
+              Get{" "}
               <span
                 className="inline-block font-black"
                 style={{
-                  background: "linear-gradient(135deg, #ea580c, #f97316, #fb923c)",
+                  background: "linear-gradient(135deg, #C8922A, #E8B84B, #F5D78A)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
                   animation: "heartbeat-glow-modal 1.6s ease-in-out infinite",
+                  filter: "drop-shadow(0 1px 2px rgba(60,20,0,0.6)) drop-shadow(0 2px 6px rgba(60,20,0,0.4))",
                 }}
               >
-                50% OFF
-              </span>
+                Unlimited Words
+              </span>{" "}
+              for 2 Months
             </h1>
             <p className="text-[#5e3d2a]/70 text-sm leading-relaxed max-w-xs mx-auto">
-              Claim this one-time welcome offer to unlock our most powerful AI Humanizer at 50% off.
+              One-time $150 — no subscription, no word caps, no daily limits. 133 spots left out of 200.
             </p>
           </div>
 

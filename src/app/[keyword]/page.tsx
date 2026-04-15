@@ -103,6 +103,17 @@ function buildKeywords(keyword: string, cluster: string, entity: string): string
     workflow: ["ai humanizer bulk", "ai humanizer workflow", "ai humanizer for teams"],
     score: ["reduce ai score", "ai score reducer", "get 0 ai score"],
     region: ["ai humanizer for students", "bypass turnitin university", "ai humanizer global"],
+    // V4 clusters
+    comparison: ["humanifylab vs", "ai humanizer comparison", "best ai humanizer alternative", "undetectable ai comparison"],
+    alternative: ["ai humanizer alternative", "best alternative", "switch to humanifylab", "ai humanizer replacement"],
+    review: ["ai humanizer review", "does it work", "is it worth it", "honest review 2026"],
+    free: ["free ai humanizer", "no sign up ai humanizer", "free bypass ai detection", "free undetectable ai"],
+    detection: ["does turnitin detect", "can gptzero detect", "ai detection bypass", "bypass ai detector"],
+    writing: ["ai humanizer for writing", "content type humanizer", "undetectable ai writing", "bypass ai detection writing"],
+    education: ["student ai humanizer", "essay humanizer", "bypass turnitin essay", "academic ai bypass"],
+    platform: ["ai humanizer for platform", "platform ai humanizer", "bypass ai detection platform"],
+    output: ["make ai sound human", "make ai undetectable", "ai to human converter", "humanize ai output"],
+    bulk: ["bulk ai humanizer", "mass humanize", "batch ai humanizer", "enterprise ai humanizer"],
   };
   const entityKw = entity && !["AI Humanizer", "Guide", "Use Case", "Academic", "Professional", "AI Detector", "Multilingual", "Niche", "Competitor", "Pricing", "Speed", "Quality", "Problem", "Workflow", "Score", "HumanifyLab"].includes(entity)
     ? [entity.toLowerCase(), `${entity.toLowerCase()} bypass`, `humanize ${entity.toLowerCase()}`, `${entity.toLowerCase()} ai humanizer`]

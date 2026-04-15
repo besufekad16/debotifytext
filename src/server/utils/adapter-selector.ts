@@ -12,7 +12,7 @@ import { aiStudios99 } from "~/server/adapters/aistudio99";
 /**
  * Supported subscription plans
  */
-export type SubscriptionPlan = 'free' | 'basic' | 'pro' | 'ultra' | null | undefined;
+export type SubscriptionPlan = 'free' | 'basic' | 'pro' | 'ultra' | 'unlimited' | null | undefined;
 
 /**
  * Humanization adapter interface
@@ -45,7 +45,7 @@ export function getHumanizationAdapter(
  */
 export function isPremiumUser(subscriptionPlan: SubscriptionPlan): boolean {
   const plan = subscriptionPlan?.toLowerCase();
-  return plan === 'basic' || plan === 'pro' || plan === 'ultra';
+  return plan === 'basic' || plan === 'pro' || plan === 'ultra' || plan === 'unlimited';
 }
 
 /**

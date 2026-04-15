@@ -126,11 +126,16 @@ export const RATE_LIMITS = {
     windowMs: 60 * 60 * 1000, // 200 requests per hour
     minInterval: 2 * 1000, // 2 seconds between requests
   },
+  unlimited: {
+    maxRequests: 500,
+    windowMs: 60 * 60 * 1000, // 500 requests per hour — effectively unlimited
+    minInterval: 1 * 1000, // 1 second between requests
+  },
 } as const;
 
 export function getRateLimitForPlan(
   plan: string | null | undefined
 ): RateLimitConfig {
   const planKey = (plan?.toLowerCase() || 'free') as keyof typeof RATE_LIMITS;
-  return RATE_LIMITS[planKey] || RATE_LIMITS.free;
+  return RATE_LIMITS[planKey] ?? RATE_LIMITS.free;
 }

@@ -66,6 +66,12 @@ function getPlanConfig(productId: string): { credits: number; plan: string; maxW
     return { credits: 45000, plan: 'topup', maxWords: 0, type: 'one_time', isTopUp: true };
   }
 
+  // Unlimited 2-Month Plan — subscription billed every 2 months, $150
+  // Treated exactly like other subscription plans: sets credits, plan, maxWords
+  if (productId === env.POLAR_PRODUCT_UNLIMITED_2M) {
+    return { credits: 999999999, plan: 'unlimited', maxWords: 2000, type: 'monthly' };
+  }
+
   return null;
 }
 
@@ -83,16 +89,22 @@ function getPlanPriceCents(productId: string): number {
   if (productId === env.POLAR_CREDITS_5000)          return 500;   // approximate
   if (productId === env.POLAR_CREDITS_20000)         return 1500;
   if (productId === env.POLAR_CREDITS_45000)         return 3000;
+  if (productId === env.POLAR_PRODUCT_UNLIMITED_2M || productId === '683dbfe2-edf6-454b-95a7-a69f489a2ba6') return 15000; // $150.00
   return 0;
 }
 
-function getNextResetDate(_type: string): Date {
+function getNextResetDate(_type: string, plan?: string): Date {
   const now = new Date();
-  const nextMonth = new Date(now);
-  nextMonth.setMonth(now.getMonth() + 1);
-  nextMonth.setDate(1);
-  nextMonth.setHours(0, 0, 0, 0);
-  return nextMonth;
+  const nextDate = new Date(now);
+  // unlimited plan: expires 2 months from now (not 1 month like regular subscriptions)
+  if (plan === 'unlimited' || _type === 'unlimited_2m') {
+    nextDate.setMonth(now.getMonth() + 2);
+  } else {
+    nextDate.setMonth(now.getMonth() + 1);
+  }
+  nextDate.setDate(1);
+  nextDate.setHours(0, 0, 0, 0);
+  return nextDate;
 }
 
 /**
@@ -269,13 +281,23 @@ export async function POST(req: NextRequest) {
     // Handle successful payment completion events only
     if (payload.type === "checkout.completed" || payload.type === "order.created" || payload.type === "subscription.created") {
       const { data } = payload;
+
+      // DEBUG: Log full payload structure for troubleshooting
+      console.log("[Polar Webhook] Full payload data keys:", Object.keys(data));
+      console.log("[Polar Webhook] Payload data (first 800 chars):", JSON.stringify(data).substring(0, 800));
       
-      // Safely extract productId and customerId from different event payloads
-      // checkout.completed: product_id, customer_id
-      // subscription.created: product.id, customer.id
-      // order.created: product_id, customer_id
-      const productId = (data as any).product_id || (data as any).product?.id;
+      // Safely extract productId — try all known Polar payload structures
+      const productId =
+        (data as any).product_id ||
+        (data as any).product?.id ||
+        (data as any).items?.[0]?.product_id ||
+        (data as any).items?.[0]?.product?.id ||
+        (data as any).products?.[0]?.id ||
+        (data as any).line_items?.[0]?.product_id;
+
       const customerId = (data as any).customer_id || (data as any).customer?.id;
+
+      console.log("[Polar Webhook] Extracted productId:", productId, "customerId:", customerId);
       const subscriptionId = (data as any).subscription_id || (data as any).id; // For subscription events, id is subscription_id
 
       console.log(`[Polar Webhook] Processing product ID: ${productId}`);
@@ -288,15 +310,57 @@ export async function POST(req: NextRequest) {
       const planConfig = getPlanConfig(productId);
 
       if (!planConfig) {
+        // Last resort: try to match by checking if this looks like the unlimited product
+        // by checking the product name in the payload
+        const productName = (data as any).product?.name?.toLowerCase() ?? '';
+        const isUnlimitedByName = productName.includes('unlimited');
+
         console.error("[Polar Webhook] Unknown product ID:", productId);
+        console.error("[Polar Webhook] Product name from payload:", productName);
+        console.error("[Polar Webhook] POLAR_PRODUCT_UNLIMITED_2M env:", env.POLAR_PRODUCT_UNLIMITED_2M);
+        console.error("[Polar Webhook] Product ID matches unlimited env?", productId === env.POLAR_PRODUCT_UNLIMITED_2M);
         console.error("[Polar Webhook] Available products:", {
             small: env.POLAR_PRODUCT_SMALL,
             medium: env.POLAR_PRODUCT_MEDIUM,
             large: env.POLAR_PRODUCT_LARGE,
             topup5k: env.POLAR_CREDITS_5000,
             topup20k: env.POLAR_CREDITS_20000,
-            topup45k: env.POLAR_CREDITS_45000
+            topup45k: env.POLAR_CREDITS_45000,
+            unlimited2m: env.POLAR_PRODUCT_UNLIMITED_2M,
         });
+
+        // Fallback: if product name contains "unlimited", treat as unlimited plan
+        if (isUnlimitedByName) {
+          console.log("[Polar Webhook] ⚠️ Falling back to unlimited plan by product name match");
+          // Process as unlimited plan
+          const clerkIdFallback =
+            data.customer_metadata?.clerkId ||
+            data.metadata?.clerkId ||
+            (data as any).checkout?.metadata?.clerkId;
+
+          if (clerkIdFallback) {
+            const now = new Date();
+            const twoMonths = new Date(now);
+            twoMonths.setMonth(now.getMonth() + 2);
+            twoMonths.setDate(1);
+            twoMonths.setHours(0, 0, 0, 0);
+
+            await db.user.update({
+              where: { clerkId: clerkIdFallback },
+              data: {
+                credits: 999999999,
+                subscriptionPlan: 'unlimited',
+                subscriptionType: 'monthly',
+                maxWordsPerRequest: 2000,
+                nextResetDate: twoMonths,
+                polarCustomerId: (data as any).customer_id || (data as any).customer?.id || undefined,
+              },
+            });
+            console.log("[Polar Webhook] ✅ Unlimited plan granted via name fallback for:", clerkIdFallback);
+            return NextResponse.json({ success: true, message: "Unlimited plan granted via fallback" });
+          }
+        }
+
         return NextResponse.json(
           { error: "Unknown product" },
           { status: 400 }
@@ -349,8 +413,9 @@ export async function POST(req: NextRequest) {
           });
         } else {
           // For subscriptions: SET credits (replace old value) and update plan
-          const shouldSetResetDate = planConfig.type === 'annual';
-          const nextReset = shouldSetResetDate ? getNextResetDate(planConfig.type) : null;
+          // unlimited plan always gets a 2-month reset date; annual gets 1-month; monthly gets null
+          const shouldSetResetDate = planConfig.type === 'annual' || planConfig.plan === 'unlimited';
+          const nextReset = shouldSetResetDate ? getNextResetDate(planConfig.type, planConfig.plan) : null;
           
           const user = await db.user.update({
             where: { clerkId },
