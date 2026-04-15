@@ -129,7 +129,7 @@ export default function YearlyDiscountBanner() {
               Only $150
             </span>
             <span className="hidden sm:inline text-white/40">·</span>
-            <span className="hidden sm:inline text-white/60 text-xs font-medium">One-time · No subscription</span>
+            <span className="hidden sm:inline text-white/60 text-xs font-medium">Billed every 2 months · Cancel anytime</span>
           </p>
 
           <span className="hidden sm:block h-4 w-px bg-white/10 flex-shrink-0" />

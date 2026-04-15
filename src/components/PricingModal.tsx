@@ -5,6 +5,7 @@ import { X, Loader2, ShieldCheck, Flame } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import ReferralCodeStep from "~/components/ReferralCodeStep";
+import UnlimitedCard from "~/components/pricing/UnlimitedCard";
 
 interface PricingModalProps {
   isOpen: boolean;
@@ -130,6 +131,8 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
   // Referral code state — must be declared before any early returns
   // showRefStep: controls the ReferralCodeStep overlay before checkout
   const [showRefStep, setShowRefStep] = useState(false);
+  // Spots data — same source as pricing page and banners
+  const [spots, setSpots] = useState<{ taken: number; max: number; remaining: number; isFull: boolean } | null>(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -165,6 +168,18 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
           .catch(console.error)
           .finally(() => setLoading(false));
       }
+      // Fetch spots in parallel — same API as pricing page and banners
+      fetch("/api/polar/unlimited-spots")
+        .then(r => r.json())
+        .then((d: { taken?: number; max?: number; remaining?: number; isFull?: boolean }) => {
+          setSpots({
+            taken: d.taken ?? 67,
+            max: d.max ?? 200,
+            remaining: d.remaining ?? 133,
+            isFull: d.isFull ?? false,
+          });
+        })
+        .catch(() => setSpots({ taken: 67, max: 200, remaining: 133, isFull: false }));
     } else {
       setIsVisible(false);
     }
@@ -251,7 +266,7 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
       </button>
 
       <div className="min-h-screen flex flex-col items-center justify-start px-4 pt-10 pb-12 sm:justify-center sm:pt-12">
-        <div className={`w-full max-w-sm transition-all duration-500 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}>
+        <div className={`w-full transition-all duration-500 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"} ${ultraPlan?.key === 'unlimited_2m' ? 'max-w-3xl' : 'max-w-sm'}`}>
 
           {/* ── HEADLINE ── */}
           <div className="text-center mb-5">
@@ -283,7 +298,7 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
               for 2 Months
             </h1>
             <p className="text-[#5e3d2a]/70 text-sm leading-relaxed max-w-xs mx-auto">
-              One-time $150 — no subscription, no word caps, no daily limits. 133 spots left out of 200.
+              $150 every 2 months — unlimited words, no daily limits. Only 133 of 200 spots left.
             </p>
           </div>
 
@@ -340,6 +355,16 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
             </div>
           ) : !ultraPlan ? (
             <p className="text-center text-sm text-red-600 py-6">Unable to load plan. Please try again.</p>
+          ) : ultraPlan.key === 'unlimited_2m' && activeOption?.id ? (
+            /* ── UNLIMITED PLAN: use the same dark gold card from the pricing page ── */
+            <div className="w-full -mx-2 sm:mx-0">
+              <UnlimitedCard
+                productId={activeOption.id}
+                isTeamMember={false}
+                spots={spots}
+                compact
+              />
+            </div>
           ) : (
             <div className="relative flex flex-col bg-white border border-[#d4b896] shadow-lg hover:shadow-xl overflow-hidden rounded-2xl p-8 w-full">
 
@@ -357,12 +382,10 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
               )}
 
               <div className="flex flex-1 flex-col w-full">
-                {/* Plan name */}
                 <h4 className="text-xl sm:text-2xl font-semibold tracking-tight mb-6 text-gray-900">
                   {ultraPlan.name}
                 </h4>
 
-                {/* Price — identical logic to PolarPricing */}
                 <div className="flex flex-wrap items-baseline gap-1.5 sm:gap-2 text-gray-900">
                   {activeCycle === "yearly" && ultraPlan.yearly?.priceAmount ? (
                     <>
@@ -396,7 +419,6 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
                   <p className="mt-2 text-[13px] text-gray-400">Billed monthly</p>
                 )}
 
-                {/* CTA — same as pricing page non-popular card */}
                 <div className="mt-8 flex flex-col gap-4">
                   <button
                     onClick={onSubscribe}
@@ -410,10 +432,8 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
                   <p className="text-center text-xs text-gray-400">No hidden fees · Cancel anytime · Secure checkout</p>
                 </div>
 
-                {/* Headline */}
                 <p className="mt-6 text-sm leading-relaxed text-gray-500">{headline}</p>
 
-                {/* Features — same as pricing page */}
                 <ul className="mt-6 space-y-4 text-sm text-gray-600">
                   {features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-2">

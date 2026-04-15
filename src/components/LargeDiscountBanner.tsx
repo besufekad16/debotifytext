@@ -119,7 +119,7 @@ export default function LargeDiscountBanner() {
           Unlimited Words for 2 Full Months
         </h2>
         <p className="text-base sm:text-lg text-white/60 mb-10 max-w-xl mx-auto font-medium">
-          One-time purchase. No subscription. No word caps. No daily limits.
+          Billed every 2 months. No word caps. No daily limits.
           Just pure, unlimited humanization — for 60 days straight.
         </p>
 
@@ -147,8 +147,8 @@ export default function LargeDiscountBanner() {
                 $150
               </span>
             </div>
-            <p className="text-white/50 text-sm mb-1">one-time · no subscription · no renewal</p>
-            <p className="text-amber-400/80 text-xs font-semibold mb-8">Valid for 2 months from purchase date</p>
+            <p className="text-white/50 text-sm mb-1">billed every 2 months · cancel anytime</p>
+            <p className="text-amber-400/80 text-xs font-semibold mb-8">Unlimited access for 2 full months per cycle</p>
 
             {/* Spots progress */}
             <div className="mb-8 text-left">
@@ -223,7 +223,7 @@ export default function LargeDiscountBanner() {
               }}
             >
               <Zap className="h-5 w-5" />
-              Claim Your Spot — $150 One-Time
+              Claim Your Spot — $150 / 2 Months
               <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
 

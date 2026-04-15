@@ -17,12 +17,13 @@ interface Props {
   productId: string;
   isTeamMember?: boolean;
   spots?: SpotsData | null;
+  compact?: boolean; // compact mode for use inside modals
 }
 
 const FEATURES = [
   "Unlimited words for 2 full months",
   "Up to 2,000 words per request",
-  "One-time purchase — no subscription",
+  "Billed every 2 months — cancel anytime",
   "Priority processing speed",
   "Advanced Humanization Engine",
   "All humanization presets included",
@@ -32,7 +33,7 @@ const FEATURES = [
   "No daily limits, no caps",
 ];
 
-export default function UnlimitedCard({ productId, isTeamMember = false, spots }: Props) {
+export default function UnlimitedCard({ productId, isTeamMember = false, spots, compact = false }: Props) {
   const { isSignedIn } = useUser();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -116,7 +117,7 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots }
         }
       `}</style>
 
-      <div className="mx-auto max-w-6xl w-full px-2 sm:px-0">
+      <div className={compact ? "w-full" : "mx-auto max-w-6xl w-full px-2 sm:px-0"}>
         {/* Outer wrapper — adds top margin for the badge */}
         <div className="relative mt-6 pt-5">
 
@@ -191,7 +192,7 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots }
                     </div>
                   </div>
                   <p className="text-white/60 text-sm max-w-md leading-relaxed">
-                    One-time purchase. Unlimited humanization for 2 full months — no word caps, no daily limits, no renewal.
+                    Billed every 2 months. Unlimited humanization — no word caps, no daily limits. Cancel anytime.
                   </p>
                 </div>
 
@@ -200,8 +201,8 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots }
                   <div className="flex items-baseline gap-1 sm:justify-end">
                     <span className="text-5xl sm:text-6xl font-black text-white leading-none">$150</span>
                   </div>
-                  <p className="text-white/50 text-xs mt-1">one-time · no subscription</p>
-                  <p className="text-[#D4A855] text-xs font-medium mt-0.5">Valid 2 months from purchase</p>
+                  <p className="text-white/50 text-xs mt-1">billed every 2 months · cancel anytime</p>
+                  <p className="text-[#D4A855] text-xs font-medium mt-0.5">Unlimited access for 2 months per cycle</p>
                 </div>
               </div>
 
@@ -282,7 +283,7 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots }
                     </button>
                   )}
                   <p className="text-center text-[11px] text-white/40">
-                    No hidden fees · Secure checkout · One-time only
+                    No hidden fees · Cancel anytime · Billed every 2 months
                   </p>
                 </div>
               </div>

@@ -76,7 +76,7 @@ const UI_DESCRIPTIONS: Record<string, string> = {
 
 • Unlimited words for 2 months
 • Up to 2,000 words per request
-• One-time purchase — no subscription
+• Billed every 2 months — cancel anytime
 • Priority processing
 • Advanced Humanization Engine
 • Natural human tone & style
@@ -86,7 +86,7 @@ const UI_DESCRIPTIONS: Record<string, string> = {
 • API access for integrations
 • Dedicated support
 
-**Valid for:** 2 months from purchase date`,
+**Billing:** Every 2 months · Cancel anytime`,
 };
 
 export async function fetchPolarProductsFromEnv(): Promise<PolarPricingTier[]> {
@@ -106,7 +106,7 @@ export async function fetchPolarProductsFromEnv(): Promise<PolarPricingTier[]> {
       monthlyId: env.POLAR_PRODUCT_LARGE,
       yearlyId: env.POLAR_PRODUCT_YEARLY_LARGE,
     },
-    // Unlimited 2-Month plan — one-time purchase, no yearly variant
+    // Unlimited 2-Month plan — recurring every 2 months
     ...(env.POLAR_PRODUCT_UNLIMITED_2M ? [{
       key: "unlimited_2m",
       monthlyId: env.POLAR_PRODUCT_UNLIMITED_2M,
