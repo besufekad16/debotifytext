@@ -148,16 +148,17 @@ function computePlanSavings(plan: Product): number {
 
 interface PolarPricingProps {
   isTeamMember?: boolean;
+  defaultBillingCycle?: BillingCycle;
 }
 
-export default function PolarPricing({ isTeamMember = false }: PolarPricingProps) {
+export default function PolarPricing({ isTeamMember = false, defaultBillingCycle }: PolarPricingProps) {
   const { isSignedIn } = useUser();
   const router = useRouter();
   const [products, setProducts] = useState<Product[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [ctaLoadingId, setCtaLoadingId] = useState<string | null>(null);
-  const [billingCycle, setBillingCycle] = useState<BillingCycle>("unlimited");
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>(defaultBillingCycle ?? "unlimited");
   // Referral code step state
   const [pendingProductId, setPendingProductId] = useState<string | null>(null);
   // Unlimited spots counter
@@ -252,15 +253,23 @@ export default function PolarPricing({ isTeamMember = false }: PolarPricingProps
 
   useEffect(() => {
     if (!loading && products) {
-      if (hasUnlimitedPlan && !hasUserChangedBilling) {
-        setBillingCycle("unlimited");
-      } else if (!hasYearlyPlans && billingCycle === "yearly") {
-        setBillingCycle("monthly");
-      } else if (hasYearlyPlans && billingCycle === "monthly" && !hasUserChangedBilling) {
-        setBillingCycle("yearly");
+      // Only auto-switch if no defaultBillingCycle was provided
+      if (!defaultBillingCycle) {
+        if (hasUnlimitedPlan && !hasUserChangedBilling) {
+          setBillingCycle("unlimited");
+        } else if (!hasYearlyPlans && billingCycle === "yearly") {
+          setBillingCycle("monthly");
+        } else if (hasYearlyPlans && billingCycle === "monthly" && !hasUserChangedBilling) {
+          setBillingCycle("yearly");
+        }
+      } else {
+        // If defaultBillingCycle is provided, only switch if the current cycle is invalid
+        if (!hasYearlyPlans && billingCycle === "yearly") {
+          setBillingCycle("monthly");
+        }
       }
     }
-  }, [hasYearlyPlans, hasUnlimitedPlan, billingCycle, products, loading, hasUserChangedBilling]);
+  }, [hasYearlyPlans, hasUnlimitedPlan, billingCycle, products, loading, hasUserChangedBilling, defaultBillingCycle]);
 
   const maxSavings = useMemo(() => {
     if (!products) return 0;
@@ -393,7 +402,7 @@ export default function PolarPricing({ isTeamMember = false }: PolarPricingProps
                   : "bg-white border-gray-200 shadow-lg hover:shadow-xl overflow-hidden"
               }`}
               style={isPopular ? {
-                background: 'linear-gradient(135deg, rgba(139, 111, 71, 0.35) 0%, rgba(109, 86, 53, 0.45) 50%, rgba(90, 69, 41, 0.35) 100%)',
+                background: 'linear-gradient(135deg, rgba(139, 111, 71, 0.45) 0%, rgba(109, 86, 53, 0.55) 50%, rgba(90, 69, 41, 0.45) 100%)',
                 backdropFilter: 'blur(60px) saturate(200%)',
                 WebkitBackdropFilter: 'blur(60px) saturate(200%)',
                 boxShadow: '0 12px 48px 0 rgba(139, 111, 71, 0.6), inset 0 2px 0 0 rgba(255, 255, 255, 0.5), inset 0 -2px 0 0 rgba(139, 111, 71, 0.4), 0 0 60px rgba(139, 111, 71, 0.4)'

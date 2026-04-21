@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { ArrowRight, Flame, Infinity as InfinityIcon, Zap } from "lucide-react";
 import Link from "next/link";
 
-const DEADLINE_KEY = "banner_deadline_v4";
+const DEADLINE_KEY = "banner_deadline_v5";
 const BASE_SPOTS_TAKEN = 67;
 const MAX_SPOTS = 200;
 
@@ -144,7 +144,7 @@ export default function LargeDiscountBanner() {
                 background:"linear-gradient(135deg,#F5D78A 0%,#E8B84B 40%,#C8922A 100%)",
                 WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text",
               }}>
-                $150
+                $100
               </span>
             </div>
             <p className="text-white/50 text-sm mb-1">billed every 2 months · cancel anytime</p>
@@ -223,7 +223,7 @@ export default function LargeDiscountBanner() {
               }}
             >
               <Zap className="h-5 w-5" />
-              Claim Your Spot — $150 / 2 Months
+              Claim Your Spot — $100 / 2 Months
               <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
 

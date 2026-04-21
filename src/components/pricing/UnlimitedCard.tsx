@@ -199,7 +199,7 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots, 
                 {/* Right: price */}
                 <div className="sm:text-right flex-shrink-0">
                   <div className="flex items-baseline gap-1 sm:justify-end">
-                    <span className="text-5xl sm:text-6xl font-black text-white leading-none">$150</span>
+                    <span className="text-5xl sm:text-6xl font-black text-white leading-none">$100</span>
                   </div>
                   <p className="text-white/50 text-xs mt-1">billed every 2 months · cancel anytime</p>
                   <p className="text-[#D4A855] text-xs font-medium mt-0.5">Unlimited access for 2 months per cycle</p>
@@ -278,7 +278,7 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots, 
                       {loading ? (
                         <><Loader2 className="h-4 w-4 animate-spin" /> Processing…</>
                       ) : (
-                        <><Zap className="h-4 w-4" /> Get Unlimited — $150</>
+                        <><Zap className="h-4 w-4" /> Get Unlimited — $100</>
                       )}
                     </button>
                   )}

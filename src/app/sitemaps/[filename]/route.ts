@@ -9,8 +9,8 @@ export async function GET(
   try {
     const { filename } = await params;
     
-    // Read the sitemap file from public/sitemaps directory
-    const sitemapPath = path.join(process.cwd(), 'public', 'sitemaps', filename);
+    // Read the sitemap file from public directory
+    const sitemapPath = path.join(process.cwd(), 'public', filename);
     
     if (!fs.existsSync(sitemapPath)) {
       return new NextResponse('Sitemap not found', { status: 404 });

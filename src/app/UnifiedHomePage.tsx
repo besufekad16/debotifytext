@@ -47,6 +47,8 @@ import { usePricingModal } from "~/hooks/usePricingModal";
 import DetectorShowcase from "~/components/DetectorShowcase";
 import LargeDiscountBanner from "~/components/LargeDiscountBanner";
 import ResponsibleUseDisclaimer from "~/components/ResponsibleUseDisclaimer";
+import SocialProofNotification from "~/components/SocialProofNotification";
+import ExitIntentPopup from "~/components/ExitIntentPopup";
 
 const PRESETS = [
   { value: "default", label: "Default", description: "Standard humanization for all users", isPremium: false },
@@ -841,6 +843,12 @@ export default function UnifiedHomePage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-background overflow-x-hidden w-full scroll-smooth">
+      {/* Social Proof Notifications */}
+      <SocialProofNotification />
+      
+      {/* Exit Intent Popup */}
+      <ExitIntentPopup />
+      
       <ModernNavbar
         onHistoryClick={isSignedIn ? () => setHistoryOpen(true) : undefined}
         currentCredits={currentCredits}
@@ -1402,7 +1410,7 @@ export default function UnifiedHomePage() {
             </div>
 
             <div className="mt-12">
-              <PolarPricing isTeamMember={isTeamMember} />
+              <PolarPricing isTeamMember={isTeamMember} defaultBillingCycle="yearly" />
             </div>
 
             {subscriptionPlan && <TopUpSection />}

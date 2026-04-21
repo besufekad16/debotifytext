@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 60; // cache for 60 seconds
 
 const MAX_SPOTS = 200;
-const BASE_COUNT = 67; // pre-seeded count — starts as if 67 already purchased
+const BASE_COUNT = 186; // pre-seeded count — starts as if 186 already purchased
 
 export async function GET() {
   try {

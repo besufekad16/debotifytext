@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { ArrowRight, Flame, Clock, Infinity as InfinityIcon } from "lucide-react";
 import Link from "next/link";
 
-const DEADLINE_KEY = "banner_deadline_v4";
+const DEADLINE_KEY = "banner_deadline_v5";
 const BASE_SPOTS_TAKEN = 67;
 const MAX_SPOTS = 200;
 
@@ -126,7 +126,7 @@ export default function YearlyDiscountBanner() {
                 animation: "heartbeat-nav 1.6s ease-in-out infinite",
               }}
             >
-              Only $150
+              Only $100
             </span>
             <span className="hidden sm:inline text-white/40">·</span>
             <span className="hidden sm:inline text-white/60 text-xs font-medium">Billed every 2 months · Cancel anytime</span>

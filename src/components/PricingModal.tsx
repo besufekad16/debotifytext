@@ -298,7 +298,7 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
               for 2 Months
             </h1>
             <p className="text-[#5e3d2a]/70 text-sm leading-relaxed max-w-xs mx-auto">
-              $150 every 2 months — unlimited words, no daily limits. Only 133 of 200 spots left.
+              $100 every 2 months — unlimited words, no daily limits. Only 133 of 200 spots left.
             </p>
           </div>
 
