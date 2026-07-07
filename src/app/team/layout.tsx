@@ -1,15 +1,15 @@
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sign Up",
-  description: "Create a free HumanifyLab account to humanize AI text with monthly free word credits.",
+  title: "Team Management",
+  description: "Manage your HumanifyLab team members and shared credits.",
   robots: {
     index: false,
     follow: true,
   },
 };
 
-export default function SignUpLayout({
+export default function TeamLayout({
   children,
 }: {
   children: React.ReactNode;

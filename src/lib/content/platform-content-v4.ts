@@ -1,5 +1,5 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
-import { uniqueIdx } from '~/lib/content/content-utils';
+import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
 import { buildPageStrings, buildStats } from '~/lib/content/content-combinator';
 
 export interface PlatformV4PageData {
@@ -90,7 +90,7 @@ const FAQ_POOL: ((kw: string, plat: string) => { q: string; a: string }[])[] = [
 export function generatePlatformV4Content(entry: KeywordEntryV4): PlatformV4PageData {
   const { keyword, entity, seed } = entry;
   const platform = entity !== 'Platform' ? entity : 'Google Docs';
-  const capitalizedKeyword = keyword.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  const capitalizedKeyword = smartTitleCase(keyword);
   const combo = buildPageStrings(capitalizedKeyword, seed, entity, 'platform');
 
   const features = FEATURES_POOL[0]!.map(f => ({

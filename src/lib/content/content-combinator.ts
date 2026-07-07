@@ -1,4 +1,4 @@
-import { uniqueIdx } from '~/lib/content/content-utils';
+import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
 
 // ── Part pools ────────────────────────────────────────────────────────────────
 
@@ -130,10 +130,10 @@ const H1_FORMATS = [
   '{verb} {keyword} — {adverb}',
   '{keyword} — {verb} Every Detector {adverb}',
   'How to {verb} {keyword} {adverb}',
-  '{keyword}: The {adverb} Fix',
+  '{keyword}: The Fix That Works {adverb}',
   '{verb} {keyword} with 99.9% Success',
   '{keyword} — {verb} AI Flags {adverb}',
-  '{keyword}: {adverb} AI Detection Solution',
+  '{keyword}: AI Detection Solved {adverb}',
   'The Best Way to {verb} {keyword}',
   '{verb} {keyword} — Proven Results',
   '{keyword}: Zero AI Score {adverb}',
@@ -146,6 +146,152 @@ const H1_FORMATS = [
   '{verb} {keyword} — Trusted by 450,000+ Users',
   '{keyword}: Permanent Results {adverb}',
   '{verb} {keyword} — Zero Data Stored',
+];
+
+// ── Keyword-type-aware formats ────────────────────────────────────────────────
+// Keywords come in three grammatical shapes and each needs different phrasing:
+//   action   — verb phrases: "bypass turnitin ai detection", "humanize chatgpt text"
+//   question — "does turnitin detect chatgpt", "how to humanize ai text"
+//   noun     — tool/thing names: "chatgpt humanizer", "humanifylab vs undetectable ai"
+
+const ACTION_FIRST_WORDS = new Set([
+  'humanize', 'bypass', 'make', 'get', 'avoid', 'beat', 'pass', 'remove', 'fix',
+  'convert', 'rewrite', 'reduce', 'trick', 'fool', 'escape', 'evade', 'defeat',
+  'lower', 'clear', 'clean', 'transform', 'turn', 'improve', 'polish', 'disguise',
+  'mask', 'hide', 'stop', 'prevent', 'skip', 'cheat', 'outsmart', 'dodge',
+]);
+
+const QUESTION_STARTS = [
+  'how ', 'what ', 'why ', 'can ', 'does ', 'is ', 'are ', 'do ', 'will ',
+  'which ', 'where ', 'when ', 'should ',
+];
+
+export function classifyKeyword(keyword: string): 'action' | 'question' | 'noun' {
+  const k = keyword.toLowerCase().trim();
+  for (const q of QUESTION_STARTS) {
+    if (k.startsWith(q)) return 'question';
+  }
+  const first = k.split(' ')[0] ?? '';
+  if (ACTION_FIRST_WORDS.has(first)) return 'action';
+  return 'noun';
+}
+
+// Action keywords ARE the verb — no extra verb is prepended.
+const ACTION_TITLE_FORMATS = [
+  '{keyword} {adverb} {suffix}',
+  'How to {keyword} {adverb} {suffix}',
+  '{keyword} — 99.9% Success Rate {suffix}',
+  '{keyword}: Works {adverb} {suffix}',
+  '{keyword} — Free & Instant {suffix}',
+  'The Best Way to {keyword} in 2026 {suffix}',
+  '{keyword} — No Sign-up, No Card {suffix}',
+  '{keyword}: Meaning Preserved {suffix}',
+  '{keyword} — Verified Against Live Detectors {suffix}',
+  '{keyword}: 0% AI Score {adverb} {suffix}',
+  '{keyword} — Deep Transformation, Not Paraphrasing {suffix}',
+  '{keyword} in Under 10 Seconds {suffix}',
+];
+
+const ACTION_H1_FORMATS = [
+  '{keyword} — {adverb}',
+  'How to {keyword} {adverb}',
+  '{keyword} with a 99.9% Success Rate',
+  '{keyword} — Free, Fast & Reliable',
+  '{keyword}: Verified Results {adverb}',
+  '{keyword} — Meaning Preserved, AI Signature Removed',
+  '{keyword}: Zero AI Score {adverb}',
+  'The Proven Way to {keyword}',
+  '{keyword} — No Sign-up Needed',
+  '{keyword} in Under 10 Seconds',
+];
+
+const QUESTION_TITLE_FORMATS = [
+  '{keyword}? Here Is the Answer {suffix}',
+  '{keyword} — Answered for 2026 {suffix}',
+  '{keyword}: Everything You Need to Know {suffix}',
+  '{keyword} — Explained Simply {suffix}',
+  '{keyword}: Complete 2026 Guide {suffix}',
+  '{keyword} — The Full Answer {suffix}',
+  '{keyword}? What the Tests Show {suffix}',
+  '{keyword}: Answered + the Fix {suffix}',
+  '{keyword} — Guide & Free Tool {suffix}',
+  '{keyword}: Step-by-Step Guide {suffix}',
+];
+
+const QUESTION_H1_FORMATS = [
+  '{keyword}? Here Is the Answer',
+  '{keyword} — Answered for 2026',
+  '{keyword}: Everything You Need to Know',
+  '{keyword} — Explained Simply',
+  '{keyword}: The Complete Guide',
+  '{keyword}? What Our Tests Show',
+  '{keyword} — The Full Answer (and the Fix)',
+  '{keyword}: Answered Step by Step',
+];
+
+const NOUN_TITLE_FORMATS = [
+  '{keyword} — Free AI Humanizer {suffix}',
+  '{keyword}: 99.9% Undetectable Results {suffix}',
+  'The Best {keyword} in 2026 {suffix}',
+  '{keyword} — Pass Every AI Detector {suffix}',
+  '{keyword}: Humanize AI Text {adverb} {suffix}',
+  '{keyword} — Instant, Accurate & Free {suffix}',
+  '{keyword} That Actually Works in 2026 {suffix}',
+  '{keyword}: Free Plan, Instant Results {suffix}',
+  'Try {keyword} — No Sign-up Needed {suffix}',
+  '{keyword}: Meaning Preserved, AI Removed {suffix}',
+];
+
+const NOUN_H1_FORMATS = [
+  '{keyword} — Humanize AI Text {adverb}',
+  'The Best {keyword} for 2026',
+  '{keyword}: Pass Every AI Detector',
+  '{keyword} — Free, Fast & Undetectable',
+  '{keyword}: 99.9% Human Score {adverb}',
+  '{keyword} That Actually Works',
+  '{keyword} — Instant Results, Meaning Preserved',
+  '{keyword}: Undetectable AI Writing {adverb}',
+];
+
+const QUESTION_DESC_OPENERS: ((kw: string) => string)[] = [
+  (kw) => `${kw}? Here is the clear answer.`,
+  (kw) => `${kw}? We tested it so you don't have to.`,
+  (kw) => `Wondering ${kw.toLowerCase()}? Here is what actually happens.`,
+  (kw) => `${kw} — answered with real test results.`,
+  (kw) => `The short answer to "${kw.toLowerCase()}" — plus the fix.`,
+  (kw) => `${kw}? Get the full answer and the solution.`,
+];
+
+const NOUN_DESC_OPENERS: ((kw: string) => string)[] = [
+  (kw) => `Looking for ${kw.toLowerCase().startsWith('the ') ? kw.toLowerCase() : 'a ' + kw.toLowerCase()}? HumanifyLab delivers.`,
+  (kw) => `${kw} — powered by HumanifyLab.`,
+  (kw) => `HumanifyLab is the ${kw.toLowerCase()} that actually works.`,
+  (kw) => `${kw}: instant results, meaning preserved.`,
+  (kw) => `The most reliable ${kw.toLowerCase()} in 2026.`,
+  (kw) => `${kw} — free plan, no sign-up, no watermark.`,
+];
+
+const QUESTION_HERO_A: ((kw: string) => string)[] = [
+  (kw) => `${kw}? HumanifyLab has tested this against live detection systems — here is what you need to know.`,
+  (kw) => `The question "${kw.toLowerCase()}" comes up constantly. We ran the tests and built the fix.`,
+  (kw) => `${kw}? The answer matters if you use AI to write. Here is the complete picture for 2026.`,
+  (kw) => `We test AI detectors weekly, so we can answer "${kw.toLowerCase()}" with real data — not guesses.`,
+];
+
+const NOUN_HERO_A: ((kw: string) => string)[] = [
+  (kw) => `HumanifyLab is the most reliable ${kw.toLowerCase()} available in 2026.`,
+  (kw) => `Over 450,000 users trust HumanifyLab as their ${kw.toLowerCase()}.`,
+  (kw) => `HumanifyLab delivers what every ${kw.toLowerCase()} promises — verified 99.9% bypass rate across all major detectors.`,
+  (kw) => `As a ${kw.toLowerCase()}, HumanifyLab targets perplexity, burstiness, and semantic entropy — the exact signals detectors measure.`,
+];
+
+const TYPE_NEUTRAL_HERO_B: ((kw: string) => string)[] = [
+  () => `Paste your content, click Humanize, and get a 0% AI score in under 10 seconds.`,
+  () => `Your original meaning is preserved 100% — only the AI signature is removed.`,
+  () => `Passes Turnitin, GPTZero, Originality.AI, Copyleaks, and more.`,
+  () => `Free plan handles up to 500 words per run — no sign-up, no credit card.`,
+  () => `Academic, Professional, and Casual tone presets are included.`,
+  () => `Works on any device — desktop, tablet, or mobile, with zero data stored.`,
 ];
 
 const HERO_PARTS_A: ((kw: string) => string)[] = [
@@ -535,24 +681,33 @@ export function buildPageStrings(
   finalCtaTitle: string;
   finalCtaSubtitle: string;
 } {
-  const verb = pick(TITLE_VERBS, seed, keyword, 0);
   const adverb = pick(TITLE_ADVERBS, seed, keyword, 1);
   const suffix = pick(TITLE_SUFFIXES, seed, keyword, 2);
-  const titleFormat = pick(TITLE_FORMATS, seed, keyword, 3);
-  const h1Format = pick(H1_FORMATS, seed, keyword, 4);
 
-  const vars = { verb, adverb, suffix, keyword };
+  // Route to grammatically correct format pools by keyword shape
+  const kwType = classifyKeyword(keyword);
+  const titlePool = kwType === 'action' ? ACTION_TITLE_FORMATS : kwType === 'question' ? QUESTION_TITLE_FORMATS : NOUN_TITLE_FORMATS;
+  const h1Pool = kwType === 'action' ? ACTION_H1_FORMATS : kwType === 'question' ? QUESTION_H1_FORMATS : NOUN_H1_FORMATS;
+  const titleFormat = pick(titlePool, seed, keyword, 3);
+  const h1Format = pick(h1Pool, seed, keyword, 4);
 
-  const metaTitle = fillTemplate(titleFormat, vars);
-  const h1 = fillTemplate(h1Format, { verb, adverb, keyword });
+  // Correct brand/acronym casing wherever the keyword appears in copy
+  const displayKeyword = smartTitleCase(keyword);
+  const vars = { adverb, suffix, keyword: displayKeyword };
 
-  const opener = pick(DESC_OPENERS, seed, keyword, 5)(keyword);
+  const metaTitle = fillTemplate(titleFormat, vars).replace(/\s{2,}/g, ' ').trim();
+  const h1 = fillTemplate(h1Format, { adverb, keyword: displayKeyword }).replace(/\s{2,}/g, ' ').trim();
+
+  const openerPool = kwType === 'action' ? DESC_OPENERS : kwType === 'question' ? QUESTION_DESC_OPENERS : NOUN_DESC_OPENERS;
+  const opener = pick(openerPool, seed, keyword, 5)(displayKeyword);
   const stat = pick(DESC_STATS, seed, keyword, 6);
   const closer = pick(DESC_CLOSERS, seed, keyword, 7);
   const metaDescription = `${opener} ${stat} ${closer}`;
 
-  const heroA = pick(HERO_PARTS_A, seed, keyword, 8)(keyword);
-  const heroB = pick(HERO_PARTS_B, seed, keyword, 9)(keyword);
+  const heroAPool = kwType === 'action' ? HERO_PARTS_A : kwType === 'question' ? QUESTION_HERO_A : NOUN_HERO_A;
+  const heroBPool = kwType === 'action' ? HERO_PARTS_B : TYPE_NEUTRAL_HERO_B;
+  const heroA = pick(heroAPool, seed, keyword, 8)(displayKeyword);
+  const heroB = pick(heroBPool, seed, keyword, 9)(displayKeyword);
   const heroSubtitle = `${heroA} ${heroB}`;
 
   const badgePrefix = pick(BADGE_PREFIXES, seed, keyword, 10);
@@ -560,10 +715,14 @@ export function buildPageStrings(
   const badge = `${badgePrefix} ${badgeSuffix}`;
 
   const faqTitleTemplate = pick(FAQ_TITLE_FORMATS, seed, keyword, 12);
-  const faqTitle = fillTemplate(faqTitleTemplate, { keyword });
+  const faqTitle = fillTemplate(faqTitleTemplate, { keyword: displayKeyword });
 
-  const ctaTitleTemplate = pick(CTA_TITLE_FORMATS, seed, keyword, 13);
-  const finalCtaTitle = fillTemplate(ctaTitleTemplate, { keyword });
+  // Question keywords read badly inside CTA templates — use neutral CTAs there
+  const ctaPool = kwType === 'question'
+    ? CTA_TITLE_FORMATS.filter((t) => !t.includes('{keyword}'))
+    : CTA_TITLE_FORMATS;
+  const ctaTitleTemplate = pick(ctaPool, seed, keyword, 13);
+  const finalCtaTitle = fillTemplate(ctaTitleTemplate, { keyword: displayKeyword });
 
   const finalCtaSubtitle = pick(CTA_SUBTITLE_FORMATS, seed, keyword, 14);
 

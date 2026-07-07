@@ -1,5 +1,5 @@
 import type { KeywordEntry } from '~/lib/pseo-data';
-import { uniqueIdx, uniqueNum } from '~/lib/content/content-utils';
+import { uniqueIdx, uniqueNum, smartTitleCase } from '~/lib/content/content-utils';
 import { buildPageStrings, buildFaqs, buildStats, buildSteps, buildFeaturePoints } from '~/lib/content/content-combinator';
 
 export interface HumanizerPageData {
@@ -181,7 +181,7 @@ export function generateHumanizerContent(entry: KeywordEntry): HumanizerPageData
   const { keyword, entity, seed } = entry;
   const toolMeta = TOOL_META[entity] ?? { displayName: 'AI', description: 'AI-generated content' };
   const toolName = toolMeta.displayName;
-  const capitalizedKeyword = keyword.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  const capitalizedKeyword = smartTitleCase(keyword);
 
   const combo = buildPageStrings(capitalizedKeyword, seed, entity, 'humanizer');
   const features = FEATURES_POOL[uniqueIdx(seed, keyword, FEATURES_POOL.length, 4)]!;

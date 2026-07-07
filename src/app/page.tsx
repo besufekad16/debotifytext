@@ -2,104 +2,22 @@ import { type Metadata } from "next";
 import UnifiedHomePage from "./UnifiedHomePage";
 
 export const metadata: Metadata = {
-  title: "Free AI Humanizer for Students & Essays | Bypass Turnitin, GPTZero, Originality.AI | HumanifyLab",
-  description: "Best free AI humanizer for students! Bypass Turnitin, GPTZero, Originality.AI, ZeroGPT & all AI detectors. Perfect for essays, assignments & academic writing. 99.9% undetectable. Transform ChatGPT text into human writing. Trusted by 450,000+ students. Try free now!",
+  title: "AI Humanizer — Free AI Text Humanizer to Bypass AI Detection | HumanifyLab",
+  description: "Humanize AI text in seconds. HumanifyLab rewrites ChatGPT, Claude & Gemini output into natural human writing that passes Turnitin, GPTZero, Originality.ai, ZeroGPT & Copyleaks. Free to try — no sign-up required.",
   keywords: [
-    // Brand Keywords
     "HumanifyLab",
-    "humanify",
-    "humanifylab humanizer",
-    "humanify lab",
-    "humanifylab.com",
-    
-    // Student-Focused Keywords (HIGH PRIORITY)
-    "ai humanizer for students",
-    "free ai humanizer for students",
-    "essay humanizer free",
-    "humanize essay",
-    "ai essay humanizer",
-    "student ai humanizer",
-    "college essay humanizer",
-    "assignment humanizer",
-    "homework ai humanizer",
-    "academic ai humanizer",
-    "chatgpt essay humanizer",
-    "humanize chatgpt for essay",
-    "make ai essay undetectable",
-    "undetectable essay writer",
-    
-    // Core AI Humanizer Keywords
-    "AI humanizer",
-    "humanize AI text",
-    "AI text humanizer",
+    "ai humanizer",
+    "humanize ai text",
     "free ai humanizer",
+    "ai text humanizer",
     "best ai humanizer",
     "undetectable ai humanizer",
-    "ai to human text converter",
-    "humanify ai text",
-    "humanify chatgpt",
-    "text humanizer",
-    "humanize text",
-    "ai to human text",
-    
-    // AI Detector Bypass Keywords (HIGH PRIORITY - STUDENT FOCUSED)
-    "bypass turnitin ai detection",
-    "bypass turnitin for students",
-    "how to bypass turnitin",
-    "bypass gptzero for essays",
-    "bypass originality ai",
-    "bypass gptzero",
-    "bypass zerogpt",
-    "bypass copyleaks",
-    "bypass winston ai",
-    "bypass content at scale",
-    "bypass writer ai detector",
-    "bypass sapling ai detector",
     "bypass ai detection",
-    "undetectable ai",
-    "undetectable ai writing",
-    "undetectable to turnitin",
-    "avoid ai detection in essays",
-    "beat ai detectors for students",
-    "trick turnitin ai detector",
-    "make chatgpt undetectable",
-    
-    // Specific AI Detector Tools
-    "originality ai bypass",
-    "gptzero bypass",
-    "turnitin ai bypass",
-    "zerogpt bypass",
-    "copyleaks ai bypass",
-    "winston ai bypass",
-    "content at scale detector bypass",
-    "quillbot ai detector bypass",
-    
-    // Use Case Keywords (STUDENT PRIORITY)
-    "essay humanizer",
-    "essay ai humanizer",
-    "research paper humanizer",
-    "thesis humanizer",
-    "dissertation humanizer",
-    "academic writing humanizer",
-    "college paper humanizer",
-    "university assignment humanizer",
-    "humanize chatgpt essay",
+    "bypass turnitin ai detection",
+    "bypass gptzero",
     "humanize chatgpt text",
-    "humanize gpt4 output",
-    "humanize claude ai",
-    "humanize gemini text",
-    "blog post humanizer",
-    "content humanizer",
-    
-    // Quality & Features
-    "natural writing",
-    "professional writing",
-    "authentic human writing",
-    "writing enhancement",
-    "paraphrase ai text",
-    "rewrite ai content",
-    "make ai text human",
-    "ai content converter"
+    "essay humanizer",
+    "ai to human text converter",
   ],
   authors: [{ name: "HumanifyLab" }],
   creator: "HumanifyLab",
@@ -113,8 +31,8 @@ export const metadata: Metadata = {
     canonical: "https://www.humanifylab.com",
   },
   openGraph: {
-    title: "Free AI Humanizer for Students | Bypass Turnitin & All AI Detectors",
-    description: "Best free AI humanizer for students & essays. Bypass Turnitin, GPTZero, Originality.AI. Perfect for academic writing. 99.9% undetectable. Trusted by 450,000+ students.",
+    title: "AI Humanizer — Free AI Text Humanizer to Bypass AI Detection",
+    description: "Rewrite ChatGPT, Claude & Gemini output into natural human writing that passes Turnitin, GPTZero, Originality.ai and every major AI detector. Free to try.",
     url: "https://www.humanifylab.com",
     siteName: "HumanifyLab",
     images: [
@@ -122,7 +40,7 @@ export const metadata: Metadata = {
         url: "https://www.humanifylab.com/forOpenGraph.png",
         width: 1200,
         height: 630,
-        alt: "HumanifyLab - Professional AI Humanizer"
+        alt: "HumanifyLab — Professional AI Humanizer"
       }
     ],
     locale: "en_US",
@@ -130,8 +48,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free AI Humanizer for Students | Bypass Turnitin & All AI Detectors",
-    description: "Best free AI humanizer for students & essays. Bypass Turnitin, GPTZero, Originality.AI. 99.9% undetectable. Perfect for academic writing. Try free!",
+    title: "AI Humanizer — Free AI Text Humanizer to Bypass AI Detection",
+    description: "Rewrite ChatGPT, Claude & Gemini output into natural human writing that passes Turnitin, GPTZero, Originality.ai and every major AI detector. Free to try.",
     images: ["https://www.humanifylab.com/forOpenGraph.png"],
     site: "@humanifylab",
     creator: "@humanifylab",
@@ -139,63 +57,117 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    nocache: true,
     googleBot: {
       index: true,
       follow: true,
-      noimageindex: false,
       "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-site-verification-code",
-  },
 };
 
 export default function HomePage() {
+  const homeSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://www.humanifylab.com/#software",
+        "name": "HumanifyLab AI Humanizer",
+        "description": "HumanifyLab is an AI text humanizer that transforms AI-generated content from ChatGPT, Claude and Gemini into natural, human-like writing that passes AI detection tools such as Turnitin, GPTZero and Originality.ai.",
+        "url": "https://www.humanifylab.com",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "description": "Free plan with monthly word credits; paid plans available."
+        },
+        "creator": { "@id": "https://www.humanifylab.com/#organization" },
+        "publisher": { "@id": "https://www.humanifylab.com/#organization" },
+        "featureList": [
+          "AI text humanization",
+          "Bypasses Turnitin, GPTZero, Originality.ai, ZeroGPT and Copyleaks",
+          "Multiple writing style presets",
+          "Meaning-preserving rewriting",
+          "Document upload (PDF, DOCX)",
+          "Fast processing under 10 seconds",
+          "History tracking"
+        ]
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.humanifylab.com/#webpage",
+        "url": "https://www.humanifylab.com",
+        "name": "AI Humanizer — Free AI Text Humanizer to Bypass AI Detection | HumanifyLab",
+        "isPartOf": { "@id": "https://www.humanifylab.com/#website" },
+        "about": { "@id": "https://www.humanifylab.com/#software" },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.humanifylab.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How is my data protected?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Enterprise-grade encryption protects your content in transit and at rest. We never train models on your data, and you maintain full control with instant deletion capabilities."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the humanization quality rate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "HumanifyLab utilizes advanced language models combined with sophisticated post-processing algorithms to transform AI text into natural, professional human writing while preserving semantic integrity and contextual meaning."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which file formats are supported?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The platform accepts direct text input or file uploads in .txt, .docx, and .pdf formats. Content is automatically extracted and processed for immediate humanization."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the credit system work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Credits operate on a 1:1 word ratio. Monthly allocations reset automatically, with instant top-up options available for paid subscriptions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are team and enterprise plans available?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Premium plans include collaborative workspaces, usage analytics, centralized billing, and dedicated support. Contact our team to configure your enterprise deployment."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What support channels are available?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Access support through in-app messaging or email at humanifylab1@gmail.com. Premium and Enterprise subscribers receive priority response with dedicated account management."
+            }
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "HumanifyLab",
-            "description": "AI Text Humanizer - Transform AI-generated text into natural, human-like writing with professional quality and authentic tone.",
-            "url": "https://www.humanifylab.com",
-            "applicationCategory": "BusinessApplication",
-            "operatingSystem": "Web",
-            "offers": {
-              "@type": "Offer",
-              "price": "5.99",
-              "priceCurrency": "USD",
-              "priceValidUntil": "2026-12-31",
-              "description": "Small pack with 3 credits"
-            },
-            "creator": {
-              "@type": "Organization",
-              "name": "HumanifyLab"
-            },
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "4.8",
-              "ratingCount": "1000",
-              "bestRating": "5",
-              "worstRating": "1"
-            },
-            "featureList": [
-              "AI Text Humanization",
-              "Smart Paraphrasing",
-              "Natural Writing Enhancement",
-              "Multiple Presets",
-              "Fast Processing",
-              "History Tracking"
-            ]
-          })
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeSchema) }}
       />
       <UnifiedHomePage />
     </>

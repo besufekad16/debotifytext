@@ -1,5 +1,5 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
-import { uniqueIdx } from '~/lib/content/content-utils';
+import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
 import { buildPageStrings, buildStats, buildSteps, buildFeaturePoints, buildFaqs } from '~/lib/content/content-combinator';
 
 export interface OutputPageData {
@@ -60,6 +60,7 @@ const HERO_SUBTITLES: ((tool: string) => string)[] = [
 
 export function generateOutputContent(entry: KeywordEntryV4): OutputPageData {
   const { keyword, entity, seed } = entry;
+  const displayKeyword = smartTitleCase(keyword);
   const aiTool = entity !== 'AI Tool' ? entity : 'AI';
   const combo = buildPageStrings(keyword, seed, entity, 'output');
 
@@ -69,9 +70,9 @@ export function generateOutputContent(entry: KeywordEntryV4): OutputPageData {
   const hsi = uniqueIdx(seed, keyword, HERO_SUBTITLES.length, 3);
 
   return {
-    metaTitle: META_TITLES[ti]!(keyword, aiTool),
-    metaDescription: META_DESCS[di]!(keyword, aiTool),
-    h1: H1S[hi]!(keyword, aiTool),
+    metaTitle: META_TITLES[ti]!(displayKeyword, aiTool),
+    metaDescription: META_DESCS[di]!(displayKeyword, aiTool),
+    h1: H1S[hi]!(displayKeyword, aiTool),
     heroSubtitle: HERO_SUBTITLES[hsi]!(aiTool),
     badge: combo.badge,
     aiTool,

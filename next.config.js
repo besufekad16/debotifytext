@@ -46,48 +46,41 @@ const config = {
     ],
   },
   
-  // Add headers for XML files
-  async headers() {
+  // Permanent redirects for retired paths — avoids indexed 404s
+  async redirects() {
     return [
+      { source: '/home', destination: '/', permanent: true },
+      { source: '/blog', destination: '/', permanent: true },
+      { source: '/blog/:path*', destination: '/', permanent: true },
+    ];
+  },
+
+  async headers() {
+    const xmlHeaders = [
+      { key: 'Content-Type', value: 'application/xml' },
+      { key: 'Cache-Control', value: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400' },
+    ];
+    return [
+      // Security headers sitewide
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+        ],
+      },
       {
         source: '/BingSiteAuth.xml',
         headers: [
-          {
-            key: 'Content-Type',
-            value: 'application/xml',
-          },
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=0, must-revalidate',
-          },
+          { key: 'Content-Type', value: 'application/xml' },
+          { key: 'Cache-Control', value: 'public, max-age=0, must-revalidate' },
         ],
       },
-      {
-        source: '/sitemap.xml',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'application/xml',
-          },
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
-          },
-        ],
-      },
-      {
-        source: '/sitemaps/:path*',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'application/xml',
-          },
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
-          },
-        ],
-      },
+      // Sitemap index + all cluster sitemaps (sitemap.xml, sitemap-*.xml)
+      { source: '/sitemap.xml', headers: xmlHeaders },
+      { source: '/:sitemap(sitemap-.*\\.xml)', headers: xmlHeaders },
+      { source: '/sitemaps/:path*', headers: xmlHeaders },
     ];
   },
 };

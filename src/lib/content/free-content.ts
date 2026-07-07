@@ -1,5 +1,5 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
-import { uniqueIdx } from '~/lib/content/content-utils';
+import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
 import { buildPageStrings, buildStats, buildSteps, buildFeaturePoints, buildFaqs } from '~/lib/content/content-combinator';
 
 export interface FreePageData {
@@ -76,6 +76,7 @@ const FAQ_POOL: ((kw: string) => { q: string; a: string }[])[] = [
 
 export function generateFreeContent(entry: KeywordEntryV4): FreePageData {
   const { keyword, seed } = entry;
+  const displayKeyword = smartTitleCase(keyword);
   const combo = buildPageStrings(keyword, seed, 'Free', 'free');
 
   const ti = uniqueIdx(seed, keyword, META_TITLES.length, 0);
@@ -85,10 +86,10 @@ export function generateFreeContent(entry: KeywordEntryV4): FreePageData {
   const fqi = uniqueIdx(seed, keyword, FAQ_POOL.length, 6);
 
   return {
-    metaTitle: META_TITLES[ti]!(keyword),
-    metaDescription: META_DESCS[di]!(keyword),
-    h1: H1S[hi]!(keyword),
-    heroSubtitle: HERO_SUBTITLES[hsi]!(keyword),
+    metaTitle: META_TITLES[ti]!(displayKeyword),
+    metaDescription: META_DESCS[di]!(displayKeyword),
+    h1: H1S[hi]!(displayKeyword),
+    heroSubtitle: HERO_SUBTITLES[hsi]!(displayKeyword),
     badge: combo.badge,
     features: buildFeaturePoints(keyword, seed, 'free'),
     steps: buildSteps(keyword, seed, 'free'),

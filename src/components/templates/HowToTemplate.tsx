@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { BookOpen, Clock, ArrowRight, CheckCircle2, Info, Lightbulb, AlertCircle, Star } from "lucide-react";
 import { Button } from "~/components/ui/button";
-import PageNavbar from "~/components/PageNavbar";
-import { SiteFooter } from "~/components/SiteFooter";
 import type { HowToPageData } from "~/lib/content/howto-content";
 
 interface Props { data: HowToPageData; }
@@ -12,7 +10,6 @@ interface Props { data: HowToPageData; }
 export default function HowToTemplate({ data }: Props) {
   return (
     <div className="min-h-screen bg-white">
-      <PageNavbar />
 
       {/* Article header */}
       <header className="border-b bg-gradient-to-b from-[#f8f4ef] to-white px-4 py-8 sm:py-12 lg:py-14">
@@ -168,8 +165,6 @@ export default function HowToTemplate({ data }: Props) {
           </div>
         </div>
       </article>
-
-      <SiteFooter />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import type { KeywordEntry } from '~/lib/pseo-data';
 import type { BypassPageData } from '~/components/templates/BypassTemplate';
-import { uniqueIdx, uniqueNum } from '~/lib/content/content-utils';
+import { uniqueIdx, uniqueNum, smartTitleCase } from '~/lib/content/content-utils';
 
 // ── Detector metadata ─────────────────────────────────────────────────────────
 interface DetectorMeta {
@@ -285,7 +285,7 @@ function detectDetector(keyword: string, entity: string): DetectorMeta {
 }
 
 function capitalize(keyword: string): string {
-  return keyword.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  return smartTitleCase(keyword);
 }
 
 // ── Main generator ────────────────────────────────────────────────────────────

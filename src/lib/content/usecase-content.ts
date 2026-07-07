@@ -1,5 +1,5 @@
 import type { KeywordEntry } from '~/lib/pseo-data';
-import { uniqueIdx } from '~/lib/content/content-utils';
+import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
 import { buildPageStrings, buildFaqs, buildStats } from '~/lib/content/content-combinator';
 
 export interface UseCasePageData {
@@ -218,7 +218,7 @@ const FAQ_POOL: ((keyword: string, audience: string) => { q: string; a: string }
 export function generateUseCaseContent(entry: KeywordEntry): UseCasePageData {
   const { keyword, entity, seed } = entry;
   const audience = detectAudience(keyword, entity);
-  const capitalizedKeyword = keyword.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  const capitalizedKeyword = smartTitleCase(keyword);
 
   const combo = buildPageStrings(capitalizedKeyword, seed, audience.label, 'usecase');
   const faqFn = FAQ_POOL[uniqueIdx(seed, keyword, FAQ_POOL.length, 1)]!;

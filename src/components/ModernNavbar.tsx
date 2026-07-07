@@ -20,22 +20,11 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
   const { isSignedIn } = useUser();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
   // Prevent hydration mismatch by waiting for client-side hydration
   useEffect(() => {
     setIsHydrated(true);
-  }, []);
-
-  // Track scroll position for shadow effect
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
@@ -61,13 +50,11 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
   };
 
   return (
-    <div 
-      className={cn(
-        "fixed top-0 left-0 right-0 z-[100] w-full bg-white/95 backdrop-blur-sm transition-shadow duration-300",
-        isScrolled && "shadow-lg"
-      )} 
-      style={{ position: 'fixed' }}
-    >
+    <div className="relative z-[100] w-full">
+      {/* Promo banner — sits ABOVE the navbar */}
+      <YearlyDiscountBanner />
+
+      <div className="w-full bg-white border-b border-gray-100">
       <div className="w-full py-4">
         <nav 
           className="mx-auto max-w-6xl bg-white rounded-full border border-gray-200 shadow-sm px-6"
@@ -247,7 +234,7 @@ export default function ModernNavbar({ onHistoryClick, currentCredits, isTeamMem
       )}
     </nav>
     </div>
-    <YearlyDiscountBanner />
+    </div>
     </div>
   );
 }

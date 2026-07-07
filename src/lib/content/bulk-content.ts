@@ -1,5 +1,5 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
-import { uniqueIdx } from '~/lib/content/content-utils';
+import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
 import { buildPageStrings, buildStats, buildSteps, buildFeaturePoints, buildFaqs } from '~/lib/content/content-combinator';
 
 export interface BulkPageData {
@@ -59,6 +59,7 @@ const HERO_SUBTITLES: ((kw: string) => string)[] = [
 
 export function generateBulkContent(entry: KeywordEntryV4): BulkPageData {
   const { keyword, seed } = entry;
+  const displayKeyword = smartTitleCase(keyword);
   const combo = buildPageStrings(keyword, seed, 'Bulk', 'bulk');
 
   const ti = uniqueIdx(seed, keyword, META_TITLES.length, 0);
@@ -67,10 +68,10 @@ export function generateBulkContent(entry: KeywordEntryV4): BulkPageData {
   const hsi = uniqueIdx(seed, keyword, HERO_SUBTITLES.length, 3);
 
   return {
-    metaTitle: META_TITLES[ti]!(keyword),
-    metaDescription: META_DESCS[di]!(keyword),
-    h1: H1S[hi]!(keyword),
-    heroSubtitle: HERO_SUBTITLES[hsi]!(keyword),
+    metaTitle: META_TITLES[ti]!(displayKeyword),
+    metaDescription: META_DESCS[di]!(displayKeyword),
+    h1: H1S[hi]!(displayKeyword),
+    heroSubtitle: HERO_SUBTITLES[hsi]!(displayKeyword),
     badge: combo.badge,
     features: buildFeaturePoints(keyword, seed, 'bulk'),
     steps: buildSteps(keyword, seed, 'bulk'),

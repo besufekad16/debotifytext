@@ -2,6 +2,8 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { getAllSlugs } from "~/lib/pseo-data";
 import { getAllV2Slugs } from "~/lib/pseo-data-v2";
+import { getAllV3Slugs } from "~/lib/pseo-data-v3";
+import { getAllV4Slugs } from "~/lib/pseo-data-v4";
 
 export const dynamic = "force-dynamic";
 
@@ -11,7 +13,7 @@ const INDEX_NOW_KEY = "cae535bda6cc4564a9c5dda38f8236eb";
 const KEY_LOCATION  = `${BASE_URL}/${INDEX_NOW_KEY}.txt`;
 const BATCH_SIZE    = 9000;
 
-const STATIC_PAGES = ["/", "/pricing", "/affiliate", "/faq", "/contact", "/responsible-use", "/terms", "/privacy"];
+const STATIC_PAGES = ["/", "/pricing", "/faq", "/contact", "/responsible-use", "/terms", "/privacy"];
 
 function chunk<T>(arr: T[], size: number): T[][] {
   const chunks: T[][] = [];
@@ -36,14 +38,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const v1Slugs = getAllSlugs();
-  const v2Slugs = getAllV2Slugs();
-  const allSlugs = [...new Set([...v1Slugs, ...v2Slugs])];
-
-  const allUrls = [
-    ...STATIC_PAGES.map(p => `${BASE_URL}${p}`),
-    ...allSlugs.map(s => `${BASE_URL}/${s}`),
-  ];
+  const allUrls = getAllIndexableUrls();
 
   const batches = chunk(allUrls, BATCH_SIZE);
   const results: { batch: number; status: number; ok: boolean }[] = [];
@@ -63,6 +58,20 @@ export async function POST(request: NextRequest) {
   }, { status: allOk ? 200 : 207 });
 }
 
+// All indexable URLs: static pages + every PSEO slug (v1–v4)
+function getAllIndexableUrls(): string[] {
+  const allSlugs = [...new Set([
+    ...getAllSlugs(),
+    ...getAllV2Slugs(),
+    ...getAllV3Slugs(),
+    ...getAllV4Slugs(),
+  ])];
+  return [
+    ...STATIC_PAGES.map(p => `${BASE_URL}${p}`),
+    ...allSlugs.map(s => `${BASE_URL}/${s}`),
+  ];
+}
+
 // GET — Vercel cron calls this weekly, also returns key info
 export async function GET(request: NextRequest) {
   // Allow Vercel cron (no auth header) OR authenticated requests
@@ -75,18 +84,12 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       key: INDEX_NOW_KEY,
       keyLocation: KEY_LOCATION,
-      totalUrls: getAllSlugs().length + getAllV2Slugs().length + STATIC_PAGES.length,
+      totalUrls: getAllIndexableUrls().length,
     });
   }
 
   // Authenticated GET or Vercel cron — run full submission
-  const v1Slugs = getAllSlugs();
-  const v2Slugs = getAllV2Slugs();
-  const allSlugs = [...new Set([...v1Slugs, ...v2Slugs])];
-  const allUrls = [
-    ...STATIC_PAGES.map(p => `${BASE_URL}${p}`),
-    ...allSlugs.map(s => `${BASE_URL}/${s}`),
-  ];
+  const allUrls = getAllIndexableUrls();
 
   const batches = chunk(allUrls, BATCH_SIZE);
   const results: { batch: number; status: number; ok: boolean }[] = [];

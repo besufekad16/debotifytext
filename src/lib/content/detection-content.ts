@@ -1,5 +1,5 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
-import { uniqueIdx } from '~/lib/content/content-utils';
+import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
 import { buildPageStrings, buildStats, buildFeaturePoints } from '~/lib/content/content-combinator';
 
 export interface DetectionPageData {
@@ -105,8 +105,17 @@ export function generateDetectionContent(entry: KeywordEntryV4): DetectionPageDa
   const tools = ['chatgpt', 'gpt-4', 'gpt-4o', 'claude', 'gemini', 'llama', 'mistral', 'copilot', 'grok', 'bard'];
   const detector = detectors.find(d => parts.some(p => p.includes(d))) ?? 'Turnitin';
   const aiTool = tools.find(t => parts.some(p => p.includes(t))) ?? 'ChatGPT';
-  const detectorDisplay = detector.charAt(0).toUpperCase() + detector.slice(1);
-  const toolDisplay = aiTool.charAt(0).toUpperCase() + aiTool.slice(1);
+  const DETECTOR_DISPLAY: Record<string, string> = {
+    turnitin: 'Turnitin', gptzero: 'GPTZero', originality: 'Originality.ai', zerogpt: 'ZeroGPT',
+    copyleaks: 'Copyleaks', winston: 'Winston AI', sapling: 'Sapling', scribbr: 'Scribbr',
+  };
+  const TOOL_DISPLAY: Record<string, string> = {
+    'chatgpt': 'ChatGPT', 'gpt-4': 'GPT-4', 'gpt-4o': 'GPT-4o', 'claude': 'Claude', 'gemini': 'Gemini',
+    'llama': 'Llama', 'mistral': 'Mistral', 'copilot': 'Copilot', 'grok': 'Grok', 'bard': 'Bard',
+  };
+  const detectorDisplay = DETECTOR_DISPLAY[detector] ?? smartTitleCase(detector);
+  const toolDisplay = TOOL_DISPLAY[aiTool] ?? smartTitleCase(aiTool);
+  const displayKeyword = smartTitleCase(keyword);
 
   const combo = buildPageStrings(keyword, seed, entity, 'detection');
   const ti = uniqueIdx(seed, keyword, META_TITLES.length, 0);
@@ -118,9 +127,9 @@ export function generateDetectionContent(entry: KeywordEntryV4): DetectionPageDa
   const fqi = uniqueIdx(seed, keyword, FAQ_POOL.length, 6);
 
   return {
-    metaTitle: META_TITLES[ti]!(keyword, detectorDisplay, toolDisplay),
-    metaDescription: META_DESCS[di]!(keyword, detectorDisplay, toolDisplay),
-    h1: H1S[hi]!(keyword, detectorDisplay, toolDisplay),
+    metaTitle: META_TITLES[ti]!(displayKeyword, detectorDisplay, toolDisplay),
+    metaDescription: META_DESCS[di]!(displayKeyword, detectorDisplay, toolDisplay),
+    h1: H1S[hi]!(displayKeyword, detectorDisplay, toolDisplay),
     heroSubtitle: HERO_SUBTITLES[hsi]!(detectorDisplay, toolDisplay),
     badge: combo.badge,
     detector: detectorDisplay,

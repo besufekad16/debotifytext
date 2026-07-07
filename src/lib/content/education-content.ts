@@ -1,5 +1,5 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
-import { uniqueIdx } from '~/lib/content/content-utils';
+import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
 import { buildPageStrings, buildStats, buildSteps, buildFeaturePoints, buildFaqs } from '~/lib/content/content-combinator';
 
 export interface EducationPageData {
@@ -60,6 +60,7 @@ const HERO_SUBTITLES: ((subj: string) => string)[] = [
 
 export function generateEducationContent(entry: KeywordEntryV4): EducationPageData {
   const { keyword, entity, seed } = entry;
+  const displayKeyword = smartTitleCase(keyword);
   const subject = entity !== 'Academic' ? entity : 'Academic';
   const combo = buildPageStrings(keyword, seed, entity, 'education');
 
@@ -69,9 +70,9 @@ export function generateEducationContent(entry: KeywordEntryV4): EducationPageDa
   const hsi = uniqueIdx(seed, keyword, HERO_SUBTITLES.length, 3);
 
   return {
-    metaTitle: META_TITLES[ti]!(keyword, subject),
-    metaDescription: META_DESCS[di]!(keyword, subject),
-    h1: H1S[hi]!(keyword, subject),
+    metaTitle: META_TITLES[ti]!(displayKeyword, subject),
+    metaDescription: META_DESCS[di]!(displayKeyword, subject),
+    h1: H1S[hi]!(displayKeyword, subject),
     heroSubtitle: HERO_SUBTITLES[hsi]!(subject),
     badge: combo.badge,
     subject,

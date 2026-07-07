@@ -1,5 +1,5 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
-import { uniqueIdx } from '~/lib/content/content-utils';
+import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
 import { buildPageStrings, buildStats, buildSteps, buildFeaturePoints, buildFaqs } from '~/lib/content/content-combinator';
 
 export interface WritingPageData {
@@ -60,6 +60,7 @@ const HERO_SUBTITLES: ((ct: string) => string)[] = [
 
 export function generateWritingContent(entry: KeywordEntryV4): WritingPageData {
   const { keyword, entity, seed } = entry;
+  const displayKeyword = smartTitleCase(keyword);
   const contentType = entity !== 'Content' ? entity : 'content';
   const combo = buildPageStrings(keyword, seed, entity, 'writing');
 
@@ -69,9 +70,9 @@ export function generateWritingContent(entry: KeywordEntryV4): WritingPageData {
   const hsi = uniqueIdx(seed, keyword, HERO_SUBTITLES.length, 3);
 
   return {
-    metaTitle: META_TITLES[ti]!(keyword, contentType),
-    metaDescription: META_DESCS[di]!(keyword, contentType),
-    h1: H1S[hi]!(keyword, contentType),
+    metaTitle: META_TITLES[ti]!(displayKeyword, contentType),
+    metaDescription: META_DESCS[di]!(displayKeyword, contentType),
+    h1: H1S[hi]!(displayKeyword, contentType),
     heroSubtitle: HERO_SUBTITLES[hsi]!(contentType),
     badge: combo.badge,
     contentType,

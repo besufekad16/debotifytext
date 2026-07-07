@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: "HumanifyLab",
     images: [
       {
-        url: "/forOpengraph.png",
+        url: "/forOpenGraph.png",
         width: 1200,
         height: 630,
         alt: "HumanifyLab OpenGraph Image"
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Privacy Policy - HumanifyLab",
     description: "Read the privacy policy for HumanifyLab.",
-    images: ["/forOpengraph.png"],
+    images: ["/forOpenGraph.png"],
   },
 };
 

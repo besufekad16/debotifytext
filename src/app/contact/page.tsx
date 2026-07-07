@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     siteName: "HumanifyLab",
     images: [
       {
-        url: "/forOpengraph.png",
+        url: "/forOpenGraph.png",
         width: 1200,
         height: 630,
         alt: "HumanifyLab Contact - Undetectable AI Support"
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Contact Us - Undetectable AI Humanizer Support",
     description: "Expert support for bypassing AI detectors. Help with Originality.AI, GPTZero, Turnitin.",
-    images: ["/humanify.png"],
+    images: ["/forOpenGraph.png"],
   },
 };
 

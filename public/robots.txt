@@ -1,137 +1,67 @@
 # ============================================================
 # HumanifyLab — robots.txt
 # https://www.humanifylab.com
-# Updated: 2026-04-10
-# Strategy: Maximum crawl speed, all SEO pages indexed
 # ============================================================
 
-# ── Google ───────────────────────────────────────────────────
-User-agent: Googlebot
+# ── Default: allow all public content ────────────────────────
+User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /_next/
-Disallow: /account/
-Disallow: /team/
-Disallow: /api-keys/
+Disallow: /account
+Disallow: /team
+Disallow: /api-keys
+Disallow: /affiliate
 Disallow: /sign-in
 Disallow: /sign-up
-Crawl-delay: 0
 
-User-agent: Googlebot-Image
-Allow: /
-Disallow: /api/
-Disallow: /_next/
-Crawl-delay: 0
-
-User-agent: Googlebot-Video
-Allow: /
-Disallow: /api/
-Disallow: /_next/
-Crawl-delay: 0
-
-User-agent: Googlebot-News
-Allow: /
-Disallow: /api/
-Disallow: /_next/
-Crawl-delay: 0
-
-# ── Bing ─────────────────────────────────────────────────────
-User-agent: Bingbot
-Allow: /
-Disallow: /api/
-Disallow: /_next/
-Disallow: /account/
-Disallow: /team/
-Disallow: /api-keys/
-Disallow: /sign-in
-Disallow: /sign-up
-Crawl-delay: 0
-
-# ── Yahoo ────────────────────────────────────────────────────
-User-agent: Slurp
-Allow: /
-Disallow: /api/
-Disallow: /_next/
-Disallow: /account/
-Disallow: /team/
-Disallow: /api-keys/
-Crawl-delay: 0
-
-# ── DuckDuckGo ───────────────────────────────────────────────
-User-agent: DuckDuckBot
-Allow: /
-Disallow: /api/
-Disallow: /_next/
-Disallow: /account/
-Disallow: /team/
-Disallow: /api-keys/
-Crawl-delay: 0
-
-# ── Baidu ────────────────────────────────────────────────────
-User-agent: Baiduspider
-Allow: /
-Disallow: /api/
-Disallow: /_next/
-Disallow: /account/
-Disallow: /team/
-Disallow: /api-keys/
-Crawl-delay: 0
-
-# ── Yandex ───────────────────────────────────────────────────
-User-agent: YandexBot
-Allow: /
-Disallow: /api/
-Disallow: /_next/
-Disallow: /account/
-Disallow: /team/
-Disallow: /api-keys/
-Crawl-delay: 0
-
-# ── Naver (South Korea) ──────────────────────────────────────
-User-agent: Yeti
-Allow: /
-Disallow: /api/
-Disallow: /_next/
-Crawl-delay: 0
-
-# ── AI Crawlers (allow for LLM training & visibility) ────────
+# ── AI assistants & LLM crawlers (allowed for AEO/GEO visibility) ──
 User-agent: GPTBot
 Allow: /
 Disallow: /api/
-Disallow: /_next/
-Disallow: /account/
-Disallow: /team/
-Disallow: /api-keys/
+Disallow: /account
+Disallow: /team
+Disallow: /api-keys
 
 User-agent: ChatGPT-User
 Allow: /
 Disallow: /api/
-Disallow: /_next/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
 
 User-agent: Google-Extended
 Allow: /
 Disallow: /api/
-Disallow: /_next/
 
 User-agent: anthropic-ai
 Allow: /
 Disallow: /api/
-Disallow: /_next/
 
 User-agent: ClaudeBot
 Allow: /
 Disallow: /api/
-Disallow: /_next/
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /api/
 
 User-agent: PerplexityBot
 Allow: /
 Disallow: /api/
-Disallow: /_next/
 
 User-agent: cohere-ai
 Allow: /
 Disallow: /api/
-Disallow: /_next/
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /api/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /api/
 
 # ── Block SEO scrapers ───────────────────────────────────────
 User-agent: AhrefsBot
@@ -152,50 +82,5 @@ Disallow: /
 User-agent: DataForSeoBot
 Disallow: /
 
-# ── Default ──────────────────────────────────────────────────
-User-agent: *
-Allow: /
-Disallow: /api/
-Disallow: /_next/
-Disallow: /account/
-Disallow: /team/
-Disallow: /api-keys/
-Disallow: /sign-in
-Disallow: /sign-up
-
-# ── Canonical host ───────────────────────────────────────────
-Host: https://www.humanifylab.com
-
-# ── Sitemaps (20 clusters, 20k+ pages) ───────────────────────
-# All sitemaps use changeFrequency=daily and high priority for fast indexing
+# ── Sitemap index (references all 31 cluster sitemaps) ───────
 Sitemap: https://www.humanifylab.com/sitemap.xml
-Sitemap: https://www.humanifylab.com/sitemap-bypass.xml
-Sitemap: https://www.humanifylab.com/sitemap-humanizer.xml
-Sitemap: https://www.humanifylab.com/sitemap-howto.xml
-Sitemap: https://www.humanifylab.com/sitemap-usecase.xml
-Sitemap: https://www.humanifylab.com/sitemap-competitor.xml
-Sitemap: https://www.humanifylab.com/sitemap-academic.xml
-Sitemap: https://www.humanifylab.com/sitemap-professional.xml
-Sitemap: https://www.humanifylab.com/sitemap-detector.xml
-Sitemap: https://www.humanifylab.com/sitemap-language.xml
-Sitemap: https://www.humanifylab.com/sitemap-niche.xml
-Sitemap: https://www.humanifylab.com/sitemap-pricing.xml
-Sitemap: https://www.humanifylab.com/sitemap-industry.xml
-Sitemap: https://www.humanifylab.com/sitemap-format.xml
-Sitemap: https://www.humanifylab.com/sitemap-speed.xml
-Sitemap: https://www.humanifylab.com/sitemap-quality.xml
-Sitemap: https://www.humanifylab.com/sitemap-tool.xml
-Sitemap: https://www.humanifylab.com/sitemap-problem.xml
-Sitemap: https://www.humanifylab.com/sitemap-workflow.xml
-Sitemap: https://www.humanifylab.com/sitemap-score.xml
-Sitemap: https://www.humanifylab.com/sitemap-region.xml
-Sitemap: https://www.humanifylab.com/sitemap-comparison.xml
-Sitemap: https://www.humanifylab.com/sitemap-alternative.xml
-Sitemap: https://www.humanifylab.com/sitemap-review.xml
-Sitemap: https://www.humanifylab.com/sitemap-free.xml
-Sitemap: https://www.humanifylab.com/sitemap-detection.xml
-Sitemap: https://www.humanifylab.com/sitemap-writing.xml
-Sitemap: https://www.humanifylab.com/sitemap-education.xml
-Sitemap: https://www.humanifylab.com/sitemap-platform-v4.xml
-Sitemap: https://www.humanifylab.com/sitemap-output.xml
-Sitemap: https://www.humanifylab.com/sitemap-bulk.xml

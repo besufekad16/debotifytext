@@ -1,5 +1,5 @@
 import type { KeywordEntry } from '~/lib/pseo-data';
-import { uniqueIdx, uniqueNum } from '~/lib/content/content-utils';
+import { uniqueIdx, uniqueNum, smartTitleCase } from '~/lib/content/content-utils';
 import { buildPageStrings, buildFaqs, buildStats, buildSteps } from '~/lib/content/content-combinator';
 
 export interface HowToPageData {
@@ -175,7 +175,7 @@ const RELATED_GUIDES = [
 
 export function generateHowToContent(entry: KeywordEntry): HowToPageData {
   const { keyword, seed } = entry;
-  const capitalizedKeyword = keyword.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  const capitalizedKeyword = smartTitleCase(keyword);
 
   const combo = buildPageStrings(capitalizedKeyword, seed, '', 'howto');
   const introFn = INTROS[uniqueIdx(seed, keyword, INTROS.length, 0)]!;

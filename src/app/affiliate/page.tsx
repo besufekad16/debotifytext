@@ -1,7 +1,17 @@
+import { type Metadata } from "next";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { db } from "~/server/db";
 import AffiliateDashboard from "./AffiliateDashboard";
+
+export const metadata: Metadata = {
+  title: "Affiliate Dashboard",
+  description: "Manage your HumanifyLab affiliate referrals, balance and payouts.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 export default async function AffiliatePage() {
   const { userId } = await auth();
@@ -28,7 +38,7 @@ export default async function AffiliatePage() {
     },
   });
 
-  const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://humanifylab.com";
+  const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.humanifylab.com";
 
   const affiliateData = affiliate
     ? {

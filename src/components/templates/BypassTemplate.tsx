@@ -3,9 +3,6 @@
 import Link from "next/link";
 import { Shield, CheckCircle2, XCircle, ArrowRight, AlertTriangle } from "lucide-react";
 import { Button } from "~/components/ui/button";
-import PageNavbar from "~/components/PageNavbar";
-import { SiteFooter } from "~/components/SiteFooter";
-
 export interface BypassPageData {
   metaTitle: string;
   metaDescription: string;
@@ -36,7 +33,6 @@ interface Props { data: BypassPageData; }
 export default function BypassTemplate({ data }: Props) {
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white">
-      <PageNavbar />
 
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-white/10 bg-gradient-to-br from-[#0a0a0f] via-[#12121f] to-[#0a0a0f] px-4 py-8 text-center sm:px-6 sm:py-12 lg:px-8 lg:py-16">
@@ -208,8 +204,6 @@ export default function BypassTemplate({ data }: Props) {
           </Link>
         </div>
       </section>
-
-      <SiteFooter />
     </div>
   );
 }

@@ -56,6 +56,71 @@ export function uniqueNum(seed: number, keyword: string, min: number, max: numbe
   return min + idx;
 }
 
+// Correct casing for brands, acronyms and detector names that naive
+// word-capitalization gets wrong ("Ai" → "AI", "Gptzero" → "GPTZero").
+const CASING_MAP: Record<string, string> = {
+  ai: "AI",
+  api: "API",
+  seo: "SEO",
+  pdf: "PDF",
+  docx: "DOCX",
+  faq: "FAQ",
+  hr: "HR",
+  pr: "PR",
+  b2b: "B2B",
+  b2c: "B2C",
+  saas: "SaaS",
+  cv: "CV",
+  uk: "UK",
+  usa: "USA",
+  us: "US",
+  eu: "EU",
+  uae: "UAE",
+  gpt: "GPT",
+  gpt4: "GPT-4",
+  gpt5: "GPT-5",
+  chatgpt: "ChatGPT",
+  gptzero: "GPTZero",
+  zerogpt: "ZeroGPT",
+  copyleaks: "Copyleaks",
+  turnitin: "Turnitin",
+  quillbot: "QuillBot",
+  grammarly: "Grammarly",
+  humanifylab: "HumanifyLab",
+  youtube: "YouTube",
+  linkedin: "LinkedIn",
+  tiktok: "TikTok",
+  wordpress: "WordPress",
+  llm: "LLM",
+  llms: "LLMs",
+  ieee: "IEEE",
+  apa: "APA",
+  mla: "MLA",
+};
+
+// Small words stay lowercase in titles unless they start the string.
+const SMALL_WORDS = new Set([
+  "a", "an", "and", "as", "at", "but", "by", "for", "in", "of",
+  "on", "or", "the", "to", "vs", "via", "with", "your", "my", "per",
+]);
+
+/**
+ * Title-cases a keyword with correct brand/acronym casing.
+ * "bypass turnitin ai detection" → "Bypass Turnitin AI Detection"
+ * "humanifylab vs undetectable ai" → "HumanifyLab vs Undetectable AI"
+ */
+export function smartTitleCase(text: string): string {
+  const words = text.split(" ").filter(Boolean);
+  return words
+    .map((word, i) => {
+      const lower = word.toLowerCase();
+      if (CASING_MAP[lower]) return CASING_MAP[lower];
+      if (i !== 0 && SMALL_WORDS.has(lower)) return lower;
+      return lower.charAt(0).toUpperCase() + lower.slice(1);
+    })
+    .join(" ");
+}
+
 /**
  * Generates a unique date string between two dates based on seed + keyword.
  */

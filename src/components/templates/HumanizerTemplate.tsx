@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { Sparkles, Zap, Target, Users, Lock, Star, ArrowRight, CheckCircle2, TrendingUp } from "lucide-react";
 import { Button } from "~/components/ui/button";
-import PageNavbar from "~/components/PageNavbar";
-import { SiteFooter } from "~/components/SiteFooter";
 import type { HumanizerPageData } from "~/lib/content/humanizer-content";
 
 interface Props { data: HumanizerPageData; }
@@ -12,7 +10,6 @@ interface Props { data: HumanizerPageData; }
 export default function HumanizerTemplate({ data }: Props) {
   return (
     <div className="min-h-screen bg-white">
-      <PageNavbar />
 
       {/* Hero — clean, bright, product-focused */}
       <section className="border-b bg-gradient-to-br from-[#fefce8] via-white to-[#f0f9ff] px-4 py-8 text-center sm:px-6 sm:py-12 lg:py-20">
@@ -173,8 +170,6 @@ export default function HumanizerTemplate({ data }: Props) {
           </Link>
         </div>
       </section>
-
-      <SiteFooter />
     </div>
   );
 }

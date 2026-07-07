@@ -1,5 +1,5 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
-import { uniqueIdx } from '~/lib/content/content-utils';
+import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
 import { buildPageStrings, buildStats, buildSteps, buildFeaturePoints } from '~/lib/content/content-combinator';
 
 export interface AlternativePageData {
@@ -92,6 +92,7 @@ const FAQ_POOL: ((kw: string, comp: string) => { q: string; a: string }[])[] = [
 
 export function generateAlternativeContent(entry: KeywordEntryV4): AlternativePageData {
   const { keyword, entity, seed } = entry;
+  const displayKeyword = smartTitleCase(keyword);
   const competitor = entity !== 'Competitor' ? entity : 'Other Tools';
   const combo = buildPageStrings(keyword, seed, entity, 'alternative');
 
@@ -103,9 +104,9 @@ export function generateAlternativeContent(entry: KeywordEntryV4): AlternativePa
   const fqi = uniqueIdx(seed, keyword, FAQ_POOL.length, 6);
 
   return {
-    metaTitle: META_TITLES[ti]!(keyword, competitor),
-    metaDescription: META_DESCS[di]!(keyword, competitor),
-    h1: H1S[hi]!(keyword, competitor),
+    metaTitle: META_TITLES[ti]!(displayKeyword, competitor),
+    metaDescription: META_DESCS[di]!(displayKeyword, competitor),
+    h1: H1S[hi]!(displayKeyword, competitor),
     heroSubtitle: HERO_SUBTITLES[hsi]!(competitor),
     badge: combo.badge,
     competitor,

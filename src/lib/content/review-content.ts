@@ -1,5 +1,5 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
-import { uniqueIdx } from '~/lib/content/content-utils';
+import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
 import { buildPageStrings, buildStats, buildFeaturePoints } from '~/lib/content/content-combinator';
 
 export interface ReviewPageData {
@@ -98,10 +98,98 @@ const FAQ_POOL: ((kw: string, subj: string) => { q: string; a: string }[])[] = [
   ],
 ];
 
+// ── Self-review pools — used when the reviewed subject IS HumanifyLab ─────────
+// (branded queries like "humanifylab review" must not read like a takedown)
+
+const SELF_META_TITLES: ((kw: string) => string)[] = [
+  (kw) => `HumanifyLab Review 2026: Features, Pricing & Real Results`,
+  (kw) => `${kw} — What Users Say About HumanifyLab in 2026`,
+  (kw) => `HumanifyLab Review: Is It the Best AI Humanizer in 2026?`,
+  (kw) => `${kw}: Honest Look at Features, Pricing & Bypass Rate`,
+];
+
+const SELF_META_DESCS: ((kw: string) => string)[] = [
+  (kw) => `${kw}: an honest look at HumanifyLab's features, pricing, and bypass performance. Free plan, zero data retention, results in under 10 seconds.`,
+  (kw) => `${kw} — how HumanifyLab performs against Turnitin, GPTZero, and Originality.ai, what it costs, and what users like most. Free plan available.`,
+  (kw) => `${kw}: features, pricing, pros and cons of HumanifyLab in 2026. See why students and professionals choose it to humanize AI text. Try free.`,
+  (kw) => `${kw} — full breakdown of HumanifyLab's humanization quality, speed, privacy policy, and pricing. Free plan with no sign-up required.`,
+];
+
+const SELF_H1S: ((kw: string) => string)[] = [
+  () => `HumanifyLab Review 2026: Features, Pricing & Results`,
+  () => `HumanifyLab Review — Is It the Best AI Humanizer?`,
+  () => `HumanifyLab Review: What You Get and What It Costs`,
+  () => `HumanifyLab in 2026: An Honest Review`,
+];
+
+const SELF_HERO_SUBTITLES: string[] = [
+  `HumanifyLab is built to turn AI-generated text into natural human writing that passes Turnitin, GPTZero, and Originality.ai. Here is a straightforward look at how it works, what it costs, and where it shines.`,
+  `Thinking about using HumanifyLab? This review covers the humanization engine, bypass performance, pricing, privacy policy, and how it compares to other tools in 2026.`,
+  `HumanifyLab focuses on deep linguistic transformation rather than simple paraphrasing. This review walks through features, speed, pricing, and real-world results.`,
+];
+
+const SELF_PROS: string[] = [
+  '99.9% verified bypass rate against major AI detectors',
+  'Free plan with no sign-up or credit card required',
+  'Zero data retention — content is never stored',
+  'Results in under 10 seconds',
+  'Academic, Professional, and Casual tone presets',
+  '50+ languages supported',
+];
+
+const SELF_CONS: string[] = [
+  'Free plan is capped per run — long documents need a paid plan',
+  'Bulk processing and API access require a subscription',
+  'Web-only — no desktop or mobile app yet',
+];
+
+const SELF_VERDICT = `HumanifyLab delivers on its core promise: AI text in, natural human writing out, with detector scores in the human range. The free plan makes it easy to verify the results yourself before paying anything.`;
+
+const SELF_FAQS: { q: string; a: string }[] = [
+  { q: `Is HumanifyLab legit?`, a: `Yes. HumanifyLab is a real, actively maintained AI humanization platform. It is tested weekly against live detection systems like Turnitin and GPTZero, and offers a free plan so you can verify results before paying.` },
+  { q: `Does HumanifyLab actually bypass Turnitin?`, a: `Yes. HumanifyLab maintains a verified 99.9% bypass rate against Turnitin's AI detection, tested weekly. Humanized text consistently scores in the human range.` },
+  { q: `How much does HumanifyLab cost?`, a: `HumanifyLab has a permanent free plan with monthly word credits. Paid plans add higher word limits, bulk processing, faster queues, and API access. See the pricing page for current rates.` },
+  { q: `Is my content safe with HumanifyLab?`, a: `Yes. HumanifyLab has a strict zero data retention policy — your content is processed and immediately deleted, never stored, shared, or used for training.` },
+  { q: `How fast is HumanifyLab?`, a: `Most documents are humanized in under 10 seconds. Paste your text, click Humanize, and the rewritten version is ready almost immediately.` },
+];
+
+function isSelfReview(subject: string, keyword: string): boolean {
+  const s = subject.toLowerCase().replace(/\s/g, '');
+  const k = keyword.toLowerCase().replace(/\s/g, '');
+  return s.includes('humanifylab') || (k.includes('humanifylab') && !k.includes('vs'));
+}
+
 export function generateReviewContent(entry: KeywordEntryV4): ReviewPageData {
   const { keyword, entity, seed } = entry;
+  const displayKeyword = smartTitleCase(keyword);
   const subject = entity !== 'Competitor' ? entity : 'This Tool';
   const combo = buildPageStrings(keyword, seed, entity, 'review');
+
+  if (isSelfReview(subject, keyword)) {
+    const sti = uniqueIdx(seed, keyword, SELF_META_TITLES.length, 0);
+    const sdi = uniqueIdx(seed, keyword, SELF_META_DESCS.length, 1);
+    const shi = uniqueIdx(seed, keyword, SELF_H1S.length, 2);
+    const shsi = uniqueIdx(seed, keyword, SELF_HERO_SUBTITLES.length, 3);
+    return {
+      metaTitle: SELF_META_TITLES[sti]!(displayKeyword),
+      metaDescription: SELF_META_DESCS[sdi]!(displayKeyword),
+      h1: SELF_H1S[shi]!(displayKeyword),
+      heroSubtitle: SELF_HERO_SUBTITLES[shsi]!,
+      badge: combo.badge,
+      subject: 'HumanifyLab',
+      verdict: SELF_VERDICT,
+      ratingValue: '4.8',
+      ratingCount: '',
+      pros: SELF_PROS,
+      cons: SELF_CONS,
+      features: buildFeaturePoints(keyword, seed, 'review'),
+      stats: buildStats(keyword, seed),
+      faqs: SELF_FAQS,
+      faqTitle: combo.faqTitle,
+      finalCtaTitle: combo.finalCtaTitle,
+      finalCtaSubtitle: combo.finalCtaSubtitle,
+    };
+  }
 
   const ti = uniqueIdx(seed, keyword, META_TITLES.length, 0);
   const di = uniqueIdx(seed, keyword, META_DESCS.length, 1);
@@ -119,9 +207,9 @@ export function generateReviewContent(entry: KeywordEntryV4): ReviewPageData {
   const ratingCount = String(1200 + (Math.abs(hash + seed * 31) % 3000));
 
   return {
-    metaTitle: META_TITLES[ti]!(keyword, subject),
-    metaDescription: META_DESCS[di]!(keyword, subject),
-    h1: H1S[hi]!(keyword, subject),
+    metaTitle: META_TITLES[ti]!(displayKeyword, subject),
+    metaDescription: META_DESCS[di]!(displayKeyword, subject),
+    h1: H1S[hi]!(displayKeyword, subject),
     heroSubtitle: HERO_SUBTITLES[hsi]!(subject),
     badge: combo.badge,
     subject,

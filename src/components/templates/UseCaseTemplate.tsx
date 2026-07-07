@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { GraduationCap, Briefcase, PenTool, ArrowRight, CheckCircle2, Star, Users, Zap, Shield } from "lucide-react";
 import { Button } from "~/components/ui/button";
-import PageNavbar from "~/components/PageNavbar";
-import { SiteFooter } from "~/components/SiteFooter";
 import type { UseCasePageData } from "~/lib/content/usecase-content";
 
 interface Props { data: UseCasePageData; }
@@ -21,7 +19,6 @@ export default function UseCaseTemplate({ data }: Props) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f8f4ef] via-white to-white">
-      <PageNavbar />
 
       {/* Hero — audience-specific, empathetic */}
       <section className="border-b px-4 py-8 sm:py-12 lg:py-20">
@@ -210,8 +207,6 @@ export default function UseCaseTemplate({ data }: Props) {
           </Link>
         </div>
       </section>
-
-      <SiteFooter />
     </div>
   );
 }

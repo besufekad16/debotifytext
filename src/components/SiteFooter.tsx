@@ -1,6 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
-import { Twitter, Linkedin, Github } from "lucide-react";
+import { Twitter, Linkedin } from "lucide-react";
 
 export function SiteFooter() {
   return (
@@ -35,15 +34,6 @@ export function SiteFooter() {
                 <span className="sr-only">Twitter</span>
               </Link>
               <Link 
-                href="https://github.com" 
-                target="_blank" 
-                rel="noreferrer" 
-                className="text-gray-500 hover:text-[#8b6f47] transition-colors"
-              >
-                <Github className="h-7 w-7" />
-                <span className="sr-only">Github</span>
-              </Link>
-              <Link 
                 href="https://www.linkedin.com/company/humanifylab" 
                 target="_blank" 
                 rel="noreferrer" 
@@ -70,13 +60,23 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/#faq" className="text-gray-400 hover:text-[#8b6f47] transition-colors">
+                <Link href="/faq" className="text-gray-400 hover:text-[#8b6f47] transition-colors">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-gray-400 hover:text-[#8b6f47] transition-colors">
-                  Blog
+                <Link href="/ai-humanizer" className="text-gray-400 hover:text-[#8b6f47] transition-colors">
+                  AI Humanizer
+                </Link>
+              </li>
+              <li>
+                <Link href="/bypass-ai-detection" className="text-gray-400 hover:text-[#8b6f47] transition-colors">
+                  Bypass AI Detection
+                </Link>
+              </li>
+              <li>
+                <Link href="/free-ai-humanizer" className="text-gray-400 hover:text-[#8b6f47] transition-colors">
+                  Free AI Humanizer
                 </Link>
               </li>
               <li>
