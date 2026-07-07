@@ -1,6 +1,6 @@
 # AI Text Humanizer SaaS with Next.js 15, Neon, Polar, Better Auth & OpenAI
 
-Welcome to the ultimate AI Text Humanizer SaaS application! This project demonstrates how to build a fully featured, production-ready SaaS platform using the latest technologies — Next.js 15, Neon (PostgreSQL), Polar payments, Better Auth authentication, and OpenAI for AI-powered text humanization — all deployed on Vercel.
+Welcome to the ultimate AI Text Humanizer SaaS application! This project demonstrates how to build a fully featured, production-ready SaaS platform using the latest technologies — Next.js 15, Neon (PostgreSQL), Polar payments, Better Auth authentication, and OpenAI for AI-powered text humanization — all deployed on Vercel. 
 
 ## Useful Links
 
