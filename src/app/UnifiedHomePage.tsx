@@ -42,8 +42,6 @@ import { cn } from "~/lib/utils";
 import { SiteFooter } from "~/components/SiteFooter";
 import HowToUseSection from "~/components/HowToUseSection";
 import FactsSection from "~/components/FactsSection";
-import PricingModal from "~/components/PricingModal";
-import { usePricingModal } from "~/hooks/usePricingModal";
 import DetectorShowcase from "~/components/DetectorShowcase";
 import LargeDiscountBanner from "~/components/LargeDiscountBanner";
 import ResponsibleUseDisclaimer from "~/components/ResponsibleUseDisclaimer";
@@ -170,10 +168,7 @@ interface HistoryItem {
 
 export default function UnifiedHomePage() {
   const { isSignedIn, user } = useUser();
-  
-  // Pricing Modal Hook
-  const { isOpen: isPricingModalOpen, closeModal: closePricingModal } = usePricingModal();
-  
+
   const [originalText, setOriginalText] = useState("");
   const [humanizedText, setHumanizedText] = useState("");
   const [preset, setPreset] = useState("default");
@@ -865,7 +860,7 @@ export default function UnifiedHomePage() {
           <div className="absolute inset-x-0 top-0 h-[420px] bg-gradient-to-b from-[#faf7f4] to-white pointer-events-none" />
 
           {/* Hero Section */}
-          <section className="relative pt-14 pb-4 sm:pt-20 sm:pb-6 overflow-hidden">
+          <section id="hero" className="relative pt-14 pb-4 sm:pt-20 sm:pb-6 overflow-hidden">
             {/* Small bubble pattern background - perfectly aligned grid */}
             <div className="absolute inset-0 opacity-[0.08]" style={{
               backgroundImage: `radial-gradient(circle, #8B6F47 3px, transparent 3px)`,
@@ -1575,6 +1570,57 @@ export default function UnifiedHomePage() {
           </div>
         </section>
 
+        {/* Guides & Regions — internal links to hub pages for crawl discovery */}
+        <section className="relative border-t border-gray-100 bg-[#faf7f4] py-16 sm:py-20">
+          <div className="mx-auto max-w-6xl px-5 sm:px-6 lg:px-8">
+            <div className="mb-10 text-center">
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8b6f47]">Resources</span>
+              <h2 className="mx-auto mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+                Guides for every detector and region
+              </h2>
+              <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-600">
+                In-depth guides on bypassing specific AI detectors, plus guidance built for students and teams in
+                your country.
+              </p>
+            </div>
+            <div className="mb-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
+              {[
+                { label: "Bypass AI Detectors", href: "/bypass-ai-detectors" },
+                { label: "AI Detector Guide", href: "/ai-detector" },
+                { label: "Free AI Humanizer", href: "/free-ai-humanizer" },
+                { label: "Browse All Guides", href: "/topics" },
+              ].map((g) => (
+                <Link
+                  key={g.href}
+                  href={g.href}
+                  className="flex items-center justify-center rounded-xl border border-gray-200 bg-white p-5 text-center text-sm font-semibold text-gray-900 transition-colors hover:border-[#8b6f47] hover:text-[#5e3d2a]"
+                >
+                  {g.label}
+                </Link>
+              ))}
+            </div>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
+              {[
+                { label: "United States", href: "/ai-humanizer-usa" },
+                { label: "Canada", href: "/ai-humanizer-canada" },
+                { label: "United Kingdom", href: "/ai-humanizer-uk" },
+                { label: "Europe", href: "/ai-humanizer-europe" },
+                { label: "Australia", href: "/ai-humanizer-australia" },
+                { label: "South Africa", href: "/ai-humanizer-south-africa" },
+                { label: "Asia", href: "/ai-humanizer-asia" },
+              ].map((r) => (
+                <Link
+                  key={r.href}
+                  href={r.href}
+                  className="rounded-lg border border-gray-200 bg-white py-3 text-center text-xs font-medium text-gray-700 transition-colors hover:border-[#8b6f47] hover:text-[#5e3d2a]"
+                >
+                  {r.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* FAQ Section */}
         <section id="faq" className="relative py-20 sm:py-24 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_1.4s_forwards] overflow-hidden">
           {/* Small triangle pattern background */}
@@ -1586,7 +1632,10 @@ export default function UnifiedHomePage() {
           
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-12">
-              <h3 className="text-3xl font-bold tracking-tight text-gray-900">FAQ</h3>
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8b6f47]">FAQ</span>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+                Frequently asked questions
+              </h2>
             </div>
 
             <div className="space-y-0">
@@ -1622,11 +1671,8 @@ export default function UnifiedHomePage() {
       
       {/* Responsible Use Disclaimer - Above Footer */}
       <ResponsibleUseDisclaimer />
-      
+
       <SiteFooter />
-      
-      {/* Pricing Modal - Shows after sign-in for free users */}
-      <PricingModal isOpen={isPricingModalOpen} onClose={closePricingModal} />
     </div>
   );
 }

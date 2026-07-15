@@ -198,7 +198,7 @@ export default function V4Template({ data, cluster }: Props) {
             <div className="grid sm:grid-cols-2 gap-4">
               {points.map((p, i) => (
                 <div key={i} className="bg-white rounded-xl border border-gray-200 p-5 flex gap-4">
-                  <span className="text-2xl flex-shrink-0">{p.icon}</span>
+                  <span className="mt-1.5 block h-2.5 w-2.5 flex-shrink-0 rounded-full bg-[#8b6f47]" />
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">{p.title}</h3>
                     <p className="text-sm text-gray-500 leading-relaxed">{p.description}</p>

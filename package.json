@@ -19,6 +19,7 @@
     "preview": "next build && next start",
     "seo:generate-sitemaps": "npx tsx scripts/generate-all-sitemaps.ts",
     "seo:verify-links": "npx tsx scripts/verify-internal-links.ts",
+    "seo:audit-uniqueness": "npx tsx scripts/audit-content-uniqueness.ts",
     "seo:submit-sitemap": "npx tsx seo/search-console-submitter.ts",
     "seo:full-deploy": "npm run seo:generate-sitemaps && npm run build",
     "start": "next start",

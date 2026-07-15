@@ -241,9 +241,10 @@ export default function TeamPage() {
 
       <main className="flex-1 py-12">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-8">
-            <h1 className="text-[1.4rem] font-semibold text-gray-900">Team Management</h1>
-            <p className="mt-1.5 text-[13px] text-gray-400">
+          <div className="mb-10">
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8b6f47]">Team</span>
+            <h1 className="mt-2 text-2xl font-semibold tracking-tight text-gray-900 sm:text-3xl">Team management</h1>
+            <p className="mt-2 text-sm text-gray-600">
               Manage your team members and collaborate on humanization projects.
             </p>
           </div>

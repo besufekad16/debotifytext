@@ -22,15 +22,18 @@ export interface ReviewPageData {
   finalCtaSubtitle: string;
 }
 
+// NOTE: `kw` already names the reviewed subject ("X review", "is X legit",
+// "X pros and cons", etc.), so the suffix must add a genuinely new angle
+// instead of restating "{subj} review" again.
 const META_TITLES: ((kw: string, subj: string) => string)[] = [
-  (kw, subj) => `${subj} Review 2026: Does It Actually Work? | HumanifyLab`,
-  (kw, subj) => `${kw}: Honest Review After 100 Tests | HumanifyLab`,
-  (kw, subj) => `Is ${subj} Worth It? Full Review & Better Alternative`,
-  (kw, subj) => `${kw} — Bypass Rate, Price & Verdict | HumanifyLab`,
-  (kw, subj) => `${subj} Review: Pros, Cons & Why HumanifyLab Wins`,
-  (kw, subj) => `${kw}: ${subj} vs HumanifyLab — Which Actually Works?`,
-  (kw, subj) => `${subj} Honest Review 2026 — Real Results Inside`,
-  (kw, subj) => `${kw}: Is ${subj} Legit? Full 2026 Review`,
+  (kw) => `${kw} 2026 — Does It Actually Work? | HumanifyLab`,
+  (kw) => `${kw}: Honest Review After 100 Tests | HumanifyLab`,
+  (kw) => `${kw}: Full Review & a Better Alternative`,
+  (kw) => `${kw} — Bypass Rate, Price & Verdict | HumanifyLab`,
+  (kw) => `${kw}: Pros, Cons & Why HumanifyLab Wins`,
+  (kw) => `${kw}: Which Actually Works?`,
+  (kw) => `${kw} — Real Results Inside`,
+  (kw) => `${kw}: Full 2026 Review`,
 ];
 
 const META_DESCS: ((kw: string, subj: string) => string)[] = [
@@ -45,14 +48,14 @@ const META_DESCS: ((kw: string, subj: string) => string)[] = [
 ];
 
 const H1S: ((kw: string, subj: string) => string)[] = [
-  (kw, subj) => `${subj} Review 2026: Honest Results After 100 Tests`,
-  (kw, subj) => `${kw}: Is ${subj} Worth It?`,
-  (kw, subj) => `${subj} Review — Bypass Rate, Price & Verdict`,
-  (kw, subj) => `Is ${subj} Legit? Full 2026 Review`,
-  (kw, subj) => `${kw}: ${subj} Pros, Cons & Better Alternative`,
-  (kw, subj) => `${subj} vs HumanifyLab: Which Actually Works?`,
-  (kw, subj) => `${kw}: The Honest ${subj} Review`,
-  (kw, subj) => `${subj} Review — Real Test Results Inside`,
+  (kw) => `${kw} — Honest Results After 100 Tests`,
+  (kw) => `${kw}: Worth It?`,
+  (kw) => `${kw} — Bypass Rate, Price & Verdict`,
+  (kw) => `${kw}: Full 2026 Review`,
+  (kw) => `${kw}: Pros, Cons & a Better Alternative`,
+  (kw) => `${kw}: Which Actually Works?`,
+  (kw) => `${kw}: The Honest Verdict`,
+  (kw) => `${kw} — Real Test Results Inside`,
 ];
 
 const HERO_SUBTITLES: ((subj: string) => string)[] = [
@@ -101,11 +104,14 @@ const FAQ_POOL: ((kw: string, subj: string) => { q: string; a: string }[])[] = [
 // ── Self-review pools — used when the reviewed subject IS HumanifyLab ─────────
 // (branded queries like "humanifylab review" must not read like a takedown)
 
+// NOTE: `kw` here is already a branded query ("humanifylab review", "is
+// humanifylab good", "does humanifylab work"), so suffixes add a new angle
+// rather than restating "HumanifyLab review" again.
 const SELF_META_TITLES: ((kw: string) => string)[] = [
-  (kw) => `HumanifyLab Review 2026: Features, Pricing & Real Results`,
-  (kw) => `${kw} — What Users Say About HumanifyLab in 2026`,
-  (kw) => `HumanifyLab Review: Is It the Best AI Humanizer in 2026?`,
-  (kw) => `${kw}: Honest Look at Features, Pricing & Bypass Rate`,
+  (kw) => `${kw} 2026 — Features, Pricing & Real Results | HumanifyLab`,
+  (kw) => `${kw} — What Users Say in 2026`,
+  (kw) => `${kw}? Here's the Honest 2026 Verdict`,
+  (kw) => `${kw}: Features, Pricing & Bypass Rate`,
 ];
 
 const SELF_META_DESCS: ((kw: string) => string)[] = [
@@ -116,10 +122,10 @@ const SELF_META_DESCS: ((kw: string) => string)[] = [
 ];
 
 const SELF_H1S: ((kw: string) => string)[] = [
-  () => `HumanifyLab Review 2026: Features, Pricing & Results`,
-  () => `HumanifyLab Review — Is It the Best AI Humanizer?`,
-  () => `HumanifyLab Review: What You Get and What It Costs`,
-  () => `HumanifyLab in 2026: An Honest Review`,
+  (kw) => `${kw} 2026 — Features, Pricing & Results`,
+  (kw) => `${kw} — Is It the Best AI Humanizer?`,
+  (kw) => `${kw}: What You Get and What It Costs`,
+  (kw) => `${kw} — An Honest 2026 Review`,
 ];
 
 const SELF_HERO_SUBTITLES: string[] = [

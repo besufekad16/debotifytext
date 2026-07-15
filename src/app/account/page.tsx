@@ -121,12 +121,13 @@ export default async function AccountPage() {
     <div className="min-h-screen bg-white">
       <PageNavbar currentCredits={userCredits + userExtraCredits} isTeamMember={isTeamMember} />
       <main className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <h1 className="text-[1.6rem] sm:text-[2rem] font-bold tracking-tight text-gray-950">
-            Manage Your Account Settings
+        <div className="mb-10">
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8b6f47]">Account</span>
+          <h1 className="mt-2 text-2xl font-semibold tracking-tight text-gray-900 sm:text-3xl">
+            Account settings
           </h1>
-          <p className="mt-2 text-[14px] text-gray-400">
-            Manage your HumanifyLab account and view your usage
+          <p className="mt-2 text-sm text-gray-600">
+            Manage your HumanifyLab account, subscription, and usage.
           </p>
         </div>
 
@@ -141,7 +142,7 @@ export default async function AccountPage() {
           />
 
           {/* Profile Information */}
-          <Card className="border-white/60 bg-white/80 shadow-md backdrop-blur">
+          <Card className="border-gray-200 bg-white shadow-sm rounded-2xl">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <User className="h-5 w-5 text-[#8B6F47]" />
@@ -174,7 +175,7 @@ export default async function AccountPage() {
           </Card>
 
           {/* Credits & Usage */}
-          <Card className="border-white/60 bg-white/80 shadow-md backdrop-blur">
+          <Card className="border-gray-200 bg-white shadow-sm rounded-2xl">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CreditCard className="h-5 w-5 text-[#8B6F47]" />
@@ -210,7 +211,7 @@ export default async function AccountPage() {
                 </p>
                 <Link
                   href="/pricing"
-                  className="mt-3 inline-block bg-[#8B6F47] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#6D5635]"
+                  className="mt-3 inline-block rounded-xl bg-[#5e3d2a] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#4a2f1f]"
                 >
                   View Pricing Plans
                 </Link>
@@ -221,7 +222,7 @@ export default async function AccountPage() {
 
         {/* Quick Links */}
         <div className="mt-8">
-          <Card className="border-white/60 bg-white/80 shadow-md backdrop-blur">
+          <Card className="border-gray-200 bg-white shadow-sm rounded-2xl">
             <CardHeader>
               <CardTitle>Quick Links</CardTitle>
               <CardDescription className="text-[12px] text-gray-400">Access important resources and support</CardDescription>
@@ -286,18 +287,20 @@ export default async function AccountPage() {
         </div>
 
         {/* Affiliate nudge */}
-        <div className="mt-8 rounded-xl border border-violet-200 bg-gradient-to-r from-violet-50 to-purple-50 p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-8 flex flex-col items-start justify-between gap-4 rounded-2xl border border-[#e8ddd5] bg-[#faf7f4] p-6 sm:flex-row sm:items-center">
           <div className="flex-1">
-            <p className="text-sm font-semibold text-gray-900">💸 Earn 10% for every referral</p>
-            <p className="text-xs text-gray-500 mt-0.5">Share your link. Get paid in USDT when someone subscribes.</p>
+            <p className="text-sm font-semibold text-gray-900">Earn 10% on every referral</p>
+            <p className="mt-0.5 text-xs text-gray-600">
+              Share your code. Get paid in USDT when someone subscribes.
+            </p>
             <ReferralCodeInput alreadyApplied={!!referredByCode} />
           </div>
-          <a
+          <Link
             href="/affiliate"
-            className="shrink-0 inline-flex items-center gap-1.5 rounded-lg bg-violet-600 px-4 py-2 text-sm font-semibold text-white hover:bg-violet-700 transition-colors whitespace-nowrap"
+            className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-xl bg-[#5e3d2a] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#4a2f1f]"
           >
-            View Affiliate Dashboard →
-          </a>
+            View Affiliate Dashboard
+          </Link>
         </div>
       </main>
       <SiteFooter />

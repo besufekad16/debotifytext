@@ -172,7 +172,7 @@ export default function LargeDiscountBanner() {
               </div>
               {pctFull > 50 && (
                 <p className="text-[11px] text-amber-300 mt-1.5 font-semibold text-center">
-                  ⚡ More than half the spots are gone — grab yours now
+                  More than half the spots are gone — grab yours now
                 </p>
               )}
             </div>
@@ -180,7 +180,7 @@ export default function LargeDiscountBanner() {
             {/* Countdown */}
             <div className="flex flex-col items-center gap-3 mb-8">
               <p className="text-xs font-semibold uppercase tracking-widest text-white/40">
-                ⏳ Offer expires in
+                Offer expires in
               </p>
               <div className="flex items-end gap-2 sm:gap-3">
                 {[

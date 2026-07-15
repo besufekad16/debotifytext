@@ -52,6 +52,11 @@ const config = {
       { source: '/home', destination: '/', permanent: true },
       { source: '/blog', destination: '/', permanent: true },
       { source: '/blog/:path*', destination: '/', permanent: true },
+      // "ai humanizer" is the homepage's primary keyword — the old spun
+      // /ai-humanizer pSEO page was removed from the dataset and now
+      // 301s here so link equity and any existing indexing consolidate
+      // onto the homepage instead of splitting between two pages.
+      { source: '/ai-humanizer', destination: '/', permanent: true },
     ];
   },
 

@@ -69,7 +69,7 @@ export default function UseCaseTemplate({ data }: Props) {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {data.problems.map((p, i) => (
               <div key={i} className="rounded-2xl border border-red-100 bg-red-50 p-5">
-                <div className="mb-3 text-2xl">{p.icon}</div>
+                <div className="mb-3 h-1 w-8 rounded-full bg-red-400" />
                 <h3 className="mb-2 font-semibold text-gray-900">{p.title}</h3>
                 <p className="text-base text-gray-500">{p.description}</p>
               </div>
@@ -86,8 +86,8 @@ export default function UseCaseTemplate({ data }: Props) {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {data.solutions.map((s, i) => (
               <div key={i} className="flex items-start gap-4 rounded-2xl border border-[#8B6F47]/20 bg-white p-6 shadow-sm">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#8B6F47]/10 to-[#6D5635]/10 text-xl">
-                  {s.icon}
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#8B6F47]/10 to-[#6D5635]/10">
+                  <span className="block h-2.5 w-2.5 rounded-full bg-[#8b6f47]" />
                 </div>
                 <div>
                   <h3 className="mb-1 font-semibold text-gray-900">{s.title}</h3>

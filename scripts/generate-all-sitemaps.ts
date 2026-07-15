@@ -15,6 +15,8 @@ import { getClusterKeywords } from "../src/lib/pseo-data";
 import { getV2ClusterKeywords } from "../src/lib/pseo-data-v2";
 import { getV3ClusterKeywords } from "../src/lib/pseo-data-v3";
 import { getV4ClusterKeywords } from "../src/lib/pseo-data-v4";
+import { getGeoClusterKeywords } from "../src/lib/pseo-data-geo";
+import { CLUSTER_ORDER } from "../src/lib/pseo-clusters";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BASE_URL = "https://www.humanifylab.com";
@@ -26,19 +28,11 @@ interface SlugEntry {
   seed: number;
 }
 
-// Mirrors getPublishDate/getModifiedDate in src/app/[keyword]/page.tsx so the
-// sitemap lastmod matches the dates each page reports in its own metadata.
-function getPublishDate(seed: number): number {
-  const start = new Date("2025-03-01").getTime();
-  const end = new Date("2026-03-01").getTime();
-  return start + ((seed % 500) / 500) * (end - start);
-}
-
-function getLastMod(seed: number): string {
-  const published = getPublishDate(seed);
-  const offsetDays = 30 + (seed % 120);
-  const modified = published + offsetDays * 24 * 60 * 60 * 1000;
-  return new Date(Math.min(modified, Date.now())).toISOString().split("T")[0]!;
+// Mirrors getModifiedDate in src/app/[keyword]/page.tsx: "updated" always
+// reflects the current date (today), since it is only ever consumed by
+// structured data, not rendered in the UI.
+function getLastMod(_seed: number): string {
+  return TODAY;
 }
 
 function urlsetXml(entries: SlugEntry[], priority: string): string {
@@ -73,6 +67,7 @@ const PRIORITIES: Record<string, string> = {
   tool: "0.7", problem: "0.8", workflow: "0.7", score: "0.8", region: "0.7",
   comparison: "0.9", alternative: "0.9", review: "0.8", free: "0.8", detection: "0.8",
   writing: "0.8", education: "0.8", platform: "0.7", output: "0.8", bulk: "0.7",
+  geo: "0.9",
 };
 
 // platform cluster keeps its historical filename to preserve indexed sitemap URLs
@@ -93,6 +88,9 @@ for (const c of V1_CLUSTERS) writeSitemap(c, getClusterKeywords(c).map((e) => ({
 for (const c of V2_CLUSTERS) writeSitemap(c, getV2ClusterKeywords(c).map((e) => ({ slug: e.slug, seed: e.seed })));
 for (const c of V3_CLUSTERS) writeSitemap(c, getV3ClusterKeywords(c).map((e) => ({ slug: e.slug, seed: e.seed })));
 for (const c of V4_CLUSTERS) writeSitemap(c, getV4ClusterKeywords(c).map((e) => ({ slug: e.slug, seed: e.seed })));
+// Geo pages are hand-authored, high-priority flagship pages — small enough
+// to fold into sitemap-main.xml rather than warranting their own file.
+const GEO_ENTRIES = getGeoClusterKeywords().map((e) => ({ slug: e.slug, seed: e.seed }));
 
 // ── Main pages sitemap ───────────────────────────────────────────────────────
 const MAIN_PAGES = [
@@ -103,6 +101,11 @@ const MAIN_PAGES = [
   { path: "/responsible-use", priority: "0.5", changefreq: "yearly" },
   { path: "/terms", priority: "0.3", changefreq: "yearly" },
   { path: "/privacy", priority: "0.3", changefreq: "yearly" },
+  { path: "/bypass-ai-detectors", priority: "0.9", changefreq: "weekly" },
+  { path: "/ai-detector", priority: "0.9", changefreq: "weekly" },
+  { path: "/topics", priority: "0.8", changefreq: "weekly" },
+  ...CLUSTER_ORDER.map((c) => ({ path: `/topics/${c}`, priority: "0.7", changefreq: "weekly" })),
+  ...GEO_ENTRIES.map((e) => ({ path: `/${e.slug}`, priority: "0.9", changefreq: "weekly" })),
 ];
 
 const mainXml = `<?xml version="1.0" encoding="UTF-8"?>

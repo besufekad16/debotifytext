@@ -2,6 +2,7 @@ import { type Metadata } from "next";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { db } from "~/server/db";
+import MarketingShell from "~/components/marketing/MarketingShell";
 import AffiliateDashboard from "./AffiliateDashboard";
 
 export const metadata: Metadata = {
@@ -57,5 +58,9 @@ export default async function AffiliatePage() {
       }
     : null;
 
-  return <AffiliateDashboard affiliate={affiliateData} />;
+  return (
+    <MarketingShell>
+      <AffiliateDashboard affiliate={affiliateData} />
+    </MarketingShell>
+  );
 }

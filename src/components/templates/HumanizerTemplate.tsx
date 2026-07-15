@@ -67,8 +67,8 @@ export default function HumanizerTemplate({ data }: Props) {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {data.features.map((f, i) => (
               <div key={i} className="group rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-all hover:border-[#8B6F47]/30 hover:shadow-md">
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#8B6F47]/10 to-[#6D5635]/10 text-2xl">
-                  {f.icon}
+                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#8B6F47]/10 to-[#6D5635]/10">
+                  <span className="block h-2.5 w-2.5 rounded-full bg-[#8b6f47]" />
                 </div>
                 <h3 className="mb-2 font-semibold text-gray-900">{f.title}</h3>
                 <p className="text-base text-gray-500 leading-relaxed">{f.description}</p>

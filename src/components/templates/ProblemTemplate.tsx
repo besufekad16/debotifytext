@@ -33,7 +33,7 @@ export default function ProblemTemplate({ data }: { data: ProblemContentData }) 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {data.problemPoints.map((p, i) => (
               <div key={i} className="bg-white rounded-xl border border-red-200 p-6">
-                <span className="text-2xl mb-3 block">{p.icon}</span>
+                <div className="mb-3 h-1 w-8 rounded-full bg-[#8b6f47]" />
                 <h3 className="font-semibold text-gray-900 mb-2">{p.title}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{p.description}</p>
               </div>
@@ -65,7 +65,7 @@ export default function ProblemTemplate({ data }: { data: ProblemContentData }) 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {data.reassurancePoints.map((p, i) => (
               <div key={i} className="flex items-start gap-4 p-5 bg-white rounded-xl border border-green-200">
-                <span className="text-2xl">{p.icon}</span>
+                <span className="mt-1.5 block h-2.5 w-2.5 flex-shrink-0 rounded-full bg-[#8b6f47]" />
                 <div>
                   <div className="font-semibold text-gray-900 mb-1">{p.title}</div>
                   <p className="text-sm text-gray-600 leading-relaxed">{p.description}</p>

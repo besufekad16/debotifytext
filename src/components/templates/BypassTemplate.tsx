@@ -80,7 +80,7 @@ export default function BypassTemplate({ data }: Props) {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {data.detectorMechanisms.map((m: { icon: string; title: string; description: string }, i: number) => (
               <div key={i} className="rounded-2xl border border-white/10 bg-white/5 p-6">
-                <div className="mb-3 text-3xl">{m.icon}</div>
+                <div className="mb-3 h-1 w-8 rounded-full bg-[#c9a96e]" />
                 <h3 className="mb-2 font-semibold text-white">{m.title}</h3>
                 <p className="text-base text-white/60">{m.description}</p>
               </div>

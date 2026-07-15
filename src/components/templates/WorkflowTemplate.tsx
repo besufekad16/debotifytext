@@ -48,7 +48,7 @@ export default function WorkflowTemplate({ data }: { data: WorkflowContentData }
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {data.roles.map((r, i) => (
               <div key={i} className="bg-white rounded-xl border border-gray-200 p-6">
-                <span className="text-2xl mb-3 block">{r.icon}</span>
+                <div className="mb-3 h-1 w-8 rounded-full bg-[#8b6f47]" />
                 <h3 className="font-semibold text-gray-900 mb-2">{r.title}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{r.description}</p>
               </div>
@@ -63,7 +63,7 @@ export default function WorkflowTemplate({ data }: { data: WorkflowContentData }
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {data.features.map((f, i) => (
               <div key={i} className="flex items-start gap-4 p-5 bg-[#faf7f4] rounded-xl border border-[#e8ddd5]">
-                <span className="text-2xl">{f.icon}</span>
+                <span className="mt-1.5 block h-2.5 w-2.5 flex-shrink-0 rounded-full bg-[#8b6f47]" />
                 <div>
                   <div className="font-semibold text-gray-900 mb-1">{f.title}</div>
                   <p className="text-sm text-gray-600 leading-relaxed">{f.description}</p>

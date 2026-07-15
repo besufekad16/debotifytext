@@ -18,15 +18,19 @@ export interface ComparisonPageData {
   finalCtaSubtitle: string;
 }
 
+// NOTE: `kw` already names the competitor ("X vs HumanifyLab", "Is HumanifyLab
+// better than X", etc.) so the suffix must add a genuinely new angle instead
+// of restating "HumanifyLab vs {comp}" again — otherwise titles read as
+// broken, repetitive spam.
 const META_TITLES: ((kw: string, comp: string) => string)[] = [
-  (kw, comp) => `HumanifyLab vs ${comp}: Which AI Humanizer Wins in 2026? | HumanifyLab`,
-  (kw, comp) => `${kw}: Full Comparison & Verdict | HumanifyLab`,
-  (kw, comp) => `${comp} vs HumanifyLab — Bypass Rate, Price & Features Compared`,
-  (kw, comp) => `Is HumanifyLab Better Than ${comp}? Honest 2026 Review`,
-  (kw, comp) => `${kw} — The Only Comparison You Need | HumanifyLab`,
-  (kw, comp) => `HumanifyLab vs ${comp}: 99.9% Bypass Rate vs ${comp}'s Results`,
-  (kw, comp) => `${comp} Alternative: Why HumanifyLab Wins Every Time`,
-  (kw, comp) => `${kw}: Side-by-Side Comparison | HumanifyLab`,
+  (kw) => `${kw}: Which AI Humanizer Wins in 2026? | HumanifyLab`,
+  (kw) => `${kw}: Full Comparison & Verdict | HumanifyLab`,
+  (kw) => `${kw} — Bypass Rate, Price & Features Compared`,
+  (kw) => `${kw}: Honest 2026 Review`,
+  (kw) => `${kw} — The Only Comparison You Need | HumanifyLab`,
+  (kw) => `${kw}: 99.9% Bypass Rate, Verified Weekly`,
+  (kw) => `${kw}: See Why HumanifyLab Wins`,
+  (kw) => `${kw}: Side-by-Side Comparison | HumanifyLab`,
 ];
 
 const META_DESCS: ((kw: string, comp: string) => string)[] = [
@@ -41,14 +45,14 @@ const META_DESCS: ((kw: string, comp: string) => string)[] = [
 ];
 
 const H1S: ((kw: string, comp: string) => string)[] = [
-  (kw, comp) => `HumanifyLab vs ${comp}: The Definitive 2026 Comparison`,
-  (kw, comp) => `${kw}: Which AI Humanizer Actually Works?`,
-  (kw, comp) => `${comp} vs HumanifyLab — Bypass Rate, Price & Verdict`,
-  (kw, comp) => `Is HumanifyLab Better Than ${comp}?`,
-  (kw, comp) => `${kw}: Full Side-by-Side Comparison`,
-  (kw, comp) => `HumanifyLab vs ${comp}: 99.9% Bypass Rate Wins`,
-  (kw, comp) => `${comp} vs HumanifyLab — The Honest Verdict`,
-  (kw, comp) => `${kw}: HumanifyLab Wins on Every Metric`,
+  (kw) => `${kw}: The Definitive 2026 Comparison`,
+  (kw) => `${kw}: Which AI Humanizer Actually Works?`,
+  (kw) => `${kw} — Bypass Rate, Price & Verdict`,
+  (kw) => `${kw}: Here's the Verdict`,
+  (kw) => `${kw}: Full Side-by-Side Comparison`,
+  (kw) => `${kw}: 99.9% Bypass Rate Wins`,
+  (kw) => `${kw} — The Honest Verdict`,
+  (kw) => `${kw}: HumanifyLab Wins on Every Metric`,
 ];
 
 const HERO_SUBTITLES: ((comp: string) => string)[] = [

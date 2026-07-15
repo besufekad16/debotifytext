@@ -18,15 +18,18 @@ export interface AlternativePageData {
   finalCtaSubtitle: string;
 }
 
+// NOTE: `kw` already names the competitor ("X alternative", "best X
+// alternative free", etc.), so the suffix must add a genuinely new angle
+// instead of restating "{comp} alternative" again.
 const META_TITLES: ((kw: string, comp: string) => string)[] = [
-  (kw, comp) => `Best ${comp} Alternative in 2026: HumanifyLab | 99.9% Bypass Rate`,
-  (kw, comp) => `${kw}: HumanifyLab is the #1 ${comp} Alternative`,
-  (kw, comp) => `${comp} Not Working? Try HumanifyLab — 99.9% Bypass Rate`,
-  (kw, comp) => `${kw} — Free, Fast & More Accurate Than ${comp}`,
-  (kw, comp) => `${comp} Alternative: HumanifyLab Beats It on Every Metric`,
-  (kw, comp) => `${kw}: The ${comp} Alternative That Actually Works`,
-  (kw, comp) => `Looking for a ${comp} Alternative? HumanifyLab Has 99.9% Bypass`,
-  (kw, comp) => `${kw} — Why HumanifyLab is the Best ${comp} Replacement`,
+  (kw) => `${kw} in 2026 | HumanifyLab — 99.9% Bypass Rate`,
+  (kw) => `${kw}: HumanifyLab is the #1 Choice`,
+  (kw) => `${kw} — Try HumanifyLab Instead`,
+  (kw) => `${kw} — Free, Fast & More Accurate`,
+  (kw) => `${kw}: HumanifyLab Wins on Every Metric`,
+  (kw) => `${kw}: The Option That Actually Works`,
+  (kw) => `${kw} — HumanifyLab Has a 99.9% Bypass Rate`,
+  (kw) => `${kw} — Why HumanifyLab Is the Better Choice`,
 ];
 
 const META_DESCS: ((kw: string, comp: string) => string)[] = [
@@ -41,14 +44,14 @@ const META_DESCS: ((kw: string, comp: string) => string)[] = [
 ];
 
 const H1S: ((kw: string, comp: string) => string)[] = [
-  (kw, comp) => `The Best ${comp} Alternative: HumanifyLab`,
-  (kw, comp) => `${kw}: Why HumanifyLab is the #1 ${comp} Replacement`,
-  (kw, comp) => `${comp} Not Working? HumanifyLab Has 99.9% Bypass Rate`,
-  (kw, comp) => `${kw} — Switch to HumanifyLab Today`,
-  (kw, comp) => `${comp} Alternative: HumanifyLab Wins on Every Metric`,
-  (kw, comp) => `${kw}: The ${comp} Alternative That Actually Delivers`,
-  (kw, comp) => `Why HumanifyLab is the Best ${comp} Alternative in 2026`,
-  (kw, comp) => `${kw} — HumanifyLab: Better Than ${comp} in Every Way`,
+  (kw) => `${kw}: Meet HumanifyLab`,
+  (kw) => `${kw}: Why HumanifyLab Is the #1 Replacement`,
+  (kw) => `${kw} — HumanifyLab Has a 99.9% Bypass Rate`,
+  (kw) => `${kw} — Switch to HumanifyLab Today`,
+  (kw) => `${kw}: HumanifyLab Wins on Every Metric`,
+  (kw) => `${kw}: The Option That Actually Delivers`,
+  (kw) => `${kw} in 2026`,
+  (kw) => `${kw} — Better in Every Way`,
 ];
 
 const HERO_SUBTITLES: ((comp: string) => string)[] = [

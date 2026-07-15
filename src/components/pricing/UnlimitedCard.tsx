@@ -230,7 +230,7 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots, 
                 </div>
                 {isUrgent && (
                   <p className="text-[11px] text-orange-300 mt-1.5 font-semibold">
-                    ⚡ Filling fast — only {remaining} spots left
+                    Filling fast — only {remaining} spots left
                   </p>
                 )}
               </div>

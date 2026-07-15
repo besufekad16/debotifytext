@@ -292,12 +292,11 @@ export default function PricingPageClient({ isTeamMember = false, hasSubscriptio
         </div>
 
         {/* Affiliate callout */}
-        <div className="mt-8 rounded-xl border-2 border-dashed border-violet-200 bg-gradient-to-r from-violet-50 to-purple-50 p-8">
+        <div className="mt-8 rounded-2xl border border-[#e8ddd5] bg-[#faf7f4] p-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="text-center sm:text-left">
               <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
-                <span className="text-2xl">💸</span>
-                <span className="text-xs font-bold uppercase tracking-widest text-violet-600 bg-violet-100 px-2 py-0.5 rounded-full">
+                <span className="text-xs font-bold uppercase tracking-widest text-[#5e3d2a] bg-[#5e3d2a]/10 px-2.5 py-0.5 rounded-full">
                   Affiliate Program
                 </span>
               </div>
@@ -316,10 +315,10 @@ export default function PricingPageClient({ isTeamMember = false, hasSubscriptio
             </div>
             <Button
               size="lg"
-              className="shrink-0 bg-violet-600 hover:bg-violet-700 text-white font-semibold px-8"
+              className="shrink-0 rounded-xl bg-[#5e3d2a] hover:bg-[#4a2f1f] text-white font-semibold px-8"
               onClick={() => router.push("/affiliate")}
             >
-              Start Earning →
+              Start Earning
             </Button>
           </div>
         </div>

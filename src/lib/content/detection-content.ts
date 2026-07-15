@@ -19,15 +19,20 @@ export interface DetectionPageData {
   finalCtaSubtitle: string;
 }
 
+// NOTE: `kw` (the keyword phrase, e.g. "does turnitin detect chatgpt") always
+// already names the detector and tool — so the suffix here must NOT restate
+// "{det} detect {tool}" again or titles read as broken, repetitive spam
+// ("Does Turnitin Detect ChatGPT: Does Turnitin Detect ChatGPT? ..."). Every
+// formula below adds a genuinely new benefit/CTA instead of echoing kw.
 const META_TITLES: ((kw: string, det: string, tool: string) => string)[] = [
-  (kw, det, tool) => `Does ${det} Detect ${tool}? Yes — Here's How to Fix It | HumanifyLab`,
-  (kw, det, tool) => `${kw}: The Answer + How to Bypass ${det} | HumanifyLab`,
-  (kw, det, tool) => `Can ${det} Detect ${tool}? Yes — Beat It with HumanifyLab`,
-  (kw, det, tool) => `${kw} — ${det} Detection Explained & Bypassed | HumanifyLab`,
-  (kw, det, tool) => `${det} Detects ${tool}: How to Make It Undetectable | HumanifyLab`,
-  (kw, det, tool) => `${kw}: Beat ${det}'s ${tool} Detection | HumanifyLab`,
-  (kw, det, tool) => `${det} vs ${tool}: How Detection Works & How to Bypass It`,
-  (kw, det, tool) => `${kw} — 99.9% ${det} Bypass for ${tool} Content | HumanifyLab`,
+  (kw) => `${kw} — Here's the Fix | HumanifyLab`,
+  (kw) => `${kw}: The Answer, Plus How to Fix It | HumanifyLab`,
+  (kw) => `${kw} — Solved with a 99.9% Bypass Rate | HumanifyLab`,
+  (kw) => `${kw} — Explained, and How to Bypass It | HumanifyLab`,
+  (kw) => `${kw}: How to Make It Undetectable | HumanifyLab`,
+  (kw) => `${kw} — Verified Weekly, 99.9% Success | HumanifyLab`,
+  (kw) => `${kw}: The Complete 2026 Bypass Guide`,
+  (kw) => `${kw} — Free Fix, Results in 10 Seconds | HumanifyLab`,
 ];
 
 const META_DESCS: ((kw: string, det: string, tool: string) => string)[] = [
@@ -42,14 +47,14 @@ const META_DESCS: ((kw: string, det: string, tool: string) => string)[] = [
 ];
 
 const H1S: ((kw: string, det: string, tool: string) => string)[] = [
-  (kw, det, tool) => `Does ${det} Detect ${tool}? Yes — Here's How to Fix It`,
-  (kw, det, tool) => `${kw}: Beat ${det}'s ${tool} Detection`,
-  (kw, det, tool) => `Can ${det} Detect ${tool}? The Answer + Solution`,
-  (kw, det, tool) => `${det} Detects ${tool}: Make It Undetectable`,
-  (kw, det, tool) => `${kw} — ${det} Detection Explained & Bypassed`,
-  (kw, det, tool) => `${det} vs ${tool}: How to Win`,
-  (kw, det, tool) => `${kw}: 99.9% ${det} Bypass for ${tool} Content`,
-  (kw, det, tool) => `${det} Flags ${tool}? HumanifyLab Fixes It`,
+  (kw) => `${kw} — Here's How to Fix It`,
+  (kw) => `${kw}: The Answer + Solution`,
+  (kw) => `${kw} — Make It Undetectable`,
+  (kw) => `${kw}: Explained & Bypassed`,
+  (kw) => `${kw} — Verified 99.9% Bypass Rate`,
+  (kw) => `${kw}: How to Win in 2026`,
+  (kw) => `${kw} — The Complete Fix`,
+  (kw) => `${kw}? HumanifyLab Fixes It`,
 ];
 
 const HERO_SUBTITLES: ((det: string, tool: string) => string)[] = [

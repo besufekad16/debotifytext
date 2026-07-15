@@ -221,7 +221,11 @@ const BYPASS: string[] = [
 // ─── CLUSTER 2: HUMANIZER TOOLS (500) ────────────────────────────────────────
 const HUMANIZER: string[] = [
   // Core humanizer (60)
-  "ai humanizer","free ai humanizer","best ai humanizer","ai humanizer online","ai humanizer free",
+  // NOTE: bare "ai humanizer" is intentionally excluded here — it is the
+  // homepage's primary target keyword. Keeping a second spun page targeting
+  // the exact same phrase creates keyword cannibalization that splits ranking
+  // signals between two competing URLs. See next.config.js redirect.
+  "free ai humanizer","best ai humanizer","ai humanizer online","ai humanizer free",
   "ai humanizer tool","ai humanizer 2026","ai humanizer no sign up","ai humanizer no watermark",
   "ai humanizer instantly","ai humanizer high quality","ai humanizer professional","ai humanizer accurate",
   "ai humanizer fast","ai humanizer reliable","ai humanizer trusted","ai humanizer best",

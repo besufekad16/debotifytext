@@ -1,9 +1,10 @@
 import { type Metadata } from "next";
 import { currentUser } from "@clerk/nextjs/server";
 import Link from "next/link";
+import { Mail, MessageCircleQuestion, Building2 } from "lucide-react";
 
-import PageNavbar from "~/components/PageNavbar";
-import { SiteFooter } from "~/components/SiteFooter";
+import MarketingShell from "~/components/marketing/MarketingShell";
+import { Section, Container, Eyebrow } from "~/components/marketing/primitives";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
@@ -96,26 +97,24 @@ export default async function ContactPage() {
 
   const contactHighlights = [
     {
-      badge: "Support",
-      badgeStyles: "border-2 border-[#D4C4B0] text-[#6D5635]",
+      icon: Mail,
       title: "Email us anytime",
       description: (
         <>
-          <a href="mailto:humanifylab1@gmail.com" className="font-semibold text-[#6D5635] underline underline-offset-4">
+          <a href="mailto:humanifylab1@gmail.com" className="font-semibold text-[#5e3d2a] underline underline-offset-4">
             humanifylab1@gmail.com
           </a>{" "}
-          • We respond in under 24 hours.
+          — we respond in under 24 hours.
         </>
       ),
     },
     {
-      badge: "Help",
-      badgeStyles: "border-2 border-[#D4C4B0] text-[#6D5635]",
+      icon: MessageCircleQuestion,
       title: "Prefer self-serve answers?",
       description: (
         <>
           Visit{" "}
-          <Link className="font-semibold text-[#6D5635] underline underline-offset-4" href="/faq">
+          <Link className="font-semibold text-[#5e3d2a] underline underline-offset-4" href="/faq">
             our FAQ
           </Link>{" "}
           for tutorials, billing, and compliance docs.
@@ -123,15 +122,15 @@ export default async function ContactPage() {
       ),
     },
     {
-      badge: "Enterprise",
-      badgeStyles: "border-2 border-[#D4C4B0] text-[#6D5635]",
+      icon: Building2,
       title: "Need a custom plan?",
-      description: "Share your compliance requirements and volume. We’ll schedule a call with our solutions team.",
+      description:
+        "Share your compliance requirements and volume. We'll schedule a call with our solutions team.",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <MarketingShell>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -140,62 +139,60 @@ export default async function ContactPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
       />
-      <PageNavbar />
-      <main className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-16">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <span className="inline-flex items-center gap-2 rounded-full  border border-[#D4C4B0] bg-card px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#6D5635]">
-                We’d love to hear from you
-              </span>
-              <h1 className="text-[1.6rem] sm:text-[2rem] font-semibold tracking-tight text-gray-950">
-                Contact the HumanifyLab team
-              </h1>
-              <p className="max-w-xl text-[14px] leading-relaxed text-gray-400">
-                Tell us about your use case, partnership idea, or anything else on your mind. We’ll reply within one business day.
+
+      <Section>
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-16">
+            {/* Left: intro + highlights */}
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <Eyebrow>Contact</Eyebrow>
+                <h1 className="text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+                  Talk to the HumanifyLab team
+                </h1>
+                <p className="max-w-xl text-base leading-relaxed text-gray-600">
+                  Tell us about your use case, partnership idea, or anything else on your mind. We reply within one
+                  business day.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                {contactHighlights.map(({ icon: Icon, title, description }) => (
+                  <div
+                    key={title}
+                    className="flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-5 transition-colors hover:border-[#8b6f47]/40"
+                  >
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-[#5e3d2a]">
+                      <Icon className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-900">{title}</p>
+                      <p className="mt-1 text-sm leading-relaxed text-gray-600">{description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="rounded-2xl bg-[#faf7f4] p-5">
+                <p className="text-sm font-semibold text-gray-900">Availability</p>
+                <p className="mt-1 text-sm text-gray-600">24/7 customer support, worldwide.</p>
+              </div>
+            </div>
+
+            {/* Right: form */}
+            <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-[0_24px_60px_-40px_rgba(94,61,42,0.35)] sm:p-8">
+              <h2 className="text-xl font-semibold tracking-tight text-gray-900">Send us a message</h2>
+              <p className="mt-2 text-sm text-gray-600">
+                Fill out the form and we&apos;ll follow up with the best next step.
               </p>
-            </div>
-
-            <div className="space-y-4">
-              {contactHighlights.map(({ badge, badgeStyles, title, description }) => (
-                <div
-                  key={badge}
-                  className="flex flex-col gap-4 rounded-2xl border border-[#D4C4B0] bg-white/95 p-5 shadow-sm sm:flex-row sm:items-center sm:gap-6"
-                >
-                  <div className="flex justify-center sm:justify-start">
-                    <span
-                      className={`inline-flex min-w-[100px] items-center justify-center rounded-full px-3 py-1 text-xs font-semibold ${badgeStyles}`}
-                    >
-                      {badge}
-                    </span>
-                  </div>
-                  <div className="space-y-1 text-center sm:text-left">
-                    <p className="text-[13.5px] font-semibold text-gray-900">{title}</p>
-                    <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="rounded-2xl border border-[#D4C4B0] bg-white/90 p-6 shadow-sm">
-              <p className="text-[13px] font-semibold text-gray-900">Availability</p>
-              <p className="mt-1 text-[13px] text-gray-400">24/7 Customer Support</p>
+              <div className="mt-7">
+                <ContactForm initialEmail={userEmail} isEmailReadOnly={!!userEmail} />
+              </div>
             </div>
           </div>
-
-          <div className="rounded-[28px] border border-[#D4C4B0] bg-card p-8 shadow-[0_26px_55px_-38px_rgba(24,18,54,0.45)]">
-            <h2 className="text-[1.15rem] font-semibold tracking-tight text-gray-900">Send us a message</h2>
-            <p className="mt-2 text-[13px] text-gray-400">
-              Fill out the form and we’ll follow up with the best next step.
-            </p>
-            <div className="mt-8">
-              <ContactForm initialEmail={userEmail} isEmailReadOnly={!!userEmail} />
-            </div>
-          </div>
-        </div>
-      </main>
-      <SiteFooter />
-    </div>
+        </Container>
+      </Section>
+    </MarketingShell>
   );
 }
 

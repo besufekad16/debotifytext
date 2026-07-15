@@ -111,22 +111,24 @@ export default async function PricingPage() {
     }
   }
 
-  return (<>
-    <PageNavbar />
-    <div className="mb-12 text-center pt-4">
-      <h1 className="mb-4 text-[1.6rem] sm:text-[2rem] font-bold tracking-tight text-gray-950">
-        Choose Your Perfect Plan
-      </h1>
-      <p className="mx-auto max-w-2xl text-[14px] text-gray-400">
-        Transform AI-generated content into natural, human-like writing. All plans include our advanced humanization features.
-      </p>
-
+  return (
+    <div className="flex min-h-screen flex-col bg-white">
+      <PageNavbar />
+      <main className="flex-1">
+        <div className="mx-auto max-w-3xl px-5 pb-4 pt-14 text-center sm:px-6 sm:pt-16">
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8b6f47]">Pricing</span>
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+            Simple, transparent pricing
+          </h1>
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-600">
+            Transform AI-generated content into natural, human-like writing. Every plan includes our full humanization
+            engine — upgrade or cancel anytime.
+          </p>
+        </div>
+        <PricingPageClient isTeamMember={isTeamMember} hasSubscription={hasSubscription} />
+      </main>
+      <SiteFooter />
     </div>
-    <PricingPageClient isTeamMember={isTeamMember} hasSubscription={hasSubscription} />
-
-    <SiteFooter />
-  </>
   );
-
 }
 

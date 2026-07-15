@@ -31,7 +31,7 @@ export default function RegionTemplate({ data }: { data: RegionContentData }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {data.regionPoints.map((p, i) => (
               <div key={i} className="bg-white rounded-xl border border-gray-200 p-6">
-                <span className="text-2xl mb-3 block">{p.icon}</span>
+                <div className="mb-3 h-1 w-8 rounded-full bg-[#8b6f47]" />
                 <h3 className="font-semibold text-gray-900 mb-2">{p.title}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{p.description}</p>
               </div>

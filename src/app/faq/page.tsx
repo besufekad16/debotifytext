@@ -1,7 +1,6 @@
 import { type Metadata } from "next";
-import Link from "next/link";
-import PageNavbar from "~/components/PageNavbar";
-import { SiteFooter } from "~/components/SiteFooter";
+import MarketingShell from "~/components/marketing/MarketingShell";
+import { Section, Container, SectionHeading, PrimaryButton, SecondaryButton } from "~/components/marketing/primitives";
 
 export const metadata: Metadata = {
   title: "FAQ — AI Humanizer Questions Answered",
@@ -151,7 +150,7 @@ export default function FAQPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <MarketingShell>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -160,63 +159,58 @@ export default function FAQPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <PageNavbar />
-      <main className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-            FAQ
-          </h1>
-        </div>
 
-        <div className="space-y-12">
-          {faqs.map((category, categoryIndex) => (
-            <div key={categoryIndex}>
-              <h2 className="mb-6 text-xl font-bold text-gray-900 border-b border-gray-200 pb-3">
-                {category.category}
-              </h2>
-              <div className="space-y-0">
-                {category.questions.map((faq, faqIndex) => (
-                  <div
-                    key={faqIndex}
-                    className="border-b border-gray-200"
-                  >
-                    <div className="py-5 px-2 hover:bg-gray-50 transition-colors">
-                      <h3 className="text-base font-semibold text-gray-900 mb-3">
-                        {faq.question}
-                      </h3>
-                      <p className="text-sm leading-relaxed text-gray-600">
-                        {faq.answer}
-                      </p>
+      <Section tone="dark" compact>
+        <Container width="narrow" className="text-center">
+          <SectionHeading
+            as="h1"
+            dark
+            eyebrow="Support"
+            title="Frequently asked questions"
+            description="Everything you need to know about HumanifyLab — how it works, pricing, privacy, and support."
+          />
+        </Container>
+      </Section>
+
+      <Section>
+        <Container width="narrow">
+          <div className="space-y-12">
+            {faqs.map((category, categoryIndex) => (
+              <div key={categoryIndex}>
+                <h2 className="mb-6 border-b border-gray-200 pb-3 text-lg font-semibold text-gray-900">
+                  {category.category}
+                </h2>
+                <div className="space-y-4">
+                  {category.questions.map((faq, faqIndex) => (
+                    <div
+                      key={faqIndex}
+                      className="rounded-2xl border border-gray-200 bg-white p-6 transition-colors hover:border-[#8b6f47]/40"
+                    >
+                      <h3 className="mb-2 text-base font-semibold text-gray-900">{faq.question}</h3>
+                      <p className="text-sm leading-relaxed text-gray-600">{faq.answer}</p>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
 
-        <div className="mt-16 border-t border-gray-200 pt-8 text-center">
-          <h2 className="text-xl font-bold text-gray-900">
-            Still have questions?
-          </h2>
-          <p className="mt-2 text-sm text-gray-600">
+      <Section tone="muted" compact>
+        <Container width="narrow" className="text-center">
+          <h2 className="text-2xl font-semibold tracking-tight text-gray-900">Still have questions?</h2>
+          <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-gray-600">
             Can&apos;t find the answer you&apos;re looking for? Our support team is here to help.
           </p>
-          <div className="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link href="/contact">
-              <button className="bg-[#8B6F47] px-6 py-3 font-semibold text-white shadow-sm transition hover:bg-[#6D5635]">
-                Contact Support
-              </button>
-            </Link>
-            <Link href="/pricing">
-              <button className="border-2 border-[#8B6F47] px-6 py-3 font-semibold text-[#8B6F47] transition hover:bg-[#8B6F47] hover:text-white">
-                View Pricing Plans
-              </button>
-            </Link>
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <PrimaryButton href="/contact" withArrow={false}>
+              Contact Support
+            </PrimaryButton>
+            <SecondaryButton href="/pricing">View Pricing Plans</SecondaryButton>
           </div>
-        </div>
-      </main>
-      <SiteFooter />
-    </div>
+        </Container>
+      </Section>
+    </MarketingShell>
   );
 }

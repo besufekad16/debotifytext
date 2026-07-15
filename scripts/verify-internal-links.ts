@@ -1,33 +1,75 @@
 /**
- * Verifies that every internal link used in SEOPageWrapper (link pool +
- * cluster hub hrefs) resolves to a real PSEO slug. Run: npx tsx scripts/verify-internal-links.ts
+ * Verifies the internal linking system is sound:
+ *  - every cluster in the registry resolves to a non-empty entry list
+ *  - every curated FLAGSHIP_POOL href in related-links.ts resolves to either
+ *    a real pSEO slug or a known hand-authored static route
+ *  - every geo slug resolves via the geo dataset
+ *
+ * Run: npx tsx scripts/verify-internal-links.ts
  */
 import { getKeywordBySlug } from "../src/lib/pseo-data";
 import { getV2KeywordBySlug } from "../src/lib/pseo-data-v2";
 import { getV3KeywordBySlug } from "../src/lib/pseo-data-v3";
 import { getV4KeywordBySlug } from "../src/lib/pseo-data-v4";
+import { getGeoKeywordBySlug, getAllGeoSlugs } from "../src/lib/pseo-data-geo";
+import { CLUSTER_REGISTRY, CLUSTER_ORDER } from "../src/lib/pseo-clusters";
 
-const slugs = [
-  // cluster hub hrefs
-  "bypass-ai-detection", "ai-humanizer", "how-to-humanize-ai-text", "ai-humanizer-for-students",
-  "best-ai-humanizer", "humanize-ai-essay-for-college", "humanize-ai-for-seo-content", "bypass-turnitin-ai-detection",
-  "ai-humanizer-spanish", "ai-humanizer-for-youtube", "humanifylab-pricing", "ai-humanizer-for-healthcare",
-  "humanize-ai-blog-post", "instant-ai-humanizer", "most-accurate-ai-humanizer", "ai-humanizer-for-chatgpt",
-  "how-to-fix-ai-flagged-my-essay", "ai-humanizer-for-agencies", "get-0-percent-ai-score", "ai-humanizer-for-uk-students",
-  "humanifylab-vs-undetectable-ai", "undetectable-ai-alternative", "humanifylab-review", "ai-humanizer-free-no-sign-up",
-  "does-turnitin-detect-chatgpt", "ai-humanizer-for-essay", "history-essay-ai-humanizer", "ai-humanizer-for-google-docs",
-  "make-chatgpt-sound-human", "bulk-ai-humanizer",
-  // link pool
-  "bypass-gptzero", "free-ai-humanizer", "chatgpt-humanizer", "bypass-originality-ai",
-  "bypass-zerogpt", "bypass-copyleaks",
-];
+// Hand-authored static routes that are NOT part of any pSEO dataset —
+// these live as real folders under src/app/.
+const STATIC_ROUTES = new Set([
+  "bypass-ai-detectors",
+  "ai-detector",
+  "topics",
+  ...getAllGeoSlugs(),
+]);
 
-let missing = 0;
-for (const s of slugs) {
-  const found = getKeywordBySlug(s) ?? getV2KeywordBySlug(s) ?? getV3KeywordBySlug(s) ?? getV4KeywordBySlug(s);
-  if (!found) {
-    console.log("MISSING:", s);
-    missing++;
+function resolvesToPseoSlug(slug: string): boolean {
+  return Boolean(
+    getKeywordBySlug(slug) ?? getV2KeywordBySlug(slug) ?? getV3KeywordBySlug(slug) ?? getV4KeywordBySlug(slug) ?? getGeoKeywordBySlug(slug),
+  );
+}
+
+let problems = 0;
+
+console.log("--- Cluster registry sanity ---");
+for (const key of CLUSTER_ORDER) {
+  const count = CLUSTER_REGISTRY[key].getEntries().length;
+  if (count === 0) {
+    console.log(`EMPTY CLUSTER: ${key}`);
+    problems++;
   }
 }
-console.log(missing === 0 ? "ALL LINKS OK" : `${missing} MISSING`);
+console.log(`${CLUSTER_ORDER.length} clusters checked.`);
+
+console.log("\n--- Flagship pool links (src/lib/related-links.ts) ---");
+const FLAGSHIP_HREFS = [
+  "/bypass-ai-detectors",
+  "/ai-detector",
+  "/free-ai-humanizer",
+  "/best-ai-humanizer",
+  "/bypass-turnitin-ai-detection",
+  "/does-turnitin-detect-chatgpt",
+  "/ai-humanizer-usa",
+  "/ai-humanizer-uk",
+];
+for (const href of FLAGSHIP_HREFS) {
+  const slug = href.replace(/^\//, "");
+  const ok = STATIC_ROUTES.has(slug) || resolvesToPseoSlug(slug);
+  if (!ok) {
+    console.log("MISSING:", href);
+    problems++;
+  }
+}
+console.log(`${FLAGSHIP_HREFS.length} flagship links checked.`);
+
+console.log("\n--- Geo slugs ---");
+for (const slug of getAllGeoSlugs()) {
+  if (!getGeoKeywordBySlug(slug)) {
+    console.log("MISSING GEO:", slug);
+    problems++;
+  }
+}
+console.log(`${getAllGeoSlugs().length} geo slugs checked.`);
+
+console.log(problems === 0 ? "\nALL LINKS OK" : `\n${problems} PROBLEM(S) FOUND`);
+process.exit(problems === 0 ? 0 : 1);

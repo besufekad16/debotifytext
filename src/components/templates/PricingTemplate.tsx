@@ -64,7 +64,7 @@ export default function PricingTemplate({ data }: { data: PricingPageData }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {data.valueProps.map((v, i) => (
               <div key={i} className="flex items-start gap-4 p-5 bg-[#faf7f4] rounded-xl border border-[#e8ddd5]">
-                <span className="text-2xl">{v.icon}</span>
+                <span className="mt-1.5 block h-2.5 w-2.5 flex-shrink-0 rounded-full bg-[#8b6f47]" />
                 <div>
                   <div className="font-semibold text-gray-900 mb-1">{v.title}</div>
                   <p className="text-sm text-gray-600 leading-relaxed">{v.description}</p>
