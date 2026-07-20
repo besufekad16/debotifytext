@@ -83,7 +83,7 @@ export function generateFreeContent(entry: KeywordEntryV4): FreePageData {
   const di = uniqueIdx(seed, keyword, META_DESCS.length, 1);
   const hi = uniqueIdx(seed, keyword, H1S.length, 2);
   const hsi = uniqueIdx(seed, keyword, HERO_SUBTITLES.length, 3);
-  const fqi = uniqueIdx(seed, keyword, FAQ_POOL.length, 6);
+  // fqi removed — FAQs now use keyword-specific buildFaqs
 
   return {
     metaTitle: META_TITLES[ti]!(displayKeyword),
@@ -94,7 +94,7 @@ export function generateFreeContent(entry: KeywordEntryV4): FreePageData {
     features: buildFeaturePoints(keyword, seed, 'free'),
     steps: buildSteps(keyword, seed, 'free'),
     stats: buildStats(keyword, seed),
-    faqs: FAQ_POOL[fqi]!(keyword),
+    faqs: buildFaqs(keyword, seed, '', 'free'),
     faqTitle: combo.faqTitle,
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,

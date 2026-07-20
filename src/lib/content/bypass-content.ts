@@ -1,6 +1,7 @@
 import type { KeywordEntry } from '~/lib/pseo-data';
 import type { BypassPageData } from '~/components/templates/BypassTemplate';
 import { uniqueIdx, uniqueNum, smartTitleCase } from '~/lib/content/content-utils';
+import { buildFaqs } from '~/lib/content/content-combinator';
 
 // ── Detector metadata ─────────────────────────────────────────────────────────
 interface DetectorMeta {
@@ -303,7 +304,7 @@ export function generateBypassContent(entry: KeywordEntry): BypassPageData {
   const heroFn = HERO_SUBTITLES[uniqueIdx(seed, keyword, HERO_SUBTITLES.length, 3)]!;
   const pair = BEFORE_AFTER_PAIRS[uniqueIdx(seed, keyword, BEFORE_AFTER_PAIRS.length, 4)]!;
   const steps = STEPS_POOL[uniqueIdx(seed, keyword, STEPS_POOL.length, 5)]!;
-  const faqFn = FAQ_POOL[uniqueIdx(seed, keyword, FAQ_POOL.length, 6)]!;
+  // faqFn removed — FAQs now use keyword-specific buildFaqs
   const compRows = COMPARISON_ROWS_POOL[uniqueIdx(seed, keyword, COMPARISON_ROWS_POOL.length, 7)]!;
 
   // Unique stats per page
@@ -342,7 +343,7 @@ export function generateBypassContent(entry: KeywordEntry): BypassPageData {
     comparisonTitle: `HumanifyLab vs. Other ${det} Bypass Tools`,
     comparisonRows: compRows,
     faqTitle: `${kw}: Frequently Asked Questions`,
-    faqs: faqFn(keyword, det),
+    faqs: buildFaqs(keyword, seed, det, 'bypass'),
     finalCtaTitle: `Ready to Beat ${det}?`,
     finalCtaSubtitle: `Join ${activeUsers} users who trust HumanifyLab to make their AI content completely undetectable. Free to start — no credit card required.`,
   };

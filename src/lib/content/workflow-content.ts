@@ -202,7 +202,7 @@ export function generateWorkflowContent(entry: KeywordEntryV3): WorkflowContentD
   const wsi = uniqueIdx(seed, keyword, WORKFLOW_STEP_SETS.length, 4);
   const rsi = uniqueIdx(seed, keyword, ROLE_SETS.length, 5);
   const fsi = uniqueIdx(seed, keyword, FEATURE_SETS.length, 6);
-  const fi = uniqueIdx(seed, keyword, FAQ_SETS.length, 7);
+  // fi removed — FAQs now use keyword-specific buildFaqs
 
   const stats = buildStats(keyword, seed);
 
@@ -224,7 +224,7 @@ export function generateWorkflowContent(entry: KeywordEntryV3): WorkflowContentD
     featuresTitle: featuresTitles[uniqueIdx(seed, keyword, featuresTitles.length, 14)]!,
     features: FEATURE_SETS[fsi]!,
     faqTitle: combo.faqTitle,
-    faqs: FAQ_SETS[fi]!,
+    faqs: buildFaqs(keyword, seed, entry.entity ?? '', 'workflow'),
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,
   };

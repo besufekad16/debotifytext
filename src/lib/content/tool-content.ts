@@ -182,7 +182,7 @@ export function generateToolContent(entry: KeywordEntryV3): ToolContentData {
   const isi = uniqueIdx(seed, keyword, INTEGRATION_SETS.length, 4);
   const ssi = uniqueIdx(seed, keyword, STEP_SETS.length, 5);
   const fsi = uniqueIdx(seed, keyword, FEATURE_SETS.length, 6);
-  const fi = uniqueIdx(seed, keyword, FAQ_SETS.length, 7);
+  // fi removed — FAQs now use keyword-specific buildFaqs
 
   const stats = buildStats(keyword, seed);
 
@@ -209,7 +209,7 @@ export function generateToolContent(entry: KeywordEntryV3): ToolContentData {
     featuresTitle: featuresTitles[uniqueIdx(seed, keyword, featuresTitles.length, 14)]!,
     features: FEATURE_SETS[fsi]!,
     faqTitle: combo.faqTitle,
-    faqs: FAQ_SETS[fi]!,
+    faqs: buildFaqs(keyword, seed, entry.entity ?? '', 'tool'),
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,
   };

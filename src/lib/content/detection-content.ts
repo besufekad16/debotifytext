@@ -1,6 +1,6 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
 import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
-import { buildPageStrings, buildStats, buildFeaturePoints } from '~/lib/content/content-combinator';
+import { buildPageStrings, buildStats, buildFeaturePoints, buildFaqs } from '~/lib/content/content-combinator';
 
 export interface DetectionPageData {
   metaTitle: string;
@@ -129,7 +129,7 @@ export function generateDetectionContent(entry: KeywordEntryV4): DetectionPageDa
   const hsi = uniqueIdx(seed, keyword, HERO_SUBTITLES.length, 3);
   const ai = uniqueIdx(seed, keyword, ANSWERS.length, 4);
   const hwi = uniqueIdx(seed, keyword, HOW_IT_WORKS_POOL.length, 5);
-  const fqi = uniqueIdx(seed, keyword, FAQ_POOL.length, 6);
+  // fqi removed — FAQs now use keyword-specific buildFaqs
 
   return {
     metaTitle: META_TITLES[ti]!(displayKeyword, detectorDisplay, toolDisplay),
@@ -142,7 +142,7 @@ export function generateDetectionContent(entry: KeywordEntryV4): DetectionPageDa
     answer: ANSWERS[ai]!,
     howItWorks: HOW_IT_WORKS_POOL[hwi]!,
     stats: buildStats(keyword, seed),
-    faqs: FAQ_POOL[fqi]!(keyword, detectorDisplay, toolDisplay),
+    faqs: buildFaqs(keyword, seed, detectorDisplay, 'detection'),
     faqTitle: combo.faqTitle,
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,

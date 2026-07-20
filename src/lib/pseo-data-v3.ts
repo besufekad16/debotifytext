@@ -739,8 +739,13 @@ export function getAllV3Keywords(): KeywordEntryV3[] {
   return _v3Cache;
 }
 
+let _v3SlugIndex: Map<string, KeywordEntryV3> | null = null;
+
 export function getV3KeywordBySlug(slug: string): KeywordEntryV3 | undefined {
-  return getAllV3Keywords().find(e => e.slug === slug);
+  if (!_v3SlugIndex) {
+    _v3SlugIndex = new Map(getAllV3Keywords().map((e) => [e.slug, e]));
+  }
+  return _v3SlugIndex.get(slug);
 }
 
 export function getAllV3Slugs(): string[] {

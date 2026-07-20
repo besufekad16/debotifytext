@@ -1,43 +1,51 @@
 import type { Metadata } from "next";
+import { cache } from "react";
 import { notFound } from "next/navigation";
 import { getAllSlugs, getKeywordBySlug } from "~/lib/pseo-data";
 import { getAllV2Slugs, getV2KeywordBySlug } from "~/lib/pseo-data-v2";
 import { getAllV3Slugs, getV3KeywordBySlug } from "~/lib/pseo-data-v3";
 import { getAllV4Slugs, getV4KeywordBySlug } from "~/lib/pseo-data-v4";
+import { getAllV5Slugs, getV5KeywordBySlug } from "~/lib/pseo-data-v5";
 import { getAllGeoSlugs, getGeoKeywordBySlug } from "~/lib/pseo-data-geo";
-import { generateGeoContent } from "~/lib/content/geo-content";
+import { generateGeoContent as _generateGeoContent } from "~/lib/content/geo-content";
 import GeoTemplate from "~/components/templates/GeoTemplate";
-import { generateBypassContent } from "~/lib/content/bypass-content";
-import { generateHumanizerContent } from "~/lib/content/humanizer-content";
-import { generateHowToContent } from "~/lib/content/howto-content";
-import { generateUseCaseContent } from "~/lib/content/usecase-content";
-import { generateCompetitorContent } from "~/lib/content/competitor-content";
-import { generateAcademicContent } from "~/lib/content/academic-content";
-import { generateProfessionalContent } from "~/lib/content/professional-content";
-import { generateDetectorContent } from "~/lib/content/detector-content";
-import { generateLanguageContent } from "~/lib/content/language-content";
-import { generateNicheContent } from "~/lib/content/niche-content";
-import { generatePricingContent } from "~/lib/content/pricing-content";
-import { generateIndustryContent } from "~/lib/content/industry-content";
-import { generateFormatContent } from "~/lib/content/format-content";
-import { generateSpeedContent } from "~/lib/content/speed-content";
-import { generateQualityContent } from "~/lib/content/quality-content";
-import { generateToolContent } from "~/lib/content/tool-content";
-import { generateProblemContent } from "~/lib/content/problem-content";
-import { generateWorkflowContent } from "~/lib/content/workflow-content";
-import { generateScoreContent } from "~/lib/content/score-content";
-import { generateRegionContent } from "~/lib/content/region-content";
+import { generateBypassContent as _generateBypassContent } from "~/lib/content/bypass-content";
+import { generateHumanizerContent as _generateHumanizerContent } from "~/lib/content/humanizer-content";
+import { generateHowToContent as _generateHowToContent } from "~/lib/content/howto-content";
+import { generateUseCaseContent as _generateUseCaseContent } from "~/lib/content/usecase-content";
+import { generateCompetitorContent as _generateCompetitorContent } from "~/lib/content/competitor-content";
+import { generateAcademicContent as _generateAcademicContent } from "~/lib/content/academic-content";
+import { generateProfessionalContent as _generateProfessionalContent } from "~/lib/content/professional-content";
+import { generateDetectorContent as _generateDetectorContent } from "~/lib/content/detector-content";
+import { generateLanguageContent as _generateLanguageContent } from "~/lib/content/language-content";
+import { generateNicheContent as _generateNicheContent } from "~/lib/content/niche-content";
+import { generatePricingContent as _generatePricingContent } from "~/lib/content/pricing-content";
+import { generateIndustryContent as _generateIndustryContent } from "~/lib/content/industry-content";
+import { generateFormatContent as _generateFormatContent } from "~/lib/content/format-content";
+import { generateSpeedContent as _generateSpeedContent } from "~/lib/content/speed-content";
+import { generateQualityContent as _generateQualityContent } from "~/lib/content/quality-content";
+import { generateToolContent as _generateToolContent } from "~/lib/content/tool-content";
+import { generateProblemContent as _generateProblemContent } from "~/lib/content/problem-content";
+import { generateWorkflowContent as _generateWorkflowContent } from "~/lib/content/workflow-content";
+import { generateScoreContent as _generateScoreContent } from "~/lib/content/score-content";
+import { generateRegionContent as _generateRegionContent } from "~/lib/content/region-content";
 // V4 content generators
-import { generateComparisonContent } from "~/lib/content/comparison-content";
-import { generateAlternativeContent } from "~/lib/content/alternative-content";
-import { generateReviewContent } from "~/lib/content/review-content";
-import { generateFreeContent } from "~/lib/content/free-content";
-import { generateDetectionContent } from "~/lib/content/detection-content";
-import { generateWritingContent } from "~/lib/content/writing-content";
-import { generateEducationContent } from "~/lib/content/education-content";
-import { generatePlatformV4Content } from "~/lib/content/platform-content-v4";
-import { generateOutputContent } from "~/lib/content/output-content";
-import { generateBulkContent } from "~/lib/content/bulk-content";
+import { generateComparisonContent as _generateComparisonContent } from "~/lib/content/comparison-content";
+import { generateAlternativeContent as _generateAlternativeContent } from "~/lib/content/alternative-content";
+import { generateReviewContent as _generateReviewContent } from "~/lib/content/review-content";
+import { generateFreeContent as _generateFreeContent } from "~/lib/content/free-content";
+import { generateDetectionContent as _generateDetectionContent } from "~/lib/content/detection-content";
+import { generateWritingContent as _generateWritingContent } from "~/lib/content/writing-content";
+import { generateEducationContent as _generateEducationContent } from "~/lib/content/education-content";
+import { generatePlatformV4Content as _generatePlatformV4Content } from "~/lib/content/platform-content-v4";
+import { generateOutputContent as _generateOutputContent } from "~/lib/content/output-content";
+import { generateBulkContent as _generateBulkContent } from "~/lib/content/bulk-content";
+// V5 content generators
+import { generateCityContent as _generateCityContent } from "~/lib/content/city-content";
+import { generateQuestionContent as _generateQuestionContent } from "~/lib/content/question-content";
+import { generateFeatureContent as _generateFeatureContent } from "~/lib/content/feature-content";
+import { generateLengthContent as _generateLengthContent } from "~/lib/content/length-content";
+import { generateScenarioContent as _generateScenarioContent } from "~/lib/content/scenario-content";
 import BypassTemplate from "~/components/templates/BypassTemplate";
 import HumanizerTemplate from "~/components/templates/HumanizerTemplate";
 import HowToTemplate from "~/components/templates/HowToTemplate";
@@ -60,6 +68,49 @@ import ScoreTemplate from "~/components/templates/ScoreTemplate";
 import RegionTemplate from "~/components/templates/RegionTemplate";
 import V4Template from "~/components/templates/V4Template";
 import SEOPageWrapper from "~/components/templates/SEOPageWrapper";
+
+// Every content generator is wrapped in React's cache() so that calling it
+// twice with the SAME entry object (once from generateMetadata, once from
+// the page component — both run in the same render pass) only computes the
+// content once. Entries are stable object references (pulled from a Map
+// index in the pseo-data modules), so cache() correctly dedupes them. This
+// halves the CPU/GC work per page across all ~23.6k pages at build time.
+const generateGeoContent = cache(_generateGeoContent);
+const generateBypassContent = cache(_generateBypassContent);
+const generateHumanizerContent = cache(_generateHumanizerContent);
+const generateHowToContent = cache(_generateHowToContent);
+const generateUseCaseContent = cache(_generateUseCaseContent);
+const generateCompetitorContent = cache(_generateCompetitorContent);
+const generateAcademicContent = cache(_generateAcademicContent);
+const generateProfessionalContent = cache(_generateProfessionalContent);
+const generateDetectorContent = cache(_generateDetectorContent);
+const generateLanguageContent = cache(_generateLanguageContent);
+const generateNicheContent = cache(_generateNicheContent);
+const generatePricingContent = cache(_generatePricingContent);
+const generateIndustryContent = cache(_generateIndustryContent);
+const generateFormatContent = cache(_generateFormatContent);
+const generateSpeedContent = cache(_generateSpeedContent);
+const generateQualityContent = cache(_generateQualityContent);
+const generateToolContent = cache(_generateToolContent);
+const generateProblemContent = cache(_generateProblemContent);
+const generateWorkflowContent = cache(_generateWorkflowContent);
+const generateScoreContent = cache(_generateScoreContent);
+const generateRegionContent = cache(_generateRegionContent);
+const generateComparisonContent = cache(_generateComparisonContent);
+const generateAlternativeContent = cache(_generateAlternativeContent);
+const generateReviewContent = cache(_generateReviewContent);
+const generateFreeContent = cache(_generateFreeContent);
+const generateDetectionContent = cache(_generateDetectionContent);
+const generateWritingContent = cache(_generateWritingContent);
+const generateEducationContent = cache(_generateEducationContent);
+const generatePlatformV4Content = cache(_generatePlatformV4Content);
+const generateOutputContent = cache(_generateOutputContent);
+const generateBulkContent = cache(_generateBulkContent);
+const generateCityContent = cache(_generateCityContent);
+const generateQuestionContent = cache(_generateQuestionContent);
+const generateFeatureContent = cache(_generateFeatureContent);
+const generateLengthContent = cache(_generateLengthContent);
+const generateScenarioContent = cache(_generateScenarioContent);
 
 interface PageProps {
   params: Promise<{ keyword: string }>;
@@ -129,6 +180,12 @@ function buildKeywords(keyword: string, cluster: string, entity: string): string
     platform: ["ai humanizer for platform", "platform ai humanizer", "bypass ai detection platform"],
     output: ["make ai sound human", "make ai undetectable", "ai to human converter", "humanize ai output"],
     bulk: ["bulk ai humanizer", "mass humanize", "batch ai humanizer", "enterprise ai humanizer"],
+    // V5 clusters
+    city: ["ai humanizer near me", "local ai humanizer", "ai humanizer for students", "best ai humanizer 2026"],
+    question: ["is ai humanizer safe", "does ai humanizer work", "ai humanizer faq", "ai detection questions answered"],
+    feature: ["ai humanizer features", "best ai humanizer tool", "ai humanizer comparison", "ai humanizer capabilities"],
+    length: ["ai humanizer word limit", "humanize long documents", "ai humanizer for essays", "bulk ai humanizer"],
+    scenario: ["ai detection anxiety", "did my professor catch ai", "avoid ai detection before submitting", "ai humanizer before submission"],
   };
   const entityKw = entity && !["AI Humanizer", "Guide", "Use Case", "Academic", "Professional", "AI Detector", "Multilingual", "Niche", "Competitor", "Pricing", "Speed", "Quality", "Problem", "Workflow", "Score", "HumanifyLab"].includes(entity)
     ? [entity.toLowerCase(), `${entity.toLowerCase()} bypass`, `humanize ${entity.toLowerCase()}`, `${entity.toLowerCase()} ai humanizer`]
@@ -137,23 +194,45 @@ function buildKeywords(keyword: string, cluster: string, entity: string): string
   return [keyword, ...core, ...(clusterKws[cluster] ?? []), ...entityKw];
 }
 
+// All ~23.6k pages are pre-rendered at build time. dynamicParams=true stays
+// on as a safety net (any slug added to the datasets after a deploy without
+// a rebuild still renders on first request instead of 404ing), but it is
+// NOT used to skip pre-rendering — every known slug is built up front so the
+// full catalog is indexable/crawlable immediately after deploy.
+//
+// A Set dedupes slugs that might collide across the v1/v2/v3/v4/geo
+// datasets (shouldn't happen, but guards against generateStaticParams
+// returning duplicate params, which Next.js would otherwise build twice).
 export async function generateStaticParams() {
-  const v1 = getAllSlugs().map((slug) => ({ keyword: slug }));
-  const v2 = getAllV2Slugs().map((slug) => ({ keyword: slug }));
-  const v3 = getAllV3Slugs().map((slug) => ({ keyword: slug }));
-  const v4 = getAllV4Slugs().map((slug) => ({ keyword: slug }));
-  const geo = getAllGeoSlugs().map((slug) => ({ keyword: slug }));
-  return [...v1, ...v2, ...v3, ...v4, ...geo];
+  const all = new Set<string>([
+    ...getAllSlugs(),
+    ...getAllV2Slugs(),
+    ...getAllV3Slugs(),
+    ...getAllV4Slugs(),
+    ...getAllV5Slugs(),
+    ...getAllGeoSlugs(),
+  ]);
+  return Array.from(all, (keyword) => ({ keyword }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { keyword } = await params;
+// Resolving which dataset a slug belongs to walks v1 -> v2 -> v3 -> v4 -> v5 -> geo.
+// generateMetadata() and the page component both need this, so it's wrapped
+// in React's cache() — within a single request/render pass it now runs once
+// instead of twice, halving the CPU work per page.
+const resolveEntry = cache((keyword: string) => {
   const entry = getKeywordBySlug(keyword);
   const entryV2 = entry ? null : getV2KeywordBySlug(keyword);
   const entryV3 = entry || entryV2 ? null : getV3KeywordBySlug(keyword);
   const entryV4 = entry || entryV2 || entryV3 ? null : getV4KeywordBySlug(keyword);
-  const entryGeo = entry || entryV2 || entryV3 || entryV4 ? null : getGeoKeywordBySlug(keyword);
-  if (!entry && !entryV2 && !entryV3 && !entryV4 && !entryGeo) return { title: "Not Found" };
+  const entryV5 = entry || entryV2 || entryV3 || entryV4 ? null : getV5KeywordBySlug(keyword);
+  const entryGeo = entry || entryV2 || entryV3 || entryV4 || entryV5 ? null : getGeoKeywordBySlug(keyword);
+  return { entry, entryV2, entryV3, entryV4, entryV5, entryGeo };
+});
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { keyword } = await params;
+  const { entry, entryV2, entryV3, entryV4, entryV5, entryGeo } = resolveEntry(keyword);
+  if (!entry && !entryV2 && !entryV3 && !entryV4 && !entryV5 && !entryGeo) return { title: "Not Found" };
 
   if (entryGeo) {
     const geoData = generateGeoContent(entryGeo);
@@ -225,8 +304,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       case "score": { const d = generateScoreContent(e3); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
       case "region": { const d = generateRegionContent(e3); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
     }
-  } else {
-    const e4 = entryV4!;
+  } else if (entryV4) {
+    const e4 = entryV4;
     switch (e4.cluster) {
       case "comparison": { const d = generateComparisonContent(e4); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
       case "alternative": { const d = generateAlternativeContent(e4); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
@@ -239,12 +318,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       case "output": { const d = generateOutputContent(e4); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
       case "bulk": { const d = generateBulkContent(e4); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
     }
+  } else {
+    const e5 = entryV5!;
+    switch (e5.cluster) {
+      case "city": { const d = generateCityContent(e5); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "question": { const d = generateQuestionContent(e5); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "feature": { const d = generateFeatureContent(e5); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "length": { const d = generateLengthContent(e5); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+      case "scenario": { const d = generateScenarioContent(e5); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
+    }
   }
 
-  const clusterForKeywords = entry?.cluster ?? entryV2?.cluster ?? entryV3?.cluster ?? entryV4?.cluster ?? 'bypass';
-  const entityForKeywords = entry?.entity ?? entryV2?.entity ?? entryV3?.entity ?? entryV4?.entity ?? '';
-  const keywordStr = entry?.keyword ?? entryV2?.keyword ?? entryV3?.keyword ?? entryV4?.keyword ?? keyword;
-  const seedVal = entry?.seed ?? entryV2?.seed ?? entryV3?.seed ?? entryV4?.seed ?? 0;
+  const clusterForKeywords = entry?.cluster ?? entryV2?.cluster ?? entryV3?.cluster ?? entryV4?.cluster ?? entryV5?.cluster ?? 'bypass';
+  const entityForKeywords = entry?.entity ?? entryV2?.entity ?? entryV3?.entity ?? entryV4?.entity ?? entryV5?.entity ?? '';
+  const keywordStr = entry?.keyword ?? entryV2?.keyword ?? entryV3?.keyword ?? entryV4?.keyword ?? entryV5?.keyword ?? keyword;
+  const seedVal = entry?.seed ?? entryV2?.seed ?? entryV3?.seed ?? entryV4?.seed ?? entryV5?.seed ?? 0;
 
   return {
     // Generated titles already include the brand suffix — absolute avoids
@@ -297,12 +385,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function KeywordPage({ params }: PageProps) {
   const { keyword } = await params;
-  const entry = getKeywordBySlug(keyword);
-  const entryV2 = entry ? null : getV2KeywordBySlug(keyword);
-  const entryV3 = entry || entryV2 ? null : getV3KeywordBySlug(keyword);
-  const entryV4 = entry || entryV2 || entryV3 ? null : getV4KeywordBySlug(keyword);
-  const entryGeo = entry || entryV2 || entryV3 || entryV4 ? null : getGeoKeywordBySlug(keyword);
-  if (!entry && !entryV2 && !entryV3 && !entryV4 && !entryGeo) notFound();
+  const { entry, entryV2, entryV3, entryV4, entryV5, entryGeo } = resolveEntry(keyword);
+  if (!entry && !entryV2 && !entryV3 && !entryV4 && !entryV5 && !entryGeo) notFound();
 
   if (entryGeo) {
     const geoData = generateGeoContent(entryGeo);
@@ -348,8 +432,8 @@ export default async function KeywordPage({ params }: PageProps) {
     );
   }
 
-  const seed = entry?.seed ?? entryV2?.seed ?? entryV3?.seed ?? entryV4?.seed ?? 0;
-  const kw = entry?.keyword ?? entryV2?.keyword ?? entryV3?.keyword ?? entryV4?.keyword ?? keyword;
+  const seed = entry?.seed ?? entryV2?.seed ?? entryV3?.seed ?? entryV4?.seed ?? entryV5?.seed ?? 0;
+  const kw = entry?.keyword ?? entryV2?.keyword ?? entryV3?.keyword ?? entryV4?.keyword ?? entryV5?.keyword ?? keyword;
   const publishDate = getPublishDate(seed);
   const modifiedDate = getModifiedDate(seed, publishDate);
 
@@ -633,6 +717,27 @@ export default async function KeywordPage({ params }: PageProps) {
       <SEOPageWrapper keyword={kw} cluster={e4.cluster} publishDate={publishDate} updatedDate={modifiedDate}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <V4Template data={v4Data} cluster={e4.cluster} />
+      </SEOPageWrapper>
+    );
+  }
+  // V5 clusters — whitespace expansion (city/question/feature/length/scenario), also on V4Template
+  if (entryV5) {
+    const e5 = entryV5;
+    let v5Data;
+    switch (e5.cluster) {
+      case "city":     v5Data = generateCityContent(e5); break;
+      case "question": v5Data = generateQuestionContent(e5); break;
+      case "feature":  v5Data = generateFeatureContent(e5); break;
+      case "length":   v5Data = generateLengthContent(e5); break;
+      case "scenario": v5Data = generateScenarioContent(e5); break;
+      default: notFound();
+    }
+    if (!v5Data) notFound();
+    const jsonLd = buildJsonLd(v5Data.h1, v5Data.metaDescription, v5Data.faqs, e5.keyword);
+    return (
+      <SEOPageWrapper keyword={kw} cluster={e5.cluster} publishDate={publishDate} updatedDate={modifiedDate}>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <V4Template data={v5Data} cluster={e5.cluster} />
       </SEOPageWrapper>
     );
   }

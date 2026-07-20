@@ -18,16 +18,43 @@ const config = {
   },
   // Fix multiple lockfiles warning
   outputFileTracingRoot: process.cwd(),
-  
-  // Optimize for large-scale programmatic SEO
-  // NOTE: experimental.workerThreads and cpus are intentionally NOT set.
-  // Next.js 15 static generation with worker threads causes DataCloneError
-  // when module-level function arrays are present in content generators.
-  // Single-threaded generation is slower but reliable.
-  experimental: {},
-  
+
+  // ── Large-scale programmatic SEO build tuning (~23.6k static pages) ──────
+  // Each static-generation worker is a *separate Node process* that loads the
+  // entire compiled server bundle (all content generators + the ~250KB of
+  // inline pSEO keyword data). Left at the default (os.cpus() - 1), a build
+  // machine with 8 CPUs spins up 7 of these simultaneously, which multiplies
+  // peak memory 7x and is what was causing the build to die partway through
+  // (~11k/23.6k pages) with an unhelpful, un-logged worker crash (OOM kill —
+  // Node just disappears, no JS stack trace, which matches "it stops").
+  // Capping concurrency trades a bit of parallelism for a much smaller,
+  // predictable memory footprint. Raise this if you build on a machine/CI
+  // with more RAM (e.g. Vercel's Enhanced Build Machine: 8 CPU / 16GB).
+  experimental: {
+    cpus: Number(process.env.NEXT_BUILD_WORKERS ?? 2),
+    // workerThreads (postMessage/structured-clone based workers) stays off —
+    // the default child_process-based workers are used instead, which is
+    // both more memory-tolerant and the only thing that's been validated
+    // against this codebase's content generators.
+    workerThreads: false,
+  },
+
   // Increase build timeout for large sites — 5000+ pages need more time
   staticPageGenerationTimeout: 300, // 5 minutes per page batch
+
+  // Skip webpack's persistent filesystem cache for production builds. It
+  // exists to speed up *repeated local dev/incremental* builds, but on a
+  // fresh CI/Vercel checkout there is nothing to reuse it from, so it's pure
+  // overhead — and with ~250KB of inline keyword data compiled into the
+  // bundle, serializing it to a cache pack file on disk after every build
+  // ("Serializing big strings... impacts deserialization performance") costs
+  // real time and memory for zero benefit here.
+  webpack: (config, { dev }) => {
+    if (!dev) {
+      config.cache = false;
+    }
+    return config;
+  },
   
   images: {
     remotePatterns: [

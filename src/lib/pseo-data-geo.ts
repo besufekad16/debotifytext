@@ -27,16 +27,25 @@ const GEO_ENTRIES: Omit<KeywordEntryGeo, "cluster">[] = [
   { keyword: "ai humanizer asia", slug: "ai-humanizer-asia", entity: "Asia", seed: 6 },
 ];
 
+let _geoCache: KeywordEntryGeo[] | null = null;
+
 export function getAllGeoEntries(): KeywordEntryGeo[] {
-  return GEO_ENTRIES.map((e) => ({ ...e, cluster: "geo" }));
+  if (_geoCache) return _geoCache;
+  _geoCache = GEO_ENTRIES.map((e) => ({ ...e, cluster: "geo" }));
+  return _geoCache;
 }
 
 export function getAllGeoSlugs(): string[] {
-  return GEO_ENTRIES.map((e) => e.slug);
+  return getAllGeoEntries().map((e) => e.slug);
 }
 
+let _geoSlugIndex: Map<string, KeywordEntryGeo> | null = null;
+
 export function getGeoKeywordBySlug(slug: string): KeywordEntryGeo | undefined {
-  return getAllGeoEntries().find((e) => e.slug === slug);
+  if (!_geoSlugIndex) {
+    _geoSlugIndex = new Map(getAllGeoEntries().map((e) => [e.slug, e]));
+  }
+  return _geoSlugIndex.get(slug);
 }
 
 export function getGeoClusterKeywords(): KeywordEntryGeo[] {

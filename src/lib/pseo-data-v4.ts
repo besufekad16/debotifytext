@@ -490,8 +490,13 @@ export function getAllV4Slugs(): string[] {
   return getAllV4Entries().map((e) => e.slug);
 }
 
+let _v4SlugIndex: Map<string, KeywordEntryV4> | null = null;
+
 export function getV4KeywordBySlug(slug: string): KeywordEntryV4 | undefined {
-  return getAllV4Entries().find((e) => e.slug === slug);
+  if (!_v4SlugIndex) {
+    _v4SlugIndex = new Map(getAllV4Entries().map((e) => [e.slug, e]));
+  }
+  return _v4SlugIndex.get(slug);
 }
 
 export function getV4ClusterKeywords(cluster: ClusterV4): KeywordEntryV4[] {

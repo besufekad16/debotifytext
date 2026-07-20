@@ -187,7 +187,7 @@ export function generateHumanizerContent(entry: KeywordEntry): HumanizerPageData
   const features = FEATURES_POOL[uniqueIdx(seed, keyword, FEATURES_POOL.length, 4)]!;
   const steps = STEPS_POOL[uniqueIdx(seed, keyword, STEPS_POOL.length, 5)]!;
   const testimonials = TESTIMONIALS_POOL[uniqueIdx(seed, keyword, TESTIMONIALS_POOL.length, 6)]!;
-  const faqFn = FAQ_POOL[uniqueIdx(seed, keyword, FAQ_POOL.length, 7)]!;
+  // faqFn removed — FAQs now use keyword-specific buildFaqs
   const activeUsers = `${uniqueNum(seed, keyword, 420, 490, 8)}K+`;
 
   const featuresTitles = [
@@ -227,7 +227,7 @@ export function generateHumanizerContent(entry: KeywordEntry): HumanizerPageData
     testimonialsTitle: ['What Our Users Say', 'Real Results from Real Users', 'Trusted by 450,000+ Users', 'What People Are Saying'][uniqueIdx(seed, keyword, 4, 24)]!,
     testimonials,
     faqTitle: combo.faqTitle,
-    faqs: faqFn(keyword, toolName),
+    faqs: buildFaqs(keyword, seed, toolName, 'humanizer'),
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,
   };

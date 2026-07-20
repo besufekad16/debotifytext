@@ -896,8 +896,13 @@ export function getAllKeywords(): KeywordEntry[] {
   return _cache;
 }
 
+let _slugIndex: Map<string, KeywordEntry> | null = null;
+
 export function getKeywordBySlug(slug: string): KeywordEntry | undefined {
-  return getAllKeywords().find(e => e.slug === slug);
+  if (!_slugIndex) {
+    _slugIndex = new Map(getAllKeywords().map((e) => [e.slug, e]));
+  }
+  return _slugIndex.get(slug);
 }
 
 export function getAllSlugs(): string[] {

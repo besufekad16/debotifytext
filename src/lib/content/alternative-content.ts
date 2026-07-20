@@ -1,6 +1,6 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
 import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
-import { buildPageStrings, buildStats, buildSteps, buildFeaturePoints } from '~/lib/content/content-combinator';
+import { buildPageStrings, buildStats, buildSteps, buildFeaturePoints, buildFaqs } from '~/lib/content/content-combinator';
 
 export interface AlternativePageData {
   metaTitle: string;
@@ -104,7 +104,7 @@ export function generateAlternativeContent(entry: KeywordEntryV4): AlternativePa
   const hi = uniqueIdx(seed, keyword, H1S.length, 2);
   const hsi = uniqueIdx(seed, keyword, HERO_SUBTITLES.length, 3);
   const wsi = uniqueIdx(seed, keyword, WHY_SWITCH_POOL.length, 5);
-  const fqi = uniqueIdx(seed, keyword, FAQ_POOL.length, 6);
+  // fqi removed — FAQs now use keyword-specific buildFaqs
 
   return {
     metaTitle: META_TITLES[ti]!(displayKeyword, competitor),
@@ -116,7 +116,7 @@ export function generateAlternativeContent(entry: KeywordEntryV4): AlternativePa
     whySwitchPoints: WHY_SWITCH_POOL[wsi]!,
     steps: buildSteps(keyword, seed, 'alternative'),
     stats: buildStats(keyword, seed),
-    faqs: FAQ_POOL[fqi]!(keyword, competitor),
+    faqs: buildFaqs(keyword, seed, competitor, 'alternative'),
     faqTitle: combo.faqTitle,
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,

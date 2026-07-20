@@ -129,7 +129,7 @@ export function generateComparisonContent(entry: KeywordEntryV4): ComparisonPage
   const hsi = uniqueIdx(seed, keyword, HERO_SUBTITLES.length, 3);
   const cri = uniqueIdx(seed, keyword, COMPARISON_ROWS_POOL.length, 4);
   const wbi = uniqueIdx(seed, keyword, WHY_BETTER_POOL.length, 5);
-  const fqi = uniqueIdx(seed, keyword, FAQ_POOL.length, 6);
+  // fqi removed — FAQs now use keyword-specific buildFaqs
 
   return {
     metaTitle: META_TITLES[ti]!(displayKeyword, competitor),
@@ -141,7 +141,7 @@ export function generateComparisonContent(entry: KeywordEntryV4): ComparisonPage
     comparisonRows: COMPARISON_ROWS_POOL[cri]!,
     whyBetterPoints: WHY_BETTER_POOL[wbi]!,
     stats: buildStats(keyword, seed),
-    faqs: FAQ_POOL[fqi]!(keyword, competitor),
+    faqs: buildFaqs(keyword, seed, competitor, 'comparison'),
     faqTitle: combo.faqTitle,
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,

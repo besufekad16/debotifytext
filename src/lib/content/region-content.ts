@@ -187,7 +187,7 @@ export function generateRegionContent(entry: KeywordEntryV3): RegionContentData 
   const rpi = uniqueIdx(seed, keyword, REGION_POINT_SETS.length, 4);
   const ssi = uniqueIdx(seed, keyword, STEP_SETS.length, 5);
   const isi = uniqueIdx(seed, keyword, INSTITUTION_SETS.length, 6);
-  const fi = uniqueIdx(seed, keyword, FAQ_SETS.length, 7);
+  // fi removed — FAQs now use keyword-specific buildFaqs
 
   const stats = buildStats(keyword, seed);
 
@@ -224,7 +224,7 @@ export function generateRegionContent(entry: KeywordEntryV3): RegionContentData 
     institutionsTitle: institutionsTitles[uniqueIdx(seed, keyword, institutionsTitles.length, 14)]!,
     institutions: INSTITUTION_SETS[isi]!,
     faqTitle: combo.faqTitle,
-    faqs: FAQ_SETS[fi]!,
+    faqs: buildFaqs(keyword, seed, entry.entity ?? '', 'region'),
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,
   };

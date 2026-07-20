@@ -182,7 +182,7 @@ export function generateHowToContent(entry: KeywordEntry): HowToPageData {
   const steps = STEPS_POOL[uniqueIdx(seed, keyword, STEPS_POOL.length, 1)]!;
   const keyTakeaways = KEY_TAKEAWAYS_POOL[uniqueIdx(seed, keyword, KEY_TAKEAWAYS_POOL.length, 2)]!;
   const whyPoints = WHY_POINTS_POOL[uniqueIdx(seed, keyword, WHY_POINTS_POOL.length, 3)]!;
-  const faqFn = FAQ_POOL[uniqueIdx(seed, keyword, FAQ_POOL.length, 4)]!;
+  // faqFn removed — FAQs now use keyword-specific buildFaqs
   const category = CATEGORIES[uniqueIdx(seed, keyword, CATEGORIES.length, 5)]!;
 
   const tocSets = [
@@ -238,7 +238,7 @@ export function generateHowToContent(entry: KeywordEntry): HowToPageData {
     inlineCtaTitle: inlineCta.title,
     inlineCtaSubtitle: inlineCta.subtitle,
     faqTitle: combo.faqTitle,
-    faqs: faqFn(keyword),
+    faqs: buildFaqs(keyword, seed, '', 'howto'),
     relatedGuides: relatedSets[uniqueIdx(seed, keyword, relatedSets.length, 12)]!,
   };
 }

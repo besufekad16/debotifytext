@@ -1,10 +1,10 @@
 /**
- * Regenerates ALL sitemaps from the live PSEO data (v1–v4).
+ * Regenerates ALL sitemaps from the live PSEO data (v1–v5).
  *
  * Output:
  *   public/sitemap.xml          — sitemap index referencing every cluster sitemap
  *   public/sitemap-main.xml     — core marketing pages
- *   public/sitemap-{cluster}.xml — one per PSEO cluster (30 total)
+ *   public/sitemap-{cluster}.xml — one per PSEO cluster (35 total)
  *
  * Run: npx tsx scripts/generate-all-sitemaps.ts
  */
@@ -15,6 +15,7 @@ import { getClusterKeywords } from "../src/lib/pseo-data";
 import { getV2ClusterKeywords } from "../src/lib/pseo-data-v2";
 import { getV3ClusterKeywords } from "../src/lib/pseo-data-v3";
 import { getV4ClusterKeywords } from "../src/lib/pseo-data-v4";
+import { getV5ClusterKeywords } from "../src/lib/pseo-data-v5";
 import { getGeoClusterKeywords } from "../src/lib/pseo-data-geo";
 import { CLUSTER_ORDER } from "../src/lib/pseo-clusters";
 
@@ -59,6 +60,7 @@ const V1_CLUSTERS = ["bypass", "humanizer", "howto", "usecase"] as const;
 const V2_CLUSTERS = ["competitor", "academic", "professional", "detector", "language", "niche"] as const;
 const V3_CLUSTERS = ["pricing", "industry", "format", "speed", "quality", "tool", "problem", "workflow", "score", "region"] as const;
 const V4_CLUSTERS = ["comparison", "alternative", "review", "free", "detection", "writing", "education", "platform", "output", "bulk"] as const;
+const V5_CLUSTERS = ["city", "question", "feature", "length", "scenario"] as const;
 
 const PRIORITIES: Record<string, string> = {
   bypass: "0.9", humanizer: "0.9", howto: "0.8", usecase: "0.8",
@@ -67,6 +69,7 @@ const PRIORITIES: Record<string, string> = {
   tool: "0.7", problem: "0.8", workflow: "0.7", score: "0.8", region: "0.7",
   comparison: "0.9", alternative: "0.9", review: "0.8", free: "0.8", detection: "0.8",
   writing: "0.8", education: "0.8", platform: "0.7", output: "0.8", bulk: "0.7",
+  city: "0.7", question: "0.8", feature: "0.7", length: "0.7", scenario: "0.8",
   geo: "0.9",
 };
 
@@ -88,6 +91,7 @@ for (const c of V1_CLUSTERS) writeSitemap(c, getClusterKeywords(c).map((e) => ({
 for (const c of V2_CLUSTERS) writeSitemap(c, getV2ClusterKeywords(c).map((e) => ({ slug: e.slug, seed: e.seed })));
 for (const c of V3_CLUSTERS) writeSitemap(c, getV3ClusterKeywords(c).map((e) => ({ slug: e.slug, seed: e.seed })));
 for (const c of V4_CLUSTERS) writeSitemap(c, getV4ClusterKeywords(c).map((e) => ({ slug: e.slug, seed: e.seed })));
+for (const c of V5_CLUSTERS) writeSitemap(c, getV5ClusterKeywords(c).map((e) => ({ slug: e.slug, seed: e.seed })));
 // Geo pages are hand-authored, high-priority flagship pages — small enough
 // to fold into sitemap-main.xml rather than warranting their own file.
 const GEO_ENTRIES = getGeoClusterKeywords().map((e) => ({ slug: e.slug, seed: e.seed }));
@@ -121,7 +125,7 @@ writeFileSync(join(PUBLIC_DIR, "sitemap-main.xml"), mainXml, "utf8");
 written.push({ file: "sitemap-main.xml", count: MAIN_PAGES.length });
 
 // ── Sitemap index ────────────────────────────────────────────────────────────
-const allFiles = ["sitemap-main.xml", ...[...V1_CLUSTERS, ...V2_CLUSTERS, ...V3_CLUSTERS, ...V4_CLUSTERS].map(sitemapFilename)];
+const allFiles = ["sitemap-main.xml", ...[...V1_CLUSTERS, ...V2_CLUSTERS, ...V3_CLUSTERS, ...V4_CLUSTERS, ...V5_CLUSTERS].map(sitemapFilename)];
 const indexXml = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${allFiles.map((f) => `  <sitemap>

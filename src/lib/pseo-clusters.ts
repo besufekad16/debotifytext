@@ -13,9 +13,10 @@ import { getClusterKeywords, type Cluster } from "~/lib/pseo-data";
 import { getV2ClusterKeywords, type ClusterV2 } from "~/lib/pseo-data-v2";
 import { getV3ClusterKeywords, type ClusterV3 } from "~/lib/pseo-data-v3";
 import { getV4ClusterKeywords, type ClusterV4 } from "~/lib/pseo-data-v4";
+import { getV5ClusterKeywords, type ClusterV5 } from "~/lib/pseo-data-v5";
 import { getGeoClusterKeywords } from "~/lib/pseo-data-geo";
 
-export type AnyClusterKey = Cluster | ClusterV2 | ClusterV3 | ClusterV4 | "geo";
+export type AnyClusterKey = Cluster | ClusterV2 | ClusterV3 | ClusterV4 | ClusterV5 | "geo";
 
 export interface LiteEntry {
   keyword: string;
@@ -185,6 +186,31 @@ export const CLUSTER_REGISTRY: Record<AnyClusterKey, ClusterMeta> = {
     description: "Processing AI content at volume — bulk uploads, API access, and enterprise/agency workflows.",
     getEntries: () => getV4ClusterKeywords("bulk"),
   },
+  city: {
+    key: "city", label: "Cities", group: "Regions",
+    description: "Hyperlocal AI humanizer guidance for students and professionals in major cities worldwide.",
+    getEntries: () => getV5ClusterKeywords("city"),
+  },
+  question: {
+    key: "question", label: "Common Questions", group: "Bypass & Detection",
+    description: "Direct answers to the questions people actually ask about AI humanizers and AI detectors.",
+    getEntries: () => getV5ClusterKeywords("question"),
+  },
+  feature: {
+    key: "feature", label: "Features", group: "Comparisons & Reviews",
+    description: "Which AI humanizer features matter, and how HumanifyLab delivers on every one of them.",
+    getEntries: () => getV5ClusterKeywords("feature"),
+  },
+  length: {
+    key: "length", label: "Content Length", group: "Content & Industry",
+    description: "Humanizing AI content at specific word counts, from short social posts to full-length theses.",
+    getEntries: () => getV5ClusterKeywords("length"),
+  },
+  scenario: {
+    key: "scenario", label: "Before You Submit", group: "Humanizer & Use Cases",
+    description: "What to do when you're worried a professor, boss, editor, or client will flag your writing as AI-generated.",
+    getEntries: () => getV5ClusterKeywords("scenario"),
+  },
   geo: {
     key: "geo", label: "Countries & Regions", group: "Regions",
     description: "Flagship AI humanizer landing pages for students and professionals in the United States, Canada, the UK, Europe, Australia, South Africa and Asia.",
@@ -198,6 +224,7 @@ export const CLUSTER_ORDER: AnyClusterKey[] = [
   "competitor", "alternative", "review", "pricing",
   "industry", "format", "tool", "workflow", "niche", "writing", "platform", "bulk",
   "language", "region", "education", "geo", "academic", "professional",
+  "question", "feature", "scenario", "length", "city",
 ];
 
 let _sizeCache: Record<string, number> | null = null;

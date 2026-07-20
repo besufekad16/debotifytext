@@ -221,7 +221,7 @@ export function generateUseCaseContent(entry: KeywordEntry): UseCasePageData {
   const capitalizedKeyword = smartTitleCase(keyword);
 
   const combo = buildPageStrings(capitalizedKeyword, seed, audience.label, 'usecase');
-  const faqFn = FAQ_POOL[uniqueIdx(seed, keyword, FAQ_POOL.length, 1)]!;
+  // faqFn removed — FAQs now use keyword-specific buildFaqs
 
   const heroSubtitles: ((aud: string, kw: string) => string)[] = [
     (aud) => `${aud} face unique challenges with AI detection. HumanifyLab is built to solve them — delivering 99.9% undetectable content that preserves your voice, meets your standards, and passes every detector your institution or client uses.`,
@@ -288,7 +288,7 @@ export function generateUseCaseContent(entry: KeywordEntry): UseCasePageData {
     pricingSubtitle: ['Start free. Upgrade when you need more. No hidden fees.', 'Free plan available. No credit card required.', 'No contracts, no commitments. Pay only for what you need.', 'Start free, scale as you grow.'][uniqueIdx(seed, keyword, 4, 27)]!,
     pricingTiers: PRICING_TIERS,
     faqTitle: combo.faqTitle,
-    faqs: faqFn(keyword, audience.label),
+    faqs: buildFaqs(keyword, seed, audience.label, 'usecase'),
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,
   };

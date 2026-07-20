@@ -166,10 +166,17 @@ const QUESTION_STARTS = [
   'which ', 'where ', 'when ', 'should ',
 ];
 
-export function classifyKeyword(keyword: string): 'action' | 'question' | 'noun' {
+// First-person declarative keywords ("my professor said...", "i am worried
+// my boss will...") read as the searcher describing their own situation.
+const STATEMENT_STARTS = ['my ', 'i ', 'our ', 'we '];
+
+export function classifyKeyword(keyword: string): 'action' | 'question' | 'noun' | 'statement' {
   const k = keyword.toLowerCase().trim();
   for (const q of QUESTION_STARTS) {
     if (k.startsWith(q)) return 'question';
+  }
+  for (const s of STATEMENT_STARTS) {
+    if (k.startsWith(s)) return 'statement';
   }
   const first = k.split(' ')[0] ?? '';
   if (ACTION_FIRST_WORDS.has(first)) return 'action';
@@ -251,6 +258,49 @@ const NOUN_H1_FORMATS = [
   '{keyword} That Actually Works',
   '{keyword} — Instant Results, Meaning Preserved',
   '{keyword}: Undetectable AI Writing {adverb}',
+];
+
+// First-person statement keywords ("my professor said my essay sounds like
+// ai") — used by the v5 `scenario` cluster. Neither the noun formats ("...
+// That Actually Works in 2026") nor the question formats fit a declarative
+// sentence, so these frame the keyword as the reader's situation and the
+// page as the fix.
+const STATEMENT_TITLE_FORMATS = [
+  '{keyword}? Here Is the Fix {suffix}',
+  '{keyword} — What to Do Next {suffix}',
+  '{keyword}: The Fix Takes 10 Seconds {suffix}',
+  '{keyword} — Solved in 2026 {suffix}',
+  '{keyword}? Do This First {suffix}',
+  '{keyword} — The Step-by-Step Fix {suffix}',
+  '{keyword}: Here Is Your Way Out {suffix}',
+  '{keyword} — Fix It Before You Submit {suffix}',
+];
+
+const STATEMENT_H1_FORMATS = [
+  '{keyword}? Here Is the Fix',
+  '{keyword} — What to Do Next',
+  '{keyword}: The Fix Takes 10 Seconds',
+  '{keyword} — Do This Before You Submit',
+  '{keyword}? You Have Options',
+  '{keyword} — The Step-by-Step Fix',
+  '{keyword}: Here Is Your Way Out',
+  '{keyword} — Solved',
+];
+
+const STATEMENT_DESC_OPENERS: ((kw: string) => string)[] = [
+  (kw) => `${kw}? Here is exactly what to do.`,
+  (kw) => `"${kw}" — a situation thousands face. Here is the fix.`,
+  (kw) => `${kw}? Don't panic — the fix takes under a minute.`,
+  (kw) => `${kw}? HumanifyLab solves this before anyone sees your draft.`,
+  (kw) => `If ${kw.toLowerCase()}, here is your step-by-step way out.`,
+  (kw) => `${kw} — the fix is simpler than you think.`,
+];
+
+const STATEMENT_HERO_A: ((kw: string) => string)[] = [
+  (kw) => `"${kw}" — if that sounds familiar, you are not alone, and it is fixable in under a minute.`,
+  (kw) => `Thousands of people search "${kw.toLowerCase()}" every month. Here is the fix that actually works.`,
+  (kw) => `${kw}? The problem is statistical patterns in your text — and HumanifyLab removes them completely.`,
+  (kw) => `This exact situation — ${kw.toLowerCase()} — is what HumanifyLab was built to solve.`,
 ];
 
 const QUESTION_DESC_OPENERS: ((kw: string) => string)[] = [
@@ -686,8 +736,16 @@ export function buildPageStrings(
 
   // Route to grammatically correct format pools by keyword shape
   const kwType = classifyKeyword(keyword);
-  const titlePool = kwType === 'action' ? ACTION_TITLE_FORMATS : kwType === 'question' ? QUESTION_TITLE_FORMATS : NOUN_TITLE_FORMATS;
-  const h1Pool = kwType === 'action' ? ACTION_H1_FORMATS : kwType === 'question' ? QUESTION_H1_FORMATS : NOUN_H1_FORMATS;
+  const titlePool =
+    kwType === 'action' ? ACTION_TITLE_FORMATS :
+    kwType === 'question' ? QUESTION_TITLE_FORMATS :
+    kwType === 'statement' ? STATEMENT_TITLE_FORMATS :
+    NOUN_TITLE_FORMATS;
+  const h1Pool =
+    kwType === 'action' ? ACTION_H1_FORMATS :
+    kwType === 'question' ? QUESTION_H1_FORMATS :
+    kwType === 'statement' ? STATEMENT_H1_FORMATS :
+    NOUN_H1_FORMATS;
   const titleFormat = pick(titlePool, seed, keyword, 3);
   const h1Format = pick(h1Pool, seed, keyword, 4);
 
@@ -698,13 +756,21 @@ export function buildPageStrings(
   const metaTitle = fillTemplate(titleFormat, vars).replace(/\s{2,}/g, ' ').trim();
   const h1 = fillTemplate(h1Format, { adverb, keyword: displayKeyword }).replace(/\s{2,}/g, ' ').trim();
 
-  const openerPool = kwType === 'action' ? DESC_OPENERS : kwType === 'question' ? QUESTION_DESC_OPENERS : NOUN_DESC_OPENERS;
+  const openerPool =
+    kwType === 'action' ? DESC_OPENERS :
+    kwType === 'question' ? QUESTION_DESC_OPENERS :
+    kwType === 'statement' ? STATEMENT_DESC_OPENERS :
+    NOUN_DESC_OPENERS;
   const opener = pick(openerPool, seed, keyword, 5)(displayKeyword);
   const stat = pick(DESC_STATS, seed, keyword, 6);
   const closer = pick(DESC_CLOSERS, seed, keyword, 7);
   const metaDescription = `${opener} ${stat} ${closer}`;
 
-  const heroAPool = kwType === 'action' ? HERO_PARTS_A : kwType === 'question' ? QUESTION_HERO_A : NOUN_HERO_A;
+  const heroAPool =
+    kwType === 'action' ? HERO_PARTS_A :
+    kwType === 'question' ? QUESTION_HERO_A :
+    kwType === 'statement' ? STATEMENT_HERO_A :
+    NOUN_HERO_A;
   const heroBPool = kwType === 'action' ? HERO_PARTS_B : TYPE_NEUTRAL_HERO_B;
   const heroA = pick(heroAPool, seed, keyword, 8)(displayKeyword);
   const heroB = pick(heroBPool, seed, keyword, 9)(displayKeyword);
@@ -717,8 +783,8 @@ export function buildPageStrings(
   const faqTitleTemplate = pick(FAQ_TITLE_FORMATS, seed, keyword, 12);
   const faqTitle = fillTemplate(faqTitleTemplate, { keyword: displayKeyword });
 
-  // Question keywords read badly inside CTA templates — use neutral CTAs there
-  const ctaPool = kwType === 'question'
+  // Question/statement keywords read badly inside CTA templates — use neutral CTAs there
+  const ctaPool = kwType === 'question' || kwType === 'statement'
     ? CTA_TITLE_FORMATS.filter((t) => !t.includes('{keyword}'))
     : CTA_TITLE_FORMATS;
   const ctaTitleTemplate = pick(ctaPool, seed, keyword, 13);

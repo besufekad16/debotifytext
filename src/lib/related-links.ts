@@ -44,6 +44,32 @@ function hashStr(s: string): number {
   return Math.abs(h);
 }
 
+// Deterministically picks up to `count` distinct indices in [0, length) by
+// walking forward from a keyword-derived starting point.
+//
+// NOTE: this used to walk with a keyword-derived `step` and loop "while
+// (picked.length < count && seen.size < length)". That only terminates if
+// step is coprime with length — whenever they share a common factor (which
+// happens for a large fraction of cluster sizes/keywords, since most
+// clusters have hundreds to thousands of entries with lots of small
+// factors), the walk cycles through a strict subset of indices forever,
+// `seen.size` gets stuck below `length`, and the loop never exits. That
+// infinite loop is what was hanging the build partway through (every page
+// calls this via SEOPageWrapper -> buildRelatedLinks, so hitting one
+// unlucky keyword/length combination froze that render forever). Stepping
+// by a fixed +1 always visits every residue exactly once per full cycle
+// through `length`, so this always terminates in at most `length` steps.
+function pickIndices(length: number, seed: number, count: number): number[] {
+  if (length <= 0) return [];
+  const n = Math.min(count, length);
+  const start = seed % length;
+  const indices: number[] = [];
+  for (let i = 0; i < length && indices.length < n; i++) {
+    indices.push((start + i) % length);
+  }
+  return indices;
+}
+
 // Curated high-value pages we want to consistently receive internal links,
 // regardless of which cluster a given page belongs to.
 const FLAGSHIP_POOL: RelatedLink[] = [
@@ -58,36 +84,26 @@ const FLAGSHIP_POOL: RelatedLink[] = [
 ];
 
 function pickFromPool(pool: RelatedLink[], keyword: string, count: number, offset = 0): RelatedLink[] {
-  const start = hashStr(keyword + offset) % pool.length;
-  const step = 1 + (hashStr(keyword + "step" + offset) % (pool.length - 1 || 1));
-  const picked: RelatedLink[] = [];
-  const seen = new Set<number>();
-  let idx = start;
-  while (picked.length < Math.min(count, pool.length) && seen.size < pool.length) {
-    if (!seen.has(idx)) {
-      seen.add(idx);
-      picked.push(pool[idx]!);
-    }
-    idx = (idx + step) % pool.length;
-  }
-  return picked;
+  const seed = hashStr(keyword + offset);
+  return pickIndices(pool.length, seed, count).map((i) => pool[i]!);
 }
 
 export function getRelatedLinks(cluster: string, keyword: string, count = 5): RelatedLink[] {
   const idx = buildIndex();
-  const siblings = (idx.get(cluster as AnyClusterKey) ?? []).filter((e) => e.slug !== toSlug(keyword));
-  if (siblings.length === 0) return [];
-  const start = hashStr(keyword) % siblings.length;
-  const step = 1 + (hashStr(keyword + "s") % (siblings.length - 1 || 1));
+  const all = idx.get(cluster as AnyClusterKey) ?? [];
+  const length = all.length;
+  if (length === 0) return [];
+  const selfSlug = toSlug(keyword);
+  const start = hashStr(keyword) % length;
+  // Walk forward from `start`, skipping self, lazily — avoids allocating a
+  // filtered O(length) copy of the cluster on every single page render
+  // (clusters can have thousands of entries; this runs for all ~23.6k
+  // pages). Bounded by `length` so it always terminates even if every
+  // entry were somehow excluded.
   const picked: LiteEntry[] = [];
-  const seen = new Set<number>();
-  let idx2 = start;
-  while (picked.length < Math.min(count, siblings.length) && seen.size < siblings.length) {
-    if (!seen.has(idx2)) {
-      seen.add(idx2);
-      picked.push(siblings[idx2]!);
-    }
-    idx2 = (idx2 + step) % siblings.length;
+  for (let i = 0; i < length && picked.length < count; i++) {
+    const entry = all[(start + i) % length]!;
+    if (entry.slug !== selfSlug) picked.push(entry);
   }
   return picked.map((e) => ({ label: smartTitleCase(e.keyword), href: `/${e.slug}` }));
 }

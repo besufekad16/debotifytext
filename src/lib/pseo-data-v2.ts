@@ -1191,8 +1191,13 @@ export function getAllV2Keywords(): KeywordEntryV2[] {
   return _v2Cache;
 }
 
+let _v2SlugIndex: Map<string, KeywordEntryV2> | null = null;
+
 export function getV2KeywordBySlug(slug: string): KeywordEntryV2 | undefined {
-  return getAllV2Keywords().find(e => e.slug === slug);
+  if (!_v2SlugIndex) {
+    _v2SlugIndex = new Map(getAllV2Keywords().map((e) => [e.slug, e]));
+  }
+  return _v2SlugIndex.get(slug);
 }
 
 export function getAllV2Slugs(): string[] {

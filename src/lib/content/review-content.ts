@@ -1,6 +1,6 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
 import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
-import { buildPageStrings, buildStats, buildFeaturePoints } from '~/lib/content/content-combinator';
+import { buildPageStrings, buildStats, buildFeaturePoints, buildFaqs } from '~/lib/content/content-combinator';
 
 export interface ReviewPageData {
   metaTitle: string;
@@ -151,13 +151,26 @@ const SELF_CONS: string[] = [
 
 const SELF_VERDICT = `HumanifyLab delivers on its core promise: AI text in, natural human writing out, with detector scores in the human range. The free plan makes it easy to verify the results yourself before paying anything.`;
 
-const SELF_FAQS: { q: string; a: string }[] = [
-  { q: `Is HumanifyLab legit?`, a: `Yes. HumanifyLab is a real, actively maintained AI humanization platform. It is tested weekly against live detection systems like Turnitin and GPTZero, and offers a free plan so you can verify results before paying.` },
+// Self-review FAQs are keyword-specific so each "humanifylab review" page gets
+// a unique first question for FAQ structured data.
+const SELF_FAQS_TEMPLATES: ((kw: string) => { q: string; a: string })[] = [
+  (kw) => ({ q: `Is ${smartTitleCase(kw)} legit?`, a: `Yes. HumanifyLab is a real, actively maintained AI humanization platform. It is tested weekly against live detection systems like Turnitin and GPTZero, and offers a free plan so you can verify results before paying.` }),
+  (kw) => ({ q: `Is HumanifyLab worth it for ${kw.toLowerCase()}?`, a: `Yes. HumanifyLab consistently scores a 99.9% bypass rate against all major detectors and offers a permanent free plan — making it the best risk-free option for ${kw.toLowerCase()}.` }),
+  (kw) => ({ q: `Does HumanifyLab work for ${kw.toLowerCase()}?`, a: `Yes. HumanifyLab is purpose-built to handle ${kw.toLowerCase()} — tested weekly against Turnitin, GPTZero, and Originality.AI. The free plan lets you verify results before paying anything.` }),
+  (kw) => ({ q: `Should I trust HumanifyLab for ${kw.toLowerCase()}?`, a: `HumanifyLab is used by 450,000+ users and achieves a 99.9% bypass rate verified weekly. You can test it for free — no credit card needed — to verify it works for your specific ${kw.toLowerCase()} use case.` }),
+];
+
+const SELF_FAQS_TAIL: { q: string; a: string }[] = [
   { q: `Does HumanifyLab actually bypass Turnitin?`, a: `Yes. HumanifyLab maintains a verified 99.9% bypass rate against Turnitin's AI detection, tested weekly. Humanized text consistently scores in the human range.` },
   { q: `How much does HumanifyLab cost?`, a: `HumanifyLab has a permanent free plan with monthly word credits. Paid plans add higher word limits, bulk processing, faster queues, and API access. See the pricing page for current rates.` },
   { q: `Is my content safe with HumanifyLab?`, a: `Yes. HumanifyLab has a strict zero data retention policy — your content is processed and immediately deleted, never stored, shared, or used for training.` },
   { q: `How fast is HumanifyLab?`, a: `Most documents are humanized in under 10 seconds. Paste your text, click Humanize, and the rewritten version is ready almost immediately.` },
 ];
+
+function buildSelfFaqs(keyword: string, seed: number): { q: string; a: string }[] {
+  const q0fn = SELF_FAQS_TEMPLATES[uniqueIdx(seed, keyword, SELF_FAQS_TEMPLATES.length, 30)]!;
+  return [q0fn(keyword), ...SELF_FAQS_TAIL];
+}
 
 function isSelfReview(subject: string, keyword: string): boolean {
   const s = subject.toLowerCase().replace(/\s/g, '');
@@ -190,7 +203,7 @@ export function generateReviewContent(entry: KeywordEntryV4): ReviewPageData {
       cons: SELF_CONS,
       features: buildFeaturePoints(keyword, seed, 'review'),
       stats: buildStats(keyword, seed),
-      faqs: SELF_FAQS,
+      faqs: buildSelfFaqs(keyword, seed),
       faqTitle: combo.faqTitle,
       finalCtaTitle: combo.finalCtaTitle,
       finalCtaSubtitle: combo.finalCtaSubtitle,
@@ -201,7 +214,7 @@ export function generateReviewContent(entry: KeywordEntryV4): ReviewPageData {
   const di = uniqueIdx(seed, keyword, META_DESCS.length, 1);
   const hi = uniqueIdx(seed, keyword, H1S.length, 2);
   const hsi = uniqueIdx(seed, keyword, HERO_SUBTITLES.length, 3);
-  const fqi = uniqueIdx(seed, keyword, FAQ_POOL.length, 6);
+  // fqi removed — FAQs now use keyword-specific buildFaqs
   const prosi = uniqueIdx(seed, keyword, PROS_POOL.length, 7);
   const consi = uniqueIdx(seed, keyword, CONS_POOL.length, 8);
   const vi = uniqueIdx(seed, keyword, VERDICT_POOL.length, 9);
@@ -226,7 +239,7 @@ export function generateReviewContent(entry: KeywordEntryV4): ReviewPageData {
     cons: CONS_POOL[consi]!,
     features: buildFeaturePoints(keyword, seed, 'review'),
     stats: buildStats(keyword, seed),
-    faqs: FAQ_POOL[fqi]!(keyword, subject),
+    faqs: buildFaqs(keyword, seed, subject, 'review'),
     faqTitle: combo.faqTitle,
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,

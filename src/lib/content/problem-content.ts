@@ -196,7 +196,7 @@ export function generateProblemContent(entry: KeywordEntryV3): ProblemContentDat
   const ppi = uniqueIdx(seed, keyword, PROBLEM_POINT_SETS.length, 4);
   const ssi = uniqueIdx(seed, keyword, SOLUTION_STEP_SETS.length, 5);
   const rpi = uniqueIdx(seed, keyword, REASSURANCE_POINT_SETS.length, 6);
-  const fi = uniqueIdx(seed, keyword, FAQ_SETS.length, 7);
+  // fi variable removed — FAQs now use keyword-specific buildFaqs
 
   const stats = buildStats(keyword, seed);
 
@@ -218,7 +218,7 @@ export function generateProblemContent(entry: KeywordEntryV3): ProblemContentDat
     reassuranceTitle: reassuranceTitles[uniqueIdx(seed, keyword, reassuranceTitles.length, 14)]!,
     reassurancePoints: REASSURANCE_POINT_SETS[rpi]!,
     faqTitle: combo.faqTitle,
-    faqs: FAQ_SETS[fi]!,
+    faqs: buildFaqs(keyword, seed, entry.entity ?? '', 'problem'),
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,
   };

@@ -208,7 +208,7 @@ export function generateScoreContent(entry: KeywordEntryV3): ScoreContentData {
   const spi = uniqueIdx(seed, keyword, SCORE_POINT_SETS.length, 4);
   const sti = uniqueIdx(seed, keyword, STEP_SETS.length, 5);
   const dsi = uniqueIdx(seed, keyword, DETECTOR_SCORE_SETS.length, 6);
-  const fi = uniqueIdx(seed, keyword, FAQ_SETS.length, 7);
+  // fi removed — FAQs now use keyword-specific buildFaqs
 
   const stats = buildStats(keyword, seed);
 
@@ -230,7 +230,7 @@ export function generateScoreContent(entry: KeywordEntryV3): ScoreContentData {
     detectorScoresTitle: detectorTitles[uniqueIdx(seed, keyword, detectorTitles.length, 14)]!,
     detectorScores: DETECTOR_SCORE_SETS[dsi]!,
     faqTitle: combo.faqTitle,
-    faqs: [...FAQ_SETS[fi]!, ...buildFaqs(keyword, seed, '', 'score').slice(0, 0)],
+    faqs: buildFaqs(keyword, seed, entry.entity ?? '', 'score'),
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,
   };

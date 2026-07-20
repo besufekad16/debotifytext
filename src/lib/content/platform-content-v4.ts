@@ -1,6 +1,6 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
 import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
-import { buildPageStrings, buildStats } from '~/lib/content/content-combinator';
+import { buildPageStrings, buildStats, buildFaqs } from '~/lib/content/content-combinator';
 
 export interface PlatformV4PageData {
   metaTitle: string;
@@ -108,7 +108,7 @@ export function generatePlatformV4Content(entry: KeywordEntryV4): PlatformV4Page
     features,
     steps: STEPS_POOL[uniqueIdx(seed, keyword, STEPS_POOL.length, 4)]!,
     stats: buildStats(keyword, seed),
-    faqs: FAQ_POOL[uniqueIdx(seed, keyword, FAQ_POOL.length, 5)]!(keyword, platform),
+    faqs: buildFaqs(keyword, seed, platform, 'platform'),
     faqTitle: combo.faqTitle,
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,
