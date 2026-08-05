@@ -1,6 +1,6 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
 import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
-import { buildPageStrings, buildStats, buildSteps, buildFeaturePoints, buildFaqs } from '~/lib/content/content-combinator';
+import { buildPageStrings, buildFaqs, buildStats, buildSteps, buildDeepGuide } from '~/lib/content/content-combinator';
 
 export interface AlternativePageData {
   metaTitle: string;
@@ -16,6 +16,8 @@ export interface AlternativePageData {
   faqTitle: string;
   finalCtaTitle: string;
   finalCtaSubtitle: string;
+  guideIntro?: string;
+  guideSections?: { title: string; body: string }[];
 }
 
 // NOTE: `kw` already names the competitor ("X alternative", "best X
@@ -98,6 +100,7 @@ export function generateAlternativeContent(entry: KeywordEntryV4): AlternativePa
   const displayKeyword = smartTitleCase(keyword);
   const competitor = entity !== 'Competitor' ? entity : 'Other Tools';
   const combo = buildPageStrings(keyword, seed, entity, 'alternative');
+  const deep = buildDeepGuide(keyword, seed);
 
   const ti = uniqueIdx(seed, keyword, META_TITLES.length, 0);
   const di = uniqueIdx(seed, keyword, META_DESCS.length, 1);
@@ -120,5 +123,7 @@ export function generateAlternativeContent(entry: KeywordEntryV4): AlternativePa
     faqTitle: combo.faqTitle,
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,
+    guideIntro: deep.guideIntro,
+    guideSections: deep.guideSections,
   };
 }

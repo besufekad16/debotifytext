@@ -1,6 +1,6 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
 import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
-import { buildPageStrings, buildStats, buildSteps, buildFeaturePoints, buildFaqs } from '~/lib/content/content-combinator';
+import { buildPageStrings, buildFaqs, buildStats, buildSteps, buildFeaturePoints, buildDeepGuide } from '~/lib/content/content-combinator';
 
 export interface FreePageData {
   metaTitle: string;
@@ -15,6 +15,8 @@ export interface FreePageData {
   faqTitle: string;
   finalCtaTitle: string;
   finalCtaSubtitle: string;
+  guideIntro?: string;
+  guideSections?: { title: string; body: string }[];
 }
 
 const META_TITLES: ((kw: string) => string)[] = [
@@ -78,6 +80,7 @@ export function generateFreeContent(entry: KeywordEntryV4): FreePageData {
   const { keyword, seed } = entry;
   const displayKeyword = smartTitleCase(keyword);
   const combo = buildPageStrings(keyword, seed, 'Free', 'free');
+  const deep = buildDeepGuide(keyword, seed);
 
   const ti = uniqueIdx(seed, keyword, META_TITLES.length, 0);
   const di = uniqueIdx(seed, keyword, META_DESCS.length, 1);
@@ -98,5 +101,7 @@ export function generateFreeContent(entry: KeywordEntryV4): FreePageData {
     faqTitle: combo.faqTitle,
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,
+    guideIntro: deep.guideIntro,
+    guideSections: deep.guideSections,
   };
 }

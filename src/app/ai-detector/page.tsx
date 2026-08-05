@@ -85,7 +85,7 @@ export default function AiDetectorPage() {
       <div className="min-h-screen bg-white">
         <section className="bg-[#0f1419] text-white py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#8b6f47] mb-4">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[var(--hl-mint-deep)] mb-4">
               <Info className="w-4 h-4" /> Complete 2026 Breakdown
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight">
@@ -96,7 +96,7 @@ export default function AiDetectorPage() {
               what that means, which detectors matter most, where they get it wrong, and how HumanifyLab makes
               your writing pass every one of them.
             </p>
-            <Link href="/bypass-ai-detectors" className="inline-flex items-center gap-2 bg-[#8b6f47] hover:bg-[#7a6040] text-white font-semibold px-8 py-4 rounded-xl transition-colors text-sm">
+            <Link href="/bypass-ai-detectors" className="inline-flex items-center gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] text-white font-semibold px-8 py-4 rounded-xl transition-colors text-sm">
               See the Bypass Guide <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -149,7 +149,7 @@ export default function AiDetectorPage() {
                     <tr key={d.name} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                       <td className="px-6 py-4 font-medium text-gray-800">{d.name}</td>
                       <td className="px-6 py-4 text-gray-500">{d.type}</td>
-                      <td className="px-6 py-4 text-[#5e3d2a] font-medium">{d.falsePositive}</td>
+                      <td className="px-6 py-4 text-[var(--hl-mint-deep)] font-medium">{d.falsePositive}</td>
                       <td className="px-6 py-4 text-gray-500">{d.notes}</td>
                     </tr>
                   ))}
@@ -169,7 +169,7 @@ export default function AiDetectorPage() {
                   Formal academic writing, non-native English phrasing, and even highly structured business writing
                   get flagged as "AI-generated" at meaningful rates across every detector in the table above. If
                   you're a human writer who has been incorrectly flagged, HumanifyLab can also help — see our{" "}
-                  <Link href="/how-to-fix-ai-flagged-my-essay" className="text-[#8b6f47] hover:underline">guide to fixing a false AI flag</Link>.
+                  <Link href="/how-to-fix-ai-flagged-my-essay" className="text-[var(--hl-mint-deep)] hover:underline">guide to fixing a false AI flag</Link>.
                 </p>
               </div>
             </div>
@@ -194,7 +194,7 @@ export default function AiDetectorPage() {
           <div className="max-w-2xl mx-auto">
             <h2 className="text-2xl font-bold mb-3">Ready to Pass Every AI Detector?</h2>
             <p className="text-gray-400 mb-6">99.9% bypass rate, verified weekly. Free plan, no sign-up required.</p>
-            <Link href="/" className="inline-flex items-center gap-2 bg-[#8b6f47] hover:bg-[#7a6040] text-white font-semibold px-8 py-4 rounded-xl transition-colors">
+            <Link href="/" className="inline-flex items-center gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] text-white font-semibold px-8 py-4 rounded-xl transition-colors">
               Try HumanifyLab Free <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

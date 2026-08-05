@@ -98,7 +98,7 @@ export default function TopUpSection() {
                 <Button
                   onClick={() => handlePurchase(product.id)}
                   disabled={!!purchasingId}
-                  className="w-full h-11 sm:h-12 rounded-xl sm:rounded-2xl py-3 sm:py-4 text-xs sm:text-sm font-semibold shadow-sm bg-gradient-to-r from-[#5e3d2a] via-[#5e3d2a] to-[#4a2f1f] text-white hover:from-[#4a2f1f] hover:via-[#4a2f1f] hover:to-[#4a2f1f] transition"
+                  className="w-full h-11 sm:h-12 rounded-xl sm:rounded-2xl py-3 sm:py-4 text-xs sm:text-sm font-semibold shadow-sm bg-gradient-to-r from-[var(--hl-mint-deep)] via-[var(--hl-mint-deep)] to-[#5e3d2a] text-white hover:from-[#5e3d2a] hover:via-[#5e3d2a] hover:to-[#5e3d2a] transition"
                 >
                   {purchasingId === product.id ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
@@ -111,15 +111,15 @@ export default function TopUpSection() {
 
               <ul className="mt-3 sm:mt-4 space-y-2.5 sm:space-y-3 text-xs sm:text-sm text-muted-foreground">
                 <li className="flex items-start gap-2 sm:gap-3">
-                  <ShieldCheck className="mt-0.5 sm:mt-1 h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#5e3d2a] flex-shrink-0" />
+                  <ShieldCheck className="mt-0.5 sm:mt-1 h-3.5 w-3.5 sm:h-4 sm:w-4 text-[var(--hl-mint-deep)] flex-shrink-0" />
                   <span className="flex-1">Instant credit delivery</span>
                 </li>
                 <li className="flex items-start gap-2 sm:gap-3">
-                  <ShieldCheck className="mt-0.5 sm:mt-1 h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#5e3d2a] flex-shrink-0" />
+                  <ShieldCheck className="mt-0.5 sm:mt-1 h-3.5 w-3.5 sm:h-4 sm:w-4 text-[var(--hl-mint-deep)] flex-shrink-0" />
                   <span className="flex-1">Works with any plan</span>
                 </li>
                 <li className="flex items-start gap-2 sm:gap-3">
-                  <ShieldCheck className="mt-0.5 sm:mt-1 h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#5e3d2a] flex-shrink-0" />
+                  <ShieldCheck className="mt-0.5 sm:mt-1 h-3.5 w-3.5 sm:h-4 sm:w-4 text-[var(--hl-mint-deep)] flex-shrink-0" />
                   <span className="flex-1">No expiration date</span>
                 </li>
               </ul>

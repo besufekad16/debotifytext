@@ -29,11 +29,15 @@ interface SlugEntry {
   seed: number;
 }
 
-// Mirrors getModifiedDate in src/app/[keyword]/page.tsx: "updated" always
-// reflects the current date (today), since it is only ever consumed by
-// structured data, not rendered in the UI.
-function getLastMod(_seed: number): string {
-  return TODAY;
+// Mirrors publish-date spreading in [keyword]/page.tsx so Google sees
+// varied lastmod across ~42k URLs instead of one identical date (which
+// looks like a bulk dump and hurts crawl prioritization).
+function getLastMod(seed: number): string {
+  const end = Date.now();
+  const start = end - 300 * 24 * 60 * 60 * 1000; // ~10 months back
+  const normalized = (Math.abs(seed) % 500) / 500;
+  const ts = start + normalized * (end - start);
+  return new Date(ts).toISOString().split("T")[0]!;
 }
 
 function urlsetXml(entries: SlugEntry[], priority: string): string {

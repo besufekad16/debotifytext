@@ -89,9 +89,9 @@ export default async function ClusterTopicPage({ params }: PageProps) {
 
       <nav aria-label="Breadcrumb" className="bg-gray-50 border-b border-gray-200 px-4 py-2">
         <ol className="mx-auto max-w-6xl flex items-center gap-1 text-xs sm:text-sm text-gray-500">
-          <li><Link href="/" className="hover:text-[#8b6f47]">HumanifyLab</Link></li>
+          <li><Link href="/" className="hover:text-[var(--hl-mint-deep)]">HumanifyLab</Link></li>
           <li aria-hidden="true">/</li>
-          <li><Link href="/topics" className="hover:text-[#8b6f47]">Topics</Link></li>
+          <li><Link href="/topics" className="hover:text-[var(--hl-mint-deep)]">Topics</Link></li>
           <li aria-hidden="true">/</li>
           <li className="text-gray-900 font-medium" aria-current="page">{meta.label}</li>
         </ol>
@@ -99,7 +99,7 @@ export default async function ClusterTopicPage({ params }: PageProps) {
 
       <section className="bg-[#0f1419] text-white py-14 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[#8b6f47] mb-4">
+          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[var(--hl-mint-deep)] mb-4">
             {entries.length.toLocaleString()} Guides
           </span>
           <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 leading-tight">{meta.label}</h1>
@@ -117,7 +117,7 @@ export default async function ClusterTopicPage({ params }: PageProps) {
                   <Link
                     key={item.slug}
                     href={`/${item.slug}`}
-                    className="text-sm text-[#8b6f47] hover:text-[#6d5a3a] hover:underline py-1 truncate"
+                    className="truncate py-1 text-sm text-[var(--hl-mint-deep)] hover:text-[var(--hl-mint)] hover:underline"
                     title={smartTitleCase(item.keyword)}
                   >
                     {smartTitleCase(item.keyword)}
@@ -131,14 +131,14 @@ export default async function ClusterTopicPage({ params }: PageProps) {
 
       <section className="py-14 px-4 bg-gray-50 text-center">
         <div className="max-w-2xl mx-auto">
-          <Link href="/topics" className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-[#8b6f47] mb-8">
+          <Link href="/topics" className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-[var(--hl-mint-deep)] mb-8">
             <ArrowLeft className="w-4 h-4" /> Back to all topics
           </Link>
           <h2 className="text-2xl font-bold text-gray-900 mb-3">Try HumanifyLab Free</h2>
           <p className="text-gray-600 mb-6">
             Results in under 10 seconds. Free plan, no sign-up required.
           </p>
-          <Link href="/" className="inline-flex items-center gap-2 bg-[#8b6f47] hover:bg-[#7a6040] text-white font-semibold px-8 py-4 rounded-xl transition-colors">
+          <Link href="/" className="inline-flex items-center gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] text-white font-semibold px-8 py-4 rounded-xl transition-colors">
             Get Started Free <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

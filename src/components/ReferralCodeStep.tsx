@@ -64,8 +64,8 @@ export default function ReferralCodeStep({ onProceed, onCancel, isLoading }: Pro
 
         {/* Header */}
         <div className="text-center mb-5">
-          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[#5e3d2a]/10">
-            <svg className="h-6 w-6 text-[#5e3d2a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--hl-mint-deep)]/10">
+            <svg className="h-6 w-6 text-[var(--hl-mint-deep)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
             </svg>
           </div>
@@ -87,7 +87,7 @@ export default function ReferralCodeStep({ onProceed, onCancel, isLoading }: Pro
             className={
               "w-full text-sm border rounded-xl px-4 py-3 font-mono tracking-wide focus:outline-none focus:ring-2 transition " +
               (status === "applied"
-                ? "border-green-400 bg-green-50 text-green-700 focus:ring-green-300"
+                ? "border-[var(--hl-mint)] bg-[var(--hl-surface)] text-[var(--hl-mint-deep)] focus:ring-[var(--hl-mint-bright)]"
                 : status === "invalid"
                 ? "border-red-300 bg-red-50 text-red-700 focus:ring-red-200"
                 : "border-gray-200 focus:ring-gray-300")
@@ -96,7 +96,7 @@ export default function ReferralCodeStep({ onProceed, onCancel, isLoading }: Pro
           />
           {/* Status message */}
           {status === "applied" && (
-            <p className="text-xs text-green-600 mt-1.5 font-medium">✓ {message}</p>
+            <p className="text-xs text-[var(--hl-mint-deep)] mt-1.5 font-medium">✓ {message}</p>
           )}
           {status === "invalid" && (
             <p className="text-xs text-red-500 mt-1.5">{message}</p>

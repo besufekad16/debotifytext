@@ -122,7 +122,7 @@ export default async function AccountPage() {
       <PageNavbar currentCredits={userCredits + userExtraCredits} isTeamMember={isTeamMember} />
       <main className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="mb-10">
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8b6f47]">Account</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--hl-mint-deep)]">Account</span>
           <h1 className="mt-2 text-2xl font-semibold tracking-tight text-gray-900 sm:text-3xl">
             Account settings
           </h1>
@@ -145,7 +145,7 @@ export default async function AccountPage() {
           <Card className="border-gray-200 bg-white shadow-sm rounded-2xl">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <User className="h-5 w-5 text-[#8B6F47]" />
+                <User className="h-5 w-5 text-[var(--hl-mint-deep)]" />
                 Profile Information
               </CardTitle>
               <CardDescription className="text-[12px] text-gray-400">Your personal details</CardDescription>
@@ -178,7 +178,7 @@ export default async function AccountPage() {
           <Card className="border-gray-200 bg-white shadow-sm rounded-2xl">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <CreditCard className="h-5 w-5 text-[#8B6F47]" />
+                <CreditCard className="h-5 w-5 text-[var(--hl-mint-deep)]" />
                 Credits & Usage
               </CardTitle>
               <CardDescription className="text-[12px] text-gray-400">Your current credit balance</CardDescription>
@@ -186,7 +186,7 @@ export default async function AccountPage() {
             <CardContent className="space-y-4">
               <div>
                 <label className="text-[12px] font-medium text-gray-400">Available Credits</label>
-                <p className="mt-1.5 text-[1.8rem] font-bold text-[#8B6F47]">
+                <p className="mt-1.5 text-[1.8rem] font-bold text-[var(--hl-mint-deep)]">
                   {(userCredits + userExtraCredits).toLocaleString()}
                 </p>
                 <div className="mt-2 flex gap-4 text-[13px] text-gray-400">
@@ -211,7 +211,7 @@ export default async function AccountPage() {
                 </p>
                 <Link
                   href="/pricing"
-                  className="mt-3 inline-block rounded-xl bg-[#5e3d2a] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#4a2f1f]"
+                  className="mt-3 inline-block rounded-xl bg-[var(--hl-mint-deep)] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#5e3d2a]"
                 >
                   View Pricing Plans
                 </Link>
@@ -231,14 +231,14 @@ export default async function AccountPage() {
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
                 <Link
                   href="/"
-                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#8B6F47] hover:shadow-md"
+                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[var(--hl-mint-deep)] hover:shadow-md"
                 >
                   <p className="text-[13.5px] font-semibold text-gray-900">Humanizer Tool</p>
                   <p className="mt-0.5 text-[11px] text-gray-400">Transform your text</p>
                 </Link>
                 <Link
                   href="/pricing"
-                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#8B6F47] hover:shadow-md"
+                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[var(--hl-mint-deep)] hover:shadow-md"
                 >
                   <p className="text-[13.5px] font-semibold text-gray-900">Pricing</p>
                   <p className="mt-0.5 text-[11px] text-gray-400">View credit packages</p>
@@ -246,10 +246,10 @@ export default async function AccountPage() {
                 {(isTeamMember || hasApiAccess) && (
                   <Link
                     href="/team"
-                    className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#8B6F47] hover:shadow-md"
+                    className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[var(--hl-mint-deep)] hover:shadow-md"
                   >
                     <div className="flex justify-center mb-1">
-                      <Users className="h-5 w-5 text-[#8B6F47]" />
+                      <Users className="h-5 w-5 text-[var(--hl-mint-deep)]" />
                     </div>
                     <p className="text-[13.5px] font-semibold text-gray-900">Team</p>
                     <p className="mt-0.5 text-[11px] text-gray-400">Manage team</p>
@@ -258,10 +258,10 @@ export default async function AccountPage() {
                 {hasApiAccess && (
                   <Link
                     href="/api-keys"
-                    className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#8B6F47] hover:shadow-md"
+                    className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[var(--hl-mint-deep)] hover:shadow-md"
                   >
                     <div className="flex justify-center mb-1">
-                      <Key className="h-5 w-5 text-[#8B6F47]" />
+                      <Key className="h-5 w-5 text-[var(--hl-mint-deep)]" />
                     </div>
                     <p className="text-[13.5px] font-semibold text-gray-900">API Keys</p>
                     <p className="mt-0.5 text-[11px] text-gray-400">Manage integrations</p>
@@ -269,14 +269,14 @@ export default async function AccountPage() {
                 )}
                 <Link
                   href="/faq"
-                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#8B6F47] hover:shadow-md"
+                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[var(--hl-mint-deep)] hover:shadow-md"
                 >
                   <p className="text-[13.5px] font-semibold text-gray-900">FAQ</p>
                   <p className="mt-0.5 text-[11px] text-gray-400">Common questions</p>
                 </Link>
                 <Link
                   href="/contact"
-                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[#8B6F47] hover:shadow-md"
+                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[var(--hl-mint-deep)] hover:shadow-md"
                 >
                   <p className="text-[13.5px] font-semibold text-gray-900">Contact</p>
                   <p className="mt-0.5 text-[11px] text-gray-400">Get support</p>
@@ -287,7 +287,7 @@ export default async function AccountPage() {
         </div>
 
         {/* Affiliate nudge */}
-        <div className="mt-8 flex flex-col items-start justify-between gap-4 rounded-2xl border border-[#e8ddd5] bg-[#faf7f4] p-6 sm:flex-row sm:items-center">
+        <div className="mt-8 flex flex-col items-start justify-between gap-4 rounded-2xl border border-[rgba(94,61,42,0.18)] bg-[#faf6f1] p-6 sm:flex-row sm:items-center">
           <div className="flex-1">
             <p className="text-sm font-semibold text-gray-900">Earn 10% on every referral</p>
             <p className="mt-0.5 text-xs text-gray-600">
@@ -297,7 +297,7 @@ export default async function AccountPage() {
           </div>
           <Link
             href="/affiliate"
-            className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-xl bg-[#5e3d2a] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#4a2f1f]"
+            className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-xl bg-[var(--hl-mint-deep)] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#5e3d2a]"
           >
             View Affiliate Dashboard
           </Link>

@@ -17,7 +17,7 @@ export function SEOBreadcrumbs({ items }: SEOBreadcrumbsProps) {
     <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-6">
       <Link 
         href="/" 
-        className="flex items-center hover:text-#8B6F47 transition-colors"
+        className="flex items-center hover:text-var(--hl-mint-deep) transition-colors"
       >
         <Home className="w-4 h-4 mr-1" />
         Home
@@ -29,7 +29,7 @@ export function SEOBreadcrumbs({ items }: SEOBreadcrumbsProps) {
           {item.href ? (
             <Link 
               href={item.href} 
-              className="hover:text-#8B6F47 transition-colors"
+              className="hover:text-var(--hl-mint-deep) transition-colors"
             >
               {item.label}
             </Link>

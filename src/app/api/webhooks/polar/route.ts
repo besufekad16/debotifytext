@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { validateEvent } from "@polar-sh/sdk/webhooks";
 import { db } from "~/server/db";
 import { env } from "~/env";
+import { getNextMonthlyResetDate } from "~/server/utils/credit-reset";
 
 export const dynamic = "force-dynamic";
 
@@ -55,6 +56,11 @@ function getPlanConfig(productId: string): { credits: number; plan: string; maxW
     return { credits: 50000, plan: 'ultra', maxWords: 3000, type: productId === env.POLAR_PRODUCT_LARGE ? 'monthly' : 'annual' };
   }
 
+  // Lifetime Deal (optional product — only active when the env var is configured)
+  if (env.POLAR_PRODUCT_LIFETIME && productId === env.POLAR_PRODUCT_LIFETIME) {
+    return { credits: 20000, plan: 'lifetime', maxWords: 2000, type: 'lifetime', isTopUp: false };
+  }
+
   // Top-up packs (One-time purchases)
   if (productId === env.POLAR_CREDITS_5000) {
     return { credits: 5000, plan: 'topup', maxWords: 0, type: 'one_time', isTopUp: true };
@@ -94,17 +100,17 @@ function getPlanPriceCents(productId: string): number {
 }
 
 function getNextResetDate(_type: string, plan?: string): Date {
-  const now = new Date();
-  const nextDate = new Date(now);
   // unlimited plan: expires 2 months from now (not 1 month like regular subscriptions)
   if (plan === 'unlimited' || _type === 'unlimited_2m') {
+    const now = new Date();
+    const nextDate = new Date(now);
     nextDate.setMonth(now.getMonth() + 2);
-  } else {
-    nextDate.setMonth(now.getMonth() + 1);
+    nextDate.setDate(1);
+    nextDate.setHours(0, 0, 0, 0);
+    return nextDate;
   }
-  nextDate.setDate(1);
-  nextDate.setHours(0, 0, 0, 0);
-  return nextDate;
+  // For monthly/annual/lifetime, use the shared monthly reset date
+  return getNextMonthlyResetDate();
 }
 
 /**
@@ -323,6 +329,7 @@ export async function POST(req: NextRequest) {
             small: env.POLAR_PRODUCT_SMALL,
             medium: env.POLAR_PRODUCT_MEDIUM,
             large: env.POLAR_PRODUCT_LARGE,
+            lifetime: env.POLAR_PRODUCT_LIFETIME,
             topup5k: env.POLAR_CREDITS_5000,
             topup20k: env.POLAR_CREDITS_20000,
             topup45k: env.POLAR_CREDITS_45000,
@@ -413,8 +420,9 @@ export async function POST(req: NextRequest) {
           });
         } else {
           // For subscriptions: SET credits (replace old value) and update plan
-          // unlimited plan always gets a 2-month reset date; annual gets 1-month; monthly gets null
-          const shouldSetResetDate = planConfig.type === 'annual' || planConfig.plan === 'unlimited';
+          // unlimited plan always gets a 2-month reset date; annual and lifetime get
+          // 1-month (monthly credit refresh); monthly gets null
+          const shouldSetResetDate = planConfig.type === 'annual' || planConfig.type === 'lifetime' || planConfig.plan === 'unlimited';
           const nextReset = shouldSetResetDate ? getNextResetDate(planConfig.type, planConfig.plan) : null;
           
           const user = await db.user.update({

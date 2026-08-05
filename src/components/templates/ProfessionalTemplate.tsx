@@ -10,8 +10,8 @@ export default function ProfessionalTemplate({ data }: { data: ProfessionalConte
       <section className="py-20 px-4 border-b border-white/10">
         <div className="max-w-5xl mx-auto">
           <div className="flex items-center gap-2 mb-6">
-            <TrendingUp className="w-4 h-4 text-emerald-400" />
-            <span className="text-xs font-semibold uppercase tracking-widest text-emerald-400">Professional</span>
+            <TrendingUp className="w-4 h-4 text-[var(--hl-mint-bright)]" />
+            <span className="text-xs font-semibold uppercase tracking-widest text-[var(--hl-mint-bright)]">Professional</span>
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-6 leading-tight">{data.h1}</h1>
           <p className="text-gray-400 text-lg max-w-2xl mb-10">{data.intro}</p>
@@ -20,13 +20,13 @@ export default function ProfessionalTemplate({ data }: { data: ProfessionalConte
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
             {data.stats.map((stat, i) => (
               <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
-                <div className="text-2xl font-black text-emerald-400 mb-1">{stat.value}</div>
+                <div className="text-2xl font-black text-[var(--hl-mint-bright)] mb-1">{stat.value}</div>
                 <div className="text-xs text-gray-500">{stat.label}</div>
               </div>
             ))}
           </div>
 
-          <Link href="/" className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black font-bold px-8 py-4 rounded-xl transition-colors text-sm">
+          <Link href="/" className="inline-flex items-center gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] text-black font-bold px-8 py-4 rounded-xl transition-colors text-sm">
             Start Humanizing <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -39,7 +39,7 @@ export default function ProfessionalTemplate({ data }: { data: ProfessionalConte
           <div className="grid sm:grid-cols-2 gap-4">
             {data.benefits.map((benefit, i) => (
               <div key={i} className="flex items-start gap-3 p-5 bg-white/5 border border-white/10 rounded-xl">
-                <Zap className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                <Zap className="w-4 h-4 text-[var(--hl-mint-bright)] flex-shrink-0 mt-0.5" />
                 <p className="text-gray-300 text-sm leading-relaxed">{benefit}</p>
               </div>
             ))}
@@ -65,9 +65,9 @@ export default function ProfessionalTemplate({ data }: { data: ProfessionalConte
       {/* CTA */}
       <section className="py-16 px-4 border-t border-white/10 text-center">
         <div className="max-w-2xl mx-auto">
-          <Users className="w-10 h-10 text-emerald-400 mx-auto mb-4" />
+          <Users className="w-10 h-10 text-[var(--hl-mint-bright)] mx-auto mb-4" />
           <h2 className="text-2xl font-bold mb-4">{data.cta}</h2>
-          <Link href="/" className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black font-bold px-8 py-4 rounded-xl transition-colors">
+          <Link href="/" className="inline-flex items-center gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] text-black font-bold px-8 py-4 rounded-xl transition-colors">
             Get Started Free <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

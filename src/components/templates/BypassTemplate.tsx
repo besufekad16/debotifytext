@@ -51,14 +51,14 @@ export default function BypassTemplate({ data }: Props) {
           <div className="mb-10 grid grid-cols-2 gap-4 text-sm sm:flex sm:flex-wrap sm:justify-center sm:gap-6">
             {data.stats.map((s: { value: string; label: string }, i: number) => (
               <div key={i} className="flex flex-col items-center">
-                <span className="text-2xl font-black text-[#c9a96e]">{s.value}</span>
+                <span className="text-2xl font-black text-[#a67c52]">{s.value}</span>
                 <span className="text-white/50">{s.label}</span>
               </div>
             ))}
           </div>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link href="/" className="w-full sm:w-auto">
-              <Button size="lg" className="min-h-[44px] w-full rounded-full bg-gradient-to-r from-[#8B6F47] to-[#c9a96e] px-8 py-3 text-base font-bold text-black hover:opacity-90 sm:w-auto sm:py-6 sm:text-lg">
+              <Button size="lg" className="min-h-[44px] w-full rounded-full bg-gradient-to-r from-[var(--hl-mint-deep)] to-[#a67c52] px-8 py-3 text-base font-bold text-black hover:opacity-90 sm:w-auto sm:py-6 sm:text-lg">
                 Bypass {data.detectorName} Now — Free
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -80,7 +80,7 @@ export default function BypassTemplate({ data }: Props) {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {data.detectorMechanisms.map((m: { icon: string; title: string; description: string }, i: number) => (
               <div key={i} className="rounded-2xl border border-white/10 bg-white/5 p-6">
-                <div className="mb-3 h-1 w-8 rounded-full bg-[#c9a96e]" />
+                <div className="mb-3 h-1 w-8 rounded-full bg-[#a67c52]" />
                 <h3 className="mb-2 font-semibold text-white">{m.title}</h3>
                 <p className="text-base text-white/60">{m.description}</p>
               </div>
@@ -104,12 +104,12 @@ export default function BypassTemplate({ data }: Props) {
               </div>
               <p className="text-base italic text-white/50 leading-relaxed">&ldquo;{data.beforeText}&rdquo;</p>
             </div>
-            <div className="rounded-2xl border border-green-500/30 bg-green-500/5 p-6">
-              <div className="mb-3 flex items-center gap-2 text-green-400">
+            <div className="rounded-2xl border border-[var(--hl-mint)]/30 bg-[var(--hl-surface)]0/5 p-6">
+              <div className="mb-3 flex items-center gap-2 text-[var(--hl-mint-bright)]">
                 <CheckCircle2 className="h-5 w-5" />
                 <span className="font-semibold">After HumanifyLab</span>
               </div>
-              <div className="mb-3 rounded-lg bg-green-500/10 px-3 py-1.5 text-sm font-bold text-green-400">
+              <div className="mb-3 rounded-lg bg-[var(--hl-surface)]0/10 px-3 py-1.5 text-sm font-bold text-[var(--hl-mint-bright)]">
                 {data.detectorName} Score: {data.afterScore}% AI
               </div>
               <p className="text-base italic text-white/50 leading-relaxed">&ldquo;{data.afterText}&rdquo;</p>
@@ -125,7 +125,7 @@ export default function BypassTemplate({ data }: Props) {
           <div className="space-y-6">
             {data.steps.map((step: { title: string; description: string }, i: number) => (
               <div key={i} className="flex gap-5">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#8B6F47] to-[#c9a96e] text-sm font-black text-black">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--hl-mint-deep)] to-[#a67c52] text-sm font-black text-black">
                   {i + 1}
                 </div>
                 <div>
@@ -137,7 +137,7 @@ export default function BypassTemplate({ data }: Props) {
           </div>
           <div className="mt-10 text-center">
             <Link href="/" className="inline-block w-full sm:w-auto">
-              <Button size="lg" className="min-h-[44px] w-full rounded-full bg-gradient-to-r from-[#8B6F47] to-[#c9a96e] px-8 py-3 font-bold text-black hover:opacity-90 sm:w-auto sm:py-5">
+              <Button size="lg" className="min-h-[44px] w-full rounded-full bg-gradient-to-r from-[var(--hl-mint-deep)] to-[#a67c52] px-8 py-3 font-bold text-black hover:opacity-90 sm:w-auto sm:py-5">
                 Start Bypassing {data.detectorName} — Free
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -155,7 +155,7 @@ export default function BypassTemplate({ data }: Props) {
               <thead className="border-b border-white/10 bg-white/5">
                 <tr>
                   <th className="px-4 py-4 text-left font-semibold text-white/70 sm:px-5">Feature</th>
-                  <th className="px-4 py-4 text-left font-semibold text-[#c9a96e] sm:px-5">HumanifyLab</th>
+                  <th className="px-4 py-4 text-left font-semibold text-[#a67c52] sm:px-5">HumanifyLab</th>
                   <th className="px-4 py-4 text-left font-semibold text-white/50 sm:px-5">Others</th>
                 </tr>
               </thead>
@@ -163,7 +163,7 @@ export default function BypassTemplate({ data }: Props) {
                 {data.comparisonRows.map((row: { feature: string; humanifylab: string; others: string }, i: number) => (
                   <tr key={i} className="border-b border-white/5">
                     <td className="px-4 py-4 font-medium text-white sm:px-5">{row.feature}</td>
-                    <td className="px-4 py-4 text-green-400 sm:px-5">
+                    <td className="px-4 py-4 text-[var(--hl-mint-bright)] sm:px-5">
                       <CheckCircle2 className="mr-1.5 inline h-4 w-4" />{row.humanifylab}
                     </td>
                     <td className="px-4 py-4 text-white/40 sm:px-5">{row.others}</td>
@@ -193,11 +193,11 @@ export default function BypassTemplate({ data }: Props) {
       {/* Final CTA */}
       <section className="px-4 py-16 text-center sm:py-20">
         <div className="mx-auto max-w-2xl">
-          <Shield className="mx-auto mb-6 h-16 w-16 text-[#c9a96e]" />
+          <Shield className="mx-auto mb-6 h-16 w-16 text-[#a67c52]" />
           <h2 className="mb-4 text-3xl font-black sm:text-4xl">{data.finalCtaTitle}</h2>
           <p className="mb-8 text-base text-white/60">{data.finalCtaSubtitle}</p>
           <Link href="/" className="inline-block w-full sm:w-auto">
-            <Button size="lg" className="min-h-[44px] w-full rounded-full bg-gradient-to-r from-[#8B6F47] to-[#c9a96e] px-10 py-4 text-lg font-black text-black hover:opacity-90 sm:w-auto sm:py-6 sm:text-xl">
+            <Button size="lg" className="min-h-[44px] w-full rounded-full bg-gradient-to-r from-[var(--hl-mint-deep)] to-[#a67c52] px-10 py-4 text-lg font-black text-black hover:opacity-90 sm:w-auto sm:py-6 sm:text-xl">
               Bypass {data.detectorName} — Start Free
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>

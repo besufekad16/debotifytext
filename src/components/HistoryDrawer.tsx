@@ -113,7 +113,7 @@ export default function HistoryDrawer({
                       {item.aiScore !== null && (
                         <Badge 
                           variant="outline" 
-                          className="text-xs bg-[#f5ede6] text-[#5e3d2a] border-[#e8ddd5]"
+                          className="text-xs bg-[#faf6f1] text-[var(--hl-mint-deep)] border-[rgba(94,61,42,0.18)]"
                         >
                           {Math.round((1) * 100)}% Human
                         </Badge>

@@ -101,7 +101,7 @@ export default async function ContactPage() {
       title: "Email us anytime",
       description: (
         <>
-          <a href="mailto:humanifylab1@gmail.com" className="font-semibold text-[#5e3d2a] underline underline-offset-4">
+          <a href="mailto:humanifylab1@gmail.com" className="font-semibold text-[var(--hl-mint-deep)] underline underline-offset-4">
             humanifylab1@gmail.com
           </a>{" "}
           — we respond in under 24 hours.
@@ -114,7 +114,7 @@ export default async function ContactPage() {
       description: (
         <>
           Visit{" "}
-          <Link className="font-semibold text-[#5e3d2a] underline underline-offset-4" href="/faq">
+          <Link className="font-semibold text-[var(--hl-mint-deep)] underline underline-offset-4" href="/faq">
             our FAQ
           </Link>{" "}
           for tutorials, billing, and compliance docs.
@@ -160,9 +160,9 @@ export default async function ContactPage() {
                 {contactHighlights.map(({ icon: Icon, title, description }) => (
                   <div
                     key={title}
-                    className="flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-5 transition-colors hover:border-[#8b6f47]/40"
+                    className="flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-5 transition-colors hover:border-[var(--hl-mint-deep)]/40"
                   >
-                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-[#5e3d2a]">
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-[var(--hl-mint-deep)]">
                       <Icon className="h-5 w-5 text-white" />
                     </div>
                     <div>
@@ -173,7 +173,7 @@ export default async function ContactPage() {
                 ))}
               </div>
 
-              <div className="rounded-2xl bg-[#faf7f4] p-5">
+              <div className="rounded-2xl bg-[#faf6f1] p-5">
                 <p className="text-sm font-semibold text-gray-900">Availability</p>
                 <p className="mt-1 text-sm text-gray-600">24/7 customer support, worldwide.</p>
               </div>

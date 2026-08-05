@@ -52,7 +52,7 @@ export default function TopicsPage() {
 
       <nav aria-label="Breadcrumb" className="bg-gray-50 border-b border-gray-200 px-4 py-2">
         <ol className="mx-auto max-w-6xl flex items-center gap-1 text-xs sm:text-sm text-gray-500">
-          <li><Link href="/" className="hover:text-[#8b6f47]">HumanifyLab</Link></li>
+          <li><Link href="/" className="hover:text-[var(--hl-mint-deep)]">HumanifyLab</Link></li>
           <li aria-hidden="true">/</li>
           <li className="text-gray-900 font-medium" aria-current="page">Topics</li>
         </ol>
@@ -60,7 +60,7 @@ export default function TopicsPage() {
 
       <section className="bg-[#0f1419] text-white py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[#8b6f47] mb-4">
+          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[var(--hl-mint-deep)] mb-4">
             {totalCount.toLocaleString()}+ Guides
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight">
@@ -86,16 +86,16 @@ export default function TopicsPage() {
                     <Link
                       key={key}
                       href={`/topics/${key}`}
-                      className="group block bg-gray-50 hover:bg-white rounded-xl border border-gray-200 hover:border-[#8b6f47] p-6 transition-colors"
+                      className="group block bg-gray-50 hover:bg-white rounded-xl border border-gray-200 hover:border-[var(--hl-mint-deep)] p-6 transition-colors"
                     >
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-semibold text-gray-900 group-hover:text-[#8b6f47] transition-colors">
+                        <h3 className="font-semibold text-gray-900 group-hover:text-[var(--hl-mint-deep)] transition-colors">
                           {meta.label}
                         </h3>
-                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-[#8b6f47] group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-[var(--hl-mint-deep)] group-hover:translate-x-0.5 transition-all flex-shrink-0" />
                       </div>
                       <p className="text-sm text-gray-600 leading-relaxed mb-3">{meta.description}</p>
-                      <span className="text-xs font-medium text-[#8b6f47]">{count.toLocaleString()} guides</span>
+                      <span className="text-xs font-medium text-[var(--hl-mint-deep)]">{count.toLocaleString()} guides</span>
                     </Link>
                   );
                 })}
@@ -111,7 +111,7 @@ export default function TopicsPage() {
           <p className="text-gray-600 mb-6">
             Paste any AI-generated text into HumanifyLab and get a humanized, undetectable version in under 10 seconds — free to try, no sign-up required.
           </p>
-          <Link href="/" className="inline-flex items-center gap-2 bg-[#8b6f47] hover:bg-[#7a6040] text-white font-semibold px-8 py-4 rounded-xl transition-colors">
+          <Link href="/" className="inline-flex items-center gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] text-white font-semibold px-8 py-4 rounded-xl transition-colors">
             Try HumanifyLab Free <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

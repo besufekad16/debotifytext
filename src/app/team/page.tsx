@@ -230,7 +230,7 @@ export default function TeamPage() {
   if (loading || !isLoaded) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-[#8B6F47]" />
+        <Loader2 className="h-8 w-8 animate-spin text-[var(--hl-mint-deep)]" />
       </div>
     );
   }
@@ -242,7 +242,7 @@ export default function TeamPage() {
       <main className="flex-1 py-12">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10">
-            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8b6f47]">Team</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--hl-mint-deep)]">Team</span>
             <h1 className="mt-2 text-2xl font-semibold tracking-tight text-gray-900 sm:text-3xl">Team management</h1>
             <p className="mt-2 text-sm text-gray-600">
               Manage your team members and collaborate on humanization projects.
@@ -328,7 +328,7 @@ export default function TeamPage() {
                       <Button
                         size="sm"
                         onClick={() => setSelectedTeamId(selectedTeamId === team.id ? null : team.id)}
-                        className="rounded-full bg-[#8B6F47]"
+                        className="rounded-full bg-[var(--hl-mint-deep)]"
                       >
                         <UserPlus className="h-4 w-4" />
                       </Button>
@@ -346,7 +346,7 @@ export default function TeamPage() {
                         <Button
                           onClick={() => addMember(team.id)}
                           disabled={actionLoading}
-                          className="rounded-full bg-[#8B6F47]"
+                          className="rounded-full bg-[var(--hl-mint-deep)]"
                         >
                           {actionLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Add"}
                         </Button>
@@ -415,7 +415,7 @@ export default function TeamPage() {
                       <Button
                         onClick={createTeam}
                         disabled={actionLoading}
-                        className="rounded-full bg-[#8B6F47]"
+                        className="rounded-full bg-[var(--hl-mint-deep)]"
                       >
                         {actionLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Create Team"}
                       </Button>

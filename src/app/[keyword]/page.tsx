@@ -137,11 +137,13 @@ function getPublishDate(seed: number): string {
   return new Date(ts).toISOString().split("T")[0]!;
 }
 
-// "Updated" is not shown in the UI (by design), only in the Article/WebPage
-// JSON-LD — so it always reflects the current date whenever the page is
-// (re)generated, per product decision.
-function getModifiedDate(_seed: number, _publishDate: string): string {
-  return new Date().toISOString().split("T")[0]!;
+// "Updated" for JSON-LD — seed-stable date after publish, never in the future.
+// Avoids every page claiming dateModified=today (manipulative signal at scale).
+function getModifiedDate(seed: number, publishDate: string): string {
+  const publishTs = new Date(publishDate).getTime();
+  const bumpDays = Math.abs(seed) % 45; // 0–44 days after publish
+  const modifiedTs = Math.min(Date.now(), publishTs + bumpDays * 24 * 60 * 60 * 1000);
+  return new Date(modifiedTs).toISOString().split("T")[0]!;
 }
 
 // Per-page keyword set: core brand + cluster-specific + keyword-specific

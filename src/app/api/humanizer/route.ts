@@ -3,7 +3,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 import { auth } from "@clerk/nextjs/server";
 import { db } from "~/server/db";
-import { getHumanizationAdapter, isPremiumUser, getAdapterName } from "~/server/utils/adapter-selector";
+import { aiStudios } from "~/server/adapters/aistudios";
 import { calculateHumanizationScore } from "~/server/utils/humanization";
 import { 
   checkRateLimit, 
@@ -19,6 +19,8 @@ import {
   isAllowedModel,
 } from "~/server/config/models";
 import { trackWordUsage } from "~/server/utils/polar-client";
+import { addCorsHeaders, handleCorsPreflight } from "~/lib/cors";
+import { refreshMonthlyCreditsIfNeeded } from "~/server/utils/credit-reset";
 
 // Helper function to validate API Key
 async function validateApiKey(key: string) {
@@ -42,7 +44,7 @@ async function validateApiKey(key: string) {
 
   // Check if the user's plan allows API access (ultra or unlimited plan)
   if (apiKey.user.subscriptionPlan !== "ultra" && apiKey.user.subscriptionPlan !== "unlimited") {
-    return null;
+    return null; // Or return a specific error about plan requirements
   }
   
   // Update last used timestamp
@@ -55,6 +57,9 @@ async function validateApiKey(key: string) {
 }
 
 export async function POST(request: NextRequest) {
+  const corsResponse = handleCorsPreflight(request);
+  if (corsResponse) return corsResponse;
+
   try {
     console.log("\n--- [HUMANIZER API] Received new request ---");
     
@@ -62,25 +67,23 @@ export async function POST(request: NextRequest) {
     let dbUser;
     let isApiKeyAuth = false;
 
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    if (authHeader && authHeader.startsWith("Bearer ")) {
+      const token = authHeader.substring(7);
+      if (token.startsWith("cb_")) {
+        // It's an API Key
+        dbUser = await validateApiKey(token);
+        if (!dbUser) {
+          return addCorsHeaders(NextResponse.json({ error: "Unauthorized" }, { status: 401 }), request);
+        }
+        isApiKeyAuth = true;
+      }
     }
 
-    const token = authHeader.substring(7);
-
-    // Check if it's an API Key or a Clerk JWT
-    if (token.startsWith("cb_")) {
-      // It's an API Key
-      dbUser = await validateApiKey(token);
-      if (!dbUser) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-      }
-      isApiKeyAuth = true;
-    } else {
-      // It's a Clerk JWT, use existing Clerk logic
+    if (!isApiKeyAuth) {
+      // Use existing Clerk logic
       const { userId } = await auth();
       if (!userId) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        return addCorsHeaders(NextResponse.json({ error: "Unauthorized" }, { status: 401 }), request);
       }
       
       dbUser = await db.user.findFirst({
@@ -114,7 +117,7 @@ export async function POST(request: NextRequest) {
 
     if (!dbUser) {
       console.error("[HUMANIZER API] User not found");
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
+      return addCorsHeaders(NextResponse.json({ error: "User not found" }, { status: 404 }), request);
     }
 
     // Determine which user to bill (team owner if exists, otherwise the user)
@@ -122,7 +125,7 @@ export async function POST(request: NextRequest) {
     // but if they are part of a team, we might want to consider that in the future.
     // For now, we'll assume API keys are personal or the owner's key.
     // If it's a team member using the web UI (Clerk auth), we use the owner.
-    const billingUser = (!isApiKeyAuth && (dbUser as any).team?.owner) ? (dbUser as any).team.owner : dbUser;
+    let billingUser = (!isApiKeyAuth && (dbUser as any).team?.owner) ? (dbUser as any).team.owner : dbUser;
     const isTeamMember = !isApiKeyAuth && !!(dbUser as any).team?.owner;
 
     // For API key auth, skip frequency check (or implement different logic)
@@ -131,10 +134,10 @@ export async function POST(request: NextRequest) {
       const frequencyCheck = validateRequestFrequency(dbUser.id, 3);
       if (!frequencyCheck.valid) {
         console.error(`[HUMANIZER API] Request frequency limit exceeded for user: ${dbUser.id}`);
-        return NextResponse.json({ 
+        return addCorsHeaders(NextResponse.json({ 
           error: frequencyCheck.error,
           errorCode: frequencyCheck.errorCode,
-        }, { status: 429 });
+        }, { status: 429 }), request);
       }
     }
 
@@ -148,7 +151,7 @@ export async function POST(request: NextRequest) {
         `[HUMANIZER API] Rate limit exceeded for user: ${dbUser.id}, ` +
         `Plan: ${billingUser.subscriptionPlan}, Retry after: ${rateLimit.retryAfter}s`
       );
-      return NextResponse.json(
+      return addCorsHeaders(NextResponse.json(
         { 
           error: `Rate limit exceeded. Please wait ${rateLimit.retryAfter} seconds before trying again.`,
           errorCode: 'RATE_LIMIT_EXCEEDED',
@@ -163,28 +166,13 @@ export async function POST(request: NextRequest) {
             "Retry-After": String(rateLimit.retryAfter || 60),
           },
         }
-      );
+      ), request);
     }
 
-    // Check if annual subscription needs credit reset (not for unlimited — it has a fixed expiry)
-    if (billingUser.subscriptionType === 'annual' && billingUser.nextResetDate && new Date() >= billingUser.nextResetDate) {
-      // Credits now represent word count (1 credit = 1 word)
-      const planCredits = billingUser.subscriptionPlan === 'basic' ? 7000 : billingUser.subscriptionPlan === 'pro' ? 25000 : 50000;
-      const nextMonth = new Date();
-      nextMonth.setMonth(nextMonth.getMonth() + 1);
-      nextMonth.setDate(1);
-      nextMonth.setHours(0, 0, 0, 0);
-      
-      await db.user.update({
-        where: { id: billingUser.id },
-        data: {
-          credits: planCredits,
-          nextResetDate: nextMonth,
-        },
-      });
-      
-      billingUser.credits = planCredits;
-      console.log(`[HUMANIZER API] Reset annual subscription credits for user ${billingUser.id}`);
+    const refreshResult = await refreshMonthlyCreditsIfNeeded(billingUser);
+    billingUser = refreshResult.user;
+    if (refreshResult.resetApplied) {
+      console.log(`[HUMANIZER API] Refreshed monthly subscription credits for user ${billingUser.id}`);
     }
 
     // Parse request body with error handling for malformed JSON
@@ -193,11 +181,11 @@ export async function POST(request: NextRequest) {
       body = await request.json();
     } catch (parseError) {
       console.error("[HUMANIZER API] JSON parse error:", parseError);
-      return NextResponse.json({ 
+      return addCorsHeaders(NextResponse.json({ 
         error: "Invalid JSON in request body. Please ensure newlines in text are escaped as \\n",
         errorCode: "INVALID_JSON",
         details: parseError instanceof Error ? parseError.message : String(parseError)
-      }, { status: 400 });
+      }, { status: 400 }), request);
     }
 
     const { text: rawText, preset = "default", tone, options = {} } = body;
@@ -206,22 +194,22 @@ export async function POST(request: NextRequest) {
     // Validate preset access - only pro and ultra users can use presets (except "default" which is available to all)
     const effectivePlan = billingUser.subscriptionPlan;
     if (selectedTone !== "default" && (effectivePlan === "basic" || !effectivePlan)) {
-      // Basic and free users can only use "default" preset; pro/ultra/unlimited get all presets
+      // Basic users can only use "default" preset, other presets require pro/ultra
       console.error(`[HUMANIZER API] Preset access denied for ${effectivePlan || "free"} user. Preset: ${selectedTone}`);
-      return NextResponse.json({ 
+      return addCorsHeaders(NextResponse.json({ 
         error: "This preset is only available for Pro and Ultra subscribers. Please upgrade to access all presets.",
         errorCode: "PRESET_LOCKED",
         upgradeRequired: true,
-      }, { status: 403 });
+      }, { status: 403 }), request);
     }
 
     // SECURITY: Validate and sanitize input
     if (!rawText || typeof rawText !== "string") {
       console.error("[HUMANIZER API] Invalid text type");
-      return NextResponse.json({ 
+      return addCorsHeaders(NextResponse.json({ 
         error: "Text is required and must be a string",
         errorCode: "INVALID_TYPE",
-      }, { status: 400 });
+      }, { status: 400 }), request);
     }
 
     // COST OPTIMIZATION: Sanitize text
@@ -235,18 +223,18 @@ export async function POST(request: NextRequest) {
     // Basic validation only (let users humanize what they want)
     if (text.length < 10) {
       console.error("[HUMANIZER API] Text too short");
-      return NextResponse.json({ 
+      return addCorsHeaders(NextResponse.json({ 
         error: "Text must be at least 10 characters long",
         errorCode: "TEXT_TOO_SHORT",
-      }, { status: 400 });
+      }, { status: 400 }), request);
     }
 
     if (text.length > 50000) {
       console.error("[HUMANIZER API] Text too long");
-      return NextResponse.json({ 
+      return addCorsHeaders(NextResponse.json({ 
         error: "Text exceeds maximum length of 50,000 characters",
         errorCode: "TEXT_TOO_LONG",
-      }, { status: 400 });
+      }, { status: 400 }), request);
     }
 
     // Calculate word count for validation
@@ -255,11 +243,11 @@ export async function POST(request: NextRequest) {
     
     if (wordCount > maxWords) {
       console.error(`[HUMANIZER API] Validation Error: Text exceeds plan limit. Words: ${wordCount}, Max: ${maxWords}`);
-      return NextResponse.json({ 
+      return addCorsHeaders(NextResponse.json({ 
         error: `Text exceeds your plan limit of ${maxWords} words per request. Your text has ${wordCount} words.`,
         wordCount,
         maxWords,
-      }, { status: 400 });
+      }, { status: 400 }), request);
     }
 
     // Check user credits (use fresh data after potential reset)
@@ -271,13 +259,13 @@ export async function POST(request: NextRequest) {
     
     if (totalAvailableCredits < creditsNeeded) {
       console.error(`[HUMANIZER API] Error: Insufficient credits. Need: ${creditsNeeded}, Have: ${totalAvailableCredits} (Plan: ${billingUser.credits}, Extra: ${billingUser.extraCredits})`);
-      return NextResponse.json({ 
+      return addCorsHeaders(NextResponse.json({ 
         error: "Insufficient credits",
         credits: billingUser.credits,
         extraCredits: billingUser.extraCredits,
         creditsNeeded,
         wordCount,
-      }, { status: 402 });
+      }, { status: 402 }), request);
     }
 
     console.log(
@@ -290,32 +278,23 @@ export async function POST(request: NextRequest) {
     
     if (!isAllowedModel(requestedModel)) {
       console.error(`[HUMANIZER API] Invalid model requested: ${requestedModel}`);
-      return NextResponse.json({ 
+      return addCorsHeaders(NextResponse.json({ 
         error: `Invalid model. Allowed models: ${ALLOWED_MODELS.join(', ')}`,
         errorCode: "INVALID_MODEL",
-      }, { status: 400 });
+      }, { status: 400 }), request);
     }
 
-    const isFreeUser = !isPremiumUser(billingUser.subscriptionPlan);
-
-    // Select appropriate adapter based on subscription plan
-    const adapter = getHumanizationAdapter(billingUser.subscriptionPlan);
-    const adapterName = getAdapterName(billingUser.subscriptionPlan);
-    
-    console.log(
-      `[HUMANIZER API] Using ${adapterName} adapter for ${billingUser.subscriptionPlan || 'free'} user`
-    );
+    // Dynamic maxTokens by word count (same tiers as stream; adapter caps by model e.g. Flash 8192)
+    const maxTokensByWordCount =
+      wordCount < 500 ? 16384 : wordCount < 1000 ? 16384 : wordCount < 3000 ? 32768 : 65536;
 
     let aiResult;
     try {
-      // Use adapter's default temperature (0.3) for better rule adherence
-      // Options can override if user provides custom temperature
-      aiResult = await adapter.humanizeText(text, {
-        maxTokens: 4000,
+      aiResult = await aiStudios.humanizeText(text, {
+        maxTokens: maxTokensByWordCount,
         preset: selectedTone,
         tone: selectedTone,
         model: requestedModel,
-        isFreeUser: isFreeUser,
         ...options, // User-provided options (including temperature) will override defaults
       });
     } catch (error) {
@@ -325,14 +304,14 @@ export async function POST(request: NextRequest) {
         `Error: ${error instanceof Error ? error.message : String(error)}\n` +
         `User: ${dbUser.id}, Words: ${wordCount}`
       );
-      return NextResponse.json(
+      return addCorsHeaders(NextResponse.json(
         { 
           error: "Failed to humanize text. Your credits were not deducted.",
           errorCode: "AI_CALL_FAILED",
           details: error instanceof Error ? error.message : String(error),
         },
         { status: 500 }
-      );
+      ), request);
     }
 
     if (!aiResult.success) {
@@ -341,30 +320,29 @@ export async function POST(request: NextRequest) {
         `Error: ${aiResult.error}\n` +
         `User: ${dbUser.id}, Words: ${wordCount}`
       );
-      return NextResponse.json(
+      return addCorsHeaders(NextResponse.json(
         { 
           error: "Failed to humanize text. Your credits were not deducted.",
           errorCode: "HUMANIZATION_FAILED",
           details: aiResult.error,
         },
         { status: 500 }
-      );
+      ), request);
     }
 
-      console.log("[HUMANIZER API] aiStudios.humanizeText call was successful.");
-      console.log(
-        "[HUMANIZER API] Result metadata:",
-        JSON.stringify(
-          {
-            adapter: adapterName,
-            source: aiResult.metadata?.source ?? "unknown",
-            fallback: aiResult.metadata?.fallback ?? false,
-            error: aiResult.metadata?.error ?? null,
-          },
-          null,
-          2,
-        ),
-      );
+    console.log("[HUMANIZER API] aiStudios.humanizeText call was successful.");
+    console.log(
+      "[HUMANIZER API] Result metadata:",
+      JSON.stringify(
+        {
+          source: aiResult.metadata?.source ?? "unknown",
+          fallback: aiResult.metadata?.fallback ?? false,
+          error: aiResult.metadata?.error ?? null,
+        },
+        null,
+        2,
+      ),
+    );
     if (aiResult.metadata?.rawAiText) {
       console.log("[HUMANIZER API] Raw paraphrase before heuristics:");
       console.log(aiResult.metadata.rawAiText);
@@ -380,32 +358,31 @@ export async function POST(request: NextRequest) {
     
     let newCredits = billingUser.credits || 0;
     let newExtraCredits = billingUser.extraCredits || 0;
+    let remainingToDeduct = creditsToDeduct;
 
-    // Unlimited plan: do not deduct credits — they have a fixed 2-month expiry
-    if (billingUser.subscriptionPlan !== 'unlimited') {
-      let remainingToDeduct = creditsToDeduct;
+    // 1. Deduct from monthly plan credits first
+    if (newCredits >= remainingToDeduct) {
+      newCredits -= remainingToDeduct;
+      remainingToDeduct = 0;
+    } else {
+      remainingToDeduct -= newCredits;
+      newCredits = 0;
+    }
 
-      // 1. Deduct from monthly plan credits first
-      if (newCredits >= remainingToDeduct) {
-        newCredits -= remainingToDeduct;
-        remainingToDeduct = 0;
-      } else {
-        remainingToDeduct -= newCredits;
-        newCredits = 0;
-      }
-
-      // 2. Deduct remaining from extra credits
-      if (remainingToDeduct > 0) {
-        newExtraCredits = Math.max(0, newExtraCredits - remainingToDeduct);
-      }
-
-      await db.user.update({
-        where: { id: billingUser.id },
-        data: { credits: newCredits, extraCredits: newExtraCredits },
-      });
+    // 2. Deduct remaining from extra credits
+    if (remainingToDeduct > 0) {
+      newExtraCredits = Math.max(0, newExtraCredits - remainingToDeduct);
     }
 
     const creditsRemaining = newCredits + newExtraCredits;
+
+    await db.user.update({
+      where: { id: billingUser.id },
+      data: { 
+        credits: newCredits,
+        extraCredits: newExtraCredits
+      },
+    });
 
     // Track usage in Polar for billing
     // This allows Polar to track customer usage for metered billing
@@ -452,7 +429,7 @@ export async function POST(request: NextRequest) {
     delete sanitizedAiResult.model; // Remove actual model name
     sanitizedAiResult.source = "cbubble-o1"; // Override source
 
-    return NextResponse.json({
+    return addCorsHeaders(NextResponse.json({
       humanized_text: humanizedText,
       ai_score: humanScore,
       tokens_used: aiResult.tokensUsed,
@@ -465,15 +442,19 @@ export async function POST(request: NextRequest) {
       },
       credits_remaining: creditsRemaining,
       credits_used: creditsToDeduct,
-    });
+    }), request);
 
   } catch (error) {
     console.error("Humanizer API error:", error);
-    return NextResponse.json(
+    return addCorsHeaders(NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
-    );
+    ), request);
   }
+}
+
+export async function OPTIONS(request: NextRequest) {
+  return handleCorsPreflight(request) || new NextResponse(null, { status: 200 });
 }
 
 export async function GET(request: NextRequest) {
@@ -519,4 +500,3 @@ export async function GET(request: NextRequest) {
     );
   }
 }
-

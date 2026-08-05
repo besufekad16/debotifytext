@@ -14,7 +14,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "~/components/ui/tooltip
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
 import {
   ArrowRight,
-  Sparkles,
   UploadCloud,
   FileText,
   Check,
@@ -30,9 +29,10 @@ import {
   Lock,
   Zap,
   Users,
-  GraduationCap,
   CheckCircle2,
-  Building
+  Building,
+  PenLine,
+  Languages,
 } from "lucide-react";
 import { toast } from "sonner";
 import { getHumanizerHistory } from "~/actions/humanizer";
@@ -40,11 +40,13 @@ import PolarPricing from "~/components/pricing/PolarPricing";
 import TopUpSection from "~/components/pricing/TopUpSection";
 import { cn } from "~/lib/utils";
 import { SiteFooter } from "~/components/SiteFooter";
-import HowToUseSection from "~/components/HowToUseSection";
-import FactsSection from "~/components/FactsSection";
 import DetectorShowcase from "~/components/DetectorShowcase";
-import LargeDiscountBanner from "~/components/LargeDiscountBanner";
+import LifetimeOfferBanner from "~/components/LifetimeOfferBanner";
 import ResponsibleUseDisclaimer from "~/components/ResponsibleUseDisclaimer";
+import ExitIntentPopup from "~/components/ExitIntentPopup";
+import SocialProofNotification from "~/components/SocialProofNotification";
+import PricingModal from "~/components/PricingModal";
+import { usePricingModal } from "~/hooks/usePricingModal";
 
 const PRESETS = [
   { value: "default", label: "Default", description: "Standard humanization for all users", isPremium: false },
@@ -79,17 +81,6 @@ const HUMANIZING_PROCESSES = [
   "Ensuring natural expression"
 ];
 
-const INSTITUTES = [
-  { name: "Harvard University", src: "/institutes/Harvard_University_shield.png" },
-  { name: "Stanford University", src: "/institutes/stanford-university-logo.png" },
-  { name: "Miami University", src: "/institutes/Miami-University-Logo.png" },
-  { name: "University of Oregon", src: "/institutes/University-of-Oregon-Logo.png" },
-  { name: "Boise State University", src: "/institutes/bsu.png" },
-  { name: "AW RUB", src: "/institutes/rub.png" },
-  { name: "Marca Peru", src: "/institutes/marca_peu_150.png" },
-];
-
-
 const TESTIMONIALS = [
   {
     quote:
@@ -119,40 +110,40 @@ const TESTIMONIALS = [
 
 const FAQ_ITEMS = [
   {
+    id: "bypass",
+    question: "Can HumanifyLab help me bypass AI detectors like Turnitin and GPTZero?",
+    answer:
+      "Yes. HumanifyLab is built as an AI humanizer that rewrites ChatGPT, Claude, and Gemini drafts so they read naturally and are engineered to pass major detectors including Turnitin, GPTZero, Originality.ai, Copyleaks, and ZeroGPT — while keeping your meaning intact.",
+  },
+  {
+    id: "zero",
+    question: "How do I score closer to 0% AI with HumanifyLab?",
+    answer:
+      "Paste at least 100–250 words, pick Academic or Default tone, run Humanize, then re-check in your detector. For best results, do a short personal edit pass. Many users searching for a 0% AI score use this exact workflow before submission.",
+  },
+  {
     id: "privacy",
     question: "How is my data protected?",
     answer:
-      "Enterprise-grade encryption protects your content in transit and at rest. We never train models on your data, and you maintain full control with instant deletion capabilities.",
-  },
-  {
-    id: "accuracy",
-    question: "What is the humanization quality rate?",
-    answer:
-      "HumanifyLab utilizes advanced language models combined with sophisticated post-processing algorithms to transform AI text into natural, professional human writing while preserving semantic integrity and contextual meaning.",
-  },
-  {
-    id: "files",
-    question: "Which file formats are supported?",
-    answer:
-      "The platform accepts direct text input or file uploads in .txt, .docx, and .pdf formats. Content is automatically extracted and processed for immediate humanization.",
+      "Encryption protects your content in transit and at rest. We do not train models on your drafts, and you control what stays in history.",
   },
   {
     id: "credits",
     question: "How does the credit system work?",
     answer:
-      "Credits operate on a 1:1 word ratio. Monthly allocations reset automatically, with instant top-up options available for paid subscriptions.",
+      "1 credit = 1 word. Monthly plans refresh on a schedule; Lifetime refreshes 20,000 words every month forever after a one-time payment. Top-ups are available on paid plans.",
   },
   {
-    id: "team",
-    question: "Are team and enterprise plans available?",
+    id: "lifetime",
+    question: "What is the Back-to-School Lifetime deal?",
     answer:
-      "Yes. Premium plans include collaborative workspaces, usage analytics, centralized billing, and dedicated support. Contact our team to configure your enterprise deployment.",
+      "Pay once for lifetime access with 20,000 words every month — no subscription renewals. It is timed for school opening so students and writers can lock in humanization for the whole year and beyond.",
   },
   {
     id: "support",
     question: "What support channels are available?",
     answer:
-      "Access support through in-app messaging or email at humanifylab1@gmail.com. Premium and Enterprise subscribers receive priority response with dedicated account management.",
+      "Email humanifylab1@gmail.com or use in-app messaging. Paid plans get priority response.",
   },
 ];
 
@@ -168,6 +159,8 @@ interface HistoryItem {
 
 export default function UnifiedHomePage() {
   const { isSignedIn, user } = useUser();
+  const { isOpen: isPricingModalOpen, closeModal: closePricingModal } = usePricingModal();
+  const [manualPricingOpen, setManualPricingOpen] = useState(false);
 
   const [originalText, setOriginalText] = useState("");
   const [humanizedText, setHumanizedText] = useState("");
@@ -194,34 +187,6 @@ export default function UnifiedHomePage() {
   const [currentProcessIndex, setCurrentProcessIndex] = useState(0);
   const hasStartedProcessLoop = useRef(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-  const [timeLeft, setTimeLeft] = useState({ days: 7, hours: 0, minutes: 0, seconds: 0 });
-
-  useEffect(() => {
-    // Target date: 7 days from now
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 7);
-
-    const interval = setInterval(() => {
-      const now = new Date();
-      const difference = targetDate.getTime() - now.getTime();
-
-      if (difference <= 0) {
-        clearInterval(interval);
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        return;
-      }
-
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-      setTimeLeft({ days, hours, minutes, seconds });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   // Loop through hardcoded process titles with random intervals while humanizing
   useEffect(() => {
@@ -387,7 +352,8 @@ export default function UnifiedHomePage() {
     }
 
     if (currentCredits === 0 || currentCredits < wordCount) {
-      toast.error("You don't have enough credits. Please purchase more below.");
+      toast.error("You don't have enough credits. Open the Back-to-School Lifetime deal.");
+      setManualPricingOpen(true);
       document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" });
       return;
     }
@@ -425,7 +391,8 @@ export default function UnifiedHomePage() {
 
         // Handle insufficient credits (402) gracefully without throwing
         if (response.status === 402) {
-          toast.error(errorData.error || "Insufficient credits. Please purchase more credits to continue.");
+          toast.error(errorData.error || "Insufficient credits. Claim Lifetime or upgrade below.");
+          setManualPricingOpen(true);
           await fetchCredits(); // Refresh credits display
           setIsHumanizing(false);
           return;
@@ -836,7 +803,16 @@ export default function UnifiedHomePage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-background overflow-x-hidden w-full scroll-smooth">
-      
+      <ExitIntentPopup />
+      <SocialProofNotification />
+      <PricingModal
+        isOpen={isPricingModalOpen || manualPricingOpen}
+        onClose={() => {
+          closePricingModal();
+          setManualPricingOpen(false);
+        }}
+      />
+
       <ModernNavbar
         onHistoryClick={isSignedIn ? () => setHistoryOpen(true) : undefined}
         currentCredits={currentCredits}
@@ -855,72 +831,61 @@ export default function UnifiedHomePage() {
 
       <main className="flex-1 w-full">
         {/* Hero and Workspace Section */}
-        <div className="relative w-full overflow-x-hidden bg-white pb-16">
-          {/* Subtle top gradient wash */}
-          <div className="absolute inset-x-0 top-0 h-[420px] bg-gradient-to-b from-[#faf7f4] to-white pointer-events-none" />
+        <div className="relative w-full overflow-x-hidden bg-white pb-16 hl-surface-mesh">
+          {/* Hero — soft motion background + staggered editorial entrance */}
+          <section id="hero" className="relative overflow-hidden pt-12 pb-8 sm:pt-20 sm:pb-10">
+            {/* Ambient field */}
+            <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+              <div className="hero-grid absolute inset-0" />
+              <div className="hero-orb hero-orb-a absolute -top-28 left-1/2 h-[30rem] w-[44rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(166,124,82,0.22)_0%,transparent_68%)] blur-2xl" />
+              <div className="hero-orb hero-orb-b absolute top-16 -left-24 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(94,61,42,0.16)_0%,transparent_70%)] blur-3xl" />
+              <div className="hero-orb hero-orb-c absolute top-10 -right-20 h-80 w-80 rounded-full bg-[radial-gradient(circle,rgba(200,146,42,0.14)_0%,transparent_70%)] blur-3xl" />
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
+            </div>
 
-          {/* Hero Section */}
-          <section id="hero" className="relative pt-14 pb-4 sm:pt-20 sm:pb-6 overflow-hidden">
-            {/* Small bubble pattern background - perfectly aligned grid */}
-            <div className="absolute inset-0 opacity-[0.08]" style={{
-              backgroundImage: `radial-gradient(circle, #8B6F47 3px, transparent 3px)`,
-              backgroundSize: '40px 40px',
-              backgroundPosition: 'center'
-            }}></div>
-
-
-            <div className="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
               <div className="text-center">
-
-                {/* Eyebrow badge */}
-                <div className="inline-flex items-center gap-2 rounded-full bg-[#faf7f4] border border-[#e8ddd5] px-3.5 py-1.5 text-[11px] font-medium text-[#7a5c44] mb-7 tracking-widest uppercase">
-                  <span className="flex h-1.5 w-1.5 rounded-full bg-[#5e3d2a]" />
-                  Trusted by 500,000+ writers worldwide
+                <div className="hero-enter hero-delay-1 mb-7 inline-flex items-center gap-2 rounded-full border border-[var(--hl-mint)]/20 bg-white/80 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--hl-mint-deep)] shadow-sm backdrop-blur-sm">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--hl-mint-bright)] opacity-50" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--hl-mint-deep)]" />
+                  </span>
+                  Trusted by 500,000+ writers
                 </div>
 
-                {/* Main Heading */}
-                <h1 className="mb-5 tracking-tight">
+                <h1 className="mb-6 tracking-tight">
                   <span
-                    className="block text-[2rem] sm:text-[2.75rem] lg:text-[3.1rem] font-bold text-gray-950 leading-[1.15]"
-                    style={{ fontFamily: 'Inter, sans-serif', letterSpacing: '-0.03em' }}
+                    className="hero-enter hero-delay-2 block text-[1.85rem] font-bold leading-[1.12] text-[var(--hl-ink)] sm:text-[2.6rem] lg:text-[3.1rem]"
+                    style={{ letterSpacing: "-0.03em" }}
                   >
-                    AI text that reads like
+                    Humanize AI text. Bypass detectors.
                   </span>
                   <span
-                    className="block text-[2.2rem] sm:text-[3rem] lg:text-[3.4rem] text-[#5e3d2a] leading-[1.1] mt-0.5"
-                    style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: 'italic', fontWeight: 500 }}
+                    className="hero-enter hero-gradient-live mt-2 block text-[2.05rem] leading-[1.08] sm:text-[2.9rem] lg:text-[3.4rem]"
+                    style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: "italic", fontWeight: 500 }}
                   >
-                    you wrote it
+                    Score closer to 0% AI.
                   </span>
                 </h1>
 
-                {/* Subheadline */}
-                <p
-                  className="text-[14.5px] text-gray-400 leading-[1.7] max-w-md mx-auto mb-8 font-normal"
-                  style={{ fontFamily: 'Inter, sans-serif' }}
-                >
-                  Paste any AI-generated content and get back clean, natural writing —
-                  undetectable, meaning-preserved, ready to use.
+                <p className="hero-enter hero-delay-4 mx-auto mb-8 max-w-lg text-[15px] leading-[1.75] text-gray-500 sm:text-base">
+                  Paste ChatGPT, Claude, or Gemini. Get natural writing built to pass Turnitin,
+                  GPTZero, Originality.ai, and Copyleaks — meaning intact.
                 </p>
 
-                {/* Trust signals */}
-                <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-[12px] text-gray-400">
-                  <span className="flex items-center gap-1.5">
-                    <Check className="h-3 w-3 text-[#5e3d2a]" />
-                    No AI footprint
-                  </span>
-                  <span className="text-gray-200 hidden sm:block">·</span>
-                  <span className="flex items-center gap-1.5">
-                    <Check className="h-3 w-3 text-[#5e3d2a]" />
-                    Meaning intact
-                  </span>
-                  <span className="text-gray-200 hidden sm:block">·</span>
-                  <span className="flex items-center gap-1.5">
-                    <Check className="h-3 w-3 text-[#5e3d2a]" />
-                    Results in under 3 seconds
-                  </span>
+                <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
+                  {["0% AI footprint", "Meaning preserved", "Results in seconds"].map((signal, i) => (
+                    <span
+                      key={signal}
+                      className={`hero-enter inline-flex items-center gap-1.5 rounded-full border border-black/5 bg-white/80 px-3.5 py-1.5 text-[12px] font-medium text-gray-600 shadow-sm backdrop-blur-sm ${
+                        i === 0 ? "hero-delay-4" : i === 1 ? "hero-delay-5" : "hero-delay-6"
+                      }`}
+                    >
+                      <Check className="h-3 w-3 text-[var(--hl-mint-deep)]" />
+                      {signal}
+                    </span>
+                  ))}
                 </div>
-
               </div>
             </div>
           </section>
@@ -928,7 +893,7 @@ export default function UnifiedHomePage() {
           {/* Main Workspace - Humanizer Tool */}
           <section id="tool" className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
             {showSignInPrompt && !isSignedIn && (
-              <div className="mb-8 border border-[#D4C4B0] bg-[#F5E6D3] p-6 text-center shadow-sm">
+              <div className="mb-8 rounded-2xl border border-[rgba(94,61,42,0.25)] bg-[#faf6f1] p-6 text-center shadow-sm">
                 <h3 className="text-lg font-semibold text-foreground">Sign in to humanize your text</h3>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Create a free account to get 50 starter credits and keep track of every version you humanize.
@@ -943,21 +908,21 @@ export default function UnifiedHomePage() {
               </div>
             )}
 
-            <div className="bg-white shadow-xl border border-gray-200 overflow-hidden">
+            <div className="overflow-hidden rounded-3xl bg-white shadow-[0_28px_80px_-28px_rgba(94,61,42,0.28)] ring-1 ring-[rgba(94,61,42,0.12)]">
               {/* Header */}
-              <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-gray-50">
+              <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-[#faf6f1] to-white">
                 <div className="flex items-center gap-3">
                   <div className="flex items-center gap-2">
                     <div className="relative">
-                      <div className="w-4 h-4 rounded-full bg-[#8B6F47] animate-[glow_2s_ease-in-out_infinite]"></div>
-                      <div className="absolute inset-0 w-4 h-4 rounded-full bg-[#8B6F47] opacity-50 animate-[ping_2s_ease-in-out_infinite]"></div>
+                      <div className="w-4 h-4 rounded-full bg-[var(--hl-mint-deep)] animate-[glow_2s_ease-in-out_infinite]"></div>
+                      <div className="absolute inset-0 w-4 h-4 rounded-full bg-[var(--hl-mint-deep)] opacity-50 animate-[ping_2s_ease-in-out_infinite]"></div>
                     </div>
                   </div>
                   <span className="text-sm font-semibold text-gray-700">LIVE HUMANIZER</span>
                 </div>
                 {currentCredits !== undefined && isSignedIn && (
-                  <div className="flex items-center gap-2 text-xs text-gray-700 bg-white px-3 py-1.5 border border-gray-200">
-                    <ShieldCheck className="h-3.5 w-3.5 text-#F5E6D30 flex-shrink-0" />
+                  <div className="flex items-center gap-2 text-xs text-gray-700 bg-white px-3 py-1.5 rounded-full border border-gray-200 shadow-sm">
+                    <ShieldCheck className="h-3.5 w-3.5 text-#faf6f10 flex-shrink-0" />
                     <span className="font-medium">{currentCredits} credits</span>
                   </div>
                 )}
@@ -983,12 +948,12 @@ export default function UnifiedHomePage() {
                     {/* Input Box */}
                     <div className="relative flex-1">
                       <div className={cn(
-                        "h-[450px] border-2 transition-all duration-200 overflow-hidden",
+                        "h-[450px] rounded-2xl border-2 transition-all duration-200 overflow-hidden",
                         isDragging
-                          ? "border-[#8B6F47] bg-[#F5E6D3]/30 shadow-lg shadow-[#8B6F47]/20"
+                          ? "border-[var(--hl-mint-deep)] bg-[#faf6f1]/30 shadow-lg shadow-[var(--hl-mint-deep)]/20"
                           : originalText
-                          ? "border-[#A0826D] bg-white shadow-sm"
-                          : "border-[#D4C4B0] bg-[#F5E6D3]/20"
+                          ? "border-[var(--hl-mint)] bg-white shadow-sm"
+                          : "border-[rgba(94,61,42,0.25)] bg-[#faf6f1]/20"
                       )}>
                         <ScrollArea className="h-full">
                           <Textarea
@@ -1011,16 +976,16 @@ export default function UnifiedHomePage() {
                       {!originalText && !isHumanizing && (
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                           <div className="text-center max-w-sm px-4">
-                            <div className="inline-flex flex-col items-center gap-3 px-6 py-6 border-2 border-dashed border-[#8B6F47] bg-white/80 backdrop-blur-sm">
-                              <div className="w-12 h-12 bg-[#8B6F47]/10 flex items-center justify-center">
-                                <FileText className="w-6 h-6 text-[#8B6F47]" />
+                            <div className="inline-flex flex-col items-center gap-3 px-6 py-6 rounded-2xl border-2 border-dashed border-[var(--hl-mint-deep)] bg-white/80 backdrop-blur-sm">
+                              <div className="w-12 h-12 rounded-xl bg-[var(--hl-mint-deep)]/10 flex items-center justify-center">
+                                <FileText className="w-6 h-6 text-[var(--hl-mint-deep)]" />
                               </div>
                               <div>
                                 <p className="text-sm font-medium text-gray-700 mb-1">
                                   Paste your text or{" "}
                                   <button
                                     onClick={() => fileInputRef.current?.click()}
-                                    className="text-[#8B6F47] hover:text-[#6D5635] font-semibold underline pointer-events-auto transition-colors"
+                                    className="text-[var(--hl-mint-deep)] hover:text-[var(--hl-mint)] font-semibold underline pointer-events-auto transition-colors"
                                   >
                                     upload a file
                                   </button>
@@ -1036,7 +1001,7 @@ export default function UnifiedHomePage() {
 
                       {/* Word Counter Badge */}
                       {originalText && (
-                        <div className="absolute bottom-3 left-3 px-3 py-1 bg-[#8B6F47] text-white text-xs font-medium">
+                        <div className="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-[var(--hl-mint-deep)] text-white text-xs font-medium shadow-sm">
                           {originalText.trim().split(/\s+/).filter(Boolean).length} words
                         </div>
                       )}
@@ -1044,7 +1009,7 @@ export default function UnifiedHomePage() {
 
                     {/* Warning for < 250 words */}
                     {originalText && originalText.trim().split(/\s+/).filter(Boolean).length < 250 && (
-                      <div className="mt-3 p-3 bg-amber-50 border border-amber-200">
+                      <div className="mt-3 p-3 rounded-xl bg-amber-50 border border-amber-200">
                         <div className="flex items-start gap-2">
                           <Info className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
                           <p className="text-xs text-amber-800 font-medium">
@@ -1059,7 +1024,7 @@ export default function UnifiedHomePage() {
                       <Button
                         onClick={handleHumanize}
                         disabled={!originalText.trim() || isHumanizing || wordCount < 100}
-                        className="w-full h-12 bg-gradient-to-r from-[#8B6F47] to-[#6D5635] hover:from-[#6D5635] hover:to-[#5A4529] text-white font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-md"
+                        className="w-full h-12 rounded-xl bg-gradient-to-r from-[var(--hl-mint-deep)] to-[var(--hl-mint)] hover:from-[var(--hl-mint)] hover:to-[#5e3d2a] text-white font-semibold text-base shadow-lg shadow-[var(--hl-mint-deep)]/25 hover:shadow-xl hover:shadow-[var(--hl-mint-deep)]/30 hover:-translate-y-px active:translate-y-0 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-lg disabled:hover:translate-y-0"
                       >
                         {isHumanizing ? (
                           <>
@@ -1073,7 +1038,7 @@ export default function UnifiedHomePage() {
                           </>
                         ) : (
                           <>
-                            <Sparkles className="w-5 h-5 mr-2" />
+                            <PenLine className="w-5 h-5 mr-2" />
                             Humanize text
                           </>
                         )}
@@ -1087,7 +1052,7 @@ export default function UnifiedHomePage() {
                             setUploadedFileName(null);
                           }}
                           variant="outline"
-                          className="w-full h-10 border-gray-300 text-gray-700 hover:bg-gray-50 font-medium text-sm"
+                          className="w-full h-10 rounded-xl border-gray-300 text-gray-700 hover:bg-gray-50 font-medium text-sm"
                         >
                           <RotateCcw className="w-4 h-4 mr-2" />
                           Reset
@@ -1116,7 +1081,7 @@ export default function UnifiedHomePage() {
                       </div>
                       {humanizedText && !isHumanizing && (
                         <div className="flex items-center gap-2">
-                          <span className="text-xs px-2 py-1 bg-[#8B6F47] text-white font-medium">
+                          <span className="text-xs px-2.5 py-1 rounded-full bg-[var(--hl-mint-deep)] text-white font-medium shadow-sm">
                             100% Human
                           </span>
                         </div>
@@ -1126,18 +1091,18 @@ export default function UnifiedHomePage() {
                     {/* Output Box */}
                     <div className="relative flex-1">
                       <div className={cn(
-                        "h-[450px] border-2 transition-all duration-200 overflow-hidden",
+                        "h-[450px] rounded-2xl border-2 transition-all duration-200 overflow-hidden",
                         humanizedText && !isHumanizing
-                          ? "border-[#A0826D] bg-white shadow-sm"
-                          : "border-[#D4C4B0] bg-gray-50"
+                          ? "border-[var(--hl-mint)] bg-white shadow-sm"
+                          : "border-[rgba(94,61,42,0.25)] bg-gray-50"
                       )}>
                         <ScrollArea className="h-full">
                           <div className="p-4 sm:p-5">
                             {isHumanizing ? (
                               <div className="flex flex-col items-center justify-center min-h-[310px] gap-4">
                                 <div className="relative">
-                                  <div className="w-14 h-14 rounded-full border-4 border-[#F5E6D3]"></div>
-                                  <div className="absolute inset-0 w-14 h-14 rounded-full border-4 border-t-[#8B6F47] animate-spin"></div>
+                                  <div className="w-14 h-14 rounded-full border-4 border-[#faf6f1]"></div>
+                                  <div className="absolute inset-0 w-14 h-14 rounded-full border-4 border-t-[var(--hl-mint-deep)] animate-spin"></div>
                                 </div>
                                 {thoughtsList.length > 0 && (
                                   <p className="text-sm text-gray-600 text-center animate-pulse max-w-xs">
@@ -1154,14 +1119,14 @@ export default function UnifiedHomePage() {
                             ) : (
                               <div className="flex flex-col items-center justify-center min-h-[410px]">
                                 <div className="text-center max-w-xs px-4">
-                                  <div className="w-14 h-14 bg-[#8B6F47]/10 flex items-center justify-center mx-auto mb-3">
-                                    <Sparkles className="w-7 h-7 text-[#8B6F47]" />
+                                  <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-[rgba(94,61,42,0.15)] bg-white">
+                                    <PenLine className="h-5 w-5 text-[var(--hl-mint-deep)]" strokeWidth={1.75} />
                                   </div>
-                                  <p className="text-sm font-medium text-gray-500 mb-1">
-                                    Humanized output will appear here
+                                  <p className="text-sm font-medium text-gray-700 mb-1">
+                                    Output appears here
                                   </p>
-                                  <p className="text-xs text-gray-400">
-                                    Enter text on the left to get started
+                                  <p className="text-xs leading-relaxed text-gray-400">
+                                    Paste your draft on the left, then run humanize.
                                   </p>
                                 </div>
                               </div>
@@ -1171,7 +1136,7 @@ export default function UnifiedHomePage() {
 
                         {/* Character Counter */}
                         {humanizedText && !isHumanizing && (
-                          <div className="absolute bottom-3 right-3 text-xs text-gray-400 bg-white/80 px-2 py-1">
+                          <div className="absolute bottom-3 right-3 text-xs text-gray-400 bg-white/80 backdrop-blur-sm px-2 py-1 rounded-full">
                             {humanizedText.length} characters
                           </div>
                         )}
@@ -1183,11 +1148,11 @@ export default function UnifiedHomePage() {
                           <Button
                             onClick={handleCopy}
                             variant="outline"
-                            className="flex-1 h-10 border-gray-300 hover:border-[#8B6F47] hover:bg-[#F5E6D3] hover:text-[#6D5635] transition-colors"
+                            className="flex-1 h-10 rounded-xl border-gray-300 hover:border-[var(--hl-mint-deep)] hover:bg-[#faf6f1] hover:text-[var(--hl-mint)] transition-colors"
                           >
                             {copied ? (
                               <>
-                                <Check className="w-4 h-4 mr-2 text-[#5e3d2a]" />
+                                <Check className="w-4 h-4 mr-2 text-[var(--hl-mint-deep)]" />
                                 Copied
                               </>
                             ) : (
@@ -1200,7 +1165,7 @@ export default function UnifiedHomePage() {
                           <Button
                             onClick={() => handleDownload("txt")}
                             variant="outline"
-                            className="h-10 px-4 border-gray-300 hover:border-[#8B6F47] hover:bg-[#F5E6D3] hover:text-[#6D5635] transition-colors"
+                            className="h-10 px-4 rounded-xl border-gray-300 hover:border-[var(--hl-mint-deep)] hover:bg-[#faf6f1] hover:text-[var(--hl-mint)] transition-colors"
                           >
                             <Download className="w-4 h-4 mr-2" />
                             .txt
@@ -1208,7 +1173,7 @@ export default function UnifiedHomePage() {
                           <Button
                             onClick={() => handleDownload("docx")}
                             variant="outline"
-                            className="h-10 px-4 border-gray-300 hover:border-[#8B6F47] hover:bg-[#F5E6D3] hover:text-[#6D5635] transition-colors"
+                            className="h-10 px-4 rounded-xl border-gray-300 hover:border-[var(--hl-mint-deep)] hover:bg-[#faf6f1] hover:text-[var(--hl-mint)] transition-colors"
                           >
                             <Download className="w-4 h-4 mr-2" />
                             .docx
@@ -1257,7 +1222,7 @@ export default function UnifiedHomePage() {
                   ]).map(({ src, label }, index) => (
                     <div 
                       key={`${label}-${index}`} 
-                      className="flex-shrink-0 flex items-center justify-center px-6 py-3 bg-white border border-gray-200 transition-all duration-300 hover:border-[#8B6F47] hover:shadow-md group"
+                      className="flex-shrink-0 flex items-center justify-center px-6 py-3 rounded-xl bg-white border border-gray-200 transition-all duration-300 hover:border-[var(--hl-mint-deep)] hover:shadow-md group"
                       style={{ minWidth: '140px' }}
                     >
                       <Image 
@@ -1283,36 +1248,24 @@ export default function UnifiedHomePage() {
 
         {/* Stats Section - Below Humanizer Tool */}
         <section className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {/* Stat 1 */}
-            <div className="bg-white rounded-xl p-5 shadow-none border border-gray-100 text-center hover:shadow-sm transition-shadow">
-              <div className="text-[1.4rem] font-bold text-[#5e3d2a] mb-0.5 tracking-tight">
-                1.2M+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+            {[
+              { value: "1.2M+", label: "Documents humanized" },
+              { value: "98.7%", label: "Detection bypass rate" },
+              { value: "<3s", label: "Average turnaround" },
+            ].map((stat) => (
+              <div
+                key={stat.label}
+                className="bg-gradient-to-b from-[#faf6f1] to-white rounded-2xl p-7 border border-[rgba(94,61,42,0.15)] text-center hover-lift"
+              >
+                <div className="text-3xl sm:text-4xl font-extrabold mb-1 tracking-tight bg-gradient-to-br from-[var(--hl-mint-deep)] to-[var(--hl-mint-deep)] bg-clip-text text-transparent">
+                  {stat.value}
+                </div>
+                <div className="text-[13px] text-gray-500 tracking-wide font-medium">
+                  {stat.label}
+                </div>
               </div>
-              <div className="text-[12px] text-gray-400 tracking-wide">
-                Documents humanized
-              </div>
-            </div>
-
-            {/* Stat 2 */}
-            <div className="bg-white rounded-xl p-5 shadow-none border border-gray-100 text-center hover:shadow-sm transition-shadow">
-              <div className="text-[1.4rem] font-bold text-[#5e3d2a] mb-0.5 tracking-tight">
-                98.7%
-              </div>
-              <div className="text-[12px] text-gray-400 tracking-wide">
-                Detection bypass rate
-              </div>
-            </div>
-
-            {/* Stat 3 */}
-            <div className="bg-white rounded-xl p-5 shadow-none border border-gray-100 text-center hover:shadow-sm transition-shadow">
-              <div className="text-[1.4rem] font-bold text-[#5e3d2a] mb-0.5 tracking-tight">
-                &lt;3s
-              </div>
-              <div className="text-[12px] text-gray-400 tracking-wide">
-                Average turnaround
-              </div>
-            </div>
+            ))}
           </div>
         </section>
 
@@ -1322,8 +1275,8 @@ export default function UnifiedHomePage() {
           <div className="absolute inset-0 opacity-[0.04]" style={{
             backgroundImage: `repeating-linear-gradient(
               45deg,
-              #8B6F47,
-              #8B6F47 2px,
+              var(--hl-mint-deep),
+              var(--hl-mint-deep) 2px,
               transparent 2px,
               transparent 20px
             )`
@@ -1331,68 +1284,49 @@ export default function UnifiedHomePage() {
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-10">
-              <h2 className="text-[1.6rem] sm:text-[2.2rem] font-extrabold tracking-tight text-gray-900 mb-2 leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
-                How it{" "}
-                <span style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: '1.15em' }} className="text-[#5e3d2a]">works</span>
+              <h2 className="mb-2 text-3xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-4xl">
+                How it <span className="hl-gradient-text">works</span>
               </h2>
-              <p className="text-[12px] text-gray-400 tracking-wide">Three steps. Under 30 seconds.</p>
+              <p className="text-sm text-gray-500 tracking-wide">Three steps. Under 30 seconds.</p>
             </div>
             
             <div className="relative">
               {/* Progress Line */}
-              <div className="absolute top-24 left-0 right-0 h-px bg-gradient-to-r from-[#5e3d2a] via-gray-200 to-[#5e3d2a]/30 hidden lg:block" style={{ width: 'calc(100% - 200px)', left: '100px' }} />
+              <div className="absolute top-24 left-0 right-0 h-px bg-gradient-to-r from-[var(--hl-mint-deep)] via-gray-200 to-[var(--hl-mint-deep)]/30 hidden lg:block" style={{ width: 'calc(100% - 200px)', left: '100px' }} />
               
               <div className="grid md:grid-cols-3 gap-12 relative">
-                {/* Step 1 */}
-                <div className="text-center">
-                  <div className="relative inline-flex items-center justify-center w-11 h-11 rounded-full bg-[#5e3d2a] text-white text-sm font-semibold mb-4 shadow-sm">
-                    1
+                {[
+                  { n: "1", title: "Paste your text", desc: "Drop in content from ChatGPT, Claude, Gemini, or any AI tool. Supports plain text, .docx, and .pdf." },
+                  { n: "2", title: "Hit Humanize", desc: "Our engine rewrites for natural flow, varied sentence rhythm, and authentic tone — while keeping your meaning." },
+                  { n: "3", title: "Copy and use", desc: "Download as .txt or .docx, or copy directly. Ready for submission, publication, or wherever you need it." },
+                ].map((step) => (
+                  <div key={step.n} className="text-center rounded-2xl bg-white/70 backdrop-blur-sm border border-[rgba(94,61,42,0.15)]/60 p-8 hover-lift">
+                    <div className="relative inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-[var(--hl-mint-deep)] to-[var(--hl-mint-deep)] text-white text-base font-bold mb-4 shadow-md shadow-[var(--hl-mint-deep)]/20">
+                      {step.n}
+                    </div>
+                    <h3 className="text-[15px] font-semibold text-gray-900 mb-2">{step.title}</h3>
+                    <p className="text-[13.5px] text-gray-500 leading-relaxed">
+                      {step.desc}
+                    </p>
                   </div>
-                  <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Paste your text</h3>
-                  <p className="text-[13px] text-gray-400 leading-relaxed">
-                    Drop in content from ChatGPT, Claude, Gemini, or any AI tool. Supports plain text, .docx, and .pdf.
-                  </p>
-                </div>
-                
-                {/* Step 2 */}
-                <div className="text-center">
-                  <div className="relative inline-flex items-center justify-center w-11 h-11 rounded-full bg-gray-800 text-white text-sm font-semibold mb-4 shadow-sm">
-                    2
-                  </div>
-                  <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Hit Humanize</h3>
-                  <p className="text-[13px] text-gray-400 leading-relaxed">
-                    Our engine rewrites for natural flow, varied sentence rhythm, and authentic tone — while keeping your meaning.
-                  </p>
-                </div>
-                
-                {/* Step 3 */}
-                <div className="text-center">
-                  <div className="relative inline-flex items-center justify-center w-11 h-11 rounded-full bg-[#5e3d2a] text-white text-sm font-semibold mb-4 shadow-sm">
-                    3
-                  </div>
-                  <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Copy and use</h3>
-                  <p className="text-[13px] text-gray-400 leading-relaxed">
-                    Download as .txt or .docx, or copy directly. Ready for submission, publication, or wherever you need it.
-                  </p>
-                </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* Large Discount Banner - Above Pricing */}
-        <LargeDiscountBanner />
+        {/* Back-to-School Lifetime Deal Banner - Above Pricing */}
+        <LifetimeOfferBanner />
 
-        {/* Pricing Section (Untouched logic, just moved) */}
-        <section id="pricing" className="py-10 sm:py-16 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_1s_forwards]">
+        {/* Pricing Section */}
+        <section id="pricing" className="py-10 sm:py-16 bg-[var(--hl-surface)] opacity-0 animate-[fadeInUp_0.8s_ease-out_1s_forwards]">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[#5e3d2a]">Pricing</span>
-              <h3 className="mt-3 text-[1.6rem] sm:text-[2.2rem] font-extrabold tracking-tight text-gray-900 leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
-                Simple,{" "}
-                <span style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: '1.15em' }} className="text-[#8B6F47]">transparent pricing</span>
+              <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--hl-mint-deep)]">Pricing</span>
+              <h3 className="mt-3 text-3xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-4xl">
+                Simple, <span className="hl-gradient-text">transparent pricing</span>
               </h3>
-              <p className="mx-auto mt-2 max-w-sm text-[13px] text-gray-400">
+              <p className="mx-auto mt-2 max-w-sm text-sm text-gray-500">
                 No hidden fees. Upgrade or cancel anytime.
               </p>
             </div>
@@ -1410,86 +1344,85 @@ export default function UnifiedHomePage() {
           {/* Square grid background pattern */}
           <div className="absolute inset-0 opacity-[0.08]" style={{
             backgroundImage: `
-              linear-gradient(to right, #8B6F47 1.5px, transparent 1.5px),
-              linear-gradient(to bottom, #8B6F47 1.5px, transparent 1.5px)
+              linear-gradient(to right, var(--hl-mint-deep) 1.5px, transparent 1.5px),
+              linear-gradient(to bottom, var(--hl-mint-deep) 1.5px, transparent 1.5px)
             `,
             backgroundSize: '40px 40px'
           }}></div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-10">
-              <h2 className="text-[1.6rem] sm:text-[2.2rem] font-extrabold tracking-tight text-gray-900 mb-3 leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
-                What makes{" "}
-                <span style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: '1.15em' }} className="text-[#5e3d2a]">it work</span>
+              <h2 className="mb-3 text-3xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-4xl">
+                What makes <span className="hl-gradient-text">it work</span>
               </h2>
-              <p className="text-gray-400 max-w-lg mx-auto text-[13px] leading-relaxed">
+              <p className="text-gray-500 max-w-lg mx-auto text-sm leading-relaxed">
                 Under the hood, a purpose-built rewriting engine — not a generic LLM wrapper — handles every nuance of natural language.
               </p>
             </div>
             
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* Feature 1 */}
-              <div className="bg-[#5e3d2a]/5 rounded-2xl p-6 border border-[#e8ddd5]">
-                <div className="w-10 h-10 bg-[#5e3d2a] rounded-xl flex items-center justify-center mb-4">
+              <div className="bg-[var(--hl-mint-deep)]/5 rounded-2xl p-6 border border-[rgba(94,61,42,0.15)] hover-lift">
+                <div className="w-10 h-10 bg-[var(--hl-mint-deep)] rounded-xl flex items-center justify-center mb-4">
                   <ShieldCheck className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Undetectable output</h3>
-                <p className="text-gray-400 text-[13px] leading-relaxed">
+                <h3 className="text-[15px] font-semibold text-gray-900 mb-2">Undetectable output</h3>
+                <p className="text-gray-500 text-[13.5px] leading-relaxed">
                   Rewrites pass GPTZero, Turnitin, and Originality.ai. The result reads like a person — because it's engineered to.
                 </p>
               </div>
 
               {/* Feature 2 */}
-              <div className="bg-[#faf7f4] rounded-2xl p-6 border border-[#e8ddd5]">
-                <div className="w-10 h-10 bg-[#5e3d2a] rounded-xl flex items-center justify-center mb-4">
+              <div className="bg-[#faf6f1] rounded-2xl p-6 border border-[rgba(94,61,42,0.15)] hover-lift">
+                <div className="w-10 h-10 bg-[var(--hl-mint-deep)] rounded-xl flex items-center justify-center mb-4">
                   <FileText className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Meaning preserved</h3>
-                <p className="text-gray-400 text-[13px] leading-relaxed">
+                <h3 className="text-[15px] font-semibold text-gray-900 mb-2">Meaning preserved</h3>
+                <p className="text-gray-500 text-[13.5px] leading-relaxed">
                   Your facts, arguments, and structure stay intact. Only the phrasing changes — nothing gets lost in translation.
                 </p>
               </div>
 
               {/* Feature 3 */}
-              <div className="bg-[#5e3d2a]/5 rounded-2xl p-6 border border-[#e8ddd5]">
-                <div className="w-10 h-10 bg-[#5e3d2a] rounded-xl flex items-center justify-center mb-4">
+              <div className="bg-[var(--hl-mint-deep)]/5 rounded-2xl p-6 border border-[rgba(94,61,42,0.15)] hover-lift">
+                <div className="w-10 h-10 bg-[var(--hl-mint-deep)] rounded-xl flex items-center justify-center mb-4">
                   <Zap className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Fast at any scale</h3>
-                <p className="text-gray-400 text-[13px] leading-relaxed">
+                <h3 className="text-[15px] font-semibold text-gray-900 mb-2">Fast at any scale</h3>
+                <p className="text-gray-500 text-[13.5px] leading-relaxed">
                   5,000 words processed in under 3 seconds. No queue, no wait — just instant results on demand.
                 </p>
               </div>
 
               {/* Feature 4 */}
-              <div className="bg-[#faf7f4] rounded-2xl p-6 border border-[#e8ddd5]">
-                <div className="w-10 h-10 bg-[#5e3d2a] rounded-xl flex items-center justify-center mb-4">
+              <div className="bg-[#faf6f1] rounded-2xl p-6 border border-[rgba(94,61,42,0.15)] hover-lift">
+                <div className="w-10 h-10 bg-[var(--hl-mint-deep)] rounded-xl flex items-center justify-center mb-4">
                   <Lock className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Private by design</h3>
-                <p className="text-gray-400 text-[13px] leading-relaxed">
+                <h3 className="text-[15px] font-semibold text-gray-900 mb-2">Private by design</h3>
+                <p className="text-gray-500 text-[13.5px] leading-relaxed">
                   Your content is never stored, logged, or used for training. What you paste stays yours — full stop.
                 </p>
               </div>
 
               {/* Feature 5 */}
-              <div className="bg-[#5e3d2a]/5 rounded-2xl p-6 border border-[#e8ddd5]">
-                <div className="w-10 h-10 bg-[#5e3d2a] rounded-xl flex items-center justify-center mb-4">
-                  <Sparkles className="w-5 h-5 text-white" />
+              <div className="bg-[var(--hl-mint-deep)]/5 rounded-2xl p-6 border border-[rgba(94,61,42,0.15)] hover-lift">
+                <div className="w-10 h-10 bg-[var(--hl-mint-deep)] rounded-xl flex items-center justify-center mb-4">
+                  <Languages className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">50+ languages</h3>
-                <p className="text-gray-400 text-[13px] leading-relaxed">
+                <h3 className="text-[15px] font-semibold text-gray-900 mb-2">50+ languages</h3>
+                <p className="text-gray-500 text-[13.5px] leading-relaxed">
                   English, Spanish, French, German, Chinese, Japanese, and more — all with the same quality and naturalness.
                 </p>
               </div>
 
               {/* Feature 6 */}
-              <div className="bg-[#faf7f4] rounded-2xl p-6 border border-[#e8ddd5]">
-                <div className="w-10 h-10 bg-[#5e3d2a] rounded-xl flex items-center justify-center mb-4">
+              <div className="bg-[#faf6f1] rounded-2xl p-6 border border-[rgba(94,61,42,0.15)] hover-lift">
+                <div className="w-10 h-10 bg-[var(--hl-mint-deep)] rounded-xl flex items-center justify-center mb-4">
                   <FileText className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">No friction to start</h3>
-                <p className="text-gray-400 text-[13px] leading-relaxed">
+                <h3 className="text-[15px] font-semibold text-gray-900 mb-2">No friction to start</h3>
+                <p className="text-gray-500 text-[13.5px] leading-relaxed">
                   Paste and go. No account required to try it — sign up only when you're ready for more.
                 </p>
               </div>
@@ -1498,17 +1431,16 @@ export default function UnifiedHomePage() {
         </section>
 
         {/* Redesigned Testimonials Section */}
-        <section id="testimonials" className="py-16 sm:py-20 bg-[#faf7f4] overflow-hidden relative opacity-0 animate-[fadeInUp_0.8s_ease-in-out_1.2s_forwards]">
+        <section id="testimonials" className="py-16 sm:py-20 bg-[#faf6f1] overflow-hidden relative opacity-0 animate-[fadeInUp_0.8s_ease-in-out_1.2s_forwards]">
           <div className="absolute top-0 inset-x-0 h-px bg-muted" />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16 md:mb-20">
-              <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[#5e3d2a] mb-3 block">Testimonials</span>
-              <h2 className="text-[1.6rem] md:text-[2.2rem] font-extrabold text-foreground tracking-tight mb-3 leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
-                What people{" "}
-                <span style={{ fontFamily: "'Caveat', cursive", fontWeight: 600, fontSize: '1.15em' }} className="text-[#8B6F47]">are saying</span>
+              <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--hl-mint-deep)] mb-3 block">Testimonials</span>
+              <h2 className="mb-3 text-3xl font-extrabold leading-tight tracking-tight text-foreground md:text-4xl">
+                What people <span className="hl-gradient-text">are saying</span>
               </h2>
-              <p className="text-gray-400 max-w-sm mx-auto text-[13px]">Thousands of writers, students, and teams use HumanifyLab every day.</p>
+              <p className="text-gray-500 max-w-sm mx-auto text-sm">Thousands of writers, students, and teams use HumanifyLab every day.</p>
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -1521,7 +1453,7 @@ export default function UnifiedHomePage() {
                   </div>
                   <p className="text-foreground text-sm leading-relaxed mb-6 flex-1">"{t.quote}"</p>
                   <div className="flex items-center gap-3 pt-4 border-t border-slate-50">
-                    <div className="w-8 h-8 rounded-full bg-[#f5ede6] flex items-center justify-center text-xs font-bold text-[#5e3d2a]">
+                    <div className="w-8 h-8 rounded-full bg-[#faf6f1] flex items-center justify-center text-xs font-bold text-[var(--hl-mint-deep)]">
                       {t.name[0]}
                     </div>
                     <div className="overflow-hidden">
@@ -1538,12 +1470,12 @@ export default function UnifiedHomePage() {
         {/* Affiliate Program Banner */}
         <section className="py-16 bg-[#0f1419] relative overflow-hidden">
           <div className="absolute inset-0 opacity-10" style={{
-            backgroundImage: `radial-gradient(circle at 20% 50%, #8b6f47 0%, transparent 50%), radial-gradient(circle at 80% 50%, #5e3d2a 0%, transparent 50%)`
+            backgroundImage: `radial-gradient(circle at 20% 50%, var(--hl-mint-deep) 0%, transparent 50%), radial-gradient(circle at 80% 50%, var(--hl-mint-deep) 0%, transparent 50%)`
           }} />
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
               <div className="text-center md:text-left">
-                <span className="inline-block text-[10px] font-medium uppercase tracking-[0.15em] text-[#8b6f47] mb-3">Affiliate Program</span>
+                <span className="inline-block text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--hl-mint-deep)] mb-3">Affiliate Program</span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3 leading-tight">
                   Earn 10% on every referral
                 </h2>
@@ -1551,16 +1483,16 @@ export default function UnifiedHomePage() {
                   Share your unique referral code. When someone signs up and enters your code, you earn 10% of their first payment — paid in USDT directly to your wallet.
                 </p>
                 <div className="flex flex-wrap gap-4 mt-5 justify-center md:justify-start text-xs text-gray-400">
-                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#8b6f47] inline-block" />10% commission</span>
-                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#8b6f47] inline-block" />Paid in USDT</span>
-                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#8b6f47] inline-block" />$15 minimum payout</span>
-                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#8b6f47] inline-block" />Open to everyone</span>
+                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[var(--hl-mint-deep)] inline-block" />10% commission</span>
+                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[var(--hl-mint-deep)] inline-block" />Paid in USDT</span>
+                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[var(--hl-mint-deep)] inline-block" />$15 minimum payout</span>
+                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[var(--hl-mint-deep)] inline-block" />Open to everyone</span>
                 </div>
               </div>
               <div className="flex-shrink-0">
                 <a
                   href="/affiliate"
-                  className="inline-flex items-center gap-2 bg-[#8b6f47] hover:bg-[#7a6040] text-white font-semibold px-8 py-4 rounded-xl transition-colors text-sm whitespace-nowrap"
+                  className="inline-flex items-center gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] text-white font-semibold px-8 py-4 rounded-2xl transition-colors text-sm whitespace-nowrap shadow-[0_12px_40px_-12px_rgba(94,61,42,0.65)]"
                 >
                   Start Earning
                   <ArrowRight className="w-4 h-4" />
@@ -1571,10 +1503,10 @@ export default function UnifiedHomePage() {
         </section>
 
         {/* Guides & Regions — internal links to hub pages for crawl discovery */}
-        <section className="relative border-t border-gray-100 bg-[#faf7f4] py-16 sm:py-20">
+        <section className="relative border-t border-gray-100 bg-[#faf6f1] py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-5 sm:px-6 lg:px-8">
             <div className="mb-10 text-center">
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8b6f47]">Resources</span>
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--hl-mint-deep)]">Resources</span>
               <h2 className="mx-auto mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
                 Guides for every detector and region
               </h2>
@@ -1586,14 +1518,30 @@ export default function UnifiedHomePage() {
             <div className="mb-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
               {[
                 { label: "Bypass AI Detectors", href: "/bypass-ai-detectors" },
-                { label: "AI Detector Guide", href: "/ai-detector" },
-                { label: "Free AI Humanizer", href: "/free-ai-humanizer" },
+                { label: "How to Bypass Detection", href: "/topics/howto" },
+                { label: "0% AI Score Guides", href: "/topics/score" },
                 { label: "Browse All Guides", href: "/topics" },
               ].map((g) => (
                 <Link
                   key={g.href}
                   href={g.href}
-                  className="flex items-center justify-center rounded-xl border border-gray-200 bg-white p-5 text-center text-sm font-semibold text-gray-900 transition-colors hover:border-[#8b6f47] hover:text-[#5e3d2a]"
+                  className="flex items-center justify-center rounded-xl border border-gray-200 bg-white p-5 text-center text-sm font-semibold text-gray-900 transition-colors hover:border-[var(--hl-mint-deep)] hover:text-[var(--hl-mint-deep)]"
+                >
+                  {g.label}
+                </Link>
+              ))}
+            </div>
+            <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {[
+                { label: "Bypass Hub", href: "/topics/bypass" },
+                { label: "Humanizer Hub", href: "/topics/humanizer" },
+                { label: "Free AI Humanizer", href: "/free-ai-humanizer" },
+                { label: "AI Detector Guide", href: "/ai-detector" },
+              ].map((g) => (
+                <Link
+                  key={g.href}
+                  href={g.href}
+                  className="rounded-lg border border-gray-200 bg-white py-3 text-center text-xs font-semibold text-gray-700 transition-colors hover:border-[var(--hl-mint-deep)] hover:text-[var(--hl-mint-deep)]"
                 >
                   {g.label}
                 </Link>
@@ -1612,7 +1560,7 @@ export default function UnifiedHomePage() {
                 <Link
                   key={r.href}
                   href={r.href}
-                  className="rounded-lg border border-gray-200 bg-white py-3 text-center text-xs font-medium text-gray-700 transition-colors hover:border-[#8b6f47] hover:text-[#5e3d2a]"
+                  className="rounded-lg border border-gray-200 bg-white py-3 text-center text-xs font-medium text-gray-700 transition-colors hover:border-[var(--hl-mint-deep)] hover:text-[var(--hl-mint-deep)]"
                 >
                   {r.label}
                 </Link>
@@ -1625,39 +1573,45 @@ export default function UnifiedHomePage() {
         <section id="faq" className="relative py-20 sm:py-24 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_1.4s_forwards] overflow-hidden">
           {/* Small triangle pattern background */}
           <div className="absolute inset-0 opacity-[0.06]" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 2 L14 10 L6 10 Z' fill='%238B6F47' /%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 2 L14 10 L6 10 Z' fill='%235e3d2a' /%3E%3C/svg%3E")`,
             backgroundSize: '20px 20px',
             backgroundRepeat: 'repeat'
           }}></div>
           
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-12">
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8b6f47]">FAQ</span>
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--hl-mint-deep)]">FAQ</span>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
                 Frequently asked questions
               </h2>
             </div>
 
-            <div className="space-y-0">
-              {FAQ_ITEMS.map((item, index) => {
+            <div className="space-y-3">
+              {FAQ_ITEMS.map((item) => {
                 const isOpen = faqOpen === item.id;
                 return (
                   <div
                     key={item.id}
-                    className={`border-b border-gray-200 ${index === 0 ? 'border-t' : ''}`}
+                    className={`rounded-2xl border transition-all duration-200 ${
+                      isOpen
+                        ? "border-[var(--hl-mint-deep)]/40 bg-[#faf6f1] shadow-sm"
+                        : "border-gray-200 bg-white hover:border-[var(--hl-mint-deep)]/30"
+                    }`}
                   >
                     <button
                       type="button"
                       onClick={() => setFaqOpen(isOpen ? null : item.id)}
-                      className="flex w-full items-center justify-between py-5 text-left hover:bg-gray-50 transition-colors px-2"
+                      className="flex w-full items-center justify-between py-5 text-left px-5 sm:px-6"
                     >
-                      <span className="text-base font-semibold text-gray-900 pr-8">{item.question}</span>
-                      <ChevronDown
-                        className={`h-5 w-5 text-gray-400 transition-transform flex-shrink-0 ${isOpen ? "rotate-180" : ""}`}
-                      />
+                      <span className="text-[15px] sm:text-base font-semibold text-gray-900 pr-8">{item.question}</span>
+                      <span className={`flex h-7 w-7 items-center justify-center rounded-full flex-shrink-0 transition-colors ${isOpen ? "bg-[var(--hl-mint-deep)] text-white" : "bg-gray-100 text-gray-500"}`}>
+                        <ChevronDown
+                          className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                        />
+                      </span>
                     </button>
                     {isOpen && (
-                      <div className="px-2 pb-5 text-sm leading-relaxed text-gray-600">
+                      <div className="px-5 sm:px-6 pb-5 text-sm leading-relaxed text-gray-600">
                         {item.answer}
                       </div>
                     )}

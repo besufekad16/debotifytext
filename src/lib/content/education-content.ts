@@ -1,6 +1,6 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
 import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
-import { buildPageStrings, buildStats, buildSteps, buildFeaturePoints, buildFaqs } from '~/lib/content/content-combinator';
+import { buildPageStrings, buildFaqs, buildStats, buildSteps, buildFeaturePoints, buildDeepGuide } from '~/lib/content/content-combinator';
 
 export interface EducationPageData {
   metaTitle: string;
@@ -16,6 +16,8 @@ export interface EducationPageData {
   faqTitle: string;
   finalCtaTitle: string;
   finalCtaSubtitle: string;
+  guideIntro?: string;
+  guideSections?: { title: string; body: string }[];
 }
 
 const META_TITLES: ((kw: string, subj: string) => string)[] = [
@@ -63,6 +65,7 @@ export function generateEducationContent(entry: KeywordEntryV4): EducationPageDa
   const displayKeyword = smartTitleCase(keyword);
   const subject = entity !== 'Academic' ? entity : 'Academic';
   const combo = buildPageStrings(keyword, seed, entity, 'education');
+  const deep = buildDeepGuide(keyword, seed);
 
   const ti = uniqueIdx(seed, keyword, META_TITLES.length, 0);
   const di = uniqueIdx(seed, keyword, META_DESCS.length, 1);
@@ -83,5 +86,7 @@ export function generateEducationContent(entry: KeywordEntryV4): EducationPageDa
     faqTitle: combo.faqTitle,
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,
+    guideIntro: deep.guideIntro,
+    guideSections: deep.guideSections,
   };
 }

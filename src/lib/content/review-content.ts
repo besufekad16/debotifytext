@@ -1,6 +1,6 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
 import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
-import { buildPageStrings, buildStats, buildFeaturePoints, buildFaqs } from '~/lib/content/content-combinator';
+import { buildPageStrings, buildFaqs, buildStats, buildFeaturePoints, buildDeepGuide } from '~/lib/content/content-combinator';
 
 export interface ReviewPageData {
   metaTitle: string;
@@ -20,6 +20,8 @@ export interface ReviewPageData {
   faqTitle: string;
   finalCtaTitle: string;
   finalCtaSubtitle: string;
+  guideIntro?: string;
+  guideSections?: { title: string; body: string }[];
 }
 
 // NOTE: `kw` already names the reviewed subject ("X review", "is X legit",
@@ -183,6 +185,7 @@ export function generateReviewContent(entry: KeywordEntryV4): ReviewPageData {
   const displayKeyword = smartTitleCase(keyword);
   const subject = entity !== 'Competitor' ? entity : 'This Tool';
   const combo = buildPageStrings(keyword, seed, entity, 'review');
+  const deep = buildDeepGuide(keyword, seed);
 
   if (isSelfReview(subject, keyword)) {
     const sti = uniqueIdx(seed, keyword, SELF_META_TITLES.length, 0);
@@ -207,6 +210,8 @@ export function generateReviewContent(entry: KeywordEntryV4): ReviewPageData {
       faqTitle: combo.faqTitle,
       finalCtaTitle: combo.finalCtaTitle,
       finalCtaSubtitle: combo.finalCtaSubtitle,
+    guideIntro: deep.guideIntro,
+    guideSections: deep.guideSections,
     };
   }
 
@@ -243,5 +248,7 @@ export function generateReviewContent(entry: KeywordEntryV4): ReviewPageData {
     faqTitle: combo.faqTitle,
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,
+    guideIntro: deep.guideIntro,
+    guideSections: deep.guideSections,
   };
 }

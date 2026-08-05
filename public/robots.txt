@@ -6,6 +6,11 @@
 # ── Default: allow all public content ────────────────────────
 User-agent: *
 Allow: /
+Allow: /topics
+Allow: /topics/
+Allow: /pricing
+Allow: /faq
+Allow: /contact
 Disallow: /api/
 Disallow: /_next/
 Disallow: /account

@@ -13,7 +13,7 @@ export default function GeoTemplate({ data }: { data: GeoContentData }) {
       {/* Hero */}
       <section className="bg-[#0f1419] px-5 py-16 text-white sm:py-20">
         <div className="mx-auto max-w-4xl text-center">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#8b6f47]/40 bg-[#8b6f47]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#c9a97f]">
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--hl-mint-deep)]/40 bg-[var(--hl-mint-deep)]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#a67c52]">
             <MapPin className="h-3.5 w-3.5" />
             {data.badge}
           </span>
@@ -26,14 +26,14 @@ export default function GeoTemplate({ data }: { data: GeoContentData }) {
           <div className="mb-10 flex flex-wrap justify-center gap-x-10 gap-y-6">
             {data.stats.map((s, i) => (
               <div key={i} className="text-center">
-                <div className="text-2xl font-bold tracking-tight text-[#c9a97f] sm:text-3xl">{s.value}</div>
+                <div className="text-2xl font-bold tracking-tight text-[#a67c52] sm:text-3xl">{s.value}</div>
                 <div className="mt-1 text-xs uppercase tracking-wide text-gray-500">{s.label}</div>
               </div>
             ))}
           </div>
           <Link
             href="/"
-            className="group inline-flex items-center gap-2 rounded-xl bg-[#8b6f47] px-8 py-4 text-sm font-semibold text-white transition-colors hover:bg-[#7a6040]"
+            className="group inline-flex items-center gap-2 rounded-xl bg-[var(--hl-mint-deep)] px-8 py-4 text-sm font-semibold text-white transition-colors hover:bg-[var(--hl-mint)]"
           >
             Try Free — No Sign-up
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -42,7 +42,7 @@ export default function GeoTemplate({ data }: { data: GeoContentData }) {
       </section>
 
       {/* Why */}
-      <section className="bg-[#faf7f4] px-5 py-16 sm:py-20">
+      <section className="bg-[#faf6f1] px-5 py-16 sm:py-20">
         <div className="mx-auto max-w-4xl">
           <h2 className="mb-10 text-center text-2xl font-semibold tracking-tight text-gray-900 sm:text-3xl">
             {data.whyTitle}
@@ -50,7 +50,7 @@ export default function GeoTemplate({ data }: { data: GeoContentData }) {
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             {data.whyPoints.map((p, i) => (
               <div key={i} className="rounded-2xl border border-gray-200 bg-white p-6 hover-lift">
-                <div className="mb-3 h-1 w-8 rounded-full bg-[#8b6f47]" />
+                <div className="mb-3 h-1 w-8 rounded-full bg-[var(--hl-mint-deep)]" />
                 <h3 className="mb-2 font-semibold text-gray-900">{p.title}</h3>
                 <p className="text-sm leading-relaxed text-gray-600">{p.description}</p>
               </div>
@@ -67,7 +67,7 @@ export default function GeoTemplate({ data }: { data: GeoContentData }) {
           </h2>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {data.audiencePoints.map((p, i) => (
-              <div key={i} className="rounded-2xl border border-gray-200 bg-[#faf7f4] p-6 text-center">
+              <div key={i} className="rounded-2xl border border-gray-200 bg-[#faf6f1] p-6 text-center">
                 <h3 className="mb-2 font-semibold text-gray-900">{p.title}</h3>
                 <p className="text-sm leading-relaxed text-gray-600">{p.description}</p>
               </div>
@@ -77,7 +77,7 @@ export default function GeoTemplate({ data }: { data: GeoContentData }) {
       </section>
 
       {/* Detectors */}
-      <section className="bg-[#faf7f4] px-5 py-16 sm:py-20">
+      <section className="bg-[#faf6f1] px-5 py-16 sm:py-20">
         <div className="mx-auto max-w-3xl">
           <h2 className="mb-8 text-center text-2xl font-semibold tracking-tight text-gray-900 sm:text-3xl">
             {data.detectorsTitle}
@@ -85,7 +85,7 @@ export default function GeoTemplate({ data }: { data: GeoContentData }) {
           <div className="space-y-3">
             {data.detectors.map((d, i) => (
               <div key={i} className="flex items-start gap-3 rounded-2xl border border-gray-200 bg-white p-5">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#8b6f47]" />
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[var(--hl-mint-deep)]" />
                 <div>
                   <span className="font-semibold text-gray-900">{d.name}</span>
                   <p className="mt-0.5 text-sm leading-relaxed text-gray-600">{d.note}</p>
@@ -105,7 +105,7 @@ export default function GeoTemplate({ data }: { data: GeoContentData }) {
           <div className="space-y-8">
             {data.steps.map((step, i) => (
               <div key={i} className="flex items-start gap-5">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#5e3d2a] text-sm font-bold text-white">
+                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[var(--hl-mint-deep)] text-sm font-bold text-white">
                   {step.number}
                 </div>
                 <div>
@@ -120,7 +120,7 @@ export default function GeoTemplate({ data }: { data: GeoContentData }) {
       </section>
 
       {/* FAQ */}
-      <section className="bg-[#faf7f4] px-5 py-16 sm:py-20">
+      <section className="bg-[#faf6f1] px-5 py-16 sm:py-20">
         <div className="mx-auto max-w-3xl">
           <h2 className="mb-8 text-center text-2xl font-semibold tracking-tight text-gray-900 sm:text-3xl">
             {data.faqTitle}
@@ -143,7 +143,7 @@ export default function GeoTemplate({ data }: { data: GeoContentData }) {
           <p className="mb-8 leading-relaxed text-gray-400">{data.finalCtaSubtitle}</p>
           <Link
             href="/"
-            className="group inline-flex items-center gap-2 rounded-xl bg-[#8b6f47] px-8 py-4 text-sm font-semibold text-white transition-colors hover:bg-[#7a6040]"
+            className="group inline-flex items-center gap-2 rounded-xl bg-[var(--hl-mint-deep)] px-8 py-4 text-sm font-semibold text-white transition-colors hover:bg-[var(--hl-mint)]"
           >
             Get Started Free
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

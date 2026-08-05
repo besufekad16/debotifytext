@@ -88,9 +88,9 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
   // ── Registration screen ───────────────────────────────────────────────────
   if (!affiliate) {
     return (
-      <div className="flex min-h-[70vh] items-center justify-center bg-[#faf7f4] p-4">
+      <div className="flex min-h-[70vh] items-center justify-center bg-[#faf6f1] p-4">
         <div className="w-full max-w-md rounded-3xl border border-gray-200 bg-white p-8 text-center shadow-sm">
-          <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#5e3d2a]">
+          <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--hl-mint-deep)]">
             <TrendingUp className="h-6 w-6 text-white" />
           </div>
           <h1 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900">Affiliate Program</h1>
@@ -104,7 +104,7 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
           <button
             onClick={handleRegister}
             disabled={registering}
-            className="w-full rounded-xl bg-[#5e3d2a] py-3.5 text-sm font-semibold text-white transition hover:bg-[#4a2f1f] disabled:opacity-50"
+            className="w-full rounded-xl bg-[var(--hl-mint-deep)] py-3.5 text-sm font-semibold text-white transition hover:bg-[#5e3d2a] disabled:opacity-50"
           >
             {registering ? "Setting up..." : "Join Affiliate Program"}
           </button>
@@ -117,11 +117,11 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
   const canPayout = available >= 15;
 
   return (
-    <div className="min-h-screen bg-[#faf7f4] px-4 py-10 md:py-14">
+    <div className="min-h-screen bg-[#faf6f1] px-4 py-10 md:py-14">
       <div className="mx-auto max-w-3xl space-y-6">
         {/* Header */}
         <div>
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8b6f47]">Affiliates</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--hl-mint-deep)]">Affiliates</span>
           <h1 className="mt-2 text-2xl font-semibold tracking-tight text-gray-900 sm:text-3xl">
             Affiliate Dashboard
           </h1>
@@ -148,7 +148,7 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
         {/* Referral code */}
         <div className="rounded-2xl border border-gray-200 bg-white p-6">
           <div className="mb-1 flex items-center gap-2">
-            <Users className="h-4 w-4 text-[#8b6f47]" />
+            <Users className="h-4 w-4 text-[var(--hl-mint-deep)]" />
             <p className="text-sm font-semibold text-gray-900">Your Referral Code</p>
           </div>
           <p className="mb-4 text-xs leading-relaxed text-gray-500">
@@ -167,15 +167,15 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
                 toast.success("Code copied to clipboard!");
                 setTimeout(() => setCodeCopied(false), 2500);
               }}
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#5e3d2a] px-5 py-4 text-sm font-semibold text-white transition hover:bg-[#4a2f1f]"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[var(--hl-mint-deep)] px-5 py-4 text-sm font-semibold text-white transition hover:bg-[#5e3d2a]"
             >
               {codeCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
               {codeCopied ? "Copied" : "Copy Code"}
             </button>
           </div>
 
-          <div className="mt-4 rounded-xl border border-[#e8ddd5] bg-[#faf7f4] px-4 py-3">
-            <p className="text-xs font-semibold text-[#5e3d2a]">How it works</p>
+          <div className="mt-4 rounded-xl border border-[rgba(94,61,42,0.18)] bg-[#faf6f1] px-4 py-3">
+            <p className="text-xs font-semibold text-[var(--hl-mint-deep)]">How it works</p>
             <ol className="mt-1 list-inside list-decimal space-y-0.5 text-xs text-gray-600">
               <li>Share your code with a friend</li>
               <li>They sign up on HumanifyLab and enter your code</li>
@@ -188,7 +188,7 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
         {/* Earnings breakdown */}
         <div className="rounded-2xl border border-gray-200 bg-white p-6">
           <div className="mb-1 flex items-center gap-2">
-            <TrendingUp className="h-4 w-4 text-[#8b6f47]" />
+            <TrendingUp className="h-4 w-4 text-[var(--hl-mint-deep)]" />
             <p className="text-sm font-semibold text-gray-900">What You Earn Per Referral</p>
           </div>
           <p className="mb-4 text-xs text-gray-500">
@@ -202,7 +202,7 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
               const y10 = (tier.yearlyAnnual * COMMISSION_RATE * 10).toFixed(2);
               return (
                 <div key={tier.plan} className="flex flex-col gap-2 rounded-xl border border-gray-200 p-4">
-                  <span className="self-start rounded-full bg-[#5e3d2a]/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-[#5e3d2a]">
+                  <span className="self-start rounded-full bg-[var(--hl-mint-deep)]/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-[var(--hl-mint-deep)]">
                     {tier.plan}
                   </span>
                   <div className="mt-1">
@@ -213,7 +213,7 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
                   </div>
                   <div>
                     <p className="mb-0.5 text-[10px] font-medium uppercase tracking-wide text-gray-400">Yearly plan</p>
-                    <p className="text-xl font-bold text-[#5e3d2a]">${ye}</p>
+                    <p className="text-xl font-bold text-[var(--hl-mint-deep)]">${ye}</p>
                   </div>
                   <div className="mt-1 border-t border-gray-100 pt-3">
                     <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-gray-400">
@@ -224,7 +224,7 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
                       <span className="self-end text-xs text-gray-400">monthly</span>
                     </div>
                     <div className="mt-0.5 flex justify-between text-sm">
-                      <span className="font-bold text-[#5e3d2a]">${y10}</span>
+                      <span className="font-bold text-[var(--hl-mint-deep)]">${y10}</span>
                       <span className="self-end text-xs text-gray-400">yearly</span>
                     </div>
                   </div>
@@ -240,7 +240,7 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
         {/* Withdraw */}
         <div className="rounded-2xl border border-gray-200 bg-white p-6">
           <div className="mb-1 flex items-center gap-2">
-            <Wallet className="h-4 w-4 text-[#8b6f47]" />
+            <Wallet className="h-4 w-4 text-[var(--hl-mint-deep)]" />
             <p className="text-sm font-semibold text-gray-900">Withdraw USDT</p>
           </div>
           <p className="mb-4 text-xs text-gray-500">
@@ -261,8 +261,8 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
                     className={
                       "rounded-xl border px-3 py-2.5 text-left transition disabled:opacity-40 " +
                       (network === n.value
-                        ? "border-[#5e3d2a] bg-[#5e3d2a] text-white"
-                        : "border-gray-200 bg-white text-gray-700 hover:border-[#8b6f47]")
+                        ? "border-[var(--hl-mint-deep)] bg-[var(--hl-mint-deep)] text-white"
+                        : "border-gray-200 bg-white text-gray-700 hover:border-[var(--hl-mint-deep)]")
                     }
                   >
                     <span className="block text-xs font-bold">{n.label}</span>
@@ -285,7 +285,7 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
                 value={walletAddress}
                 onChange={(e) => setWalletAddress(e.target.value)}
                 disabled={!canPayout || payingOut}
-                className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm transition focus:border-[#8b6f47] focus:outline-none disabled:bg-gray-50 disabled:text-gray-400"
+                className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm transition focus:border-[var(--hl-mint-deep)] focus:outline-none disabled:bg-gray-50 disabled:text-gray-400"
               />
               <p className="mt-1.5 flex items-center gap-1.5 text-[11px] text-gray-500">
                 <AlertTriangle className="h-3 w-3 text-amber-500" />
@@ -297,7 +297,7 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
             <button
               type="submit"
               disabled={!canPayout || payingOut || !walletAddress.trim()}
-              className="w-full rounded-xl bg-[#5e3d2a] py-3.5 text-sm font-semibold text-white transition hover:bg-[#4a2f1f] disabled:opacity-40"
+              className="w-full rounded-xl bg-[var(--hl-mint-deep)] py-3.5 text-sm font-semibold text-white transition hover:bg-[#5e3d2a] disabled:opacity-40"
             >
               {payingOut
                 ? "Processing..."
@@ -327,7 +327,7 @@ export default function AffiliateDashboard({ affiliate: initialAffiliate }: Prop
                       className={
                         "rounded-full px-2 py-0.5 text-xs font-semibold capitalize " +
                         (p.status === "completed"
-                          ? "bg-green-50 text-green-700"
+                          ? "bg-[var(--hl-surface)] text-[var(--hl-mint-deep)]"
                           : p.status === "failed"
                             ? "bg-red-50 text-red-600"
                             : "bg-yellow-50 text-yellow-700")

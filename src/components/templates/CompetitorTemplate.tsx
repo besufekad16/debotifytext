@@ -9,10 +9,10 @@ export default function CompetitorTemplate({ data }: { data: CompetitorContentDa
       {/* Hero */}
       <section className="bg-[#0f1419] text-white py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[#8b6f47] mb-4">Comparison</span>
+          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[var(--hl-mint-deep)] mb-4">Comparison</span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight">{data.h1}</h1>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto mb-8">{data.intro}</p>
-          <Link href="/" className="inline-flex items-center gap-2 bg-[#8b6f47] hover:bg-[#7a6040] text-white font-semibold px-8 py-4 rounded-xl transition-colors text-sm">
+          <Link href="/" className="inline-flex items-center gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] text-white font-semibold px-8 py-4 rounded-xl transition-colors text-sm">
             Try HumanifyLab Free <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -28,7 +28,7 @@ export default function CompetitorTemplate({ data }: { data: CompetitorContentDa
                 <tr className="bg-[#0f1419] text-white">
                   <th className="text-left px-6 py-4 font-semibold">Feature</th>
                   <th className="text-center px-6 py-4 font-semibold text-gray-400">Competitor</th>
-                  <th className="text-center px-6 py-4 font-semibold text-[#8b6f47]">HumanifyLab ✦</th>
+                  <th className="text-center px-6 py-4 font-semibold text-[var(--hl-mint-deep)]">HumanifyLab ✦</th>
                 </tr>
               </thead>
               <tbody>
@@ -36,7 +36,7 @@ export default function CompetitorTemplate({ data }: { data: CompetitorContentDa
                   <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                     <td className="px-6 py-4 font-medium text-gray-700">{row.feature}</td>
                     <td className="px-6 py-4 text-center text-gray-500">{row.competitor}</td>
-                    <td className="px-6 py-4 text-center font-semibold text-[#5e3d2a]">{row.humanifylab}</td>
+                    <td className="px-6 py-4 text-center font-semibold text-[var(--hl-mint-deep)]">{row.humanifylab}</td>
                   </tr>
                 ))}
               </tbody>
@@ -51,8 +51,8 @@ export default function CompetitorTemplate({ data }: { data: CompetitorContentDa
           <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">Why Switch to HumanifyLab?</h2>
           <div className="space-y-4">
             {data.whySwitchPoints.map((point, i) => (
-              <div key={i} className="flex items-start gap-3 p-4 bg-[#faf7f4] rounded-xl border border-[#e8ddd5]">
-                <Check className="w-5 h-5 text-[#5e3d2a] flex-shrink-0 mt-0.5" />
+              <div key={i} className="flex items-start gap-3 p-4 bg-[#faf6f1] rounded-xl border border-[rgba(94,61,42,0.18)]">
+                <Check className="w-5 h-5 text-[var(--hl-mint-deep)] flex-shrink-0 mt-0.5" />
                 <p className="text-gray-700 text-sm leading-relaxed">{point}</p>
               </div>
             ))}
@@ -79,7 +79,7 @@ export default function CompetitorTemplate({ data }: { data: CompetitorContentDa
       <section className="py-16 px-4 bg-[#0f1419] text-white text-center">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-2xl font-bold mb-4">{data.cta}</h2>
-          <Link href="/" className="inline-flex items-center gap-2 bg-[#8b6f47] hover:bg-[#7a6040] text-white font-semibold px-8 py-4 rounded-xl transition-colors">
+          <Link href="/" className="inline-flex items-center gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] text-white font-semibold px-8 py-4 rounded-xl transition-colors">
             Get Started Free <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

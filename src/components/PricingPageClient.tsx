@@ -7,6 +7,7 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import PageNavbar from "~/components/PageNavbar";
 import PolarPricing from "~/components/pricing/PolarPricing";
+import LifetimeDealCard from "~/components/pricing/LifetimeDealCard";
 import TopUpSection from "~/components/pricing/TopUpSection";
 
 type BillingCycle = "monthly" | "yearly";
@@ -223,7 +224,7 @@ export default function PricingPageClient({ isTeamMember = false, hasSubscriptio
       <div className="min-h-screen bg-white">
         <div className="flex min-h-[80vh] items-center justify-center">
           <div className="inline-flex items-center gap-3 rounded-full border border-gray-200 bg-white px-5 py-3 text-sm font-medium text-gray-500 shadow-sm">
-            <Loader2 className="h-4 w-4 animate-spin text-[#5e3d2a]" /> Fetching plans…
+            <Loader2 className="h-4 w-4 animate-spin text-[var(--hl-mint-deep)]" /> Fetching plans…
           </div>
         </div>
       </div>
@@ -270,11 +271,13 @@ export default function PricingPageClient({ isTeamMember = false, hasSubscriptio
               <PolarPricing isTeamMember={isTeamMember} />
             </div>
 
+            <LifetimeDealCard isTeamMember={isTeamMember} />
+
             {hasSubscription && <TopUpSection />}
           </div>
         </section>
 
-        <div className="mt-16 rounded-xl border border-gray-200 bg-[#faf7f4] p-8 text-center">
+        <div className="mt-16 rounded-xl border border-gray-200 bg-[#faf6f1] p-8 text-center">
           <h3 className="mb-3 text-[1.15rem] font-bold text-gray-900">
             Need Help Choosing?
           </h3>
@@ -284,7 +287,7 @@ export default function PricingPageClient({ isTeamMember = false, hasSubscriptio
           <Button
             variant="outline"
             size="lg"
-            className="border-2 border-[#5e3d2a] text-[#5e3d2a] hover:bg-[#5e3d2a] hover:text-white transition-colors"
+            className="border-2 border-[var(--hl-mint-deep)] text-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint-deep)] hover:text-white transition-colors"
             onClick={() => router.push("/contact")}
           >
             Contact Support
@@ -292,11 +295,11 @@ export default function PricingPageClient({ isTeamMember = false, hasSubscriptio
         </div>
 
         {/* Affiliate callout */}
-        <div className="mt-8 rounded-2xl border border-[#e8ddd5] bg-[#faf7f4] p-8">
+        <div className="mt-8 rounded-2xl border border-[rgba(94,61,42,0.18)] bg-[#faf6f1] p-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="text-center sm:text-left">
               <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
-                <span className="text-xs font-bold uppercase tracking-widest text-[#5e3d2a] bg-[#5e3d2a]/10 px-2.5 py-0.5 rounded-full">
+                <span className="text-xs font-bold uppercase tracking-widest text-[var(--hl-mint-deep)] bg-[var(--hl-mint-deep)]/10 px-2.5 py-0.5 rounded-full">
                   Affiliate Program
                 </span>
               </div>
@@ -307,15 +310,15 @@ export default function PricingPageClient({ isTeamMember = false, hasSubscriptio
                 Refer a friend and earn 10% of their first payment — paid directly to your crypto wallet. No cap, no expiry.
               </p>
               <div className="flex flex-wrap gap-4 mt-3 justify-center sm:justify-start text-xs text-gray-500">
-                <span className="flex items-center gap-1"><span className="text-green-500 font-bold">✓</span> Paid in USDT</span>
-                <span className="flex items-center gap-1"><span className="text-green-500 font-bold">✓</span> No KYC needed</span>
-                <span className="flex items-center gap-1"><span className="text-green-500 font-bold">✓</span> Instant signup</span>
-                <span className="flex items-center gap-1"><span className="text-green-500 font-bold">✓</span> Works worldwide</span>
+                <span className="flex items-center gap-1"><span className="text-[var(--hl-mint)] font-bold">✓</span> Paid in USDT</span>
+                <span className="flex items-center gap-1"><span className="text-[var(--hl-mint)] font-bold">✓</span> No KYC needed</span>
+                <span className="flex items-center gap-1"><span className="text-[var(--hl-mint)] font-bold">✓</span> Instant signup</span>
+                <span className="flex items-center gap-1"><span className="text-[var(--hl-mint)] font-bold">✓</span> Works worldwide</span>
               </div>
             </div>
             <Button
               size="lg"
-              className="shrink-0 rounded-xl bg-[#5e3d2a] hover:bg-[#4a2f1f] text-white font-semibold px-8"
+              className="shrink-0 rounded-xl bg-[var(--hl-mint-deep)] hover:bg-[#5e3d2a] text-white font-semibold px-8"
               onClick={() => router.push("/affiliate")}
             >
               Start Earning

@@ -126,7 +126,7 @@ const SECTIONS: LegalSection[] = [
     paragraphs: [
       <span key="contact">
         For questions about these Terms of Service, please contact us at{" "}
-        <a href="mailto:humanifylab1@gmail.com" className="font-semibold text-[#5e3d2a] underline underline-offset-4">
+        <a href="mailto:humanifylab1@gmail.com" className="font-semibold text-[var(--hl-mint-deep)] underline underline-offset-4">
           humanifylab1@gmail.com
         </a>
         . We typically respond within 24 hours.

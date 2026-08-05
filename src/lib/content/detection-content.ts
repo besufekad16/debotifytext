@@ -1,6 +1,6 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
 import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
-import { buildPageStrings, buildStats, buildFeaturePoints, buildFaqs } from '~/lib/content/content-combinator';
+import { buildPageStrings, buildFaqs, buildStats, buildDeepGuide } from '~/lib/content/content-combinator';
 
 export interface DetectionPageData {
   metaTitle: string;
@@ -17,6 +17,8 @@ export interface DetectionPageData {
   faqTitle: string;
   finalCtaTitle: string;
   finalCtaSubtitle: string;
+  guideIntro?: string;
+  guideSections?: { title: string; body: string }[];
 }
 
 // NOTE: `kw` (the keyword phrase, e.g. "does turnitin detect chatgpt") always
@@ -123,6 +125,7 @@ export function generateDetectionContent(entry: KeywordEntryV4): DetectionPageDa
   const displayKeyword = smartTitleCase(keyword);
 
   const combo = buildPageStrings(keyword, seed, entity, 'detection');
+  const deep = buildDeepGuide(keyword, seed);
   const ti = uniqueIdx(seed, keyword, META_TITLES.length, 0);
   const di = uniqueIdx(seed, keyword, META_DESCS.length, 1);
   const hi = uniqueIdx(seed, keyword, H1S.length, 2);
@@ -146,5 +149,7 @@ export function generateDetectionContent(entry: KeywordEntryV4): DetectionPageDa
     faqTitle: combo.faqTitle,
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,
+    guideIntro: deep.guideIntro,
+    guideSections: deep.guideSections,
   };
 }

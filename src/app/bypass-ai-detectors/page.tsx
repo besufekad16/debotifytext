@@ -97,7 +97,7 @@ export default function BypassAiDetectorsPage() {
       <div className="min-h-screen bg-white">
         <section className="bg-[#0f1419] text-white py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#8b6f47] mb-4">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[var(--hl-mint-deep)] mb-4">
               <ShieldOff className="w-4 h-4" /> Every Major Detector, Beaten
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight">
@@ -108,7 +108,7 @@ export default function BypassAiDetectorsPage() {
               against live versions of every major AI detector every week and rewrites your text so it reads as
               genuinely human, not just paraphrased.
             </p>
-            <Link href="/" className="inline-flex items-center gap-2 bg-[#8b6f47] hover:bg-[#7a6040] text-white font-semibold px-8 py-4 rounded-xl transition-colors text-sm">
+            <Link href="/" className="inline-flex items-center gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] text-white font-semibold px-8 py-4 rounded-xl transition-colors text-sm">
               Try Free — No Sign-up <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -149,7 +149,7 @@ export default function BypassAiDetectorsPage() {
                   <tr className="bg-[#0f1419] text-white">
                     <th className="text-left px-6 py-4 font-semibold">Detector</th>
                     <th className="text-left px-6 py-4 font-semibold">Used By</th>
-                    <th className="text-center px-6 py-4 font-semibold text-[#8b6f47]">HumanifyLab Bypass Rate</th>
+                    <th className="text-center px-6 py-4 font-semibold text-[var(--hl-mint-deep)]">HumanifyLab Bypass Rate</th>
                     <th className="text-center px-6 py-4 font-semibold">Guide</th>
                   </tr>
                 </thead>
@@ -158,9 +158,9 @@ export default function BypassAiDetectorsPage() {
                     <tr key={d.name} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                       <td className="px-6 py-4 font-medium text-gray-800">{d.name}</td>
                       <td className="px-6 py-4 text-gray-500">{d.usedBy}</td>
-                      <td className="px-6 py-4 text-center text-[#5e3d2a] font-semibold">{d.bypassRate}</td>
+                      <td className="px-6 py-4 text-center text-[var(--hl-mint-deep)] font-semibold">{d.bypassRate}</td>
                       <td className="px-6 py-4 text-center">
-                        <Link href={d.link} className="text-[#8b6f47] hover:underline font-medium">
+                        <Link href={d.link} className="text-[var(--hl-mint-deep)] hover:underline font-medium">
                           Full guide →
                         </Link>
                       </td>
@@ -180,7 +180,7 @@ export default function BypassAiDetectorsPage() {
               {DETECTORS.map((d) => (
                 <div key={d.name} className="bg-gray-50 rounded-xl border border-gray-200 p-6">
                   <div className="flex items-center gap-2 mb-2">
-                    <CheckCircle2 className="w-5 h-5 text-[#8b6f47]" />
+                    <CheckCircle2 className="w-5 h-5 text-[var(--hl-mint-deep)]" />
                     <h3 className="font-semibold text-gray-900">{d.name}</h3>
                   </div>
                   <p className="text-sm text-gray-600 leading-relaxed">{d.mechanism}</p>
@@ -201,7 +201,7 @@ export default function BypassAiDetectorsPage() {
                 { n: "4", t: "Submit or publish with confidence", d: "Results are permanent — text humanized once does not get re-flagged later." },
               ].map((s) => (
                 <div key={s.n} className="flex gap-5 items-start">
-                  <div className="w-10 h-10 rounded-full bg-[#8b6f47] text-white flex items-center justify-center font-bold text-sm flex-shrink-0">{s.n}</div>
+                  <div className="w-10 h-10 rounded-full bg-[var(--hl-mint-deep)] text-white flex items-center justify-center font-bold text-sm flex-shrink-0">{s.n}</div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">{s.t}</h3>
                     <p className="text-sm text-gray-600 leading-relaxed">{s.d}</p>
@@ -230,7 +230,7 @@ export default function BypassAiDetectorsPage() {
           <div className="max-w-2xl mx-auto">
             <h2 className="text-2xl font-bold mb-3">Beat Every Detector — Try Free</h2>
             <p className="text-gray-400 mb-6">99.9% bypass rate. No sign-up required. Results in under 10 seconds.</p>
-            <Link href="/" className="inline-flex items-center gap-2 bg-[#8b6f47] hover:bg-[#7a6040] text-white font-semibold px-8 py-4 rounded-xl transition-colors">
+            <Link href="/" className="inline-flex items-center gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] text-white font-semibold px-8 py-4 rounded-xl transition-colors">
               Get Started Free <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

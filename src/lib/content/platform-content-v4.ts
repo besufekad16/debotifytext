@@ -1,6 +1,6 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
 import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
-import { buildPageStrings, buildStats, buildFaqs } from '~/lib/content/content-combinator';
+import { buildPageStrings, buildFaqs, buildStats, buildDeepGuide } from '~/lib/content/content-combinator';
 
 export interface PlatformV4PageData {
   metaTitle: string;
@@ -16,6 +16,8 @@ export interface PlatformV4PageData {
   faqTitle: string;
   finalCtaTitle: string;
   finalCtaSubtitle: string;
+  guideIntro?: string;
+  guideSections?: { title: string; body: string }[];
 }
 
 const META_TITLES: ((kw: string, plat: string) => string)[] = [
@@ -92,6 +94,7 @@ export function generatePlatformV4Content(entry: KeywordEntryV4): PlatformV4Page
   const platform = entity !== 'Platform' ? entity : 'Google Docs';
   const capitalizedKeyword = smartTitleCase(keyword);
   const combo = buildPageStrings(capitalizedKeyword, seed, entity, 'platform');
+  const deep = buildDeepGuide(keyword, seed);
 
   const features = FEATURES_POOL[0]!.map(f => ({
     ...f,
@@ -112,5 +115,7 @@ export function generatePlatformV4Content(entry: KeywordEntryV4): PlatformV4Page
     faqTitle: combo.faqTitle,
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,
+    guideIntro: deep.guideIntro,
+    guideSections: deep.guideSections,
   };
 }

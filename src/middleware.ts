@@ -11,14 +11,21 @@ const isPublicRoute = createRouteMatcher([
   '/terms(.*)',
   '/pricing(.*)',
   '/responsible-use(.*)',
+  '/affiliate(.*)',
+  // Topic hubs MUST be public — Googlebot uses them as the HTML crawl graph
+  // into tens of thousands of PSEO pages. Auth-blocking /topics/[cluster]
+  // orphans long-tail URLs behind XML-only discovery.
+  '/topics(.*)',
   '/api/webhooks/clerk(.*)',
   '/api/webhooks/polar(.*)',
   '/api/polar/products(.*)',
+  '/api/polar/lifetime',
   '/api/humanize(.*)',
   '/sitemap.xml',
   '/robots.txt',
   '/sitemap',
   '/robots',
+  // Single-segment PSEO landing pages (e.g. /bypass-turnitin)
   '/:keyword',
 ])
 

@@ -24,7 +24,7 @@ export default function NavigationBar() {
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/humanify.png" alt="HumanifyLab Logo" width={35} height={35} className="h-[35px] w-[35px]" />
-            <span className="text-[24px] font-extrabold tracking-tight bg-gradient-to-r from-blue-400 via-#8B6F47 to-indigo-700 
+            <span className="text-[24px] font-extrabold tracking-tight bg-gradient-to-r from-blue-400 via-var(--hl-mint-deep) to-indigo-700 
               bg-clip-text text-transparent drop-shadow-sm">
                 HumanifyLab
               </span>
@@ -37,7 +37,7 @@ export default function NavigationBar() {
               size="sm"
               loading={loading}
               onClick={() => handleNavigation("/")}
-              className="cursor-pointer gap-2 bg-[#8B6F47] hover:bg-[#8B6F47]/90"
+              className="cursor-pointer gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint-deep)]/90"
             >
               Get Started
               <ArrowRight className="h-4 w-4" />

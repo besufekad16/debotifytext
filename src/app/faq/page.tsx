@@ -184,7 +184,7 @@ export default function FAQPage() {
                   {category.questions.map((faq, faqIndex) => (
                     <div
                       key={faqIndex}
-                      className="rounded-2xl border border-gray-200 bg-white p-6 transition-colors hover:border-[#8b6f47]/40"
+                      className="rounded-2xl border border-gray-200 bg-white p-6 transition-colors hover:border-[var(--hl-mint-deep)]/40"
                     >
                       <h3 className="mb-2 text-base font-semibold text-gray-900">{faq.question}</h3>
                       <p className="text-sm leading-relaxed text-gray-600">{faq.answer}</p>

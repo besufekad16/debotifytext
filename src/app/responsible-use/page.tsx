@@ -56,8 +56,8 @@ export default function ResponsibleUsePage() {
         <Container width="narrow">
           <div className="space-y-8">
             {/* Important notice */}
-            <div className="rounded-2xl border-l-4 border-[#8b6f47] bg-[#faf7f4] p-6 sm:p-8">
-              <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-[#8b6f47]">Important notice</p>
+            <div className="rounded-2xl border-l-4 border-[var(--hl-mint-deep)] bg-[#faf6f1] p-6 sm:p-8">
+              <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-[var(--hl-mint-deep)]">Important notice</p>
               <p className="text-[15px] leading-relaxed text-gray-700">
                 HumanifyLab is <strong className="text-gray-900">not a tool for academic dishonesty or cheating</strong>.
                 We encourage responsible use that enhances your work while respecting academic integrity and
@@ -80,7 +80,7 @@ export default function ResponsibleUsePage() {
                   "Ensure their writing sounds authentic and natural",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-[15px] leading-relaxed text-gray-600">
-                    <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#8b6f47]" />
+                    <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[var(--hl-mint-deep)]" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -125,9 +125,9 @@ export default function ResponsibleUsePage() {
                 {RESPONSIBLE_PRACTICES.map(({ icon: Icon, title, desc }) => (
                   <div
                     key={title}
-                    className="rounded-2xl border border-gray-200 bg-white p-5 transition-colors hover:border-[#8b6f47]/40"
+                    className="rounded-2xl border border-gray-200 bg-white p-5 transition-colors hover:border-[var(--hl-mint-deep)]/40"
                   >
-                    <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#5e3d2a]">
+                    <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--hl-mint-deep)]">
                       <Icon className="h-4 w-4 text-white" />
                     </div>
                     <h3 className="mb-1.5 text-sm font-semibold text-gray-900">{title}</h3>
@@ -147,7 +147,7 @@ export default function ResponsibleUsePage() {
               </p>
             </section>
 
-            <div className="rounded-2xl border border-gray-200 bg-[#faf7f4] p-6 sm:p-8">
+            <div className="rounded-2xl border border-gray-200 bg-[#faf6f1] p-6 sm:p-8">
               <h2 className="mb-2 text-lg font-semibold tracking-tight text-gray-900">
                 Questions about responsible use?
               </h2>
@@ -156,7 +156,7 @@ export default function ResponsibleUsePage() {
                 out to us at{" "}
                 <Link
                   href="mailto:humanifylab1@gmail.com"
-                  className="font-semibold text-[#5e3d2a] underline underline-offset-4"
+                  className="font-semibold text-[var(--hl-mint-deep)] underline underline-offset-4"
                 >
                   humanifylab1@gmail.com
                 </Link>{" "}

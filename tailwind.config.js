@@ -20,17 +20,14 @@ export default {
     extend: {
       fontFamily: {
         sans: [
+          "Outfit",
           "var(--font-geist-sans)",
-          "Inter",
           "ui-sans-serif",
           "system-ui",
           "sans-serif",
-          "Apple Color Emoji",
-          "Segoe UI Emoji",
-          "Segoe UI Symbol",
-          "Noto Color Emoji",
         ],
-        inter: ["Inter", "system-ui", "sans-serif"],
+        heading: ["Outfit", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["Playfair Display", "Georgia", "serif"],
       },
       borderRadius: {
         lg: "var(--radius)",

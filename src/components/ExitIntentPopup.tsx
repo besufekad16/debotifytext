@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Check } from "lucide-react";
+import { X, Check, GraduationCap, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-const EXIT_INTENT_SHOWN_KEY = "exit_intent_shown_v1";
+const EXIT_INTENT_SHOWN_KEY = "exit_intent_shown_v2_lifetime";
 const EXIT_INTENT_COOLDOWN = 24 * 60 * 60 * 1000; // 24 hours
 
 export default function ExitIntentPopup() {
@@ -14,7 +14,6 @@ export default function ExitIntentPopup() {
   const [hasShown, setHasShown] = useState(false);
 
   useEffect(() => {
-    // Check if we've shown the popup recently
     const checkCooldown = () => {
       try {
         const lastShown = localStorage.getItem(EXIT_INTENT_SHOWN_KEY);
@@ -33,14 +32,10 @@ export default function ExitIntentPopup() {
 
     if (checkCooldown()) return;
 
-    // Exit intent detection
     const handleMouseLeave = (e: MouseEvent) => {
-      // Only trigger if mouse leaves from the top of the page
       if (e.clientY <= 0 && !hasShown && !isVisible) {
         setIsVisible(true);
         setHasShown(true);
-        
-        // Store timestamp
         try {
           localStorage.setItem(EXIT_INTENT_SHOWN_KEY, Date.now().toString());
         } catch {
@@ -50,10 +45,7 @@ export default function ExitIntentPopup() {
     };
 
     document.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      document.removeEventListener("mouseleave", handleMouseLeave);
-    };
+    return () => document.removeEventListener("mouseleave", handleMouseLeave);
   }, [hasShown, isVisible]);
 
   const handleClose = () => {
@@ -66,95 +58,88 @@ export default function ExitIntentPopup() {
 
   const handleCTA = () => {
     handleClose();
-    // Scroll to pricing section
-    const pricingSection = document.getElementById("pricing");
-    if (pricingSection) {
-      pricingSection.scrollIntoView({ behavior: "smooth" });
-    } else {
-      router.push("/#pricing");
-    }
+    router.push("/pricing#lifetime");
   };
 
   if (!isVisible) return null;
 
   return (
     <>
-      {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-black/50 z-50 transition-opacity duration-200 ${
+        className={`fixed inset-0 z-50 bg-[var(--hl-ink)]/55 backdrop-blur-[2px] transition-opacity duration-200 ${
           isClosing ? "opacity-0" : "opacity-100"
         }`}
         onClick={handleClose}
       />
 
-      {/* Popup - Mobile First Design */}
       <div
-        className={`fixed inset-x-4 bottom-4 sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:inset-x-0 z-50 w-auto sm:w-full sm:max-w-md transition-all duration-200 ${
-          isClosing ? "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" : "opacity-100 translate-y-0 sm:scale-100"
+        className={`fixed inset-x-4 bottom-4 z-50 w-auto transition-all duration-200 sm:inset-x-0 sm:top-1/2 sm:left-1/2 sm:w-full sm:max-w-md sm:-translate-x-1/2 sm:-translate-y-1/2 ${
+          isClosing
+            ? "translate-y-4 opacity-0 sm:translate-y-0 sm:scale-95"
+            : "translate-y-0 opacity-100 sm:scale-100"
         }`}
       >
-        <div className="relative bg-white rounded-lg shadow-xl">
-          {/* Close Button */}
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[var(--hl-ink)] shadow-2xl">
+          <div
+            className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full blur-3xl"
+            style={{ background: "radial-gradient(circle, rgba(232,184,75,0.35), transparent 70%)" }}
+          />
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--hl-offer)] to-transparent" />
+
           <button
             onClick={handleClose}
-            className="absolute top-3 right-3 p-1.5 rounded-md hover:bg-gray-100 transition-colors"
+            className="absolute right-3 top-3 z-10 rounded-lg p-1.5 text-white/50 transition-colors hover:bg-white/10 hover:text-white"
             aria-label="Close"
           >
-            <X className="h-4 w-4 text-gray-500" />
+            <X className="h-4 w-4" />
           </button>
 
-          {/* Content */}
-          <div className="p-6 sm:p-8">
-            {/* Headline */}
-            <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2 pr-8">
-              Special Offer
-            </h2>
-            
-            <p className="text-sm sm:text-base text-gray-600 mb-6">
-              Get 2 months unlimited access at a discounted rate
-            </p>
-
-            {/* Pricing */}
-            <div className="bg-gray-50 rounded-lg p-4 mb-6">
-              <div className="flex items-baseline justify-center gap-2 mb-3">
-                <span className="text-gray-400 text-lg line-through">$150</span>
-                <span className="text-3xl sm:text-4xl font-bold text-gray-900">$100</span>
-                <span className="text-gray-600 text-sm">/ 2 months</span>
-              </div>
-              
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 text-sm text-gray-700">
-                  <Check className="h-4 w-4 text-[#8B6F47] flex-shrink-0" />
-                  <span>Unlimited humanization</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-gray-700">
-                  <Check className="h-4 w-4 text-[#8B6F47] flex-shrink-0" />
-                  <span>No daily limits</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-gray-700">
-                  <Check className="h-4 w-4 text-[#8B6F47] flex-shrink-0" />
-                  <span>Cancel anytime</span>
-                </div>
-              </div>
+          <div className="relative p-6 sm:p-8">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--hl-offer)]/35 bg-[var(--hl-offer)]/10 px-3 py-1.5">
+              <GraduationCap className="h-3.5 w-3.5 text-[var(--hl-offer)]" />
+              <span className="text-[10px] font-black uppercase tracking-[0.14em] text-[var(--hl-offer)]">
+                Back-to-School · Lifetime
+              </span>
             </div>
 
-            {/* CTA Buttons */}
-            <div className="space-y-3">
+            <h2 className="pr-8 text-xl font-bold tracking-tight text-white sm:text-2xl">
+              Wait — lock in lifetime before semester starts
+            </h2>
+
+            <p className="mt-2 text-sm leading-relaxed text-white/60 sm:text-base">
+              Pay once. Get 20,000 words every month forever. No subscription. No renewals.
+            </p>
+
+            <div className="mt-5 space-y-2.5 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+              {[
+                "20,000 words / month for life",
+                "Built for Turnitin & GPTZero",
+                "30-day money-back guarantee",
+              ].map((item) => (
+                <div key={item} className="flex items-center gap-2.5 text-sm text-white/85">
+                  <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[var(--hl-offer)]/15">
+                    <Check className="h-3 w-3 text-[var(--hl-offer)]" />
+                  </span>
+                  {item}
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 space-y-3">
               <button
                 onClick={handleCTA}
-                className="w-full px-6 py-3 rounded-lg font-semibold text-white transition-colors"
+                className="group flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-sm font-black uppercase tracking-wide text-[var(--hl-ink)] transition-transform hover:scale-[1.02] active:scale-[0.98]"
                 style={{
-                  backgroundColor: '#8B6F47',
+                  background: "linear-gradient(135deg,#F5D78A 0%,#E8B84B 45%,#C8922A 100%)",
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#6d5636'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#8B6F47'}
               >
-                View Pricing
+                Claim Lifetime Access
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </button>
-              
+
               <button
                 onClick={handleClose}
-                className="w-full px-6 py-2 text-sm text-gray-500 hover:text-gray-700 transition-colors"
+                className="w-full px-6 py-2 text-sm text-white/40 transition-colors hover:text-white/70"
               >
                 No thanks
               </button>

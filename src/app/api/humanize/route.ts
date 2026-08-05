@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import { db } from "~/server/db";
+import { refreshMonthlyCreditsIfNeeded } from "~/server/utils/credit-reset";
 
 // POST - Humanize text using API key
 export async function POST(request: Request) {
   try {
     // Check for API key in Authorization header
     const authHeader = request.headers.get("authorization");
-
+    
     if (!authHeader?.startsWith("Bearer ")) {
       return NextResponse.json(
         { error: "Missing or invalid Authorization header. Use: Authorization: Bearer YOUR_API_KEY" },
@@ -24,6 +25,8 @@ export async function POST(request: Request) {
           select: {
             id: true,
             credits: true,
+            subscriptionType: true,
+            nextResetDate: true,
             subscriptionPlan: true,
             maxWordsPerRequest: true
           }
@@ -38,8 +41,10 @@ export async function POST(request: Request) {
       );
     }
 
+    const { user } = await refreshMonthlyCreditsIfNeeded(apiKeyRecord.user);
+
     // Check if user has enough credits
-    if (apiKeyRecord.user.credits <= 0) {
+    if (user.credits <= 0) {
       return NextResponse.json(
         { error: "Insufficient credits. Please purchase more credits." },
         { status: 402 }
@@ -59,7 +64,7 @@ export async function POST(request: Request) {
 
     // Validate text length
     const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
-
+    
     if (wordCount === 0) {
       return NextResponse.json(
         { error: "Text cannot be empty" },
@@ -67,12 +72,12 @@ export async function POST(request: Request) {
       );
     }
 
-    if (wordCount > apiKeyRecord.user.maxWordsPerRequest) {
+    if (wordCount > user.maxWordsPerRequest) {
       return NextResponse.json(
-        {
-          error: `Text exceeds maximum allowed words (${apiKeyRecord.user.maxWordsPerRequest} words)`,
+        { 
+          error: `Text exceeds maximum allowed words (${user.maxWordsPerRequest} words)`,
           wordCount,
-          maxWords: apiKeyRecord.user.maxWordsPerRequest
+          maxWords: user.maxWordsPerRequest
         },
         { status: 400 }
       );
@@ -81,12 +86,12 @@ export async function POST(request: Request) {
     // Calculate credits needed (1 credit per 1 words)
     const creditsNeeded = wordCount;
 
-    if (apiKeyRecord.user.credits < creditsNeeded) {
+    if (user.credits < creditsNeeded) {
       return NextResponse.json(
-        {
+        { 
           error: "Insufficient credits",
           creditsNeeded,
-          creditsAvailable: apiKeyRecord.user.credits
+          creditsAvailable: user.credits
         },
         { status: 402 }
       );
@@ -100,7 +105,7 @@ export async function POST(request: Request) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "x-user-id": apiKeyRecord.user.id, // Internal header to identify user
+            "x-user-id": user.id, // Internal header to identify user
             "x-api-key-auth": "true" // Flag to skip Clerk auth in humanizer route
           },
           body: JSON.stringify({ text, preset })

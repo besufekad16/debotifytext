@@ -13,6 +13,8 @@ interface HumanizeOptions {
   temperature?: number;
   maxTokens?: number;
   preset?: string;
+  tone?: string; // Alias for preset passed by API routes
+  targetDetector?: string; // Detector hint forwarded by the stream route
   stream?: boolean;
   model?: string; // Allow custom model selection
   isFreeUser?: boolean;

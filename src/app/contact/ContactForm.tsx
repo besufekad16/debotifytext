@@ -110,7 +110,7 @@ export default function ContactForm({ initialEmail, isEmailReadOnly }: ContactFo
             value={formState.name}
             onChange={handleChange("name")}
             required
-            className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-500 focus:border-[#8B6F47] focus:ring-2 focus:ring-[#D4C4B0]"
+            className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-500 focus:border-[var(--hl-mint-deep)] focus:ring-2 focus:ring-[rgba(94,61,42,0.28)]"
           />
         </div>
         <div className="space-y-2">
@@ -127,7 +127,7 @@ export default function ContactForm({ initialEmail, isEmailReadOnly }: ContactFo
             onChange={handleChange("email")}
             required
             readOnly={!!isEmailReadOnly}
-            className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-500 focus:border-[#8B6F47] focus:ring-2 focus:ring-[#D4C4B0] disabled:opacity-60"
+            className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-500 focus:border-[var(--hl-mint-deep)] focus:ring-2 focus:ring-[rgba(94,61,42,0.28)] disabled:opacity-60"
             disabled={!!isEmailReadOnly}
           />
         </div>
@@ -145,13 +145,13 @@ export default function ContactForm({ initialEmail, isEmailReadOnly }: ContactFo
           value={formState.message}
           onChange={handleChange("message")}
           required
-          className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-500 focus:border-[#8B6F47] focus:ring-2 focus:ring-[#D4C4B0]"
+          className="border-slate-200 bg-white text-slate-900 placeholder:text-slate-500 focus:border-[var(--hl-mint-deep)] focus:ring-2 focus:ring-[rgba(94,61,42,0.28)]"
         />
         <p className="text-[12px] text-[13px] text-gray-400">Minimum 10 characters.</p>
       </div>
 
       {feedback ? (
-        <div className="rounded-2xl border border-#A0826D bg-#F5E6D3 px-4 py-3 text-sm text-#5A4529">
+        <div className="rounded-2xl border border-var(--hl-mint) bg-#faf6f1 px-4 py-3 text-sm text-#5A4529">
           {feedback}
         </div>
       ) : null}
@@ -165,7 +165,7 @@ export default function ContactForm({ initialEmail, isEmailReadOnly }: ContactFo
       <Button
         type="submit"
         disabled={isPending}
-        className="w-full justify-center rounded-full bg-[#5e3d2a] px-6 py-2.5 text-[14px] font-semibold text-white shadow-[0_16px_30px_-18px_rgba(59,130,246,0.45)] transition hover:bg-#6D5635"
+        className="w-full justify-center rounded-full bg-[var(--hl-mint-deep)] px-6 py-2.5 text-[14px] font-semibold text-white shadow-[0_16px_30px_-18px_rgba(59,130,246,0.45)] transition hover:bg-var(--hl-mint)"
       >
         {isPending ? "Sending…" : "Send message"}
       </Button>

@@ -1,31 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { db } from "~/server/db";
-import { env } from "~/env";
+import { getNextMonthlyResetDate, getPlanMonthlyCredits } from "~/server/utils/credit-reset";
 
 export const dynamic = "force-dynamic";
-
-function getPlanCredits(plan: string): number {
-  // Credits now represent word count (1 credit = 1 word)
-  switch (plan) {
-    case 'basic':
-      return 7000;
-    case 'pro':
-      return 25000;
-    case 'ultra':
-      return 50000;
-    default:
-      return 7000;
-  }
-}
-
-function getNextResetDate(): Date {
-  const now = new Date();
-  const nextMonth = new Date(now);
-  nextMonth.setMonth(now.getMonth() + 1);
-  nextMonth.setDate(1);
-  nextMonth.setHours(0, 0, 0, 0);
-  return nextMonth;
-}
 
 export async function GET(req: NextRequest) {
   try {
@@ -41,12 +18,18 @@ export async function GET(req: NextRequest) {
 
     const now = new Date();
 
-    // Find all annual subscribers whose reset date has passed
+    // Find users who need a reset
+    // This includes:
+    // 1. Annual subscribers (who get monthly credit refreshes)
+    // 2. Lifetime deal users (who get monthly credit refreshes)
     const usersToReset = await db.user.findMany({
       where: {
-        subscriptionType: "annual",
+        OR: [
+          { subscriptionType: "annual" },
+          { subscriptionType: "lifetime" }
+        ],
         nextResetDate: {
-          lte: now,
+          lte: now, // Date is in the past or today
         },
       },
     });
@@ -58,8 +41,8 @@ export async function GET(req: NextRequest) {
 
     for (const user of usersToReset) {
       try {
-        const planCredits = getPlanCredits(user.subscriptionPlan || 'basic');
-        const nextReset = getNextResetDate();
+        const planCredits = getPlanMonthlyCredits(user.subscriptionPlan);
+        const nextReset = getNextMonthlyResetDate();
 
         await db.user.update({
           where: { id: user.id },

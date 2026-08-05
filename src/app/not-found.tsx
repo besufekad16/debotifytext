@@ -12,7 +12,7 @@ export default function NotFound() {
       <div className="relative z-10 w-full max-w-xl text-center">
         {/* 404 Number */}
         <div className="mb-4">
-          <h1 className="text-[3rem] sm:text-[4rem] font-bold text-[#5e3d2a] leading-none">
+          <h1 className="text-[3rem] sm:text-[4rem] font-bold text-[var(--hl-mint-deep)] leading-none">
             404
           </h1>
         </div>
@@ -47,7 +47,7 @@ export default function NotFound() {
           <Link href="/">
             <Button
               size="lg"
-              className="rounded-full bg-#8B6F47 px-5 py-4 text-sm font-semibold text-white shadow-[0_12px_24px_-8px_rgba(59,130,246,0.5)] transition-all hover:bg-#6D5635 hover:shadow-[0_14px_28px_-10px_rgba(59,130,246,0.6)] hover:scale-105"
+              className="rounded-full bg-[var(--hl-mint-deep)] px-5 py-4 text-sm font-semibold text-white shadow-[0_12px_24px_-8px_rgba(94,61,42,0.45)] transition-all hover:bg-[var(--hl-mint)] hover:shadow-[0_14px_28px_-10px_rgba(94,61,42,0.55)] hover:scale-105"
             >
               Go to Homepage
             </Button>
@@ -55,7 +55,7 @@ export default function NotFound() {
           <Button
             size="lg"
             variant="outline"
-            className="rounded-full border-2 border-slate-200 bg-white/90 px-5 py-4 text-sm font-semibold text-slate-700 hover:border-[#8B6F47]/30 hover:bg-white hover:scale-105 transition-all"
+            className="rounded-full border-2 border-slate-200 bg-white/90 px-5 py-4 text-sm font-semibold text-slate-700 hover:border-[var(--hl-mint-deep)]/30 hover:bg-white hover:scale-105 transition-all"
             onClick={() => window.history.back()}
           >
             Go Back
@@ -67,14 +67,14 @@ export default function NotFound() {
           <div className="flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm">
             <Link
               href="/pricing"
-              className="text-slate-600 hover:text-[#6D5635] font-medium transition-colors"
+              className="text-slate-600 hover:text-[var(--hl-mint)] font-medium transition-colors"
             >
               Pricing
             </Link>
             <span className="text-slate-300">•</span>
             <Link
               href="/contact"
-              className="text-slate-600 hover:text-[#6D5635] font-medium transition-colors"
+              className="text-slate-600 hover:text-[var(--hl-mint)] font-medium transition-colors"
             >
               Contact
             </Link>

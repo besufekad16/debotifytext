@@ -934,3 +934,79 @@ export function buildStats(
 
   return result;
 }
+
+// ── Deep guide builder (unique long-form body for ranking / indexing) ─────────
+
+const GUIDE_INTROS: ((kw: string) => string)[] = [
+  (kw) =>
+    `If you are searching for ${kw.toLowerCase()}, you need more than a synonym swap. HumanifyLab rewrites AI-generated drafts at the sentence, rhythm, and intent level so the result reads like a real person wrote it — while keeping your original meaning intact.`,
+  (kw) =>
+    `${kw} is one of the most searched problems in academic and professional writing today. Detectors look for predictable token patterns, low burstiness, and uniform sentence length. HumanifyLab targets those exact signals and rebuilds the text so it scores as human.`,
+  (kw) =>
+    `People looking up ${kw.toLowerCase()} usually need a fast, reliable way to get to a 0% AI score without destroying their argument. HumanifyLab is built for that: paste, humanize, and verify against Turnitin, GPTZero, Originality.ai, and Copyleaks.`,
+  (kw) =>
+    `The difference between a weak paraphraser and a real humanizer shows up when you test ${kw.toLowerCase()} on live detectors. HumanifyLab runs a deep rewrite that varies perplexity, burstiness, and phrasing while preserving citations, claims, and structure.`,
+];
+
+const GUIDE_SECTION_TITLES = [
+  "Why detectors flag AI text",
+  "How HumanifyLab removes the AI signature",
+  "How to get a 0% AI score step by step",
+  "Who this workflow is for",
+  "What to check before you submit",
+  "Turnitin, GPTZero, and multi-detector testing",
+  "Meaning preservation vs. synonym swap tools",
+  "When to choose Lifetime vs. monthly plans",
+];
+
+const GUIDE_SECTION_BODIES: ((kw: string, title: string) => string)[] = [
+  (kw) =>
+    `Modern detectors score statistical regularity — not "bad writing." Uniform sentence length, safe vocabulary, and low burstiness are classic AI tells. When you need ${kw.toLowerCase()}, you must break those patterns without inventing new facts. HumanifyLab restructures cadence and word choice while locking meaning.`,
+  (kw) =>
+    `HumanifyLab does not slap a thesaurus on your draft. It rewrites transitions, compresses or expands clauses, and introduces natural human variation. That is why users searching for ${kw.toLowerCase()} report stable results across Turnitin, GPTZero, and Originality.ai — not a one-detector trick.`,
+  (kw) =>
+    `1) Paste at least 100–250 words for best accuracy. 2) Choose Academic, Professional, or Default tone. 3) Run HumanifyLab. 4) Re-check the output in your detector. 5) Make a final human pass for personal voice. This is the practical path for ${kw.toLowerCase()} when deadlines are real.`,
+  (kw) =>
+    `Students, researchers, marketers, and freelancers all search for ${kw.toLowerCase()} for different reasons — essays, proposals, blogs, reports. The shared need is authenticity under detector scrutiny. HumanifyLab gives you detector-ready output with meaning preserved and no watermark.`,
+  (kw) =>
+    `Before you submit, confirm names, numbers, and citations still match your sources. Detectors change weekly; HumanifyLab is updated against live systems, but your final read-through is what makes ${kw.toLowerCase()} look truly authored by you.`,
+  (kw) =>
+    `One detector is never enough. For ${kw.toLowerCase()}, run the humanized draft through Turnitin (where available), GPTZero, Originality.ai, and Copyleaks. HumanifyLab is tuned against that multi-detector reality so you are not optimizing for a single loophole that disappears next week.`,
+  (kw) =>
+    `Cheap paraphrasers change words and keep AI structure — detectors still catch them. Real ${kw.toLowerCase()} needs structural rewriting: clause order, burstiness, and rhetorical pacing. HumanifyLab keeps your thesis, evidence, and citations while making the prose sound authored.`,
+  (kw) =>
+    `If you use HumanifyLab every semester, Lifetime (20,000 words/month, pay once) is usually cheaper than stacking monthly Ultra bills. Monthly Basic/Pro/Ultra still make sense for short bursts. Either way, start free, confirm quality on your detector, then upgrade when ${kw.toLowerCase()} becomes weekly work.`,
+];
+
+/**
+ * Builds unique long-form guide sections per keyword/seed so PSEO pages are
+ * deep enough for indexing (not thin doorway duplicates).
+ */
+export function buildDeepGuide(
+  keyword: string,
+  seed: number,
+): {
+  guideIntro: string;
+  guideSections: { title: string; body: string }[];
+} {
+  const displayKeyword = smartTitleCase(keyword);
+  const intro = pick(GUIDE_INTROS, seed, keyword, 90)(displayKeyword);
+
+  const sections: { title: string; body: string }[] = [];
+  const used = new Set<number>();
+  // 6 sections ≈ stronger topical depth for indexing vs thin doorway pages
+  for (let i = 0; i < 6; i++) {
+    let idx = uniqueIdx(seed, keyword, GUIDE_SECTION_TITLES.length, i * 7 + 500);
+    let attempts = 0;
+    while (used.has(idx) && attempts < GUIDE_SECTION_TITLES.length) {
+      idx = (idx + 1) % GUIDE_SECTION_TITLES.length;
+      attempts++;
+    }
+    used.add(idx);
+    const title = GUIDE_SECTION_TITLES[idx]!;
+    const bodyFn = GUIDE_SECTION_BODIES[idx] ?? GUIDE_SECTION_BODIES[0]!;
+    sections.push({ title, body: bodyFn(displayKeyword, title) });
+  }
+
+  return { guideIntro: intro, guideSections: sections };
+}

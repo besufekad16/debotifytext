@@ -9,36 +9,36 @@ const steps = [
     title: "Input Your Content",
     description: "Paste your AI-generated essays, blog posts, or assignments into our secure editor. We support plain text, Word docs, and PDFs.",
     icon: FileText,
-    color: "from-#F5E6D30 to-#6D5635",
+    color: "from-#faf6f10 to-var(--hl-mint)",
     lightColor: "bg-primary/10",
-    borderColor: "border-#D4C4B0",
+    borderColor: "border-rgba(94,61,42,0.28)",
   },
   {
     step: "02",
     title: "Choose Your Tone",
     description: "Select from our expert-crafted presets or customize the style to match your natural voice. Whether academic or conversational, we've got you covered.",
     icon: ListChecks,
-    color: "from-#F5E6D30 to-#6D5635",
-    lightColor: "bg-#F5E6D3",
-    borderColor: "border-#D4C4B0",
+    color: "from-#faf6f10 to-var(--hl-mint)",
+    lightColor: "bg-#faf6f1",
+    borderColor: "border-rgba(94,61,42,0.28)",
   },
   {
     step: "03",
     title: "Humanize Instantly",
     description: "Our advanced linguistic engine rewrites your text in seconds, removing AI fingerprints while preserving your original meaning and message.",
     icon: Zap,
-    color: "from-#6D5635 to-#5A4529",
-    lightColor: "bg-#F5E6D3",
-    borderColor: "border-#D4C4B0",
+    color: "from-var(--hl-mint) to-#5A4529",
+    lightColor: "bg-#faf6f1",
+    borderColor: "border-rgba(94,61,42,0.28)",
   },
   {
     step: "04",
     title: "Achieve Quality",
     description: "Download your professionally humanized text. It now reads naturally with authentic human tone and style.",
     icon: ShieldCheck,
-    color: "from-#F5E6D30 to-#6D5635",
+    color: "from-#faf6f10 to-var(--hl-mint)",
     lightColor: "bg-brand-green/10",
-    borderColor: "border-#D4C4B0",
+    borderColor: "border-rgba(94,61,42,0.28)",
   },
 ];
 
@@ -47,13 +47,13 @@ export default function HowToUseSection() {
     <section className="relative py-24 sm:py-32 bg-card overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
-        <div className="absolute top-[10%] left-[-10%] w-[40%] h-[40%] bg-#F5E6D3/50 rounded-full blur-3xl opacity-50" />
-        <div className="absolute bottom-[10%] right-[-10%] w-[40%] h-[40%] bg-#F5E6D3/50 rounded-full blur-3xl opacity-50" />
+        <div className="absolute top-[10%] left-[-10%] w-[40%] h-[40%] bg-#faf6f1/50 rounded-full blur-3xl opacity-50" />
+        <div className="absolute bottom-[10%] right-[-10%] w-[40%] h-[40%] bg-#faf6f1/50 rounded-full blur-3xl opacity-50" />
       </div>
 
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center mb-16 sm:mb-24">
-          <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-primary border border-#D4C4B0 mb-6">
+          <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-primary border border-rgba(94,61,42,0.28) mb-6">
             <Sparkles className="h-4 w-4" />
             Simple Workflow
           </div>
@@ -72,11 +72,11 @@ export default function HowToUseSection() {
             return (
               <div
                 key={step.step}
-                className="group relative flex flex-col h-full rounded-[2rem] border border-border bg-card p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-#F5E6D30/10 hover:-translate-y-2 hover:border-#A0826D"
+                className="group relative flex flex-col h-full rounded-[2rem] border border-border bg-card p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-#faf6f10/10 hover:-translate-y-2 hover:border-var(--hl-mint)"
               >
                 {/* Step Number Badge */}
                 <div className={cn(
-                  "mb-8 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br text-white font-black text-lg shadow-lg shadow-#F5E6D30/20 group-hover:scale-110 transition-transform duration-300",
+                  "mb-8 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br text-white font-black text-lg shadow-lg shadow-#faf6f10/20 group-hover:scale-110 transition-transform duration-300",
                   step.color
                 )}>
                   {step.step}

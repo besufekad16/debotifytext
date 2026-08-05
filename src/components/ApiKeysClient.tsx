@@ -150,19 +150,19 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
               <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">With API access, you can:</h3>
               <ul className="space-y-2 text-[13px] text-gray-500">
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="h-4 w-4 text-#F5E6D30 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="h-4 w-4 text-#faf6f10 mt-0.5 flex-shrink-0" />
                   <span>Integrate AI humanization into your own applications</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="h-4 w-4 text-#F5E6D30 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="h-4 w-4 text-#faf6f10 mt-0.5 flex-shrink-0" />
                   <span>Automate content humanization workflows</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="h-4 w-4 text-#F5E6D30 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="h-4 w-4 text-#faf6f10 mt-0.5 flex-shrink-0" />
                   <span>Process content at scale with programmatic access</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="h-4 w-4 text-#F5E6D30 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="h-4 w-4 text-#faf6f10 mt-0.5 flex-shrink-0" />
                   <span>Build custom integrations with your existing tools</span>
                 </li>
               </ul>
@@ -170,7 +170,7 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
 
             <div className="flex gap-3">
               <Link href="/pricing">
-                <Button className="bg-[#8B6F47] hover:bg-[#6D5635]">
+                <Button className="bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)]">
                   View Pricing Plans
                 </Button>
               </Link>
@@ -201,7 +201,7 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
       <Card className="mb-8 border-white/60 bg-white/80 shadow-md backdrop-blur">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Plus className="h-5 w-5 text-[#8B6F47]" />
+            <Plus className="h-5 w-5 text-[var(--hl-mint-deep)]" />
             Create New API Key
           </CardTitle>
           <CardDescription>
@@ -223,7 +223,7 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
             <Button
               onClick={createApiKey}
               disabled={creating || !newKeyName.trim()}
-              className="bg-[#8B6F47] hover:bg-[#6D5635]"
+              className="bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)]"
             >
               {creating ? "Creating..." : "Create Key"}
             </Button>
@@ -238,7 +238,7 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
       <Card className="border-white/60 bg-white/80 shadow-md backdrop-blur">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Key className="h-5 w-5 text-[#8B6F47]" />
+            <Key className="h-5 w-5 text-[var(--hl-mint-deep)]" />
             Your API Keys
           </CardTitle>
           <CardDescription>
@@ -347,7 +347,7 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
           <div className="pt-4 border-t border-slate-200">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 text-[#8B6F47] hover:text-[#6D5635] font-medium"
+              className="inline-flex items-center gap-2 text-[var(--hl-mint-deep)] hover:text-[var(--hl-mint)] font-medium"
             >
               Contact Support for API Documentation
               <ExternalLink className="h-4 w-4" />

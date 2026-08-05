@@ -279,8 +279,8 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
   if (loading) {
     return (
       <div className="flex justify-center pt-10">
-        <div className="inline-flex items-center gap-3 rounded-full border border-[#5e3d2a]/30 bg-card px-5 py-3 text-sm font-medium text-muted-foreground shadow-sm">
-          <Loader2 className="h-4 w-4 animate-spin text-[#5e3d2a]" /> Fetching plans…
+        <div className="inline-flex items-center gap-3 rounded-full border border-[var(--hl-mint-deep)]/30 bg-card px-5 py-3 text-sm font-medium text-muted-foreground shadow-sm">
+          <Loader2 className="h-4 w-4 animate-spin text-[var(--hl-mint-deep)]" /> Fetching plans…
         </div>
       </div>
     );
@@ -321,8 +321,8 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
               onClick={() => { setBillingCycle("monthly"); setHasUserChangedBilling(true); }}
               className={`min-w-[100px] px-4 py-2 text-xs sm:text-sm font-semibold transition whitespace-nowrap ${
                 billingCycle === "monthly"
-                  ? "bg-gradient-to-r from-[#5e3d2a] via-[#5e3d2a] to-[#4a2f1f] text-white shadow-sm"
-                  : "text-muted-foreground hover:text-foreground bg-transparent"
+                  ? "bg-gradient-to-r from-[#5e3d2a] via-[#6d4630] to-[#8b5e3c] text-white shadow-sm"
+                  : "bg-transparent text-muted-foreground hover:text-foreground"
               }`}
             >
               Monthly
@@ -334,8 +334,8 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
                 onClick={() => { setBillingCycle("unlimited"); setHasUserChangedBilling(true); }}
                 className={`relative min-w-[120px] px-3 py-2 text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-1.5 whitespace-nowrap ${
                   billingCycle === "unlimited"
-                    ? "bg-gradient-to-r from-[#5e3d2a] via-[#5e3d2a] to-[#4a2f1f] text-white shadow-sm"
-                    : "text-muted-foreground hover:text-foreground bg-transparent"
+                    ? "bg-gradient-to-r from-[#5e3d2a] via-[#6d4630] to-[#8b5e3c] text-white shadow-sm"
+                    : "bg-transparent text-muted-foreground hover:text-foreground"
                 }`}
               >
                 <InfinityIcon className="h-3.5 w-3.5" />
@@ -358,10 +358,10 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
               <button
                 type="button"
                 onClick={() => { setBillingCycle("yearly"); setHasUserChangedBilling(true); }}
-                className={`min-w-[100px] px-3 py-2 text-xs sm:text-sm font-semibold transition relative flex items-center justify-center gap-1.5 whitespace-nowrap ${
+                className={`relative flex min-w-[100px] items-center justify-center gap-1.5 whitespace-nowrap px-3 py-2 text-xs font-semibold transition sm:text-sm ${
                   billingCycle === "yearly"
-                    ? "bg-gradient-to-r from-[#5e3d2a] via-[#5e3d2a] to-[#4a2f1f] text-white shadow-sm"
-                    : "text-muted-foreground hover:text-foreground bg-transparent"
+                    ? "bg-gradient-to-r from-[#5e3d2a] via-[#6d4630] to-[#8b5e3c] text-white shadow-sm"
+                    : "bg-transparent text-muted-foreground hover:text-foreground"
                 }`}
               >
                 <span>Yearly</span>
@@ -398,27 +398,27 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
               key={product.key}
               className={`group relative flex h-full flex-col border transition-all duration-700 p-8 sm:p-10 md:p-12 w-full ${
                 isPopular
-                  ? "bg-white/5 backdrop-blur-3xl border-[#8B6F47]/60 shadow-2xl shadow-[#8B6F47]/50 scale-105 z-10 hover:shadow-[0_0_100px_rgba(139,111,71,1),0_0_150px_rgba(139,111,71,0.8),0_0_200px_rgba(139,111,71,0.5),inset_0_0_80px_rgba(139,111,71,0.4)] hover:border-[#8B6F47] hover:scale-[1.08] hover:bg-white/15 overflow-visible"
-                  : "bg-white border-gray-200 shadow-lg hover:shadow-xl overflow-hidden"
+                  ? "scale-105 z-10 overflow-visible border-[#8b5e3c]/55 bg-[var(--hl-ink)] shadow-2xl shadow-[rgba(94,61,42,0.45)] hover:scale-[1.05] hover:border-[#a67c52]/70 hover:shadow-[0_0_80px_rgba(94,61,42,0.55),0_0_120px_rgba(166,124,82,0.25)]"
+                  : "overflow-hidden border border-[#e8ddd0] bg-white shadow-lg hover:shadow-xl hover:border-[#d4c4b0]"
               }`}
               style={isPopular ? {
-                background: 'linear-gradient(135deg, rgba(139, 111, 71, 0.45) 0%, rgba(109, 86, 53, 0.55) 50%, rgba(90, 69, 41, 0.45) 100%)',
-                backdropFilter: 'blur(60px) saturate(200%)',
-                WebkitBackdropFilter: 'blur(60px) saturate(200%)',
-                boxShadow: '0 12px 48px 0 rgba(139, 111, 71, 0.6), inset 0 2px 0 0 rgba(255, 255, 255, 0.5), inset 0 -2px 0 0 rgba(139, 111, 71, 0.4), 0 0 60px rgba(139, 111, 71, 0.4)'
+                background: 'linear-gradient(135deg, rgba(58, 35, 22, 0.92) 0%, rgba(94, 61, 42, 0.95) 45%, rgba(139, 94, 60, 0.88) 100%)',
+                backdropFilter: 'blur(60px) saturate(160%)',
+                WebkitBackdropFilter: 'blur(60px) saturate(160%)',
+                boxShadow: '0 12px 48px 0 rgba(94, 61, 42, 0.4), inset 0 2px 0 0 rgba(255, 255, 255, 0.22), 0 0 50px rgba(166, 124, 82, 0.2)'
               } : undefined}
             >
               {/* Multiple glass reflection layers */}
               {isPopular && (
                 <>
                   {/* Top glass shine - more brownish when not hovering */}
-                  <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-[#D4C4B0]/30 via-[#A0826D]/10 to-transparent opacity-50 group-hover:from-white/40 group-hover:via-white/10 group-hover:opacity-80 transition-all duration-700 pointer-events-none"></div>
+                  <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-[rgba(94,61,42,0.28)]/30 via-[var(--hl-mint)]/10 to-transparent opacity-50 group-hover:from-white/40 group-hover:via-white/10 group-hover:opacity-80 transition-all duration-700 pointer-events-none"></div>
                   
                   {/* Diagonal glass reflection - brownish tint */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#A0826D]/20 via-transparent to-[#8B6F47]/30 opacity-40 group-hover:from-white/30 group-hover:opacity-80 transition-all duration-700 pointer-events-none"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-[var(--hl-mint)]/20 via-transparent to-[var(--hl-mint-deep)]/30 opacity-40 group-hover:from-white/30 group-hover:opacity-80 transition-all duration-700 pointer-events-none"></div>
                   
                   {/* Reverse diagonal for depth - brownish */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-[#8B6F47]/25 via-transparent to-[#A0826D]/15 opacity-35 group-hover:to-white/20 group-hover:opacity-70 transition-all duration-700 pointer-events-none"></div>
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[var(--hl-mint-deep)]/25 via-transparent to-[var(--hl-mint)]/15 opacity-35 group-hover:to-white/20 group-hover:opacity-70 transition-all duration-700 pointer-events-none"></div>
                   
                   {/* Animated shimmer effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" style={{
@@ -427,13 +427,13 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
                   
                   {/* Outer glow aura - multiple layers */}
                   <div className="absolute -inset-4 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" style={{
-                    background: 'radial-gradient(circle at center, rgba(139, 111, 71, 0.8), rgba(139, 111, 71, 0.4), transparent)',
+                    background: 'radial-gradient(circle at center, rgba(166, 124, 82, 0.55), rgba(94, 61, 42, 0.25), transparent)',
                     filter: 'blur(30px)',
                     zIndex: -1
                   }}></div>
                   
                   <div className="absolute -inset-8 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" style={{
-                    background: 'radial-gradient(circle at center, rgba(139, 111, 71, 0.6), rgba(139, 111, 71, 0.2), transparent)',
+                    background: 'radial-gradient(circle at center, rgba(166, 124, 82, 0.4), rgba(94, 61, 42, 0.15), transparent)',
                     filter: 'blur(50px)',
                     zIndex: -2
                   }}></div>
@@ -441,12 +441,12 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
               )}
               {isPopular && (
                 <>
-                  <div className="absolute -top-4 sm:-top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#F5E6D3] to-white px-3 sm:px-4 py-1 sm:py-1.5 text-[10px] sm:text-xs font-semibold text-[#8B6F47] shadow-lg whitespace-nowrap border border-[#8B6F47]/20">
+                  <div className="absolute -top-4 sm:-top-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#d4b896] bg-[#faf6f1] px-3 py-1 text-[10px] font-semibold text-[#5e3d2a] shadow-lg sm:-top-5 sm:px-4 sm:py-1.5 sm:text-xs">
                     Most Loved
                   </div>
                   {/* Glowing orb effect */}
-                  <div className="absolute -top-20 -right-20 w-40 h-40 bg-[#8B6F47]/30 blur-3xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
-                  <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-[#6D5635]/30 blur-3xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
+                  <div className="absolute -top-20 -right-20 w-40 h-40 bg-[var(--hl-mint-deep)]/30 blur-3xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
+                  <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-[var(--hl-mint)]/30 blur-3xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
                 </>
               )}
 
@@ -514,8 +514,8 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
                       <Button
                       className={`w-full h-14 sm:h-16 py-4 sm:py-5 text-sm sm:text-[15px] font-semibold shadow-lg transition-all duration-300 ${
                         isPopular
-                          ? "bg-white text-[#8B6F47] hover:bg-[#F5E6D3] hover:text-[#6D5635] hover:shadow-[0_0_30px_rgba(245,230,211,0.8)] hover:scale-105"
-                          : "bg-gray-900 text-white hover:bg-[#5e3d2a]"
+                          ? "bg-[#faf6f1] text-[#5e3d2a] hover:bg-white hover:text-[#3b2418] hover:shadow-[0_0_28px_rgba(232,184,75,0.35)] hover:scale-105"
+                          : "bg-[#5e3d2a] text-white hover:bg-[#8b5e3c]"
                       }`}
                       onClick={() => activeProductId && onSubscribe(activeProductId)}
                       disabled={!activeProductId || !!ctaLoadingId}
@@ -533,7 +533,7 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
                 <ul className={`mt-6 sm:mt-8 space-y-4 sm:space-y-5 text-sm ${isPopular ? "text-white/90" : "text-gray-600"}`}>
                   {features.map((feature, featureIndex) => (
                     <li key={`${product.key}-feature-${featureIndex}`} className="flex items-start gap-2 sm:gap-3">
-                      <ShieldCheck className={`mt-0.5 sm:mt-1 h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0 ${isPopular ? "text-white" : "text-[#5e3d2a]"}`} />
+                      <ShieldCheck className={`mt-0.5 sm:mt-1 h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0 ${isPopular ? "text-[#E8B84B]" : "text-[#5e3d2a]"}`} />
                       <span className="flex-1">{feature}</span>
                     </li>
                   ))}

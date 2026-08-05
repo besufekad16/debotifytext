@@ -47,7 +47,7 @@ export default function BlackFridayBanner() {
     <div className="relative mb-12 overflow-hidden rounded-3xl bg-black p-8 text-white shadow-2xl">
       {/* Background Effects */}
       <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-purple-600/30 blur-3xl" />
-      <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-#8B6F47/30 blur-3xl" />
+      <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-var(--hl-mint-deep)/30 blur-3xl" />
       
       <div className="relative z-10 flex flex-col items-center justify-between gap-8 md:flex-row">
         <div className="flex-1 text-center md:text-left">

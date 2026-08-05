@@ -8,18 +8,18 @@ export default function ScoreTemplate({ data }: { data: ScoreContentData }) {
     <div className="min-h-screen bg-white">
       <section className="bg-[#0f1419] text-white py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[#8b6f47] mb-4">{data.badge}</span>
+          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[var(--hl-mint-deep)] mb-4">{data.badge}</span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight">{data.h1}</h1>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto mb-8">{data.heroSubtitle}</p>
           <div className="flex flex-wrap justify-center gap-6 mb-8">
             {data.stats.map((s, i) => (
               <div key={i} className="text-center">
-                <div className="text-2xl font-extrabold text-[#8b6f47]">{s.value}</div>
+                <div className="text-2xl font-extrabold text-[var(--hl-mint-deep)]">{s.value}</div>
                 <div className="text-xs text-gray-400 uppercase tracking-wide">{s.label}</div>
               </div>
             ))}
           </div>
-          <Link href="/" className="inline-flex items-center gap-2 bg-[#8b6f47] hover:bg-[#7a6040] text-white font-semibold px-8 py-4 rounded-xl transition-colors text-sm">
+          <Link href="/" className="inline-flex items-center gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] text-white font-semibold px-8 py-4 rounded-xl transition-colors text-sm">
             Get 0% AI Score Free <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -31,7 +31,7 @@ export default function ScoreTemplate({ data }: { data: ScoreContentData }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {data.scorePoints.map((p, i) => (
               <div key={i} className="bg-white rounded-xl border border-gray-200 p-6">
-                <div className="mb-3 h-1 w-8 rounded-full bg-[#8b6f47]" />
+                <div className="mb-3 h-1 w-8 rounded-full bg-[var(--hl-mint-deep)]" />
                 <h3 className="font-semibold text-gray-900 mb-2">{p.title}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{p.description}</p>
               </div>
@@ -46,7 +46,7 @@ export default function ScoreTemplate({ data }: { data: ScoreContentData }) {
           <div className="space-y-6">
             {data.steps.map((step, i) => (
               <div key={i} className="flex gap-5 items-start">
-                <div className="w-10 h-10 rounded-full bg-[#8b6f47] text-white flex items-center justify-center font-bold text-sm flex-shrink-0">{step.number}</div>
+                <div className="w-10 h-10 rounded-full bg-[var(--hl-mint-deep)] text-white flex items-center justify-center font-bold text-sm flex-shrink-0">{step.number}</div>
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-1">{step.title}</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">{step.description}</p>
@@ -66,7 +66,7 @@ export default function ScoreTemplate({ data }: { data: ScoreContentData }) {
                 <tr className="bg-[#0f1419] text-white">
                   <th className="text-left px-6 py-4 font-semibold">Detector</th>
                   <th className="text-center px-6 py-4 font-semibold text-red-400">Before</th>
-                  <th className="text-center px-6 py-4 font-semibold text-green-400">After HumanifyLab</th>
+                  <th className="text-center px-6 py-4 font-semibold text-[var(--hl-mint-bright)]">After HumanifyLab</th>
                 </tr>
               </thead>
               <tbody>
@@ -74,7 +74,7 @@ export default function ScoreTemplate({ data }: { data: ScoreContentData }) {
                   <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                     <td className="px-6 py-4 font-medium text-gray-700">{row.detector}</td>
                     <td className="px-6 py-4 text-center text-red-500 font-semibold">{row.before}</td>
-                    <td className="px-6 py-4 text-center text-green-600 font-semibold">{row.after}</td>
+                    <td className="px-6 py-4 text-center text-[var(--hl-mint-deep)] font-semibold">{row.after}</td>
                   </tr>
                 ))}
               </tbody>
@@ -100,11 +100,11 @@ export default function ScoreTemplate({ data }: { data: ScoreContentData }) {
       <section className="py-16 px-4 bg-[#0f1419] text-white text-center">
         <div className="max-w-2xl mx-auto">
           <div className="flex justify-center gap-1 mb-4">
-            {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-[#8b6f47] text-[#8b6f47]" />)}
+            {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-[var(--hl-mint-deep)] text-[var(--hl-mint-deep)]" />)}
           </div>
           <h2 className="text-2xl font-bold mb-3">{data.finalCtaTitle}</h2>
           <p className="text-gray-400 mb-6">{data.finalCtaSubtitle}</p>
-          <Link href="/" className="inline-flex items-center gap-2 bg-[#8b6f47] hover:bg-[#7a6040] text-white font-semibold px-8 py-4 rounded-xl transition-colors">
+          <Link href="/" className="inline-flex items-center gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] text-white font-semibold px-8 py-4 rounded-xl transition-colors">
             Get 0% AI Score Now <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

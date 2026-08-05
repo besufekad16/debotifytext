@@ -1,10 +1,8 @@
 import type { KeywordEntryV5 } from '~/lib/pseo-data-v5';
 import type { V4PageData } from '~/components/templates/V4Template';
 import { uniqueIdx } from '~/lib/content/content-utils';
-import { buildPageStrings, buildFaqs, buildStats, buildSteps } from '~/lib/content/content-combinator';
+import { buildPageStrings, buildFaqs, buildStats, buildSteps, buildDeepGuide } from '~/lib/content/content-combinator';
 
-// Reassurance-first answers — scenario pages target pre-submission anxiety,
-// so the lead answer calms the concern before walking through the fix.
 const ANSWERS: ((ctx: string) => string)[] = [
   (c) => `Run your text through HumanifyLab before your ${c.toLowerCase()} sees it — it removes the statistical patterns detectors flag, in under 10 seconds.`,
   (c) => `Yes, your ${c.toLowerCase()} can likely detect unmodified AI writing — but HumanifyLab's transformation is verified to pass every major detector.`,
@@ -16,6 +14,7 @@ const ANSWERS: ((ctx: string) => string)[] = [
 export function generateScenarioContent(entry: KeywordEntryV5): V4PageData {
   const { keyword, entity, seed } = entry;
   const combo = buildPageStrings(keyword, seed, entity, 'scenario');
+  const deep = buildDeepGuide(keyword, seed);
   const ai = uniqueIdx(seed, keyword, ANSWERS.length, 20);
 
   return {
@@ -27,6 +26,8 @@ export function generateScenarioContent(entry: KeywordEntryV5): V4PageData {
     answer: ANSWERS[ai]!(entity),
     stats: buildStats(keyword, seed),
     steps: buildSteps(keyword, seed, 'scenario'),
+    guideIntro: deep.guideIntro,
+    guideSections: deep.guideSections,
     faqs: buildFaqs(keyword, seed, entity, 'scenario'),
     faqTitle: combo.faqTitle,
     finalCtaTitle: combo.finalCtaTitle,

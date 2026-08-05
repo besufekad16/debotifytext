@@ -14,7 +14,7 @@ export default function DetectorTemplate({ data }: { data: DetectorContentData }
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight">{data.h1}</h1>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto mb-8">{data.intro}</p>
-          <Link href="/" className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-400 text-black font-bold px-8 py-4 rounded-xl transition-colors text-sm">
+          <Link href="/" className="inline-flex items-center gap-2 bg-[var(--hl-surface)]0 hover:bg-[var(--hl-mint)] text-black font-bold px-8 py-4 rounded-xl transition-colors text-sm">
             Bypass Detection Now <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -26,8 +26,8 @@ export default function DetectorTemplate({ data }: { data: DetectorContentData }
           <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">Detection Stats</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {data.detectorStats.map((stat, i) => (
-              <div key={i} className={`rounded-xl p-5 text-center border ${i === 1 ? 'bg-green-50 border-green-200' : 'bg-white border-gray-200'}`}>
-                <div className={`text-2xl font-black mb-1 ${i === 1 ? 'text-green-600' : 'text-red-500'}`}>{stat.value}</div>
+              <div key={i} className={`rounded-xl p-5 text-center border ${i === 1 ? 'bg-[var(--hl-surface)] border-[var(--hl-mint)]/25' : 'bg-white border-gray-200'}`}>
+                <div className={`text-2xl font-black mb-1 ${i === 1 ? 'text-[var(--hl-mint-deep)]' : 'text-red-500'}`}>{stat.value}</div>
                 <div className="text-xs text-gray-500">{stat.label}</div>
               </div>
             ))}
@@ -42,7 +42,7 @@ export default function DetectorTemplate({ data }: { data: DetectorContentData }
           <div className="space-y-4">
             {data.howItWorks.map((step, i) => (
               <div key={i} className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
-                <div className="w-7 h-7 rounded-full bg-green-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">{i + 1}</div>
+                <div className="w-7 h-7 rounded-full bg-[var(--hl-surface)]0 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">{i + 1}</div>
                 <p className="text-gray-700 text-sm leading-relaxed">{step}</p>
               </div>
             ))}
@@ -68,9 +68,9 @@ export default function DetectorTemplate({ data }: { data: DetectorContentData }
       {/* CTA */}
       <section className="py-16 px-4 bg-[#1a1a2e] text-white text-center">
         <div className="max-w-2xl mx-auto">
-          <ShieldCheck className="w-10 h-10 text-green-400 mx-auto mb-4" />
+          <ShieldCheck className="w-10 h-10 text-[var(--hl-mint-bright)] mx-auto mb-4" />
           <h2 className="text-2xl font-bold mb-4">{data.cta}</h2>
-          <Link href="/" className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-400 text-black font-bold px-8 py-4 rounded-xl transition-colors">
+          <Link href="/" className="inline-flex items-center gap-2 bg-[var(--hl-surface)]0 hover:bg-[var(--hl-mint)] text-black font-bold px-8 py-4 rounded-xl transition-colors">
             Try Free Now <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

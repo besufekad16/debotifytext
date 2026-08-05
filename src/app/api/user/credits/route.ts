@@ -2,24 +2,20 @@ import { type NextRequest, NextResponse } from "next/server";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { db } from "~/server/db";
 import { addCorsHeaders, handleCorsPreflight } from "~/lib/cors";
+import { refreshMonthlyCreditsIfNeeded } from "~/server/utils/credit-reset";
 
 export async function GET(request: NextRequest) {
   const corsResponse = handleCorsPreflight(request);
   if (corsResponse) return corsResponse;
 
   try {
-    // Only log in development to reduce CPU usage
-    if (process.env.NODE_ENV === 'development') {
-      console.log("🔍 [API] Starting credits fetch at", new Date().toISOString());
-    }
+    console.log("🔍 [API] Starting credits fetch at", new Date().toISOString());
     const startTime = Date.now();
 
     const { userId } = await auth();
 
     if (!userId) {
-      if (process.env.NODE_ENV === 'development') {
-        console.log("❌ [API] No session found for credits");
-      }
+      console.log("❌ [API] No session found for credits");
       const response = NextResponse.json({ credits: 0 }, { status: 401 });
       return addCorsHeaders(response, request);
     }
@@ -27,16 +23,23 @@ export async function GET(request: NextRequest) {
     let user = await db.user.findFirst({
       where: { clerkId: userId },
       select: { 
+        id: true,
+        email: true,
         credits: true, 
         extraCredits: true,
         subscriptionPlan: true,
+        subscriptionType: true,
+        nextResetDate: true,
         team: {
           select: {
             owner: {
               select: {
+                id: true,
                 credits: true,
                 extraCredits: true,
-                subscriptionPlan: true
+                subscriptionPlan: true,
+                subscriptionType: true,
+                nextResetDate: true
               }
             }
           }
@@ -46,9 +49,7 @@ export async function GET(request: NextRequest) {
 
     // Fallback: If user not found in DB (webhook delay), try to sync from Clerk
     if (!user) {
-      if (process.env.NODE_ENV === 'development') {
-        console.log("⚠️ [API] User not found in DB, attempting to sync from Clerk...");
-      }
+      console.log("⚠️ [API] User not found in DB, attempting to sync from Clerk...");
       try {
         const clerkUser = await currentUser();
         if (clerkUser) {
@@ -67,15 +68,17 @@ export async function GET(request: NextRequest) {
             }
           });
 
-          if (process.env.NODE_ENV === 'development') {
-            console.log(`✅ [API] Created missing user ${userId} on the fly`);
-          }
+          console.log(`✅ [API] Created missing user ${userId} on the fly`);
           
           // Use the new user data
           user = {
+            id: newUser.id,
+            email: newUser.email,
             credits: newUser.credits,
             extraCredits: newUser.extraCredits,
             subscriptionPlan: newUser.subscriptionPlan,
+            subscriptionType: newUser.subscriptionType,
+            nextResetDate: newUser.nextResetDate,
             team: null
           };
         }
@@ -89,28 +92,37 @@ export async function GET(request: NextRequest) {
       return addCorsHeaders(response, request);
     }
 
-    // If user is in a team, return owner's credits and plan
-    const effectiveCredits = user.team?.owner ? user.team.owner.credits : user.credits;
-    const effectiveExtraCredits = user.team?.owner ? user.team.owner.extraCredits : user.extraCredits;
-    const effectivePlan = user.team?.owner ? user.team.owner.subscriptionPlan : user.subscriptionPlan;
+    // If user is in a team, use the owner's billing balance.
+    const billingUser = user.team?.owner ? user.team.owner : user;
+    const { user: refreshedBillingUser, resetApplied } =
+      await refreshMonthlyCreditsIfNeeded(billingUser);
+
+    if (resetApplied) {
+      console.log(`🔄 [API] Refreshed monthly credits for billing user ${refreshedBillingUser.id}`);
+    }
+
+    const effectiveCredits = refreshedBillingUser.credits;
+    const effectiveExtraCredits = refreshedBillingUser.extraCredits;
+    const effectivePlan = refreshedBillingUser.subscriptionPlan;
     const isTeamMember = !!user.team?.owner;
 
     const endTime = Date.now();
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`✅ [API] Credits fetched in ${endTime - startTime}ms:`, effectiveCredits + effectiveExtraCredits);
-    }
+    console.log(`✅ [API] Credits fetched in ${endTime - startTime}ms:`, effectiveCredits + effectiveExtraCredits);
 
     const response = NextResponse.json(
       { 
+        email: user.email,
         credits: effectiveCredits, 
         extraCredits: effectiveExtraCredits,
         subscriptionPlan: effectivePlan,
+        subscriptionType: refreshedBillingUser.subscriptionType,
+        nextResetDate: refreshedBillingUser.nextResetDate,
         isTeamMember
       },
       {
         status: 200,
         headers: {
-          "Cache-Control": "private, max-age=30",
+          "Cache-Control": "no-store",
         },
       }
     );
@@ -122,7 +134,7 @@ export async function GET(request: NextRequest) {
       {
         status: 500,
         headers: {
-          "Cache-Control": "private, max-age=30",
+          "Cache-Control": "no-store",
         },
       }
     );

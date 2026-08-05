@@ -116,7 +116,7 @@ export default async function PricingPage() {
       <PageNavbar />
       <main className="flex-1">
         <div className="mx-auto max-w-3xl px-5 pb-4 pt-14 text-center sm:px-6 sm:pt-16">
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8b6f47]">Pricing</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--hl-mint-deep)]">Pricing</span>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
             Simple, transparent pricing
           </h1>

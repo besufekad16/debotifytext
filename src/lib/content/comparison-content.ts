@@ -1,6 +1,6 @@
 import type { KeywordEntryV4 } from '~/lib/pseo-data-v4';
 import { uniqueIdx, smartTitleCase } from '~/lib/content/content-utils';
-import { buildPageStrings, buildFaqs, buildStats } from '~/lib/content/content-combinator';
+import { buildPageStrings, buildFaqs, buildStats, buildDeepGuide } from '~/lib/content/content-combinator';
 
 export interface ComparisonPageData {
   metaTitle: string;
@@ -16,6 +16,8 @@ export interface ComparisonPageData {
   faqTitle: string;
   finalCtaTitle: string;
   finalCtaSubtitle: string;
+  guideIntro?: string;
+  guideSections?: { title: string; body: string }[];
 }
 
 // NOTE: `kw` already names the competitor ("X vs HumanifyLab", "Is HumanifyLab
@@ -122,6 +124,7 @@ export function generateComparisonContent(entry: KeywordEntryV4): ComparisonPage
   const displayKeyword = smartTitleCase(keyword);
   const competitor = entity !== 'Competitor' ? entity : 'Other Tools';
   const combo = buildPageStrings(keyword, seed, entity, 'comparison');
+  const deep = buildDeepGuide(keyword, seed);
 
   const ti = uniqueIdx(seed, keyword, META_TITLES.length, 0);
   const di = uniqueIdx(seed, keyword, META_DESCS.length, 1);
@@ -145,5 +148,7 @@ export function generateComparisonContent(entry: KeywordEntryV4): ComparisonPage
     faqTitle: combo.faqTitle,
     finalCtaTitle: combo.finalCtaTitle,
     finalCtaSubtitle: combo.finalCtaSubtitle,
+    guideIntro: deep.guideIntro,
+    guideSections: deep.guideSections,
   };
 }

@@ -32,7 +32,7 @@ export default function LegalPage({
 
       <Section tone="dark" compact>
         <Container width="narrow" className="text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#c9a97f]">Legal</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#a67c52]">Legal</span>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">{title}</h1>
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-400">{intro}</p>
           <p className="mt-5 text-xs text-gray-500">Last updated: {lastUpdated}</p>
@@ -54,7 +54,7 @@ export default function LegalPage({
                   <ul className="mt-3 space-y-2">
                     {section.bullets.map((b, j) => (
                       <li key={j} className="flex items-start gap-3 text-[15px] leading-relaxed text-gray-600">
-                        <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#8b6f47]" />
+                        <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[var(--hl-mint-deep)]" />
                         <span>{b}</span>
                       </li>
                     ))}

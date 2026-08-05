@@ -13,7 +13,7 @@ export default function ReferralCodeInput({ alreadyApplied }: Props) {
 
   if (alreadyApplied || status === "success") {
     return (
-      <p className="text-xs text-green-600 font-medium">
+      <p className="text-xs text-[var(--hl-mint-deep)] font-medium">
         ✓ {status === "success" ? message : "Referral code already applied to your account."}
       </p>
     );

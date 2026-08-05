@@ -17,7 +17,7 @@ export default function FactsSection() {
 
         <div className="grid gap-8 md:grid-cols-3">
           {/* Card 1 */}
-          <div className="bg-card rounded-2xl p-8 shadow-sm border border-border/60 hover:border-#A0826D/50 hover:shadow-xl hover:shadow-#F5E6D30/5 transition-all duration-300 hover:-translate-y-1 group">
+          <div className="bg-card rounded-2xl p-8 shadow-sm border border-border/60 hover:border-var(--hl-mint)/50 hover:shadow-xl hover:shadow-#faf6f10/5 transition-all duration-300 hover:-translate-y-1 group">
             <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
               <ShieldCheck className="h-6 w-6 text-primary" />
             </div>
@@ -32,7 +32,7 @@ export default function FactsSection() {
           </div>
 
           {/* Card 2 */}
-          <div className="bg-card rounded-2xl p-8 shadow-sm border border-border/60 hover:border-#A0826D/50 hover:shadow-xl hover:shadow-#F5E6D30/5 transition-all duration-300 hover:-translate-y-1 group">
+          <div className="bg-card rounded-2xl p-8 shadow-sm border border-border/60 hover:border-var(--hl-mint)/50 hover:shadow-xl hover:shadow-#faf6f10/5 transition-all duration-300 hover:-translate-y-1 group">
             <div className="h-12 w-12 rounded-xl bg-brand-green/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
               <Fingerprint className="h-6 w-6 text-brand-green" />
             </div>
@@ -47,9 +47,9 @@ export default function FactsSection() {
           </div>
 
           {/* Card 3 */}
-          <div className="bg-card rounded-2xl p-8 shadow-sm border border-border/60 hover:border-#A0826D/50 hover:shadow-xl hover:shadow-#F5E6D30/5 transition-all duration-300 hover:-translate-y-1 group">
-            <div className="h-12 w-12 rounded-xl bg-#F5E6D3 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-              <Zap className="h-6 w-6 text-#6D5635" />
+          <div className="bg-card rounded-2xl p-8 shadow-sm border border-border/60 hover:border-var(--hl-mint)/50 hover:shadow-xl hover:shadow-#faf6f10/5 transition-all duration-300 hover:-translate-y-1 group">
+            <div className="h-12 w-12 rounded-xl bg-#faf6f1 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <Zap className="h-6 w-6 text-var(--hl-mint)" />
             </div>
             <h3 className="text-xl font-bold text-foreground mb-3">Lightning Fast</h3>
             <div className="mb-4">
