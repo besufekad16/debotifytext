@@ -40,8 +40,9 @@ export default async function ClusterTopicPage({ params }: PageProps) {
   if (!meta) notFound();
 
   const entries = meta.getEntries();
-  const groupedMap = new Map<string, typeof entries>();
-  for (const entry of entries) {
+  const hubEntries = entries.length > 2500 ? entries.slice(0, 2500) : entries;
+  const groupedMap = new Map<string, typeof hubEntries>();
+  for (const entry of hubEntries) {
     const arr = groupedMap.get(entry.entity) ?? [];
     arr.push(entry);
     groupedMap.set(entry.entity, arr);
@@ -104,6 +105,11 @@ export default async function ClusterTopicPage({ params }: PageProps) {
           </span>
           <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 leading-tight">{meta.label}</h1>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">{meta.description}</p>
+          {entries.length > hubEntries.length && (
+            <p className="mt-4 text-sm text-white/60">
+              Showing {hubEntries.length.toLocaleString()} of {entries.length.toLocaleString()} URLs here. The rest are listed in sitemap-{cluster}.xml for crawlers.
+            </p>
+          )}
         </div>
       </section>
 

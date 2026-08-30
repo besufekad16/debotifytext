@@ -73,6 +73,7 @@ function pickIndices(length: number, seed: number, count: number): number[] {
 // Curated high-value pages we want to consistently receive internal links,
 // regardless of which cluster a given page belongs to.
 const FLAGSHIP_POOL: RelatedLink[] = [
+  { label: "HumanifyLab AI Humanizer", href: "/" },
   { label: "Bypass AI Detectors", href: "/bypass-ai-detectors" },
   { label: "AI Detector Guide", href: "/ai-detector" },
   { label: "Free AI Humanizer", href: "/free-ai-humanizer" },

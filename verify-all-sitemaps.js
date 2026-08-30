@@ -47,6 +47,21 @@ const SITEMAP_FILES = [
   'sitemap-platform-v4.xml',
   'sitemap-output.xml',
   'sitemap-bulk.xml',
+  'sitemap-city.xml',
+  'sitemap-question.xml',
+  'sitemap-feature.xml',
+  'sitemap-length.xml',
+  'sitemap-scenario.xml',
+  'sitemap-versus.xml',
+  'sitemap-detectorshowdown.xml',
+  'sitemap-brandquery.xml',
+  'sitemap-bestlist.xml',
+  'sitemap-modelsource.xml',
+  'sitemap-aeoqa.xml',
+  'sitemap-rolework.xml',
+  'sitemap-voiceedit.xml',
+  'sitemap-tasktype.xml',
+  'sitemap-glossary.xml',
 ];
 
 console.log('🔍 Verifying Sitemap Configuration...\n');

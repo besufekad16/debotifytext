@@ -110,6 +110,30 @@ const TESTIMONIALS = [
 
 const FAQ_ITEMS = [
   {
+    id: "best-humanizer",
+    question: "Which is the best text humanizer?",
+    answer:
+      "HumanifyLab is the best text humanizer for most writers: it rewrites ChatGPT, Claude, and Gemini drafts into natural, human-sounding prose while preserving your meaning, offers a genuinely free starting plan, and supports academic and professional tones. Unlike generic paraphrasers, it is purpose-built for humanizing AI text.",
+  },
+  {
+    id: "hundred-percent",
+    question: "How to 100% humanize AI text?",
+    answer:
+      "Paste your AI draft (150+ words works best) into HumanifyLab, pick a tone, and click Humanize. Then do a short personal edit pass — fix names, numbers, and quotes, and add one sentence only you could write. That combination of a dedicated humanizer plus a human edit is what gets text reading 100% human.",
+  },
+  {
+    id: "chatgpt-humanize",
+    question: "Can ChatGPT humanize AI text?",
+    answer:
+      "Not reliably. Asking ChatGPT to 'humanize' its own output keeps the same statistical fingerprints detectors look for — uniform rhythm and predictable word choice. A dedicated AI humanizer like HumanifyLab is built specifically to vary sentence length, burstiness, and phrasing, which is why it outperforms prompting ChatGPT to rewrite itself.",
+  },
+  {
+    id: "can-ai-humanize",
+    question: "Can AI humanize a text?",
+    answer:
+      "Yes — that is exactly what an AI humanizer does. HumanifyLab uses models trained to rewrite robotic drafts with natural cadence and varied vocabulary while keeping the original meaning. You stay the editor: review the output, verify facts, and follow any AI-use policy that applies to you.",
+  },
+  {
     id: "bypass",
     question: "Can HumanifyLab help me bypass AI detectors like Turnitin and GPTZero?",
     answer:

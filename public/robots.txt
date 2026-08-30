@@ -87,5 +87,32 @@ Disallow: /
 User-agent: DataForSeoBot
 Disallow: /
 
-# ── Sitemap index (references all 31 cluster sitemaps) ───────
+User-agent: Amazonbot
+Allow: /
+Disallow: /api/
+
+User-agent: Bytespider
+Allow: /
+Disallow: /api/
+
+User-agent: YouBot
+Allow: /
+Disallow: /api/
+
+User-agent: Google-CloudVertexBot
+Allow: /
+Disallow: /api/
+
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /api/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /api/
+
+# AI / GEO briefing for assistants
+# https://www.humanifylab.com/llms.txt
+
+# ── Sitemap index (v1–v6 cluster sitemaps) ──────────────────
 Sitemap: https://www.humanifylab.com/sitemap.xml

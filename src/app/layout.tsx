@@ -105,7 +105,8 @@ export default function RootLayout({
           "@type": "ImageObject",
           "url": "https://www.humanifylab.com/humanify.png"
         },
-        "description": "HumanifyLab builds professional AI humanization technology that rewrites AI-generated text into authentic, human-like writing.",
+        "alternateName": ["Humanify", "Humanify Lab", "HumanifyLab AI Humanizer"],
+        "description": "HumanifyLab is an AI text humanizer for making ChatGPT, Claude, and Gemini drafts read more naturally. Also searched as humanify, humanify lab, essay humanizer, and free AI humanizer.",
         "email": "humanifylab1@gmail.com",
         "contactPoint": {
           "@type": "ContactPoint",

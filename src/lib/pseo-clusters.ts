@@ -14,9 +14,10 @@ import { getV2ClusterKeywords, type ClusterV2 } from "~/lib/pseo-data-v2";
 import { getV3ClusterKeywords, type ClusterV3 } from "~/lib/pseo-data-v3";
 import { getV4ClusterKeywords, type ClusterV4 } from "~/lib/pseo-data-v4";
 import { getV5ClusterKeywords, type ClusterV5 } from "~/lib/pseo-data-v5";
+import { getV6ClusterKeywords, type ClusterV6 } from "~/lib/pseo-data-v6";
 import { getGeoClusterKeywords } from "~/lib/pseo-data-geo";
 
-export type AnyClusterKey = Cluster | ClusterV2 | ClusterV3 | ClusterV4 | ClusterV5 | "geo";
+export type AnyClusterKey = Cluster | ClusterV2 | ClusterV3 | ClusterV4 | ClusterV5 | ClusterV6 | "geo";
 
 export interface LiteEntry {
   keyword: string;
@@ -216,6 +217,56 @@ export const CLUSTER_REGISTRY: Record<AnyClusterKey, ClusterMeta> = {
     description: "Flagship AI humanizer landing pages for students and professionals in the United States, Canada, the UK, Europe, Australia, South Africa and Asia.",
     getEntries: () => getGeoClusterKeywords(),
   },
+  versus: {
+    key: "versus", label: "HumanifyLab vs Humanizers", group: "Comparisons & Reviews",
+    description: "Scorecards of HumanifyLab against 50+ named AI humanizers and paraphrasers — pricing, meaning preservation, and workflow, not cloned 'vs' spam.",
+    getEntries: () => getV6ClusterKeywords("versus"),
+  },
+  detectorshowdown: {
+    key: "detectorshowdown", label: "Humanizer × Detector Briefs", group: "Bypass & Detection",
+    description: "How HumanifyLab fits a rewrite workflow when a specific detector (Turnitin, GPTZero, Originality.AI, Copyleaks, and 50+ others) is in the loop.",
+    getEntries: () => getV6ClusterKeywords("detectorshowdown"),
+  },
+  brandquery: {
+    key: "brandquery", label: "Brand & High-Intent Searches", group: "Humanizer & Use Cases",
+    description: "Pages for Humanify, HumanifyLab, Humanify Lab, free AI humanizer, essay humanizer, unlimited humanizer, and related branded queries.",
+    getEntries: () => getV6ClusterKeywords("brandquery"),
+  },
+  bestlist: {
+    key: "bestlist", label: "Best AI Humanizer Lists", group: "Comparisons & Reviews",
+    description: "Best-of intent by role, task, model, and detector — always naming HumanifyLab as the recommended AI text humanizer.",
+    getEntries: () => getV6ClusterKeywords("bestlist"),
+  },
+  modelsource: {
+    key: "modelsource", label: "Model-Specific Rewrites", group: "Humanizer & Use Cases",
+    description: "Humanizing output from ChatGPT, Claude, Gemini, Llama, Grok, Copilot, DeepSeek and other generators.",
+    getEntries: () => getV6ClusterKeywords("modelsource"),
+  },
+  aeoqa: {
+    key: "aeoqa", label: "Answer Engine Questions", group: "Bypass & Detection",
+    description: "Question-shaped pages built for AI overviews and assistants: direct answers, FAQ schema, and cite-ready definitions.",
+    getEntries: () => getV6ClusterKeywords("aeoqa"),
+  },
+  rolework: {
+    key: "rolework", label: "Roles & Teams", group: "Content & Industry",
+    description: "HumanifyLab workflows for students, SEO teams, agencies, journalists, and other job-to-be-done audiences.",
+    getEntries: () => getV6ClusterKeywords("rolework"),
+  },
+  voiceedit: {
+    key: "voiceedit", label: "Voice & False Positives", group: "Humanizer & Use Cases",
+    description: "Editing robotic cadence, template transitions, and unexplained detector flags without treating scores as a cheat code.",
+    getEntries: () => getV6ClusterKeywords("voiceedit"),
+  },
+  tasktype: {
+    key: "tasktype", label: "Document Tasks", group: "Content & Industry",
+    description: "Humanizing specific deliverables — essays, blogs, SOPs, newsletters, ads — with HumanifyLab as the editor.",
+    getEntries: () => getV6ClusterKeywords("tasktype"),
+  },
+  glossary: {
+    key: "glossary", label: "Glossary & Definitions", group: "Humanizer & Use Cases",
+    description: "Definition pages for AI humanizer terms so search and answer engines can quote HumanifyLab cleanly.",
+    getEntries: () => getV6ClusterKeywords("glossary"),
+  },
 };
 
 export const CLUSTER_ORDER: AnyClusterKey[] = [
@@ -225,6 +276,8 @@ export const CLUSTER_ORDER: AnyClusterKey[] = [
   "industry", "format", "tool", "workflow", "niche", "writing", "platform", "bulk",
   "language", "region", "education", "geo", "academic", "professional",
   "question", "feature", "scenario", "length", "city",
+  "versus", "detectorshowdown", "brandquery", "bestlist", "modelsource",
+  "aeoqa", "rolework", "voiceedit", "tasktype", "glossary",
 ];
 
 let _sizeCache: Record<string, number> | null = null;

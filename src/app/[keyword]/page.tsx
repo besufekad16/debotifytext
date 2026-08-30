@@ -6,6 +6,7 @@ import { getAllV2Slugs, getV2KeywordBySlug } from "~/lib/pseo-data-v2";
 import { getAllV3Slugs, getV3KeywordBySlug } from "~/lib/pseo-data-v3";
 import { getAllV4Slugs, getV4KeywordBySlug } from "~/lib/pseo-data-v4";
 import { getAllV5Slugs, getV5KeywordBySlug } from "~/lib/pseo-data-v5";
+import { getV6KeywordBySlug, getAllV6Slugs } from "~/lib/pseo-data-v6";
 import { getAllGeoSlugs, getGeoKeywordBySlug } from "~/lib/pseo-data-geo";
 import { generateGeoContent as _generateGeoContent } from "~/lib/content/geo-content";
 import GeoTemplate from "~/components/templates/GeoTemplate";
@@ -46,6 +47,7 @@ import { generateQuestionContent as _generateQuestionContent } from "~/lib/conte
 import { generateFeatureContent as _generateFeatureContent } from "~/lib/content/feature-content";
 import { generateLengthContent as _generateLengthContent } from "~/lib/content/length-content";
 import { generateScenarioContent as _generateScenarioContent } from "~/lib/content/scenario-content";
+import { generateV6Content as _generateV6Content } from "~/lib/content/v6-content";
 import BypassTemplate from "~/components/templates/BypassTemplate";
 import HumanizerTemplate from "~/components/templates/HumanizerTemplate";
 import HowToTemplate from "~/components/templates/HowToTemplate";
@@ -67,6 +69,7 @@ import WorkflowTemplate from "~/components/templates/WorkflowTemplate";
 import ScoreTemplate from "~/components/templates/ScoreTemplate";
 import RegionTemplate from "~/components/templates/RegionTemplate";
 import V4Template from "~/components/templates/V4Template";
+import V6Template from "~/components/templates/V6Template";
 import SEOPageWrapper from "~/components/templates/SEOPageWrapper";
 
 // Every content generator is wrapped in React's cache() so that calling it
@@ -111,6 +114,7 @@ const generateQuestionContent = cache(_generateQuestionContent);
 const generateFeatureContent = cache(_generateFeatureContent);
 const generateLengthContent = cache(_generateLengthContent);
 const generateScenarioContent = cache(_generateScenarioContent);
+const generateV6Content = cache(_generateV6Content);
 
 interface PageProps {
   params: Promise<{ keyword: string }>;
@@ -188,6 +192,15 @@ function buildKeywords(keyword: string, cluster: string, entity: string): string
     feature: ["ai humanizer features", "best ai humanizer tool", "ai humanizer comparison", "ai humanizer capabilities"],
     length: ["ai humanizer word limit", "humanize long documents", "ai humanizer for essays", "bulk ai humanizer"],
     scenario: ["ai detection anxiety", "did my professor catch ai", "avoid ai detection before submitting", "ai humanizer before submission"],
+    versus: ["humanifylab vs", "ai humanizer comparison", "best ai humanizer 2026", "humanify lab vs"],
+    detectorshowdown: ["ai detector rewrite", "turnitin gptzero originality", "false positive ai score", "humanifylab detector workflow"],
+    brandquery: ["humanify", "humanifylab", "humanify lab", "free ai humanizer", "essay humanizer", "unlimited ai humanizer"],
+    bestlist: ["best ai humanizer", "best ai text humanizer", "best free humanizer", "best essay humanizer"],
+    modelsource: ["chatgpt humanizer", "claude humanizer", "gemini humanizer", "humanize chatgpt"],
+    aeoqa: ["which is the best ai text humanizer", "what is an ai humanizer", "is humanifylab good"],
+    rolework: ["ai humanizer for students", "ai humanizer for seo", "ai humanizer for agencies"],
+    voiceedit: ["make ai writing sound human", "fix robotic writing", "false positive ai detection"],
+    glossary: ["what is an ai humanizer", "ai text humanizer meaning", "essay humanizer definition"],
   };
   const entityKw = entity && !["AI Humanizer", "Guide", "Use Case", "Academic", "Professional", "AI Detector", "Multilingual", "Niche", "Competitor", "Pricing", "Speed", "Quality", "Problem", "Workflow", "Score", "HumanifyLab"].includes(entity)
     ? [entity.toLowerCase(), `${entity.toLowerCase()} bypass`, `humanize ${entity.toLowerCase()}`, `${entity.toLowerCase()} ai humanizer`]
@@ -196,15 +209,15 @@ function buildKeywords(keyword: string, cluster: string, entity: string): string
   return [keyword, ...core, ...(clusterKws[cluster] ?? []), ...entityKw];
 }
 
-// All ~23.6k pages are pre-rendered at build time. dynamicParams=true stays
-// on as a safety net (any slug added to the datasets after a deploy without
-// a rebuild still renders on first request instead of 404ing), but it is
-// NOT used to skip pre-rendering — every known slug is built up front so the
-// full catalog is indexable/crawlable immediately after deploy.
+// Every known page (v1-v6 + geo, ~97k slugs) is pre-rendered at build time
+// so the whole catalog ships as static HTML. dynamicParams=true stays on as
+// a safety net (any slug added to the datasets after a deploy without a
+// rebuild still renders on first request instead of 404ing), but it is NOT
+// used to skip pre-rendering.
 //
-// A Set dedupes slugs that might collide across the v1/v2/v3/v4/geo
-// datasets (shouldn't happen, but guards against generateStaticParams
-// returning duplicate params, which Next.js would otherwise build twice).
+// A Set dedupes slugs that might collide across the v1-v6/geo datasets
+// (shouldn't happen, but guards against generateStaticParams returning
+// duplicate params, which Next.js would otherwise build twice).
 export async function generateStaticParams() {
   const all = new Set<string>([
     ...getAllSlugs(),
@@ -212,6 +225,7 @@ export async function generateStaticParams() {
     ...getAllV3Slugs(),
     ...getAllV4Slugs(),
     ...getAllV5Slugs(),
+    ...getAllV6Slugs(),
     ...getAllGeoSlugs(),
   ]);
   return Array.from(all, (keyword) => ({ keyword }));
@@ -227,14 +241,15 @@ const resolveEntry = cache((keyword: string) => {
   const entryV3 = entry || entryV2 ? null : getV3KeywordBySlug(keyword);
   const entryV4 = entry || entryV2 || entryV3 ? null : getV4KeywordBySlug(keyword);
   const entryV5 = entry || entryV2 || entryV3 || entryV4 ? null : getV5KeywordBySlug(keyword);
-  const entryGeo = entry || entryV2 || entryV3 || entryV4 || entryV5 ? null : getGeoKeywordBySlug(keyword);
-  return { entry, entryV2, entryV3, entryV4, entryV5, entryGeo };
+  const entryV6 = entry || entryV2 || entryV3 || entryV4 || entryV5 ? null : getV6KeywordBySlug(keyword);
+  const entryGeo = entry || entryV2 || entryV3 || entryV4 || entryV5 || entryV6 ? null : getGeoKeywordBySlug(keyword);
+  return { entry, entryV2, entryV3, entryV4, entryV5, entryV6, entryGeo };
 });
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { keyword } = await params;
-  const { entry, entryV2, entryV3, entryV4, entryV5, entryGeo } = resolveEntry(keyword);
-  if (!entry && !entryV2 && !entryV3 && !entryV4 && !entryV5 && !entryGeo) return { title: "Not Found" };
+  const { entry, entryV2, entryV3, entryV4, entryV5, entryV6, entryGeo } = resolveEntry(keyword);
+  if (!entry && !entryV2 && !entryV3 && !entryV4 && !entryV5 && !entryV6 && !entryGeo) return { title: "Not Found" };
 
   if (entryGeo) {
     const geoData = generateGeoContent(entryGeo);
@@ -320,8 +335,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       case "output": { const d = generateOutputContent(e4); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
       case "bulk": { const d = generateBulkContent(e4); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
     }
-  } else {
-    const e5 = entryV5!;
+  } else if (entryV5) {
+    const e5 = entryV5;
     switch (e5.cluster) {
       case "city": { const d = generateCityContent(e5); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
       case "question": { const d = generateQuestionContent(e5); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
@@ -329,12 +344,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       case "length": { const d = generateLengthContent(e5); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
       case "scenario": { const d = generateScenarioContent(e5); metaTitle = d.metaTitle; metaDescription = d.metaDescription; break; }
     }
+  } else if (entryV6) {
+    const d = generateV6Content(entryV6);
+    metaTitle = d.metaTitle;
+    metaDescription = d.metaDescription;
   }
 
-  const clusterForKeywords = entry?.cluster ?? entryV2?.cluster ?? entryV3?.cluster ?? entryV4?.cluster ?? entryV5?.cluster ?? 'bypass';
-  const entityForKeywords = entry?.entity ?? entryV2?.entity ?? entryV3?.entity ?? entryV4?.entity ?? entryV5?.entity ?? '';
-  const keywordStr = entry?.keyword ?? entryV2?.keyword ?? entryV3?.keyword ?? entryV4?.keyword ?? entryV5?.keyword ?? keyword;
-  const seedVal = entry?.seed ?? entryV2?.seed ?? entryV3?.seed ?? entryV4?.seed ?? entryV5?.seed ?? 0;
+  const clusterForKeywords = entry?.cluster ?? entryV2?.cluster ?? entryV3?.cluster ?? entryV4?.cluster ?? entryV5?.cluster ?? entryV6?.cluster ?? 'bypass';
+  const entityForKeywords = entry?.entity ?? entryV2?.entity ?? entryV3?.entity ?? entryV4?.entity ?? entryV5?.entity ?? entryV6?.entity ?? '';
+  const keywordStr = entry?.keyword ?? entryV2?.keyword ?? entryV3?.keyword ?? entryV4?.keyword ?? entryV5?.keyword ?? entryV6?.keyword ?? keyword;
+  const seedVal = entry?.seed ?? entryV2?.seed ?? entryV3?.seed ?? entryV4?.seed ?? entryV5?.seed ?? entryV6?.seed ?? 0;
 
   return {
     // Generated titles already include the brand suffix — absolute avoids
@@ -387,8 +406,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function KeywordPage({ params }: PageProps) {
   const { keyword } = await params;
-  const { entry, entryV2, entryV3, entryV4, entryV5, entryGeo } = resolveEntry(keyword);
-  if (!entry && !entryV2 && !entryV3 && !entryV4 && !entryV5 && !entryGeo) notFound();
+  const { entry, entryV2, entryV3, entryV4, entryV5, entryV6, entryGeo } = resolveEntry(keyword);
+  if (!entry && !entryV2 && !entryV3 && !entryV4 && !entryV5 && !entryV6 && !entryGeo) notFound();
 
   if (entryGeo) {
     const geoData = generateGeoContent(entryGeo);
@@ -434,8 +453,8 @@ export default async function KeywordPage({ params }: PageProps) {
     );
   }
 
-  const seed = entry?.seed ?? entryV2?.seed ?? entryV3?.seed ?? entryV4?.seed ?? entryV5?.seed ?? 0;
-  const kw = entry?.keyword ?? entryV2?.keyword ?? entryV3?.keyword ?? entryV4?.keyword ?? entryV5?.keyword ?? keyword;
+  const seed = entry?.seed ?? entryV2?.seed ?? entryV3?.seed ?? entryV4?.seed ?? entryV5?.seed ?? entryV6?.seed ?? 0;
+  const kw = entry?.keyword ?? entryV2?.keyword ?? entryV3?.keyword ?? entryV4?.keyword ?? entryV5?.keyword ?? entryV6?.keyword ?? keyword;
   const publishDate = getPublishDate(seed);
   const modifiedDate = getModifiedDate(seed, publishDate);
 
@@ -743,4 +762,76 @@ export default async function KeywordPage({ params }: PageProps) {
       </SEOPageWrapper>
     );
   }
+  if (entryV6) {
+    const v6 = generateV6Content(entryV6);
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": `${BASE_URL}/${keyword}`,
+          url: `${BASE_URL}/${keyword}`,
+          name: v6.metaTitle,
+          description: v6.metaDescription,
+          inLanguage: "en-US",
+          speakable: {
+            "@type": "SpeakableSpecification",
+            cssSelector: ["#direct-answer", "h1"],
+          },
+          mainEntity: { "@id": `${BASE_URL}/${keyword}#qa` },
+          isPartOf: { "@id": `${BASE_URL}/#website` },
+          datePublished: publishDate,
+          dateModified: modifiedDate,
+        },
+        {
+          "@type": "QAPage",
+          "@id": `${BASE_URL}/${keyword}#qa`,
+          mainEntity: {
+            "@type": "Question",
+            name: entryV6.keyword,
+            acceptedAnswer: { "@type": "Answer", text: v6.directAnswer },
+          },
+        },
+        {
+          "@type": "FAQPage",
+          "@id": `${BASE_URL}/${keyword}#faq`,
+          mainEntity: v6.faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": `${BASE_URL}/#software`,
+          name: "HumanifyLab AI Humanizer",
+          applicationCategory: "UtilitiesApplication",
+          operatingSystem: "Web",
+          url: BASE_URL,
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        },
+        {
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+            { "@type": "ListItem", position: 2, name: entryV6.cluster, item: `${BASE_URL}/topics/${entryV6.cluster}` },
+            { "@type": "ListItem", position: 3, name: entryV6.keyword, item: `${BASE_URL}/${keyword}` },
+          ],
+        },
+        {
+          "@type": "DefinedTerm",
+          name: entryV6.keyword,
+          description: v6.directAnswer,
+          inDefinedTermSet: `${BASE_URL}/topics/glossary`,
+        },
+      ],
+    };
+    return (
+      <SEOPageWrapper keyword={kw} cluster={entryV6.cluster} publishDate={publishDate} updatedDate={modifiedDate}>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <V6Template data={v6} />
+      </SEOPageWrapper>
+    );
+  }
+  notFound();
 }
