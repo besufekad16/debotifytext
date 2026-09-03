@@ -59,6 +59,13 @@ const PRESETS = [
   { value: "persuasive", label: "Persuasive", description: "Compelling and convincing for marketing and sales", isPremium: true },
 ];
 
+const PRESET_UNLOCKED_PLANS = new Set(["pro", "ultra", "lifetime", "unlimited"]);
+
+function canUsePremiumPresets(plan: string | null | undefined): boolean {
+  if (!plan) return false;
+  return PRESET_UNLOCKED_PLANS.has(plan.toLowerCase());
+}
+
 // Hardcoded humanizing process titles
 const HUMANIZING_PROCESSES = [
   "Analyzing text structure",
@@ -361,6 +368,14 @@ export default function UnifiedHomePage() {
       return;
     }
 
+    const selectedPresetMeta = PRESETS.find((p) => p.value === preset);
+    if (selectedPresetMeta?.isPremium && !canUsePremiumPresets(subscriptionPlan)) {
+      toast.error("This tone is locked. Subscribe to Pro, Ultra, Lifetime, or Unlimited to unlock it.");
+      setManualPricingOpen(true);
+      setPreset("default");
+      return;
+    }
+
     const wordCount = originalText.trim().split(/\s+/).filter(Boolean).length;
 
     // Check minimum word count (100 words) - REQUIRED FOR ALL USERS
@@ -418,6 +433,13 @@ export default function UnifiedHomePage() {
           toast.error(errorData.error || "Insufficient credits. Claim Lifetime or upgrade below.");
           setManualPricingOpen(true);
           await fetchCredits(); // Refresh credits display
+          setIsHumanizing(false);
+          return;
+        }
+        if (response.status === 403 && errorData.errorCode === "PRESET_LOCKED") {
+          toast.error(errorData.error || "This tone is locked. Subscribe to unlock more presets.");
+          setManualPricingOpen(true);
+          setPreset("default");
           setIsHumanizing(false);
           return;
         }
@@ -623,7 +645,7 @@ export default function UnifiedHomePage() {
       // Reset score on error
       setCurrentAiScore(null);
     }
-  }, [originalText, isSignedIn, currentCredits, preset, fetchCredits, fetchHistory]);
+  }, [originalText, isSignedIn, currentCredits, preset, subscriptionPlan, fetchCredits, fetchHistory]);
 
   // Handle Ctrl+Enter (or Cmd+Enter on Mac) keyboard shortcut to humanize
   useEffect(() => {
@@ -815,11 +837,29 @@ export default function UnifiedHomePage() {
   const handleHistorySelect = (item: HistoryItem) => {
     setOriginalText(item.originalText);
     setHumanizedText(item.humanizedText);
-    setPreset(item.preset);
+    const restored = item.preset || "default";
+    const match = PRESETS.find((p) => p.value === restored);
+    if (match && (!match.isPremium || canUsePremiumPresets(subscriptionPlan))) {
+      setPreset(restored);
+      return;
+    }
+    setPreset("default");
+  };
+
+  const handlePresetSelect = (value: string) => {
+    const selected = PRESETS.find((p) => p.value === value);
+    if (!selected) return;
+    if (selected.isPremium && !canUsePremiumPresets(subscriptionPlan)) {
+      toast.error("This tone is locked. Subscribe to Pro, Ultra, Lifetime, or Unlimited to unlock it.");
+      setManualPricingOpen(true);
+      return;
+    }
+    setPreset(value);
   };
 
   const wordCount = originalText.trim().split(/\s+/).filter(Boolean).length;
   const charCount = originalText.length;
+  const hasPresetAccess = canUsePremiumPresets(subscriptionPlan);
   // 1 credit = 1 word in the new system
   const estimatedCredits = wordCount;
   // Show output panel when humanizing, has humanized text, or is showing thoughts
@@ -1042,6 +1082,75 @@ export default function UnifiedHomePage() {
                         </div>
                       </div>
                     )}
+
+                    {/* Tone preset: dropdown on mobile, chips on larger screens */}
+                    <div className="mt-4">
+                      <div className="mb-2 flex items-center justify-between gap-2">
+                        <label htmlFor="tone-preset" className="text-sm font-semibold text-gray-700">
+                          Tone
+                        </label>
+                        {!hasPresetAccess && (
+                          <span className="inline-flex items-center gap-1 text-[11px] text-gray-500">
+                            <Lock className="h-3 w-3" />
+                            Upgrade to unlock
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="sm:hidden">
+                        <Select
+                          value={preset}
+                          onValueChange={handlePresetSelect}
+                          disabled={isHumanizing}
+                        >
+                          <SelectTrigger
+                            id="tone-preset"
+                            className="h-11 w-full rounded-xl border-[rgba(94,61,42,0.25)] bg-white text-sm"
+                          >
+                            <SelectValue placeholder="Default" />
+                          </SelectTrigger>
+                          <SelectContent className="rounded-xl">
+                            {PRESETS.map((p) => {
+                              const locked = p.isPremium && !hasPresetAccess;
+                              return (
+                                <SelectItem key={p.value} value={p.value} className="py-2.5">
+                                  <span className="flex items-center gap-2">
+                                    {locked && <Lock className="h-3.5 w-3.5 shrink-0 text-gray-400" />}
+                                    <span>{p.label}</span>
+                                  </span>
+                                </SelectItem>
+                              );
+                            })}
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div className="hidden sm:flex flex-wrap gap-2">
+                        {PRESETS.map((p) => {
+                          const locked = p.isPremium && !hasPresetAccess;
+                          const active = preset === p.value;
+                          return (
+                            <button
+                              key={p.value}
+                              type="button"
+                              disabled={isHumanizing}
+                              onClick={() => handlePresetSelect(p.value)}
+                              title={locked ? `${p.label} is locked until you subscribe` : p.description}
+                              className={cn(
+                                "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
+                                active && !locked && "border-[var(--hl-mint-deep)] bg-[var(--hl-mint-deep)] text-white shadow-sm",
+                                !active && !locked && "border-[rgba(94,61,42,0.18)] bg-white text-gray-700 hover:border-[var(--hl-mint-deep)] hover:bg-[#faf6f1]",
+                                locked && "border-gray-200 bg-gray-50 text-gray-500 hover:border-amber-300 hover:bg-amber-50",
+                                isHumanizing && "cursor-not-allowed opacity-50",
+                              )}
+                            >
+                              {locked && <Lock className="h-3 w-3" />}
+                              {p.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
 
                     {/* Action Buttons */}
                     <div className="mt-4 space-y-3">
