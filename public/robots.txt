@@ -8,6 +8,8 @@ User-agent: *
 Allow: /
 Allow: /topics
 Allow: /topics/
+Allow: /guides
+Allow: /guides/
 Allow: /pricing
 Allow: /faq
 Allow: /contact
@@ -114,5 +116,5 @@ Disallow: /api/
 # AI / GEO briefing for assistants
 # https://www.humanifylab.com/llms.txt
 
-# ── Sitemap index (v1–v6 cluster sitemaps) ──────────────────
+# ── Sitemap index (8 PSEO cluster sitemaps + main) ──────────
 Sitemap: https://www.humanifylab.com/sitemap.xml

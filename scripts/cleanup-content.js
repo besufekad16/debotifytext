@@ -71,7 +71,7 @@ const filesToProcess = [
   'src/components/SEOPageLayout.tsx',
   'src/components/SiteFooter.tsx',
   'src/components/PricingModal.tsx',
-  'src/app/[keyword]/page.tsx',
+  'src/app/guides/[keyword]/page.tsx',
   'src/app/page.tsx',
   'src/lib/pseo-content.ts',
 ];

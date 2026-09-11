@@ -17,14 +17,12 @@ const TEST_URLS = [
   '/pricing',
   '/faq',
   '/contact',
-  '/bypass-turnitin',
-  '/chatgpt-humanizer',
-  '/how-to-bypass-ai-detection',
-  '/humanifylab-vs-undetectable-ai',
-  '/ai-humanizer-for-students',
-  '/free-ai-humanizer',
-  '/bypass-gptzero',
-  '/ai-humanizer-pricing',
+  '/guides/chatgpt-humanizer',
+  '/guides/free-ai-humanizer',
+  '/guides/ai-humanizer-for-students',
+  '/guides/bypass-gptzero',
+  '/topics',
+  '/topics/humanizer',
 ];
 
 console.log('🔍 SEO Verification Script\n');

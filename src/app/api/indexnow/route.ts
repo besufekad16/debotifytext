@@ -1,9 +1,8 @@
 
 import { type NextRequest, NextResponse } from "next/server";
-import { getAllSlugs } from "~/lib/pseo-data";
-import { getAllV2Slugs } from "~/lib/pseo-data-v2";
-import { getAllV3Slugs } from "~/lib/pseo-data-v3";
-import { getAllV4Slugs } from "~/lib/pseo-data-v4";
+import { getAllSlugs } from "~/lib/pseo/keywords";
+import { CLUSTER_ORDER } from "~/lib/pseo/clusters";
+import { pseoPath } from "~/lib/pseo/paths";
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +12,19 @@ const INDEX_NOW_KEY = "cae535bda6cc4564a9c5dda38f8236eb";
 const KEY_LOCATION  = `${BASE_URL}/${INDEX_NOW_KEY}.txt`;
 const BATCH_SIZE    = 9000;
 
-const STATIC_PAGES = ["/", "/pricing", "/faq", "/contact", "/responsible-use", "/terms", "/privacy"];
+const STATIC_PAGES = [
+  "/",
+  "/pricing",
+  "/faq",
+  "/contact",
+  "/responsible-use",
+  "/terms",
+  "/privacy",
+  "/bypass-ai-detectors",
+  "/ai-detector",
+  "/topics",
+  ...CLUSTER_ORDER.map((c) => `/topics/${c}`),
+];
 
 function chunk<T>(arr: T[], size: number): T[][] {
   const chunks: T[][] = [];
@@ -58,17 +69,12 @@ export async function POST(request: NextRequest) {
   }, { status: allOk ? 200 : 207 });
 }
 
-// All indexable URLs: static pages + every PSEO slug (v1–v4)
+// All indexable URLs: static pages + every PSEO page under /guides/
 function getAllIndexableUrls(): string[] {
-  const allSlugs = [...new Set([
-    ...getAllSlugs(),
-    ...getAllV2Slugs(),
-    ...getAllV3Slugs(),
-    ...getAllV4Slugs(),
-  ])];
+  const allSlugs = [...new Set(getAllSlugs())];
   return [
     ...STATIC_PAGES.map(p => `${BASE_URL}${p}`),
-    ...allSlugs.map(s => `${BASE_URL}/${s}`),
+    ...allSlugs.map(s => `${BASE_URL}${pseoPath(s)}`),
   ];
 }
 

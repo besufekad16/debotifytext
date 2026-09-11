@@ -30,13 +30,13 @@ export const metadata: Metadata = {
 };
 
 const DETECTORS = [
-  { name: "Turnitin", usedBy: "Universities & colleges worldwide", bypassRate: "99.9%", link: "/bypass-turnitin-ai-detection", mechanism: "Perplexity + burstiness scoring against a database of known AI model outputs." },
-  { name: "GPTZero", usedBy: "Educators, K-12 schools, individual instructors", bypassRate: "99.8%", link: "/bypass-gptzero", mechanism: "Dual-metric scoring: sentence-level perplexity combined with burstiness variance." },
-  { name: "Originality.AI", usedBy: "Publishers, SEO agencies, content marketplaces", bypassRate: "99.7%", link: "/bypass-originality-ai", mechanism: "Ensemble of multiple detection models plus contextual coherence checks." },
-  { name: "ZeroGPT", usedBy: "Teachers, content teams", bypassRate: "99.9%", link: "/bypass-zerogpt", mechanism: "Proprietary DeepAnalyse algorithm scoring at paragraph and document level." },
-  { name: "Copyleaks", usedBy: "Enterprises, LMS platforms (Canvas, Blackboard, Moodle)", bypassRate: "99.8%", link: "/bypass-copyleaks", mechanism: "Cross-language pattern matching against a database of AI linguistic fingerprints." },
-  { name: "Winston AI", usedBy: "Media companies, publishers", bypassRate: "99.7%", link: "/bypass-winston-ai", mechanism: "Combines AI detection with readability scoring and sentence-level highlighting." },
-  { name: "Sapling", usedBy: "HR teams, recruiters", bypassRate: "99.8%", link: "/bypass-sapling-ai", mechanism: "Contextual word-prediction scoring tuned for professional writing." },
+  { name: "Turnitin", usedBy: "Universities & colleges worldwide", bypassRate: "99.9%", link: "/guides/bypass-turnitin-ai-detection", mechanism: "Perplexity + burstiness scoring against a database of known AI model outputs." },
+  { name: "GPTZero", usedBy: "Educators, K-12 schools, individual instructors", bypassRate: "99.8%", link: "/guides/bypass-gptzero", mechanism: "Dual-metric scoring: sentence-level perplexity combined with burstiness variance." },
+  { name: "Originality.AI", usedBy: "Publishers, SEO agencies, content marketplaces", bypassRate: "99.7%", link: "/guides/bypass-originality-ai", mechanism: "Ensemble of multiple detection models plus contextual coherence checks." },
+  { name: "ZeroGPT", usedBy: "Teachers, content teams", bypassRate: "99.9%", link: "/guides/bypass-zerogpt", mechanism: "Proprietary DeepAnalyse algorithm scoring at paragraph and document level." },
+  { name: "Copyleaks", usedBy: "Enterprises, LMS platforms (Canvas, Blackboard, Moodle)", bypassRate: "99.8%", link: "/guides/bypass-copyleaks", mechanism: "Cross-language pattern matching against a database of AI linguistic fingerprints." },
+  { name: "Winston AI", usedBy: "Media companies, publishers", bypassRate: "99.7%", link: "/guides/bypass-winston-ai", mechanism: "Combines AI detection with readability scoring and sentence-level highlighting." },
+  { name: "Sapling", usedBy: "HR teams, recruiters", bypassRate: "99.8%", link: "/guides/bypass-sapling", mechanism: "Contextual word-prediction scoring tuned for professional writing." },
 ];
 
 const FAQS = [

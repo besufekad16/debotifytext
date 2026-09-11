@@ -72,7 +72,7 @@ export default function AiDetectorPage() {
         "@id": `${URL}#breadcrumb`,
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
-          { "@type": "ListItem", position: 2, name: "AI Detectors", item: `${BASE_URL}/topics/detector` },
+          { "@type": "ListItem", position: 2, name: "AI Detectors", item: `${BASE_URL}/topics/detectors` },
           { "@type": "ListItem", position: 3, name: "AI Detector", item: URL },
         ],
       },
@@ -80,7 +80,7 @@ export default function AiDetectorPage() {
   };
 
   return (
-    <SEOPageWrapper keyword="ai detector" cluster="detector" publishDate="2026-01-15" updatedDate="2026-06-20" readTime={8}>
+    <SEOPageWrapper keyword="ai detector" cluster="detectors" publishDate="2026-01-15" updatedDate="2026-06-20" readTime={8}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="min-h-screen bg-white">
         <section className="bg-[#0f1419] text-white py-16 px-4">

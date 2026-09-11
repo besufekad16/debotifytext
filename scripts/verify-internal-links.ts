@@ -1,75 +1,70 @@
 /**
- * Verifies the internal linking system is sound:
- *  - every cluster in the registry resolves to a non-empty entry list
- *  - every curated FLAGSHIP_POOL href in related-links.ts resolves to either
- *    a real pSEO slug or a known hand-authored static route
- *  - every geo slug resolves via the geo dataset
- *
+ * Verifies the rebuilt 40k PSEO catalog and flagship links.
  * Run: npx tsx scripts/verify-internal-links.ts
  */
-import { getKeywordBySlug } from "../src/lib/pseo-data";
-import { getV2KeywordBySlug } from "../src/lib/pseo-data-v2";
-import { getV3KeywordBySlug } from "../src/lib/pseo-data-v3";
-import { getV4KeywordBySlug } from "../src/lib/pseo-data-v4";
-import { getGeoKeywordBySlug, getAllGeoSlugs } from "../src/lib/pseo-data-geo";
-import { CLUSTER_REGISTRY, CLUSTER_ORDER } from "../src/lib/pseo-clusters";
+import { getKeywordBySlug, getAllSlugs } from "../src/lib/pseo/keywords";
+import { CLUSTER_META, CLUSTER_ORDER, getClusterSize, getTotalPseoCount } from "../src/lib/pseo/clusters";
+import { TARGET_PER_CLUSTER } from "../src/lib/pseo/types";
+import { RESERVED_SLUGS } from "../src/lib/pseo/reserved";
 
-// Hand-authored static routes that are NOT part of any pSEO dataset —
-// these live as real folders under src/app/.
 const STATIC_ROUTES = new Set([
   "bypass-ai-detectors",
   "ai-detector",
   "topics",
-  ...getAllGeoSlugs(),
+  "pricing",
+  "faq",
 ]);
 
-function resolvesToPseoSlug(slug: string): boolean {
-  return Boolean(
-    getKeywordBySlug(slug) ?? getV2KeywordBySlug(slug) ?? getV3KeywordBySlug(slug) ?? getV4KeywordBySlug(slug) ?? getGeoKeywordBySlug(slug),
-  );
-}
-
-let problems = 0;
-
-console.log("--- Cluster registry sanity ---");
-for (const key of CLUSTER_ORDER) {
-  const count = CLUSTER_REGISTRY[key].getEntries().length;
-  if (count === 0) {
-    console.log(`EMPTY CLUSTER: ${key}`);
-    problems++;
-  }
-}
-console.log(`${CLUSTER_ORDER.length} clusters checked.`);
-
-console.log("\n--- Flagship pool links (src/lib/related-links.ts) ---");
 const FLAGSHIP_HREFS = [
   "/bypass-ai-detectors",
   "/ai-detector",
-  "/free-ai-humanizer",
-  "/best-ai-humanizer",
-  "/bypass-turnitin-ai-detection",
-  "/does-turnitin-detect-chatgpt",
-  "/ai-humanizer-usa",
-  "/ai-humanizer-uk",
+  "/guides/free-ai-humanizer",
+  "/guides/best-ai-humanizer",
+  "/guides/bypass-turnitin-ai-detection",
+  "/guides/does-turnitin-detect-chatgpt",
+  "/guides/ai-humanizer-usa",
+  "/guides/ai-humanizer-uk",
+  "/guides/chatgpt-humanizer",
 ];
+
+let problems = 0;
+
+console.log("--- Cluster sizes ---");
+for (const key of CLUSTER_ORDER) {
+  const count = getClusterSize(key);
+  console.log(key, count);
+  if (count !== TARGET_PER_CLUSTER) {
+    console.log("BAD COUNT", key, count);
+    problems++;
+  }
+}
+console.log("total", getTotalPseoCount());
+
+console.log("\n--- Flagship links ---");
 for (const href of FLAGSHIP_HREFS) {
-  const slug = href.replace(/^\//, "");
-  const ok = STATIC_ROUTES.has(slug) || resolvesToPseoSlug(slug);
+  const slug = href.replace(/^\/guides\//, "").replace(/^\//, "");
+  const ok = STATIC_ROUTES.has(slug) || Boolean(getKeywordBySlug(slug));
   if (!ok) {
     console.log("MISSING:", href);
     problems++;
   }
 }
-console.log(`${FLAGSHIP_HREFS.length} flagship links checked.`);
 
-console.log("\n--- Geo slugs ---");
-for (const slug of getAllGeoSlugs()) {
-  if (!getGeoKeywordBySlug(slug)) {
-    console.log("MISSING GEO:", slug);
+console.log("\n--- Reserved collisions ---");
+for (const slug of getAllSlugs()) {
+  if (RESERVED_SLUGS.has(slug)) {
+    console.log("RESERVED COLLISION", slug);
     problems++;
   }
 }
-console.log(`${getAllGeoSlugs().length} geo slugs checked.`);
+
+console.log("\n--- Hub meta ---");
+for (const key of CLUSTER_ORDER) {
+  if (!CLUSTER_META[key]) {
+    console.log("MISSING META", key);
+    problems++;
+  }
+}
 
 console.log(problems === 0 ? "\nALL LINKS OK" : `\n${problems} PROBLEM(S) FOUND`);
 process.exit(problems === 0 ? 0 : 1);

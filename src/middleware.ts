@@ -16,6 +16,7 @@ const isPublicRoute = createRouteMatcher([
   // into tens of thousands of PSEO pages. Auth-blocking /topics/[cluster]
   // orphans long-tail URLs behind XML-only discovery.
   '/topics(.*)',
+  '/guides(.*)',
   '/api/webhooks/clerk(.*)',
   '/api/webhooks/polar(.*)',
   '/api/polar/products(.*)',
@@ -25,7 +26,8 @@ const isPublicRoute = createRouteMatcher([
   '/robots.txt',
   '/sitemap',
   '/robots',
-  // Single-segment PSEO landing pages (e.g. /bypass-turnitin)
+  // Retired single-segment PSEO lived at /:keyword — keep those 404s public
+  // so Googlebot does not get a login wall. Live PSEO is /guides/:keyword.
   '/:keyword',
 ])
 
