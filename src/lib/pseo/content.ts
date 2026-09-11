@@ -30,7 +30,23 @@ function pick<T>(pool: readonly T[], seed: number, salt: number): T {
 function clip(text: string, max: number): string {
   if (text.length <= max) return text;
   const cut = text.lastIndexOf(" ", max - 1);
-  return `${text.slice(0, cut > 40 ? cut : max - 1).trimEnd()}…`;
+  return `${text.slice(0, cut > 40 ? cut : max - 1).trimEnd()}...`;
+}
+
+const TITLE_TAG: Record<KeywordEntry["cluster"], string> = {
+  humanizer: "HumanifyLab",
+  bypass: "Rewrite Guide",
+  essay: "Academic Rewrite",
+  detectors: "Detector Guide",
+  writing: "Writing Workflow",
+  guides: "Step-by-Step",
+  compare: "Comparison",
+  usecases: "HumanifyLab",
+};
+
+/** Never clip the query: clipped titles collided across 40k unique keywords. */
+function uniqueMetaTitle(entry: KeywordEntry): string {
+  return `${titleCase(entry.keyword)} | ${TITLE_TAG[entry.cluster]}`;
 }
 
 function matchByName<T extends { name: string; key: string }>(list: T[], ...names: string[]): T | undefined {
@@ -63,21 +79,11 @@ function titleCase(keyword: string): string {
   return smartTitleCase(keyword);
 }
 
-function metaFor(keyword: string, cluster: KeywordEntry["cluster"]): { metaTitle: string; metaDescription: string } {
-  const t = titleCase(keyword);
-  const titles: Record<KeywordEntry["cluster"], string> = {
-    humanizer: clip(`${t} | HumanifyLab`, 62),
-    bypass: clip(`${t} — Natural Rewrite Guide`, 62),
-    essay: clip(`${t} | Academic Rewrite`, 62),
-    detectors: clip(`${t} | Detector Explainer`, 62),
-    writing: clip(`${t} | Writing Workflow`, 62),
-    guides: clip(`${t} | Step-by-Step`, 62),
-    compare: clip(`${t} | Honest Comparison`, 62),
-    usecases: clip(`${t} | HumanifyLab`, 62),
-  };
-  const descLead = `${t} — HumanifyLab rewrites ${keyword} with meaning-first edits so the draft reads like a person wrote it.`;
+function metaFor(entry: KeywordEntry): { metaTitle: string; metaDescription: string } {
+  const t = titleCase(entry.keyword);
+  const descLead = `${t} — HumanifyLab rewrites ${entry.keyword} with meaning-first edits so the draft reads like a person wrote it.`;
   return {
-    metaTitle: titles[cluster],
+    metaTitle: uniqueMetaTitle(entry),
     metaDescription: clip(`${descLead} Free to try. Keep citations, structure, and your actual claims.`, 158),
   };
 }
@@ -291,7 +297,7 @@ export function buildPseoContent(entry: KeywordEntry): PseoPageData {
   const { detector, model, doc, role, geo, competitor, task } = resolve(entry);
   const k = titleCase(entry.keyword);
   const h1 = k;
-  const { metaTitle, metaDescription } = metaFor(entry.keyword, entry.cluster);
+  const { metaTitle, metaDescription } = metaFor(entry);
 
   const eyebrows: Record<KeywordEntry["cluster"], string> = {
     humanizer: "AI humanizer",

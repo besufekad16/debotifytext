@@ -26,8 +26,7 @@ const isPublicRoute = createRouteMatcher([
   '/robots.txt',
   '/sitemap',
   '/robots',
-  // Retired single-segment PSEO lived at /:keyword — keep those 404s public
-  // so Googlebot does not get a login wall. Live PSEO is /guides/:keyword.
+  // Live PSEO is /:keyword. /guides/:keyword 308s onto the same slug.
   '/:keyword',
 ])
 

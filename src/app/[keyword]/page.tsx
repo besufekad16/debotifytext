@@ -5,8 +5,10 @@ import SEOPageWrapper from "~/components/templates/SEOPageWrapper";
 import PseoGuide from "~/components/templates/PseoGuide";
 import {
   BASE_URL,
+  TARGET_TOTAL,
   buildPseoContent,
   getKeywordBySlug,
+  getAllSlugs,
   getPrioritySlugs,
   modifiedDate,
   publishDate,
@@ -18,8 +20,8 @@ interface PageProps {
   params: Promise<{ keyword: string }>;
 }
 
+export const dynamic = "force-static";
 export const dynamicParams = true;
-export const revalidate = 86400;
 
 const loadPage = cache((slug: string) => {
   const entry = getKeywordBySlug(slug);
@@ -30,7 +32,14 @@ const loadPage = cache((slug: string) => {
 });
 
 export async function generateStaticParams() {
-  return getPrioritySlugs().map((keyword) => ({ keyword }));
+  const slugs = getAllSlugs();
+  if (slugs.length !== TARGET_TOTAL) {
+    throw new Error(`PSEO generateStaticParams expected ${TARGET_TOTAL} slugs, got ${slugs.length}`);
+  }
+  if (process.env.NODE_ENV !== "production") {
+    return getPrioritySlugs().map((keyword) => ({ keyword }));
+  }
+  return slugs.map((keyword) => ({ keyword }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

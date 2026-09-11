@@ -1,6 +1,6 @@
 {
   "framework": "nextjs",
-  "buildCommand": "next build",
+  "buildCommand": "NODE_OPTIONS=--max-old-space-size=8192 next build",
   "crons": [
     {
       "path": "/api/indexnow",
@@ -12,7 +12,7 @@
     }
   ],
   "functions": {
-    "app/[keyword]/page.tsx": {
+    "src/app/[keyword]/page.tsx": {
       "maxDuration": 30,
       "memory": 1024
     },

@@ -1668,7 +1668,7 @@ export default function UnifiedHomePage() {
               {[
                 { label: "Bypass Hub", href: "/topics/bypass" },
                 { label: "Humanizer Hub", href: "/topics/humanizer" },
-                { label: "Free AI Humanizer", href: "/guides/free-ai-humanizer" },
+                { label: "Free AI Humanizer", href: "/free-ai-humanizer" },
                 { label: "AI Detector Guide", href: "/ai-detector" },
               ].map((g) => (
                 <Link
@@ -1682,13 +1682,13 @@ export default function UnifiedHomePage() {
             </div>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
               {[
-                { label: "United States", href: "/guides/ai-humanizer-usa" },
-                { label: "Canada", href: "/guides/ai-humanizer-canada" },
-                { label: "United Kingdom", href: "/guides/ai-humanizer-uk" },
-                { label: "Europe", href: "/guides/ai-humanizer-europe" },
-                { label: "Australia", href: "/guides/ai-humanizer-australia" },
-                { label: "South Africa", href: "/guides/ai-humanizer-south-africa" },
-                { label: "Asia", href: "/guides/ai-humanizer-asia" },
+                { label: "United States", href: "/ai-humanizer-usa" },
+                { label: "Canada", href: "/ai-humanizer-canada" },
+                { label: "United Kingdom", href: "/ai-humanizer-uk" },
+                { label: "Europe", href: "/ai-humanizer-europe" },
+                { label: "Australia", href: "/ai-humanizer-australia" },
+                { label: "South Africa", href: "/ai-humanizer-south-africa" },
+                { label: "Asia", href: "/ai-humanizer-asia" },
               ].map((r) => (
                 <Link
                   key={r.href}

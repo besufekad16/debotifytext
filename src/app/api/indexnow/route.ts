@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
   }, { status: allOk ? 200 : 207 });
 }
 
-// All indexable URLs: static pages + every PSEO page under /guides/
+// All indexable URLs: static pages + every PSEO page at /{keyword}
 function getAllIndexableUrls(): string[] {
   const allSlugs = [...new Set(getAllSlugs())];
   return [

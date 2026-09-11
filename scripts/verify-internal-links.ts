@@ -18,13 +18,13 @@ const STATIC_ROUTES = new Set([
 const FLAGSHIP_HREFS = [
   "/bypass-ai-detectors",
   "/ai-detector",
-  "/guides/free-ai-humanizer",
-  "/guides/best-ai-humanizer",
-  "/guides/bypass-turnitin-ai-detection",
-  "/guides/does-turnitin-detect-chatgpt",
-  "/guides/ai-humanizer-usa",
-  "/guides/ai-humanizer-uk",
-  "/guides/chatgpt-humanizer",
+  "/free-ai-humanizer",
+  "/best-ai-humanizer",
+  "/bypass-turnitin-ai-detection",
+  "/does-turnitin-detect-chatgpt",
+  "/ai-humanizer-usa",
+  "/ai-humanizer-uk",
+  "/chatgpt-humanizer",
 ];
 
 let problems = 0;
@@ -42,7 +42,7 @@ console.log("total", getTotalPseoCount());
 
 console.log("\n--- Flagship links ---");
 for (const href of FLAGSHIP_HREFS) {
-  const slug = href.replace(/^\/guides\//, "").replace(/^\//, "");
+  const slug = href.replace(/^\//, "");
   const ok = STATIC_ROUTES.has(slug) || Boolean(getKeywordBySlug(slug));
   if (!ok) {
     console.log("MISSING:", href);

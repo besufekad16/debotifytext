@@ -7,6 +7,9 @@ interface PageProps {
   params: Promise<{ cluster: string; page: string }>;
 }
 
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   const params: { cluster: string; page: string }[] = [];
   for (const cluster of CLUSTER_ORDER) {

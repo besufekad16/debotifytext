@@ -52,11 +52,11 @@ for (const cluster of CLUSTER_KEYS) {
     changefreq: "weekly",
     priority: e.priority ? "0.9" : "0.7",
   })));
-  if (!xml.includes(`${BASE_URL}/guides/`)) {
-    throw new Error(`${cluster} sitemap is missing /guides/ URLs`);
+  if (xml.includes(`${BASE_URL}/guides/`)) {
+    throw new Error(`${cluster} sitemap still contains /guides/ URLs`);
   }
-  if (xml.includes(`${BASE_URL}/free-ai-humanizer<`) || /<loc>https:\/\/www\.humanifylab\.com\/[a-z0-9-]+<\/loc>/.test(xml)) {
-    throw new Error(`${cluster} sitemap still contains old single-segment PSEO URLs`);
+  if (!/<loc>https:\/\/www\.humanifylab\.com\/[a-z0-9-]+<\/loc>/.test(xml)) {
+    throw new Error(`${cluster} sitemap is missing root /{keyword} URLs`);
   }
   const name = `sitemap-${cluster}.xml`;
   writeFileSync(join(PUBLIC_DIR, name), xml, "utf8");

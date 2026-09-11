@@ -6,19 +6,19 @@ const PRODUCT_LINKS = [
   { label: "AI Humanizer", href: "/" },
   { label: "Pricing", href: "/pricing" },
   { label: "Bypass AI Detectors", href: "/bypass-ai-detectors" },
-  { label: "Bypass Turnitin", href: "/guides/bypass-turnitin-ai-detection" },
-  { label: "Free AI Humanizer", href: "/guides/free-ai-humanizer" },
+  { label: "Bypass Turnitin", href: "/bypass-turnitin-ai-detection" },
+  { label: "Free AI Humanizer", href: "/free-ai-humanizer" },
   { label: "All Guides", href: "/topics" },
 ];
 
 const REGION_LINKS = [
-  { label: "United States", href: "/guides/ai-humanizer-usa" },
-  { label: "Canada", href: "/guides/ai-humanizer-canada" },
-  { label: "United Kingdom", href: "/guides/ai-humanizer-uk" },
-  { label: "Europe", href: "/guides/ai-humanizer-europe" },
-  { label: "Australia", href: "/guides/ai-humanizer-australia" },
-  { label: "South Africa", href: "/guides/ai-humanizer-south-africa" },
-  { label: "Asia", href: "/guides/ai-humanizer-asia" },
+  { label: "United States", href: "/ai-humanizer-usa" },
+  { label: "Canada", href: "/ai-humanizer-canada" },
+  { label: "United Kingdom", href: "/ai-humanizer-uk" },
+  { label: "Europe", href: "/ai-humanizer-europe" },
+  { label: "Australia", href: "/ai-humanizer-australia" },
+  { label: "South Africa", href: "/ai-humanizer-south-africa" },
+  { label: "Asia", href: "/ai-humanizer-asia" },
 ];
 
 const COMPANY_LINKS = [

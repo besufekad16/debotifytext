@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 next build",
+    "build": "cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=8192 next build",
+    "seo:verify-pages": "npx tsx scripts/verify-sitemap-pages.ts",
+    "seo:verify-http": "npx tsx scripts/http-check-pseo.ts",
     "check": "next lint && tsc --noEmit",
     "db:generate": "prisma migrate dev",
     "db:migrate": "prisma migrate deploy",

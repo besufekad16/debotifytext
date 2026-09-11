@@ -5,6 +5,8 @@ import PageNavbar from "~/components/PageNavbar";
 import { SiteFooter } from "~/components/SiteFooter";
 import { BASE_URL, CLUSTER_META, CLUSTER_ORDER, getClusterSize, getTotalPseoCount } from "~/lib/pseo";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   title: { absolute: "All Guides — AI Humanizer, Detectors & Academic Writing | HumanifyLab" },
   description: "Browse 40,000 HumanifyLab guides across eight topics: AI humanizer tools, detector bypass, essays, AI detectors, writing workflows, how-tos, comparisons, and regional use cases.",

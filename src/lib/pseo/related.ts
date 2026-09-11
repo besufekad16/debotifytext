@@ -13,13 +13,13 @@ const FLAGSHIP_POOL: RelatedLink[] = [
   { label: "HumanifyLab AI Humanizer", href: "/" },
   { label: "Bypass AI Detectors", href: "/bypass-ai-detectors" },
   { label: "AI Detector Guide", href: "/ai-detector" },
-  { label: "Free AI Humanizer", href: "/guides/free-ai-humanizer" },
-  { label: "Best AI Humanizer", href: "/guides/best-ai-humanizer" },
-  { label: "Bypass Turnitin AI Detection", href: "/guides/bypass-turnitin-ai-detection" },
-  { label: "Does Turnitin Detect ChatGPT?", href: "/guides/does-turnitin-detect-chatgpt" },
-  { label: "ChatGPT Humanizer", href: "/guides/chatgpt-humanizer" },
-  { label: "AI Humanizer for Students", href: "/guides/ai-humanizer-for-students" },
-  { label: "AI Humanizer in the USA", href: "/guides/ai-humanizer-usa" },
+  { label: "Free AI Humanizer", href: "/free-ai-humanizer" },
+  { label: "Best AI Humanizer", href: "/best-ai-humanizer" },
+  { label: "Bypass Turnitin AI Detection", href: "/bypass-turnitin-ai-detection" },
+  { label: "Does Turnitin Detect ChatGPT?", href: "/does-turnitin-detect-chatgpt" },
+  { label: "ChatGPT Humanizer", href: "/chatgpt-humanizer" },
+  { label: "AI Humanizer for Students", href: "/ai-humanizer-for-students" },
+  { label: "AI Humanizer in the USA", href: "/ai-humanizer-usa" },
 ];
 
 function hashStr(s: string): number {
