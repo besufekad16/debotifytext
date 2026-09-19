@@ -2,38 +2,38 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
     <loc>https://www.humanifylab.com/sitemap-main.xml</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-09-19</lastmod>
   </sitemap>
   <sitemap>
-    <loc>https://www.humanifylab.com/sitemap-humanizer.xml</loc>
-    <lastmod>2026-09-11</lastmod>
+    <loc>https://www.humanifylab.com/sitemap-priority-1.xml</loc>
+    <lastmod>2026-09-19</lastmod>
   </sitemap>
   <sitemap>
-    <loc>https://www.humanifylab.com/sitemap-bypass.xml</loc>
-    <lastmod>2026-09-11</lastmod>
+    <loc>https://www.humanifylab.com/sitemap-priority-2.xml</loc>
+    <lastmod>2026-09-19</lastmod>
   </sitemap>
   <sitemap>
-    <loc>https://www.humanifylab.com/sitemap-essay.xml</loc>
-    <lastmod>2026-09-11</lastmod>
+    <loc>https://www.humanifylab.com/sitemap-secondary-1.xml</loc>
+    <lastmod>2026-09-19</lastmod>
   </sitemap>
   <sitemap>
-    <loc>https://www.humanifylab.com/sitemap-detectors.xml</loc>
-    <lastmod>2026-09-11</lastmod>
+    <loc>https://www.humanifylab.com/sitemap-secondary-2.xml</loc>
+    <lastmod>2026-09-19</lastmod>
   </sitemap>
   <sitemap>
-    <loc>https://www.humanifylab.com/sitemap-writing.xml</loc>
-    <lastmod>2026-09-11</lastmod>
+    <loc>https://www.humanifylab.com/sitemap-secondary-3.xml</loc>
+    <lastmod>2026-09-19</lastmod>
   </sitemap>
   <sitemap>
-    <loc>https://www.humanifylab.com/sitemap-guides.xml</loc>
-    <lastmod>2026-09-11</lastmod>
+    <loc>https://www.humanifylab.com/sitemap-secondary-4.xml</loc>
+    <lastmod>2026-09-19</lastmod>
   </sitemap>
   <sitemap>
-    <loc>https://www.humanifylab.com/sitemap-compare.xml</loc>
-    <lastmod>2026-09-11</lastmod>
+    <loc>https://www.humanifylab.com/sitemap-secondary-5.xml</loc>
+    <lastmod>2026-09-19</lastmod>
   </sitemap>
   <sitemap>
-    <loc>https://www.humanifylab.com/sitemap-usecases.xml</loc>
-    <lastmod>2026-09-11</lastmod>
+    <loc>https://www.humanifylab.com/sitemap-secondary-6.xml</loc>
+    <lastmod>2026-09-19</lastmod>
   </sitemap>
 </sitemapindex>

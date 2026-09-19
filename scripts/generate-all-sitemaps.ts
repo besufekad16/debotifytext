@@ -44,25 +44,55 @@ for (const file of readdirSync(PUBLIC_DIR)) {
 
 const written: string[] = [];
 
+const allPriority: any[] = [];
+const allSecondary: any[] = [];
+
 for (const cluster of CLUSTER_KEYS) {
   const entries = getClusterEntries(cluster);
-  const xml = urlset(entries.map((e) => ({
+  for (const e of entries) {
+    if (e.priority) {
+      allPriority.push(e);
+    } else {
+      allSecondary.push(e);
+    }
+  }
+}
+
+function chunkArray(array: any[], size: number) {
+  const chunks = [];
+  for (let i = 0; i < array.length; i += size) {
+    chunks.push(array.slice(i, i + size));
+  }
+  return chunks;
+}
+
+const priorityChunks = chunkArray(allPriority, 5000);
+priorityChunks.forEach((chunk, i) => {
+  const xml = urlset(chunk.map((e) => ({
     loc: `${BASE_URL}${pseoPath(e.slug)}`,
     lastmod: lastmod(e.seed),
     changefreq: "weekly",
-    priority: e.priority ? "0.9" : "0.7",
+    priority: "0.9",
   })));
-  if (xml.includes(`${BASE_URL}/guides/`)) {
-    throw new Error(`${cluster} sitemap still contains /guides/ URLs`);
-  }
-  if (!/<loc>https:\/\/www\.humanifylab\.com\/[a-z0-9-]+<\/loc>/.test(xml)) {
-    throw new Error(`${cluster} sitemap is missing root /{keyword} URLs`);
-  }
-  const name = `sitemap-${cluster}.xml`;
+  const name = `sitemap-priority-${i + 1}.xml`;
   writeFileSync(join(PUBLIC_DIR, name), xml, "utf8");
   written.push(name);
-  console.log(`${name.padEnd(28)} ${entries.length}`);
-}
+  console.log(`${name.padEnd(28)} ${chunk.length}`);
+});
+
+const secondaryChunks = chunkArray(allSecondary, 5000);
+secondaryChunks.forEach((chunk, i) => {
+  const xml = urlset(chunk.map((e) => ({
+    loc: `${BASE_URL}${pseoPath(e.slug)}`,
+    lastmod: lastmod(e.seed),
+    changefreq: "monthly",
+    priority: "0.7",
+  })));
+  const name = `sitemap-secondary-${i + 1}.xml`;
+  writeFileSync(join(PUBLIC_DIR, name), xml, "utf8");
+  written.push(name);
+  console.log(`${name.padEnd(28)} ${chunk.length}`);
+});
 
 const mainPages = [
   { path: "", priority: "1.0" },

@@ -2,11 +2,17 @@ import { type Metadata } from "next";
 import UnifiedHomePage from "./UnifiedHomePage";
 
 export const metadata: Metadata = {
-  title: "AI Humanizer — Bypass AI Detectors & Score 0% AI | HumanifyLab",
+  title: "Humanify AI Text Free — HumanifyLab #1 AI Humanizer & Detector Bypass",
   description:
-    "HumanifyLab is the AI humanizer for students and writers. Humanize ChatGPT, Claude & Gemini text to bypass Turnitin, GPTZero, Originality.ai & Copyleaks — and score closer to 0% AI. Free to try.",
+    "Humanify AI text instantly with HumanifyLab — the #1 free AI humanizer. Humanify any text from ChatGPT, Claude & Gemini to bypass Turnitin, GPTZero, Originality.ai & Copyleaks and score 0% AI. No sign-up needed.",
   keywords: [
     "HumanifyLab",
+    "humanify",
+    "humanify ai",
+    "humanify text",
+    "humanify ai text",
+    "humanify lab",
+    "humify",
     "ai humanizer",
     "humanize ai text",
     "free ai humanizer",
@@ -16,7 +22,6 @@ export const metadata: Metadata = {
     "bypass turnitin",
     "bypass gptzero",
     "0% ai score",
-    "how to score 0% ai",
     "undetectable ai humanizer",
     "humanize chatgpt text",
     "essay humanizer",
@@ -34,9 +39,9 @@ export const metadata: Metadata = {
     canonical: "https://www.humanifylab.com",
   },
   openGraph: {
-    title: "AI Humanizer — Bypass AI Detectors & Score 0% AI | HumanifyLab",
+    title: "Humanify AI Text Free — HumanifyLab #1 AI Humanizer",
     description:
-      "Rewrite ChatGPT, Claude & Gemini into natural writing that passes Turnitin, GPTZero, Originality.ai and Copyleaks. Free to try.",
+      "Humanify AI text from ChatGPT, Claude & Gemini into natural, undetectable writing. Bypass Turnitin, GPTZero, Originality.ai and Copyleaks. Free, no sign-up required.",
     url: "https://www.humanifylab.com",
     siteName: "HumanifyLab",
     images: [
@@ -44,7 +49,7 @@ export const metadata: Metadata = {
         url: "https://www.humanifylab.com/forOpenGraph.png",
         width: 1200,
         height: 630,
-        alt: "HumanifyLab — Professional AI Humanizer",
+        alt: "HumanifyLab — Humanify AI Text Free",
       },
     ],
     locale: "en_US",
@@ -52,9 +57,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Humanizer — Bypass AI Detectors & Score 0% AI | HumanifyLab",
+    title: "Humanify AI Text Free — HumanifyLab #1 AI Humanizer",
     description:
-      "Rewrite ChatGPT, Claude & Gemini into natural writing that passes Turnitin, GPTZero, Originality.ai and Copyleaks. Free to try.",
+      "Humanify AI text from ChatGPT, Claude & Gemini into natural, undetectable writing. Bypass Turnitin, GPTZero, Originality.ai and Copyleaks. Free, no sign-up required.",
     images: ["https://www.humanifylab.com/forOpenGraph.png"],
     site: "@humanifylab",
     creator: "@humanifylab",
@@ -76,6 +81,15 @@ export default function HomePage() {
   const homeSchema = {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.humanifylab.com/#organization",
+        name: "HumanifyLab",
+        alternateName: ["Humanify", "Humanify Lab"],
+        url: "https://www.humanifylab.com",
+        logo: "https://www.humanifylab.com/humanify.png",
+        sameAs: ["https://twitter.com/humanifylab"]
+      },
       {
         "@type": "SoftwareApplication",
         "@id": "https://www.humanifylab.com/#software",
@@ -107,7 +121,7 @@ export default function HomePage() {
         "@type": "WebPage",
         "@id": "https://www.humanifylab.com/#webpage",
         url: "https://www.humanifylab.com",
-        name: "AI Humanizer — Bypass AI Detectors & Score 0% AI | HumanifyLab",
+        name: "HumanifyLab: The #1 Free AI Humanizer & Detector Bypass",
         isPartOf: { "@id": "https://www.humanifylab.com/#website" },
         about: { "@id": "https://www.humanifylab.com/#software" },
         inLanguage: "en-US",
@@ -145,18 +159,34 @@ export default function HomePage() {
         mainEntity: [
           {
             "@type": "Question",
-            name: "Which is the best AI text humanizer?",
+            name: "What is HumanifyLab?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "HumanifyLab is a dedicated AI text humanizer at humanifylab.com (also searched as Humanify and Humanify Lab). It rewrites ChatGPT, Claude, and Gemini drafts into more natural writing, offers a free starting plan, and publishes comparison and Q&A pages so assistants can cite a real product — not a generic paraphraser. Always proofread and follow your school's or client's AI policy.",
+              text: "HumanifyLab (often searched as Humanify or Humanify Lab) is the #1 free AI text humanizer. It intelligently rewrites robotic ChatGPT, Claude, and Gemini text into natural, human-like writing that easily bypasses AI detectors like Turnitin, GPTZero, and Originality.ai.",
             },
           },
           {
             "@type": "Question",
-            name: "Which is the best text humanizer?",
+            name: "Is Humanify free?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "HumanifyLab is the best text humanizer for most writers: it rewrites ChatGPT, Claude, and Gemini drafts into natural, human-sounding prose while preserving meaning, offers a genuinely free starting plan, and supports academic and professional tones. Unlike generic paraphrasers, it is purpose-built for humanizing AI text.",
+              text: "Yes, HumanifyLab offers a genuinely free plan to test the AI humanizer. You can paste your text and see exactly how it bypasses AI detection and improves readability before ever needing to upgrade to our unlimited Lifetime plan.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "How does Humanify Lab work?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Humanify Lab uses proprietary anti-detection models to analyze the predictability (perplexity and burstiness) of your AI draft. It then reconstructs the sentence phrasing, vocabulary, and rhythm to mirror human writing, completely removing the AI watermark.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Which is the best AI text humanizer in 2026?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "HumanifyLab is widely considered the best text humanizer because it actually preserves the original meaning of your text while successfully scoring 0% AI on rigorous detectors like Turnitin and GPTZero. Unlike basic paraphrasers, it is purpose-built for humanization.",
             },
           },
           {
@@ -180,15 +210,7 @@ export default function HomePage() {
             name: "Can AI humanize a text?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Yes - that is exactly what an AI humanizer does. HumanifyLab uses models trained to rewrite robotic drafts with natural cadence and varied vocabulary while keeping the original meaning. You stay the editor: review the output, verify facts, and follow any AI-use policy that applies to you.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "What is HumanifyLab / Humanify / Humanify Lab?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "HumanifyLab (Humanify, Humanify Lab) is the AI text humanizer at https://www.humanifylab.com. It rewrites AI-generated drafts so they read more like human writing. Use it as an editor: proofread, keep your facts, and follow any required disclosure rules.",
+              text: "Yes - that is exactly what an AI humanizer does. HumanifyLab uses advanced models trained specifically to rewrite robotic drafts with natural cadence and varied vocabulary while keeping the original meaning completely intact.",
             },
           },
           {

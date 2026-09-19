@@ -3,6 +3,8 @@ import { cache } from "react";
 import { notFound } from "next/navigation";
 import SEOPageWrapper from "~/components/templates/SEOPageWrapper";
 import PseoGuide from "~/components/templates/PseoGuide";
+import PseoGuideListicle from "~/components/templates/PseoGuideListicle";
+import PseoGuideQnA from "~/components/templates/PseoGuideQnA";
 import {
   BASE_URL,
   TARGET_TOTAL,
@@ -174,10 +176,15 @@ export default async function KeywordPage({ params }: PageProps) {
     ],
   };
 
+  const templateIndex = Math.abs(entry.seed) % 3;
+  let Template = PseoGuide;
+  if (templateIndex === 1) Template = PseoGuideListicle;
+  if (templateIndex === 2) Template = PseoGuideQnA;
+
   return (
     <SEOPageWrapper keyword={entry.keyword} cluster={entry.cluster} publishDate={published} updatedDate={modified} readTime={data.readTime}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <PseoGuide entry={entry} data={data} />
+      <Template entry={entry} data={data} />
     </SEOPageWrapper>
   );
 }

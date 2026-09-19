@@ -32,15 +32,6 @@ const HEAD: Record<ClusterKey, string[][]> = {
     ["ai to human converter", "HumanifyLab", "converter", "text"],
     ["essay humanizer", "essay", "humanizer", "academic"],
     ["undetectable ai writer", "HumanifyLab", "undetectable", "writer"],
-    ["humanifylab", "HumanifyLab", "brand", "home"],
-    ["humanifylab humanizer", "HumanifyLab", "brand", "humanizer"],
-    ["humanify lab", "HumanifyLab", "brand", "name"],
-    ["humanify", "HumanifyLab", "brand", "name"],
-    ["humanify humanizer", "HumanifyLab", "brand", "humanizer"],
-    ["humify", "HumanifyLab", "brand", "misspelling"],
-    ["humify lab", "HumanifyLab", "brand", "misspelling"],
-    ["humify humanizer", "HumanifyLab", "brand", "misspelling"],
-    ["humanify lab humanizer", "HumanifyLab", "brand", "humanizer"],
     ["unlimited ai humanizer", "HumanifyLab", "unlimited", "tool"],
     ["online ai humanizer", "HumanifyLab", "online", "tool"],
     ["ai humanizer no sign up", "HumanifyLab", "no sign up", "tool"],
@@ -90,19 +81,20 @@ const HEAD: Record<ClusterKey, string[][]> = {
     ["humanize ai essay", "essay", "humanize", "ai"],
   ],
   detectors: [
+    ["how to bypass turnitin with chatgpt", "Turnitin", "ChatGPT", "bypass"],
+    ["why does gptzero flag my essay", "GPTZero", "essay", "flag"],
+    ["how does originality ai detect ai writing", "Originality.ai", "detect", "ai writing"],
+    ["can quillbot bypass turnitin", "QuillBot", "Turnitin", "bypass"],
+    ["when do teachers use gptzero", "GPTZero", "teachers", "use"],
+    ["does turnitin detect quillbot", "Turnitin", "QuillBot", "detect"],
+    ["does zerogpt work", "ZeroGPT", "work", "accuracy"],
+    ["what is a plagiarism detector", "plagiarism detector", "what is", "definition"],
     ["does turnitin detect chatgpt", "Turnitin", "ChatGPT", "detect"],
     ["does gptzero detect chatgpt", "GPTZero", "ChatGPT", "detect"],
     ["does turnitin detect claude", "Turnitin", "Claude", "detect"],
     ["best ai detector 2026", "AI detectors", "best", "2026"],
-    ["best ai detector", "AI detectors", "best", "tools"],
-    ["turnitin vs gptzero", "Turnitin", "GPTZero", "compare"],
     ["how do ai detectors work", "AI detectors", "how", "work"],
     ["gptzero accuracy", "GPTZero", "accuracy", "score"],
-    ["turnitin ai detection accuracy", "Turnitin", "accuracy", "ai"],
-    ["ai detector for teachers", "teachers", "detector", "classroom"],
-    ["copyleaks vs turnitin", "Copyleaks", "Turnitin", "compare"],
-    ["does originality ai detect chatgpt", "Originality.ai", "ChatGPT", "detect"],
-    ["best ai detectors in 2026", "AI detectors", "best", "2026"],
     ["how turnitin ai detection works", "Turnitin", "how", "works"],
   ],
   writing: [
@@ -118,14 +110,16 @@ const HEAD: Record<ClusterKey, string[][]> = {
     ["humanize ai writing", "AI writing", "humanize", "text"],
   ],
   guides: [
+    ["how to use humanifylab humanizer", "HumanifyLab", "humanizer", "how to use"],
+    ["how to rewrite essay to avoid ai detection", "essay", "rewrite", "how to"],
+    ["how to humanize essays", "essay", "humanize", "how to"],
+    ["what is humanifylab", "HumanifyLab", "definition", "what is"],
+    ["how to avoid plagiarism detector", "plagiarism detector", "avoid", "how to"],
     ["how to humanize ai text", "humanize", "ai text", "how to"],
     ["how to bypass turnitin", "Turnitin", "bypass", "how to"],
     ["how to make chatgpt undetectable", "ChatGPT", "undetectable", "how to"],
-    ["how to humanize chatgpt essay", "ChatGPT", "essay", "how to"],
     ["what is an ai humanizer", "AI humanizer", "definition", "what is"],
     ["how to pass gptzero", "GPTZero", "pass", "how to"],
-    ["how to rewrite ai content", "rewrite", "ai content", "how to"],
-    ["how to humanize chatgpt text", "ChatGPT", "humanize", "how to"],
     ["step by step ai humanizer guide", "AI humanizer", "guide", "steps"],
     ["how to beat ai detectors 2026", "AI detectors", "beat", "2026"],
   ],
@@ -192,7 +186,7 @@ function buildCatalog(): { byCluster: Record<ClusterKey, KeywordEntry[]>; bySlug
       secondary,
       tertiary,
       seed,
-      priority: priority || bucket.length < 60,
+      priority: priority || bucket.length < 1250,
     };
     bucket.push(entry);
     bySlug.set(slug, entry);
@@ -243,9 +237,9 @@ function buildCatalog(): { byCluster: Record<ClusterKey, KeywordEntry[]>; bySlug
   const compareTemplates = [
     (c: string, u: string) => [`humanifylab vs ${c} for ${u}`, "vs"],
     (c: string, u: string) => [`${c} alternative for ${u}`, "alternative"],
-    (c: string, u: string) => [`${c} vs humanifylab ${u} 2026`, "2026"],
-    (c: string, u: string) => [`switch from ${c} for ${u}`, "switch"],
-    (c: string, u: string) => [`best ${c} alternative ${u}`, "best"],
+    (c: string, u: string) => [`humanifylab vs ${c} for ${u} in 2026`, "2026"],
+    (c: string, u: string) => [`why switch from ${c} for ${u}`, "switch"],
+    (c: string, u: string) => [`best ${c} alternative for ${u}`, "best"],
   ] as const;
 
   // humanizer: model × qualifier × job
@@ -302,7 +296,7 @@ function buildCatalog(): { byCluster: Record<ClusterKey, KeywordEntry[]>; bySlug
     for (const model of detectorModels) {
       for (const tmpl of detectorTemplates) {
         const [keyword, tertiary] = tmpl(detector.name, model.name);
-        add("detectors", keyword, detector.name, model.name, tertiary);
+        add("detectors", keyword!, detector.name, model.name, tertiary!);
       }
     }
   }
@@ -362,7 +356,7 @@ function buildCatalog(): { byCluster: Record<ClusterKey, KeywordEntry[]>; bySlug
     for (const doc of DOCS) {
       for (const tmpl of compareTemplates) {
         const [keyword, tertiary] = tmpl(competitor.name, doc.name);
-        add("compare", keyword, competitor.name, doc.name, tertiary);
+        add("compare", keyword!, competitor.name, doc.name, tertiary!);
       }
     }
   }

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, CircleAlert } from "lucide-react";
+import { ArrowRight, CheckCircle2, CircleAlert, Clock, CalendarSync, Sparkles, BookOpen } from "lucide-react";
 import type { KeywordEntry, PseoPageData } from "~/lib/pseo/types";
 import { CLUSTER_META } from "~/lib/pseo/clusters";
 
@@ -33,7 +33,15 @@ export default function PseoGuide({ entry, data }: Props) {
           <h1 className="text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-[2.6rem]">
             {data.h1}
           </h1>
-          <p className="mt-4 text-base leading-relaxed text-white/70 sm:text-lg">{data.heroSubtitle}</p>
+          <div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-white/60 sm:text-sm">
+            <span className="flex items-center gap-1.5">
+              <CalendarSync className="h-4 w-4" /> Updated: {new Date(data.updatedDate).toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric' })}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Clock className="h-4 w-4" /> {data.readTime} min read
+            </span>
+          </div>
+          <p className="mt-5 text-base leading-relaxed text-white/70 sm:text-lg">{data.heroSubtitle}</p>
           <p id="direct-answer" className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm leading-relaxed text-white/90 sm:text-base">
             {data.directAnswer}
           </p>
@@ -64,7 +72,9 @@ export default function PseoGuide({ entry, data }: Props) {
 
       <div className="mx-auto max-w-3xl px-4 py-10 sm:py-14">
         <section className="rounded-2xl border border-black/5 bg-white p-5 sm:p-7">
-          <h2 className="text-xl font-semibold tracking-tight">Key takeaways</h2>
+          <h2 className="flex items-center gap-2 text-xl font-semibold tracking-tight">
+            <Sparkles className="h-5 w-5 text-[var(--hl-mint-deep)]" /> Key takeaways
+          </h2>
           <ul className="mt-4 space-y-3">
             {data.takeaways.map((t) => (
               <li key={t} className="flex gap-3 text-sm leading-relaxed text-black/70 sm:text-base">
@@ -140,6 +150,24 @@ export default function PseoGuide({ entry, data }: Props) {
                 </summary>
                 <p className="mt-2 text-sm leading-relaxed text-black/65 sm:text-base">{faq.a}</p>
               </details>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-12 rounded-2xl border border-[var(--hl-mint-deep)]/20 bg-[var(--hl-mint-deep)]/5 p-5 sm:p-7">
+          <h2 className="flex items-center gap-2 text-xl font-semibold tracking-tight text-[var(--hl-ink)]">
+            <BookOpen className="h-5 w-5 text-[var(--hl-mint-deep)]" /> Related Guides
+          </h2>
+          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {data.relatedLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="group flex items-center justify-between rounded-xl bg-white p-4 text-sm font-medium text-[var(--hl-ink)] shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <span className="line-clamp-1">{link.label}</span>
+                <ArrowRight className="h-4 w-4 shrink-0 text-black/20 transition-transform group-hover:translate-x-1 group-hover:text-[var(--hl-mint-deep)]" />
+              </Link>
             ))}
           </div>
         </section>

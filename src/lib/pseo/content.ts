@@ -1,4 +1,6 @@
 import { smartTitleCase } from "~/lib/content/content-utils";
+import { spin, getPainPoint, seededRandom } from "./spintax";
+import { buildRelatedLinks } from "./related";
 import type { FaqItem, GuideSection, KeywordEntry, PseoPageData, StepItem, TableRow } from "./types";
 import {
   COMPETITORS,
@@ -130,167 +132,58 @@ function stepsFor(d: DetectorFact, m: ModelFact, doc: DocFact): StepItem[] {
 
 function sectionsFor(entry: KeywordEntry, d: DetectorFact, m: ModelFact, doc: DocFact, role: RoleFact, geo: GeoFact, competitor: CompetitorFact, task: TaskFact): GuideSection[] {
   const k = titleCase(entry.keyword);
-  const clusterSections: Record<KeywordEntry["cluster"], GuideSection[]> = {
-    humanizer: [
-      {
-        title: `What people mean by ${k}`,
-        body: `“${entry.keyword}” is a product query. Searchers already know they used ${m.name}; they want a tool that turns that draft into something they would actually sign. HumanifyLab is that editor. It does not invent a new ${doc.name}. It keeps ${doc.keep} and rebuilds the parts that scream ${m.tells}.`,
-      },
-      {
-        title: `Why ${m.name} still fails a careful reader`,
-        body: `${m.name} writes with ${m.cadence}. That is useful for a first pass and deadly for a final ${doc.name}. ${role.workflow}. The tell is not a single banned word — it is the absence of the messy choices a person in ${geo.name} would make when the stakes are ${role.stake}.`,
-      },
-      {
-        title: "What HumanifyLab changes",
-        body: `The rewrite targets rhythm, function words, and stock transitions — not your citations. ${m.bestFix}. If a paragraph only works because the model hedged, it will still be a weak paragraph after humanizing. Edit the claim, then humanize the prose.`,
-      },
-      {
-        title: `Where this sits next to ${competitor.name}`,
-        body: `${competitor.angle}. ${competitor.gap}. If you only need synonym swapping, a paraphraser is cheaper. If you need a ${doc.name} that still sounds like the rest of your work, use HumanifyLab.`,
-      },
-    ],
-    bypass: [
-      {
-        title: `How ${d.name} actually scores a ${doc.name}`,
-        body: `${d.name} is used by ${d.usedBy}. Under the hood it relies on ${d.method}. Raw ${m.name} usually presents as ${d.typicalScore}. “Bypass” here does not mean a cheat code. It means rewriting the draft so the statistical fingerprint of ${m.cadence} is no longer the loudest signal.`,
-      },
-      {
-        title: `The ${m.name} patterns ${d.name} notices first`,
-        body: `${m.tells}. Combined with ${doc.risk}, that is enough for a high AI indicator even when similarity is low. ${d.weakness}. HumanifyLab leans into that weakness by changing structure, not by spinning synonyms ${d.name} already expects.`,
-      },
-      {
-        title: `False positives you should still watch`,
-        body: `${d.name} also trips on ${d.falsePositives}. A humanized ${doc.name} can still look “too clean.” Leave a little of your normal roughness: the way you cite, the asides you actually say in class, the data only you measured.`,
-      },
-      {
-        title: `A responsible bypass workflow`,
-        body: `Start from work you can explain. Keep ${doc.keep}. Run HumanifyLab. Then read the output against the rubric as if ${d.name} did not exist. If your institution forbids undisclosed AI assistance, do not use this page as permission — read the policy.`,
-      },
-    ],
-    essay: [
-      {
-        title: `The ${doc.name} problem ${m.name} cannot see`,
-        body: `A ${doc.name} lives or dies on ${doc.structure}. ${m.name} will happily produce ${doc.risk}. HumanifyLab will not invent your argument. It will make the sentences around that argument sound like the rest of your coursework.`,
-      },
-      {
-        title: "Citations, data, and what must stay",
-        body: `Never let a rewriter touch ${doc.keep}. If ${m.name} fabricated a source, humanizing it only makes the fabrication read better. Verify every claim, then humanize. ${d.name} is a separate problem from plagiarism.`,
-      },
-      {
-        title: `Voice that matches ${role.name}`,
-        body: `${role.workflow}. Instructors notice when a ${doc.name} suddenly sounds like a different person than last week’s homework. After HumanifyLab, compare a paragraph to something you wrote without a model. If they do not match, edit toward you, not toward “more academic.”`,
-      },
-      {
-        title: `Detectors in ${geo.name}`,
-        body: `Writers in ${geo.name} usually meet ${geo.detectors}. ${geo.context}. Build the ${doc.name} for the course, then run a rewrite pass — not the other way around.`,
-      },
-    ],
-    detectors: [
-      {
-        title: `What ${d.name} is measuring`,
-        body: `${d.name} is not a lie detector. It estimates whether text looks like it came from a large language model. It does that with ${d.method}. The people who see the score are ${d.usedBy}. A high number on a ${m.name} ${doc.name} is common because of ${m.tells}.`,
-      },
-      {
-        title: "Why scores disagree across tools",
-        body: `GPTZero, Turnitin, Originality.ai, and Copyleaks do not share one model. ${d.name} in particular is sensitive to ${d.falsePositives}. That is why “best ai detector 2026” is a category, not a single winner — and why a vendor’s own checker is the worst place to get a second opinion.`,
-      },
-      {
-        title: `Reading a ${d.name} report without panicking`,
-        body: `Look at highlighted spans, not only the headline percentage. ${d.typicalScore} on untouched ${m.name} does not mean the ideas are fake. It means the cadence is. Rewrite those spans. Leave quotes and methods sections that are supposed to be formulaic.`,
-      },
-      {
-        title: "What HumanifyLab does with that information",
-        body: `We do not spoof ${d.name}’s meter. We edit the prose features the meter is built to notice: ${m.cadence}. ${d.weakness}. After the pass, you still own the ${doc.name}.`,
-      },
-    ],
-    writing: [
-      {
-        title: `Editing ${task.name} that started in ${m.name}`,
-        body: `${task.goal}. ${m.name} defaults to ${m.cadence}, which fights ${task.voice}. HumanifyLab is the pass after generation: keep the outline, replace the assistant voice.`,
-      },
-      {
-        title: "SEO and detector gates are different jobs",
-        body: `If you publish ${task.name} through a team that runs Originality.ai, a keyword-stuffed ${m.name} draft will fail twice — once as AI, once as thin content. Write the useful answer first. Humanize second. Optimize third.`,
-      },
-      {
-        title: `A workflow ${role.name} can repeat`,
-        body: `${role.workflow}. For ${task.name}, that means a brief, a ${m.name} draft, a HumanifyLab pass, then a human fact check. ${role.stake}. Skipping the last step is how brands publish confident nonsense.`,
-      },
-      {
-        title: `Where ${competitor.name} usually stops`,
-        body: `${competitor.angle}. ${competitor.gap}. Generation tools create ${task.name}. HumanifyLab makes them shippable.`,
-      },
-    ],
-    guides: [
-      {
-        title: `Start with a ${doc.name} you can stand behind`,
-        body: `This guide for “${entry.keyword}” assumes you already have substance. ${doc.keep}. If ${m.name} wrote the outline, you still have to decide the claim. HumanifyLab will not do that, and ${d.name} is not the audience — your reader is.`,
-      },
-      {
-        title: `Rewrite order that actually moves ${d.name}`,
-        body: `Do not run ten paraphrasers. Change openings, vary sentence length, and delete stock transitions. ${m.bestFix}. ${d.weakness}. Then listen to the ${doc.name} out loud. If you would not say it, do not submit it.`,
-      },
-      {
-        title: "Common failure points",
-        body: `People fail this process by (1) humanizing fabricated sources, (2) leaving the ${m.name} intro intact, (3) trusting a vendor detector, and (4) ignoring ${doc.structure}. ${d.name} false positives around ${d.falsePositives} are a fifth issue — fix cleanliness, not honesty.`,
-      },
-      {
-        title: `After you click run`,
-        body: `Compare the output to an older piece of your writing. Align contractions, citation quirks, and how you handle disagreement. That last mile is what ${role.name} in ${geo.name} actually get judged on.`,
-      },
-    ],
-    compare: [
-      {
-        title: `HumanifyLab vs ${competitor.name} for this job`,
-        body: `${competitor.angle}. ${competitor.gap}. If you searched “${entry.keyword}”, you want a replacement that still works on a ${doc.name} from ${m.name}, not another spinner.`,
-      },
-      {
-        title: "What to compare besides a score",
-        body: `Score-chasing against a vendor meter is how tools overfit. Compare: does the output keep ${doc.keep}? Does it still match ${task.voice}? Can ${role.name} edit it without starting over? HumanifyLab is built around those questions.`,
-      },
-      {
-        title: `When to stay on ${competitor.name}`,
-        body: `If you only need grammar or a quick synonym pass, ${competitor.name} may already be in your stack. HumanifyLab is the better next step when ${d.name} or a similar checker is in the workflow and meaning has to survive.`,
-      },
-      {
-        title: "How to switch without losing drafts",
-        body: `Export the ${m.name} draft, run it through HumanifyLab, and keep a side-by-side. Do not round-trip the same text through five humanizers — each pass drifts from ${doc.keep}.`,
-      },
-    ],
-    usecases: [
-      {
-        title: `Why ${role.name} in ${geo.name} search this`,
-        body: `${geo.context}. Typical checkers are ${geo.detectors}. ${role.workflow}. The stake is ${role.stake}. “${entry.keyword}” is that situation in one query.`,
-      },
-      {
-        title: `A ${task.name} pass that fits the day job`,
-        body: `${task.goal}. ${m.name} will give you ${m.cadence} unless you stop it. HumanifyLab is the interrupt: restore ${task.voice} before anyone else reads the ${doc.name}.`,
-      },
-      {
-        title: "Local reality beats generic advice",
-        body: `Advice written for US undergraduates does not automatically apply in ${geo.name}. Confirm which detector your school or client actually uses. Then edit for that system’s known weakness — for ${d.name}, ${d.weakness}.`,
-      },
-      {
-        title: "Keep the human in the loop",
-        body: `${role.name} still have to own ${doc.keep}. HumanifyLab compresses the editing hour. It does not attend the seminar, run the experiment, or talk to the source.`,
-      },
-    ],
-  };
-  return [
-    ...clusterSections[entry.cluster],
+  const pain = getPainPoint(role.name + " " + entry.keyword, entry.seed);
+  
+  const allSections: GuideSection[] = [
     {
-      title: `A checklist for “${entry.keyword}”`,
-      body: `Before you call this done, check four things that are specific to this query. First, ${doc.keep} is still on the page — HumanifyLab should not have invented or deleted it. Second, the ${doc.name} still follows ${doc.structure} instead of ${doc.risk}. Third, ${m.name} residue such as ${m.tells} is gone from the opening and the close. Fourth, you know which checker you will actually face. ${d.name} is used by ${d.usedBy} and looks at ${d.method}; a different tool can disagree. If you are ${role.name} in ${geo.name}, that checker is often ${geo.detectors}. Read the output against something you wrote last month. If the new ${doc.name} sounds like a different person, edit toward you, not toward a more “academic” model voice.`,
+      title: spin(`{What people mean by|Understanding|The truth about|A deep dive into} ${k}`, entry.seed),
+      body: spin(`“${entry.keyword}” {is a product query|is what people search|shows intent}. {Searchers|Writers} already know they used ${m.name}; they want a {tool|solution|fix} that turns that draft into something they would {actually sign|proudly publish|submit}. HumanifyLab is that editor. It {does not invent|won't hallucinate} a new ${doc.name}. It {keeps|preserves} ${doc.keep} and {rebuilds|rewrites|fixes} the parts that {scream|look like|resemble} ${m.tells}.`, entry.seed),
     },
     {
-      title: `What a good result looks like`,
-      body: `A good result for “${entry.keyword}” is not a vendor meter sitting at zero. It is a ${doc.name} you can explain line by line. ${task.goal}. The voice should match ${task.voice}. ${d.name} may still highlight ${d.falsePositives}, which is a reason to keep some of your natural roughness rather than polishing every sentence identically. Compared with ${competitor.name}: ${competitor.gap} After HumanifyLab, do one human pass for facts. ${m.bestFix}. Then stop. Extra paraphrasers put the ${doc.name} back into the pattern ${d.name} already expects, and they are how people accidentally strip ${doc.keep}. If your institution or client forbids undisclosed AI assistance, this page is not permission — it is an editing method for drafts you are allowed to use.`,
+      title: spin(`{Why|The reason} ${m.name} {still fails|gets caught by} {a careful reader|detectors}`, entry.seed),
+      body: spin(`${m.name} writes with ${m.cadence}. That is {useful|good} for a {first pass|rough draft} and {deadly|dangerous|risky} for a final ${doc.name}. ${role.workflow}. The {tell|dead giveaway|mistake} is not a {single banned word|few keywords} — it is the {absence|lack} of the {messy|human|nuanced} choices a person in ${geo.name} would make when the stakes are ${role.stake}. When facing ${pain}, this matters even more.`, entry.seed + 1),
     },
     {
-      title: `How ${geo.name} changes the workflow`,
-      body: `${geo.context}. Typical tools in that setting: ${geo.detectors}. ${role.workflow}. The stake is ${role.stake}. That is why a generic “humanizer tips” article fails this query — it never names the ${doc.name}, the ${m.name} draft, or the checker. Use HumanifyLab as the middle of the process, not the whole process: brief or outline, ${m.name} if you use it, rewrite, then a human read. For ${task.name}, remember ${task.goal}. If a paragraph only exists because the model wanted a tidy three-part answer, delete it. ${d.weakness}. That is the opening you should spend the most time on.`,
+      title: spin(`{What HumanifyLab changes|How the humanizer works|Behind the scenes of the rewrite}`, entry.seed),
+      body: spin(`The {rewrite|edit|process} {targets|focuses on} {rhythm|flow}, function words, and {stock transitions|robotic phrasing} — {not your citations|never your facts}. ${m.bestFix}. If a paragraph only {works|makes sense} because the model {hedged|was vague}, it will still be a {weak|poor} paragraph after humanizing. {Edit the claim|Fix the facts}, then {humanize the prose|rewrite the text}.`, entry.seed + 2),
     },
+    {
+      title: spin(`{Where this sits next to|Comparing this to|Why not just use} ${competitor.name}`, entry.seed),
+      body: spin(`${competitor.angle}. ${competitor.gap}. If you only need {synonym swapping|basic rewriting|grammar fixes}, a {paraphraser|basic tool} is {cheaper|fine}. If you need a ${doc.name} that {still sounds like|matches} the rest of your {work|writing}, use HumanifyLab to {avoid|prevent} ${pain}.`, entry.seed + 3),
+    },
+    {
+      title: spin(`{How|The way} ${d.name} {actually scores|grades|analyzes} a ${doc.name}`, entry.seed),
+      body: spin(`${d.name} is used by ${d.usedBy}. {Under the hood|Behind the scenes} it {relies on|uses} ${d.method}. Raw ${m.name} {usually presents|often scores} as ${d.typicalScore}. “Bypass” {here does not mean|isn't} a cheat code. It means {rewriting|fixing} the draft so the {statistical fingerprint|robotic trace} of ${m.cadence} is no longer the {loudest|primary} signal.`, entry.seed + 4),
+    },
+    {
+      title: spin(`{False positives|Errors|Mistakes} you should still {watch|look out for}`, entry.seed),
+      body: spin(`${d.name} also trips on ${d.falsePositives}. A humanized ${doc.name} can still {look|appear} “too clean.” {Leave|Keep} a little of your {normal roughness|natural style}: the way you {cite|reference}, the asides you actually {say in class|write naturally}, the data only you measured.`, entry.seed + 5),
+    },
+    {
+      title: spin(`{A responsible bypass workflow|How to use this ethically|The right way to humanize}`, entry.seed),
+      body: spin(`Start from {work|research} you can {explain|defend}. Keep ${doc.keep}. {Run|Use} HumanifyLab. Then {read|review} the output {against the rubric|carefully} as if ${d.name} did not exist. {If your institution forbids undisclosed AI assistance, do not use this page as permission — read the policy.|Always follow your organization's AI rules.}`, entry.seed + 6),
+    },
+    {
+      title: spin(`The ${doc.name} {problem|issue} ${m.name} cannot {see|fix}`, entry.seed),
+      body: spin(`A ${doc.name} {lives or dies|depends entirely} on ${doc.structure}. ${m.name} will happily produce ${doc.risk}. HumanifyLab {will not|cannot} invent your argument. It will make the sentences {around that argument|supporting it} sound like the rest of your {coursework|writing|work}.`, entry.seed + 7),
+    },
+    {
+      title: spin(`Citations, data, and what {must stay|to protect}`, entry.seed),
+      body: spin(`{Never|Don't ever} let a rewriter touch ${doc.keep}. If ${m.name} fabricated a source, humanizing it only makes the {fabrication|lie} read better. {Verify|Check} every claim, then humanize. ${d.name} is a {separate problem|different issue} from plagiarism.`, entry.seed + 8),
+    },
+    {
+      title: spin(`{Voice that matches|Sounding like} ${role.name}`, entry.seed),
+      body: spin(`${role.workflow}. {Instructors|Readers|Clients} notice when a ${doc.name} suddenly {sounds like a different person|changes tone}. After HumanifyLab, compare a paragraph to something you wrote without a model. If they do not match, edit toward {you|your voice}, not toward {“more academic.”|being overly complex.}`, entry.seed + 9),
+    }
   ];
+
+  for (let i = allSections.length - 1; i > 0; i--) {
+    const j = Math.floor(seededRandom(entry.seed + i) * (i + 1));
+    [allSections[i], allSections[j]] = [allSections[j]!, allSections[i]!];
+  }
+
+  const sectionCount = 4 + Math.floor(seededRandom(entry.seed) * 4);
+  return allSections.slice(0, sectionCount);
 }
 
 export function buildPseoContent(entry: KeywordEntry): PseoPageData {
@@ -362,21 +255,23 @@ export function buildPseoContent(entry: KeywordEntry): PseoPageData {
     metaTitle,
     metaDescription,
     h1,
-    eyebrow: eyebrows[entry.cluster],
-    directAnswer: answers[entry.cluster],
-    heroSubtitle: `A practical page for “${entry.keyword}” — written for ${role.name}, aimed at ${doc.name} drafts from ${model.name}, with ${detector.name} explained in plain language.`,
+    eyebrow: eyebrows[entry.cluster]!,
+    directAnswer: spin(answers[entry.cluster]!, entry.seed),
+    heroSubtitle: spin(`{A practical page|An essential guide} for “${entry.keyword}” — {written|created} for ${role.name}, aimed at ${doc.name} drafts from ${model.name}, with ${detector.name} explained in {plain language|clear terms}.`, entry.seed),
     takeaways,
     sections: sectionsFor(entry, detector, model, doc, role, geo, competitor, task),
     steps: stepsFor(detector, model, doc),
     table,
-    exampleTitle: `Worked example: ${model.name} ${doc.name} before ${detector.name}`,
-    exampleBody: `Suppose ${role.name} in ${geo.name} paste a ${model.name} ${doc.name}. The raw draft shows ${model.tells} and follows ${model.cadence}. ${detector.name} is likely to report ${detector.typicalScore} because of ${detector.method}. HumanifyLab rewrites openings and transitions while leaving ${doc.keep}. You then restore ${doc.structure} where the model drifted into ${doc.risk}. The result is not “invisible.” It is a ${doc.name} you can actually defend. ${model.bestFix}.`,
+    exampleTitle: spin(`{Worked example|Case study}: ${model.name} ${doc.name} before ${detector.name}`, entry.seed),
+    exampleBody: spin(`Suppose ${role.name} in ${geo.name} {paste|submit} a ${model.name} ${doc.name}. The raw draft {shows|contains} ${model.tells} and follows ${model.cadence}. ${detector.name} is {likely|expected} to report ${detector.typicalScore} because of ${detector.method}. HumanifyLab {rewrites|fixes} openings and transitions while leaving ${doc.keep}. You then {restore|fix} ${doc.structure} where the model {drifted into|wandered into} ${doc.risk}. The result is not “invisible.” It is a ${doc.name} you can actually defend. ${model.bestFix}.`, entry.seed),
     mistakes,
     faqs: faqSet(entry, detector, model, doc),
     stats,
-    ctaTitle: `Try HumanifyLab on this ${doc.name}`,
-    ctaSubtitle: `Paste a ${model.name} sample. Keep your meaning. Read the result before anyone else does.`,
+    ctaTitle: spin(`{Try|Test} HumanifyLab on this ${doc.name}`, entry.seed),
+    ctaSubtitle: spin(`{Paste|Enter} a ${model.name} sample. {Keep|Protect} your meaning. {Read|Review} the result before anyone else does.`, entry.seed),
     readTime,
+    updatedDate: modifiedDate(entry.seed, publishDate(entry.seed)),
+    relatedLinks: buildRelatedLinks(entry.cluster, entry.keyword),
   };
 }
 

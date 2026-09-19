@@ -68,6 +68,8 @@ export interface PseoPageData {
   ctaTitle: string;
   ctaSubtitle: string;
   readTime: number;
+  updatedDate: string;
+  relatedLinks: { label: string; href: string }[];
 }
 
 export const HUB_PAGE_SIZE = 80;
