@@ -96,6 +96,7 @@ secondaryChunks.forEach((chunk, i) => {
 
 const mainPages = [
   { path: "", priority: "1.0" },
+  { path: "/ai-humanizer", priority: "1.0" },
   { path: "/pricing", priority: "0.9" },
   { path: "/faq", priority: "0.8" },
   { path: "/contact", priority: "0.6" },
