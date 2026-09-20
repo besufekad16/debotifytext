@@ -16,6 +16,11 @@ export const metadata: Metadata = {
   description: "HumanifyLab is a professional AI humanizer that rewrites ChatGPT, Claude & Gemini text into natural human writing that passes Turnitin, GPTZero, Originality.ai and every major AI detector. Free to try — no sign-up required.",
   keywords: [
     'humanifylab',
+    'humanify',
+    'humanify ai',
+    'humanify text',
+    'humanify ai text',
+    'humanify lab',
     'ai humanizer',
     'humanize ai text',
     'ai text humanizer',

@@ -7,6 +7,16 @@ import SEOPageWrapper from "~/components/templates/SEOPageWrapper";
 export const metadata: Metadata = {
   title: "AI Humanizer: The #1 Free AI Text Humanizer & Detector Bypass",
   description: "HumanifyLab is the industry-leading AI humanizer. Turn ChatGPT, Claude, and Gemini drafts into natural, human-written text that bypasses AI detectors like Turnitin, GPTZero, and Originality.ai.",
+  keywords: [
+    "HumanifyLab",
+    "humanify",
+    "humanify ai",
+    "humanify text",
+    "humanify ai text",
+    "humanify lab",
+    "ai humanizer",
+    "humanize ai text"
+  ],
   alternates: {
     canonical: `${BASE_URL}/ai-humanizer`,
   },

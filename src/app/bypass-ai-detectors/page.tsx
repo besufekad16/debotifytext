@@ -9,7 +9,7 @@ const URL = `${BASE_URL}/bypass-ai-detectors`;
 export const metadata: Metadata = {
   title: { absolute: "Bypass AI Detectors — Every Major Detector Beaten (2026) | HumanifyLab" },
   description: "Bypass AI detectors including Turnitin, GPTZero, Originality.AI, ZeroGPT, Copyleaks, Winston AI and Sapling. HumanifyLab achieves a 99.9% bypass rate, verified weekly. Free plan, no sign-up.",
-  keywords: ["bypass ai detectors", "bypass ai detector", "ai detector bypass", "beat ai detectors", "undetectable ai", "ai humanizer"],
+  keywords: ["bypass ai detectors", "bypass ai detector", "ai detector bypass", "beat ai detectors", "undetectable ai", "ai humanizer", "HumanifyLab", "humanify", "humanify ai", "humanify text", "humanify ai text", "humanify lab"],
   authors: [{ name: "HumanifyLab", url: BASE_URL }],
   alternates: { canonical: URL },
   openGraph: {

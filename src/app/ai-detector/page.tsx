@@ -9,7 +9,7 @@ const URL = `${BASE_URL}/ai-detector`;
 export const metadata: Metadata = {
   title: { absolute: "AI Detector: How AI Detectors Work & How to Pass Every One | HumanifyLab" },
   description: "What is an AI detector, how do Turnitin, GPTZero and Originality.AI actually work, and how accurate are they really? Full 2026 breakdown plus how to pass every one.",
-  keywords: ["ai detector", "ai detectors", "what is an ai detector", "how do ai detectors work", "best ai detector", "ai detector accuracy", "bypass ai detector"],
+  keywords: ["ai detector", "ai detectors", "what is an ai detector", "how do ai detectors work", "best ai detector", "ai detector accuracy", "bypass ai detector", "HumanifyLab", "humanify", "humanify ai", "humanify text", "humanify ai text", "humanify lab"],
   authors: [{ name: "HumanifyLab", url: BASE_URL }],
   alternates: { canonical: URL },
   openGraph: {

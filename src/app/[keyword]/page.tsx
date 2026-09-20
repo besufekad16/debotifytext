@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: { absolute: data.metaTitle },
     description: data.metaDescription,
-    keywords: [entry.keyword, "humanifylab", "ai humanizer", "humanize ai text", entry.entity],
+    keywords: [entry.keyword, "humanifylab", "humanify", "humanify ai", "humanify text", "humanify ai text", "humanify lab", "ai humanizer", "humanize ai text", entry.entity],
     authors: [{ name: "HumanifyLab", url: BASE_URL }],
     creator: "HumanifyLab",
     publisher: "HumanifyLab",
