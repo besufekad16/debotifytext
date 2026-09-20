@@ -105,6 +105,7 @@ const mainPages = [
   { path: "/privacy", priority: "0.3" },
   { path: "/bypass-ai-detectors", priority: "0.9" },
   { path: "/ai-detector", priority: "0.9" },
+  { path: "/research/2026-ai-detector-efficacy-report", priority: "0.9" },
   { path: "/llms.txt", priority: "0.7" },
   { path: "/topics", priority: "0.8" },
 ];
