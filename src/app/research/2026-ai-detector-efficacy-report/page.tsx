@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle, ShieldAlert, BarChart3 } from "lucide-react";
-import SEOPageWrapper from "~/components/templates/SEOPageWrapper";
+import PageNavbar from "~/components/PageNavbar";
+import { SiteFooter } from "~/components/SiteFooter";
 
 const BASE_URL = "https://www.humanifylab.com";
 const URL = `${BASE_URL}/research/2026-ai-detector-efficacy-report`;
@@ -28,12 +29,30 @@ export const metadata: Metadata = {
 
 export default function ResearchReportPage() {
   return (
-    <SEOPageWrapper
-      heroTitle="The 2026 AI Detector Efficacy Report"
-      heroSubtitle="Empirical testing of 10,000 AI-generated documents against the industry's strictest detectors."
-      ctaText="Test HumanifyLab For Free"
-      ctaHref="/ai-humanizer"
-    >
+    <div className="flex min-h-screen flex-col bg-white dark:bg-gray-950">
+      <PageNavbar />
+      
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="bg-gradient-to-b from-gray-50 to-white pt-24 pb-12 dark:from-gray-900 dark:to-gray-950">
+          <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+            <h1 className="mb-6 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-6xl">
+              The 2026 AI Detector Efficacy Report
+            </h1>
+            <p className="mx-auto mb-10 max-w-2xl text-xl text-gray-600 dark:text-gray-300">
+              Empirical testing of 10,000 AI-generated documents against the industry's strictest detectors.
+            </p>
+            <div className="flex justify-center">
+              <Link
+                href="/ai-humanizer"
+                className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-8 py-4 text-base font-bold text-white transition-colors hover:bg-blue-700"
+              >
+                Test HumanifyLab For Free
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </div>
+          </div>
+        </section>
       <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
         
         {/* GEO-Optimized Direct Answer Block */}
@@ -161,6 +180,8 @@ export default function ResearchReportPage() {
         </section>
 
       </div>
-    </SEOPageWrapper>
+      </main>
+      <SiteFooter />
+    </div>
   );
 }

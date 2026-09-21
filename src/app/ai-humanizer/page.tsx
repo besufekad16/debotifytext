@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ShieldCheck, Zap, Bot, Edit3, CheckCircle2 } from "lucide-react";
 import { BASE_URL } from "~/lib/pseo";
-import SEOPageWrapper from "~/components/templates/SEOPageWrapper";
+import PageNavbar from "~/components/PageNavbar";
+import { SiteFooter } from "~/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "AI Humanizer: The #1 Free AI Text Humanizer & Detector Bypass",
@@ -30,8 +31,9 @@ export const metadata: Metadata = {
 
 export default function AIHumanizerPage() {
   return (
-    <SEOPageWrapper keyword="ai humanizer" cluster="humanizer" publishDate={new Date().toISOString()} updatedDate={new Date().toISOString()} readTime={5}>
-      <main className="bg-slate-50 min-h-screen text-slate-900 selection:bg-emerald-200">
+    <div className="flex min-h-screen flex-col bg-white dark:bg-gray-950">
+      <PageNavbar />
+      <main className="flex-1 bg-slate-50 min-h-screen text-slate-900 selection:bg-emerald-200">
         
         {/* Hero Section */}
         <section className="relative px-6 py-20 lg:py-32 overflow-hidden bg-white border-b border-slate-200">
@@ -158,6 +160,7 @@ export default function AIHumanizerPage() {
           </div>
         </section>
       </main>
-    </SEOPageWrapper>
+      <SiteFooter />
+    </div>
   );
 }

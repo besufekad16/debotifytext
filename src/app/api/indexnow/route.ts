@@ -1,13 +1,9 @@
-
 import { type NextRequest, NextResponse } from "next/server";
-import { getAllSlugs } from "~/lib/pseo/keywords";
-import { CLUSTER_ORDER } from "~/lib/pseo/clusters";
-import { pseoPath } from "~/lib/pseo/paths";
+import { getAllApprovedSlugs, BASE_URL, pseoPath } from "~/lib/pseo/keywords";
 
 export const dynamic = "force-dynamic";
 
 const HOST          = "www.humanifylab.com";
-const BASE_URL      = `https://${HOST}`;
 const INDEX_NOW_KEY = "cae535bda6cc4564a9c5dda38f8236eb";
 const KEY_LOCATION  = `${BASE_URL}/${INDEX_NOW_KEY}.txt`;
 const BATCH_SIZE    = 9000;
@@ -22,8 +18,8 @@ const STATIC_PAGES = [
   "/privacy",
   "/bypass-ai-detectors",
   "/ai-detector",
-  "/topics",
-  ...CLUSTER_ORDER.map((c) => `/topics/${c}`),
+  "/ai-humanizer",
+  "/research/2026-ai-detector-efficacy-report",
 ];
 
 function chunk<T>(arr: T[], size: number): T[][] {
@@ -71,7 +67,7 @@ export async function POST(request: NextRequest) {
 
 // All indexable URLs: static pages + every PSEO page at /{keyword}
 function getAllIndexableUrls(): string[] {
-  const allSlugs = [...new Set(getAllSlugs())];
+  const allSlugs = [...new Set(getAllApprovedSlugs())];
   return [
     ...STATIC_PAGES.map(p => `${BASE_URL}${p}`),
     ...allSlugs.map(s => `${BASE_URL}${pseoPath(s)}`),

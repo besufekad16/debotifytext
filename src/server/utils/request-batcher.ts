@@ -114,7 +114,7 @@ class RequestBatcher {
 
       // Use the first request's options as base (they should all be similar for free users)
       const batchOptions = {
-        ...requests[0].options,
+        ...requests[0]?.options,
         isFreeUser: true,
       };
 

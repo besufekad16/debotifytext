@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, ShieldOff } from "lucide-react";
-import SEOPageWrapper from "~/components/templates/SEOPageWrapper";
+import PageNavbar from "~/components/PageNavbar";
+import { SiteFooter } from "~/components/SiteFooter";
 
 const BASE_URL = "https://www.humanifylab.com";
 const URL = `${BASE_URL}/bypass-ai-detectors`;
@@ -92,7 +93,9 @@ export default function BypassAiDetectorsPage() {
   };
 
   return (
-    <SEOPageWrapper keyword="bypass ai detectors" cluster="bypass" publishDate="2026-01-08" updatedDate="2026-06-15" readTime={9}>
+    <div className="flex min-h-screen flex-col bg-white dark:bg-gray-950">
+      <PageNavbar />
+      <main className="flex-1">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="min-h-screen bg-white">
         <section className="bg-[#0f1419] text-white py-16 px-4">
@@ -236,6 +239,8 @@ export default function BypassAiDetectorsPage() {
           </div>
         </section>
       </div>
-    </SEOPageWrapper>
+      </main>
+      <SiteFooter />
+    </div>
   );
 }

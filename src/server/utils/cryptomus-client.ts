@@ -10,7 +10,7 @@ const CRYPTOMUS_PAYOUT_URL = "https://api.cryptomus.com/v1/payout";
 export function signRequest(body: string): string {
   const base64Body = Buffer.from(body).toString("base64");
   return createHash("md5")
-    .update(base64Body + (env.CRYPTOMUS_API_KEY ?? ""))
+    .update(base64Body + (process.env.CRYPTOMUS_API_KEY ?? ""))
     .digest("hex");
 }
 
@@ -51,7 +51,7 @@ export async function sendPayout(
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        merchant: env.CRYPTOMUS_MERCHANT_ID ?? "",
+        merchant: process.env.CRYPTOMUS_MERCHANT_ID ?? "",
         sign,
       },
       body,

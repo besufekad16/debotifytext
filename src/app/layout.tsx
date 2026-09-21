@@ -121,7 +121,10 @@ export default function RootLayout({
         },
         "sameAs": [
           "https://x.com/humanifylab",
-          "https://www.linkedin.com/company/humanifylab"
+          "https://www.linkedin.com/company/humanifylab",
+          "https://www.facebook.com/humanifylab",
+          "https://www.instagram.com/humanifylab",
+          "https://www.youtube.com/@humanifylab"
         ]
       }
     ]
