@@ -13,24 +13,19 @@
   ],
   "functions": {
     "src/app/[keyword]/page.tsx": {
-      "maxDuration": 30,
-      "memory": 1024
+      "maxDuration": 30
     },
     "src/app/api/**/*.ts": {
-      "maxDuration": 300,
-      "memory": 512
+      "maxDuration": 300
     },
     "src/app/api/humanizer/stream/route.ts": {
-      "maxDuration": 600,
-      "memory": 2048
+      "maxDuration": 600
     },
     "src/app/api/cron/**/*.ts": {
-      "maxDuration": 60,
-      "memory": 512
+      "maxDuration": 60
     },
     "src/app/api/indexnow/route.ts": {
-      "maxDuration": 120,
-      "memory": 512
+      "maxDuration": 120
     }
   }
 }
