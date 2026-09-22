@@ -21,7 +21,7 @@ interface PageProps {
 }
 
 export const dynamic = "force-static";
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const slugs = getAllApprovedSlugs();
@@ -176,14 +176,14 @@ export default async function PseoPage({ params }: PageProps) {
       case "MetricsTable":
         return <PseoMetricsTable key={idx} keyword={contract.primaryKeyword} metrics={llmData.metrics} />;
       case "PersonaProfile":
-        return <PseoPersonaProfile key={idx} keyword={contract.primaryKeyword} persona={llmData.persona} />;
+        return <PseoPersonaProfile key={idx} keyword={contract.primaryKeyword} profile={llmData.persona} />;
       case "TechnicalDeepDive":
         // LLM generates multiple paragraphs separated by \n\n. We can split and render them.
         return <PseoTechnicalDeepDive key={idx} keyword={contract.primaryKeyword} content={llmData.technicalDeepDive} />;
       case "StepByStep":
         return <PseoStepByStep key={idx} keyword={contract.primaryKeyword} steps={llmData.stepByStep} />;
       case "Glossary":
-        return <PseoGlossary key={idx} keyword={contract.primaryKeyword} terms={llmData.glossary} />;
+        return <PseoGlossary key={idx} keyword={contract.primaryKeyword} glossary={llmData.glossary} />;
       case "ComparisonMatrix":
         return <PseoComparisonMatrix key={idx} keyword={contract.primaryKeyword} />;
       case "FAQ":

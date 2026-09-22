@@ -19,6 +19,18 @@ const config = {
   // Fix multiple lockfiles warning
   outputFileTracingRoot: process.cwd(),
 
+  // ── Exclude large build-time-only data files from serverless function bundles ──
+  // pseo-registry.json (47MB) and the per-page content JSON files are only
+  // needed at BUILD TIME to generate the 40k static HTML pages. After build,
+  // these pages are pure static HTML on the CDN — no function reads these files
+  // at runtime. Including them would bloat every function bundle by 47MB+.
+  outputFileTracingExcludes: {
+    '**': [
+      './src/data/pseo-registry.json',
+      './src/content/pseo/**',
+    ],
+  },
+
   transpilePackages: ['lucide-react'],
 
   // ── Programmatic SEO: 40k static /{keyword} pages (all pre-rendered at build) ──
@@ -44,36 +56,10 @@ const config = {
   // Increase build timeout for large sites — 5000+ pages need more time
   staticPageGenerationTimeout: 300, // 5 minutes per page batch
 
-  // Skip webpack's persistent filesystem cache for production builds. It
-  // exists to speed up *repeated local dev/incremental* builds, but on a
-  // fresh CI/Vercel checkout there is nothing to reuse it from, so it's pure
-  // overhead — and with ~250KB of inline keyword data compiled into the
-  // bundle, serializing it to a cache pack file on disk after every build
-  // ("Serializing big strings... impacts deserialization performance") costs
-  // real time and memory for zero benefit here.
-  //
-  // CRITICAL: We also tell webpack to never bundle pseo-registry.json.
-  // The registry is ~47MB and is read at runtime via fs.readFileSync() in
-  // src/lib/pseo/keywords.ts. Without this, webpack tries to inline it into
-  // every PSEO function bundle, causing the 252MB > 250MB Vercel limit error.
-  webpack: (config, { dev, isServer }) => {
+  // Skip webpack's persistent filesystem cache for production builds.
+  webpack: (config, { dev }) => {
     if (!dev) {
       config.cache = false;
-    }
-    if (isServer) {
-      // Keep the registry as an external file — never inline it into the bundle.
-      // keywords.ts already reads it with fs.readFileSync so this is safe.
-      const originalExternals = config.externals ?? [];
-      config.externals = [
-        ...(Array.isArray(originalExternals) ? originalExternals : [originalExternals]),
-        ({ request }, callback) => {
-          if (request && request.includes('pseo-registry.json')) {
-            // Mark as CommonJS external so Node.js reads it from disk
-            return callback(null, `commonjs ${request}`);
-          }
-          callback();
-        },
-      ];
     }
     return config;
   },
