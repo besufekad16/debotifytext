@@ -1,0 +1,95 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 96,
+    "postHumanizationOriginality": 98.3,
+    "semanticPreservationScore": 95.2,
+    "tokensProcessedAvg": 2421319
+  },
+  "persona": {
+    "idealUser": "Students",
+    "coreIntent": "Achieve perfect results with humanify pdf my thesis safe"
+  },
+  "technicalDeepDive": "By injecting natural human error margins into the text, we ensure your student tone is genuine.\n\nWe train our models on millions of peer-reviewed essays to ensure your output is proficient yet undetectable.\n\nMany students struggle with incorrect AI flagging. HumanifyLab fixes this issue by giving your text the depth of real human writing.",
+  "stepByStep": [
+    {
+      "title": "Scholarly Rewrite",
+      "description": "Vocabulary and syntax are humanized to match a natural student baseline."
+    },
+    {
+      "title": "Upload Draft",
+      "description": "Paste your assignment directly into the dashboard."
+    },
+    {
+      "title": "Safe Export",
+      "description": "Download your plagiarism-free paper, ready for submission."
+    },
+    {
+      "title": "Plagiarism Check",
+      "description": "We run a quick verification to ensure complete safety."
+    },
+    {
+      "title": "Academic Scan",
+      "description": "The engine analyzes Turnitin's current detection models."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Semantic Preservation",
+      "definition": "Keeping the original meaning intact while changing the words."
+    },
+    {
+      "term": "AI Watermark",
+      "definition": "Hidden statistical patterns left by language models like ChatGPT."
+    },
+    {
+      "term": "Perplexity",
+      "definition": "A measure of how unpredictable the text is to an AI model."
+    },
+    {
+      "term": "Undetectable AI",
+      "definition": "Text that has been modified to bypass algorithmic detection."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Does humanify pdf my thesis safe require an account?",
+      "answer": "Customers worldwide rely on us for humanify pdf my thesis safe daily."
+    },
+    {
+      "question": "Can I rely on this for humanify pdf my thesis safe tasks?",
+      "answer": "Security is our main focus when dealing with humanify pdf my thesis safe."
+    },
+    {
+      "question": "Is humanify pdf my thesis safe free to use?",
+      "answer": "It significantly enhances your results with humanify pdf my thesis safe."
+    },
+    {
+      "question": "Can I trust this for humanify pdf my thesis safe tasks?",
+      "answer": "Security is our main focus when dealing with humanify pdf my thesis safe."
+    },
+    {
+      "question": "How do I get started with humanify pdf my thesis safe?",
+      "answer": "Yes, it is designed specifically for humanify pdf my thesis safe."
+    },
+    {
+      "question": "Who uses humanify pdf my thesis safe the most?",
+      "answer": "You can quickly integrate humanify pdf my thesis safe in your process."
+    },
+    {
+      "question": "What makes humanify pdf my thesis safe the best choice?",
+      "answer": "Absolutely, it is designed specifically for humanify pdf my thesis safe."
+    },
+    {
+      "question": "Who benefits from humanify pdf my thesis safe the most?",
+      "answer": "You can quickly use humanify pdf my thesis safe in your process."
+    },
+    {
+      "question": "What makes humanify pdf my thesis safe the best choice?",
+      "answer": "Customers worldwide trust us for humanify pdf my thesis safe every single day."
+    },
+    {
+      "question": "How does the humanizer process humanify pdf my thesis safe?",
+      "answer": "The engine uses advanced NLP to process humanify pdf my thesis safe flawlessly."
+    }
+  ]
+}

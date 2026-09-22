@@ -1,0 +1,83 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 95,
+    "postHumanizationOriginality": 99.8,
+    "semanticPreservationScore": 98.1,
+    "tokensProcessedAvg": 744065
+  },
+  "persona": {
+    "idealUser": "Professionals",
+    "coreIntent": "Achieve flawless results with how to humanize my assignment"
+  },
+  "technicalDeepDive": "When TAs run your work through Turnitin, they look for predictable phrasing. Our system eliminates these watermarks entirely.\n\nUniversities use highly sensitive algorithms to detect AI. HumanifyLab counters this by re-evaluating the lexical density of your assignment.\n\nBy introducing natural variance into the text, we ensure your student tone is believable.\n\nUnlike simple spinners, our engine understands scholarly citations and preserves your core thesis without triggering major academic detectors.",
+  "stepByStep": [
+    {
+      "title": "Upload Draft",
+      "description": "Paste your essay directly into the secure portal."
+    },
+    {
+      "title": "Scholarly Rewrite",
+      "description": "Vocabulary and syntax are humanized to match a natural student baseline."
+    },
+    {
+      "title": "Citation Protection",
+      "description": "All your Chicago quotes and references are safeguarded."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Semantic Preservation",
+      "definition": "Keeping the original meaning intact while changing the words."
+    },
+    {
+      "term": "Perplexity",
+      "definition": "A measure of how unpredictable the text is to an AI model."
+    },
+    {
+      "term": "Undetectable AI",
+      "definition": "Text that has been modified to bypass algorithmic detection."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How does the algorithm process how to humanize my assignment?",
+      "answer": "It significantly improves your results with how to humanize my assignment."
+    },
+    {
+      "question": "How fast is how to humanize my assignment processing?",
+      "answer": "The engine uses advanced NLP to handle how to humanize my assignment flawlessly."
+    },
+    {
+      "question": "How does the algorithm process how to humanize my assignment?",
+      "answer": "Yes, it is designed specifically for how to humanize my assignment."
+    },
+    {
+      "question": "Is how to humanize my assignment available today?",
+      "answer": "Security is our main focus when dealing with how to humanize my assignment."
+    },
+    {
+      "question": "How does the algorithm process how to humanize my assignment?",
+      "answer": "Security is our top priority when dealing with how to humanize my assignment."
+    },
+    {
+      "question": "Will how to humanize my assignment save me time?",
+      "answer": "You can easily integrate how to humanize my assignment in your workflow."
+    },
+    {
+      "question": "What makes how to humanize my assignment unique compared to alternatives?",
+      "answer": "The engine uses advanced NLP to process how to humanize my assignment flawlessly."
+    },
+    {
+      "question": "How does the algorithm process how to humanize my assignment?",
+      "answer": "Yes, our tool is optimized for how to humanize my assignment."
+    },
+    {
+      "question": "Who uses how to humanize my assignment the most?",
+      "answer": "Yes, it is designed specifically for how to humanize my assignment."
+    },
+    {
+      "question": "How do I use how to humanize my assignment?",
+      "answer": "You can quickly use how to humanize my assignment in your workflow."
+    }
+  ]
+}

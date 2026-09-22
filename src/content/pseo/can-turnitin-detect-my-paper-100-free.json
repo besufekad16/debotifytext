@@ -1,0 +1,83 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 89,
+    "postHumanizationOriginality": 99.7,
+    "semanticPreservationScore": 96.7,
+    "tokensProcessedAvg": 1669822
+  },
+  "persona": {
+    "idealUser": "Researchers",
+    "coreIntent": "Achieve flawless results with can turnitin detect my paper 100% free"
+  },
+  "technicalDeepDive": "We train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nMany researchers struggle with incorrect AI flagging. HumanifyLab fixes this issue by giving your text the depth of real human writing.\n\nUnlike simple spinners, our engine understands university guidelines and preserves your main ideas without triggering GPTZero or Turnitin.\n\nWhen professors run your assignment through Turnitin, they look for robotic patterns. Our system eliminates these watermarks entirely.",
+  "stepByStep": [
+    {
+      "title": "Citation Protection",
+      "description": "All your APA quotes and references are ignored by the rewriter."
+    },
+    {
+      "title": "Scholarly Rewrite",
+      "description": "Vocabulary and syntax are adjusted to match a natural student baseline."
+    },
+    {
+      "title": "Plagiarism Check",
+      "description": "We run a final scan to ensure complete safety."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "AI Watermark",
+      "definition": "Hidden statistical patterns left by language models like ChatGPT."
+    },
+    {
+      "term": "Semantic Preservation",
+      "definition": "Keeping the original meaning intact while changing the words."
+    },
+    {
+      "term": "Burstiness",
+      "definition": "The variation in sentence length and structure typical of human writing."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Will can turnitin detect my paper 100% free improve my workflow?",
+      "answer": "It significantly improves your outputs with can turnitin detect my paper 100% free."
+    },
+    {
+      "question": "Will can turnitin detect my paper 100% free improve my workflow?",
+      "answer": "Users worldwide rely on us for can turnitin detect my paper 100% free daily."
+    },
+    {
+      "question": "Can I rely on this for can turnitin detect my paper 100% free tasks?",
+      "answer": "It drastically enhances your outputs with can turnitin detect my paper 100% free."
+    },
+    {
+      "question": "Is can turnitin detect my paper 100% free available today?",
+      "answer": "Our system uses advanced NLP to process can turnitin detect my paper 100% free flawlessly."
+    },
+    {
+      "question": "Is can turnitin detect my paper 100% free free to use?",
+      "answer": "It drastically improves your outputs with can turnitin detect my paper 100% free."
+    },
+    {
+      "question": "How fast is can turnitin detect my paper 100% free processing?",
+      "answer": "The engine uses advanced NLP to process can turnitin detect my paper 100% free flawlessly."
+    },
+    {
+      "question": "Will can turnitin detect my paper 100% free save me time?",
+      "answer": "It significantly enhances your results with can turnitin detect my paper 100% free."
+    },
+    {
+      "question": "Is can turnitin detect my paper 100% free free to use?",
+      "answer": "Users worldwide rely on us for can turnitin detect my paper 100% free every single day."
+    },
+    {
+      "question": "How does the algorithm process can turnitin detect my paper 100% free?",
+      "answer": "It drastically enhances your outputs with can turnitin detect my paper 100% free."
+    },
+    {
+      "question": "Who benefits from can turnitin detect my paper 100% free the most?",
+      "answer": "Yes, it is designed specifically for can turnitin detect my paper 100% free."
+    }
+  ]
+}

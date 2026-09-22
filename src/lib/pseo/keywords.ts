@@ -58,3 +58,28 @@ export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://humanifylab
 export function pseoPath(slug: string): string {
   return `/${slug}`;
 }
+
+export function getRandomApprovedSlugs(count: number, excludeSlug?: string): string[] {
+  const slugs = getAllApprovedSlugs().filter(s => s !== excludeSlug);
+  
+  // Deterministic shuffle based on the excludeSlug (so the related links stay static per page)
+  let h = 0;
+  if (excludeSlug) {
+    for (let i = 0; i < excludeSlug.length; i++) {
+      h = Math.imul(31, h) + excludeSlug.charCodeAt(i) | 0;
+    }
+  }
+
+  // Shuffle using LCG
+  const shuffled = [...slugs];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    h = Math.imul(1664525, h) + 1013904223 | 0;
+    const rnd = Math.abs(h) / 2147483648;
+    const j = Math.floor(rnd * (i + 1));
+    const temp = shuffled[i] as string;
+    shuffled[i] = shuffled[j] as string;
+    shuffled[j] = temp;
+  }
+
+  return shuffled.slice(0, count);
+}

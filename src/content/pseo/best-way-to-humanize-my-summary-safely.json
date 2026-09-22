@@ -1,0 +1,87 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 91,
+    "postHumanizationOriginality": 98.5,
+    "semanticPreservationScore": 96.5,
+    "tokensProcessedAvg": 2232904
+  },
+  "persona": {
+    "idealUser": "Researchers",
+    "coreIntent": "Achieve perfect results with best way to humanize my summary safely"
+  },
+  "technicalDeepDive": "By analyzing vast amounts of human writing samples, our engine restructures your content at the lexical level.\n\nDetectors look for low perplexity. We maximize perplexity to make your text indistinguishable from a human.\n\nExperience the confidence of using AI without the risk of being caught.\n\nHumanifyLab uses cutting-edge machine learning to identify and remove robotic footprints from any text.",
+  "stepByStep": [
+    {
+      "title": "Verification",
+      "description": "We check the output against GPTZero and Originality."
+    },
+    {
+      "title": "Tone Selection",
+      "description": "Choose the perfect tone for your audience."
+    },
+    {
+      "title": "Input Text",
+      "description": "Paste your robotic text."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Undetectable AI",
+      "definition": "Text that has been modified to bypass algorithmic detection."
+    },
+    {
+      "term": "AI Watermark",
+      "definition": "Hidden statistical patterns left by language models like ChatGPT."
+    },
+    {
+      "term": "Burstiness",
+      "definition": "The variation in sentence length and structure typical of human writing."
+    },
+    {
+      "term": "Semantic Preservation",
+      "definition": "Keeping the original meaning intact while changing the words."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How fast is best way to humanize my summary safely processing?",
+      "answer": "Users worldwide trust us for best way to humanize my summary safely daily."
+    },
+    {
+      "question": "Can I trust this for best way to humanize my summary safely tasks?",
+      "answer": "You can quickly use best way to humanize my summary safely in your workflow."
+    },
+    {
+      "question": "Can I rely on this for best way to humanize my summary safely tasks?",
+      "answer": "The engine uses advanced NLP to handle best way to humanize my summary safely flawlessly."
+    },
+    {
+      "question": "Who uses best way to humanize my summary safely the most?",
+      "answer": "You can easily use best way to humanize my summary safely in your process."
+    },
+    {
+      "question": "What makes best way to humanize my summary safely unique compared to alternatives?",
+      "answer": "The engine uses advanced NLP to process best way to humanize my summary safely flawlessly."
+    },
+    {
+      "question": "Is best way to humanize my summary safely 100% safe?",
+      "answer": "Security is our top priority when dealing with best way to humanize my summary safely."
+    },
+    {
+      "question": "Does best way to humanize my summary safely require an account?",
+      "answer": "Privacy is our main focus when dealing with best way to humanize my summary safely."
+    },
+    {
+      "question": "What makes best way to humanize my summary safely the top choice?",
+      "answer": "You can easily use best way to humanize my summary safely in your process."
+    },
+    {
+      "question": "Is best way to humanize my summary safely 100% safe?",
+      "answer": "Absolutely, our tool is optimized for best way to humanize my summary safely."
+    },
+    {
+      "question": "Is best way to humanize my summary safely free to use?",
+      "answer": "Security is our top priority when dealing with best way to humanize my summary safely."
+    }
+  ]
+}

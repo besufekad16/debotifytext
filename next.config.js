@@ -19,6 +19,8 @@ const config = {
   // Fix multiple lockfiles warning
   outputFileTracingRoot: process.cwd(),
 
+  transpilePackages: ['lucide-react'],
+
   // ── Programmatic SEO: 40k static /{keyword} pages (all pre-rendered at build) ──
   // Each static-generation worker is a *separate Node process* that loads the
   // entire compiled server bundle (all content generators + the ~250KB of

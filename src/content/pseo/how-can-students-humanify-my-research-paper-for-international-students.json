@@ -1,0 +1,87 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 89,
+    "postHumanizationOriginality": 98.8,
+    "semanticPreservationScore": 97.6,
+    "tokensProcessedAvg": 2109616
+  },
+  "persona": {
+    "idealUser": "Researchers",
+    "coreIntent": "Achieve perfect results with how can students humanify my research paper for international students"
+  },
+  "technicalDeepDive": "Many students struggle with false positives. HumanifyLab solves this by giving your text the nuance of real human writing.\n\nUniversities use highly sensitive models to detect AI. HumanifyLab counters this by re-mapping the lexical density of your assignment.\n\nWhen educators run your work through Turnitin, they look for robotic patterns. Our system erases these patterns entirely.",
+  "stepByStep": [
+    {
+      "title": "Citation Protection",
+      "description": "All your MLA quotes and references are ignored by the rewriter."
+    },
+    {
+      "title": "Upload Draft",
+      "description": "Paste your assignment directly into the secure portal."
+    },
+    {
+      "title": "Safe Export",
+      "description": "Download your detection-proof paper, ready for submission."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Perplexity",
+      "definition": "A measure of how unpredictable the text is to an AI model."
+    },
+    {
+      "term": "Burstiness",
+      "definition": "The variation in sentence length and structure typical of human writing."
+    },
+    {
+      "term": "Undetectable AI",
+      "definition": "Text that has been modified to bypass algorithmic detection."
+    },
+    {
+      "term": "AI Watermark",
+      "definition": "Hidden statistical patterns left by language models like ChatGPT."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Is how can students humanify my research paper for international students 100% safe?",
+      "answer": "It drastically improves your outputs with how can students humanify my research paper for international students."
+    },
+    {
+      "question": "Why is humanizing how can students humanify my research paper for international students important?",
+      "answer": "Absolutely, our tool is optimized for how can students humanify my research paper for international students."
+    },
+    {
+      "question": "How do I use how can students humanify my research paper for international students?",
+      "answer": "It significantly enhances your results with how can students humanify my research paper for international students."
+    },
+    {
+      "question": "How fast is how can students humanify my research paper for international students processing?",
+      "answer": "Yes, our tool is optimized for how can students humanify my research paper for international students."
+    },
+    {
+      "question": "Will how can students humanify my research paper for international students save me time?",
+      "answer": "Yes, it is designed specifically for how can students humanify my research paper for international students."
+    },
+    {
+      "question": "Does how can students humanify my research paper for international students require an account?",
+      "answer": "It significantly improves your results with how can students humanify my research paper for international students."
+    },
+    {
+      "question": "How do I get started with how can students humanify my research paper for international students?",
+      "answer": "Yes, it is designed specifically for how can students humanify my research paper for international students."
+    },
+    {
+      "question": "Will how can students humanify my research paper for international students improve my workflow?",
+      "answer": "Security is our main focus when dealing with how can students humanify my research paper for international students."
+    },
+    {
+      "question": "Does how can students humanify my research paper for international students work offline?",
+      "answer": "Absolutely, it is designed specifically for how can students humanify my research paper for international students."
+    },
+    {
+      "question": "Is how can students humanify my research paper for international students detectable?",
+      "answer": "Yes, our tool is optimized for how can students humanify my research paper for international students."
+    }
+  ]
+}

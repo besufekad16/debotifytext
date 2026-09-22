@@ -1,0 +1,87 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 97,
+    "postHumanizationOriginality": 99.7,
+    "semanticPreservationScore": 99.2,
+    "tokensProcessedAvg": 1709598
+  },
+  "persona": {
+    "idealUser": "Students",
+    "coreIntent": "Achieve flawless results with is it possible to humanize my essay instantly"
+  },
+  "technicalDeepDive": "Many researchers struggle with false positives. HumanifyLab fixes this issue by giving your text the depth of real human writing.\n\nBy introducing natural human error margins into the text, we ensure your student tone is believable.\n\nWhen TAs run your assignment through Turnitin, they look for predictable phrasing. Our system erases these patterns entirely.",
+  "stepByStep": [
+    {
+      "title": "Upload Draft",
+      "description": "Paste your assignment directly into the dashboard."
+    },
+    {
+      "title": "Scholarly Rewrite",
+      "description": "Vocabulary and syntax are adjusted to match a natural student baseline."
+    },
+    {
+      "title": "Plagiarism Check",
+      "description": "We run a final scan to ensure complete safety."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Semantic Preservation",
+      "definition": "Keeping the original meaning intact while changing the words."
+    },
+    {
+      "term": "Perplexity",
+      "definition": "A measure of how unpredictable the text is to an AI model."
+    },
+    {
+      "term": "Burstiness",
+      "definition": "The variation in sentence length and structure typical of human writing."
+    },
+    {
+      "term": "Undetectable AI",
+      "definition": "Text that has been modified to bypass algorithmic detection."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What makes is it possible to humanize my essay instantly the best choice?",
+      "answer": "You can quickly integrate is it possible to humanize my essay instantly in your process."
+    },
+    {
+      "question": "What makes is it possible to humanize my essay instantly the best choice?",
+      "answer": "Security is our main focus when dealing with is it possible to humanize my essay instantly."
+    },
+    {
+      "question": "Does is it possible to humanize my essay instantly work offline?",
+      "answer": "Absolutely, it is designed specifically for is it possible to humanize my essay instantly."
+    },
+    {
+      "question": "What makes is it possible to humanize my essay instantly the top choice?",
+      "answer": "You can easily integrate is it possible to humanize my essay instantly in your workflow."
+    },
+    {
+      "question": "Who uses is it possible to humanize my essay instantly the most?",
+      "answer": "You can quickly use is it possible to humanize my essay instantly in your process."
+    },
+    {
+      "question": "Does is it possible to humanize my essay instantly work offline?",
+      "answer": "You can easily integrate is it possible to humanize my essay instantly in your process."
+    },
+    {
+      "question": "How does the algorithm process is it possible to humanize my essay instantly?",
+      "answer": "Customers worldwide trust us for is it possible to humanize my essay instantly every single day."
+    },
+    {
+      "question": "Will is it possible to humanize my essay instantly save me time?",
+      "answer": "Our system uses advanced NLP to process is it possible to humanize my essay instantly flawlessly."
+    },
+    {
+      "question": "Does is it possible to humanize my essay instantly work offline?",
+      "answer": "Security is our top priority when dealing with is it possible to humanize my essay instantly."
+    },
+    {
+      "question": "Does is it possible to humanize my essay instantly require an account?",
+      "answer": "The engine uses proprietary NLP to process is it possible to humanize my essay instantly flawlessly."
+    }
+  ]
+}

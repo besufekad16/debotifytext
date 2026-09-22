@@ -1,0 +1,83 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 92,
+    "postHumanizationOriginality": 98.2,
+    "semanticPreservationScore": 96.3,
+    "tokensProcessedAvg": 1190306
+  },
+  "persona": {
+    "idealUser": "Writers",
+    "coreIntent": "Achieve flawless results with what is the best free humanizer for a literature review as a student"
+  },
+  "technicalDeepDive": "Unlike simple tools, our engine understands academic formatting and maintains your core thesis without triggering GPTZero or Turnitin.\n\nWhen TAs run your assignment through Turnitin, they look for predictable phrasing. Our system erases these watermarks entirely.\n\nWe train our models on millions of peer-reviewed essays to ensure your output is proficient yet undetectable.\n\nMany students struggle with false positives. HumanifyLab fixes this issue by giving your text the nuance of real human writing.",
+  "stepByStep": [
+    {
+      "title": "Upload Draft",
+      "description": "Paste your assignment directly into the dashboard."
+    },
+    {
+      "title": "Academic Scan",
+      "description": "The engine analyzes Turnitin's current detection parameters."
+    },
+    {
+      "title": "Scholarly Rewrite",
+      "description": "Sentence structures are adjusted to match a natural student baseline."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Burstiness",
+      "definition": "The variation in sentence length and structure typical of human writing."
+    },
+    {
+      "term": "Semantic Preservation",
+      "definition": "Keeping the original meaning intact while changing the words."
+    },
+    {
+      "term": "Undetectable AI",
+      "definition": "Text that has been modified to bypass algorithmic detection."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Why is humanizing what is the best free humanizer for a literature review as a student important?",
+      "answer": "Users worldwide rely on us for what is the best free humanizer for a literature review as a student every single day."
+    },
+    {
+      "question": "Who benefits from what is the best free humanizer for a literature review as a student the most?",
+      "answer": "Customers worldwide rely on us for what is the best free humanizer for a literature review as a student daily."
+    },
+    {
+      "question": "Is what is the best free humanizer for a literature review as a student available today?",
+      "answer": "It drastically enhances your results with what is the best free humanizer for a literature review as a student."
+    },
+    {
+      "question": "Does what is the best free humanizer for a literature review as a student require an account?",
+      "answer": "Absolutely, our tool is optimized for what is the best free humanizer for a literature review as a student."
+    },
+    {
+      "question": "How do I use what is the best free humanizer for a literature review as a student?",
+      "answer": "You can easily use what is the best free humanizer for a literature review as a student in your process."
+    },
+    {
+      "question": "How do I get started with what is the best free humanizer for a literature review as a student?",
+      "answer": "Absolutely, our tool is optimized for what is the best free humanizer for a literature review as a student."
+    },
+    {
+      "question": "How do I get started with what is the best free humanizer for a literature review as a student?",
+      "answer": "You can quickly integrate what is the best free humanizer for a literature review as a student in your workflow."
+    },
+    {
+      "question": "How do I get started with what is the best free humanizer for a literature review as a student?",
+      "answer": "It drastically enhances your outputs with what is the best free humanizer for a literature review as a student."
+    },
+    {
+      "question": "How do I use what is the best free humanizer for a literature review as a student?",
+      "answer": "It drastically improves your results with what is the best free humanizer for a literature review as a student."
+    },
+    {
+      "question": "What makes what is the best free humanizer for a literature review as a student special compared to alternatives?",
+      "answer": "It drastically enhances your outputs with what is the best free humanizer for a literature review as a student."
+    }
+  ]
+}

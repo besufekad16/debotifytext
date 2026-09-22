@@ -1,0 +1,91 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 94,
+    "postHumanizationOriginality": 99.6,
+    "semanticPreservationScore": 96.8,
+    "tokensProcessedAvg": 2125689
+  },
+  "persona": {
+    "idealUser": "Writers",
+    "coreIntent": "Achieve flawless results with which humanizer works best against crossplag with my thesis without getting caught"
+  },
+  "technicalDeepDive": "Colleges use advanced models to detect AI. HumanifyLab counters this by re-evaluating the lexical density of your assignment.\n\nWhen educators run your assignment through Turnitin, they look for predictable phrasing. Our system erases these patterns entirely.\n\nMany researchers struggle with incorrect AI flagging. HumanifyLab fixes this issue by giving your text the depth of real human writing.",
+  "stepByStep": [
+    {
+      "title": "Safe Export",
+      "description": "Download your plagiarism-free paper, ready for submission."
+    },
+    {
+      "title": "Plagiarism Check",
+      "description": "We run a quick verification to ensure 100% originality."
+    },
+    {
+      "title": "Academic Scan",
+      "description": "The engine analyzes Turnitin's current detection models."
+    },
+    {
+      "title": "Upload Draft",
+      "description": "Paste your thesis draft directly into the dashboard."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Perplexity",
+      "definition": "A measure of how unpredictable the text is to an AI model."
+    },
+    {
+      "term": "AI Watermark",
+      "definition": "Hidden statistical patterns left by language models like ChatGPT."
+    },
+    {
+      "term": "Burstiness",
+      "definition": "The variation in sentence length and structure typical of human writing."
+    },
+    {
+      "term": "Semantic Preservation",
+      "definition": "Keeping the original meaning intact while changing the words."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How fast is which humanizer works best against crossplag with my thesis without getting caught processing?",
+      "answer": "The engine uses proprietary NLP to handle which humanizer works best against crossplag with my thesis without getting caught flawlessly."
+    },
+    {
+      "question": "Will which humanizer works best against crossplag with my thesis without getting caught improve my workflow?",
+      "answer": "You can quickly integrate which humanizer works best against crossplag with my thesis without getting caught in your process."
+    },
+    {
+      "question": "Will which humanizer works best against crossplag with my thesis without getting caught save me time?",
+      "answer": "Security is our top priority when dealing with which humanizer works best against crossplag with my thesis without getting caught."
+    },
+    {
+      "question": "How does the algorithm process which humanizer works best against crossplag with my thesis without getting caught?",
+      "answer": "The engine uses advanced NLP to process which humanizer works best against crossplag with my thesis without getting caught flawlessly."
+    },
+    {
+      "question": "Why is humanizing which humanizer works best against crossplag with my thesis without getting caught important?",
+      "answer": "It significantly enhances your outputs with which humanizer works best against crossplag with my thesis without getting caught."
+    },
+    {
+      "question": "Is which humanizer works best against crossplag with my thesis without getting caught detectable?",
+      "answer": "The engine uses proprietary NLP to process which humanizer works best against crossplag with my thesis without getting caught flawlessly."
+    },
+    {
+      "question": "What makes which humanizer works best against crossplag with my thesis without getting caught special compared to alternatives?",
+      "answer": "Absolutely, it is designed specifically for which humanizer works best against crossplag with my thesis without getting caught."
+    },
+    {
+      "question": "Who benefits from which humanizer works best against crossplag with my thesis without getting caught the most?",
+      "answer": "Security is our top priority when dealing with which humanizer works best against crossplag with my thesis without getting caught."
+    },
+    {
+      "question": "Will which humanizer works best against crossplag with my thesis without getting caught save me time?",
+      "answer": "Yes, it is designed specifically for which humanizer works best against crossplag with my thesis without getting caught."
+    },
+    {
+      "question": "How fast is which humanizer works best against crossplag with my thesis without getting caught processing?",
+      "answer": "The engine uses proprietary NLP to process which humanizer works best against crossplag with my thesis without getting caught flawlessly."
+    }
+  ]
+}

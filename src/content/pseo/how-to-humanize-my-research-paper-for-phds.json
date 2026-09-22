@@ -1,0 +1,91 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 98,
+    "postHumanizationOriginality": 98.4,
+    "semanticPreservationScore": 98.4,
+    "tokensProcessedAvg": 1822029
+  },
+  "persona": {
+    "idealUser": "Students",
+    "coreIntent": "Achieve perfect results with how to humanize my research paper for phds"
+  },
+  "technicalDeepDive": "Many researchers struggle with incorrect AI flagging. HumanifyLab solves this by giving your text the depth of real human writing.\n\nWe train our algorithms on millions of high-scoring papers to ensure your output is academically rigorous yet undetectable.\n\nUnlike outdated rewriters, our engine understands university guidelines and preserves your main ideas without triggering GPTZero or Turnitin.",
+  "stepByStep": [
+    {
+      "title": "Upload Draft",
+      "description": "Paste your assignment directly into the dashboard."
+    },
+    {
+      "title": "Academic Scan",
+      "description": "The engine analyzes Turnitin's current detection models."
+    },
+    {
+      "title": "Scholarly Rewrite",
+      "description": "Sentence structures are adjusted to match a natural student baseline."
+    },
+    {
+      "title": "Citation Protection",
+      "description": "All your MLA quotes and references are safeguarded."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Semantic Preservation",
+      "definition": "Keeping the original meaning intact while changing the words."
+    },
+    {
+      "term": "Perplexity",
+      "definition": "A measure of how unpredictable the text is to an AI model."
+    },
+    {
+      "term": "Burstiness",
+      "definition": "The variation in sentence length and structure typical of human writing."
+    },
+    {
+      "term": "Undetectable AI",
+      "definition": "Text that has been modified to bypass algorithmic detection."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How does the algorithm process how to humanize my research paper for phds?",
+      "answer": "It drastically improves your results with how to humanize my research paper for phds."
+    },
+    {
+      "question": "What makes how to humanize my research paper for phds the top choice?",
+      "answer": "It drastically improves your results with how to humanize my research paper for phds."
+    },
+    {
+      "question": "How fast is how to humanize my research paper for phds processing?",
+      "answer": "Privacy is our top priority when dealing with how to humanize my research paper for phds."
+    },
+    {
+      "question": "Does how to humanize my research paper for phds require an account?",
+      "answer": "Users worldwide trust us for how to humanize my research paper for phds daily."
+    },
+    {
+      "question": "How do I get started with how to humanize my research paper for phds?",
+      "answer": "It drastically improves your outputs with how to humanize my research paper for phds."
+    },
+    {
+      "question": "Why is humanizing how to humanize my research paper for phds crucial?",
+      "answer": "It significantly improves your results with how to humanize my research paper for phds."
+    },
+    {
+      "question": "Does how to humanize my research paper for phds work offline?",
+      "answer": "You can easily use how to humanize my research paper for phds in your process."
+    },
+    {
+      "question": "Does how to humanize my research paper for phds require an account?",
+      "answer": "Absolutely, it is designed specifically for how to humanize my research paper for phds."
+    },
+    {
+      "question": "Will how to humanize my research paper for phds improve my workflow?",
+      "answer": "Users worldwide rely on us for how to humanize my research paper for phds every single day."
+    },
+    {
+      "question": "Does how to humanize my research paper for phds work offline?",
+      "answer": "You can quickly integrate how to humanize my research paper for phds in your workflow."
+    }
+  ]
+}

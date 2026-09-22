@@ -1,0 +1,95 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 90,
+    "postHumanizationOriginality": 98.3,
+    "semanticPreservationScore": 97.3,
+    "tokensProcessedAvg": 2061335
+  },
+  "persona": {
+    "idealUser": "Researchers",
+    "coreIntent": "Achieve flawless results with is it possible to humanize my coursework for high school students"
+  },
+  "technicalDeepDive": "Unlike basic rewriters, our engine understands academic formatting and maintains your core thesis without triggering GPTZero or Turnitin.\n\nMany researchers struggle with incorrect AI flagging. HumanifyLab fixes this issue by giving your text the nuance of real human writing.\n\nWhen TAs run your work through Turnitin, they look for predictable phrasing. Our system erases these watermarks entirely.",
+  "stepByStep": [
+    {
+      "title": "Scholarly Rewrite",
+      "description": "Sentence structures are humanized to match a natural student baseline."
+    },
+    {
+      "title": "Upload Draft",
+      "description": "Paste your essay directly into the secure portal."
+    },
+    {
+      "title": "Plagiarism Check",
+      "description": "We run a final scan to ensure 100% originality."
+    },
+    {
+      "title": "Academic Scan",
+      "description": "The engine cross-references Turnitin's current detection models."
+    },
+    {
+      "title": "Citation Protection",
+      "description": "All your MLA quotes and references are safeguarded."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Semantic Preservation",
+      "definition": "Keeping the original meaning intact while changing the words."
+    },
+    {
+      "term": "AI Watermark",
+      "definition": "Hidden statistical patterns left by language models like ChatGPT."
+    },
+    {
+      "term": "Undetectable AI",
+      "definition": "Text that has been modified to bypass algorithmic detection."
+    },
+    {
+      "term": "Perplexity",
+      "definition": "A measure of how unpredictable the text is to an AI model."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Can I trust this for is it possible to humanize my coursework for high school students tasks?",
+      "answer": "It drastically improves your outputs with is it possible to humanize my coursework for high school students."
+    },
+    {
+      "question": "Can I rely on this for is it possible to humanize my coursework for high school students tasks?",
+      "answer": "Yes, our tool is optimized for is it possible to humanize my coursework for high school students."
+    },
+    {
+      "question": "Why is humanizing is it possible to humanize my coursework for high school students crucial?",
+      "answer": "Absolutely, it is designed specifically for is it possible to humanize my coursework for high school students."
+    },
+    {
+      "question": "Is is it possible to humanize my coursework for high school students free to use?",
+      "answer": "You can quickly use is it possible to humanize my coursework for high school students in your workflow."
+    },
+    {
+      "question": "How fast is is it possible to humanize my coursework for high school students processing?",
+      "answer": "Security is our top priority when dealing with is it possible to humanize my coursework for high school students."
+    },
+    {
+      "question": "Is is it possible to humanize my coursework for high school students available today?",
+      "answer": "You can easily integrate is it possible to humanize my coursework for high school students in your workflow."
+    },
+    {
+      "question": "How fast is is it possible to humanize my coursework for high school students processing?",
+      "answer": "Our system uses proprietary NLP to handle is it possible to humanize my coursework for high school students flawlessly."
+    },
+    {
+      "question": "What makes is it possible to humanize my coursework for high school students the best choice?",
+      "answer": "You can easily integrate is it possible to humanize my coursework for high school students in your workflow."
+    },
+    {
+      "question": "Is is it possible to humanize my coursework for high school students available today?",
+      "answer": "You can easily use is it possible to humanize my coursework for high school students in your workflow."
+    },
+    {
+      "question": "Is is it possible to humanize my coursework for high school students available today?",
+      "answer": "Absolutely, it is designed specifically for is it possible to humanize my coursework for high school students."
+    }
+  ]
+}

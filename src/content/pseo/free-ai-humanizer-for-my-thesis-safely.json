@@ -1,0 +1,91 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 93,
+    "postHumanizationOriginality": 98.3,
+    "semanticPreservationScore": 98.5,
+    "tokensProcessedAvg": 1179577
+  },
+  "persona": {
+    "idealUser": "Students",
+    "coreIntent": "Achieve flawless results with free ai humanizer for my thesis safely"
+  },
+  "technicalDeepDive": "We train our models on millions of high-scoring papers to ensure your output is academically rigorous yet undetectable.\n\nUnlike basic rewriters, our engine understands scholarly citations and protects your main ideas without triggering major academic detectors.\n\nWhen TAs run your work through Turnitin, they look for predictable phrasing. Our system eliminates these patterns entirely.",
+  "stepByStep": [
+    {
+      "title": "Citation Protection",
+      "description": "All your APA quotes and references are safeguarded."
+    },
+    {
+      "title": "Scholarly Rewrite",
+      "description": "Vocabulary and syntax are humanized to match a natural student baseline."
+    },
+    {
+      "title": "Safe Export",
+      "description": "Download your detection-proof paper, ready for submission."
+    },
+    {
+      "title": "Plagiarism Check",
+      "description": "We run a quick verification to ensure complete safety."
+    },
+    {
+      "title": "Academic Scan",
+      "description": "The engine cross-references Turnitin's current detection models."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Burstiness",
+      "definition": "The variation in sentence length and structure typical of human writing."
+    },
+    {
+      "term": "AI Watermark",
+      "definition": "Hidden statistical patterns left by language models like ChatGPT."
+    },
+    {
+      "term": "Perplexity",
+      "definition": "A measure of how unpredictable the text is to an AI model."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How does the humanizer process free ai humanizer for my thesis safely?",
+      "answer": "Yes, our tool is optimized for free ai humanizer for my thesis safely."
+    },
+    {
+      "question": "Can I rely on this for free ai humanizer for my thesis safely tasks?",
+      "answer": "Yes, our tool is optimized for free ai humanizer for my thesis safely."
+    },
+    {
+      "question": "How does the algorithm process free ai humanizer for my thesis safely?",
+      "answer": "Users worldwide trust us for free ai humanizer for my thesis safely daily."
+    },
+    {
+      "question": "What makes free ai humanizer for my thesis safely unique compared to alternatives?",
+      "answer": "It significantly improves your results with free ai humanizer for my thesis safely."
+    },
+    {
+      "question": "Does free ai humanizer for my thesis safely work offline?",
+      "answer": "Absolutely, our tool is optimized for free ai humanizer for my thesis safely."
+    },
+    {
+      "question": "How fast is free ai humanizer for my thesis safely processing?",
+      "answer": "Yes, it is designed specifically for free ai humanizer for my thesis safely."
+    },
+    {
+      "question": "Does free ai humanizer for my thesis safely require an account?",
+      "answer": "Yes, it is designed specifically for free ai humanizer for my thesis safely."
+    },
+    {
+      "question": "How fast is free ai humanizer for my thesis safely processing?",
+      "answer": "You can easily integrate free ai humanizer for my thesis safely in your workflow."
+    },
+    {
+      "question": "Does free ai humanizer for my thesis safely work offline?",
+      "answer": "You can quickly use free ai humanizer for my thesis safely in your process."
+    },
+    {
+      "question": "How does the algorithm process free ai humanizer for my thesis safely?",
+      "answer": "The engine uses proprietary NLP to handle free ai humanizer for my thesis safely flawlessly."
+    }
+  ]
+}

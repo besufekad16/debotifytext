@@ -1,0 +1,91 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 85,
+    "postHumanizationOriginality": 99.7,
+    "semanticPreservationScore": 96.5,
+    "tokensProcessedAvg": 545149
+  },
+  "persona": {
+    "idealUser": "Marketers",
+    "coreIntent": "Achieve perfect results with best way to humanize a case study for academic writing"
+  },
+  "technicalDeepDive": "Many students struggle with false positives. HumanifyLab fixes this issue by giving your text the depth of real human writing.\n\nThe result is a cohesive document that flows naturally, guaranteeing a completely safe AI detection score.\n\nUniversities use strict heuristics to flag AI. HumanifyLab counters this by re-mapping the writing flow of your paper.",
+  "stepByStep": [
+    {
+      "title": "Upload Draft",
+      "description": "Paste your thesis draft directly into the dashboard."
+    },
+    {
+      "title": "Academic Scan",
+      "description": "The engine cross-references Turnitin's current detection parameters."
+    },
+    {
+      "title": "Plagiarism Check",
+      "description": "We run a final scan to ensure complete safety."
+    },
+    {
+      "title": "Citation Protection",
+      "description": "All your APA quotes and references are safeguarded."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Semantic Preservation",
+      "definition": "Keeping the original meaning intact while changing the words."
+    },
+    {
+      "term": "AI Watermark",
+      "definition": "Hidden statistical patterns left by language models like ChatGPT."
+    },
+    {
+      "term": "Undetectable AI",
+      "definition": "Text that has been modified to bypass algorithmic detection."
+    },
+    {
+      "term": "Perplexity",
+      "definition": "A measure of how unpredictable the text is to an AI model."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How does the humanizer process best way to humanize a case study for academic writing?",
+      "answer": "Users worldwide rely on us for best way to humanize a case study for academic writing every single day."
+    },
+    {
+      "question": "How do I get started with best way to humanize a case study for academic writing?",
+      "answer": "Absolutely, our tool is optimized for best way to humanize a case study for academic writing."
+    },
+    {
+      "question": "Who uses best way to humanize a case study for academic writing the most?",
+      "answer": "Absolutely, our tool is optimized for best way to humanize a case study for academic writing."
+    },
+    {
+      "question": "How does the algorithm process best way to humanize a case study for academic writing?",
+      "answer": "Security is our top priority when dealing with best way to humanize a case study for academic writing."
+    },
+    {
+      "question": "Will best way to humanize a case study for academic writing save me time?",
+      "answer": "The engine uses proprietary NLP to process best way to humanize a case study for academic writing flawlessly."
+    },
+    {
+      "question": "Is best way to humanize a case study for academic writing 100% safe?",
+      "answer": "Our system uses proprietary NLP to process best way to humanize a case study for academic writing flawlessly."
+    },
+    {
+      "question": "Who benefits from best way to humanize a case study for academic writing the most?",
+      "answer": "Users worldwide trust us for best way to humanize a case study for academic writing every single day."
+    },
+    {
+      "question": "Can I trust this for best way to humanize a case study for academic writing tasks?",
+      "answer": "Security is our top priority when dealing with best way to humanize a case study for academic writing."
+    },
+    {
+      "question": "Is best way to humanize a case study for academic writing detectable?",
+      "answer": "It significantly improves your outputs with best way to humanize a case study for academic writing."
+    },
+    {
+      "question": "How do I get started with best way to humanize a case study for academic writing?",
+      "answer": "You can easily integrate best way to humanize a case study for academic writing in your workflow."
+    }
+  ]
+}

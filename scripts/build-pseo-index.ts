@@ -68,7 +68,8 @@ async function main() {
   // Cluster map: signature -> Array of keywords
   const clusters = new Map<string, string[]>();
 
-  for (const record of records) {
+  for (const row of records) {
+    const record = row as Record<string, any>;
     const rawKeyword = record.keyword || record.Keyword;
     if (!rawKeyword) continue;
     

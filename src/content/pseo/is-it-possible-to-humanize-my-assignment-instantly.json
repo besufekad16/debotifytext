@@ -1,0 +1,91 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 95,
+    "postHumanizationOriginality": 99.8,
+    "semanticPreservationScore": 97.9,
+    "tokensProcessedAvg": 1413911
+  },
+  "persona": {
+    "idealUser": "Researchers",
+    "coreIntent": "Achieve perfect results with is it possible to humanize my assignment instantly"
+  },
+  "technicalDeepDive": "The result is a perfectly structured paper that reads like a human scholar, guaranteeing a completely safe AI detection score.\n\nAcademic institutions use highly sensitive algorithms to flag AI. HumanifyLab counters this by re-evaluating the semantic structure of your paper.\n\nUnlike outdated tools, our engine understands university guidelines and protects your research arguments without triggering GPTZero or Turnitin.\n\nMany researchers struggle with false positives. HumanifyLab fixes this issue by giving your text the depth of real human writing.",
+  "stepByStep": [
+    {
+      "title": "Scholarly Rewrite",
+      "description": "Sentence structures are adjusted to match a natural student baseline."
+    },
+    {
+      "title": "Plagiarism Check",
+      "description": "We run a quick verification to ensure 100% originality."
+    },
+    {
+      "title": "Academic Scan",
+      "description": "The engine cross-references Turnitin's current detection models."
+    },
+    {
+      "title": "Safe Export",
+      "description": "Download your detection-proof paper, ready for submission."
+    },
+    {
+      "title": "Upload Draft",
+      "description": "Paste your assignment directly into the dashboard."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Undetectable AI",
+      "definition": "Text that has been modified to bypass algorithmic detection."
+    },
+    {
+      "term": "Perplexity",
+      "definition": "A measure of how unpredictable the text is to an AI model."
+    },
+    {
+      "term": "Burstiness",
+      "definition": "The variation in sentence length and structure typical of human writing."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Why is humanizing is it possible to humanize my assignment instantly important?",
+      "answer": "Security is our top priority when dealing with is it possible to humanize my assignment instantly."
+    },
+    {
+      "question": "Is is it possible to humanize my assignment instantly free to use?",
+      "answer": "Security is our top priority when dealing with is it possible to humanize my assignment instantly."
+    },
+    {
+      "question": "How does the humanizer process is it possible to humanize my assignment instantly?",
+      "answer": "Privacy is our main focus when dealing with is it possible to humanize my assignment instantly."
+    },
+    {
+      "question": "What makes is it possible to humanize my assignment instantly the best choice?",
+      "answer": "Privacy is our top priority when dealing with is it possible to humanize my assignment instantly."
+    },
+    {
+      "question": "Can I rely on this for is it possible to humanize my assignment instantly tasks?",
+      "answer": "You can quickly integrate is it possible to humanize my assignment instantly in your workflow."
+    },
+    {
+      "question": "Will is it possible to humanize my assignment instantly improve my workflow?",
+      "answer": "Yes, it is designed specifically for is it possible to humanize my assignment instantly."
+    },
+    {
+      "question": "Will is it possible to humanize my assignment instantly improve my workflow?",
+      "answer": "Absolutely, it is designed specifically for is it possible to humanize my assignment instantly."
+    },
+    {
+      "question": "Will is it possible to humanize my assignment instantly save me time?",
+      "answer": "Absolutely, our tool is optimized for is it possible to humanize my assignment instantly."
+    },
+    {
+      "question": "Does is it possible to humanize my assignment instantly require an account?",
+      "answer": "Our system uses advanced NLP to process is it possible to humanize my assignment instantly flawlessly."
+    },
+    {
+      "question": "Can I rely on this for is it possible to humanize my assignment instantly tasks?",
+      "answer": "You can easily integrate is it possible to humanize my assignment instantly in your workflow."
+    }
+  ]
+}

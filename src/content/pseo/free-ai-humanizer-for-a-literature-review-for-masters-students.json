@@ -1,0 +1,87 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 86,
+    "postHumanizationOriginality": 99.7,
+    "semanticPreservationScore": 96.4,
+    "tokensProcessedAvg": 1781667
+  },
+  "persona": {
+    "idealUser": "Students",
+    "coreIntent": "Achieve perfect results with free ai humanizer for a literature review for masters students"
+  },
+  "technicalDeepDive": "When professors run your assignment through Turnitin, they look for robotic patterns. Our system erases these patterns entirely.\n\nUniversities use strict heuristics to detect AI. HumanifyLab counters this by restructuring the lexical density of your assignment.\n\nMany students struggle with false positives. HumanifyLab fixes this issue by giving your text the depth of real human writing.",
+  "stepByStep": [
+    {
+      "title": "Academic Scan",
+      "description": "The engine analyzes Turnitin's current detection parameters."
+    },
+    {
+      "title": "Plagiarism Check",
+      "description": "We run a final scan to ensure complete safety."
+    },
+    {
+      "title": "Scholarly Rewrite",
+      "description": "Vocabulary and syntax are humanized to match a natural student baseline."
+    },
+    {
+      "title": "Upload Draft",
+      "description": "Paste your assignment directly into the dashboard."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "AI Watermark",
+      "definition": "Hidden statistical patterns left by language models like ChatGPT."
+    },
+    {
+      "term": "Burstiness",
+      "definition": "The variation in sentence length and structure typical of human writing."
+    },
+    {
+      "term": "Semantic Preservation",
+      "definition": "Keeping the original meaning intact while changing the words."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How does the algorithm process free ai humanizer for a literature review for masters students?",
+      "answer": "Absolutely, it is designed specifically for free ai humanizer for a literature review for masters students."
+    },
+    {
+      "question": "Is free ai humanizer for a literature review for masters students available today?",
+      "answer": "Yes, it is designed specifically for free ai humanizer for a literature review for masters students."
+    },
+    {
+      "question": "How do I use free ai humanizer for a literature review for masters students?",
+      "answer": "It drastically improves your outputs with free ai humanizer for a literature review for masters students."
+    },
+    {
+      "question": "How does the humanizer process free ai humanizer for a literature review for masters students?",
+      "answer": "Customers worldwide trust us for free ai humanizer for a literature review for masters students every single day."
+    },
+    {
+      "question": "How does the humanizer process free ai humanizer for a literature review for masters students?",
+      "answer": "The engine uses advanced NLP to handle free ai humanizer for a literature review for masters students flawlessly."
+    },
+    {
+      "question": "Does free ai humanizer for a literature review for masters students require an account?",
+      "answer": "You can easily integrate free ai humanizer for a literature review for masters students in your workflow."
+    },
+    {
+      "question": "Will free ai humanizer for a literature review for masters students save me time?",
+      "answer": "You can easily integrate free ai humanizer for a literature review for masters students in your workflow."
+    },
+    {
+      "question": "Will free ai humanizer for a literature review for masters students save me time?",
+      "answer": "You can quickly use free ai humanizer for a literature review for masters students in your process."
+    },
+    {
+      "question": "Will free ai humanizer for a literature review for masters students improve my workflow?",
+      "answer": "You can quickly integrate free ai humanizer for a literature review for masters students in your workflow."
+    },
+    {
+      "question": "What makes free ai humanizer for a literature review for masters students the best choice?",
+      "answer": "You can easily integrate free ai humanizer for a literature review for masters students in your process."
+    }
+  ]
+}

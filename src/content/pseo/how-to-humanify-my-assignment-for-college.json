@@ -1,0 +1,87 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 95,
+    "postHumanizationOriginality": 99.4,
+    "semanticPreservationScore": 95.8,
+    "tokensProcessedAvg": 1629057
+  },
+  "persona": {
+    "idealUser": "Professionals",
+    "coreIntent": "Achieve perfect results with how to humanify my assignment for college"
+  },
+  "technicalDeepDive": "When TAs run your work through Turnitin, they look for predictable phrasing. Our system removes these patterns entirely.\n\nUniversities use highly sensitive models to flag AI. HumanifyLab counters this by re-mapping the writing flow of your essay.\n\nUnlike outdated spinners, our engine understands university guidelines and preserves your main ideas without triggering major academic detectors.\n\nThe result is a logically sound document that exhibits natural human burstiness, guaranteeing a 0% AI detection score.",
+  "stepByStep": [
+    {
+      "title": "Academic Scan",
+      "description": "The engine cross-references Turnitin's current detection models."
+    },
+    {
+      "title": "Upload Draft",
+      "description": "Paste your thesis draft directly into the secure portal."
+    },
+    {
+      "title": "Citation Protection",
+      "description": "All your Chicago quotes and references are ignored by the rewriter."
+    },
+    {
+      "title": "Safe Export",
+      "description": "Download your plagiarism-free paper, ready for submission."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Semantic Preservation",
+      "definition": "Keeping the original meaning intact while changing the words."
+    },
+    {
+      "term": "AI Watermark",
+      "definition": "Hidden statistical patterns left by language models like ChatGPT."
+    },
+    {
+      "term": "Perplexity",
+      "definition": "A measure of how unpredictable the text is to an AI model."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Who uses how to humanify my assignment for college the most?",
+      "answer": "You can quickly integrate how to humanify my assignment for college in your workflow."
+    },
+    {
+      "question": "Who benefits from how to humanify my assignment for college the most?",
+      "answer": "Absolutely, our tool is optimized for how to humanify my assignment for college."
+    },
+    {
+      "question": "Will how to humanify my assignment for college improve my workflow?",
+      "answer": "You can easily integrate how to humanify my assignment for college in your process."
+    },
+    {
+      "question": "Is how to humanify my assignment for college detectable?",
+      "answer": "It drastically improves your results with how to humanify my assignment for college."
+    },
+    {
+      "question": "Can I trust this for how to humanify my assignment for college tasks?",
+      "answer": "Yes, our tool is optimized for how to humanify my assignment for college."
+    },
+    {
+      "question": "Will how to humanify my assignment for college improve my workflow?",
+      "answer": "It significantly enhances your outputs with how to humanify my assignment for college."
+    },
+    {
+      "question": "Is how to humanify my assignment for college available today?",
+      "answer": "You can quickly use how to humanify my assignment for college in your workflow."
+    },
+    {
+      "question": "Is how to humanify my assignment for college 100% safe?",
+      "answer": "Security is our main focus when dealing with how to humanify my assignment for college."
+    },
+    {
+      "question": "Who uses how to humanify my assignment for college the most?",
+      "answer": "It drastically enhances your outputs with how to humanify my assignment for college."
+    },
+    {
+      "question": "How do I get started with how to humanify my assignment for college?",
+      "answer": "Yes, it is designed specifically for how to humanify my assignment for college."
+    }
+  ]
+}

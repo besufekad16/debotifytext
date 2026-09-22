@@ -1,6 +1,6 @@
 # ============================================================
 # HumanifyLab — robots.txt
-# https://www.humanifylab.com
+# https://humanifylab.com
 # ============================================================
 
 # ── Default: allow all public content ────────────────────────
@@ -114,7 +114,7 @@ Allow: /
 Disallow: /api/
 
 # AI / GEO briefing for assistants
-# https://www.humanifylab.com/llms.txt
+# https://humanifylab.com/llms.txt
 
-# ── Sitemap index (8 PSEO cluster sitemaps + main) ──────────
-Sitemap: https://www.humanifylab.com/sitemap.xml
+# ── Sitemap index (Dynamic Next.js Sitemaps) ──────────
+Sitemap: https://humanifylab.com/sitemap.xml

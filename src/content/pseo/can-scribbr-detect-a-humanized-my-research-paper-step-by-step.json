@@ -1,0 +1,91 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 97,
+    "postHumanizationOriginality": 99.4,
+    "semanticPreservationScore": 99.1,
+    "tokensProcessedAvg": 2440601
+  },
+  "persona": {
+    "idealUser": "Researchers",
+    "coreIntent": "Achieve perfect results with can scribbr detect a humanized my research paper step by step"
+  },
+  "technicalDeepDive": "Academic institutions use strict heuristics to flag AI. HumanifyLab counters this by re-mapping the writing flow of your paper.\n\nUnlike basic tools, our engine understands university guidelines and preserves your main ideas without triggering major academic detectors.\n\nMany researchers struggle with false positives. HumanifyLab fixes this issue by giving your text the depth of real human writing.",
+  "stepByStep": [
+    {
+      "title": "Plagiarism Check",
+      "description": "We run a final scan to ensure 100% originality."
+    },
+    {
+      "title": "Academic Scan",
+      "description": "The engine cross-references Turnitin's current detection models."
+    },
+    {
+      "title": "Upload Draft",
+      "description": "Paste your assignment directly into the dashboard."
+    },
+    {
+      "title": "Citation Protection",
+      "description": "All your MLA quotes and references are safeguarded."
+    },
+    {
+      "title": "Safe Export",
+      "description": "Download your plagiarism-free paper, ready for submission."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Semantic Preservation",
+      "definition": "Keeping the original meaning intact while changing the words."
+    },
+    {
+      "term": "AI Watermark",
+      "definition": "Hidden statistical patterns left by language models like ChatGPT."
+    },
+    {
+      "term": "Perplexity",
+      "definition": "A measure of how unpredictable the text is to an AI model."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How does the humanizer process can scribbr detect a humanized my research paper step by step?",
+      "answer": "You can quickly use can scribbr detect a humanized my research paper step by step in your workflow."
+    },
+    {
+      "question": "Is can scribbr detect a humanized my research paper step by step 100% safe?",
+      "answer": "The engine uses proprietary NLP to process can scribbr detect a humanized my research paper step by step flawlessly."
+    },
+    {
+      "question": "How fast is can scribbr detect a humanized my research paper step by step processing?",
+      "answer": "Customers worldwide rely on us for can scribbr detect a humanized my research paper step by step daily."
+    },
+    {
+      "question": "How does the algorithm process can scribbr detect a humanized my research paper step by step?",
+      "answer": "It drastically enhances your outputs with can scribbr detect a humanized my research paper step by step."
+    },
+    {
+      "question": "How fast is can scribbr detect a humanized my research paper step by step processing?",
+      "answer": "Privacy is our main focus when dealing with can scribbr detect a humanized my research paper step by step."
+    },
+    {
+      "question": "Is can scribbr detect a humanized my research paper step by step detectable?",
+      "answer": "Users worldwide trust us for can scribbr detect a humanized my research paper step by step daily."
+    },
+    {
+      "question": "How does the algorithm process can scribbr detect a humanized my research paper step by step?",
+      "answer": "Our system uses advanced NLP to handle can scribbr detect a humanized my research paper step by step flawlessly."
+    },
+    {
+      "question": "Will can scribbr detect a humanized my research paper step by step save me time?",
+      "answer": "Our system uses advanced NLP to handle can scribbr detect a humanized my research paper step by step flawlessly."
+    },
+    {
+      "question": "What makes can scribbr detect a humanized my research paper step by step the top choice?",
+      "answer": "Customers worldwide trust us for can scribbr detect a humanized my research paper step by step every single day."
+    },
+    {
+      "question": "Is can scribbr detect a humanized my research paper step by step detectable?",
+      "answer": "Yes, our tool is optimized for can scribbr detect a humanized my research paper step by step."
+    }
+  ]
+}
