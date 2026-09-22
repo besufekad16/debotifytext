@@ -66,7 +66,7 @@ const config = {
       const originalExternals = config.externals ?? [];
       config.externals = [
         ...(Array.isArray(originalExternals) ? originalExternals : [originalExternals]),
-        ({ request }: { request?: string }, callback: (err?: Error | null, result?: string) => void) => {
+        ({ request }, callback) => {
           if (request && request.includes('pseo-registry.json')) {
             // Mark as CommonJS external so Node.js reads it from disk
             return callback(null, `commonjs ${request}`);
