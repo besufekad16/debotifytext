@@ -295,7 +295,7 @@ export default async function PseoPage({ params }: PageProps) {
         {/* Internal Linking */}
         <section className="bg-white py-16 border-t border-[rgba(94,61,42,0.15)] relative z-10 shadow-sm">
           <div className="max-w-6xl mx-auto px-6">
-            <h2 className="text-3xl font-extrabold mb-10 text-center hl-gradient-text">Explore Related Topics</h2>
+            <h2 className="text-3xl font-extrabold mb-10 text-center hl-gradient-text">Explore Related AI Humanizer Topics</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {relatedSlugs.map((relatedSlug) => {
                 const relatedContract = getKeywordBySlug(relatedSlug);
@@ -323,7 +323,7 @@ export default async function PseoPage({ params }: PageProps) {
         <section className="px-6 py-24 text-center bg-white relative">
           <div className="absolute inset-0 bg-gradient-to-t from-[#faf6f1] to-white pointer-events-none" />
           <div className="relative z-10">
-            <h2 className="text-3xl md:text-5xl font-extrabold mb-6 hl-gradient-text">Ready to perfect your {contract.primaryKeyword}?</h2>
+            <h2 className="text-3xl md:text-5xl font-extrabold mb-6 hl-gradient-text">Ready to humanize your AI text and bypass detectors?</h2>
             <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
               Join thousands of professionals using HumanifyLab to bypass AI detectors and create flawless, human-like content instantly.
             </p>
