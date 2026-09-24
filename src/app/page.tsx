@@ -2,9 +2,9 @@ import { type Metadata } from "next";
 import UnifiedHomePage from "./UnifiedHomePage";
 
 export const metadata: Metadata = {
-  title: "Humanify AI Text Free — HumanifyLab #1 AI Humanizer & Detector Bypass",
+  title: "Humanize AI Text Free | #1 AI Humanizer & AI Detector Bypass Tool",
   description:
-    "Humanify AI text instantly with HumanifyLab — the #1 free AI humanizer. Humanify any text from ChatGPT, Claude & Gemini to bypass Turnitin, GPTZero, Originality.ai & Copyleaks and score 0% AI. No sign-up needed.",
+    "Looking for how to avoid AI detection? Use HumanifyLab to humanize AI text from ChatGPT, Claude, and Gemini. The best AI humanizer to bypass AI detectors for free.",
   keywords: [
     "HumanifyLab",
     "humanify",
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
     canonical: "https://www.humanifylab.com",
   },
   openGraph: {
-    title: "Humanify AI Text Free — HumanifyLab #1 AI Humanizer",
+    title: "Humanize AI Text Free | #1 AI Humanizer & AI Detector Bypass Tool",
     description:
-      "Humanify AI text from ChatGPT, Claude & Gemini into natural, undetectable writing. Bypass Turnitin, GPTZero, Originality.ai and Copyleaks. Free, no sign-up required.",
+      "Looking for how to avoid AI detection? Use HumanifyLab to humanize AI text from ChatGPT, Claude, and Gemini. The best AI humanizer to bypass AI detectors for free.",
     url: "https://www.humanifylab.com",
     siteName: "HumanifyLab",
     images: [
@@ -57,9 +57,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Humanify AI Text Free — HumanifyLab #1 AI Humanizer",
+    title: "Humanize AI Text Free | #1 AI Humanizer & AI Detector Bypass Tool",
     description:
-      "Humanify AI text from ChatGPT, Claude & Gemini into natural, undetectable writing. Bypass Turnitin, GPTZero, Originality.ai and Copyleaks. Free, no sign-up required.",
+      "Looking for how to avoid AI detection? Use HumanifyLab to humanize AI text from ChatGPT, Claude, and Gemini. The best AI humanizer to bypass AI detectors for free.",
     images: ["https://www.humanifylab.com/forOpenGraph.png"],
     site: "@humanifylab",
     creator: "@humanifylab",

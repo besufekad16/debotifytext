@@ -40,14 +40,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   // Construct a powerful meta description (under ~150 chars) integrating secondary keywords
   const secondaryKeywordsStr = contract.secondaryKeywords.slice(0, 2).join(", ");
-  let metaDesc = `${contract.content.directAnswer} Learn more about ${secondaryKeywordsStr} with HumanifyLab.`;
+  let metaDesc = `${contract.content.directAnswer} Humanize AI text and bypass AI detection for ${secondaryKeywordsStr} with HumanifyLab.`;
   if (metaDesc.length > 155) {
     metaDesc = metaDesc.substring(0, 152) + "...";
   }
 
   // Capitalize primary keyword for the title
   const titleCaps = contract.primaryKeyword.replace(/\b\w/g, l => l.toUpperCase());
-  const optimizedTitle = `${titleCaps} | AI Humanizer by HumanifyLab`;
+  const optimizedTitle = `${titleCaps} | Free AI Humanizer to Bypass AI Detection`;
 
   return {
     title: { absolute: optimizedTitle },

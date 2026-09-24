@@ -922,7 +922,7 @@ export default function UnifiedHomePage() {
                     className="hero-enter hero-delay-2 block text-[1.85rem] font-bold leading-[1.12] text-[var(--hl-ink)] sm:text-[2.6rem] lg:text-[3.1rem]"
                     style={{ letterSpacing: "-0.03em" }}
                   >
-                    Humanize AI text. Bypass detectors.
+                    Humanize AI text. Bypass AI detection.
                   </span>
                   <span
                     className="hero-enter hero-gradient-live mt-2 block text-[2.05rem] leading-[1.08] sm:text-[2.9rem] lg:text-[3.4rem]"
@@ -1418,7 +1418,7 @@ export default function UnifiedHomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-10">
               <h2 className="mb-2 text-3xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-4xl">
-                How it <span className="hl-gradient-text">works</span>
+                How to <span className="hl-gradient-text">bypass AI detection</span>
               </h2>
               <p className="text-sm text-gray-500 tracking-wide">Three steps. Under 30 seconds.</p>
             </div>
@@ -1486,7 +1486,7 @@ export default function UnifiedHomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-10">
               <h2 className="mb-3 text-3xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-4xl">
-                What makes <span className="hl-gradient-text">it work</span>
+                How our <span className="hl-gradient-text">AI humanizer works</span>
               </h2>
               <p className="text-gray-500 max-w-lg mx-auto text-sm leading-relaxed">
                 Under the hood, a purpose-built rewriting engine — not a generic LLM wrapper — handles every nuance of natural language.
@@ -1715,7 +1715,7 @@ export default function UnifiedHomePage() {
             <div className="text-center mb-12">
               <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--hl-mint-deep)]">FAQ</span>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
-                Frequently asked questions
+                Frequently asked questions about our AI humanizer
               </h2>
             </div>
 

@@ -10,10 +10,10 @@ import { TooltipProvider } from "~/components/ui/tooltip";
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.humanifylab.com'),
   title: {
-    default: "AI Humanizer — Humanize AI Text & Bypass AI Detectors | HumanifyLab",
+    default: "AI Humanizer: Humanize AI Text & Bypass AI Detectors | HumanifyLab",
     template: "%s | HumanifyLab"
   },
-  description: "HumanifyLab is a professional AI humanizer that rewrites ChatGPT, Claude & Gemini text into natural human writing that passes Turnitin, GPTZero, Originality.ai and every major AI detector. Free to try — no sign-up required.",
+  description: "Use HumanifyLab's AI humanizer tool to humanize AI text and easily bypass AI detectors like Turnitin and GPTZero. Rewrite ChatGPT content to 100% human for free.",
   keywords: [
     'humanifylab',
     'humanify',
