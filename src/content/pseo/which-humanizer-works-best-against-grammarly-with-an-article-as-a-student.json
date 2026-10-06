@@ -9,7 +9,7 @@
     "idealUser": "Marketers",
     "coreIntent": "Achieve flawless results with which humanizer works best against grammarly with an article as a student"
   },
-  "technicalDeepDive": "The result is a cohesive submission that reads like a human scholar, guaranteeing a completely safe AI detection score.\n\nWe train our models on millions of peer-reviewed essays to ensure your output is academically rigorous yet undetectable.\n\nWhen educators run your work through Turnitin, they look for robotic patterns. Our system removes these watermarks entirely.\n\nAcademic institutions use highly sensitive heuristics to flag AI. HumanifyLab counters this by re-mapping the lexical density of your paper.",
+  "technicalDeepDive": "The result is a cohesive submission that reads like a human scholar, guaranteeing a completely safe AI detection score.\n\nWe train our models on millions of peer-reviewed essays to ensure your output is academically rigorous yet undetectable.\n\nWhen educators run your work through Turnitin, they look for robotic patterns. Our system removes these watermarks entirely.\n\nAcademic institutions use highly sensitive heuristics to flag AI. DebotifyText counters this by re-mapping the lexical density of your paper.",
   "stepByStep": [
     {
       "title": "Upload Draft",

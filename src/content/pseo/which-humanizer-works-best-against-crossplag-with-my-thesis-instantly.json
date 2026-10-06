@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with which humanizer works best against crossplag with my thesis instantly"
   },
-  "technicalDeepDive": "When TAs run your work through Turnitin, they look for robotic patterns. Our system eliminates these watermarks entirely.\n\nUniversities use highly sensitive models to flag AI. HumanifyLab counters this by re-mapping the lexical density of your essay.\n\nWe train our algorithms on millions of peer-reviewed essays to ensure your output is proficient yet undetectable.",
+  "technicalDeepDive": "When TAs run your work through Turnitin, they look for robotic patterns. Our system eliminates these watermarks entirely.\n\nUniversities use highly sensitive models to flag AI. DebotifyText counters this by re-mapping the lexical density of your essay.\n\nWe train our algorithms on millions of peer-reviewed essays to ensure your output is proficient yet undetectable.",
   "stepByStep": [
     {
       "title": "Citation Protection",

@@ -9,7 +9,7 @@
     "idealUser": "Writers",
     "coreIntent": "Achieve perfect results with how to trick safeassign with my creative writing without getting caught"
   },
-  "technicalDeepDive": "By analyzing vast amounts of human writing samples, our engine rewrites your content at the syntactic level.\n\nHumanifyLab uses cutting-edge machine learning to identify and remove robotic footprints from any text.\n\nDetectors look for predictable words. We increase perplexity to make your text completely natural.",
+  "technicalDeepDive": "By analyzing vast amounts of human writing samples, our engine rewrites your content at the syntactic level.\n\nDebotifyText uses cutting-edge machine learning to identify and remove robotic footprints from any text.\n\nDetectors look for predictable words. We increase perplexity to make your text completely natural.",
   "stepByStep": [
     {
       "title": "Input Text",

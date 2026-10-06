@@ -4,10 +4,10 @@ import { auth } from "@clerk/nextjs/server";
 import { db } from "~/server/db";
 import { sendPayout } from "~/server/utils/oxapay-client";
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://humanifylab.com";
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://debotifytext.com";
 
 function generateReferralCode(count: number): string {
-  return `humanify-${String(count + 1).padStart(3, "0")}`;
+  return `debotify-${String(count + 1).padStart(3, "0")}`;
 }
 
 export async function registerAffiliate(): Promise<{

@@ -223,8 +223,8 @@ export default function PricingPageClient({ isTeamMember = false, hasSubscriptio
     return (
       <div className="min-h-screen bg-white">
         <div className="flex min-h-[80vh] items-center justify-center">
-          <div className="inline-flex items-center gap-3 rounded-full border border-gray-200 bg-white px-5 py-3 text-sm font-medium text-gray-500 shadow-sm">
-            <Loader2 className="h-4 w-4 animate-spin text-[var(--hl-mint-deep)]" /> Fetching plans…
+          <div className="inline-flex items-center gap-3 rounded-full border border-slate-100 bg-white px-5 py-3 text-sm font-medium text-slate-400 shadow-sm">
+            <Loader2 className="h-4 w-4 animate-spin text-green-700" /> Fetching plans…
           </div>
         </div>
       </div>
@@ -277,17 +277,17 @@ export default function PricingPageClient({ isTeamMember = false, hasSubscriptio
           </div>
         </section>
 
-        <div className="mt-16 rounded-xl border border-gray-200 bg-[#faf6f1] p-8 text-center">
-          <h3 className="mb-3 text-[1.15rem] font-bold text-gray-900">
+        <div className="mt-16 rounded-xl border border-slate-100 bg-green-50 p-8 text-center">
+          <h3 className="mb-3 text-[1.15rem] font-bold text-slate-900">
             Need Help Choosing?
           </h3>
-          <p className="mb-4 text-[13px] text-gray-500">
+          <p className="mb-4 text-[13px] text-slate-400">
             Not sure which plan is right for you? Contact our support team for personalized recommendations.
           </p>
           <Button
             variant="outline"
             size="lg"
-            className="border-2 border-[var(--hl-mint-deep)] text-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint-deep)] hover:text-white transition-colors"
+            className="border-2 border-green-700 text-green-700 hover:bg-green-700 hover:text-white transition-colors"
             onClick={() => router.push("/contact")}
           >
             Contact Support
@@ -295,30 +295,30 @@ export default function PricingPageClient({ isTeamMember = false, hasSubscriptio
         </div>
 
         {/* Affiliate callout */}
-        <div className="mt-8 rounded-2xl border border-[rgba(94,61,42,0.18)] bg-[#faf6f1] p-8">
+        <div className="mt-8 rounded-2xl border border-[rgba(21,128,61,0.18)] bg-green-50 p-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="text-center sm:text-left">
               <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
-                <span className="text-xs font-bold uppercase tracking-widest text-[var(--hl-mint-deep)] bg-[var(--hl-mint-deep)]/10 px-2.5 py-0.5 rounded-full">
+                <span className="text-xs font-bold uppercase tracking-widest text-green-700 bg-green-700/10 px-2.5 py-0.5 rounded-full">
                   Affiliate Program
                 </span>
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-1">
-                Share HumanifyLab. Earn 10% in USDT.
+              <h3 className="text-lg font-bold text-slate-900 mb-1">
+                Share DebotifyText. Earn 10% in USDT.
               </h3>
-              <p className="text-sm text-gray-500 max-w-md">
+              <p className="text-sm text-slate-400 max-w-md">
                 Refer a friend and earn 10% of their first payment — paid directly to your crypto wallet. No cap, no expiry.
               </p>
-              <div className="flex flex-wrap gap-4 mt-3 justify-center sm:justify-start text-xs text-gray-500">
-                <span className="flex items-center gap-1"><span className="text-[var(--hl-mint)] font-bold">✓</span> Paid in USDT</span>
-                <span className="flex items-center gap-1"><span className="text-[var(--hl-mint)] font-bold">✓</span> No KYC needed</span>
-                <span className="flex items-center gap-1"><span className="text-[var(--hl-mint)] font-bold">✓</span> Instant signup</span>
-                <span className="flex items-center gap-1"><span className="text-[var(--hl-mint)] font-bold">✓</span> Works worldwide</span>
+              <div className="flex flex-wrap gap-4 mt-3 justify-center sm:justify-start text-xs text-slate-400">
+                <span className="flex items-center gap-1"><span className="text-green-600 font-bold">✓</span> Paid in USDT</span>
+                <span className="flex items-center gap-1"><span className="text-green-600 font-bold">✓</span> No KYC needed</span>
+                <span className="flex items-center gap-1"><span className="text-green-600 font-bold">✓</span> Instant signup</span>
+                <span className="flex items-center gap-1"><span className="text-green-600 font-bold">✓</span> Works worldwide</span>
               </div>
             </div>
             <Button
               size="lg"
-              className="shrink-0 rounded-xl bg-[var(--hl-mint-deep)] hover:bg-[#5e3d2a] text-white font-semibold px-8"
+              className="shrink-0 rounded-xl bg-green-700 hover:bg-green-800 text-white font-semibold px-8"
               onClick={() => router.push("/affiliate")}
             >
               Start Earning

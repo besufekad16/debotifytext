@@ -9,7 +9,7 @@
     "idealUser": "Writers",
     "coreIntent": "Achieve perfect results with how to trick canvas with my paper online"
   },
-  "technicalDeepDive": "We train our algorithms on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nUnlike basic rewriters, our engine understands university guidelines and protects your research arguments without triggering major academic detectors.\n\nWhen TAs run your work through Turnitin, they look for robotic patterns. Our system eliminates these watermarks entirely.\n\nColleges use strict heuristics to detect AI. HumanifyLab counters this by re-evaluating the lexical density of your essay.",
+  "technicalDeepDive": "We train our algorithms on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nUnlike basic rewriters, our engine understands university guidelines and protects your research arguments without triggering major academic detectors.\n\nWhen TAs run your work through Turnitin, they look for robotic patterns. Our system eliminates these watermarks entirely.\n\nColleges use strict heuristics to detect AI. DebotifyText counters this by re-evaluating the lexical density of your essay.",
   "stepByStep": [
     {
       "title": "Academic Scan",

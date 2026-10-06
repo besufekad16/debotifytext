@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve perfect results with what is the best tool to bypass quillbot with my essay for high school students"
   },
-  "technicalDeepDive": "We train our algorithms on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nColleges use highly sensitive heuristics to flag AI. HumanifyLab counters this by re-mapping the writing flow of your paper.\n\nWhen TAs run your work through Turnitin, they look for predictable phrasing. Our system removes these watermarks entirely.",
+  "technicalDeepDive": "We train our algorithms on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nColleges use highly sensitive heuristics to flag AI. DebotifyText counters this by re-mapping the writing flow of your paper.\n\nWhen TAs run your work through Turnitin, they look for predictable phrasing. Our system removes these watermarks entirely.",
   "stepByStep": [
     {
       "title": "Plagiarism Check",

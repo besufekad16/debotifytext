@@ -9,7 +9,7 @@
     "idealUser": "Writers",
     "coreIntent": "Achieve perfect results with which humanizer works best against turnitin with an annotated bibliography for university students"
   },
-  "technicalDeepDive": "Unlike outdated tools, our engine understands academic formatting and maintains your main ideas without triggering major academic detectors.\n\nAcademic institutions use highly sensitive heuristics to flag AI. HumanifyLab counters this by restructuring the semantic structure of your paper.\n\nThe result is a logically sound paper that flows naturally, guaranteeing a 0% AI detection score.",
+  "technicalDeepDive": "Unlike outdated tools, our engine understands academic formatting and maintains your main ideas without triggering major academic detectors.\n\nAcademic institutions use highly sensitive heuristics to flag AI. DebotifyText counters this by restructuring the semantic structure of your paper.\n\nThe result is a logically sound paper that flows naturally, guaranteeing a 0% AI detection score.",
   "stepByStep": [
     {
       "title": "Upload Draft",

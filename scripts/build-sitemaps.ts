@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-const BASE_URL = "https://www.humanifylab.com";
+const BASE_URL = "https://www.debotifytext.com";
 
 interface KeywordContract {
   primaryKeyword: string;

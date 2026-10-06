@@ -9,7 +9,7 @@
     "idealUser": "Writers",
     "coreIntent": "Achieve flawless results with which humanizer works best against copyleaks with my essay for high school students"
   },
-  "technicalDeepDive": "We train our models on millions of peer-reviewed papers to ensure your output is proficient yet undetectable.\n\nUnlike basic rewriters, our engine understands university guidelines and maintains your research arguments without triggering major academic detectors.\n\nAcademic institutions use highly sensitive heuristics to detect AI. HumanifyLab counters this by re-evaluating the writing flow of your paper.\n\nMany researchers struggle with false positives. HumanifyLab solves this by giving your text the depth of real human writing.",
+  "technicalDeepDive": "We train our models on millions of peer-reviewed papers to ensure your output is proficient yet undetectable.\n\nUnlike basic rewriters, our engine understands university guidelines and maintains your research arguments without triggering major academic detectors.\n\nAcademic institutions use highly sensitive heuristics to detect AI. DebotifyText counters this by re-evaluating the writing flow of your paper.\n\nMany researchers struggle with false positives. DebotifyText solves this by giving your text the depth of real human writing.",
   "stepByStep": [
     {
       "title": "Academic Scan",

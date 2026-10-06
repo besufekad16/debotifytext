@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve flawless results with can scribbr detect a humanized a lab report as a student"
   },
-  "technicalDeepDive": "Many students struggle with incorrect AI flagging. HumanifyLab solves this by giving your text the depth of real human writing.\n\nAcademic institutions use highly sensitive heuristics to flag AI. HumanifyLab counters this by re-evaluating the writing flow of your essay.\n\nWhen TAs run your work through Turnitin, they look for predictable phrasing. Our system eliminates these patterns entirely.",
+  "technicalDeepDive": "Many students struggle with incorrect AI flagging. DebotifyText solves this by giving your text the depth of real human writing.\n\nAcademic institutions use highly sensitive heuristics to flag AI. DebotifyText counters this by re-evaluating the writing flow of your essay.\n\nWhen TAs run your work through Turnitin, they look for predictable phrasing. Our system eliminates these patterns entirely.",
   "stepByStep": [
     {
       "title": "Upload Draft",

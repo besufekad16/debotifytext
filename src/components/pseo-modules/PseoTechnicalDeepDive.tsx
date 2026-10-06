@@ -8,7 +8,7 @@ export function PseoTechnicalDeepDive({ keyword, content }: { keyword: string; c
     <section className="my-32 w-full max-w-6xl mx-auto px-6">
       <div className="bg-slate-900 rounded-[3rem] p-10 md:p-20 shadow-2xl relative overflow-hidden border border-slate-800">
         {/* Glow effects */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-[var(--hl-mint-deep)]/20 via-blue-500/10 to-transparent rounded-full blur-[100px] -z-10 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-green-700/20 via-blue-500/10 to-transparent rounded-full blur-[100px] -z-10 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-emerald-500/10 via-transparent to-transparent rounded-full blur-[100px] -z-10 pointer-events-none" />
         
         {/* Decorative Grid */}
@@ -18,12 +18,12 @@ export function PseoTechnicalDeepDive({ keyword, content }: { keyword: string; c
           {/* Header Column */}
           <div className="md:w-1/3 shrink-0">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/5 border border-white/10 shadow-inner mb-8">
-              <Cpu className="h-8 w-8 text-[var(--hl-mint-bright)] drop-shadow-[0_0_15px_rgba(var(--hl-mint-bright-rgb),0.5)]" />
+              <Cpu className="h-8 w-8 text-green-500 drop-shadow-[0_0_15px_rgba(var(--hl-mint-bright-rgb),0.5)]" />
             </div>
             <h2 className="text-3xl md:text-4xl font-black text-white capitalize tracking-tight leading-tight mb-4">
               Technical Architecture
             </h2>
-            <p className="text-[var(--hl-mint-bright)] font-bold tracking-widest uppercase text-sm">
+            <p className="text-green-500 font-bold tracking-widest uppercase text-sm">
               Proprietary Engine
             </p>
           </div>
@@ -32,7 +32,7 @@ export function PseoTechnicalDeepDive({ keyword, content }: { keyword: string; c
           <div className="md:w-2/3">
             <div className="space-y-8">
               {content.split('\n\n').map((paragraph, idx) => (
-                <div key={idx} className="relative pl-8 md:pl-10 before:absolute before:left-0 before:top-3 before:w-3 before:h-3 before:bg-white/10 before:border before:border-[var(--hl-mint-bright)]/50 before:rounded-full">
+                <div key={idx} className="relative pl-8 md:pl-10 before:absolute before:left-0 before:top-3 before:w-3 before:h-3 before:bg-white/10 before:border before:border-green-500/50 before:rounded-full">
                   <p className="text-lg md:text-xl text-slate-300 leading-relaxed font-light">
                     {paragraph}
                   </p>

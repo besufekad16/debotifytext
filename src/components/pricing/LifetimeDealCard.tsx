@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
-import { BadgeCheck, Check, Loader2, Sparkles } from "lucide-react";
+import { BadgeCheck, Check, Loader2, Feather } from "lucide-react";
 import { Button } from "~/components/ui/button";
 
 interface LifetimeDealCardProps {
@@ -101,14 +101,14 @@ export default function LifetimeDealCard({ isTeamMember = false }: LifetimeDealC
   }
 
   return (
-    <div id="lifetime" className="relative mt-16 scroll-mt-28 overflow-hidden rounded-3xl border border-white/10 bg-[var(--hl-ink)] text-white shadow-2xl">
+    <div id="lifetime" className="relative mt-16 scroll-mt-28 overflow-hidden rounded-3xl border border-white/10 bg-slate-900 text-white shadow-2xl">
       <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[var(--hl-offer)]/20 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-[var(--hl-mint-bright)]/20 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-green-500/20 blur-3xl" />
 
       <div className="relative grid gap-10 p-8 sm:p-10 md:p-14 lg:grid-cols-[1.2fr_1fr] lg:items-center">
         <div>
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--hl-offer)]/40 bg-[var(--hl-offer)]/10 px-4 py-1.5">
-            <Sparkles className="h-3.5 w-3.5 text-[var(--hl-offer)]" />
+            <Feather className="h-3.5 w-3.5 text-[var(--hl-offer)]" />
             <span className="text-xs font-bold uppercase tracking-widest text-[var(--hl-offer)]">
               Back-to-School · Lifetime Deal
             </span>
@@ -123,7 +123,7 @@ export default function LifetimeDealCard({ isTeamMember = false }: LifetimeDealC
 
           <p className="mt-5 max-w-md text-base text-white/75">
             One payment, lifetime access. Your 20,000-word balance refreshes
-            every month for as long as HumanifyLab exists — no subscription,
+            every month for as long as DebotifyText exists — no subscription,
             no renewal, no surprises.
           </p>
 
@@ -137,11 +137,11 @@ export default function LifetimeDealCard({ isTeamMember = false }: LifetimeDealC
           </ul>
         </div>
 
-        <div className="rounded-2xl bg-white p-8 text-center text-gray-900 shadow-xl">
+        <div className="rounded-2xl bg-white p-8 text-center text-slate-900 shadow-xl">
           {displayPrice && (
             <>
-              <div className="text-5xl font-black text-[var(--hl-ink)]">{displayPrice}</div>
-              <div className="mt-1 text-sm text-gray-500">
+              <div className="text-5xl font-black text-slate-900">{displayPrice}</div>
+              <div className="mt-1 text-sm text-slate-400">
                 one-time payment · yours for life
               </div>
             </>
@@ -151,7 +151,7 @@ export default function LifetimeDealCard({ isTeamMember = false }: LifetimeDealC
             size="lg"
             onClick={onClaim}
             disabled={isSubscribing || isLifetime || isTeamMember}
-            className="mt-6 w-full rounded-2xl font-black uppercase tracking-wide text-[var(--hl-ink)] hover:opacity-95"
+            className="mt-6 w-full rounded-2xl font-black uppercase tracking-wide text-slate-900 hover:opacity-95"
             style={{
               background: "linear-gradient(135deg,#F5D78A 0%,#E8B84B 45%,#C8922A 100%)",
             }}
@@ -173,7 +173,7 @@ export default function LifetimeDealCard({ isTeamMember = false }: LifetimeDealC
             )}
           </Button>
 
-          <p className="mt-4 text-xs text-gray-500">
+          <p className="mt-4 text-xs text-slate-400">
             {claimedCount > 0
               ? `${claimedCount.toLocaleString()} ${claimedCount === 1 ? "member has" : "members have"} already claimed lifetime access`
               : "30-day money-back guarantee"}

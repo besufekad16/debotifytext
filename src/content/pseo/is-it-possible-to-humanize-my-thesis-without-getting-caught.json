@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve flawless results with is it possible to humanize my thesis without getting caught"
   },
-  "technicalDeepDive": "When educators run your work through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.\n\nMany students struggle with false positives. HumanifyLab fixes this issue by giving your text the nuance of real human writing.\n\nThe result is a cohesive document that flows naturally, guaranteeing a 0% AI detection score.\n\nWe train our models on millions of high-scoring papers to ensure your output is proficient yet undetectable.",
+  "technicalDeepDive": "When educators run your work through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.\n\nMany students struggle with false positives. DebotifyText fixes this issue by giving your text the nuance of real human writing.\n\nThe result is a cohesive document that flows naturally, guaranteeing a 0% AI detection score.\n\nWe train our models on millions of high-scoring papers to ensure your output is proficient yet undetectable.",
   "stepByStep": [
     {
       "title": "Plagiarism Check",

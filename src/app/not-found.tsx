@@ -12,7 +12,7 @@ export default function NotFound() {
       <div className="relative z-10 w-full max-w-xl text-center">
         {/* 404 Number */}
         <div className="mb-4">
-          <h1 className="text-[3rem] sm:text-[4rem] font-bold text-[var(--hl-mint-deep)] leading-none">
+          <h1 className="text-[3rem] sm:text-[4rem] font-bold text-green-700 leading-none">
             404
           </h1>
         </div>
@@ -21,8 +21,8 @@ export default function NotFound() {
         <div className="mb-5 flex justify-center">
           <div className="relative h-40 w-40 sm:h-48 sm:w-48 md:h-56 md:w-56 flex-shrink-0">
             <Image
-              src="/humanify.png"
-              alt="HumanifyLab"
+              src="/debotify.png"
+              alt="DebotifyText"
               fill
               className="object-contain"
               priority
@@ -34,7 +34,7 @@ export default function NotFound() {
 
         {/* Title and Description */}
         <div className="mb-6">
-          <h2 className="text-[1.2rem] sm:text-[1.4rem] font-semibold text-gray-900 mb-1.5">
+          <h2 className="text-[1.2rem] sm:text-[1.4rem] font-semibold text-slate-900 mb-1.5">
             Page Not Found
           </h2>
           <p className="text-[13px] text-gray-400 max-w-sm mx-auto leading-relaxed">
@@ -47,7 +47,7 @@ export default function NotFound() {
           <Link href="/">
             <Button
               size="lg"
-              className="rounded-full bg-[var(--hl-mint-deep)] px-5 py-4 text-sm font-semibold text-white shadow-[0_12px_24px_-8px_rgba(94,61,42,0.45)] transition-all hover:bg-[var(--hl-mint)] hover:shadow-[0_14px_28px_-10px_rgba(94,61,42,0.55)] hover:scale-105"
+              className="rounded-full bg-green-700 px-5 py-4 text-sm font-semibold text-white shadow-[0_12px_24px_-8px_rgba(21,128,61,0.45)] transition-all hover:bg-green-600 hover:shadow-[0_14px_28px_-10px_rgba(21,128,61,0.55)] hover:scale-105"
             >
               Go to Homepage
             </Button>
@@ -55,7 +55,7 @@ export default function NotFound() {
           <Button
             size="lg"
             variant="outline"
-            className="rounded-full border-2 border-slate-200 bg-white/90 px-5 py-4 text-sm font-semibold text-slate-700 hover:border-[var(--hl-mint-deep)]/30 hover:bg-white hover:scale-105 transition-all"
+            className="rounded-full border-2 border-slate-200 bg-white/90 px-5 py-4 text-sm font-semibold text-slate-700 hover:border-green-700/30 hover:bg-white hover:scale-105 transition-all"
             onClick={() => window.history.back()}
           >
             Go Back
@@ -67,14 +67,14 @@ export default function NotFound() {
           <div className="flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm">
             <Link
               href="/pricing"
-              className="text-slate-600 hover:text-[var(--hl-mint)] font-medium transition-colors"
+              className="text-slate-600 hover:text-green-600 font-medium transition-colors"
             >
               Pricing
             </Link>
             <span className="text-slate-300">•</span>
             <Link
               href="/contact"
-              className="text-slate-600 hover:text-[var(--hl-mint)] font-medium transition-colors"
+              className="text-slate-600 hover:text-green-600 font-medium transition-colors"
             >
               Contact
             </Link>

@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve perfect results with what removes ai detection for plagiarism checkers with a cover letter for masters students"
   },
-  "technicalDeepDive": "The result is a perfectly structured submission that reads like a human scholar, guaranteeing a 0% AI detection score.\n\nWhen professors run your work through Turnitin, they look for robotic patterns. Our system eliminates these patterns entirely.\n\nWe train our models on millions of peer-reviewed essays to ensure your output is academically rigorous yet undetectable.\n\nAcademic institutions use strict algorithms to detect AI. HumanifyLab counters this by re-mapping the semantic structure of your essay.",
+  "technicalDeepDive": "The result is a perfectly structured submission that reads like a human scholar, guaranteeing a 0% AI detection score.\n\nWhen professors run your work through Turnitin, they look for robotic patterns. Our system eliminates these patterns entirely.\n\nWe train our models on millions of peer-reviewed essays to ensure your output is academically rigorous yet undetectable.\n\nAcademic institutions use strict algorithms to detect AI. DebotifyText counters this by re-mapping the semantic structure of your essay.",
   "stepByStep": [
     {
       "title": "Plagiarism Check",

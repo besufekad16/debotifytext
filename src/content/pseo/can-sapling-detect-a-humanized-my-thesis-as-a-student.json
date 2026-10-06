@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve perfect results with can sapling detect a humanized my thesis as a student"
   },
-  "technicalDeepDive": "When professors run your assignment through Turnitin, they look for predictable phrasing. Our system removes these watermarks entirely.\n\nMany researchers struggle with incorrect AI flagging. HumanifyLab solves this by giving your text the depth of real human writing.\n\nWe train our models on millions of peer-reviewed papers to ensure your output is proficient yet undetectable.\n\nUnlike simple spinners, our engine understands academic formatting and maintains your core thesis without triggering major academic detectors.",
+  "technicalDeepDive": "When professors run your assignment through Turnitin, they look for predictable phrasing. Our system removes these watermarks entirely.\n\nMany researchers struggle with incorrect AI flagging. DebotifyText solves this by giving your text the depth of real human writing.\n\nWe train our models on millions of peer-reviewed papers to ensure your output is proficient yet undetectable.\n\nUnlike simple spinners, our engine understands academic formatting and maintains your core thesis without triggering major academic detectors.",
   "stepByStep": [
     {
       "title": "Citation Protection",

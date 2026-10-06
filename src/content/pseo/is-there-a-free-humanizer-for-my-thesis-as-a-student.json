@@ -9,7 +9,7 @@
     "idealUser": "Writers",
     "coreIntent": "Achieve flawless results with is there a free humanizer for my thesis as a student"
   },
-  "technicalDeepDive": "When TAs run your work through Turnitin, they look for predictable phrasing. Our system eliminates these watermarks entirely.\n\nThe result is a perfectly structured submission that reads like a human scholar, guaranteeing a completely safe AI detection score.\n\nColleges use advanced models to flag AI. HumanifyLab counters this by re-evaluating the lexical density of your essay.\n\nWe train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.",
+  "technicalDeepDive": "When TAs run your work through Turnitin, they look for predictable phrasing. Our system eliminates these watermarks entirely.\n\nThe result is a perfectly structured submission that reads like a human scholar, guaranteeing a completely safe AI detection score.\n\nColleges use advanced models to flag AI. DebotifyText counters this by re-evaluating the lexical density of your essay.\n\nWe train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.",
   "stepByStep": [
     {
       "title": "Academic Scan",

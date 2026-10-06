@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve perfect results with what removes ai detection for turnitin with homework step by step"
   },
-  "technicalDeepDive": "When TAs run your work through Turnitin, they look for predictable phrasing. Our system eliminates these watermarks entirely.\n\nUnlike simple spinners, our engine understands academic formatting and preserves your research arguments without triggering GPTZero or Turnitin.\n\nMany researchers struggle with incorrect AI flagging. HumanifyLab fixes this issue by giving your text the depth of real human writing.\n\nWe train our algorithms on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.",
+  "technicalDeepDive": "When TAs run your work through Turnitin, they look for predictable phrasing. Our system eliminates these watermarks entirely.\n\nUnlike simple spinners, our engine understands academic formatting and preserves your research arguments without triggering GPTZero or Turnitin.\n\nMany researchers struggle with incorrect AI flagging. DebotifyText fixes this issue by giving your text the depth of real human writing.\n\nWe train our algorithms on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.",
   "stepByStep": [
     {
       "title": "Citation Protection",

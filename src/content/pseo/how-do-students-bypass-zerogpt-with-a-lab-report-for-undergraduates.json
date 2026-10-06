@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve perfect results with how do students bypass zerogpt with a lab report for undergraduates"
   },
-  "technicalDeepDive": "When TAs run your work through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.\n\nThe result is a perfectly structured paper that reads like a human scholar, guaranteeing a completely safe AI detection score.\n\nColleges use advanced models to detect AI. HumanifyLab counters this by re-evaluating the writing flow of your essay.",
+  "technicalDeepDive": "When TAs run your work through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.\n\nThe result is a perfectly structured paper that reads like a human scholar, guaranteeing a completely safe AI detection score.\n\nColleges use advanced models to detect AI. DebotifyText counters this by re-evaluating the writing flow of your essay.",
   "stepByStep": [
     {
       "title": "Plagiarism Check",

@@ -25,7 +25,6 @@ const REGION_LINKS = [
 const COMPANY_LINKS = [
   { label: "Contact", href: "/contact" },
   { label: "FAQ", href: "/faq" },
-  { label: "Affiliate Program", href: "/affiliate" },
   { label: "Responsible Use", href: "/responsible-use" },
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Terms of Service", href: "/terms" },
@@ -34,13 +33,13 @@ const COMPANY_LINKS = [
 function FooterColumn({ title, links }: { title: string; links: { label: string; href: string }[] }) {
   return (
     <div>
-      <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-white/45">{title}</h3>
+      <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-slate-500">{title}</h3>
       <ul className="space-y-3">
         {links.map((link) => (
           <li key={link.href}>
             <Link
               href={link.href}
-              className="text-sm text-white/55 transition-colors hover:text-[var(--hl-mint-bright)]"
+              className="text-[14px] font-medium text-slate-400 transition-colors hover:text-green-400"
             >
               {link.label}
             </Link>
@@ -53,39 +52,40 @@ function FooterColumn({ title, links }: { title: string; links: { label: string;
 
 export function SiteFooter() {
   return (
-    <footer className="bg-[var(--hl-ink)]">
-      <div className="h-px bg-gradient-to-r from-transparent via-[var(--hl-mint-bright)] to-transparent" />
+    <footer className="bg-slate-950 border-t border-slate-900">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="grid grid-cols-2 gap-10 md:grid-cols-12 lg:gap-8">
           <div className="col-span-2 md:col-span-4">
-            <Link href="/" className="mb-5 inline-flex items-center gap-2.5">
-              <Image src="/humanify.png" alt="" width={36} height={36} className="h-9 w-9" />
-              <span className="text-xl font-bold text-white">
-                Humanify<span className="text-[var(--hl-mint-bright)]">Lab</span>
+            <Link href="/" className="mb-6 inline-flex items-center gap-2.5">
+              <div className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center">
+                <Image src="/debotify.png" alt="DebotifyText" width={24} height={24} className="h-6 w-6" />
+              </div>
+              <span className="text-xl font-extrabold text-white tracking-tight">
+                Debotify<span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-500">Lab</span>
               </span>
             </Link>
-            <p className="mb-6 max-w-xs text-sm leading-relaxed text-white/55">
+            <p className="mb-8 max-w-xs text-[14px] leading-relaxed text-slate-400 font-medium">
               The modern AI humanizer that rewrites ChatGPT, Claude, and Gemini text into natural writing
               that passes Turnitin, GPTZero, and every major detector.
             </p>
             <div className="flex items-center gap-3">
               <Link
-                href="https://x.com/humanifylab"
+                href="https://x.com/debotifytext"
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-white/50 transition-colors hover:border-[var(--hl-mint)] hover:text-[var(--hl-mint-bright)]"
-                aria-label="HumanifyLab on X (Twitter)"
+                className="group flex h-10 w-10 items-center justify-center rounded-xl border border-slate-800 bg-slate-900 text-slate-400 transition-all duration-300 hover:border-green-500/50 hover:bg-green-500/10 hover:text-green-400 hover:-translate-y-1 hover:shadow-lg hover:shadow-green-500/20"
+                aria-label="DebotifyText on X (Twitter)"
               >
-                <Twitter className="h-4 w-4" />
+                <Twitter className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
               </Link>
               <Link
-                href="https://www.linkedin.com/company/humanifylab"
+                href="https://www.linkedin.com/company/debotifytext"
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-white/50 transition-colors hover:border-[var(--hl-mint)] hover:text-[var(--hl-mint-bright)]"
-                aria-label="HumanifyLab on LinkedIn"
+                className="group flex h-10 w-10 items-center justify-center rounded-xl border border-slate-800 bg-slate-900 text-slate-400 transition-all duration-300 hover:border-green-500/50 hover:bg-green-500/10 hover:text-green-400 hover:-translate-y-1 hover:shadow-lg hover:shadow-green-500/20"
+                aria-label="DebotifyText on LinkedIn"
               >
-                <Linkedin className="h-4 w-4" />
+                <Linkedin className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
               </Link>
             </div>
           </div>
@@ -101,9 +101,9 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
-          <p className="text-sm text-white/40">© {new Date().getFullYear()} HumanifyLab. All rights reserved.</p>
-          <p className="text-xs text-white/30">Built for writers, students, and teams worldwide.</p>
+        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-slate-800/80 pt-8 sm:flex-row">
+          <p className="text-sm font-medium text-slate-500">© {new Date().getFullYear()} DebotifyText. All rights reserved.</p>
+          <p className="text-xs font-medium text-slate-500">Built for writers, students, and teams worldwide.</p>
         </div>
       </div>
     </footer>

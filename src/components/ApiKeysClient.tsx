@@ -131,7 +131,7 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
             API Access
           </h1>
           <p className="mt-2 text-[14px] text-gray-400">
-            Integrate HumanifyLab into your applications
+            Integrate DebotifyText into your applications
           </p>
         </div>
 
@@ -147,8 +147,8 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="rounded-lg bg-white p-4">
-              <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">With API access, you can:</h3>
-              <ul className="space-y-2 text-[13px] text-gray-500">
+              <h3 className="text-[13.5px] font-semibold text-slate-900 mb-1.5">With API access, you can:</h3>
+              <ul className="space-y-2 text-[13px] text-slate-400">
                 <li className="flex items-start gap-2">
                   <CheckCircle className="h-4 w-4 text-#faf6f10 mt-0.5 flex-shrink-0" />
                   <span>Integrate AI humanization into your own applications</span>
@@ -170,7 +170,7 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
 
             <div className="flex gap-3">
               <Link href="/pricing">
-                <Button className="bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)]">
+                <Button className="bg-green-700 hover:bg-green-600">
                   View Pricing Plans
                 </Button>
               </Link>
@@ -193,7 +193,7 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
           API Keys
         </h1>
         <p className="mt-2 text-[14px] text-gray-400">
-          Manage your API keys for integrating HumanifyLab into your applications
+          Manage your API keys for integrating DebotifyText into your applications
         </p>
       </div>
 
@@ -201,11 +201,11 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
       <Card className="mb-8 border-white/60 bg-white/80 shadow-md backdrop-blur">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Plus className="h-5 w-5 text-[var(--hl-mint-deep)]" />
+            <Plus className="h-5 w-5 text-green-700" />
             Create New API Key
           </CardTitle>
           <CardDescription>
-            Generate a new API key to access the HumanifyLab API
+            Generate a new API key to access the DebotifyText API
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -223,7 +223,7 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
             <Button
               onClick={createApiKey}
               disabled={creating || !newKeyName.trim()}
-              className="bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)]"
+              className="bg-green-700 hover:bg-green-600"
             >
               {creating ? "Creating..." : "Create Key"}
             </Button>
@@ -238,7 +238,7 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
       <Card className="border-white/60 bg-white/80 shadow-md backdrop-blur">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Key className="h-5 w-5 text-[var(--hl-mint-deep)]" />
+            <Key className="h-5 w-5 text-green-700" />
             Your API Keys
           </CardTitle>
           <CardDescription>
@@ -262,7 +262,7 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <h3 className="text-[13.5px] font-semibold text-gray-900">{apiKey.name}</h3>
+                      <h3 className="text-[13.5px] font-semibold text-slate-900">{apiKey.name}</h3>
                       <div className="mt-2 flex items-center gap-2">
                         <code className="flex-1 rounded bg-white px-3 py-2 text-sm font-mono text-slate-700 border border-slate-200">
                           {showKeys[apiKey.id] ? apiKey.key : maskApiKey(apiKey.key)}
@@ -310,20 +310,20 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
         <CardHeader>
           <CardTitle>API Documentation</CardTitle>
           <CardDescription>
-            Learn how to use the HumanifyLab API in your applications
+            Learn how to use the DebotifyText API in your applications
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Base URL</h3>
+            <h3 className="text-[13.5px] font-semibold text-slate-900 mb-1.5">Base URL</h3>
             <code className="block rounded bg-slate-100 px-3 py-2 text-sm">
-              https://www.humanifylab.com/api
+              https://www.debotifytext.com/api
             </code>
           </div>
 
           <div>
-            <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Authentication</h3>
-            <p className="text-[13px] text-gray-500 mb-2">
+            <h3 className="text-[13.5px] font-semibold text-slate-900 mb-1.5">Authentication</h3>
+            <p className="text-[13px] text-slate-400 mb-2">
               Include your API key in the request headers:
             </p>
             <code className="block rounded bg-slate-100 px-3 py-2 text-sm">
@@ -332,9 +332,9 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
           </div>
 
           <div>
-            <h3 className="text-[13.5px] font-semibold text-gray-900 mb-1.5">Example Request</h3>
+            <h3 className="text-[13.5px] font-semibold text-slate-900 mb-1.5">Example Request</h3>
             <pre className="rounded bg-slate-100 px-3 py-2 text-xs overflow-x-auto">
-              {`curl -X POST https://www.humanifylab.com/api/humanizer \
+              {`curl -X POST https://www.debotifytext.com/api/humanizer \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -347,7 +347,7 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
           <div className="pt-4 border-t border-slate-200">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 text-[var(--hl-mint-deep)] hover:text-[var(--hl-mint)] font-medium"
+              className="inline-flex items-center gap-2 text-green-700 hover:text-green-600 font-medium"
             >
               Contact Support for API Documentation
               <ExternalLink className="h-4 w-4" />

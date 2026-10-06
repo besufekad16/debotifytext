@@ -175,9 +175,12 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
         ]);
 
         if (!productsRes.ok) {
-          const errorData = await productsRes.json();
-          console.error('[PolarPricing] API error:', errorData);
-          throw new Error(errorData.error || "Failed to load products");
+          const textData = await productsRes.text();
+          let errorData: any = {};
+          try {
+            errorData = JSON.parse(textData);
+          } catch (e) {}
+          throw new Error(errorData.error || `Failed to load products (Status ${productsRes.status})`);
         }
 
         const data = (await productsRes.json()) as Product[];
@@ -188,7 +191,6 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
           if (active) setSpots(spotsData);
         }
       } catch (e) {
-        console.error('[PolarPricing] Error:', e);
         setError((e as Error).message);
       } finally {
         if (active) setLoading(false);
@@ -203,7 +205,7 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
       return;
     }
     // Show referral code step before proceeding to checkout
-    setPendingProductId(productId);
+    doCheckout(productId);
   };
 
   const doCheckout = async (productId: string) => {
@@ -279,8 +281,8 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
   if (loading) {
     return (
       <div className="flex justify-center pt-10">
-        <div className="inline-flex items-center gap-3 rounded-full border border-[var(--hl-mint-deep)]/30 bg-card px-5 py-3 text-sm font-medium text-muted-foreground shadow-sm">
-          <Loader2 className="h-4 w-4 animate-spin text-[var(--hl-mint-deep)]" /> Fetching plans…
+        <div className="inline-flex items-center gap-3 rounded-full border border-green-700/30 bg-card px-5 py-3 text-sm font-medium text-muted-foreground shadow-sm">
+          <Loader2 className="h-4 w-4 animate-spin text-green-700" /> Fetching plans…
         </div>
       </div>
     );
@@ -321,7 +323,7 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
               onClick={() => { setBillingCycle("monthly"); setHasUserChangedBilling(true); }}
               className={`min-w-[100px] px-4 py-2 text-xs sm:text-sm font-semibold transition whitespace-nowrap ${
                 billingCycle === "monthly"
-                  ? "bg-gradient-to-r from-[#5e3d2a] via-[#6d4630] to-[#8b5e3c] text-white shadow-sm"
+                  ? "bg-gradient-to-r from-green-700 via-green-600 to-green-500 text-white shadow-sm"
                   : "bg-transparent text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -334,7 +336,7 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
                 onClick={() => { setBillingCycle("unlimited"); setHasUserChangedBilling(true); }}
                 className={`relative min-w-[120px] px-3 py-2 text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-1.5 whitespace-nowrap ${
                   billingCycle === "unlimited"
-                    ? "bg-gradient-to-r from-[#5e3d2a] via-[#6d4630] to-[#8b5e3c] text-white shadow-sm"
+                    ? "bg-gradient-to-r from-green-700 via-green-600 to-green-500 text-white shadow-sm"
                     : "bg-transparent text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -360,7 +362,7 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
                 onClick={() => { setBillingCycle("yearly"); setHasUserChangedBilling(true); }}
                 className={`relative flex min-w-[100px] items-center justify-center gap-1.5 whitespace-nowrap px-3 py-2 text-xs font-semibold transition sm:text-sm ${
                   billingCycle === "yearly"
-                    ? "bg-gradient-to-r from-[#5e3d2a] via-[#6d4630] to-[#8b5e3c] text-white shadow-sm"
+                    ? "bg-gradient-to-r from-green-700 via-green-600 to-green-500 text-white shadow-sm"
                     : "bg-transparent text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -398,7 +400,7 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
               key={product.key}
               className={`group relative flex h-full flex-col border transition-all duration-700 p-8 sm:p-10 md:p-12 w-full ${
                 isPopular
-                  ? "scale-105 z-10 overflow-visible border-[#8b5e3c]/55 bg-[var(--hl-ink)] shadow-2xl shadow-[rgba(94,61,42,0.45)] hover:scale-[1.05] hover:border-[#a67c52]/70 hover:shadow-[0_0_80px_rgba(94,61,42,0.55),0_0_120px_rgba(166,124,82,0.25)]"
+                  ? "scale-105 z-10 overflow-visible border-[#8b5e3c]/55 bg-slate-900 shadow-2xl shadow-[rgba(21,128,61,0.45)] hover:scale-[1.05] hover:border-[#a67c52]/70 hover:shadow-[0_0_80px_rgba(21,128,61,0.55),0_0_120px_rgba(34,197,94,0.25)]"
                   : "overflow-hidden border border-[#e8ddd0] bg-white shadow-lg hover:shadow-xl hover:border-[#d4c4b0]"
               }`}
               style={isPopular ? {
@@ -412,13 +414,13 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
               {isPopular && (
                 <>
                   {/* Top glass shine - more brownish when not hovering */}
-                  <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-[rgba(94,61,42,0.28)]/30 via-[var(--hl-mint)]/10 to-transparent opacity-50 group-hover:from-white/40 group-hover:via-white/10 group-hover:opacity-80 transition-all duration-700 pointer-events-none"></div>
+                  <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-[rgba(21,128,61,0.15)]/30 via-green-600/10 to-transparent opacity-50 group-hover:from-white/40 group-hover:via-white/10 group-hover:opacity-80 transition-all duration-700 pointer-events-none"></div>
                   
                   {/* Diagonal glass reflection - brownish tint */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[var(--hl-mint)]/20 via-transparent to-[var(--hl-mint-deep)]/30 opacity-40 group-hover:from-white/30 group-hover:opacity-80 transition-all duration-700 pointer-events-none"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-600/20 via-transparent to-green-700/30 opacity-40 group-hover:from-white/30 group-hover:opacity-80 transition-all duration-700 pointer-events-none"></div>
                   
                   {/* Reverse diagonal for depth - brownish */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-[var(--hl-mint-deep)]/25 via-transparent to-[var(--hl-mint)]/15 opacity-35 group-hover:to-white/20 group-hover:opacity-70 transition-all duration-700 pointer-events-none"></div>
+                  <div className="absolute inset-0 bg-gradient-to-tr from-green-700/25 via-transparent to-green-600/15 opacity-35 group-hover:to-white/20 group-hover:opacity-70 transition-all duration-700 pointer-events-none"></div>
                   
                   {/* Animated shimmer effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" style={{
@@ -441,12 +443,12 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
               )}
               {isPopular && (
                 <>
-                  <div className="absolute -top-4 sm:-top-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#d4b896] bg-[#faf6f1] px-3 py-1 text-[10px] font-semibold text-[#5e3d2a] shadow-lg sm:-top-5 sm:px-4 sm:py-1.5 sm:text-xs">
+                  <div className="absolute -top-4 sm:-top-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-green-300 bg-green-50 px-3 py-1 text-[10px] font-semibold text-green-800 shadow-lg sm:-top-5 sm:px-4 sm:py-1.5 sm:text-xs">
                     Most Loved
                   </div>
                   {/* Glowing orb effect */}
-                  <div className="absolute -top-20 -right-20 w-40 h-40 bg-[var(--hl-mint-deep)]/30 blur-3xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
-                  <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-[var(--hl-mint)]/30 blur-3xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
+                  <div className="absolute -top-20 -right-20 w-40 h-40 bg-green-700/30 blur-3xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
+                  <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-green-600/30 blur-3xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
                 </>
               )}
 
@@ -458,8 +460,8 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
 
               <div className="flex flex-1 flex-col w-full">
                 <div className="mb-8">
-                  <h4 className={`text-xl sm:text-2xl font-semibold tracking-tight mb-6 ${isPopular ? "text-white" : "text-gray-900"}`}>{product.name}</h4>
-                  <div className={`mt-4 sm:mt-5 flex flex-wrap items-baseline gap-1.5 sm:gap-2 ${isPopular ? "text-white" : "text-gray-900"}`}>
+                  <h4 className={`text-xl sm:text-2xl font-semibold tracking-tight mb-6 ${isPopular ? "text-white" : "text-slate-900"}`}>{product.name}</h4>
+                  <div className={`mt-4 sm:mt-5 flex flex-wrap items-baseline gap-1.5 sm:gap-2 ${isPopular ? "text-white" : "text-slate-900"}`}>
                     {activeCycle === "yearly" && product.yearly?.priceAmount ? (
                       <>
                         {/* Show monthly (original) price struck out if available */}
@@ -514,8 +516,8 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
                       <Button
                       className={`w-full h-14 sm:h-16 py-4 sm:py-5 text-sm sm:text-[15px] font-semibold shadow-lg transition-all duration-300 ${
                         isPopular
-                          ? "bg-[#faf6f1] text-[#5e3d2a] hover:bg-white hover:text-[#3b2418] hover:shadow-[0_0_28px_rgba(232,184,75,0.35)] hover:scale-105"
-                          : "bg-[#5e3d2a] text-white hover:bg-[#8b5e3c]"
+                          ? "bg-green-50 text-green-800 hover:bg-white hover:text-green-950 hover:shadow-[0_0_28px_rgba(232,184,75,0.35)] hover:scale-105"
+                          : "bg-green-700 text-white hover:bg-green-800"
                       }`}
                       onClick={() => activeProductId && onSubscribe(activeProductId)}
                       disabled={!activeProductId || !!ctaLoadingId}
@@ -528,12 +530,12 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
                 <p className={`text-center text-xs sm:text-[13px] ${isPopular ? "text-white/80" : "text-gray-400"}`}>No hidden fees · Cancel anytime · Secure checkout</p>
                 </div>
 
-                <p className={`mt-6 sm:mt-8 text-sm leading-relaxed ${isPopular ? "text-white/90" : "text-gray-500"}`}>{headline}</p>
+                <p className={`mt-6 sm:mt-8 text-sm leading-relaxed ${isPopular ? "text-white/90" : "text-slate-400"}`}>{headline}</p>
 
-                <ul className={`mt-6 sm:mt-8 space-y-4 sm:space-y-5 text-sm ${isPopular ? "text-white/90" : "text-gray-600"}`}>
+                <ul className={`mt-6 sm:mt-8 space-y-4 sm:space-y-5 text-sm ${isPopular ? "text-white/90" : "text-slate-500"}`}>
                   {features.map((feature, featureIndex) => (
                     <li key={`${product.key}-feature-${featureIndex}`} className="flex items-start gap-2 sm:gap-3">
-                      <ShieldCheck className={`mt-0.5 sm:mt-1 h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0 ${isPopular ? "text-[#E8B84B]" : "text-[#5e3d2a]"}`} />
+                      <ShieldCheck className={`mt-0.5 sm:mt-1 h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0 ${isPopular ? "text-green-300" : "text-green-800"}`} />
                       <span className="flex-1">{feature}</span>
                     </li>
                   ))}

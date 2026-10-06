@@ -9,7 +9,7 @@
     "idealUser": "Marketers",
     "coreIntent": "Achieve perfect results with humanize pdf an article to beat crossplag"
   },
-  "technicalDeepDive": "By analyzing millions of human writing samples, our engine rewrites your content at the syntactic level.\n\nStop worrying about AI detection. Our unique algorithm guarantees 100% human scores every time.\n\nHumanifyLab uses advanced NLP to identify and remove robotic footprints from any text.",
+  "technicalDeepDive": "By analyzing millions of human writing samples, our engine rewrites your content at the syntactic level.\n\nStop worrying about AI detection. Our unique algorithm guarantees 100% human scores every time.\n\nDebotifyText uses advanced NLP to identify and remove robotic footprints from any text.",
   "stepByStep": [
     {
       "title": "AI Scan",

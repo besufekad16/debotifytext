@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with what is the best tool to bypass copyleaks with an essay 100% free"
   },
-  "technicalDeepDive": "We train our algorithms on millions of high-scoring papers to ensure your output is proficient yet undetectable.\n\nWhen professors run your work through Turnitin, they look for predictable phrasing. Our system erases these watermarks entirely.\n\nMany researchers struggle with false positives. HumanifyLab fixes this issue by giving your text the nuance of real human writing.\n\nThe result is a logically sound submission that exhibits natural human burstiness, guaranteeing a completely safe AI detection score.",
+  "technicalDeepDive": "We train our algorithms on millions of high-scoring papers to ensure your output is proficient yet undetectable.\n\nWhen professors run your work through Turnitin, they look for predictable phrasing. Our system erases these watermarks entirely.\n\nMany researchers struggle with false positives. DebotifyText fixes this issue by giving your text the nuance of real human writing.\n\nThe result is a logically sound submission that exhibits natural human burstiness, guaranteeing a completely safe AI detection score.",
   "stepByStep": [
     {
       "title": "Safe Export",

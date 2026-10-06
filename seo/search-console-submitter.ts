@@ -14,8 +14,8 @@
 
 import { google } from 'googleapis';
 
-const SITE_URL = 'https://www.humanifylab.com/';
-const SITEMAP_URL = 'https://www.humanifylab.com/sitemap.xml';
+const SITE_URL = 'https://www.debotifytext.com/';
+const SITEMAP_URL = 'https://www.debotifytext.com/sitemap.xml';
 
 interface SubmissionResult {
   success: boolean;

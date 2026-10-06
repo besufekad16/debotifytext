@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with which humanizer works best against grammarly with my research paper as a student"
   },
-  "technicalDeepDive": "We train our models on millions of peer-reviewed essays to ensure your output is academically rigorous yet undetectable.\n\nAcademic institutions use advanced algorithms to detect AI. HumanifyLab counters this by re-mapping the lexical density of your essay.\n\nUnlike basic rewriters, our engine understands university guidelines and protects your core thesis without triggering major academic detectors.\n\nThe result is a logically sound document that exhibits natural human burstiness, guaranteeing a completely safe AI detection score.",
+  "technicalDeepDive": "We train our models on millions of peer-reviewed essays to ensure your output is academically rigorous yet undetectable.\n\nAcademic institutions use advanced algorithms to detect AI. DebotifyText counters this by re-mapping the lexical density of your essay.\n\nUnlike basic rewriters, our engine understands university guidelines and protects your core thesis without triggering major academic detectors.\n\nThe result is a logically sound document that exhibits natural human burstiness, guaranteeing a completely safe AI detection score.",
   "stepByStep": [
     {
       "title": "Citation Protection",

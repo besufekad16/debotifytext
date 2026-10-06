@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Sparkles, GraduationCap, Zap } from "lucide-react";
+import { X, Feather, GraduationCap, Zap } from "lucide-react";
 
 type NotificationType = "humanized" | "subscribed";
 
@@ -80,7 +80,7 @@ export default function SocialProofNotification() {
   if (notifications.length === 0) return null;
 
   return (
-    <div className="pointer-events-none fixed bottom-4 left-4 right-4 z-40 flex flex-col-reverse gap-2 sm:bottom-6 sm:left-6 sm:right-auto sm:gap-3">
+    <div className="pointer-events-none fixed bottom-4 left-4 right-4 z-[9999] flex flex-col-reverse gap-3 sm:bottom-6 sm:left-6 sm:right-auto">
       {notifications.map((notification, index) => {
         const isExiting = index < notifications.length - 1;
         const isLifetime = notification.plan === "Lifetime";
@@ -88,79 +88,79 @@ export default function SocialProofNotification() {
         return (
           <div
             key={notification.id}
-            className={`pointer-events-auto w-full sm:max-w-sm ${
-              isExiting ? "animate-[fadeIn_0.4s_ease_forwards] opacity-0" : "animate-[slideInLeft_0.45s_ease]"
+            className={`pointer-events-auto w-full sm:max-w-[320px] ${
+              isExiting ? "animate-[fadeOut_0.4s_ease_forwards]" : "animate-[slideInLeft_0.5s_cubic-bezier(0.16,1,0.3,1)]"
             }`}
           >
             <div
-              className={`relative rounded-2xl border px-3 py-2.5 pr-10 shadow-xl sm:px-4 sm:py-3 ${
+              className={`relative rounded-[1.25rem] border p-3.5 pr-10 transition-all duration-300 ${
                 isLifetime
-                  ? "border-[var(--hl-offer)]/40 bg-[var(--hl-ink)]"
-                  : "border-gray-200 bg-white"
+                  ? "border-green-400/30 bg-slate-900/90 backdrop-blur-xl shadow-[0_12px_40px_-10px_rgba(34,197,94,0.3)]"
+                  : "border-slate-100 bg-white/80 backdrop-blur-xl shadow-[0_12px_30px_-10px_rgba(34,197,94,0.15)]"
               }`}
             >
               <button
                 onClick={() => handleClose(notification.id)}
-                className={`absolute right-2 top-2 rounded-full p-1 transition-colors ${
-                  isLifetime ? "text-white/50 hover:bg-white/10 hover:text-white" : "text-gray-400 hover:bg-gray-100"
+                className={`absolute right-2 top-2 rounded-full p-1.5 transition-colors ${
+                  isLifetime ? "text-white/40 hover:bg-white/10 hover:text-white" : "text-slate-400 hover:bg-slate-100 hover:text-slate-600"
                 }`}
                 aria-label="Close notification"
               >
-                <X className="h-3.5 w-3.5" />
+                <X className="h-3.5 w-3.5" strokeWidth={2.5} />
               </button>
 
-              <div className="flex items-center gap-2.5 sm:gap-3">
+              <div className="flex items-center gap-3.5">
                 <div
-                  className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full sm:h-9 sm:w-9 ${
+                  className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl shadow-inner ${
                     isLifetime
-                      ? "bg-gradient-to-br from-[#E8B84B] to-[#C8922A]"
-                      : "bg-[var(--hl-mint-deep)]"
+                      ? "bg-gradient-to-br from-green-400 to-green-600 border border-green-300/50"
+                      : "bg-green-50 border border-green-100/50"
                   }`}
                 >
                   {isLifetime ? (
-                    <GraduationCap className="h-4 w-4 text-[var(--hl-ink)]" />
+                    <GraduationCap className="h-5 w-5 text-slate-900" />
                   ) : (
-                    <Sparkles className="h-4 w-4 text-white" />
+                    <Feather className="h-4 w-4 text-green-600" />
                   )}
                 </div>
 
                 <div className="min-w-0 flex-1">
                   {notification.type === "humanized" ? (
                     <>
-                      <p className={`text-xs leading-snug sm:text-sm ${isLifetime ? "text-white" : "text-gray-700"}`}>
-                        <span className="hidden sm:inline">Someone just humanized </span>
+                      <p className={`text-[13px] leading-tight ${isLifetime ? "text-white" : "text-slate-700"}`}>
+                        <span className="hidden sm:inline">Someone humanized </span>
                         <span className="sm:hidden">Humanized </span>
-                        <span className={`font-bold ${isLifetime ? "text-[var(--hl-offer)]" : "text-gray-900"}`}>
+                        <span className={`font-bold ${isLifetime ? "text-green-400" : "text-slate-900"}`}>
                           {notification.words?.toLocaleString()} words
                         </span>{" "}
                         <span className="hidden sm:inline">with </span>
                         <span className="sm:hidden">• </span>
-                        <span className={`font-bold ${isLifetime ? "text-[var(--hl-offer)]" : "text-[var(--hl-mint-deep)]"}`}>
+                        <span className={`font-bold ${isLifetime ? "text-green-400" : "text-green-600"}`}>
                           {notification.plan}
                         </span>
                       </p>
-                      <p className={`mt-0.5 truncate text-[10px] sm:text-xs ${isLifetime ? "text-white/55" : "text-gray-500"}`}>
+                      <p className={`mt-1 truncate text-[11px] font-medium ${isLifetime ? "text-slate-400" : "text-slate-500"}`}>
                         {notification.price}/month
                       </p>
                     </>
                   ) : (
                     <>
-                      <p className={`text-xs leading-snug sm:text-sm ${isLifetime ? "text-white" : "text-gray-700"}`}>
+                      <p className={`text-[13px] leading-tight ${isLifetime ? "text-white" : "text-slate-700"}`}>
                         {isLifetime ? (
                           <>
-                            <span className="font-bold text-[var(--hl-offer)]">Claimed Lifetime</span>
-                            <span className="text-white/80"> — Back-to-School deal</span>
+                            <span className="font-bold text-green-400">Claimed Lifetime</span>
+                            <span className="text-white/80"> — Back-to-School</span>
                           </>
                         ) : (
                           <>
                             <span className="hidden sm:inline">Someone subscribed to </span>
                             <span className="sm:hidden">Subscribed • </span>
-                            <span className="font-bold text-[var(--hl-mint-deep)]">{notification.plan}</span>
+                            <span className="font-bold text-green-600">{notification.plan}</span>
                           </>
                         )}
                       </p>
-                      <p className={`mt-0.5 flex items-center gap-1 truncate text-[10px] sm:text-xs ${isLifetime ? "text-white/55" : "text-gray-500"}`}>
-                        {isLifetime && <Zap className="h-3 w-3 flex-shrink-0 text-[var(--hl-offer)]" />}
+                      <p className={`mt-1 flex items-center gap-1 truncate text-[11px] font-medium ${isLifetime ? "text-slate-400" : "text-slate-500"}`}>
+                        {isLifetime && <Zap className="h-3.5 w-3.5 flex-shrink-0 text-green-400" />}
                         <span className="truncate">
                           {isLifetime ? "20k words/mo forever — pay once" : `${notification.price}/month`}
                         </span>

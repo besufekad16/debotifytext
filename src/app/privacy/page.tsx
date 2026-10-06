@@ -4,8 +4,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.humanifylab.com" },
-    { "@type": "ListItem", position: 2, name: "Privacy Policy", item: "https://www.humanifylab.com/privacy" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.debotifytext.com" },
+    { "@type": "ListItem", position: 2, name: "Privacy Policy", item: "https://www.debotifytext.com/privacy" },
   ],
 };
 
@@ -16,8 +16,8 @@ const SECTIONS: LegalSection[] = [
       "We may collect personal information from you in a variety of ways, including, but not limited to, when you visit our site, register on the site, place an order, and in connection with other activities, services, features, or resources we make available.",
     ],
     bullets: [
-      <span key="personal"><strong className="text-gray-900">Personal Data:</strong> Personally identifiable information, such as your name, email address, and payment information, that you voluntarily give to us when you register or when you choose to participate in various activities related to the site.</span>,
-      <span key="usage"><strong className="text-gray-900">Usage Data:</strong> Information your browser sends whenever you visit our Service or when you access the Service by or through a mobile device.</span>,
+      <span key="personal"><strong className="text-slate-900">Personal Data:</strong> Personally identifiable information, such as your name, email address, and payment information, that you voluntarily give to us when you register or when you choose to participate in various activities related to the site.</span>,
+      <span key="usage"><strong className="text-slate-900">Usage Data:</strong> Information your browser sends whenever you visit our Service or when you access the Service by or through a mobile device.</span>,
     ],
   },
   {
@@ -85,8 +85,8 @@ const SECTIONS: LegalSection[] = [
     paragraphs: [
       <span key="contact">
         If you have any questions about this Privacy Policy, contact us at{" "}
-        <a href="mailto:humanifylab1@gmail.com" className="font-semibold text-[var(--hl-mint-deep)] underline underline-offset-4">
-          humanifylab1@gmail.com
+        <a href="mailto:debotifytext1@gmail.com" className="font-semibold text-green-700 underline underline-offset-4">
+          debotifytext1@gmail.com
         </a>
         . We typically respond within 24 hours.
       </span>,

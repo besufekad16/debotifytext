@@ -33,6 +33,7 @@ import {
   Building,
   PenLine,
   Languages,
+  Feather,
 } from "lucide-react";
 import { toast } from "sonner";
 import { getHumanizerHistory } from "~/actions/humanizer";
@@ -40,7 +41,6 @@ import PolarPricing from "~/components/pricing/PolarPricing";
 import TopUpSection from "~/components/pricing/TopUpSection";
 import { cn } from "~/lib/utils";
 import { SiteFooter } from "~/components/SiteFooter";
-import DetectorShowcase from "~/components/DetectorShowcase";
 import LifetimeOfferBanner from "~/components/LifetimeOfferBanner";
 import ResponsibleUseDisclaimer from "~/components/ResponsibleUseDisclaimer";
 import ExitIntentPopup from "~/components/ExitIntentPopup";
@@ -120,35 +120,35 @@ const FAQ_ITEMS = [
     id: "best-humanizer",
     question: "Which is the best text humanizer?",
     answer:
-      "HumanifyLab is the best text humanizer for most writers: it rewrites ChatGPT, Claude, and Gemini drafts into natural, human-sounding prose while preserving your meaning, offers a genuinely free starting plan, and supports academic and professional tones. Unlike generic paraphrasers, it is purpose-built for humanizing AI text.",
+      "DebotifyText is the best text humanizer for most writers: it rewrites ChatGPT, Claude, and Gemini drafts into natural, human-sounding prose while preserving your meaning, offers a genuinely free starting plan, and supports academic and professional tones. Unlike generic paraphrasers, it is purpose-built for humanizing AI text.",
   },
   {
     id: "hundred-percent",
     question: "How to 100% humanize AI text?",
     answer:
-      "Paste your AI draft (150+ words works best) into HumanifyLab, pick a tone, and click Humanize. Then do a short personal edit pass — fix names, numbers, and quotes, and add one sentence only you could write. That combination of a dedicated humanizer plus a human edit is what gets text reading 100% human.",
+      "Paste your AI draft (150+ words works best) into DebotifyText, pick a tone, and click Humanize. Then do a short personal edit pass — fix names, numbers, and quotes, and add one sentence only you could write. That combination of a dedicated humanizer plus a human edit is what gets text reading 100% human.",
   },
   {
     id: "chatgpt-humanize",
     question: "Can ChatGPT humanize AI text?",
     answer:
-      "Not reliably. Asking ChatGPT to 'humanize' its own output keeps the same statistical fingerprints detectors look for — uniform rhythm and predictable word choice. A dedicated AI humanizer like HumanifyLab is built specifically to vary sentence length, burstiness, and phrasing, which is why it outperforms prompting ChatGPT to rewrite itself.",
+      "Not reliably. Asking ChatGPT to 'humanize' its own output keeps the same statistical fingerprints detectors look for — uniform rhythm and predictable word choice. A dedicated AI humanizer like DebotifyText is built specifically to vary sentence length, burstiness, and phrasing, which is why it outperforms prompting ChatGPT to rewrite itself.",
   },
   {
     id: "can-ai-humanize",
     question: "Can AI humanize a text?",
     answer:
-      "Yes — that is exactly what an AI humanizer does. HumanifyLab uses models trained to rewrite robotic drafts with natural cadence and varied vocabulary while keeping the original meaning. You stay the editor: review the output, verify facts, and follow any AI-use policy that applies to you.",
+      "Yes — that is exactly what an AI humanizer does. DebotifyText uses models trained to rewrite robotic drafts with natural cadence and varied vocabulary while keeping the original meaning. You stay the editor: review the output, verify facts, and follow any AI-use policy that applies to you.",
   },
   {
     id: "bypass",
-    question: "Can HumanifyLab help me bypass AI detectors like Turnitin and GPTZero?",
+    question: "Can DebotifyText help me bypass AI detectors like Turnitin and GPTZero?",
     answer:
-      "Yes. HumanifyLab is built as an AI humanizer that rewrites ChatGPT, Claude, and Gemini drafts so they read naturally and are engineered to pass major detectors including Turnitin, GPTZero, Originality.ai, Copyleaks, and ZeroGPT — while keeping your meaning intact.",
+      "Yes. DebotifyText is built as an AI humanizer that rewrites ChatGPT, Claude, and Gemini drafts so they read naturally and are engineered to pass major detectors including Turnitin, GPTZero, Originality.ai, Copyleaks, and ZeroGPT — while keeping your meaning intact.",
   },
   {
     id: "zero",
-    question: "How do I score closer to 0% AI with HumanifyLab?",
+    question: "How do I score closer to 0% AI with DebotifyText?",
     answer:
       "Paste at least 100–250 words, pick Academic or Default tone, run Humanize, then re-check in your detector. For best results, do a short personal edit pass. Many users searching for a 0% AI score use this exact workflow before submission.",
   },
@@ -174,7 +174,7 @@ const FAQ_ITEMS = [
     id: "support",
     question: "What support channels are available?",
     answer:
-      "Email humanifylab1@gmail.com or use in-app messaging. Paid plans get priority response.",
+      "Email debotifytext1@gmail.com or use in-app messaging. Paid plans get priority response.",
   },
 ];
 
@@ -895,57 +895,51 @@ export default function UnifiedHomePage() {
 
       <main className="flex-1 w-full">
         {/* Hero and Workspace Section */}
-        <div className="relative w-full overflow-x-hidden bg-white pb-16 hl-surface-mesh">
+        <div className="relative w-full overflow-x-hidden bg-white pb-16">
           {/* Hero — soft motion background + staggered editorial entrance */}
-          <section id="hero" className="relative overflow-hidden pt-12 pb-8 sm:pt-20 sm:pb-10">
+          <section id="hero" className="relative overflow-hidden pt-12 pb-8 sm:pt-20 sm:pb-12">
             {/* Ambient field */}
             <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-              <div className="hero-grid absolute inset-0" />
-              <div className="hero-orb hero-orb-a absolute -top-28 left-1/2 h-[30rem] w-[44rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(166,124,82,0.22)_0%,transparent_68%)] blur-2xl" />
-              <div className="hero-orb hero-orb-b absolute top-16 -left-24 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(94,61,42,0.16)_0%,transparent_70%)] blur-3xl" />
-              <div className="hero-orb hero-orb-c absolute top-10 -right-20 h-80 w-80 rounded-full bg-[radial-gradient(circle,rgba(200,146,42,0.14)_0%,transparent_70%)] blur-3xl" />
-              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+              <div className="absolute -top-28 left-1/2 h-[30rem] w-[44rem] -translate-x-1/2 rounded-full bg-green-400/20 blur-[100px]" />
+              <div className="absolute top-16 -left-24 h-72 w-72 rounded-full bg-green-300/20 blur-[80px]" />
+              <div className="absolute top-10 -right-20 h-80 w-80 rounded-full bg-green-500/10 blur-[80px]" />
+              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent" />
             </div>
 
-            <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+            <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
               <div className="text-center">
-                <div className="hero-enter hero-delay-1 mb-7 inline-flex items-center gap-2 rounded-full border border-[var(--hl-mint)]/20 bg-white/80 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--hl-mint-deep)] shadow-sm backdrop-blur-sm">
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--hl-mint-bright)] opacity-50" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--hl-mint-deep)]" />
+                <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-green-200/60 bg-green-50/50 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-green-800 shadow-sm backdrop-blur-md transition-all hover:bg-green-100/50 cursor-default">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
                   </span>
                   Trusted by 500,000+ writers
                 </div>
 
-                <h1 className="mb-6 tracking-tight">
-                  <span
-                    className="hero-enter hero-delay-2 block text-[1.85rem] font-bold leading-[1.12] text-[var(--hl-ink)] sm:text-[2.6rem] lg:text-[3.1rem]"
-                    style={{ letterSpacing: "-0.03em" }}
-                  >
-                    Humanize AI text. Bypass AI detection.
+                <h1 className="mb-6 tracking-tight text-balance">
+                  <span className="block text-4xl font-extrabold leading-tight text-slate-900 sm:text-5xl lg:text-6xl">
+                    Humanize AI text.
                   </span>
-                  <span
-                    className="hero-enter hero-gradient-live mt-2 block text-[2.05rem] leading-[1.08] sm:text-[2.9rem] lg:text-[3.4rem]"
-                    style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: "italic", fontWeight: 500 }}
-                  >
-                    Score closer to 0% AI.
+                  <span className="mt-2 block text-4xl font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-green-600 via-green-500 to-green-700 sm:text-5xl lg:text-[4.2rem]">
+                    Bypass AI detection.
                   </span>
                 </h1>
 
-                <p className="hero-enter hero-delay-4 mx-auto mb-8 max-w-lg text-[15px] leading-[1.75] text-gray-500 sm:text-base">
+                <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-slate-600">
                   Paste ChatGPT, Claude, or Gemini. Get natural writing built to pass Turnitin,
                   GPTZero, Originality.ai, and Copyleaks — meaning intact.
                 </p>
 
-                <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
+                <div className="flex flex-wrap items-center justify-center gap-3">
                   {["0% AI footprint", "Meaning preserved", "Results in seconds"].map((signal, i) => (
                     <span
                       key={signal}
-                      className={`hero-enter inline-flex items-center gap-1.5 rounded-full border border-black/5 bg-white/80 px-3.5 py-1.5 text-[12px] font-medium text-gray-600 shadow-sm backdrop-blur-sm ${
-                        i === 0 ? "hero-delay-4" : i === 1 ? "hero-delay-5" : "hero-delay-6"
-                      }`}
+                      className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/90 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm transition-transform hover:-translate-y-0.5"
                     >
-                      <Check className="h-3 w-3 text-[var(--hl-mint-deep)]" />
+                      <div className="rounded-full bg-green-100 p-1">
+                        <Check className="h-3.5 w-3.5 text-green-600" strokeWidth={3} />
+                      </div>
                       {signal}
                     </span>
                   ))}
@@ -957,7 +951,7 @@ export default function UnifiedHomePage() {
           {/* Main Workspace - Humanizer Tool */}
           <section id="tool" className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
             {showSignInPrompt && !isSignedIn && (
-              <div className="mb-8 rounded-2xl border border-[rgba(94,61,42,0.25)] bg-[#faf6f1] p-6 text-center shadow-sm">
+              <div className="mb-8 rounded-2xl border border-[rgba(21,128,61,0.15)] bg-green-50 p-6 text-center shadow-sm">
                 <h3 className="text-lg font-semibold text-foreground">Sign in to humanize your text</h3>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Create a free account to get 50 starter credits and keep track of every version you humanize.
@@ -972,54 +966,55 @@ export default function UnifiedHomePage() {
               </div>
             )}
 
-            <div className="overflow-hidden rounded-3xl bg-white shadow-[0_28px_80px_-28px_rgba(94,61,42,0.28)] ring-1 ring-[rgba(94,61,42,0.12)]">
+            <div className="relative overflow-hidden rounded-[2rem] bg-white/80 backdrop-blur-2xl shadow-[0_8px_40px_-12px_rgba(0,0,0,0.1)] ring-1 ring-slate-200/60">
+              {/* Decorative top gradient line */}
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-green-300 via-green-500 to-green-700 opacity-80" />
+              
               {/* Header */}
-              <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-[#faf6f1] to-white">
+              <div className="flex items-center justify-between px-6 py-5 border-b border-slate-100 bg-white/40">
                 <div className="flex items-center gap-3">
                   <div className="flex items-center gap-2">
-                    <div className="relative">
-                      <div className="w-4 h-4 rounded-full bg-[var(--hl-mint-deep)] animate-[glow_2s_ease-in-out_infinite]"></div>
-                      <div className="absolute inset-0 w-4 h-4 rounded-full bg-[var(--hl-mint-deep)] opacity-50 animate-[ping_2s_ease-in-out_infinite]"></div>
+                    <div className="relative flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                     </div>
                   </div>
-                  <span className="text-sm font-semibold text-gray-700">LIVE HUMANIZER</span>
+                  <span className="text-xs font-bold tracking-widest text-slate-700 uppercase">Live Humanizer</span>
                 </div>
                 {currentCredits !== undefined && isSignedIn && (
-                  <div className="flex items-center gap-2 text-xs text-gray-700 bg-white px-3 py-1.5 rounded-full border border-gray-200 shadow-sm">
-                    <ShieldCheck className="h-3.5 w-3.5 text-#faf6f10 flex-shrink-0" />
-                    <span className="font-medium">{currentCredits} credits</span>
+                  <div className="flex items-center gap-1.5 text-xs font-semibold text-green-700 bg-green-50/80 px-3 py-1.5 rounded-full ring-1 ring-green-600/10">
+                    <Zap className="h-3.5 w-3.5" />
+                    <span>{currentCredits} credits</span>
                   </div>
                 )}
               </div>
 
               {/* Content Grid - Dynamic Layout */}
-              <div className="p-4 sm:p-6 lg:p-8">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
+              <div className="p-5 sm:p-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-8">
                   {/* Left Column - Input Box */}
                   <div className="flex flex-col h-full">
                     {/* Header */}
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2">
-                        <label className="text-sm font-semibold text-gray-700">
-                          Input Text
-                        </label>
-                      </div>
-                      <div className="flex items-center gap-2 text-xs text-gray-500">
-                        <span>{originalText.trim().split(/\s+/).filter(Boolean).length} words</span>
+                    <div className="flex items-center justify-between mb-4">
+                      <label className="text-[13px] font-bold uppercase tracking-wider text-slate-500">
+                        Input
+                      </label>
+                      <div className="flex items-center gap-2 text-xs font-medium text-slate-400 bg-slate-50 px-2.5 py-1 rounded-md">
+                        {originalText.trim().split(/\s+/).filter(Boolean).length} words
                       </div>
                     </div>
 
                     {/* Input Box */}
-                    <div className="relative flex-1">
+                    <div className="relative flex-1 group">
                       <div className={cn(
-                        "h-[450px] rounded-2xl border-2 transition-all duration-200 overflow-hidden",
+                        "h-[450px] rounded-2xl border-[1.5px] transition-all duration-300 overflow-hidden relative",
                         isDragging
-                          ? "border-[var(--hl-mint-deep)] bg-[#faf6f1]/30 shadow-lg shadow-[var(--hl-mint-deep)]/20"
+                          ? "border-green-500 bg-green-50/50 shadow-[0_0_30px_rgba(34,197,94,0.15)] ring-4 ring-green-500/10"
                           : originalText
-                          ? "border-[var(--hl-mint)] bg-white shadow-sm"
-                          : "border-[rgba(94,61,42,0.25)] bg-[#faf6f1]/20"
+                          ? "border-slate-300 bg-white shadow-sm hover:border-slate-400 focus-within:border-green-500 focus-within:ring-4 focus-within:ring-green-500/10"
+                          : "border-slate-200 bg-slate-50/50 hover:bg-white hover:border-slate-300 focus-within:bg-white focus-within:border-green-500 focus-within:ring-4 focus-within:ring-green-500/10"
                       )}>
-                        <ScrollArea className="h-full">
+                        <ScrollArea className="h-full z-10 relative">
                           <Textarea
                             value={originalText}
                             onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -1030,7 +1025,7 @@ export default function UnifiedHomePage() {
                             onDragLeave={handleDragLeave}
                             onDrop={handleDrop}
                             placeholder="Paste your AI-generated text here (Ctrl+V)..."
-                            className="w-full min-h-[450px] resize-none border-0 bg-transparent p-4 sm:p-5 text-[15px] leading-relaxed text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-0 focus-visible:ring-0"
+                            className="w-full min-h-[450px] resize-none border-0 bg-transparent p-5 sm:p-6 text-[15px] leading-relaxed text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-0 focus-visible:ring-0 selection:bg-green-100"
                             disabled={isHumanizing}
                           />
                         </ScrollArea>
@@ -1038,61 +1033,54 @@ export default function UnifiedHomePage() {
 
                       {/* Drop Zone Overlay */}
                       {!originalText && !isHumanizing && (
-                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                          <div className="text-center max-w-sm px-4">
-                            <div className="inline-flex flex-col items-center gap-3 px-6 py-6 rounded-2xl border-2 border-dashed border-[var(--hl-mint-deep)] bg-white/80 backdrop-blur-sm">
-                              <div className="w-12 h-12 rounded-xl bg-[var(--hl-mint-deep)]/10 flex items-center justify-center">
-                                <FileText className="w-6 h-6 text-[var(--hl-mint-deep)]" />
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                          <div className="text-center max-w-[280px]">
+                            <div className="inline-flex flex-col items-center gap-4 px-6 py-8 rounded-2xl border border-slate-200 bg-white/60 backdrop-blur-md shadow-sm transition-transform duration-300 group-hover:-translate-y-1">
+                              <div className="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center shadow-sm border border-slate-100">
+                                <FileText className="w-5 h-5 text-slate-400" />
                               </div>
                               <div>
-                                <p className="text-sm font-medium text-gray-700 mb-1">
-                                  Paste your text or{" "}
+                                <p className="text-[13px] font-medium text-slate-600 mb-1 leading-snug">
+                                  Paste text or{" "}
                                   <button
                                     onClick={() => fileInputRef.current?.click()}
-                                    className="text-[var(--hl-mint-deep)] hover:text-[var(--hl-mint)] font-semibold underline pointer-events-auto transition-colors"
+                                    className="text-green-600 hover:text-green-700 font-semibold underline underline-offset-2 pointer-events-auto transition-colors"
                                   >
-                                    upload a file
+                                    upload file
                                   </button>
                                 </p>
-                                <p className="text-xs text-gray-500">
-                                  Supports .pdf, .docx, and .txt
+                                <p className="text-[11px] font-medium text-slate-400">
+                                  .txt, .docx, .pdf
                                 </p>
                               </div>
                             </div>
                           </div>
                         </div>
                       )}
-
-                      {/* Word Counter Badge */}
-                      {originalText && (
-                        <div className="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-[var(--hl-mint-deep)] text-white text-xs font-medium shadow-sm">
-                          {originalText.trim().split(/\s+/).filter(Boolean).length} words
-                        </div>
-                      )}
                     </div>
 
                     {/* Warning for < 250 words */}
                     {originalText && originalText.trim().split(/\s+/).filter(Boolean).length < 250 && (
-                      <div className="mt-3 p-3 rounded-xl bg-amber-50 border border-amber-200">
-                        <div className="flex items-start gap-2">
-                          <Info className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
-                          <p className="text-xs text-amber-800 font-medium">
-                            For better results, use 250+ words
+                      <div className="mt-3 p-2.5 rounded-xl bg-orange-50/80 border border-orange-200/60">
+                        <div className="flex items-center gap-2">
+                          <Info className="w-3.5 h-3.5 text-orange-500 flex-shrink-0" />
+                          <p className="text-[11px] text-orange-800 font-medium">
+                            Use 250+ words for maximum bypass effectiveness.
                           </p>
                         </div>
                       </div>
                     )}
 
-                    {/* Tone preset: dropdown on mobile, chips on larger screens */}
-                    <div className="mt-4">
-                      <div className="mb-2 flex items-center justify-between gap-2">
-                        <label htmlFor="tone-preset" className="text-sm font-semibold text-gray-700">
+                    {/* Tone preset */}
+                    <div className="mt-5">
+                      <div className="mb-2.5 flex items-center justify-between">
+                        <label className="text-[13px] font-bold uppercase tracking-wider text-slate-500">
                           Tone
                         </label>
                         {!hasPresetAccess && (
-                          <span className="inline-flex items-center gap-1 text-[11px] text-gray-500">
+                          <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-400">
                             <Lock className="h-3 w-3" />
-                            Upgrade to unlock
+                            Premium Locked
                           </span>
                         )}
                       </div>
@@ -1104,8 +1092,7 @@ export default function UnifiedHomePage() {
                           disabled={isHumanizing}
                         >
                           <SelectTrigger
-                            id="tone-preset"
-                            className="h-11 w-full rounded-xl border-[rgba(94,61,42,0.25)] bg-white text-sm"
+                            className="h-11 w-full rounded-xl border-slate-200 bg-white text-sm shadow-sm focus:ring-green-500"
                           >
                             <SelectValue placeholder="Default" />
                           </SelectTrigger>
@@ -1115,7 +1102,7 @@ export default function UnifiedHomePage() {
                               return (
                                 <SelectItem key={p.value} value={p.value} className="py-2.5">
                                   <span className="flex items-center gap-2">
-                                    {locked && <Lock className="h-3.5 w-3.5 shrink-0 text-gray-400" />}
+                                    {locked && <Lock className="h-3.5 w-3.5 shrink-0 text-slate-400" />}
                                     <span>{p.label}</span>
                                   </span>
                                 </SelectItem>
@@ -1137,14 +1124,14 @@ export default function UnifiedHomePage() {
                               onClick={() => handlePresetSelect(p.value)}
                               title={locked ? `${p.label} is locked until you subscribe` : p.description}
                               className={cn(
-                                "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
-                                active && !locked && "border-[var(--hl-mint-deep)] bg-[var(--hl-mint-deep)] text-white shadow-sm",
-                                !active && !locked && "border-[rgba(94,61,42,0.18)] bg-white text-gray-700 hover:border-[var(--hl-mint-deep)] hover:bg-[#faf6f1]",
-                                locked && "border-gray-200 bg-gray-50 text-gray-500 hover:border-amber-300 hover:bg-amber-50",
+                                "inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-[13px] font-medium transition-all",
+                                active && !locked && "border-green-600 bg-green-50 text-green-700 shadow-[0_2px_10px_rgba(34,197,94,0.15)] ring-1 ring-green-600",
+                                !active && !locked && "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50",
+                                locked && "border-slate-200 bg-slate-50 text-slate-400 opacity-70 hover:border-slate-300",
                                 isHumanizing && "cursor-not-allowed opacity-50",
                               )}
                             >
-                              {locked && <Lock className="h-3 w-3" />}
+                              {locked && <Lock className="h-3 w-3 opacity-60" />}
                               {p.label}
                             </button>
                           );
@@ -1153,27 +1140,29 @@ export default function UnifiedHomePage() {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="mt-4 space-y-3">
+                    <div className="mt-5 space-y-3">
                       <Button
                         onClick={handleHumanize}
                         disabled={!originalText.trim() || isHumanizing || wordCount < 100}
-                        className="w-full h-12 rounded-xl bg-gradient-to-r from-[var(--hl-mint-deep)] to-[var(--hl-mint)] hover:from-[var(--hl-mint)] hover:to-[#5e3d2a] text-white font-semibold text-base shadow-lg shadow-[var(--hl-mint-deep)]/25 hover:shadow-xl hover:shadow-[var(--hl-mint-deep)]/30 hover:-translate-y-px active:translate-y-0 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-lg disabled:hover:translate-y-0"
+                        className="group relative w-full h-12 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-[15px] shadow-[0_8px_20px_-8px_rgba(0,0,0,0.3)] hover:-translate-y-px transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 overflow-hidden"
                       >
+                        <div className="absolute inset-0 bg-gradient-to-r from-green-500/0 via-green-500/20 to-green-500/0 -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out" />
+                        
                         {isHumanizing ? (
-                          <>
-                            <Loader2 className="w-5 h-5 animate-spin mr-2 text-white" />
-                            Humanizing...
-                          </>
+                          <span className="flex items-center gap-2 relative z-10">
+                            <Loader2 className="w-5 h-5 animate-spin text-green-400" />
+                            Processing...
+                          </span>
                         ) : wordCount < 100 && originalText.trim() ? (
-                          <>
-                            <Lock className="w-5 h-5 mr-2" />
+                          <span className="flex items-center gap-2 relative z-10">
+                            <Lock className="w-4 h-4 text-slate-400" />
                             Need {100 - wordCount} more words
-                          </>
+                          </span>
                         ) : (
-                          <>
-                            <PenLine className="w-5 h-5 mr-2" />
-                            Humanize text
-                          </>
+                          <span className="flex items-center gap-2 relative z-10">
+                            <Feather className="w-4 h-4 text-green-400" />
+                            Humanize Text
+                          </span>
                         )}
                       </Button>
 
@@ -1184,11 +1173,11 @@ export default function UnifiedHomePage() {
                             setHumanizedText("");
                             setUploadedFileName(null);
                           }}
-                          variant="outline"
-                          className="w-full h-10 rounded-xl border-gray-300 text-gray-700 hover:bg-gray-50 font-medium text-sm"
+                          variant="ghost"
+                          className="w-full h-10 rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-800 font-medium text-[13px]"
                         >
-                          <RotateCcw className="w-4 h-4 mr-2" />
-                          Reset
+                          <RotateCcw className="w-3.5 h-3.5 mr-2" />
+                          Clear all
                         </Button>
                       )}
                     </div>
@@ -1203,19 +1192,18 @@ export default function UnifiedHomePage() {
                     />
                   </div>
 
-                  {/* Right Column - Output Box (Always visible) */}
+                  {/* Right Column - Output Box */}
                   <div className="flex flex-col h-full">
                     {/* Header */}
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2">
-                        <label className="text-sm font-semibold text-gray-700">
-                          Humanized Output
-                        </label>
-                      </div>
+                    <div className="flex items-center justify-between mb-4">
+                      <label className="text-[13px] font-bold uppercase tracking-wider text-slate-500">
+                        Output
+                      </label>
                       {humanizedText && !isHumanizing && (
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs px-2.5 py-1 rounded-full bg-[var(--hl-mint-deep)] text-white font-medium shadow-sm">
-                            100% Human
+                        <div className="flex items-center gap-1.5 animate-in fade-in zoom-in duration-300">
+                          <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-green-500 text-white shadow-sm flex items-center gap-1">
+                            <Check className="w-3 h-3" strokeWidth={3} />
+                            0% AI Detected
                           </span>
                         </div>
                       )}
@@ -1224,42 +1212,54 @@ export default function UnifiedHomePage() {
                     {/* Output Box */}
                     <div className="relative flex-1">
                       <div className={cn(
-                        "h-[450px] rounded-2xl border-2 transition-all duration-200 overflow-hidden",
-                        humanizedText && !isHumanizing
-                          ? "border-[var(--hl-mint)] bg-white shadow-sm"
-                          : "border-[rgba(94,61,42,0.25)] bg-gray-50"
+                        "h-[450px] rounded-2xl border-[1.5px] transition-all duration-500 overflow-hidden relative",
+                        isHumanizing
+                          ? "border-green-400 bg-white shadow-[0_0_40px_rgba(34,197,94,0.15)] ring-4 ring-green-500/10"
+                          : humanizedText
+                          ? "border-green-200 bg-gradient-to-b from-green-50/30 to-white shadow-sm"
+                          : "border-slate-200 border-dashed bg-slate-50/50"
                       )}>
-                        <ScrollArea className="h-full">
-                          <div className="p-4 sm:p-5">
+                        
+                        {isHumanizing && (
+                          <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,rgba(34,197,94,0.08),transparent_60%)] animate-pulse" />
+                        )}
+
+                        <ScrollArea className="h-full z-10 relative">
+                          <div className="p-5 sm:p-6">
                             {isHumanizing ? (
-                              <div className="flex flex-col items-center justify-center min-h-[310px] gap-4">
-                                <div className="relative">
-                                  <div className="w-14 h-14 rounded-full border-4 border-[#faf6f1]"></div>
-                                  <div className="absolute inset-0 w-14 h-14 rounded-full border-4 border-t-[var(--hl-mint-deep)] animate-spin"></div>
+                              <div className="flex flex-col items-center justify-center min-h-[350px] gap-6">
+                                <div className="relative flex items-center justify-center w-16 h-16">
+                                  <div className="absolute inset-0 rounded-xl bg-green-100 animate-ping opacity-60"></div>
+                                  <div className="relative w-16 h-16 bg-white border border-green-200 shadow-sm rounded-xl flex items-center justify-center">
+                                    <Feather className="w-6 h-6 text-green-500 animate-pulse" />
+                                  </div>
                                 </div>
                                 {thoughtsList.length > 0 && (
-                                  <p className="text-sm text-gray-600 text-center animate-pulse max-w-xs">
-                                    {thoughtsList[0]}
-                                  </p>
+                                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-50 border border-slate-100 shadow-sm">
+                                    <Loader2 className="w-3.5 h-3.5 animate-spin text-green-500" />
+                                    <p className="text-[13px] font-medium text-slate-600 animate-pulse">
+                                      {thoughtsList[0]}
+                                    </p>
+                                  </div>
                                 )}
                               </div>
                             ) : humanizedText ? (
                               <div className="prose prose-sm max-w-none">
-                                <p className="text-[15px] leading-relaxed text-gray-800 whitespace-pre-wrap">
+                                <p className="text-[15px] leading-relaxed text-slate-800 whitespace-pre-wrap selection:bg-green-100">
                                   {humanizedText}
                                 </p>
                               </div>
                             ) : (
-                              <div className="flex flex-col items-center justify-center min-h-[410px]">
-                                <div className="text-center max-w-xs px-4">
-                                  <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-[rgba(94,61,42,0.15)] bg-white">
-                                    <PenLine className="h-5 w-5 text-[var(--hl-mint-deep)]" strokeWidth={1.75} />
+                              <div className="flex flex-col items-center justify-center min-h-[350px]">
+                                <div className="text-center max-w-[240px]">
+                                  <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100/80 border border-slate-200">
+                                    <CheckCircle2 className="h-6 w-6 text-slate-300" strokeWidth={1.5} />
                                   </div>
-                                  <p className="text-sm font-medium text-gray-700 mb-1">
-                                    Output appears here
+                                  <p className="text-[14px] font-medium text-slate-600 mb-1">
+                                    Ready to humanize
                                   </p>
-                                  <p className="text-xs leading-relaxed text-gray-400">
-                                    Paste your draft on the left, then run humanize.
+                                  <p className="text-[13px] leading-relaxed text-slate-400">
+                                    Your natural, undetectable output will appear here.
                                   </p>
                                 </div>
                               </div>
@@ -1269,7 +1269,7 @@ export default function UnifiedHomePage() {
 
                         {/* Character Counter */}
                         {humanizedText && !isHumanizing && (
-                          <div className="absolute bottom-3 right-3 text-xs text-gray-400 bg-white/80 backdrop-blur-sm px-2 py-1 rounded-full">
+                          <div className="absolute bottom-3 right-3 text-[11px] font-medium text-slate-400 bg-white/90 backdrop-blur px-2.5 py-1 rounded-md border border-slate-100 shadow-sm">
                             {humanizedText.length} characters
                           </div>
                         )}
@@ -1277,40 +1277,44 @@ export default function UnifiedHomePage() {
 
                       {/* Action Buttons */}
                       {humanizedText && !isHumanizing && (
-                        <div className="mt-4 flex items-center gap-2">
+                        <div className="mt-4 flex items-center gap-2 animate-in fade-in slide-in-from-bottom-2 duration-300">
                           <Button
                             onClick={handleCopy}
                             variant="outline"
-                            className="flex-1 h-10 rounded-xl border-gray-300 hover:border-[var(--hl-mint-deep)] hover:bg-[#faf6f1] hover:text-[var(--hl-mint)] transition-colors"
+                            className="flex-1 h-11 rounded-xl border-slate-200 bg-white hover:border-green-600 hover:bg-green-50 hover:text-green-700 transition-colors shadow-sm font-semibold text-[13px]"
                           >
                             {copied ? (
                               <>
-                                <Check className="w-4 h-4 mr-2 text-[var(--hl-mint-deep)]" />
-                                Copied
+                                <Check className="w-4 h-4 mr-2 text-green-600" />
+                                Copied to clipboard
                               </>
                             ) : (
                               <>
-                                <Copy className="w-4 h-4 mr-2" />
-                                Copy
+                                <Copy className="w-4 h-4 mr-2 text-slate-400" />
+                                Copy text
                               </>
                             )}
                           </Button>
-                          <Button
-                            onClick={() => handleDownload("txt")}
-                            variant="outline"
-                            className="h-10 px-4 rounded-xl border-gray-300 hover:border-[var(--hl-mint-deep)] hover:bg-[#faf6f1] hover:text-[var(--hl-mint)] transition-colors"
-                          >
-                            <Download className="w-4 h-4 mr-2" />
-                            .txt
-                          </Button>
-                          <Button
-                            onClick={() => handleDownload("docx")}
-                            variant="outline"
-                            className="h-10 px-4 rounded-xl border-gray-300 hover:border-[var(--hl-mint-deep)] hover:bg-[#faf6f1] hover:text-[var(--hl-mint)] transition-colors"
-                          >
-                            <Download className="w-4 h-4 mr-2" />
-                            .docx
-                          </Button>
+                          <div className="flex items-center gap-2">
+                            <Button
+                              onClick={() => handleDownload("txt")}
+                              variant="outline"
+                              className="h-11 px-4 rounded-xl border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 transition-colors shadow-sm text-slate-600 font-medium text-[13px]"
+                              title="Download as .txt"
+                            >
+                              <Download className="w-4 h-4" />
+                              <span className="ml-1.5">.txt</span>
+                            </Button>
+                            <Button
+                              onClick={() => handleDownload("docx")}
+                              variant="outline"
+                              className="h-11 px-4 rounded-xl border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 transition-colors shadow-sm text-slate-600 font-medium text-[13px]"
+                              title="Download as Word Document"
+                            >
+                              <Download className="w-4 h-4" />
+                              <span className="ml-1.5">.docx</span>
+                            </Button>
+                          </div>
                         </div>
                       )}
                     </div>
@@ -1318,8 +1322,7 @@ export default function UnifiedHomePage() {
                 </div>
               </div>
             </div>
-          </section>
-
+            </section>
           {/* AI Detector Logos - Horizontal Scrolling */}
           <section className="relative w-full py-10 overflow-hidden bg-gradient-to-b from-white to-gray-50">
             <p className="text-center text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-400 mb-8">
@@ -1355,7 +1358,7 @@ export default function UnifiedHomePage() {
                   ]).map(({ src, label }, index) => (
                     <div 
                       key={`${label}-${index}`} 
-                      className="flex-shrink-0 flex items-center justify-center px-6 py-3 rounded-xl bg-white border border-gray-200 transition-all duration-300 hover:border-[var(--hl-mint-deep)] hover:shadow-md group"
+                      className="flex-shrink-0 flex items-center justify-center px-6 py-3 rounded-xl bg-white border border-slate-100 transition-all duration-300 hover:border-green-700 hover:shadow-md group"
                       style={{ minWidth: '140px' }}
                     >
                       <Image 
@@ -1374,10 +1377,6 @@ export default function UnifiedHomePage() {
 
         </div>
 
-        {/* AI Detector Showcase Section - Interactive */}
-        <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-white">
-          <DetectorShowcase />
-        </section>
 
         {/* Stats Section - Below Humanizer Tool */}
         <section className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]">
@@ -1389,12 +1388,12 @@ export default function UnifiedHomePage() {
             ].map((stat) => (
               <div
                 key={stat.label}
-                className="bg-gradient-to-b from-[#faf6f1] to-white rounded-2xl p-7 border border-[rgba(94,61,42,0.15)] text-center hover-lift"
+                className="bg-gradient-to-b from-green-50 to-white rounded-2xl p-7 border border-[rgba(21,128,61,0.15)] text-center hover-lift"
               >
-                <div className="text-3xl sm:text-4xl font-extrabold mb-1 tracking-tight bg-gradient-to-br from-[var(--hl-mint-deep)] to-[var(--hl-mint-deep)] bg-clip-text text-transparent">
+                <div className="text-3xl sm:text-4xl font-extrabold mb-1 tracking-tight bg-gradient-to-br from-green-700 to-green-700 bg-clip-text text-transparent">
                   {stat.value}
                 </div>
-                <div className="text-[13px] text-gray-500 tracking-wide font-medium">
+                <div className="text-[13px] text-slate-400 tracking-wide font-medium">
                   {stat.label}
                 </div>
               </div>
@@ -1403,44 +1402,48 @@ export default function UnifiedHomePage() {
         </section>
 
         {/* How It Works Section */}
-        <section className="py-16 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.8s_forwards] relative overflow-hidden">
-          {/* Diagonal stripe pattern background */}
-          <div className="absolute inset-0 opacity-[0.04]" style={{
-            backgroundImage: `repeating-linear-gradient(
-              45deg,
-              var(--hl-mint-deep),
-              var(--hl-mint-deep) 2px,
-              transparent 2px,
-              transparent 20px
-            )`
-          }}></div>
+        <section className="py-24 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.8s_forwards] relative overflow-hidden">
+          {/* Ambient Glow */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-green-400/10 blur-[120px] rounded-full pointer-events-none" />
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center mb-10">
-              <h2 className="mb-2 text-3xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-4xl">
-                How to <span className="hl-gradient-text">bypass AI detection</span>
+            <div className="text-center mb-16">
+              <span className="inline-block py-1 px-3 rounded-full bg-green-50 border border-green-200 text-[11px] font-bold tracking-widest text-green-700 uppercase mb-4">
+                Workflow
+              </span>
+              <h2 className="mb-4 text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-5xl">
+                How to <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-green-400">bypass AI detection</span>
               </h2>
-              <p className="text-sm text-gray-500 tracking-wide">Three steps. Under 30 seconds.</p>
+              <p className="text-base text-slate-500 tracking-wide max-w-xl mx-auto">Three simple steps to transform robotic AI generation into natural, undetectable human writing.</p>
             </div>
             
             <div className="relative">
               {/* Progress Line */}
-              <div className="absolute top-24 left-0 right-0 h-px bg-gradient-to-r from-[var(--hl-mint-deep)] via-gray-200 to-[var(--hl-mint-deep)]/30 hidden lg:block" style={{ width: 'calc(100% - 200px)', left: '100px' }} />
+              <div className="absolute top-[88px] left-[15%] right-[15%] h-0.5 bg-gradient-to-r from-green-100 via-green-400 to-green-100 hidden lg:block opacity-50" />
               
-              <div className="grid md:grid-cols-3 gap-12 relative">
+              <div className="grid md:grid-cols-3 gap-8 relative z-10">
                 {[
                   { n: "1", title: "Paste your text", desc: "Drop in content from ChatGPT, Claude, Gemini, or any AI tool. Supports plain text, .docx, and .pdf." },
                   { n: "2", title: "Hit Humanize", desc: "Our engine rewrites for natural flow, varied sentence rhythm, and authentic tone — while keeping your meaning." },
                   { n: "3", title: "Copy and use", desc: "Download as .txt or .docx, or copy directly. Ready for submission, publication, or wherever you need it." },
-                ].map((step) => (
-                  <div key={step.n} className="text-center rounded-2xl bg-white/70 backdrop-blur-sm border border-[rgba(94,61,42,0.15)]/60 p-8 hover-lift">
-                    <div className="relative inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-[var(--hl-mint-deep)] to-[var(--hl-mint-deep)] text-white text-base font-bold mb-4 shadow-md shadow-[var(--hl-mint-deep)]/20">
+                ].map((step, idx) => (
+                  <div key={step.n} className="group relative text-center rounded-[2rem] bg-white border border-slate-100 p-10 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(34,197,94,0.15)] hover:border-green-200 transition-all duration-500 overflow-hidden">
+                    {/* Background Number */}
+                    <div className="absolute -top-6 -right-6 text-[180px] font-black text-slate-50/80 leading-none select-none z-0 group-hover:text-green-50/50 transition-colors duration-500">
                       {step.n}
                     </div>
-                    <h3 className="text-[15px] font-semibold text-gray-900 mb-2">{step.title}</h3>
-                    <p className="text-[13.5px] text-gray-500 leading-relaxed">
-                      {step.desc}
-                    </p>
+                    
+                    <div className="relative z-10 flex flex-col items-center">
+                      <div className="w-16 h-16 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-green-500/20 group-hover:border-green-200 transition-all duration-500">
+                        {idx === 0 && <FileText className="w-7 h-7 text-green-600" />}
+                        {idx === 1 && <Feather className="w-7 h-7 text-green-600" />}
+                        {idx === 2 && <Copy className="w-7 h-7 text-green-600" />}
+                      </div>
+                      <h3 className="text-xl font-bold text-slate-800 mb-3">{step.title}</h3>
+                      <p className="text-[14px] text-slate-500 leading-relaxed max-w-[260px]">
+                        {step.desc}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -1452,14 +1455,14 @@ export default function UnifiedHomePage() {
         <LifetimeOfferBanner />
 
         {/* Pricing Section */}
-        <section id="pricing" className="py-10 sm:py-16 bg-[var(--hl-surface)] opacity-0 animate-[fadeInUp_0.8s_ease-out_1s_forwards]">
+        <section id="pricing" className="py-10 sm:py-16 bg-green-50 opacity-0 animate-[fadeInUp_0.8s_ease-out_1s_forwards]">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--hl-mint-deep)]">Pricing</span>
-              <h3 className="mt-3 text-3xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-4xl">
+              <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-green-700">Pricing</span>
+              <h3 className="mt-3 text-3xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-4xl">
                 Simple, <span className="hl-gradient-text">transparent pricing</span>
               </h3>
-              <p className="mx-auto mt-2 max-w-sm text-sm text-gray-500">
+              <p className="mx-auto mt-2 max-w-sm text-sm text-slate-400">
                 No hidden fees. Upgrade or cancel anytime.
               </p>
             </div>
@@ -1471,109 +1474,65 @@ export default function UnifiedHomePage() {
             {subscriptionPlan && <TopUpSection />}
           </div>
         </section>
-
         {/* Powerful Humanization Features */}
-        <section className="py-16 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.6s_forwards] relative overflow-hidden">
-          {/* Square grid background pattern */}
-          <div className="absolute inset-0 opacity-[0.08]" style={{
-            backgroundImage: `
-              linear-gradient(to right, var(--hl-mint-deep) 1.5px, transparent 1.5px),
-              linear-gradient(to bottom, var(--hl-mint-deep) 1.5px, transparent 1.5px)
-            `,
-            backgroundSize: '40px 40px'
+        <section className="py-24 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.6s_forwards] relative overflow-hidden">
+          {/* Subtle dot background */}
+          <div className="absolute inset-0 opacity-[0.03]" style={{
+            backgroundImage: 'radial-gradient(circle at center, #15803d 1px, transparent 1px)',
+            backgroundSize: '24px 24px'
           }}></div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center mb-10">
-              <h2 className="mb-3 text-3xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-4xl">
-                How our <span className="hl-gradient-text">AI humanizer works</span>
+            <div className="text-center mb-16">
+              <span className="inline-block py-1 px-3 rounded-full bg-green-50 border border-green-200 text-[11px] font-bold tracking-widest text-green-700 uppercase mb-4">
+                Core Technology
+              </span>
+              <h2 className="mb-4 text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-5xl">
+                How our <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-green-400">AI humanizer works</span>
               </h2>
-              <p className="text-gray-500 max-w-lg mx-auto text-sm leading-relaxed">
+              <p className="text-base text-slate-500 tracking-wide max-w-xl mx-auto">
                 Under the hood, a purpose-built rewriting engine — not a generic LLM wrapper — handles every nuance of natural language.
               </p>
             </div>
             
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Feature 1 */}
-              <div className="bg-[var(--hl-mint-deep)]/5 rounded-2xl p-6 border border-[rgba(94,61,42,0.15)] hover-lift">
-                <div className="w-10 h-10 bg-[var(--hl-mint-deep)] rounded-xl flex items-center justify-center mb-4">
-                  <ShieldCheck className="w-5 h-5 text-white" />
+              {[
+                { icon: ShieldCheck, title: "Undetectable output", desc: "Rewrites pass GPTZero, Turnitin, and Originality.ai. The result reads like a person — because it's engineered to." },
+                { icon: FileText, title: "Meaning preserved", desc: "Your facts, arguments, and structure stay intact. Only the phrasing changes — nothing gets lost in translation." },
+                { icon: Zap, title: "Fast at any scale", desc: "5,000 words processed in under 3 seconds. No queue, no wait — just instant results on demand." },
+                { icon: Lock, title: "Private by design", desc: "Your content is never stored, logged, or used for training. What you paste stays yours — full stop." },
+                { icon: Languages, title: "50+ languages", desc: "English, Spanish, French, German, Chinese, Japanese, and more — all with the same quality and naturalness." },
+                { icon: CheckCircle2, title: "No friction to start", desc: "Paste and go. No account required to try it — sign up only when you're ready for more." }
+              ].map((feature, idx) => (
+                <div key={idx} className="group relative bg-white rounded-3xl p-8 border border-slate-100 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-10px_rgba(34,197,94,0.15)] hover:-translate-y-1 hover:border-green-200 transition-all duration-300 overflow-hidden">
+                  <div className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-5 transition-opacity duration-500 transform translate-x-4 -translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0">
+                    <feature.icon className="w-24 h-24 text-green-700" />
+                  </div>
+                  
+                  <div className="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-500 group-hover:scale-110 transition-all duration-300">
+                    <feature.icon className="w-6 h-6 text-green-600 group-hover:text-white transition-colors duration-300" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-[17px] font-bold text-slate-800 mb-3">{feature.title}</h3>
+                  <p className="text-[14px] text-slate-500 leading-relaxed">
+                    {feature.desc}
+                  </p>
                 </div>
-                <h3 className="text-[15px] font-semibold text-gray-900 mb-2">Undetectable output</h3>
-                <p className="text-gray-500 text-[13.5px] leading-relaxed">
-                  Rewrites pass GPTZero, Turnitin, and Originality.ai. The result reads like a person — because it's engineered to.
-                </p>
-              </div>
-
-              {/* Feature 2 */}
-              <div className="bg-[#faf6f1] rounded-2xl p-6 border border-[rgba(94,61,42,0.15)] hover-lift">
-                <div className="w-10 h-10 bg-[var(--hl-mint-deep)] rounded-xl flex items-center justify-center mb-4">
-                  <FileText className="w-5 h-5 text-white" />
-                </div>
-                <h3 className="text-[15px] font-semibold text-gray-900 mb-2">Meaning preserved</h3>
-                <p className="text-gray-500 text-[13.5px] leading-relaxed">
-                  Your facts, arguments, and structure stay intact. Only the phrasing changes — nothing gets lost in translation.
-                </p>
-              </div>
-
-              {/* Feature 3 */}
-              <div className="bg-[var(--hl-mint-deep)]/5 rounded-2xl p-6 border border-[rgba(94,61,42,0.15)] hover-lift">
-                <div className="w-10 h-10 bg-[var(--hl-mint-deep)] rounded-xl flex items-center justify-center mb-4">
-                  <Zap className="w-5 h-5 text-white" />
-                </div>
-                <h3 className="text-[15px] font-semibold text-gray-900 mb-2">Fast at any scale</h3>
-                <p className="text-gray-500 text-[13.5px] leading-relaxed">
-                  5,000 words processed in under 3 seconds. No queue, no wait — just instant results on demand.
-                </p>
-              </div>
-
-              {/* Feature 4 */}
-              <div className="bg-[#faf6f1] rounded-2xl p-6 border border-[rgba(94,61,42,0.15)] hover-lift">
-                <div className="w-10 h-10 bg-[var(--hl-mint-deep)] rounded-xl flex items-center justify-center mb-4">
-                  <Lock className="w-5 h-5 text-white" />
-                </div>
-                <h3 className="text-[15px] font-semibold text-gray-900 mb-2">Private by design</h3>
-                <p className="text-gray-500 text-[13.5px] leading-relaxed">
-                  Your content is never stored, logged, or used for training. What you paste stays yours — full stop.
-                </p>
-              </div>
-
-              {/* Feature 5 */}
-              <div className="bg-[var(--hl-mint-deep)]/5 rounded-2xl p-6 border border-[rgba(94,61,42,0.15)] hover-lift">
-                <div className="w-10 h-10 bg-[var(--hl-mint-deep)] rounded-xl flex items-center justify-center mb-4">
-                  <Languages className="w-5 h-5 text-white" />
-                </div>
-                <h3 className="text-[15px] font-semibold text-gray-900 mb-2">50+ languages</h3>
-                <p className="text-gray-500 text-[13.5px] leading-relaxed">
-                  English, Spanish, French, German, Chinese, Japanese, and more — all with the same quality and naturalness.
-                </p>
-              </div>
-
-              {/* Feature 6 */}
-              <div className="bg-[#faf6f1] rounded-2xl p-6 border border-[rgba(94,61,42,0.15)] hover-lift">
-                <div className="w-10 h-10 bg-[var(--hl-mint-deep)] rounded-xl flex items-center justify-center mb-4">
-                  <FileText className="w-5 h-5 text-white" />
-                </div>
-                <h3 className="text-[15px] font-semibold text-gray-900 mb-2">No friction to start</h3>
-                <p className="text-gray-500 text-[13.5px] leading-relaxed">
-                  Paste and go. No account required to try it — sign up only when you're ready for more.
-                </p>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* Redesigned Testimonials Section */}
-        <section id="testimonials" className="py-16 sm:py-20 bg-[#faf6f1] overflow-hidden relative opacity-0 animate-[fadeInUp_0.8s_ease-in-out_1.2s_forwards]">
+        <section id="testimonials" className="py-16 sm:py-20 bg-green-50 overflow-hidden relative opacity-0 animate-[fadeInUp_0.8s_ease-in-out_1.2s_forwards]">
           <div className="absolute top-0 inset-x-0 h-px bg-muted" />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16 md:mb-20">
-              <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--hl-mint-deep)] mb-3 block">Testimonials</span>
+              <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-green-700 mb-3 block">Testimonials</span>
               <h2 className="mb-3 text-3xl font-extrabold leading-tight tracking-tight text-foreground md:text-4xl">
                 What people <span className="hl-gradient-text">are saying</span>
               </h2>
-              <p className="text-gray-500 max-w-sm mx-auto text-sm">Thousands of writers, students, and teams use HumanifyLab every day.</p>
+              <p className="text-slate-400 max-w-sm mx-auto text-sm">Thousands of writers, students, and teams use DebotifyText every day.</p>
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -1586,7 +1545,7 @@ export default function UnifiedHomePage() {
                   </div>
                   <p className="text-foreground text-sm leading-relaxed mb-6 flex-1">"{t.quote}"</p>
                   <div className="flex items-center gap-3 pt-4 border-t border-slate-50">
-                    <div className="w-8 h-8 rounded-full bg-[#faf6f1] flex items-center justify-center text-xs font-bold text-[var(--hl-mint-deep)]">
+                    <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-xs font-bold text-green-700">
                       {t.name[0]}
                     </div>
                     <div className="overflow-hidden">
@@ -1600,50 +1559,17 @@ export default function UnifiedHomePage() {
           </div>
         </section>
 
-        {/* Affiliate Program Banner */}
-        <section className="py-16 bg-[#0f1419] relative overflow-hidden">
-          <div className="absolute inset-0 opacity-10" style={{
-            backgroundImage: `radial-gradient(circle at 20% 50%, var(--hl-mint-deep) 0%, transparent 50%), radial-gradient(circle at 80% 50%, var(--hl-mint-deep) 0%, transparent 50%)`
-          }} />
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-              <div className="text-center md:text-left">
-                <span className="inline-block text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--hl-mint-deep)] mb-3">Affiliate Program</span>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3 leading-tight">
-                  Earn 10% on every referral
-                </h2>
-                <p className="text-gray-400 text-sm max-w-md leading-relaxed" suppressHydrationWarning>
-                  Share your unique referral code. When someone signs up and enters your code, you earn 10% of their first payment — paid in USDT directly to your wallet.
-                </p>
-                <div className="flex flex-wrap gap-4 mt-5 justify-center md:justify-start text-xs text-gray-400">
-                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[var(--hl-mint-deep)] inline-block" />10% commission</span>
-                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[var(--hl-mint-deep)] inline-block" />Paid in USDT</span>
-                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[var(--hl-mint-deep)] inline-block" />$15 minimum payout</span>
-                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[var(--hl-mint-deep)] inline-block" />Open to everyone</span>
-                </div>
-              </div>
-              <div className="flex-shrink-0">
-                <a
-                  href="/affiliate"
-                  className="inline-flex items-center gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] text-white font-semibold px-8 py-4 rounded-2xl transition-colors text-sm whitespace-nowrap shadow-[0_12px_40px_-12px_rgba(94,61,42,0.65)]"
-                >
-                  Start Earning
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
+        
 
         {/* Guides & Regions — internal links to hub pages for crawl discovery */}
-        <section className="relative border-t border-gray-100 bg-[#faf6f1] py-16 sm:py-20">
+        <section className="relative border-t border-gray-100 bg-green-50 py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-5 sm:px-6 lg:px-8">
             <div className="mb-10 text-center">
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--hl-mint-deep)]">Resources</span>
-              <h2 className="mx-auto mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-green-700">Resources</span>
+              <h2 className="mx-auto mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
                 Guides for every detector and region
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-600">
+              <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-slate-500">
                 In-depth guides on bypassing specific AI detectors, plus guidance built for students and teams in
                 your country.
               </p>
@@ -1658,7 +1584,7 @@ export default function UnifiedHomePage() {
                 <Link
                   key={g.href}
                   href={g.href}
-                  className="flex items-center justify-center rounded-xl border border-gray-200 bg-white p-5 text-center text-sm font-semibold text-gray-900 transition-colors hover:border-[var(--hl-mint-deep)] hover:text-[var(--hl-mint-deep)]"
+                  className="flex items-center justify-center rounded-xl border border-slate-100 bg-white p-5 text-center text-sm font-semibold text-slate-900 transition-colors hover:border-green-700 hover:text-green-700"
                 >
                   {g.label}
                 </Link>
@@ -1674,7 +1600,7 @@ export default function UnifiedHomePage() {
                 <Link
                   key={g.href}
                   href={g.href}
-                  className="rounded-lg border border-gray-200 bg-white py-3 text-center text-xs font-semibold text-gray-700 transition-colors hover:border-[var(--hl-mint-deep)] hover:text-[var(--hl-mint-deep)]"
+                  className="rounded-lg border border-slate-100 bg-white py-3 text-center text-xs font-semibold text-gray-700 transition-colors hover:border-green-700 hover:text-green-700"
                 >
                   {g.label}
                 </Link>
@@ -1693,7 +1619,7 @@ export default function UnifiedHomePage() {
                 <Link
                   key={r.href}
                   href={r.href}
-                  className="rounded-lg border border-gray-200 bg-white py-3 text-center text-xs font-medium text-gray-700 transition-colors hover:border-[var(--hl-mint-deep)] hover:text-[var(--hl-mint-deep)]"
+                  className="rounded-lg border border-slate-100 bg-white py-3 text-center text-xs font-medium text-gray-700 transition-colors hover:border-green-700 hover:text-green-700"
                 >
                   {r.label}
                 </Link>
@@ -1703,51 +1629,51 @@ export default function UnifiedHomePage() {
         </section>
 
         {/* FAQ Section */}
-        <section id="faq" className="relative py-20 sm:py-24 bg-white opacity-0 animate-[fadeInUp_0.8s_ease-out_1.4s_forwards] overflow-hidden">
-          {/* Small triangle pattern background */}
-          <div className="absolute inset-0 opacity-[0.06]" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 2 L14 10 L6 10 Z' fill='%235e3d2a' /%3E%3C/svg%3E")`,
-            backgroundSize: '20px 20px',
-            backgroundRepeat: 'repeat'
-          }}></div>
+        <section id="faq" className="relative py-24 bg-gradient-to-b from-white to-green-50/30 opacity-0 animate-[fadeInUp_0.8s_ease-out_1.4s_forwards] overflow-hidden">
+          {/* Ambient Glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-400/5 blur-[120px] rounded-full pointer-events-none" />
           
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center mb-12">
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--hl-mint-deep)]">FAQ</span>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
-                Frequently asked questions about our AI humanizer
+            <div className="text-center mb-16">
+              <span className="inline-block py-1 px-3 rounded-full bg-green-50 border border-green-200 text-[11px] font-bold tracking-widest text-green-700 uppercase mb-4">
+                FAQ
+              </span>
+              <h2 className="mb-4 text-3xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-4xl">
+                Frequently asked questions about our <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-green-400">AI humanizer</span>
               </h2>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-4">
               {FAQ_ITEMS.map((item) => {
                 const isOpen = faqOpen === item.id;
                 return (
                   <div
                     key={item.id}
-                    className={`rounded-2xl border transition-all duration-200 ${
+                    className={`group rounded-[1.5rem] border transition-all duration-300 overflow-hidden ${
                       isOpen
-                        ? "border-[var(--hl-mint-deep)]/40 bg-[#faf6f1] shadow-sm"
-                        : "border-gray-200 bg-white hover:border-[var(--hl-mint-deep)]/30"
+                        ? "border-green-200 bg-white shadow-[0_8px_30px_-10px_rgba(34,197,94,0.12)] -translate-y-0.5"
+                        : "border-slate-100 bg-white hover:border-green-100 hover:shadow-sm"
                     }`}
                   >
                     <button
                       type="button"
                       onClick={() => setFaqOpen(isOpen ? null : item.id)}
-                      className="flex w-full items-center justify-between py-5 text-left px-5 sm:px-6"
+                      className="flex w-full items-center justify-between py-6 text-left px-6 sm:px-8"
                     >
-                      <span className="text-[15px] sm:text-base font-semibold text-gray-900 pr-8">{item.question}</span>
-                      <span className={`flex h-7 w-7 items-center justify-center rounded-full flex-shrink-0 transition-colors ${isOpen ? "bg-[var(--hl-mint-deep)] text-white" : "bg-gray-100 text-gray-500"}`}>
-                        <ChevronDown
-                          className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-                        />
+                      <span className={`text-[16px] sm:text-[17px] font-bold pr-8 transition-colors ${isOpen ? "text-green-950" : "text-slate-800"}`}>
+                        {item.question}
+                      </span>
+                      <span className={`flex h-8 w-8 items-center justify-center rounded-xl flex-shrink-0 transition-all duration-300 ${isOpen ? "bg-green-100 text-green-700 rotate-180 shadow-inner" : "bg-slate-50 text-slate-400 group-hover:bg-green-50 group-hover:text-green-600"}`}>
+                        <ChevronDown className="h-5 w-5" strokeWidth={2.5} />
                       </span>
                     </button>
-                    {isOpen && (
-                      <div className="px-5 sm:px-6 pb-5 text-sm leading-relaxed text-gray-600">
+                    <div 
+                      className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"}`}
+                    >
+                      <div className="px-6 sm:px-8 pb-7 text-[14.5px] leading-relaxed text-slate-500">
                         {item.answer}
                       </div>
-                    )}
+                    </div>
                   </div>
                 );
               })}

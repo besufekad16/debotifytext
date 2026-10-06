@@ -5,8 +5,8 @@ export function addCorsHeaders(response: NextResponse, request: NextRequest) {
   const allowedOrigins = [
     'http://localhost:3000',
     'http://localhost:3050',
-    'https://www.humanifylab.com',
-    'https://humanifylab.com'
+    'https://www.debotifytext.com',
+    'https://debotifytext.com'
   ];
 
   if (origin && allowedOrigins.includes(origin)) {

@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve perfect results with how to trick scribbr with a speech as a student"
   },
-  "technicalDeepDive": "When TAs run your assignment through Turnitin, they look for predictable phrasing. Our system removes these patterns entirely.\n\nUniversities use highly sensitive models to detect AI. HumanifyLab counters this by re-evaluating the writing flow of your assignment.\n\nUnlike basic rewriters, our engine understands university guidelines and maintains your main ideas without triggering GPTZero or Turnitin.\n\nThe result is a perfectly structured submission that exhibits natural human burstiness, guaranteeing a 0% AI detection score.",
+  "technicalDeepDive": "When TAs run your assignment through Turnitin, they look for predictable phrasing. Our system removes these patterns entirely.\n\nUniversities use highly sensitive models to detect AI. DebotifyText counters this by re-evaluating the writing flow of your assignment.\n\nUnlike basic rewriters, our engine understands university guidelines and maintains your main ideas without triggering GPTZero or Turnitin.\n\nThe result is a perfectly structured submission that exhibits natural human burstiness, guaranteeing a 0% AI detection score.",
   "stepByStep": [
     {
       "title": "Academic Scan",

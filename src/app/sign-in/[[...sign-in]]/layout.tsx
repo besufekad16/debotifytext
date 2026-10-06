@@ -2,7 +2,7 @@ import { type Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Sign In",
-  description: "Sign in to your HumanifyLab account to humanize AI text and manage your credits.",
+  description: "Sign in to your DebotifyText account to humanize AI text and manage your credits.",
   robots: {
     index: false,
     follow: true,

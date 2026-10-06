@@ -9,7 +9,7 @@
     "idealUser": "Writers",
     "coreIntent": "Achieve perfect results with what removes ai detection for quillbot with homework for undergraduates"
   },
-  "technicalDeepDive": "We train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nColleges use strict heuristics to flag AI. HumanifyLab counters this by restructuring the semantic structure of your paper.\n\nWhen TAs run your work through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.\n\nUnlike simple rewriters, our engine understands academic formatting and maintains your research arguments without triggering GPTZero or Turnitin.",
+  "technicalDeepDive": "We train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nColleges use strict heuristics to flag AI. DebotifyText counters this by restructuring the semantic structure of your paper.\n\nWhen TAs run your work through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.\n\nUnlike simple rewriters, our engine understands academic formatting and maintains your research arguments without triggering GPTZero or Turnitin.",
   "stepByStep": [
     {
       "title": "Plagiarism Check",

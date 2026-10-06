@@ -4,22 +4,22 @@ import { ArrowRight, CheckCircle2, ShieldOff } from "lucide-react";
 import PageNavbar from "~/components/PageNavbar";
 import { SiteFooter } from "~/components/SiteFooter";
 
-const BASE_URL = "https://www.humanifylab.com";
+const BASE_URL = "https://www.debotifytext.com";
 const URL = `${BASE_URL}/bypass-ai-detectors`;
 
 export const metadata: Metadata = {
-  title: { absolute: "Bypass AI Detectors — Every Major Detector Beaten (2026) | HumanifyLab" },
-  description: "Bypass AI detectors including Turnitin, GPTZero, Originality.AI, ZeroGPT, Copyleaks, Winston AI and Sapling. HumanifyLab achieves a 99.9% bypass rate, verified weekly. Free plan, no sign-up.",
-  keywords: ["bypass ai detectors", "bypass ai detector", "ai detector bypass", "beat ai detectors", "undetectable ai", "ai humanizer", "HumanifyLab", "humanify", "humanify ai", "humanify text", "humanify ai text", "humanify lab"],
-  authors: [{ name: "HumanifyLab", url: BASE_URL }],
+  title: { absolute: "Bypass AI Detectors — Every Major Detector Beaten (2026) | DebotifyText" },
+  description: "Bypass AI detectors including Turnitin, GPTZero, Originality.AI, ZeroGPT, Copyleaks, Winston AI and Sapling. DebotifyText achieves a 99.9% bypass rate, verified weekly. Free plan, no sign-up.",
+  keywords: ["bypass ai detectors", "bypass ai detector", "ai detector bypass", "beat ai detectors", "undetectable ai", "ai humanizer", "DebotifyText", "debotify", "debotify ai", "debotify text", "debotify ai text", "debotify lab"],
+  authors: [{ name: "DebotifyText", url: BASE_URL }],
   alternates: { canonical: URL },
   openGraph: {
     title: "Bypass AI Detectors — Every Major Detector Beaten (2026)",
-    description: "HumanifyLab bypasses Turnitin, GPTZero, Originality.AI, ZeroGPT, Copyleaks and every major AI detector with a 99.9% success rate.",
+    description: "DebotifyText bypasses Turnitin, GPTZero, Originality.AI, ZeroGPT, Copyleaks and every major AI detector with a 99.9% success rate.",
     url: URL,
-    siteName: "HumanifyLab",
+    siteName: "DebotifyText",
     type: "article",
-    images: [{ url: `${BASE_URL}/forOpenGraph.png`, width: 1200, height: 630, alt: "Bypass AI Detectors — HumanifyLab" }],
+    images: [{ url: `${BASE_URL}/forOpenGraph.png`, width: 1200, height: 630, alt: "Bypass AI Detectors — DebotifyText" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -41,11 +41,11 @@ const DETECTORS = [
 ];
 
 const FAQS = [
-  { q: "Can AI detectors really be bypassed reliably?", a: "Yes — AI detectors work by measuring statistical patterns like perplexity (how predictable each word is) and burstiness (variation in sentence length). HumanifyLab rewrites text at the linguistic level to push those statistics into the range typical of human writing, rather than simply swapping synonyms. Because the underlying signal is genuinely changed, the bypass holds up across repeated scans." },
-  { q: "Is bypassing an AI detector the same as plagiarism?", a: "No. Plagiarism detection checks whether your words match an existing source. AI detection checks whether your writing style statistically resembles AI-generated text. HumanifyLab does not copy anyone else's work — it rewrites your own AI-drafted content into natural, original human-style phrasing." },
-  { q: "Do I need to use different tools for different detectors?", a: "No. HumanifyLab's transformation targets the shared statistical signals (perplexity, burstiness, semantic entropy) that essentially all AI detectors rely on, so a single pass typically clears every major detector at once — no need to run separate tools per detector." },
-  { q: "How often do detectors update, and does HumanifyLab keep up?", a: "AI detectors update their models every few weeks as new AI writing patterns emerge. HumanifyLab is re-tested against live versions of every major detector weekly, and the transformation engine is adjusted whenever a detector's accuracy shifts." },
-  { q: "Will bypassing an AI detector change what my text says?", a: "No — HumanifyLab preserves 100% of your original meaning. Only the statistical writing signature that detectors key on is changed; the facts, arguments, and structure of your content stay intact." },
+  { q: "Can AI detectors really be bypassed reliably?", a: "Yes — AI detectors work by measuring statistical patterns like perplexity (how predictable each word is) and burstiness (variation in sentence length). DebotifyText rewrites text at the linguistic level to push those statistics into the range typical of human writing, rather than simply swapping synonyms. Because the underlying signal is genuinely changed, the bypass holds up across repeated scans." },
+  { q: "Is bypassing an AI detector the same as plagiarism?", a: "No. Plagiarism detection checks whether your words match an existing source. AI detection checks whether your writing style statistically resembles AI-generated text. DebotifyText does not copy anyone else's work — it rewrites your own AI-drafted content into natural, original human-style phrasing." },
+  { q: "Do I need to use different tools for different detectors?", a: "No. DebotifyText's transformation targets the shared statistical signals (perplexity, burstiness, semantic entropy) that essentially all AI detectors rely on, so a single pass typically clears every major detector at once — no need to run separate tools per detector." },
+  { q: "How often do detectors update, and does DebotifyText keep up?", a: "AI detectors update their models every few weeks as new AI writing patterns emerge. DebotifyText is re-tested against live versions of every major detector weekly, and the transformation engine is adjusted whenever a detector's accuracy shifts." },
+  { q: "Will bypassing an AI detector change what my text says?", a: "No — DebotifyText preserves 100% of your original meaning. Only the statistical writing signature that detectors key on is changed; the facts, arguments, and structure of your content stay intact." },
 ];
 
 export default function BypassAiDetectorsPage() {
@@ -56,12 +56,12 @@ export default function BypassAiDetectorsPage() {
         "@type": "Article",
         "@id": `${URL}#article`,
         headline: "Bypass AI Detectors: Every Major Detector Beaten (2026 Guide)",
-        description: "A complete breakdown of every major AI detector and how HumanifyLab bypasses each one with a verified 99.9% success rate.",
+        description: "A complete breakdown of every major AI detector and how DebotifyText bypasses each one with a verified 99.9% success rate.",
         inLanguage: "en-US",
-        author: { "@type": "Organization", name: "HumanifyLab", url: BASE_URL },
+        author: { "@type": "Organization", name: "DebotifyText", url: BASE_URL },
         publisher: {
-          "@type": "Organization", name: "HumanifyLab", url: BASE_URL,
-          logo: { "@type": "ImageObject", url: `${BASE_URL}/humanify.png`, width: 512, height: 512 },
+          "@type": "Organization", name: "DebotifyText", url: BASE_URL,
+          logo: { "@type": "ImageObject", url: `${BASE_URL}/debotify.png`, width: 512, height: 512 },
         },
         mainEntityOfPage: { "@type": "WebPage", "@id": URL },
       },
@@ -73,7 +73,7 @@ export default function BypassAiDetectorsPage() {
       {
         "@type": "SoftwareApplication",
         "@id": `${URL}#app`,
-        name: "HumanifyLab",
+        name: "DebotifyText",
         applicationCategory: "UtilitiesApplication",
         operatingSystem: "Web",
         url: BASE_URL,
@@ -100,18 +100,18 @@ export default function BypassAiDetectorsPage() {
       <div className="min-h-screen bg-white">
         <section className="bg-[#0f1419] text-white py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[var(--hl-mint-deep)] mb-4">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-green-700 mb-4">
               <ShieldOff className="w-4 h-4" /> Every Major Detector, Beaten
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight">
               Bypass AI Detectors — All of Them, Verified Weekly
             </h1>
             <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto mb-8">
-              Turnitin, GPTZero, Originality.AI, ZeroGPT, Copyleaks, Winston AI, Sapling — HumanifyLab is tested
+              Turnitin, GPTZero, Originality.AI, ZeroGPT, Copyleaks, Winston AI, Sapling — DebotifyText is tested
               against live versions of every major AI detector every week and rewrites your text so it reads as
               genuinely human, not just paraphrased.
             </p>
-            <Link href="/" className="inline-flex items-center gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] text-white font-semibold px-8 py-4 rounded-xl transition-colors text-sm">
+            <Link href="/" className="inline-flex items-center gap-2 bg-green-700 hover:bg-green-600 text-white font-semibold px-8 py-4 rounded-xl transition-colors text-sm">
               Try Free — No Sign-up <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -119,8 +119,8 @@ export default function BypassAiDetectorsPage() {
 
         <section className="py-16 px-4 bg-white">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">How AI Detectors Actually Work</h2>
-            <p className="text-gray-600 leading-relaxed mb-4">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6">How AI Detectors Actually Work</h2>
+            <p className="text-slate-500 leading-relaxed mb-4">
               Every AI detector on this page — regardless of who built it — relies on the same underlying idea:
               AI language models generate text that is statistically more predictable than human writing. Detectors
               measure this predictability through a handful of signals, most commonly <strong>perplexity</strong> (how
@@ -128,14 +128,14 @@ export default function BypassAiDetectorsPage() {
               sentence length and structure vary across a passage), and increasingly, <strong>semantic entropy</strong>
               {" "}(how varied the underlying ideas and phrasing are across a document).
             </p>
-            <p className="text-gray-600 leading-relaxed mb-4">
+            <p className="text-slate-500 leading-relaxed mb-4">
               AI-generated text tends to score low on all three: word choices are unusually predictable, sentence
               lengths cluster tightly around an average, and phrasing repeats structural patterns. Simple paraphrasing
               tools — the kind that swap words for synonyms — barely move these numbers, which is why text run through
               a basic paraphraser is often still flagged.
             </p>
-            <p className="text-gray-600 leading-relaxed">
-              HumanifyLab instead rewrites at the structural level: varying sentence length deliberately, choosing
+            <p className="text-slate-500 leading-relaxed">
+              DebotifyText instead rewrites at the structural level: varying sentence length deliberately, choosing
               less-predictable (but still natural) word order, and breaking up the overly consistent rhythm AI models
               produce. That is why the transformation holds up across every detector below, rather than beating one
               and failing another.
@@ -143,27 +143,27 @@ export default function BypassAiDetectorsPage() {
           </div>
         </section>
 
-        <section className="py-16 px-4 bg-gray-50">
+        <section className="py-16 px-4 bg-slate-50">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 text-center mb-10">Bypass Rate by Detector</h2>
-            <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm bg-white">
+            <h2 className="text-2xl font-bold text-slate-900 text-center mb-10">Bypass Rate by Detector</h2>
+            <div className="overflow-x-auto rounded-2xl border border-slate-100 shadow-sm bg-white">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-[#0f1419] text-white">
                     <th className="text-left px-6 py-4 font-semibold">Detector</th>
                     <th className="text-left px-6 py-4 font-semibold">Used By</th>
-                    <th className="text-center px-6 py-4 font-semibold text-[var(--hl-mint-deep)]">HumanifyLab Bypass Rate</th>
+                    <th className="text-center px-6 py-4 font-semibold text-green-700">DebotifyText Bypass Rate</th>
                     <th className="text-center px-6 py-4 font-semibold">Guide</th>
                   </tr>
                 </thead>
                 <tbody>
                   {DETECTORS.map((d, i) => (
-                    <tr key={d.name} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                    <tr key={d.name} className={i % 2 === 0 ? "bg-white" : "bg-slate-50"}>
                       <td className="px-6 py-4 font-medium text-gray-800">{d.name}</td>
-                      <td className="px-6 py-4 text-gray-500">{d.usedBy}</td>
-                      <td className="px-6 py-4 text-center text-[var(--hl-mint-deep)] font-semibold">{d.bypassRate}</td>
+                      <td className="px-6 py-4 text-slate-400">{d.usedBy}</td>
+                      <td className="px-6 py-4 text-center text-green-700 font-semibold">{d.bypassRate}</td>
                       <td className="px-6 py-4 text-center">
-                        <Link href={d.link} className="text-[var(--hl-mint-deep)] hover:underline font-medium">
+                        <Link href={d.link} className="text-green-700 hover:underline font-medium">
                           Full guide →
                         </Link>
                       </td>
@@ -178,36 +178,36 @@ export default function BypassAiDetectorsPage() {
 
         <section className="py-16 px-4 bg-white">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 text-center mb-10">Detection Mechanisms, Detector by Detector</h2>
+            <h2 className="text-2xl font-bold text-slate-900 text-center mb-10">Detection Mechanisms, Detector by Detector</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {DETECTORS.map((d) => (
-                <div key={d.name} className="bg-gray-50 rounded-xl border border-gray-200 p-6">
+                <div key={d.name} className="bg-slate-50 rounded-xl border border-slate-100 p-6">
                   <div className="flex items-center gap-2 mb-2">
-                    <CheckCircle2 className="w-5 h-5 text-[var(--hl-mint-deep)]" />
-                    <h3 className="font-semibold text-gray-900">{d.name}</h3>
+                    <CheckCircle2 className="w-5 h-5 text-green-700" />
+                    <h3 className="font-semibold text-slate-900">{d.name}</h3>
                   </div>
-                  <p className="text-sm text-gray-600 leading-relaxed">{d.mechanism}</p>
+                  <p className="text-sm text-slate-500 leading-relaxed">{d.mechanism}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="py-16 px-4 bg-gray-50">
+        <section className="py-16 px-4 bg-slate-50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 text-center mb-10">How It Works</h2>
+            <h2 className="text-2xl font-bold text-slate-900 text-center mb-10">How It Works</h2>
             <div className="space-y-6">
               {[
                 { n: "1", t: "Paste your AI-generated text", d: "From ChatGPT, Claude, Gemini, or any other AI tool — any length is supported." },
-                { n: "2", t: "Choose a tone", d: "Academic, Professional, or Casual — HumanifyLab tunes the transformation to match your context." },
+                { n: "2", t: "Choose a tone", d: "Academic, Professional, or Casual — DebotifyText tunes the transformation to match your context." },
                 { n: "3", t: "Get humanized output in under 10 seconds", d: "Meaning is preserved 100%; only the AI-detectable statistical signature is removed." },
                 { n: "4", t: "Submit or publish with confidence", d: "Results are permanent — text humanized once does not get re-flagged later." },
               ].map((s) => (
                 <div key={s.n} className="flex gap-5 items-start">
-                  <div className="w-10 h-10 rounded-full bg-[var(--hl-mint-deep)] text-white flex items-center justify-center font-bold text-sm flex-shrink-0">{s.n}</div>
+                  <div className="w-10 h-10 rounded-full bg-green-700 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">{s.n}</div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">{s.t}</h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">{s.d}</p>
+                    <h3 className="font-semibold text-slate-900 mb-1">{s.t}</h3>
+                    <p className="text-sm text-slate-500 leading-relaxed">{s.d}</p>
                   </div>
                 </div>
               ))}
@@ -217,12 +217,12 @@ export default function BypassAiDetectorsPage() {
 
         <section className="py-16 px-4 bg-white">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">Frequently Asked Questions</h2>
+            <h2 className="text-2xl font-bold text-slate-900 text-center mb-8">Frequently Asked Questions</h2>
             <div className="space-y-4">
               {FAQS.map((faq) => (
-                <div key={faq.q} className="bg-gray-50 rounded-xl border border-gray-200 p-6">
-                  <h3 className="font-semibold text-gray-900 mb-2">{faq.q}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
+                <div key={faq.q} className="bg-slate-50 rounded-xl border border-slate-100 p-6">
+                  <h3 className="font-semibold text-slate-900 mb-2">{faq.q}</h3>
+                  <p className="text-slate-500 text-sm leading-relaxed">{faq.a}</p>
                 </div>
               ))}
             </div>
@@ -233,7 +233,7 @@ export default function BypassAiDetectorsPage() {
           <div className="max-w-2xl mx-auto">
             <h2 className="text-2xl font-bold mb-3">Beat Every Detector — Try Free</h2>
             <p className="text-gray-400 mb-6">99.9% bypass rate. No sign-up required. Results in under 10 seconds.</p>
-            <Link href="/" className="inline-flex items-center gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] text-white font-semibold px-8 py-4 rounded-xl transition-colors">
+            <Link href="/" className="inline-flex items-center gap-2 bg-green-700 hover:bg-green-600 text-white font-semibold px-8 py-4 rounded-xl transition-colors">
               Get Started Free <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

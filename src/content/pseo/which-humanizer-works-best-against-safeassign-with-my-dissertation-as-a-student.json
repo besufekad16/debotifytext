@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with which humanizer works best against safeassign with my dissertation as a student"
   },
-  "technicalDeepDive": "The result is a cohesive paper that reads like a human scholar, guaranteeing a 0% AI detection score.\n\nWhen professors run your assignment through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.\n\nColleges use highly sensitive algorithms to flag AI. HumanifyLab counters this by re-mapping the semantic structure of your paper.",
+  "technicalDeepDive": "The result is a cohesive paper that reads like a human scholar, guaranteeing a 0% AI detection score.\n\nWhen professors run your assignment through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.\n\nColleges use highly sensitive algorithms to flag AI. DebotifyText counters this by re-mapping the semantic structure of your paper.",
   "stepByStep": [
     {
       "title": "Academic Scan",

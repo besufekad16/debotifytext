@@ -9,7 +9,7 @@
     "idealUser": "Writers",
     "coreIntent": "Achieve perfect results with which humanizer works best against scribbr with an assignment for masters students"
   },
-  "technicalDeepDive": "We train our algorithms on millions of high-scoring papers to ensure your output is academically rigorous yet undetectable.\n\nWhen educators run your work through Turnitin, they look for predictable phrasing. Our system removes these patterns entirely.\n\nMany researchers struggle with false positives. HumanifyLab solves this by giving your text the depth of real human writing.",
+  "technicalDeepDive": "We train our algorithms on millions of high-scoring papers to ensure your output is academically rigorous yet undetectable.\n\nWhen educators run your work through Turnitin, they look for predictable phrasing. Our system removes these patterns entirely.\n\nMany researchers struggle with false positives. DebotifyText solves this by giving your text the depth of real human writing.",
   "stepByStep": [
     {
       "title": "Safe Export",

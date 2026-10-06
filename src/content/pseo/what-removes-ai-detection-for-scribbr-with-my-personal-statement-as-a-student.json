@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve flawless results with what removes ai detection for scribbr with my personal statement as a student"
   },
-  "technicalDeepDive": "When TAs run your assignment through Turnitin, they look for predictable phrasing. Our system removes these watermarks entirely.\n\nMany students struggle with false positives. HumanifyLab solves this by giving your text the depth of real human writing.\n\nColleges use advanced models to flag AI. HumanifyLab counters this by re-mapping the writing flow of your essay.",
+  "technicalDeepDive": "When TAs run your assignment through Turnitin, they look for predictable phrasing. Our system removes these watermarks entirely.\n\nMany students struggle with false positives. DebotifyText solves this by giving your text the depth of real human writing.\n\nColleges use advanced models to flag AI. DebotifyText counters this by re-mapping the writing flow of your essay.",
   "stepByStep": [
     {
       "title": "Citation Protection",

@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve flawless results with what is the best tool to bypass scribbr with a lab report as a student"
   },
-  "technicalDeepDive": "We train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nColleges use strict heuristics to detect AI. HumanifyLab counters this by re-mapping the semantic structure of your paper.\n\nThe result is a logically sound document that exhibits natural human burstiness, guaranteeing a 0% AI detection score.",
+  "technicalDeepDive": "We train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nColleges use strict heuristics to detect AI. DebotifyText counters this by re-mapping the semantic structure of your paper.\n\nThe result is a logically sound document that exhibits natural human burstiness, guaranteeing a 0% AI detection score.",
   "stepByStep": [
     {
       "title": "Upload Draft",

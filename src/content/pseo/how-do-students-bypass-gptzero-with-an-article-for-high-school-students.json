@@ -9,7 +9,7 @@
     "idealUser": "Writers",
     "coreIntent": "Achieve perfect results with how do students bypass gptzero with an article for high school students"
   },
-  "technicalDeepDive": "When educators run your work through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.\n\nColleges use highly sensitive heuristics to detect AI. HumanifyLab counters this by re-evaluating the lexical density of your paper.\n\nThe result is a cohesive document that reads like a human scholar, guaranteeing a completely safe AI detection score.",
+  "technicalDeepDive": "When educators run your work through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.\n\nColleges use highly sensitive heuristics to detect AI. DebotifyText counters this by re-evaluating the lexical density of your paper.\n\nThe result is a cohesive document that reads like a human scholar, guaranteeing a completely safe AI detection score.",
   "stepByStep": [
     {
       "title": "Citation Protection",

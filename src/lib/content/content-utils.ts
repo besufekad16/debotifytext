@@ -88,7 +88,7 @@ const CASING_MAP: Record<string, string> = {
   turnitin: "Turnitin",
   quillbot: "QuillBot",
   grammarly: "Grammarly",
-  humanifylab: "HumanifyLab",
+  debotifytext: "DebotifyText",
   youtube: "YouTube",
   linkedin: "LinkedIn",
   tiktok: "TikTok",
@@ -109,7 +109,7 @@ const SMALL_WORDS = new Set([
 /**
  * Title-cases a keyword with correct brand/acronym casing.
  * "bypass turnitin ai detection" → "Bypass Turnitin AI Detection"
- * "humanifylab vs undetectable ai" → "HumanifyLab vs Undetectable AI"
+ * "debotifytext vs undetectable ai" → "DebotifyText vs Undetectable AI"
  */
 export function smartTitleCase(text: string): string {
   const words = text.split(" ").filter(Boolean);

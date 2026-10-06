@@ -225,7 +225,7 @@ export class ProceduralEngine {
     const kw = keyword.toLowerCase();
     let guide = `### Understanding the Importance of ${kw}\n\n`;
     
-    guide += this.spintax(`When evaluating solutions for {**${kw}**|${kw}}, {it's critical to look beyond basic features|you must consider the underlying technology|the most important factor is reliability}. {Our engine|HumanifyLab} is {built|engineered|designed} from the ground up to address the {specific nuances|unique challenges} of this field. `);
+    guide += this.spintax(`When evaluating solutions for {**${kw}**|${kw}}, {it's critical to look beyond basic features|you must consider the underlying technology|the most important factor is reliability}. {Our engine|DebotifyText} is {built|engineered|designed} from the ground up to address the {specific nuances|unique challenges} of this field. `);
     
     if (secondaryKeywords.length > 0) {
       guide += `\n\n### Exploring Related Concepts\n\n`;

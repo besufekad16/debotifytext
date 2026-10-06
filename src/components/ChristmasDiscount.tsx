@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { PartyPopper, Sparkles, Timer, Star } from "lucide-react";
+import { PartyPopper, Feather, Timer, Star } from "lucide-react";
 import { cn } from "~/lib/utils";
 import Image from "next/image";
 
@@ -70,7 +70,7 @@ export default function ChristmasDiscount() {
         {/* Sparkle Background Effect */}
         <div className="absolute inset-0 opacity-20 pointer-events-none z-0">
           {[...Array(15)].map((_, i) => (
-            <Sparkles
+            <Feather
               key={i}
               className={cn(
                 "absolute text-[#ffd700] animate-pulse",

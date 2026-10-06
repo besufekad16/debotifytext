@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with which humanizer works best against quillbot with a case study instantly"
   },
-  "technicalDeepDive": "By analyzing vast amounts of data points, our engine rewrites your content at the lexical level.\n\nDetectors look for predictable words. We increase perplexity to make your text indistinguishable from a human.\n\nHumanifyLab uses cutting-edge NLP to erase robotic footprints from any text.\n\nStop worrying about AI detection. Our proprietary algorithm guarantees complete undetectability every time.",
+  "technicalDeepDive": "By analyzing vast amounts of data points, our engine rewrites your content at the lexical level.\n\nDetectors look for predictable words. We increase perplexity to make your text indistinguishable from a human.\n\nDebotifyText uses cutting-edge NLP to erase robotic footprints from any text.\n\nStop worrying about AI detection. Our proprietary algorithm guarantees complete undetectability every time.",
   "stepByStep": [
     {
       "title": "Verification",

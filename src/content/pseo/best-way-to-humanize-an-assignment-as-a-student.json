@@ -9,7 +9,7 @@
     "idealUser": "Writers",
     "coreIntent": "Achieve perfect results with best way to humanize an assignment as a student"
   },
-  "technicalDeepDive": "When professors run your work through Turnitin, they look for predictable phrasing. Our system removes these watermarks entirely.\n\nThe result is a logically sound paper that flows naturally, guaranteeing a completely safe AI detection score.\n\nMany students struggle with incorrect AI flagging. HumanifyLab fixes this issue by giving your text the depth of real human writing.",
+  "technicalDeepDive": "When professors run your work through Turnitin, they look for predictable phrasing. Our system removes these watermarks entirely.\n\nThe result is a logically sound paper that flows naturally, guaranteeing a completely safe AI detection score.\n\nMany students struggle with incorrect AI flagging. DebotifyText fixes this issue by giving your text the depth of real human writing.",
   "stepByStep": [
     {
       "title": "Upload Draft",

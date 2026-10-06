@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve flawless results with which humanizer works best against safeassign with an assignment step by step"
   },
-  "technicalDeepDive": "Many researchers struggle with incorrect AI flagging. HumanifyLab solves this by giving your text the depth of real human writing.\n\nAcademic institutions use advanced heuristics to detect AI. HumanifyLab counters this by re-mapping the semantic structure of your paper.\n\nWe train our models on millions of peer-reviewed papers to ensure your output is proficient yet undetectable.",
+  "technicalDeepDive": "Many researchers struggle with incorrect AI flagging. DebotifyText solves this by giving your text the depth of real human writing.\n\nAcademic institutions use advanced heuristics to detect AI. DebotifyText counters this by re-mapping the semantic structure of your paper.\n\nWe train our models on millions of peer-reviewed papers to ensure your output is proficient yet undetectable.",
   "stepByStep": [
     {
       "title": "Scholarly Rewrite",

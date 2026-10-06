@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve perfect results with how do i humanize a pdf of a college essay for university students"
   },
-  "technicalDeepDive": "Academic institutions use strict heuristics to flag AI. HumanifyLab counters this by re-mapping the lexical density of your essay.\n\nMany researchers struggle with false positives. HumanifyLab fixes this issue by giving your text the depth of real human writing.\n\nUnlike outdated spinners, our engine understands scholarly citations and protects your core thesis without triggering major academic detectors.\n\nWe train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.",
+  "technicalDeepDive": "Academic institutions use strict heuristics to flag AI. DebotifyText counters this by re-mapping the lexical density of your essay.\n\nMany researchers struggle with false positives. DebotifyText fixes this issue by giving your text the depth of real human writing.\n\nUnlike outdated spinners, our engine understands scholarly citations and protects your core thesis without triggering major academic detectors.\n\nWe train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.",
   "stepByStep": [
     {
       "title": "Upload Draft",

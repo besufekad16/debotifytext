@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with which humanizer works best against crossplag with a speech for college"
   },
-  "technicalDeepDive": "We train our algorithms on millions of peer-reviewed papers to ensure your output is proficient yet undetectable.\n\nMany students struggle with false positives. HumanifyLab solves this by giving your text the nuance of real human writing.\n\nBy injecting natural entropy into the text, we ensure your student tone is authentic.",
+  "technicalDeepDive": "We train our algorithms on millions of peer-reviewed papers to ensure your output is proficient yet undetectable.\n\nMany students struggle with false positives. DebotifyText solves this by giving your text the nuance of real human writing.\n\nBy injecting natural entropy into the text, we ensure your student tone is authentic.",
   "stepByStep": [
     {
       "title": "Safe Export",

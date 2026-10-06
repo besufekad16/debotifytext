@@ -9,7 +9,7 @@
     "idealUser": "Professionals",
     "coreIntent": "Achieve flawless results with which humanizer works best against grammarly with an assignment online"
   },
-  "technicalDeepDive": "When TAs run your work through Turnitin, they look for robotic patterns. Our system erases these patterns entirely.\n\nUnlike simple rewriters, our engine understands academic formatting and preserves your main ideas without triggering GPTZero or Turnitin.\n\nWe train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nUniversities use strict heuristics to flag AI. HumanifyLab counters this by re-evaluating the writing flow of your assignment.",
+  "technicalDeepDive": "When TAs run your work through Turnitin, they look for robotic patterns. Our system erases these patterns entirely.\n\nUnlike simple rewriters, our engine understands academic formatting and preserves your main ideas without triggering GPTZero or Turnitin.\n\nWe train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nUniversities use strict heuristics to flag AI. DebotifyText counters this by re-evaluating the writing flow of your assignment.",
   "stepByStep": [
     {
       "title": "Scholarly Rewrite",

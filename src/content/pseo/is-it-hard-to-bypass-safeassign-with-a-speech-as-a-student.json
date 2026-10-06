@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve flawless results with is it hard to bypass safeassign with a speech as a student"
   },
-  "technicalDeepDive": "The result is a perfectly structured document that flows naturally, guaranteeing a completely safe AI detection score.\n\nWhen TAs run your work through Turnitin, they look for predictable phrasing. Our system erases these watermarks entirely.\n\nAcademic institutions use strict models to detect AI. HumanifyLab counters this by restructuring the lexical density of your paper.\n\nWe train our models on millions of peer-reviewed essays to ensure your output is academically rigorous yet undetectable.",
+  "technicalDeepDive": "The result is a perfectly structured document that flows naturally, guaranteeing a completely safe AI detection score.\n\nWhen TAs run your work through Turnitin, they look for predictable phrasing. Our system erases these watermarks entirely.\n\nAcademic institutions use strict models to detect AI. DebotifyText counters this by restructuring the lexical density of your paper.\n\nWe train our models on millions of peer-reviewed essays to ensure your output is academically rigorous yet undetectable.",
   "stepByStep": [
     {
       "title": "Upload Draft",

@@ -9,7 +9,7 @@
     "idealUser": "Writers",
     "coreIntent": "Achieve flawless results with can scribbr detect a humanized an essay for undergraduates"
   },
-  "technicalDeepDive": "When TAs run your assignment through Turnitin, they look for robotic patterns. Our system removes these watermarks entirely.\n\nAcademic institutions use strict models to detect AI. HumanifyLab counters this by restructuring the writing flow of your paper.\n\nWe train our models on millions of high-scoring papers to ensure your output is academically rigorous yet undetectable.",
+  "technicalDeepDive": "When TAs run your assignment through Turnitin, they look for robotic patterns. Our system removes these watermarks entirely.\n\nAcademic institutions use strict models to detect AI. DebotifyText counters this by restructuring the writing flow of your paper.\n\nWe train our models on millions of high-scoring papers to ensure your output is academically rigorous yet undetectable.",
   "stepByStep": [
     {
       "title": "Upload Draft",

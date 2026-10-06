@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve flawless results with what is the best tool to bypass crossplag with a cover letter for masters students"
   },
-  "technicalDeepDive": "Unlike outdated spinners, our engine understands academic formatting and protects your main ideas without triggering GPTZero or Turnitin.\n\nWhen TAs run your work through Turnitin, they look for predictable phrasing. Our system removes these watermarks entirely.\n\nColleges use advanced heuristics to detect AI. HumanifyLab counters this by re-mapping the writing flow of your paper.\n\nMany students struggle with incorrect AI flagging. HumanifyLab solves this by giving your text the depth of real human writing.",
+  "technicalDeepDive": "Unlike outdated spinners, our engine understands academic formatting and protects your main ideas without triggering GPTZero or Turnitin.\n\nWhen TAs run your work through Turnitin, they look for predictable phrasing. Our system removes these watermarks entirely.\n\nColleges use advanced heuristics to detect AI. DebotifyText counters this by re-mapping the writing flow of your paper.\n\nMany students struggle with incorrect AI flagging. DebotifyText solves this by giving your text the depth of real human writing.",
   "stepByStep": [
     {
       "title": "Upload Draft",

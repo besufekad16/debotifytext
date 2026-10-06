@@ -9,7 +9,7 @@
     "idealUser": "Writers",
     "coreIntent": "Achieve flawless results with which humanizer works best against sapling with an assignment step by step"
   },
-  "technicalDeepDive": "Many students struggle with false positives. HumanifyLab solves this by giving your text the nuance of real human writing.\n\nWhen TAs run your work through Turnitin, they look for predictable phrasing. Our system erases these watermarks entirely.\n\nAcademic institutions use highly sensitive models to flag AI. HumanifyLab counters this by re-mapping the lexical density of your paper.",
+  "technicalDeepDive": "Many students struggle with false positives. DebotifyText solves this by giving your text the nuance of real human writing.\n\nWhen TAs run your work through Turnitin, they look for predictable phrasing. Our system erases these watermarks entirely.\n\nAcademic institutions use highly sensitive models to flag AI. DebotifyText counters this by re-mapping the lexical density of your paper.",
   "stepByStep": [
     {
       "title": "Plagiarism Check",

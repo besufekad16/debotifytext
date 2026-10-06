@@ -1,6 +1,6 @@
 "use client";
 
-import { FileText, Zap, ShieldCheck, Sparkles, ArrowRight, MessageSquare, ListChecks } from "lucide-react";
+import { FileText, Zap, ShieldCheck, Feather, ArrowRight, MessageSquare, ListChecks } from "lucide-react";
 import { cn } from "~/lib/utils";
 
 const steps = [
@@ -11,7 +11,7 @@ const steps = [
     icon: FileText,
     color: "from-#faf6f10 to-var(--hl-mint)",
     lightColor: "bg-primary/10",
-    borderColor: "border-rgba(94,61,42,0.28)",
+    borderColor: "border-rgba(21,128,61,0.15)",
   },
   {
     step: "02",
@@ -20,7 +20,7 @@ const steps = [
     icon: ListChecks,
     color: "from-#faf6f10 to-var(--hl-mint)",
     lightColor: "bg-#faf6f1",
-    borderColor: "border-rgba(94,61,42,0.28)",
+    borderColor: "border-rgba(21,128,61,0.15)",
   },
   {
     step: "03",
@@ -29,7 +29,7 @@ const steps = [
     icon: Zap,
     color: "from-var(--hl-mint) to-#5A4529",
     lightColor: "bg-#faf6f1",
-    borderColor: "border-rgba(94,61,42,0.28)",
+    borderColor: "border-rgba(21,128,61,0.15)",
   },
   {
     step: "04",
@@ -38,7 +38,7 @@ const steps = [
     icon: ShieldCheck,
     color: "from-#faf6f10 to-var(--hl-mint)",
     lightColor: "bg-brand-green/10",
-    borderColor: "border-rgba(94,61,42,0.28)",
+    borderColor: "border-rgba(21,128,61,0.15)",
   },
 ];
 
@@ -53,8 +53,8 @@ export default function HowToUseSection() {
 
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center mb-16 sm:mb-24">
-          <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-primary border border-rgba(94,61,42,0.28) mb-6">
-            <Sparkles className="h-4 w-4" />
+          <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-primary border border-rgba(21,128,61,0.15) mb-6">
+            <Feather className="h-4 w-4" />
             Simple Workflow
           </div>
           <h2 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl mb-6 max-w-4xl">

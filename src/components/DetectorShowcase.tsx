@@ -64,15 +64,15 @@ export default function DetectorShowcase() {
   return (
     <div className="space-y-8">
       <div className="mx-auto max-w-2xl text-center">
-        <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[var(--hl-mint)]/20 bg-[var(--hl-mint-deep)]/5 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--hl-mint-deep)]">
+        <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-green-600/20 bg-green-700/5 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-green-700">
           <CheckCircle2 className="h-3.5 w-3.5" />
           Proven on live detectors
         </div>
-        <h2 className="text-2xl font-extrabold tracking-tight text-[var(--hl-ink)] sm:text-3xl">
+        <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
           Built to pass the detectors people actually use
         </h2>
-        <p className="mt-2 text-sm text-gray-500 sm:text-base">
-          Tap a detector to see real HumanifyLab output scoring as human.
+        <p className="mt-2 text-sm text-slate-400 sm:text-base">
+          Tap a detector to see real DebotifyText output scoring as human.
         </p>
       </div>
 
@@ -88,8 +88,8 @@ export default function DetectorShowcase() {
                 flex flex-shrink-0 items-center gap-2 rounded-2xl border px-3.5 py-2.5 transition-all duration-300
                 ${
                   isActive
-                    ? "border-[var(--hl-mint-deep)] bg-[var(--hl-mint-deep)] text-white shadow-[0_10px_30px_-12px_rgba(94,61,42,0.65)]"
-                    : "border-black/5 bg-white text-gray-600 hover:border-[var(--hl-mint)]/30 hover:bg-[var(--hl-surface)]"
+                    ? "border-green-700 bg-green-700 text-white shadow-[0_10px_30px_-12px_rgba(21,128,61,0.25)]"
+                    : "border-black/5 bg-white text-slate-500 hover:border-green-600/30 hover:bg-green-50"
                 }
               `}
             >
@@ -106,22 +106,22 @@ export default function DetectorShowcase() {
         })}
       </div>
 
-      <div className="relative overflow-hidden rounded-3xl border border-black/5 bg-[var(--hl-surface)] shadow-[0_24px_80px_-32px_rgba(94,61,42,0.35)]">
+      <div className="relative overflow-hidden rounded-3xl border border-black/5 bg-green-50 shadow-[0_24px_80px_-32px_rgba(21,128,61,0.35)]">
         <div className="flex items-center justify-between border-b border-black/5 bg-white/80 px-4 py-3 backdrop-blur-sm">
           <div className="flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
             <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
-            <span className="h-2.5 w-2.5 rounded-full bg-[var(--hl-mint-bright)]/80" />
+            <span className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
           </div>
-          <span className="text-xs font-semibold text-gray-500">{active.name} · Human score</span>
-          <span className="rounded-full bg-[var(--hl-mint)]/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-[var(--hl-mint-deep)]">
+          <span className="text-xs font-semibold text-slate-400">{active.name} · Human score</span>
+          <span className="rounded-full bg-green-600/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-green-700">
             Pass
           </span>
         </div>
         <div className="relative min-h-[280px] sm:min-h-[420px]">
           <Image
             src={active.screenshot}
-            alt={`${active.name} detector result for HumanifyLab output`}
+            alt={`${active.name} detector result for DebotifyText output`}
             width={1200}
             height={700}
             className="h-auto w-full object-contain"
@@ -138,7 +138,7 @@ export default function DetectorShowcase() {
             onClick={() => setActiveDetector(index)}
             className={`h-2 rounded-full transition-all duration-300 ${
               activeDetector === index
-                ? "w-8 bg-[var(--hl-mint-deep)]"
+                ? "w-8 bg-green-700"
                 : "w-2 bg-gray-300 hover:bg-gray-400"
             }`}
             aria-label={`Show ${d.name}`}

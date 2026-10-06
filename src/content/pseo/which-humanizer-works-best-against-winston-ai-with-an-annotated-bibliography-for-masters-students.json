@@ -9,7 +9,7 @@
     "idealUser": "Marketers",
     "coreIntent": "Achieve perfect results with which humanizer works best against winston ai with an annotated bibliography for masters students"
   },
-  "technicalDeepDive": "Unlike simple tools, our engine understands scholarly citations and protects your research arguments without triggering major academic detectors.\n\nWe train our algorithms on millions of peer-reviewed essays to ensure your output is proficient yet undetectable.\n\nColleges use strict heuristics to flag AI. HumanifyLab counters this by re-mapping the writing flow of your essay.\n\nWhen educators run your work through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.",
+  "technicalDeepDive": "Unlike simple tools, our engine understands scholarly citations and protects your research arguments without triggering major academic detectors.\n\nWe train our algorithms on millions of peer-reviewed essays to ensure your output is proficient yet undetectable.\n\nColleges use strict heuristics to flag AI. DebotifyText counters this by re-mapping the writing flow of your essay.\n\nWhen educators run your work through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.",
   "stepByStep": [
     {
       "title": "Citation Protection",

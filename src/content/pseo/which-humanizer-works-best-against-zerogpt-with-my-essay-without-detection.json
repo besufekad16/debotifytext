@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve perfect results with which humanizer works best against zerogpt with my essay without detection"
   },
-  "technicalDeepDive": "We train our models on millions of high-scoring essays to ensure your output is proficient yet undetectable.\n\nThe result is a perfectly structured paper that exhibits natural human burstiness, guaranteeing a 0% AI detection score.\n\nMany researchers struggle with false positives. HumanifyLab solves this by giving your text the depth of real human writing.",
+  "technicalDeepDive": "We train our models on millions of high-scoring essays to ensure your output is proficient yet undetectable.\n\nThe result is a perfectly structured paper that exhibits natural human burstiness, guaranteeing a 0% AI detection score.\n\nMany researchers struggle with false positives. DebotifyText solves this by giving your text the depth of real human writing.",
   "stepByStep": [
     {
       "title": "Upload Draft",

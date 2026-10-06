@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with is it hard to bypass scribbr with an annotated bibliography as a student"
   },
-  "technicalDeepDive": "Many researchers struggle with false positives. HumanifyLab solves this by giving your text the depth of real human writing.\n\nWe train our algorithms on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nUnlike simple spinners, our engine understands academic formatting and maintains your research arguments without triggering GPTZero or Turnitin.",
+  "technicalDeepDive": "Many researchers struggle with false positives. DebotifyText solves this by giving your text the depth of real human writing.\n\nWe train our algorithms on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nUnlike simple spinners, our engine understands academic formatting and maintains your research arguments without triggering GPTZero or Turnitin.",
   "stepByStep": [
     {
       "title": "Safe Export",

@@ -21,7 +21,7 @@
 
 import { google } from 'googleapis';
 
-const SITE_URL = 'https://www.humanifylab.com';
+const SITE_URL = 'https://www.debotifytext.com';
 
 // Priority pages to request indexing for
 const PRIORITY_URLS = [

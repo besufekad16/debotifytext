@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve flawless results with which humanizer works best against safeassign with my capstone project for academic writing"
   },
-  "technicalDeepDive": "We train our algorithms on millions of peer-reviewed essays to ensure your output is proficient yet undetectable.\n\nWhen professors run your work through Turnitin, they look for robotic patterns. Our system eliminates these patterns entirely.\n\nMany researchers struggle with incorrect AI flagging. HumanifyLab solves this by giving your text the nuance of real human writing.",
+  "technicalDeepDive": "We train our algorithms on millions of peer-reviewed essays to ensure your output is proficient yet undetectable.\n\nWhen professors run your work through Turnitin, they look for robotic patterns. Our system eliminates these patterns entirely.\n\nMany researchers struggle with incorrect AI flagging. DebotifyText solves this by giving your text the nuance of real human writing.",
   "stepByStep": [
     {
       "title": "Upload Draft",

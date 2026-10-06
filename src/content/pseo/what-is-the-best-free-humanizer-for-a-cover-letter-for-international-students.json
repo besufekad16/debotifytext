@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve perfect results with what is the best free humanizer for a cover letter for international students"
   },
-  "technicalDeepDive": "Many researchers struggle with false positives. HumanifyLab solves this by giving your text the nuance of real human writing.\n\nWhen TAs run your work through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.\n\nUniversities use strict models to detect AI. HumanifyLab counters this by re-evaluating the lexical density of your assignment.",
+  "technicalDeepDive": "Many researchers struggle with false positives. DebotifyText solves this by giving your text the nuance of real human writing.\n\nWhen TAs run your work through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.\n\nUniversities use strict models to detect AI. DebotifyText counters this by re-evaluating the lexical density of your assignment.",
   "stepByStep": [
     {
       "title": "Citation Protection",

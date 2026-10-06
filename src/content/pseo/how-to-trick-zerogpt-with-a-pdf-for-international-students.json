@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve perfect results with how to trick zerogpt with a pdf for international students"
   },
-  "technicalDeepDive": "When TAs run your assignment through Turnitin, they look for robotic patterns. Our system erases these patterns entirely.\n\nMany researchers struggle with incorrect AI flagging. HumanifyLab solves this by giving your text the nuance of real human writing.\n\nColleges use strict algorithms to detect AI. HumanifyLab counters this by re-mapping the semantic structure of your essay.\n\nThe result is a cohesive paper that exhibits natural human burstiness, guaranteeing a 0% AI detection score.",
+  "technicalDeepDive": "When TAs run your assignment through Turnitin, they look for robotic patterns. Our system erases these patterns entirely.\n\nMany researchers struggle with incorrect AI flagging. DebotifyText solves this by giving your text the nuance of real human writing.\n\nColleges use strict algorithms to detect AI. DebotifyText counters this by re-mapping the semantic structure of your essay.\n\nThe result is a cohesive paper that exhibits natural human burstiness, guaranteeing a 0% AI detection score.",
   "stepByStep": [
     {
       "title": "Citation Protection",

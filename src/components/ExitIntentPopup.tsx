@@ -66,7 +66,7 @@ export default function ExitIntentPopup() {
   return (
     <>
       <div
-        className={`fixed inset-0 z-50 bg-[var(--hl-ink)]/55 backdrop-blur-[2px] transition-opacity duration-200 ${
+        className={`fixed inset-0 z-50 bg-slate-900/55 backdrop-blur-[2px] transition-opacity duration-200 ${
           isClosing ? "opacity-0" : "opacity-100"
         }`}
         onClick={handleClose}
@@ -79,7 +79,7 @@ export default function ExitIntentPopup() {
             : "translate-y-0 opacity-100 sm:scale-100"
         }`}
       >
-        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[var(--hl-ink)] shadow-2xl">
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-slate-900 shadow-2xl">
           <div
             className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full blur-3xl"
             style={{ background: "radial-gradient(circle, rgba(232,184,75,0.35), transparent 70%)" }}
@@ -128,7 +128,7 @@ export default function ExitIntentPopup() {
             <div className="mt-6 space-y-3">
               <button
                 onClick={handleCTA}
-                className="group flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-sm font-black uppercase tracking-wide text-[var(--hl-ink)] transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                className="group flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-sm font-black uppercase tracking-wide text-slate-900 transition-transform hover:scale-[1.02] active:scale-[0.98]"
                 style={{
                   background: "linear-gradient(135deg,#F5D78A 0%,#E8B84B 45%,#C8922A 100%)",
                 }}

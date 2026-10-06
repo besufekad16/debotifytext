@@ -6,7 +6,7 @@ import { Card } from "~/components/ui/card";
 import { Cookie, X, Settings } from "lucide-react";
 import Link from "next/link";
 
-const COOKIE_CONSENT_KEY = "humanifylab-cookie-consent";
+const COOKIE_CONSENT_KEY = "debotifytext-cookie-consent";
 
 export default function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);
@@ -70,7 +70,7 @@ export default function CookieConsent() {
           <div className="p-6">
             <div className="flex items-start justify-between gap-4">
               <div className="flex items-start gap-3 flex-1">
-                <Cookie className="h-6 w-6 text-[var(--hl-mint-deep)] flex-shrink-0 mt-1" />
+                <Cookie className="h-6 w-6 text-green-700 flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="text-lg font-semibold text-slate-900">
                     We value your privacy
@@ -79,7 +79,7 @@ export default function CookieConsent() {
                     We use cookies to enhance your experience, analyze site traffic, and personalize content.
                     By clicking &quot;Accept All&quot;, you consent to our use of cookies. You can customize your preferences
                     or learn more in our{" "}
-                    <Link href="/privacy" className="text-[var(--hl-mint-deep)] hover:underline">
+                    <Link href="/privacy" className="text-green-700 hover:underline">
                       Privacy Policy
                     </Link>
                     .
@@ -100,7 +100,7 @@ export default function CookieConsent() {
               <div className="mt-6 flex flex-col gap-3">
                 <Button
                   onClick={acceptAll}
-                  className="bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] w-full"
+                  className="bg-green-700 hover:bg-green-600 w-full"
                 >
                   Accept All
                 </Button>
@@ -176,7 +176,7 @@ export default function CookieConsent() {
                 <div className="flex flex-col gap-3">
                   <Button
                     onClick={saveCustom}
-                    className="bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] w-full"
+                    className="bg-green-700 hover:bg-green-600 w-full"
                   >
                     Save Preferences
                   </Button>

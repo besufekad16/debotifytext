@@ -30,12 +30,14 @@ export default function LegalPage({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       )}
 
-      <Section tone="dark" compact>
+      <Section className="bg-gradient-to-b from-green-50/50 to-white pt-24 pb-16 border-b border-slate-100">
         <Container width="narrow" className="text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#a67c52]">Legal</span>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">{title}</h1>
-          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-400">{intro}</p>
-          <p className="mt-5 text-xs text-gray-500">Last updated: {lastUpdated}</p>
+          <span className="inline-block py-1 px-3 rounded-full bg-green-100/50 border border-green-200/50 text-[11px] font-bold tracking-widest text-green-700 uppercase mb-6">
+            Legal
+          </span>
+          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">{title}</h1>
+          <p className="mx-auto mt-6 max-w-xl text-[17px] leading-relaxed text-slate-500 font-medium">{intro}</p>
+          <p className="mt-6 text-sm font-semibold text-slate-400">Last updated: {lastUpdated}</p>
         </Container>
       </Section>
 
@@ -44,17 +46,17 @@ export default function LegalPage({
           <div className="space-y-10">
             {sections.map((section, i) => (
               <section key={i} className="scroll-mt-24">
-                <h2 className="mb-3 text-xl font-semibold tracking-tight text-gray-900">{section.heading}</h2>
+                <h2 className="mb-3 text-xl font-semibold tracking-tight text-slate-900">{section.heading}</h2>
                 {section.paragraphs?.map((p, j) => (
-                  <p key={j} className="mb-3 text-[15px] leading-relaxed text-gray-600">
+                  <p key={j} className="mb-3 text-[15px] leading-relaxed text-slate-500">
                     {p}
                   </p>
                 ))}
                 {section.bullets && (
                   <ul className="mt-3 space-y-2">
                     {section.bullets.map((b, j) => (
-                      <li key={j} className="flex items-start gap-3 text-[15px] leading-relaxed text-gray-600">
-                        <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[var(--hl-mint-deep)]" />
+                      <li key={j} className="flex items-start gap-3 text-[15px] leading-relaxed text-slate-500">
+                        <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-green-700" />
                         <span>{b}</span>
                       </li>
                     ))}

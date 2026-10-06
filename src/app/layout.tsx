@@ -8,19 +8,19 @@ import CookieConsent from "~/components/CookieConsent";
 import { TooltipProvider } from "~/components/ui/tooltip";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.humanifylab.com'),
+  metadataBase: new URL('https://www.debotifytext.com'),
   title: {
-    default: "AI Humanizer: Humanize AI Text & Bypass AI Detectors | HumanifyLab",
-    template: "%s | HumanifyLab"
+    default: "AI Humanizer: Humanize AI Text & Bypass AI Detectors | DebotifyText",
+    template: "%s | DebotifyText"
   },
-  description: "Use HumanifyLab's AI humanizer tool to humanize AI text and easily bypass AI detectors like Turnitin and GPTZero. Rewrite ChatGPT content to 100% human for free.",
+  description: "Use DebotifyText's AI humanizer tool to humanize AI text and easily bypass AI detectors like Turnitin and GPTZero. Rewrite ChatGPT content to 100% human for free.",
   keywords: [
-    'humanifylab',
-    'humanify',
-    'humanify ai',
-    'humanify text',
-    'humanify ai text',
-    'humanify lab',
+    'debotifytext',
+    'debotify',
+    'debotify ai',
+    'debotify text',
+    'debotify ai text',
+    'debotify lab',
     'ai humanizer',
     'humanize ai text',
     'ai text humanizer',
@@ -34,10 +34,10 @@ export const metadata: Metadata = {
     'ai to human text converter',
     'essay humanizer',
   ],
-  authors: [{ name: "HumanifyLab" }],
-  creator: "HumanifyLab",
-  publisher: "HumanifyLab",
-  applicationName: "HumanifyLab",
+  authors: [{ name: "DebotifyText" }],
+  creator: "DebotifyText",
+  publisher: "DebotifyText",
+  applicationName: "DebotifyText",
   category: "Technology",
   robots: {
     index: true,
@@ -51,32 +51,32 @@ export const metadata: Metadata = {
     },
   },
   icons: [
-    { rel: "icon", url: "/humanify.png", type: "image/png" },
-    { rel: "apple-touch-icon", url: "/humanify.png" }
+    { rel: "icon", url: "/debotify.png", type: "image/png" },
+    { rel: "apple-touch-icon", url: "/debotify.png" }
   ],
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.humanifylab.com",
-    siteName: "HumanifyLab",
-    title: "AI Humanizer — Humanize AI Text & Bypass AI Detectors | HumanifyLab",
+    url: "https://www.debotifytext.com",
+    siteName: "DebotifyText",
+    title: "AI Humanizer — Humanize AI Text & Bypass AI Detectors | DebotifyText",
     description: "Rewrite ChatGPT, Claude & Gemini text into natural human writing that passes Turnitin, GPTZero, Originality.ai and every major AI detector. Free to try.",
     images: [
       {
         url: "/forOpenGraph.png",
         width: 1200,
         height: 630,
-        alt: "HumanifyLab — Professional AI Humanizer"
+        alt: "DebotifyText — Professional AI Humanizer"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Humanizer — Humanize AI Text & Bypass AI Detectors | HumanifyLab",
+    title: "AI Humanizer — Humanize AI Text & Bypass AI Detectors | DebotifyText",
     description: "Rewrite ChatGPT, Claude & Gemini text into natural human writing that passes Turnitin, GPTZero, Originality.ai and every major AI detector. Free to try.",
     images: ["/forOpenGraph.png"],
-    site: "@humanifylab",
-    creator: "@humanifylab",
+    site: "@debotifytext",
+    creator: "@debotifytext",
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
@@ -94,37 +94,37 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "https://www.humanifylab.com/#website",
-        "name": "HumanifyLab",
-        "url": "https://www.humanifylab.com",
+        "@id": "https://www.debotifytext.com/#website",
+        "name": "DebotifyText",
+        "url": "https://www.debotifytext.com",
         "description": "Professional AI humanizer that transforms AI-generated content into natural, human-like writing that passes AI detection.",
-        "publisher": { "@id": "https://www.humanifylab.com/#organization" },
+        "publisher": { "@id": "https://www.debotifytext.com/#organization" },
         "inLanguage": "en-US"
       },
       {
         "@type": "Organization",
-        "@id": "https://www.humanifylab.com/#organization",
-        "name": "HumanifyLab",
-        "url": "https://www.humanifylab.com",
+        "@id": "https://www.debotifytext.com/#organization",
+        "name": "DebotifyText",
+        "url": "https://www.debotifytext.com",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://www.humanifylab.com/humanify.png"
+          "url": "https://www.debotifytext.com/debotify.png"
         },
-        "alternateName": ["Humanify", "Humanify Lab", "HumanifyLab AI Humanizer"],
-        "description": "HumanifyLab is an AI text humanizer for making ChatGPT, Claude, and Gemini drafts read more naturally. Also searched as humanify, humanify lab, essay humanizer, and free AI humanizer.",
-        "email": "humanifylab1@gmail.com",
+        "alternateName": ["Debotify", "Debotify Text", "DebotifyText AI Humanizer"],
+        "description": "DebotifyText is an AI text humanizer for making ChatGPT, Claude, and Gemini drafts read more naturally. Also searched as debotify, debotify lab, essay humanizer, and free AI humanizer.",
+        "email": "debotifytext1@gmail.com",
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "customer support",
-          "email": "humanifylab1@gmail.com",
-          "url": "https://www.humanifylab.com/contact"
+          "email": "debotifytext1@gmail.com",
+          "url": "https://www.debotifytext.com/contact"
         },
         "sameAs": [
-          "https://x.com/humanifylab",
-          "https://www.linkedin.com/company/humanifylab",
-          "https://www.facebook.com/humanifylab",
-          "https://www.instagram.com/humanifylab",
-          "https://www.youtube.com/@humanifylab"
+          "https://x.com/debotifytext",
+          "https://www.linkedin.com/company/debotifytext",
+          "https://www.facebook.com/debotifytext",
+          "https://www.instagram.com/debotifytext",
+          "https://www.youtube.com/@debotifytext"
         ]
       }
     ]
@@ -163,7 +163,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           {/* End Google Tag Manager */}
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-          <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
         </head>
         <body suppressHydrationWarning className="overflow-x-hidden">
           {/* Google Tag Manager (noscript) */}

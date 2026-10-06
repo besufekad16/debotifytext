@@ -11,11 +11,11 @@ const REGISTRY_PATH = path.join(__dirname, "../src/data/pseo-registry.json");
 const intents = [
   "how to humanize",
   "is there a free humanizer for",
-  "how can students humanify",
+  "how can students debotify",
   "how to bypass ai detectors with",
   "what is the best free humanizer for",
   "how do i humanize a pdf of",
-  "can i humanify my",
+  "can i debotify my",
   "how to make ai undetectable in my",
   "is it possible to humanize",
   "how to remove ai watermark from",
@@ -23,10 +23,10 @@ const intents = [
   "best way to humanize",
   "how to rewrite ai text for",
   "can turnitin detect",
-  "how to humanify",
+  "how to debotify",
   "free ai humanizer for",
   "undetectable ai humanizer for",
-  "is humanifylab the best for",
+  "is debotifytext the best for",
   "bypass ai detection for",
   "how to humanize ai text for"
 ];
@@ -98,7 +98,7 @@ const contexts = [
   "no login required",
   "in 2025",
   "using an ai bypasser",
-  "with humanifylab",
+  "with debotifytext",
   "easily",
   "step by step",
   "for academic writing",
@@ -113,7 +113,7 @@ const questionFrameworks = [
   "how do students bypass",
   "are there free tools to beat",
   "which humanizer works best against",
-  "can i use humanifylab to bypass",
+  "can i use debotifytext to bypass",
   "how to trick",
   "is it hard to bypass",
   "what removes ai detection for"
@@ -155,7 +155,7 @@ async function main() {
       for (const format of formats) {
         for (const context of contexts) {
           allKeywords.add(`${framework} ${detector} with ${format} ${context}`);
-          allKeywords.add(`how to humanify ${format} to bypass ${detector}`);
+          allKeywords.add(`how to debotify ${format} to bypass ${detector}`);
           allKeywords.add(`can ${detector} detect a humanized ${format} ${context}`);
           allKeywords.add(`humanize pdf ${format} to beat ${detector}`);
         }
@@ -163,14 +163,14 @@ async function main() {
     }
   }
 
-  // Mix 3: "Humanify PDF" and "Free Humanizer" specific
+  // Mix 3: "Debotify PDF" and "Free Humanizer" specific
   const specificModifiers = ["for students", "free online", "without login", "fast", "safe"];
   for (const format of formats) {
     for (const mod of specificModifiers) {
       allKeywords.add(`free humanizer for ${format} ${mod}`);
-      allKeywords.add(`humanify pdf ${format} ${mod}`);
+      allKeywords.add(`debotify pdf ${format} ${mod}`);
       allKeywords.add(`humanize pdf ${mod} for ${format}`);
-      allKeywords.add(`how to humanify pdf of ${format}`);
+      allKeywords.add(`how to debotify pdf of ${format}`);
     }
   }
 
@@ -209,7 +209,7 @@ async function main() {
       priority: index <= 5000 ? "HIGH" : (index <= 20000 ? "MEDIUM" : "LOW"),
       content: {
         heroTitle: title + "?", // Frame as question in hero
-        directAnswer: `Are you a student wondering ${kw}? HumanifyLab is the ultimate free AI text humanizer designed to rewrite your essays, assignments, and PDFs natively so they bypass all major AI detectors like Turnitin and GPTZero.`
+        directAnswer: `Are you a student wondering ${kw}? DebotifyText is the ultimate free AI text humanizer designed to rewrite your essays, assignments, and PDFs natively so they bypass all major AI detectors like Turnitin and GPTZero.`
       },
       indexing: {
         indexEligibility: true,

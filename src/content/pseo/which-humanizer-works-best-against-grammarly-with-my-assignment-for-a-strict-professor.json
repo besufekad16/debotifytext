@@ -9,7 +9,7 @@
     "idealUser": "Writers",
     "coreIntent": "Achieve perfect results with which humanizer works best against grammarly with my assignment for a strict professor"
   },
-  "technicalDeepDive": "When professors run your work through Turnitin, they look for robotic patterns. Our system eliminates these patterns entirely.\n\nMany students struggle with incorrect AI flagging. HumanifyLab solves this by giving your text the depth of real human writing.\n\nWe train our models on millions of peer-reviewed essays to ensure your output is academically rigorous yet undetectable.",
+  "technicalDeepDive": "When professors run your work through Turnitin, they look for robotic patterns. Our system eliminates these patterns entirely.\n\nMany students struggle with incorrect AI flagging. DebotifyText solves this by giving your text the depth of real human writing.\n\nWe train our models on millions of peer-reviewed essays to ensure your output is academically rigorous yet undetectable.",
   "stepByStep": [
     {
       "title": "Citation Protection",

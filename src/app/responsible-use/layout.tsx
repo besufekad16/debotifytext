@@ -1,32 +1,32 @@
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Responsible Use - HumanifyLab",
-  description: "Learn how to use HumanifyLab responsibly and ethically. Understand our guidelines for academic integrity and ethical content creation.",
+  title: "Responsible Use - DebotifyText",
+  description: "Learn how to use DebotifyText responsibly and ethically. Understand our guidelines for academic integrity and ethical content creation.",
   keywords: [
     "ai humanizer",
     "responsible AI use",
     "academic integrity",
     "ethical writing",
-    "HumanifyLab guidelines",
+    "DebotifyText guidelines",
     "AI ethics",
     "content creation ethics",
     "academic honesty",
   ],
   alternates: {
-    canonical: "https://www.humanifylab.com/responsible-use",
+    canonical: "https://www.debotifytext.com/responsible-use",
   },
   openGraph: {
-    title: "Responsible Use - HumanifyLab | AI Humanizer",
-    description: "Learn how to use HumanifyLab responsibly and ethically.",
-    url: "https://www.humanifylab.com/responsible-use",
-    siteName: "HumanifyLab",
+    title: "Responsible Use - DebotifyText | AI Humanizer",
+    description: "Learn how to use DebotifyText responsibly and ethically.",
+    url: "https://www.debotifytext.com/responsible-use",
+    siteName: "DebotifyText",
     images: [
       {
         url: "/forOpenGraph.png",
         width: 1200,
         height: 630,
-        alt: "HumanifyLab OpenGraph Image"
+        alt: "DebotifyText OpenGraph Image"
       }
     ],
     locale: "en_US",
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Responsible Use - HumanifyLab",
-    description: "Learn how to use HumanifyLab responsibly and ethically.",
+    title: "Responsible Use - DebotifyText",
+    description: "Learn how to use DebotifyText responsibly and ethically.",
     images: ["/forOpenGraph.png"],
   },
 };

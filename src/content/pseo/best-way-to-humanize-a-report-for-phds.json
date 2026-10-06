@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve flawless results with best way to humanize a report for phds"
   },
-  "technicalDeepDive": "Stop worrying about AI detection. Our proprietary algorithm guarantees 100% human scores every time.\n\nHumanifyLab uses state-of-the-art machine learning to erase robotic footprints from any text.\n\nDetectors look for predictable words. We increase perplexity to make your text completely natural.",
+  "technicalDeepDive": "Stop worrying about AI detection. Our proprietary algorithm guarantees 100% human scores every time.\n\nDebotifyText uses state-of-the-art machine learning to erase robotic footprints from any text.\n\nDetectors look for predictable words. We increase perplexity to make your text completely natural.",
   "stepByStep": [
     {
       "title": "Tone Selection",

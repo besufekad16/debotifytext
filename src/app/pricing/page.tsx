@@ -23,19 +23,19 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://www.humanifylab.com/pricing",
+    canonical: "https://www.debotifytext.com/pricing",
   },
   openGraph: {
-    title: "Pricing — AI Humanizer Plans, Free Plan Included | HumanifyLab",
+    title: "Pricing — AI Humanizer Plans, Free Plan Included | DebotifyText",
     description: "Start free with monthly word credits, or upgrade for higher limits, faster processing and API access. Plans for students, professionals and teams.",
-    url: "https://www.humanifylab.com/pricing",
-    siteName: "HumanifyLab",
+    url: "https://www.debotifytext.com/pricing",
+    siteName: "DebotifyText",
     images: [
       {
         url: "/forOpenGraph.png",
         width: 1200,
         height: 630,
-        alt: "HumanifyLab Pricing — AI Humanizer Plans",
+        alt: "DebotifyText Pricing — AI Humanizer Plans",
       },
     ],
     locale: "en_US",
@@ -43,11 +43,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pricing — AI Humanizer Plans, Free Plan Included | HumanifyLab",
+    title: "Pricing — AI Humanizer Plans, Free Plan Included | DebotifyText",
     description: "Start free with monthly word credits, or upgrade for higher limits, faster processing and API access.",
     images: ["/forOpenGraph.png"],
-    site: "@humanifylab",
-    creator: "@humanifylab",
+    site: "@debotifytext",
+    creator: "@debotifytext",
   },
 };
 
@@ -115,15 +115,19 @@ export default async function PricingPage() {
     <div className="flex min-h-screen flex-col bg-white">
       <PageNavbar />
       <main className="flex-1">
-        <div className="mx-auto max-w-3xl px-5 pb-4 pt-14 text-center sm:px-6 sm:pt-16">
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--hl-mint-deep)]">Pricing</span>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
-            Simple, transparent pricing
-          </h1>
-          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-600">
-            Transform AI-generated content into natural, human-like writing. Every plan includes our full humanization
-            engine — upgrade or cancel anytime.
-          </p>
+        <div className="relative pt-24 pb-16 bg-gradient-to-b from-green-50/50 to-white text-center">
+          <div className="mx-auto max-w-3xl px-5 sm:px-6 relative z-10">
+            <span className="inline-block py-1 px-3 rounded-full bg-green-100/50 border border-green-200/50 text-[11px] font-bold tracking-widest text-green-700 uppercase mb-6">
+              Pricing
+            </span>
+            <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+              Simple, transparent pricing
+            </h1>
+            <p className="mx-auto mt-6 max-w-xl text-[17px] leading-relaxed text-slate-500 font-medium">
+              Transform AI-generated content into natural, human-like writing. Every plan includes our full humanization
+              engine — upgrade or cancel anytime.
+            </p>
+          </div>
         </div>
         <PricingPageClient isTeamMember={isTeamMember} hasSubscription={hasSubscription} />
       </main>

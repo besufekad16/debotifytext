@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with what is the best tool to bypass grammarly with my thesis for a strict professor"
   },
-  "technicalDeepDive": "When TAs run your work through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.\n\nAcademic institutions use strict heuristics to detect AI. HumanifyLab counters this by restructuring the writing flow of your paper.\n\nThe result is a perfectly structured document that exhibits natural human burstiness, guaranteeing a completely safe AI detection score.\n\nUnlike basic tools, our engine understands academic formatting and protects your core thesis without triggering major academic detectors.",
+  "technicalDeepDive": "When TAs run your work through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.\n\nAcademic institutions use strict heuristics to detect AI. DebotifyText counters this by restructuring the writing flow of your paper.\n\nThe result is a perfectly structured document that exhibits natural human burstiness, guaranteeing a completely safe AI detection score.\n\nUnlike basic tools, our engine understands academic formatting and protects your core thesis without triggering major academic detectors.",
   "stepByStep": [
     {
       "title": "Academic Scan",

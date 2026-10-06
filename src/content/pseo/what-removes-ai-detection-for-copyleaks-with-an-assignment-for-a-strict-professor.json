@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with what removes ai detection for copyleaks with an assignment for a strict professor"
   },
-  "technicalDeepDive": "When professors run your work through Turnitin, they look for robotic patterns. Our system eliminates these watermarks entirely.\n\nMany researchers struggle with false positives. HumanifyLab solves this by giving your text the depth of real human writing.\n\nUniversities use strict models to detect AI. HumanifyLab counters this by re-mapping the lexical density of your paper.\n\nThe result is a perfectly structured paper that flows naturally, guaranteeing a 0% AI detection score.",
+  "technicalDeepDive": "When professors run your work through Turnitin, they look for robotic patterns. Our system eliminates these watermarks entirely.\n\nMany researchers struggle with false positives. DebotifyText solves this by giving your text the depth of real human writing.\n\nUniversities use strict models to detect AI. DebotifyText counters this by re-mapping the lexical density of your paper.\n\nThe result is a perfectly structured paper that flows naturally, guaranteeing a 0% AI detection score.",
   "stepByStep": [
     {
       "title": "Scholarly Rewrite",

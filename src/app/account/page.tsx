@@ -12,8 +12,8 @@ import SubscriptionManagement from "~/components/SubscriptionManagement";
 import ReferralCodeInput from "~/components/ReferralCodeInput";
 
 export const metadata: Metadata = {
-  title: "Account - HumanifyLab | Manage Your Free AI Humanizer",
-  description: "Manage your HumanifyLab account and credits. Access your AI humanizer and track your usage for professional writing enhancement.",
+  title: "Account - DebotifyText | Manage Your Free AI Humanizer",
+  description: "Manage your DebotifyText account and credits. Access your AI humanizer and track your usage for professional writing enhancement.",
   keywords: [
     "ai humanizer",
     "humanizer",
@@ -122,12 +122,12 @@ export default async function AccountPage() {
       <PageNavbar currentCredits={userCredits + userExtraCredits} isTeamMember={isTeamMember} />
       <main className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="mb-10">
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--hl-mint-deep)]">Account</span>
-          <h1 className="mt-2 text-2xl font-semibold tracking-tight text-gray-900 sm:text-3xl">
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-green-700">Account</span>
+          <h1 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
             Account settings
           </h1>
-          <p className="mt-2 text-sm text-gray-600">
-            Manage your HumanifyLab account, subscription, and usage.
+          <p className="mt-2 text-sm text-slate-500">
+            Manage your DebotifyText account, subscription, and usage.
           </p>
         </div>
 
@@ -142,10 +142,10 @@ export default async function AccountPage() {
           />
 
           {/* Profile Information */}
-          <Card className="border-gray-200 bg-white shadow-sm rounded-2xl">
+          <Card className="border-slate-100 bg-white shadow-sm rounded-2xl">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <User className="h-5 w-5 text-[var(--hl-mint-deep)]" />
+                <User className="h-5 w-5 text-green-700" />
                 Profile Information
               </CardTitle>
               <CardDescription className="text-[12px] text-gray-400">Your personal details</CardDescription>
@@ -153,7 +153,7 @@ export default async function AccountPage() {
             <CardContent className="space-y-4">
               <div>
                 <label className="text-[12px] font-medium text-gray-400">Full Name</label>
-                <p className="mt-1 text-[13.5px] font-semibold text-gray-900">{userName}</p>
+                <p className="mt-1 text-[13.5px] font-semibold text-slate-900">{userName}</p>
               </div>
               <Separator />
               <div>
@@ -161,7 +161,7 @@ export default async function AccountPage() {
                   <Mail className="h-4 w-4" />
                   Email Address
                 </label>
-                <p className="mt-1 text-[13.5px] font-semibold text-gray-900">{userEmail}</p>
+                <p className="mt-1 text-[13.5px] font-semibold text-slate-900">{userEmail}</p>
               </div>
               <Separator />
               <div>
@@ -169,16 +169,16 @@ export default async function AccountPage() {
                   <Calendar className="h-4 w-4" />
                   Member Since
                 </label>
-                <p className="mt-1 text-[13.5px] font-semibold text-gray-900">{createdAt}</p>
+                <p className="mt-1 text-[13.5px] font-semibold text-slate-900">{createdAt}</p>
               </div>
             </CardContent>
           </Card>
 
           {/* Credits & Usage */}
-          <Card className="border-gray-200 bg-white shadow-sm rounded-2xl">
+          <Card className="border-slate-100 bg-white shadow-sm rounded-2xl">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <CreditCard className="h-5 w-5 text-[var(--hl-mint-deep)]" />
+                <CreditCard className="h-5 w-5 text-green-700" />
                 Credits & Usage
               </CardTitle>
               <CardDescription className="text-[12px] text-gray-400">Your current credit balance</CardDescription>
@@ -186,7 +186,7 @@ export default async function AccountPage() {
             <CardContent className="space-y-4">
               <div>
                 <label className="text-[12px] font-medium text-gray-400">Available Credits</label>
-                <p className="mt-1.5 text-[1.8rem] font-bold text-[var(--hl-mint-deep)]">
+                <p className="mt-1.5 text-[1.8rem] font-bold text-green-700">
                   {(userCredits + userExtraCredits).toLocaleString()}
                 </p>
                 <div className="mt-2 flex gap-4 text-[13px] text-gray-400">
@@ -205,13 +205,13 @@ export default async function AccountPage() {
               </div>
               <Separator />
               <div className="rounded-lg bg-primary/10 p-4">
-                <p className="text-[13px] font-medium text-gray-900">Need more credits?</p>
+                <p className="text-[13px] font-medium text-slate-900">Need more credits?</p>
                 <p className="mt-1 text-[13px] text-gray-400">
                   Visit our pricing page to purchase more credits and continue humanizing your content.
                 </p>
                 <Link
                   href="/pricing"
-                  className="mt-3 inline-block rounded-xl bg-[var(--hl-mint-deep)] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#5e3d2a]"
+                  className="mt-3 inline-block rounded-xl bg-green-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-green-800"
                 >
                   View Pricing Plans
                 </Link>
@@ -222,7 +222,7 @@ export default async function AccountPage() {
 
         {/* Quick Links */}
         <div className="mt-8">
-          <Card className="border-gray-200 bg-white shadow-sm rounded-2xl">
+          <Card className="border-slate-100 bg-white shadow-sm rounded-2xl">
             <CardHeader>
               <CardTitle>Quick Links</CardTitle>
               <CardDescription className="text-[12px] text-gray-400">Access important resources and support</CardDescription>
@@ -231,54 +231,54 @@ export default async function AccountPage() {
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
                 <Link
                   href="/"
-                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[var(--hl-mint-deep)] hover:shadow-md"
+                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-green-700 hover:shadow-md"
                 >
-                  <p className="text-[13.5px] font-semibold text-gray-900">Humanizer Tool</p>
+                  <p className="text-[13.5px] font-semibold text-slate-900">Humanizer Tool</p>
                   <p className="mt-0.5 text-[11px] text-gray-400">Transform your text</p>
                 </Link>
                 <Link
                   href="/pricing"
-                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[var(--hl-mint-deep)] hover:shadow-md"
+                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-green-700 hover:shadow-md"
                 >
-                  <p className="text-[13.5px] font-semibold text-gray-900">Pricing</p>
+                  <p className="text-[13.5px] font-semibold text-slate-900">Pricing</p>
                   <p className="mt-0.5 text-[11px] text-gray-400">View credit packages</p>
                 </Link>
                 {(isTeamMember || hasApiAccess) && (
                   <Link
                     href="/team"
-                    className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[var(--hl-mint-deep)] hover:shadow-md"
+                    className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-green-700 hover:shadow-md"
                   >
                     <div className="flex justify-center mb-1">
-                      <Users className="h-5 w-5 text-[var(--hl-mint-deep)]" />
+                      <Users className="h-5 w-5 text-green-700" />
                     </div>
-                    <p className="text-[13.5px] font-semibold text-gray-900">Team</p>
+                    <p className="text-[13.5px] font-semibold text-slate-900">Team</p>
                     <p className="mt-0.5 text-[11px] text-gray-400">Manage team</p>
                   </Link>
                 )}
                 {hasApiAccess && (
                   <Link
                     href="/api-keys"
-                    className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[var(--hl-mint-deep)] hover:shadow-md"
+                    className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-green-700 hover:shadow-md"
                   >
                     <div className="flex justify-center mb-1">
-                      <Key className="h-5 w-5 text-[var(--hl-mint-deep)]" />
+                      <Key className="h-5 w-5 text-green-700" />
                     </div>
-                    <p className="text-[13.5px] font-semibold text-gray-900">API Keys</p>
+                    <p className="text-[13.5px] font-semibold text-slate-900">API Keys</p>
                     <p className="mt-0.5 text-[11px] text-gray-400">Manage integrations</p>
                   </Link>
                 )}
                 <Link
                   href="/faq"
-                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[var(--hl-mint-deep)] hover:shadow-md"
+                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-green-700 hover:shadow-md"
                 >
-                  <p className="text-[13.5px] font-semibold text-gray-900">FAQ</p>
+                  <p className="text-[13.5px] font-semibold text-slate-900">FAQ</p>
                   <p className="mt-0.5 text-[11px] text-gray-400">Common questions</p>
                 </Link>
                 <Link
                   href="/contact"
-                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-[var(--hl-mint-deep)] hover:shadow-md"
+                  className="rounded-lg border border-border bg-card p-4 text-center transition hover:border-green-700 hover:shadow-md"
                 >
-                  <p className="text-[13.5px] font-semibold text-gray-900">Contact</p>
+                  <p className="text-[13.5px] font-semibold text-slate-900">Contact</p>
                   <p className="mt-0.5 text-[11px] text-gray-400">Get support</p>
                 </Link>
               </div>
@@ -287,17 +287,17 @@ export default async function AccountPage() {
         </div>
 
         {/* Affiliate nudge */}
-        <div className="mt-8 flex flex-col items-start justify-between gap-4 rounded-2xl border border-[rgba(94,61,42,0.18)] bg-[#faf6f1] p-6 sm:flex-row sm:items-center">
+        <div className="mt-8 flex flex-col items-start justify-between gap-4 rounded-2xl border border-[rgba(21,128,61,0.18)] bg-green-50 p-6 sm:flex-row sm:items-center">
           <div className="flex-1">
-            <p className="text-sm font-semibold text-gray-900">Earn 10% on every referral</p>
-            <p className="mt-0.5 text-xs text-gray-600">
+            <p className="text-sm font-semibold text-slate-900">Earn 10% on every referral</p>
+            <p className="mt-0.5 text-xs text-slate-500">
               Share your code. Get paid in USDT when someone subscribes.
             </p>
             <ReferralCodeInput alreadyApplied={!!referredByCode} />
           </div>
           <Link
             href="/affiliate"
-            className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-xl bg-[var(--hl-mint-deep)] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#5e3d2a]"
+            className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-xl bg-green-700 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-green-800"
           >
             View Affiliate Dashboard
           </Link>

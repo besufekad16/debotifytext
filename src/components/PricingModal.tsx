@@ -83,7 +83,7 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
       router.push("/pricing#lifetime");
       return;
     }
-    setShowRefStep(true);
+    doCheckout();
   };
 
   return (
@@ -97,65 +97,64 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
       )}
 
       <div
-        className={`fixed inset-0 z-[300] flex items-end justify-center bg-[var(--hl-ink)]/60 p-4 backdrop-blur-sm transition-opacity duration-250 sm:items-center ${
+        className={`fixed inset-0 z-[300] flex items-end justify-center bg-slate-950/60 p-4 backdrop-blur-md transition-all duration-300 sm:items-center ${
           isVisible ? "opacity-100" : "opacity-0"
         }`}
         onClick={handleClose}
       >
         <div
-          className={`relative w-full max-w-md overflow-hidden rounded-3xl border border-white/10 bg-[var(--hl-ink)] shadow-2xl transition-all duration-250 ${
-            isVisible ? "translate-y-0 scale-100 opacity-100" : "translate-y-4 scale-95 opacity-0"
+          className={`relative w-full max-w-[420px] overflow-hidden rounded-[2.5rem] border border-green-400/20 bg-green-950 shadow-[0_30px_100px_-15px_rgba(34,197,94,0.25)] transition-all duration-300 cubic-bezier(0.16,1,0.3,1) ${
+            isVisible ? "translate-y-0 scale-100 opacity-100" : "translate-y-8 scale-95 opacity-0"
           }`}
           onClick={(e) => e.stopPropagation()}
         >
-          <div
-            className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full blur-3xl"
-            style={{ background: "radial-gradient(circle, rgba(232,184,75,0.35), transparent 70%)" }}
-          />
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--hl-offer)] to-transparent" />
+          {/* Ambient Glows */}
+          <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-green-400/20 blur-[80px]" />
+          <div className="pointer-events-none absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-green-500/10 blur-[80px]" />
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-green-400/50 to-transparent" />
 
           <button
             onClick={handleClose}
-            className="absolute right-3 top-3 z-10 rounded-lg p-1.5 text-white/45 transition-colors hover:bg-white/10 hover:text-white"
+            className="absolute right-4 top-4 z-10 rounded-full p-2 text-green-100/40 transition-all hover:bg-green-400/10 hover:text-green-300"
             aria-label="Close"
           >
-            <X className="h-4 w-4" />
+            <X className="h-4 w-4" strokeWidth={2.5} />
           </button>
 
-          <div className="relative p-6 sm:p-8">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--hl-offer)]/35 bg-[var(--hl-offer)]/10 px-3 py-1.5">
-              <GraduationCap className="h-3.5 w-3.5 text-[var(--hl-offer)]" />
-              <span className="text-[10px] font-black uppercase tracking-[0.14em] text-[var(--hl-offer)]">
+          <div className="relative p-7 sm:p-9">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-green-400/30 bg-green-400/10 px-3.5 py-1.5 shadow-[inset_0_0_10px_rgba(74,222,128,0.1)]">
+              <GraduationCap className="h-3.5 w-3.5 text-green-300" />
+              <span className="text-[10px] font-black uppercase tracking-[0.16em] text-green-300">
                 Back-to-School Lifetime
               </span>
             </div>
 
-            <h2 className="pr-8 text-2xl font-black tracking-tight text-white">
-              Out of credits?{" "}
-              <span className="bg-gradient-to-r from-[#F5D78A] via-[#E8B84B] to-[#C8922A] bg-clip-text text-transparent">
+            <h2 className="pr-8 text-3xl font-black tracking-tight text-white leading-[1.1]">
+              Out of credits?<br/>
+              <span className="bg-gradient-to-r from-green-200 via-green-400 to-green-500 bg-clip-text text-transparent">
                 Go lifetime.
               </span>
             </h2>
-            <p className="mt-2 text-sm leading-relaxed text-white/60">
+            <p className="mt-3 text-[15px] leading-relaxed text-green-100/60 font-medium">
               Pay once before school opens. Get 20,000 words every month — forever. No renewals.
             </p>
 
             {displayPrice && (
-              <div className="mt-5 text-center">
-                <div className="text-4xl font-black text-white">{displayPrice}</div>
-                <div className="mt-1 text-xs text-white/45">one-time · yours for life</div>
+              <div className="mt-6 text-center bg-green-900/30 rounded-2xl border border-green-800/30 py-4">
+                <div className="text-[40px] font-black text-white leading-none tracking-tight">{displayPrice}</div>
+                <div className="mt-1.5 text-[11px] font-bold uppercase tracking-widest text-green-300/50">one-time · yours for life</div>
               </div>
             )}
 
-            <ul className="mt-5 space-y-2.5">
+            <ul className="mt-6 space-y-3">
               {[
                 "20,000 words refreshed monthly",
                 "Beat Turnitin, GPTZero & more",
                 "Every future update included",
               ].map((item) => (
-                <li key={item} className="flex items-center gap-2.5 text-sm text-white/85">
-                  <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[var(--hl-offer)]/15">
-                    <Check className="h-3 w-3 text-[var(--hl-offer)]" />
+                <li key={item} className="flex items-start gap-3 text-[14.5px] font-medium text-green-50/90">
+                  <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-green-400/20">
+                    <Check className="h-3 w-3 text-green-400" strokeWidth={3} />
                   </span>
                   {item}
                 </li>
@@ -165,17 +164,17 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
             <button
               onClick={onClaim}
               disabled={ctaLoading}
-              className="group mt-7 flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-sm font-black uppercase tracking-wide text-[var(--hl-ink)] transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70"
+              className="group mt-8 flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-4 text-[15px] font-black uppercase tracking-wide text-green-950 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 shadow-[0_0_20px_rgba(34,197,94,0.3)]"
               style={{
-                background: "linear-gradient(135deg,#F5D78A 0%,#E8B84B 45%,#C8922A 100%)",
+                background: "linear-gradient(135deg, #bbf7d0 0%, #4ade80 50%, #22c55e 100%)",
               }}
             >
               {ctaLoading ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
+                <Loader2 className="h-5 w-5 animate-spin" />
               ) : (
                 <>
                   Claim Lifetime Access
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </>
               )}
             </button>
@@ -185,7 +184,7 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
                 handleClose();
                 router.push("/pricing");
               }}
-              className="mt-3 w-full py-2 text-center text-sm text-white/40 transition-colors hover:text-white/70"
+              className="mt-4 w-full py-2 text-center text-[13px] font-medium text-green-100/40 transition-colors hover:text-green-300"
             >
               See all plans
             </button>

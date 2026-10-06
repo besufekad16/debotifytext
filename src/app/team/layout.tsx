@@ -2,7 +2,7 @@ import { type Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Team Management",
-  description: "Manage your HumanifyLab team members and shared credits.",
+  description: "Manage your DebotifyText team members and shared credits.",
   robots: {
     index: false,
     follow: true,

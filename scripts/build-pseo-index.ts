@@ -3,7 +3,7 @@ import path from 'path';
 import { parse } from 'csv-parse/sync';
 
 // Setup Paths
-const CSV_PATH = path.join(process.cwd(), 'humanifylab_40000_professional_keywords.csv');
+const CSV_PATH = path.join(process.cwd(), 'debotifytext_40000_professional_keywords.csv');
 const OUTPUT_DIR = path.join(process.cwd(), 'src/data');
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'pseo-registry.json');
 
@@ -15,7 +15,7 @@ const RESERVED_SLUGS = new Set([
 ]);
 
 // Brand & Core Keywords
-const BRAND_KEYWORDS = ['humanifylab', 'humanify lab'];
+const BRAND_KEYWORDS = ['debotifytext', 'debotify lab'];
 const CORE_KEYWORDS = ['ai text humanizer', 'ai humanizer', 'text humanizer'];
 
 // Define the contract
@@ -109,7 +109,7 @@ async function main() {
       },
       content: {
         heroTitle: `The Most Advanced ${primaryKeyword.replace(/\b\w/g, l => l.toUpperCase())} in 2026`,
-        directAnswer: `HumanifyLab is the ultimate solution for "${primaryKeyword}". Our proprietary AI bypasses major detectors by naturally rewriting content without losing original meaning.`,
+        directAnswer: `DebotifyText is the ultimate solution for "${primaryKeyword}". Our proprietary AI bypasses major detectors by naturally rewriting content without losing original meaning.`,
         toolCallToAction: `Try the ${primaryKeyword.replace(/\b\w/g, l => l.toUpperCase())} now for free.`
       },
       indexing: {

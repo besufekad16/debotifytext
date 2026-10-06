@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve flawless results with can scribbr detect a humanized an essay for academic writing"
   },
-  "technicalDeepDive": "When TAs run your work through Turnitin, they look for robotic patterns. Our system erases these patterns entirely.\n\nColleges use highly sensitive models to detect AI. HumanifyLab counters this by restructuring the writing flow of your assignment.\n\nUnlike basic rewriters, our engine understands scholarly citations and maintains your main ideas without triggering GPTZero or Turnitin.\n\nWe train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.",
+  "technicalDeepDive": "When TAs run your work through Turnitin, they look for robotic patterns. Our system erases these patterns entirely.\n\nColleges use highly sensitive models to detect AI. DebotifyText counters this by restructuring the writing flow of your assignment.\n\nUnlike basic rewriters, our engine understands scholarly citations and maintains your main ideas without triggering GPTZero or Turnitin.\n\nWe train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.",
   "stepByStep": [
     {
       "title": "Scholarly Rewrite",

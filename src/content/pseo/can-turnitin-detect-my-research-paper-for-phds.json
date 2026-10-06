@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve flawless results with can turnitin detect my research paper for phds"
   },
-  "technicalDeepDive": "Unlike basic spinners, our engine understands university guidelines and preserves your research arguments without triggering GPTZero or Turnitin.\n\nWhen TAs run your work through Turnitin, they look for robotic patterns. Our system erases these patterns entirely.\n\nUniversities use strict heuristics to detect AI. HumanifyLab counters this by restructuring the writing flow of your paper.",
+  "technicalDeepDive": "Unlike basic spinners, our engine understands university guidelines and preserves your research arguments without triggering GPTZero or Turnitin.\n\nWhen TAs run your work through Turnitin, they look for robotic patterns. Our system erases these patterns entirely.\n\nUniversities use strict heuristics to detect AI. DebotifyText counters this by restructuring the writing flow of your paper.",
   "stepByStep": [
     {
       "title": "Upload Draft",

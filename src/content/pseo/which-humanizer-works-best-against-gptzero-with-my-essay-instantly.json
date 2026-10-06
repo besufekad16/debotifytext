@@ -9,7 +9,7 @@
     "idealUser": "Writers",
     "coreIntent": "Achieve flawless results with which humanizer works best against gptzero with my essay instantly"
   },
-  "technicalDeepDive": "The result is a perfectly structured submission that reads like a human scholar, guaranteeing a 0% AI detection score.\n\nWhen TAs run your assignment through Turnitin, they look for predictable phrasing. Our system eliminates these watermarks entirely.\n\nUniversities use strict algorithms to detect AI. HumanifyLab counters this by re-evaluating the lexical density of your paper.\n\nWe train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.",
+  "technicalDeepDive": "The result is a perfectly structured submission that reads like a human scholar, guaranteeing a 0% AI detection score.\n\nWhen TAs run your assignment through Turnitin, they look for predictable phrasing. Our system eliminates these watermarks entirely.\n\nUniversities use strict algorithms to detect AI. DebotifyText counters this by re-evaluating the lexical density of your paper.\n\nWe train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.",
   "stepByStep": [
     {
       "title": "Plagiarism Check",

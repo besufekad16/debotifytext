@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve perfect results with how do students bypass gptzero with my summary for international students"
   },
-  "technicalDeepDive": "When TAs run your work through Turnitin, they look for robotic patterns. Our system erases these watermarks entirely.\n\nUnlike simple tools, our engine understands academic formatting and preserves your main ideas without triggering GPTZero or Turnitin.\n\nMany researchers struggle with false positives. HumanifyLab solves this by giving your text the nuance of real human writing.\n\nAcademic institutions use strict heuristics to detect AI. HumanifyLab counters this by re-mapping the lexical density of your essay.",
+  "technicalDeepDive": "When TAs run your work through Turnitin, they look for robotic patterns. Our system erases these watermarks entirely.\n\nUnlike simple tools, our engine understands academic formatting and preserves your main ideas without triggering GPTZero or Turnitin.\n\nMany researchers struggle with false positives. DebotifyText solves this by giving your text the nuance of real human writing.\n\nAcademic institutions use strict heuristics to detect AI. DebotifyText counters this by re-mapping the lexical density of your essay.",
   "stepByStep": [
     {
       "title": "Safe Export",

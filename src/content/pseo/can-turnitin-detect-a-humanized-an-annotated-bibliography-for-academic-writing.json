@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve flawless results with can turnitin detect a humanized an annotated bibliography for academic writing"
   },
-  "technicalDeepDive": "Unlike simple rewriters, our engine understands academic formatting and protects your main ideas without triggering GPTZero or Turnitin.\n\nWhen educators run your work through Turnitin, they look for robotic patterns. Our system erases these watermarks entirely.\n\nColleges use advanced models to detect AI. HumanifyLab counters this by re-mapping the lexical density of your assignment.\n\nThe result is a cohesive paper that reads like a human scholar, guaranteeing a 0% AI detection score.",
+  "technicalDeepDive": "Unlike simple rewriters, our engine understands academic formatting and protects your main ideas without triggering GPTZero or Turnitin.\n\nWhen educators run your work through Turnitin, they look for robotic patterns. Our system erases these watermarks entirely.\n\nColleges use advanced models to detect AI. DebotifyText counters this by re-mapping the lexical density of your assignment.\n\nThe result is a cohesive paper that reads like a human scholar, guaranteeing a 0% AI detection score.",
   "stepByStep": [
     {
       "title": "Scholarly Rewrite",

@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with which humanizer works best against turnitin with homework for university students"
   },
-  "technicalDeepDive": "The result is a perfectly structured paper that exhibits natural human burstiness, guaranteeing a completely safe AI detection score.\n\nAcademic institutions use highly sensitive algorithms to detect AI. HumanifyLab counters this by re-mapping the lexical density of your paper.\n\nMany researchers struggle with incorrect AI flagging. HumanifyLab solves this by giving your text the depth of real human writing.",
+  "technicalDeepDive": "The result is a perfectly structured paper that exhibits natural human burstiness, guaranteeing a completely safe AI detection score.\n\nAcademic institutions use highly sensitive algorithms to detect AI. DebotifyText counters this by re-mapping the lexical density of your paper.\n\nMany researchers struggle with incorrect AI flagging. DebotifyText solves this by giving your text the depth of real human writing.",
   "stepByStep": [
     {
       "title": "Upload Draft",

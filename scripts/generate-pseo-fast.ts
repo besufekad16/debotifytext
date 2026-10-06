@@ -69,16 +69,16 @@ function parseSpintax(text: string, rng: SeededRandom): string {
 // Modular Block Engine Templates
 const techBlocks = {
   Academic: [
-    "{Academic institutions|Universities|Colleges} use {strict|advanced|highly sensitive} {heuristics|algorithms|models} to {flag|detect} AI. HumanifyLab counters this by {re-evaluating|re-mapping|restructuring} the {semantic structure|lexical density|writing flow} of your {essay|paper|assignment}.",
+    "{Academic institutions|Universities|Colleges} use {strict|advanced|highly sensitive} {heuristics|algorithms|models} to {flag|detect} AI. DebotifyText counters this by {re-evaluating|re-mapping|restructuring} the {semantic structure|lexical density|writing flow} of your {essay|paper|assignment}.",
     "Unlike {basic|simple|outdated} {spinners|rewriters|tools}, our engine understands {scholarly citations|academic formatting|university guidelines} and {preserves|protects|maintains} your {core thesis|research arguments|main ideas} without triggering {GPTZero or Turnitin|major academic detectors}.",
     "The result is a {cohesive|logically sound|perfectly structured} {document|submission|paper} that {reads like a human scholar|exhibits natural human burstiness|flows naturally}, guaranteeing a {0%|completely safe} AI detection score.",
     "When {professors|TAs|educators} run your {work|assignment} through Turnitin, they look for {robotic patterns|predictable phrasing}. Our system {erases|eliminates|removes} these {watermarks|patterns} entirely.",
     "By {injecting|introducing} natural {entropy|variance|human error margins} into the text, we ensure your {academic voice|student tone} is {authentic|genuine|believable}.",
-    "Many {students|researchers} struggle with {false positives|incorrect AI flagging}. HumanifyLab {solves this|fixes this issue} by giving your text the {nuance|depth} of real human writing.",
+    "Many {students|researchers} struggle with {false positives|incorrect AI flagging}. DebotifyText {solves this|fixes this issue} by giving your text the {nuance|depth} of real human writing.",
     "We train our {models|algorithms} on millions of {high-scoring|peer-reviewed} {essays|papers} to ensure your output is {academically rigorous|proficient} yet undetectable."
   ],
   General: [
-    "HumanifyLab uses {state-of-the-art|cutting-edge|advanced} {NLP|machine learning} to {identify and remove|eliminate|erase} {robotic footprints|AI watermarks} from any text.",
+    "DebotifyText uses {state-of-the-art|cutting-edge|advanced} {NLP|machine learning} to {identify and remove|eliminate|erase} {robotic footprints|AI watermarks} from any text.",
     "By {analyzing|processing} {millions of|countless|vast amounts of} {human writing samples|data points}, our engine {restructures|rewrites} your content at the {lexical|syntactic} level.",
     "The result is {flawless|perfect}, {human-like|natural} text that {bypasses|beats|outsmarts} {every major AI detector|GPTZero, Originality.ai, and more}.",
     "Stop {worrying about|fearing} AI detection. Our {proprietary|unique} algorithm guarantees {100% human scores|complete undetectability} every time.",

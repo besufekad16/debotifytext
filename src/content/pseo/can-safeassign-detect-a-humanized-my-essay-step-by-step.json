@@ -9,7 +9,7 @@
     "idealUser": "Marketers",
     "coreIntent": "Achieve perfect results with can safeassign detect a humanized my essay step by step"
   },
-  "technicalDeepDive": "When professors run your work through Turnitin, they look for robotic patterns. Our system eliminates these watermarks entirely.\n\nWe train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nAcademic institutions use strict algorithms to detect AI. HumanifyLab counters this by re-mapping the semantic structure of your paper.\n\nThe result is a perfectly structured paper that flows naturally, guaranteeing a 0% AI detection score.",
+  "technicalDeepDive": "When professors run your work through Turnitin, they look for robotic patterns. Our system eliminates these watermarks entirely.\n\nWe train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nAcademic institutions use strict algorithms to detect AI. DebotifyText counters this by re-mapping the semantic structure of your paper.\n\nThe result is a perfectly structured paper that flows naturally, guaranteeing a 0% AI detection score.",
   "stepByStep": [
     {
       "title": "Scholarly Rewrite",

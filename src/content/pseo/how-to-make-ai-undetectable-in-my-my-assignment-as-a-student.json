@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve flawless results with how to make ai undetectable in my my assignment as a student"
   },
-  "technicalDeepDive": "When professors run your assignment through Turnitin, they look for predictable phrasing. Our system eliminates these watermarks entirely.\n\nWe train our algorithms on millions of high-scoring essays to ensure your output is academically rigorous yet undetectable.\n\nUniversities use advanced heuristics to flag AI. HumanifyLab counters this by re-mapping the semantic structure of your essay.\n\nThe result is a perfectly structured paper that flows naturally, guaranteeing a 0% AI detection score.",
+  "technicalDeepDive": "When professors run your assignment through Turnitin, they look for predictable phrasing. Our system eliminates these watermarks entirely.\n\nWe train our algorithms on millions of high-scoring essays to ensure your output is academically rigorous yet undetectable.\n\nUniversities use advanced heuristics to flag AI. DebotifyText counters this by re-mapping the semantic structure of your essay.\n\nThe result is a perfectly structured paper that flows naturally, guaranteeing a 0% AI detection score.",
   "stepByStep": [
     {
       "title": "Safe Export",

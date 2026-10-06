@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve flawless results with how to trick scribbr with my paper for high school students"
   },
-  "technicalDeepDive": "When professors run your work through Turnitin, they look for robotic patterns. Our system eliminates these patterns entirely.\n\nColleges use highly sensitive models to flag AI. HumanifyLab counters this by re-mapping the semantic structure of your assignment.\n\nUnlike basic tools, our engine understands university guidelines and preserves your core thesis without triggering GPTZero or Turnitin.\n\nWe train our algorithms on millions of peer-reviewed papers to ensure your output is proficient yet undetectable.",
+  "technicalDeepDive": "When professors run your work through Turnitin, they look for robotic patterns. Our system eliminates these patterns entirely.\n\nColleges use highly sensitive models to flag AI. DebotifyText counters this by re-mapping the semantic structure of your assignment.\n\nUnlike basic tools, our engine understands university guidelines and preserves your core thesis without triggering GPTZero or Turnitin.\n\nWe train our algorithms on millions of peer-reviewed papers to ensure your output is proficient yet undetectable.",
   "stepByStep": [
     {
       "title": "Scholarly Rewrite",

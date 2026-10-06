@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with best way to humanize a college essay for undergraduates"
   },
-  "technicalDeepDive": "When educators run your work through Turnitin, they look for predictable phrasing. Our system eliminates these watermarks entirely.\n\nMany students struggle with false positives. HumanifyLab solves this by giving your text the nuance of real human writing.\n\nUniversities use highly sensitive heuristics to detect AI. HumanifyLab counters this by re-mapping the lexical density of your essay.",
+  "technicalDeepDive": "When educators run your work through Turnitin, they look for predictable phrasing. Our system eliminates these watermarks entirely.\n\nMany students struggle with false positives. DebotifyText solves this by giving your text the nuance of real human writing.\n\nUniversities use highly sensitive heuristics to detect AI. DebotifyText counters this by re-mapping the lexical density of your essay.",
   "stepByStep": [
     {
       "title": "Plagiarism Check",

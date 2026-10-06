@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with what removes ai detection for gptzero with a literature review for masters students"
   },
-  "technicalDeepDive": "We train our algorithms on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nAcademic institutions use strict models to detect AI. HumanifyLab counters this by re-evaluating the writing flow of your essay.\n\nThe result is a cohesive paper that reads like a human scholar, guaranteeing a 0% AI detection score.",
+  "technicalDeepDive": "We train our algorithms on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nAcademic institutions use strict models to detect AI. DebotifyText counters this by re-evaluating the writing flow of your essay.\n\nThe result is a cohesive paper that reads like a human scholar, guaranteeing a 0% AI detection score.",
   "stepByStep": [
     {
       "title": "Upload Draft",

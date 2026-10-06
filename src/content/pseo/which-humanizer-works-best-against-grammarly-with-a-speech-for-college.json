@@ -9,7 +9,7 @@
     "idealUser": "Professionals",
     "coreIntent": "Achieve perfect results with which humanizer works best against grammarly with a speech for college"
   },
-  "technicalDeepDive": "We train our models on millions of peer-reviewed essays to ensure your output is academically rigorous yet undetectable.\n\nWhen professors run your work through Turnitin, they look for robotic patterns. Our system erases these patterns entirely.\n\nUnlike simple spinners, our engine understands university guidelines and preserves your core thesis without triggering GPTZero or Turnitin.\n\nMany students struggle with incorrect AI flagging. HumanifyLab solves this by giving your text the nuance of real human writing.",
+  "technicalDeepDive": "We train our models on millions of peer-reviewed essays to ensure your output is academically rigorous yet undetectable.\n\nWhen professors run your work through Turnitin, they look for robotic patterns. Our system erases these patterns entirely.\n\nUnlike simple spinners, our engine understands university guidelines and preserves your core thesis without triggering GPTZero or Turnitin.\n\nMany students struggle with incorrect AI flagging. DebotifyText solves this by giving your text the nuance of real human writing.",
   "stepByStep": [
     {
       "title": "Academic Scan",

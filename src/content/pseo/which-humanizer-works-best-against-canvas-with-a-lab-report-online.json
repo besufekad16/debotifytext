@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with which humanizer works best against canvas with a lab report online"
   },
-  "technicalDeepDive": "By processing millions of human writing samples, our engine rewrites your content at the lexical level.\n\nHumanifyLab uses advanced NLP to identify and remove AI watermarks from any text.\n\nThe result is flawless, human-like text that beats every major AI detector.\n\nStop fearing AI detection. Our unique algorithm guarantees 100% human scores every time.",
+  "technicalDeepDive": "By processing millions of human writing samples, our engine rewrites your content at the lexical level.\n\nDebotifyText uses advanced NLP to identify and remove AI watermarks from any text.\n\nThe result is flawless, human-like text that beats every major AI detector.\n\nStop fearing AI detection. Our unique algorithm guarantees 100% human scores every time.",
   "stepByStep": [
     {
       "title": "Humanization",

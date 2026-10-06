@@ -64,13 +64,13 @@ export default function ReferralCodeStep({ onProceed, onCancel, isLoading }: Pro
 
         {/* Header */}
         <div className="text-center mb-5">
-          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--hl-mint-deep)]/10">
-            <svg className="h-6 w-6 text-[var(--hl-mint-deep)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-green-700/10">
+            <svg className="h-6 w-6 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
             </svg>
           </div>
-          <h2 className="text-lg font-bold text-gray-900">Have a referral code?</h2>
-          <p className="text-sm text-gray-500 mt-1">
+          <h2 className="text-lg font-bold text-slate-900">Have a referral code?</h2>
+          <p className="text-sm text-slate-400 mt-1">
             Enter a friend&apos;s code to credit them. Completely optional.
           </p>
         </div>
@@ -79,7 +79,7 @@ export default function ReferralCodeStep({ onProceed, onCancel, isLoading }: Pro
         <div className="mb-4">
           <input
             type="text"
-            placeholder="e.g. humanify-005"
+            placeholder="e.g. debotify-005"
             value={code}
             onChange={(e) => { setCode(e.target.value); setStatus("idle"); }}
             disabled={status === "applying" || status === "applied" || isLoading}
@@ -87,16 +87,16 @@ export default function ReferralCodeStep({ onProceed, onCancel, isLoading }: Pro
             className={
               "w-full text-sm border rounded-xl px-4 py-3 font-mono tracking-wide focus:outline-none focus:ring-2 transition " +
               (status === "applied"
-                ? "border-[var(--hl-mint)] bg-[var(--hl-surface)] text-[var(--hl-mint-deep)] focus:ring-[var(--hl-mint-bright)]"
+                ? "border-green-600 bg-green-50 text-green-700 focus:ring-green-500"
                 : status === "invalid"
                 ? "border-red-300 bg-red-50 text-red-700 focus:ring-red-200"
-                : "border-gray-200 focus:ring-gray-300")
+                : "border-slate-100 focus:ring-gray-300")
             }
             autoFocus
           />
           {/* Status message */}
           {status === "applied" && (
-            <p className="text-xs text-[var(--hl-mint-deep)] mt-1.5 font-medium">✓ {message}</p>
+            <p className="text-xs text-green-700 mt-1.5 font-medium">✓ {message}</p>
           )}
           {status === "invalid" && (
             <p className="text-xs text-red-500 mt-1.5">{message}</p>
@@ -127,7 +127,7 @@ export default function ReferralCodeStep({ onProceed, onCancel, isLoading }: Pro
             <button
               onClick={handleSkip}
               disabled={status === "applying" || isLoading}
-              className="w-full py-2.5 text-sm text-gray-400 hover:text-gray-600 transition"
+              className="w-full py-2.5 text-sm text-gray-400 hover:text-slate-500 transition"
             >
               Skip — I don&apos;t have a code
             </button>
@@ -137,7 +137,7 @@ export default function ReferralCodeStep({ onProceed, onCancel, isLoading }: Pro
           <button
             onClick={onCancel}
             disabled={status === "applying" || isLoading}
-            className="w-full py-2 text-xs text-gray-300 hover:text-gray-500 transition"
+            className="w-full py-2 text-xs text-gray-300 hover:text-slate-400 transition"
           >
             Cancel
           </button>

@@ -9,7 +9,7 @@
     "idealUser": "Professionals",
     "coreIntent": "Achieve perfect results with what is the best free humanizer for my assignment 100% free"
   },
-  "technicalDeepDive": "When TAs run your work through Turnitin, they look for robotic patterns. Our system erases these patterns entirely.\n\nMany researchers struggle with false positives. HumanifyLab fixes this issue by giving your text the nuance of real human writing.\n\nWe train our models on millions of peer-reviewed essays to ensure your output is academically rigorous yet undetectable.\n\nThe result is a cohesive paper that flows naturally, guaranteeing a completely safe AI detection score.",
+  "technicalDeepDive": "When TAs run your work through Turnitin, they look for robotic patterns. Our system erases these patterns entirely.\n\nMany researchers struggle with false positives. DebotifyText fixes this issue by giving your text the nuance of real human writing.\n\nWe train our models on millions of peer-reviewed essays to ensure your output is academically rigorous yet undetectable.\n\nThe result is a cohesive paper that flows naturally, guaranteeing a completely safe AI detection score.",
   "stepByStep": [
     {
       "title": "Upload Draft",

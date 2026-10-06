@@ -9,7 +9,7 @@
     "idealUser": "Writers",
     "coreIntent": "Achieve perfect results with which humanizer works best against grammarly with an assignment without detection"
   },
-  "technicalDeepDive": "Unlike basic tools, our engine understands academic formatting and protects your research arguments without triggering major academic detectors.\n\nAcademic institutions use highly sensitive heuristics to flag AI. HumanifyLab counters this by re-evaluating the semantic structure of your assignment.\n\nMany students struggle with incorrect AI flagging. HumanifyLab fixes this issue by giving your text the nuance of real human writing.\n\nWhen professors run your assignment through Turnitin, they look for robotic patterns. Our system erases these patterns entirely.",
+  "technicalDeepDive": "Unlike basic tools, our engine understands academic formatting and protects your research arguments without triggering major academic detectors.\n\nAcademic institutions use highly sensitive heuristics to flag AI. DebotifyText counters this by re-evaluating the semantic structure of your assignment.\n\nMany students struggle with incorrect AI flagging. DebotifyText fixes this issue by giving your text the nuance of real human writing.\n\nWhen professors run your assignment through Turnitin, they look for robotic patterns. Our system erases these patterns entirely.",
   "stepByStep": [
     {
       "title": "Citation Protection",

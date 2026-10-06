@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve perfect results with can turnitin detect a humanized a pdf for high school students"
   },
-  "technicalDeepDive": "The result is a perfectly structured paper that reads like a human scholar, guaranteeing a completely safe AI detection score.\n\nUnlike simple spinners, our engine understands scholarly citations and preserves your main ideas without triggering GPTZero or Turnitin.\n\nUniversities use strict heuristics to detect AI. HumanifyLab counters this by re-mapping the semantic structure of your paper.",
+  "technicalDeepDive": "The result is a perfectly structured paper that reads like a human scholar, guaranteeing a completely safe AI detection score.\n\nUnlike simple spinners, our engine understands scholarly citations and preserves your main ideas without triggering GPTZero or Turnitin.\n\nUniversities use strict heuristics to detect AI. DebotifyText counters this by re-mapping the semantic structure of your paper.",
   "stepByStep": [
     {
       "title": "Citation Protection",

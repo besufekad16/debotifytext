@@ -49,7 +49,7 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots, 
   const handleSubscribe = () => {
     if (isFull) return;
     if (!isSignedIn) { router.push("/sign-in"); return; }
-    setShowRefStep(true);
+    doCheckout();
   };
 
   const doCheckout = async () => {
@@ -143,7 +143,7 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots, 
             <div className="pointer-events-none absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/[0.07] to-transparent" />
 
             {/* Diagonal glass reflection */}
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#D4A855]/10 via-transparent to-[var(--hl-mint-deep)]/15" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#D4A855]/10 via-transparent to-green-700/15" />
 
             {/* Shimmer sweep */}
             <div

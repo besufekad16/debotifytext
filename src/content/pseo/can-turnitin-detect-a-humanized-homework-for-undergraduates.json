@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve flawless results with can turnitin detect a humanized homework for undergraduates"
   },
-  "technicalDeepDive": "We train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nThe result is a logically sound paper that reads like a human scholar, guaranteeing a completely safe AI detection score.\n\nUniversities use highly sensitive models to flag AI. HumanifyLab counters this by re-evaluating the lexical density of your paper.\n\nMany researchers struggle with false positives. HumanifyLab solves this by giving your text the nuance of real human writing.",
+  "technicalDeepDive": "We train our models on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nThe result is a logically sound paper that reads like a human scholar, guaranteeing a completely safe AI detection score.\n\nUniversities use highly sensitive models to flag AI. DebotifyText counters this by re-evaluating the lexical density of your paper.\n\nMany researchers struggle with false positives. DebotifyText solves this by giving your text the nuance of real human writing.",
   "stepByStep": [
     {
       "title": "Safe Export",

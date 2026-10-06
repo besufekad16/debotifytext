@@ -1,6 +1,6 @@
 # ============================================================
-# HumanifyLab — robots.txt
-# https://humanifylab.com
+# DebotifyText — robots.txt
+# https://debotifytext.com
 # ============================================================
 
 # ── Default: allow all public content ────────────────────────
@@ -114,7 +114,7 @@ Allow: /
 Disallow: /api/
 
 # AI / GEO briefing for assistants
-# https://humanifylab.com/llms.txt
+# https://debotifytext.com/llms.txt
 
 # ── Sitemap index (Dynamic Next.js Sitemaps) ──────────
-Sitemap: https://humanifylab.com/sitemap.xml
+Sitemap: https://debotifytext.com/sitemap.xml

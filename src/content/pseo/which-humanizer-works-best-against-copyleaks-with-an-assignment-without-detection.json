@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve perfect results with which humanizer works best against copyleaks with an assignment without detection"
   },
-  "technicalDeepDive": "When TAs run your assignment through Turnitin, they look for robotic patterns. Our system erases these patterns entirely.\n\nMany students struggle with false positives. HumanifyLab solves this by giving your text the nuance of real human writing.\n\nAcademic institutions use highly sensitive algorithms to flag AI. HumanifyLab counters this by re-evaluating the semantic structure of your essay.\n\nThe result is a logically sound document that flows naturally, guaranteeing a completely safe AI detection score.",
+  "technicalDeepDive": "When TAs run your assignment through Turnitin, they look for robotic patterns. Our system erases these patterns entirely.\n\nMany students struggle with false positives. DebotifyText solves this by giving your text the nuance of real human writing.\n\nAcademic institutions use highly sensitive algorithms to flag AI. DebotifyText counters this by re-evaluating the semantic structure of your essay.\n\nThe result is a logically sound document that flows naturally, guaranteeing a completely safe AI detection score.",
   "stepByStep": [
     {
       "title": "Scholarly Rewrite",

@@ -27,7 +27,6 @@ export default {
           "sans-serif",
         ],
         heading: ["Outfit", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Playfair Display", "Georgia", "serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -64,12 +63,6 @@ export default {
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
         },
         card: {
           DEFAULT: "hsl(var(--card))",
@@ -94,19 +87,14 @@ export default {
         },
         // Brand-specific colors for direct use
         brand: {
-          blue: "#0B6FFF",
-          orange: "#FF7A3D",
-          peach: "#FFB199",
-          porcelain: "#F6F8FA",
+          50:  "#F0FDF4",
+          100: "#DCFCE7",
+          500: "#22C55E",
+          600: "#16A34A",
+          700: "#15803D",
+          800: "#166534",
+          950: "#052E16",
           white: "#FFFFFF",
-          graphite: "#1F2933",
-          slate: "#4B5563",
-          green: "#16A34A",
-          amber: "#F59E0B",
-          red: "#EF4444",
-          mint: "#10B981",
-          mintLight: "#D1FAE5",
-          mintDark: "#059669",
         },
       },
       keyframes: {

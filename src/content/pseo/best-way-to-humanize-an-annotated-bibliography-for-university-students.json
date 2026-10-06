@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve flawless results with best way to humanize an annotated bibliography for university students"
   },
-  "technicalDeepDive": "Unlike outdated tools, our engine understands scholarly citations and maintains your research arguments without triggering major academic detectors.\n\nMany researchers struggle with incorrect AI flagging. HumanifyLab fixes this issue by giving your text the depth of real human writing.\n\nUniversities use advanced heuristics to flag AI. HumanifyLab counters this by re-evaluating the writing flow of your assignment.\n\nWe train our models on millions of peer-reviewed essays to ensure your output is proficient yet undetectable.",
+  "technicalDeepDive": "Unlike outdated tools, our engine understands scholarly citations and maintains your research arguments without triggering major academic detectors.\n\nMany researchers struggle with incorrect AI flagging. DebotifyText fixes this issue by giving your text the depth of real human writing.\n\nUniversities use advanced heuristics to flag AI. DebotifyText counters this by re-evaluating the writing flow of your assignment.\n\nWe train our models on millions of peer-reviewed essays to ensure your output is proficient yet undetectable.",
   "stepByStep": [
     {
       "title": "Upload Draft",

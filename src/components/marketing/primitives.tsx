@@ -16,7 +16,7 @@ export function Section({
   compact?: boolean;
 }) {
   const toneClass =
-    tone === "dark" ? "bg-[#0f1419] text-white" : tone === "muted" ? "bg-[#faf6f1]" : "bg-white";
+    tone === "dark" ? "bg-[#0f1419] text-white" : tone === "muted" ? "bg-green-50" : "bg-white";
   return (
     <section id={id} className={cn(compact ? "section-y-sm" : "section-y", toneClass, className)}>
       {children}
@@ -51,7 +51,7 @@ export function Eyebrow({ children, dark = false }: { children: React.ReactNode;
     <span
       className={cn(
         "inline-block text-xs font-semibold uppercase tracking-[0.18em]",
-        dark ? "text-[#a67c52]" : "text-[var(--hl-mint-deep)]",
+        dark ? "text-[#a67c52]" : "text-green-700",
       )}
     >
       {children}
@@ -84,13 +84,13 @@ export function SectionHeading({
       <Tag
         className={cn(
           "text-3xl font-semibold leading-tight tracking-tight sm:text-4xl",
-          dark ? "text-white" : "text-gray-900",
+          dark ? "text-white" : "text-slate-900",
         )}
       >
         {title}
       </Tag>
       {description && (
-        <p className={cn("mt-4 text-base leading-relaxed", dark ? "text-gray-400" : "text-gray-600")}>
+        <p className={cn("mt-4 text-base leading-relaxed", dark ? "text-gray-400" : "text-slate-500")}>
           {description}
         </p>
       )}
@@ -113,7 +113,7 @@ export function PrimaryButton({
     <Link
       href={href}
       className={cn(
-        "group inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--hl-mint-deep)] px-7 py-3.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-[#5e3d2a] hover:shadow-md",
+        "group inline-flex items-center justify-center gap-2 rounded-xl bg-green-700 px-7 py-3.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-green-800 hover:shadow-md",
         className,
       )}
     >
@@ -141,7 +141,7 @@ export function SecondaryButton({
         "inline-flex items-center justify-center gap-2 rounded-xl border px-7 py-3.5 text-sm font-semibold transition-colors",
         dark
           ? "border-white/20 text-white hover:bg-white/10"
-          : "border-gray-300 text-gray-800 hover:border-[var(--hl-mint-deep)] hover:text-[var(--hl-mint-deep)]",
+          : "border-gray-300 text-gray-800 hover:border-green-700 hover:text-green-700",
         className,
       )}
     >
@@ -162,7 +162,7 @@ export function Card({
   return (
     <div
       className={cn(
-        "rounded-2xl border border-gray-200 bg-white p-6",
+        "rounded-2xl border border-slate-100 bg-white p-6",
         hover && "hover-lift",
         className,
       )}
@@ -175,10 +175,10 @@ export function Card({
 export function StatBlock({ value, label, dark = false }: { value: string; label: string; dark?: boolean }) {
   return (
     <div className="text-center">
-      <div className={cn("text-2xl font-bold tracking-tight sm:text-3xl", dark ? "text-[#a67c52]" : "text-[var(--hl-mint-deep)]")}>
+      <div className={cn("text-2xl font-bold tracking-tight sm:text-3xl", dark ? "text-[#a67c52]" : "text-green-700")}>
         {value}
       </div>
-      <div className={cn("mt-1 text-xs uppercase tracking-wide", dark ? "text-gray-400" : "text-gray-500")}>
+      <div className={cn("mt-1 text-xs uppercase tracking-wide", dark ? "text-gray-400" : "text-slate-400")}>
         {label}
       </div>
     </div>
@@ -202,7 +202,7 @@ export function CTASection({
         <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">{title}</h2>
         <p className="mx-auto mt-3 max-w-xl text-gray-400">{subtitle}</p>
         <div className="mt-8">
-          <PrimaryButton href={href} className="bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)]">
+          <PrimaryButton href={href} className="bg-green-700 hover:bg-green-600">
             {cta}
           </PrimaryButton>
         </div>

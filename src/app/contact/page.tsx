@@ -4,32 +4,24 @@ import Link from "next/link";
 import { Mail, MessageCircleQuestion, Building2 } from "lucide-react";
 
 import MarketingShell from "~/components/marketing/MarketingShell";
-import { Section, Container, Eyebrow } from "~/components/marketing/primitives";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact Us - Undetectable AI Humanizer Support | HumanifyLab",
-  description: "Contact HumanifyLab for support with bypassing AI detectors. Expert help with Originality.AI, GPTZero, Turnitin bypass. Enterprise undetectable AI solutions. 24/7 support.",
+  title: "Contact Us - Undetectable AI Humanizer Support | DebotifyText",
+  description: "Contact DebotifyText for support with bypassing AI detectors. Expert help with Originality.AI, GPTZero, Turnitin bypass. Enterprise undetectable AI solutions. 24/7 support.",
   keywords: [
-    // Contact Keywords
-    "humanifylab contact",
+    "debotifytext contact",
     "ai humanizer support",
     "undetectable ai support",
     "ai detector bypass help",
-    
-    // Support Topics
     "originality ai bypass support",
     "gptzero bypass help",
     "turnitin bypass support",
     "zerogpt bypass help",
-    
-    // Core Features
     "ai humanizer",
     "humanize AI text",
     "writing enhancement",
     "undetectable ai",
-    
-    // Business
     "enterprise ai humanizer",
     "bulk ai humanization",
     "api access support",
@@ -38,19 +30,19 @@ export const metadata: Metadata = {
     "technical support"
   ],
   alternates: {
-    canonical: "https://www.humanifylab.com/contact",
+    canonical: "https://www.debotifytext.com/contact",
   },
   openGraph: {
-    title: "Contact Us - Undetectable AI Humanizer Support | HumanifyLab",
+    title: "Contact Us - Undetectable AI Humanizer Support | DebotifyText",
     description: "Expert support for bypassing AI detectors. Help with Originality.AI, GPTZero, Turnitin bypass. Enterprise solutions.",
-    url: "https://www.humanifylab.com/contact",
-    siteName: "HumanifyLab",
+    url: "https://www.debotifytext.com/contact",
+    siteName: "DebotifyText",
     images: [
       {
         url: "/forOpenGraph.png",
         width: 1200,
         height: 630,
-        alt: "HumanifyLab Contact - Undetectable AI Support"
+        alt: "DebotifyText Contact - Undetectable AI Support"
       }
     ],
     locale: "en_US",
@@ -76,13 +68,13 @@ export default async function ContactPage() {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://www.humanifylab.com"
+        "item": "https://www.debotifytext.com"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Contact Us",
-        "item": "https://www.humanifylab.com/contact"
+        "item": "https://www.debotifytext.com/contact"
       }
     ]
   };
@@ -90,9 +82,9 @@ export default async function ContactPage() {
   const contactSchema = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    "name": "Contact HumanifyLab",
-    "description": "Contact the HumanifyLab team for professional AI humanization solutions and enterprise support.",
-    "url": "https://www.humanifylab.com/contact"
+    "name": "Contact DebotifyText",
+    "description": "Contact the DebotifyText team for professional AI humanization solutions and enterprise support.",
+    "url": "https://www.debotifytext.com/contact"
   };
 
   const contactHighlights = [
@@ -101,8 +93,8 @@ export default async function ContactPage() {
       title: "Email us anytime",
       description: (
         <>
-          <a href="mailto:humanifylab1@gmail.com" className="font-semibold text-[var(--hl-mint-deep)] underline underline-offset-4">
-            humanifylab1@gmail.com
+          <a href="mailto:debotifytext1@gmail.com" className="font-semibold text-green-700 transition-colors hover:text-green-800">
+            debotifytext1@gmail.com
           </a>{" "}
           — we respond in under 24 hours.
         </>
@@ -114,7 +106,7 @@ export default async function ContactPage() {
       description: (
         <>
           Visit{" "}
-          <Link className="font-semibold text-[var(--hl-mint-deep)] underline underline-offset-4" href="/faq">
+          <Link className="font-semibold text-green-700 transition-colors hover:text-green-800" href="/faq">
             our FAQ
           </Link>{" "}
           for tutorials, billing, and compliance docs.
@@ -140,59 +132,83 @@ export default async function ContactPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
       />
 
-      <Section>
-        <Container>
-          <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-16">
-            {/* Left: intro + highlights */}
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <Eyebrow>Contact</Eyebrow>
-                <h1 className="text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
-                  Talk to the HumanifyLab team
+      <section className="relative overflow-hidden bg-white pt-24 pb-32">
+        {/* Ambient Glows */}
+        <div className="pointer-events-none absolute left-0 top-0 h-[40rem] w-[40rem] -translate-x-1/2 -translate-y-1/4 rounded-full bg-green-50 opacity-70 blur-[100px]" />
+        <div className="pointer-events-none absolute right-0 top-1/2 h-[30rem] w-[30rem] translate-x-1/3 -translate-y-1/2 rounded-full bg-green-100/50 opacity-50 blur-[120px]" />
+
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid gap-16 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+            
+            {/* Left: Intro + Highlights */}
+            <div className="space-y-12">
+              <div className="space-y-6">
+                <span className="inline-block py-1.5 px-3.5 rounded-full bg-green-50 border border-green-200/60 text-[11px] font-bold tracking-[0.2em] text-green-700 uppercase shadow-sm">
+                  Get in touch
+                </span>
+                <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl leading-[1.1]">
+                  Talk to the <br/>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-green-400">DebotifyText</span> team
                 </h1>
-                <p className="max-w-xl text-base leading-relaxed text-gray-600">
-                  Tell us about your use case, partnership idea, or anything else on your mind. We reply within one
-                  business day.
+                <p className="max-w-md text-lg leading-relaxed text-slate-500 font-medium">
+                  Tell us about your use case, partnership idea, or anything else on your mind. We reply within one business day.
                 </p>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-4 relative">
+                {/* Decorative connecting line */}
+                <div className="absolute left-[1.35rem] top-8 bottom-8 w-px bg-gradient-to-b from-green-100 via-green-200/50 to-transparent hidden sm:block" />
+                
                 {contactHighlights.map(({ icon: Icon, title, description }) => (
                   <div
                     key={title}
-                    className="flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-5 transition-colors hover:border-[var(--hl-mint-deep)]/40"
+                    className="group relative flex items-start gap-5 rounded-[1.5rem] border border-slate-100 bg-white/60 p-6 backdrop-blur-md shadow-sm transition-all duration-300 hover:border-green-200 hover:shadow-[0_8px_30px_-12px_rgba(34,197,94,0.15)] hover:-translate-y-1"
                   >
-                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-[var(--hl-mint-deep)]">
-                      <Icon className="h-5 w-5 text-white" />
+                    <div className="relative z-10 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-green-50 shadow-inner border border-green-100/50 transition-colors duration-300 group-hover:bg-green-100/80">
+                      <Icon className="h-5 w-5 text-green-600" />
                     </div>
-                    <div>
-                      <p className="text-sm font-semibold text-gray-900">{title}</p>
-                      <p className="mt-1 text-sm leading-relaxed text-gray-600">{description}</p>
+                    <div className="pt-1">
+                      <p className="text-[16px] font-bold text-slate-900">{title}</p>
+                      <p className="mt-1.5 text-[14px] leading-relaxed text-slate-500 font-medium">{description}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="rounded-2xl bg-[#faf6f1] p-5">
-                <p className="text-sm font-semibold text-gray-900">Availability</p>
-                <p className="mt-1 text-sm text-gray-600">24/7 customer support, worldwide.</p>
+              <div className="rounded-[1.5rem] bg-slate-50/80 p-6 border border-slate-100 backdrop-blur-sm flex items-center gap-4 max-w-sm">
+                <div className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                </div>
+                <div>
+                  <p className="text-[14px] font-bold text-slate-900">24/7 Availability</p>
+                  <p className="text-[13px] font-medium text-slate-500">Global customer support.</p>
+                </div>
               </div>
             </div>
 
-            {/* Right: form */}
-            <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-[0_24px_60px_-40px_rgba(94,61,42,0.35)] sm:p-8">
-              <h2 className="text-xl font-semibold tracking-tight text-gray-900">Send us a message</h2>
-              <p className="mt-2 text-sm text-gray-600">
-                Fill out the form and we&apos;ll follow up with the best next step.
-              </p>
-              <div className="mt-7">
-                <ContactForm initialEmail={userEmail} isEmailReadOnly={!!userEmail} />
+            {/* Right: Form */}
+            <div className="relative">
+              {/* Form Backdrop Glow */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-green-400/20 to-transparent blur-2xl rounded-[3rem] -z-10 transform scale-[0.95] translate-y-4" />
+              
+              <div className="rounded-[2rem] sm:rounded-[2.5rem] border border-white/40 bg-white/80 p-8 shadow-[0_24px_60px_-15px_rgba(34,197,94,0.15)] backdrop-blur-xl sm:p-10 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-[250px] h-[250px] bg-green-50 rounded-full blur-[80px] opacity-60 -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+                
+                <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 relative z-10">Send us a message</h2>
+                <p className="mt-2 text-[15px] font-medium text-slate-500 relative z-10">
+                  Fill out the form and we'll follow up with the best next step.
+                </p>
+                
+                <div className="mt-8 relative z-10">
+                  <ContactForm initialEmail={userEmail} isEmailReadOnly={!!userEmail} />
+                </div>
               </div>
             </div>
+
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
     </MarketingShell>
   );
 }
-

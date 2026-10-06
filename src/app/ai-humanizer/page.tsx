@@ -7,14 +7,14 @@ import { SiteFooter } from "~/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "AI Humanizer: The #1 Free AI Text Humanizer & Detector Bypass",
-  description: "HumanifyLab is the industry-leading AI humanizer. Turn ChatGPT, Claude, and Gemini drafts into natural, human-written text that bypasses AI detectors like Turnitin, GPTZero, and Originality.ai.",
+  description: "DebotifyText is the industry-leading AI humanizer. Turn ChatGPT, Claude, and Gemini drafts into natural, human-written text that bypasses AI detectors like Turnitin, GPTZero, and Originality.ai.",
   keywords: [
-    "HumanifyLab",
-    "humanify",
-    "humanify ai",
-    "humanify text",
-    "humanify ai text",
-    "humanify lab",
+    "DebotifyText",
+    "debotify",
+    "debotify ai",
+    "debotify text",
+    "debotify ai text",
+    "debotify lab",
     "ai humanizer",
     "humanize ai text"
   ],
@@ -65,7 +65,7 @@ export default function AIHumanizerPage() {
         <section className="px-6 py-24 bg-slate-50">
           <div className="mx-auto max-w-7xl">
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Why Writers & Students Choose HumanifyLab</h2>
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Why Writers & Students Choose DebotifyText</h2>
               <p className="mt-4 text-lg text-slate-600">The only AI humanizer that preserves your meaning while completely erasing the robotic watermark.</p>
             </div>
             
@@ -152,7 +152,7 @@ export default function AIHumanizerPage() {
           <div className="mx-auto max-w-3xl">
             <h2 className="text-4xl font-bold tracking-tight mb-6">Ready to bypass AI detectors?</h2>
             <p className="text-xl text-slate-300 mb-10 leading-relaxed">
-              Join over 100,000 writers, marketers, and students who trust HumanifyLab to protect their work and ensure their writing stays human.
+              Join over 100,000 writers, marketers, and students who trust DebotifyText to protect their work and ensure their writing stays human.
             </p>
             <Link href="/" className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 px-10 py-5 text-lg font-bold text-slate-900 transition-all hover:bg-emerald-400 hover:scale-105">
               Start Humanizing For Free <ArrowRight className="w-5 h-5" />

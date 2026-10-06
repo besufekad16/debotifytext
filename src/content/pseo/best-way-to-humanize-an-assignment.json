@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve flawless results with best way to humanize an assignment"
   },
-  "technicalDeepDive": "When professors run your work through Turnitin, they look for predictable phrasing. Our system eliminates these patterns entirely.\n\nUnlike simple tools, our engine understands university guidelines and maintains your research arguments without triggering major academic detectors.\n\nMany researchers struggle with incorrect AI flagging. HumanifyLab solves this by giving your text the nuance of real human writing.\n\nWe train our models on millions of peer-reviewed essays to ensure your output is proficient yet undetectable.",
+  "technicalDeepDive": "When professors run your work through Turnitin, they look for predictable phrasing. Our system eliminates these patterns entirely.\n\nUnlike simple tools, our engine understands university guidelines and maintains your research arguments without triggering major academic detectors.\n\nMany researchers struggle with incorrect AI flagging. DebotifyText solves this by giving your text the nuance of real human writing.\n\nWe train our models on millions of peer-reviewed essays to ensure your output is proficient yet undetectable.",
   "stepByStep": [
     {
       "title": "Scholarly Rewrite",

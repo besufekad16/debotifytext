@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with which humanizer works best against winston ai with a speech as a student"
   },
-  "technicalDeepDive": "Unlike basic tools, our engine understands university guidelines and maintains your main ideas without triggering GPTZero or Turnitin.\n\nWhen educators run your work through Turnitin, they look for predictable phrasing. Our system erases these patterns entirely.\n\nColleges use strict heuristics to detect AI. HumanifyLab counters this by re-mapping the writing flow of your essay.\n\nWe train our algorithms on millions of peer-reviewed papers to ensure your output is proficient yet undetectable.",
+  "technicalDeepDive": "Unlike basic tools, our engine understands university guidelines and maintains your main ideas without triggering GPTZero or Turnitin.\n\nWhen educators run your work through Turnitin, they look for predictable phrasing. Our system erases these patterns entirely.\n\nColleges use strict heuristics to detect AI. DebotifyText counters this by re-mapping the writing flow of your essay.\n\nWe train our algorithms on millions of peer-reviewed papers to ensure your output is proficient yet undetectable.",
   "stepByStep": [
     {
       "title": "Citation Protection",

@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   // Construct a powerful meta description (under ~150 chars) integrating secondary keywords
   const secondaryKeywordsStr = contract.secondaryKeywords.slice(0, 2).join(", ");
-  let metaDesc = `${contract.content.directAnswer} Humanize AI text and bypass AI detection for ${secondaryKeywordsStr} with HumanifyLab.`;
+  let metaDesc = `${contract.content.directAnswer} Humanize AI text and bypass AI detection for ${secondaryKeywordsStr} with DebotifyText.`;
   if (metaDesc.length > 155) {
     metaDesc = metaDesc.substring(0, 152) + "...";
   }
@@ -52,16 +52,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: { absolute: optimizedTitle },
     description: metaDesc,
-    keywords: [contract.primaryKeyword, ...contract.secondaryKeywords, "humanifylab", "ai humanizer", "bypass ai detector", "student essay humanizer"],
+    keywords: [contract.primaryKeyword, ...contract.secondaryKeywords, "debotifytext", "ai humanizer", "bypass ai detector", "student essay humanizer"],
     authors: [{ name: "Dr. Sarah Jenkins", url: BASE_URL }],
-    creator: "HumanifyLab",
-    publisher: "HumanifyLab",
+    creator: "DebotifyText",
+    publisher: "DebotifyText",
     alternates: { canonical: url },
     openGraph: {
       title: optimizedTitle,
       description: metaDesc,
       url,
-      siteName: "HumanifyLab",
+      siteName: "DebotifyText",
       locale: "en_US",
       type: "article",
       images: [
@@ -77,8 +77,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: optimizedTitle,
       description: metaDesc,
-      site: "@humanifylab",
-      creator: "@humanifylab",
+      site: "@debotifytext",
+      creator: "@debotifytext",
     },
     robots: {
       index: true,
@@ -122,12 +122,12 @@ export default async function PseoPage({ params }: PageProps) {
       url,
       name: contract.content.heroTitle,
       description: contract.content.directAnswer,
-      isPartOf: { "@type": "WebSite", "@id": `${BASE_URL}/#website`, name: "HumanifyLab", url: BASE_URL },
+      isPartOf: { "@type": "WebSite", "@id": `${BASE_URL}/#website`, name: "DebotifyText", url: BASE_URL },
     },
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "HumanifyLab AI Humanizer",
+      "name": "DebotifyText AI Humanizer",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Web",
       "offers": {
@@ -154,7 +154,7 @@ export default async function PseoPage({ params }: PageProps) {
       },
       publisher: {
         "@type": "Organization",
-        name: "HumanifyLab",
+        name: "DebotifyText",
         logo: {
           "@type": "ImageObject",
           url: `${BASE_URL}/logo.png`
@@ -193,9 +193,9 @@ export default async function PseoPage({ params }: PageProps) {
             <h2 className="text-3xl font-extrabold mb-8 text-center hl-gradient-text capitalize">FAQs about {contract.primaryKeyword}</h2>
             <div className="space-y-4 max-w-3xl mx-auto">
               {llmData.faqs.map((faq: any, faqIdx: number) => (
-                <div key={faqIdx} className="bg-white p-6 rounded-2xl border border-[rgba(94,61,42,0.15)] shadow-sm hover-lift">
-                  <h3 className="font-semibold text-lg text-gray-900 mb-2">{faq.question}</h3>
-                  <p className="text-gray-500 leading-relaxed">{faq.answer}</p>
+                <div key={faqIdx} className="bg-white p-6 rounded-2xl border border-[rgba(21,128,61,0.15)] shadow-sm hover-lift">
+                  <h3 className="font-semibold text-lg text-slate-900 mb-2">{faq.question}</h3>
+                  <p className="text-slate-400 leading-relaxed">{faq.answer}</p>
                 </div>
               ))}
             </div>
@@ -207,7 +207,7 @@ export default async function PseoPage({ params }: PageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--hl-surface)] text-foreground font-sans flex flex-col hl-surface-mesh">
+    <div className="min-h-screen bg-green-50 text-foreground font-sans flex flex-col hl-surface-mesh">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <PageNavbar />
@@ -215,19 +215,19 @@ export default async function PseoPage({ params }: PageProps) {
       <main className="flex-grow pt-20">
         {/* Breadcrumbs */}
         <div className="max-w-6xl mx-auto px-6 py-4">
-          <nav className="flex text-sm text-gray-500">
-            <Link href="/" className="hover:text-[var(--hl-mint)] transition-colors">Home</Link>
+          <nav className="flex text-sm text-slate-400">
+            <Link href="/" className="hover:text-green-600 transition-colors">Home</Link>
             <ChevronRight className="h-4 w-4 mx-2" />
-            <span className="font-semibold text-gray-900 capitalize">{contract.primaryKeyword}</span>
+            <span className="font-semibold text-slate-900 capitalize">{contract.primaryKeyword}</span>
           </nav>
         </div>
 
         {/* Hero Section */}
         <section className="relative px-6 pt-12 pb-16 md:px-12 md:pt-20 md:pb-20 max-w-5xl mx-auto text-center">
-          <div className="hero-enter hero-delay-1 mb-7 inline-flex items-center gap-2 rounded-full border border-[var(--hl-mint)]/20 bg-white/80 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--hl-mint-deep)] shadow-sm backdrop-blur-sm mx-auto">
+          <div className="hero-enter hero-delay-1 mb-7 inline-flex items-center gap-2 rounded-full border border-green-600/20 bg-white/80 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-green-700 shadow-sm backdrop-blur-sm mx-auto">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--hl-mint-bright)] opacity-50" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--hl-mint-deep)]" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-50" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-700" />
             </span>
             Trusted by 500,000+ writers
           </div>
@@ -235,7 +235,7 @@ export default async function PseoPage({ params }: PageProps) {
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 hl-gradient-text capitalize">
             {contract.primaryKeyword.includes('?') ? contract.primaryKeyword : `${contract.primaryKeyword}?`}
           </h1>
-          <p className="text-lg md:text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed mb-8">
+          <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed mb-8">
             {contract.content.directAnswer}
           </p>
 
@@ -249,13 +249,13 @@ export default async function PseoPage({ params }: PageProps) {
             </Link>
             <Link
               href="/pricing"
-              className="inline-flex items-center justify-center rounded-full bg-white px-10 py-4 text-base font-bold text-gray-900 border border-[rgba(94,61,42,0.15)] shadow-sm hover:bg-[#faf6f1] transition-all duration-300"
+              className="inline-flex items-center justify-center rounded-full bg-white px-10 py-4 text-base font-bold text-slate-900 border border-[rgba(21,128,61,0.15)] shadow-sm hover:bg-green-50 transition-all duration-300"
             >
               View Pricing
             </Link>
           </div>
 
-          <div className="flex items-center justify-center gap-2 text-sm text-gray-600">
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500">
             <div className="flex text-yellow-400">
               <Star className="h-4 w-4 fill-current" />
               <Star className="h-4 w-4 fill-current" />
@@ -269,18 +269,18 @@ export default async function PseoPage({ params }: PageProps) {
         </section>
 
         {/* Trust & Authority Bar */}
-        <section className="border-y border-[rgba(94,61,42,0.15)] bg-white py-4 shadow-sm relative z-10">
+        <section className="border-y border-[rgba(21,128,61,0.15)] bg-white py-4 shadow-sm relative z-10">
           <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-[#faf6f1] border border-[rgba(94,61,42,0.1)] flex items-center justify-center overflow-hidden">
-                <User className="h-6 w-6 text-[var(--hl-mint)]" />
+              <div className="h-10 w-10 rounded-full bg-green-50 border border-[rgba(21,128,61,0.1)] flex items-center justify-center overflow-hidden">
+                <User className="h-6 w-6 text-green-600" />
               </div>
               <div>
-                <p className="font-semibold text-gray-900">Written by Dr. Sarah Jenkins</p>
-                <p className="text-gray-500">Content AI Researcher</p>
+                <p className="font-semibold text-slate-900">Written by Dr. Sarah Jenkins</p>
+                <p className="text-slate-400">Content AI Researcher</p>
               </div>
             </div>
-            <div className="text-gray-500 text-center md:text-right">
+            <div className="text-slate-400 text-center md:text-right">
               <p>Last updated: <span className="font-semibold text-gray-700">{new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</span></p>
               <p className="text-xs mt-0.5">Methodology: Peer-reviewed algorithmic testing</p>
             </div>
@@ -293,7 +293,7 @@ export default async function PseoPage({ params }: PageProps) {
         </div>
 
         {/* Internal Linking */}
-        <section className="bg-white py-16 border-t border-[rgba(94,61,42,0.15)] relative z-10 shadow-sm">
+        <section className="bg-white py-16 border-t border-[rgba(21,128,61,0.15)] relative z-10 shadow-sm">
           <div className="max-w-6xl mx-auto px-6">
             <h2 className="text-3xl font-extrabold mb-10 text-center hl-gradient-text">Explore Related AI Humanizer Topics</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -304,12 +304,12 @@ export default async function PseoPage({ params }: PageProps) {
                   <Link
                     key={relatedSlug}
                     href={pseoPath(relatedSlug)}
-                    className="block p-6 rounded-2xl bg-[#faf6f1]/50 border border-[rgba(94,61,42,0.15)] hover:border-[var(--hl-mint)] transition-all group hover-lift"
+                    className="block p-6 rounded-2xl bg-green-50/50 border border-[rgba(21,128,61,0.15)] hover:border-green-600 transition-all group hover-lift"
                   >
-                    <h4 className="font-semibold text-gray-900 group-hover:text-[var(--hl-mint-deep)] capitalize truncate">
+                    <h4 className="font-semibold text-slate-900 group-hover:text-green-700 capitalize truncate">
                       {relatedContract.primaryKeyword}
                     </h4>
-                    <p className="text-sm text-gray-500 mt-2 line-clamp-2 leading-relaxed">
+                    <p className="text-sm text-slate-400 mt-2 line-clamp-2 leading-relaxed">
                       {relatedContract.content.directAnswer}
                     </p>
                   </Link>
@@ -321,11 +321,11 @@ export default async function PseoPage({ params }: PageProps) {
 
         {/* Final CTA */}
         <section className="px-6 py-24 text-center bg-white relative">
-          <div className="absolute inset-0 bg-gradient-to-t from-[#faf6f1] to-white pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-green-50 to-white pointer-events-none" />
           <div className="relative z-10">
             <h2 className="text-3xl md:text-5xl font-extrabold mb-6 hl-gradient-text">Ready to humanize your AI text and bypass detectors?</h2>
-            <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
-              Join thousands of professionals using HumanifyLab to bypass AI detectors and create flawless, human-like content instantly.
+            <p className="text-lg text-slate-500 mb-10 max-w-2xl mx-auto">
+              Join thousands of professionals using DebotifyText to bypass AI detectors and create flawless, human-like content instantly.
             </p>
             <Link
               href="/ai-humanizer"

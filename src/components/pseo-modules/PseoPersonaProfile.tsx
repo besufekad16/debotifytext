@@ -14,12 +14,12 @@ export function PseoPersonaProfile({ keyword, profile }: { keyword: string; prof
           
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-slate-600 shadow-sm mb-10">
-              <User className="h-4 w-4 text-[var(--hl-mint-deep)]" />
+              <User className="h-4 w-4 text-green-700" />
               <span>User Success Story</span>
             </div>
             
             <h3 className="text-3xl font-black text-slate-900 mb-2">{profile.name}</h3>
-            <p className="text-[var(--hl-mint-deep)] font-bold tracking-wide uppercase text-sm mb-12">{profile.role}</p>
+            <p className="text-green-700 font-bold tracking-wide uppercase text-sm mb-12">{profile.role}</p>
           </div>
 
           <div className="relative">
@@ -33,7 +33,7 @@ export function PseoPersonaProfile({ keyword, profile }: { keyword: string; prof
         {/* Right Pane: Challenges & Solutions */}
         <div className="lg:w-3/5 p-12 md:p-16 bg-white">
           <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-12 tracking-tight">
-            How HumanifyLab Solves <span className="text-[var(--hl-mint-deep)] capitalize">{keyword}</span>
+            How DebotifyText Solves <span className="text-green-700 capitalize">{keyword}</span>
           </h2>
           
           <div className="grid md:grid-cols-2 gap-12">
@@ -52,7 +52,7 @@ export function PseoPersonaProfile({ keyword, profile }: { keyword: string; prof
 
             {/* Benefits */}
             <div>
-              <h4 className="text-sm font-bold text-[var(--hl-mint-deep)] uppercase tracking-widest mb-6">The Benefits</h4>
+              <h4 className="text-sm font-bold text-green-700 uppercase tracking-widest mb-6">The Benefits</h4>
               <ul className="space-y-5">
                 {profile.benefits?.map((benefit, idx) => (
                   <li key={idx} className="flex items-start gap-4">

@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve flawless results with how to beat ai detectors using an article for college"
   },
-  "technicalDeepDive": "We train our algorithms on millions of high-scoring essays to ensure your output is academically rigorous yet undetectable.\n\nColleges use highly sensitive heuristics to detect AI. HumanifyLab counters this by restructuring the semantic structure of your essay.\n\nUnlike outdated spinners, our engine understands university guidelines and maintains your research arguments without triggering GPTZero or Turnitin.\n\nWhen TAs run your work through Turnitin, they look for robotic patterns. Our system eliminates these watermarks entirely.",
+  "technicalDeepDive": "We train our algorithms on millions of high-scoring essays to ensure your output is academically rigorous yet undetectable.\n\nColleges use highly sensitive heuristics to detect AI. DebotifyText counters this by restructuring the semantic structure of your essay.\n\nUnlike outdated spinners, our engine understands university guidelines and maintains your research arguments without triggering GPTZero or Turnitin.\n\nWhen TAs run your work through Turnitin, they look for robotic patterns. Our system eliminates these watermarks entirely.",
   "stepByStep": [
     {
       "title": "Upload Draft",

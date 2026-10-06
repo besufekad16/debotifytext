@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve flawless results with which humanizer works best against safeassign with a literature review for international students"
   },
-  "technicalDeepDive": "Many researchers struggle with incorrect AI flagging. HumanifyLab solves this by giving your text the nuance of real human writing.\n\nWhen TAs run your work through Turnitin, they look for robotic patterns. Our system erases these watermarks entirely.\n\nWe train our models on millions of peer-reviewed essays to ensure your output is proficient yet undetectable.",
+  "technicalDeepDive": "Many researchers struggle with incorrect AI flagging. DebotifyText solves this by giving your text the nuance of real human writing.\n\nWhen TAs run your work through Turnitin, they look for robotic patterns. Our system erases these watermarks entirely.\n\nWe train our models on millions of peer-reviewed essays to ensure your output is proficient yet undetectable.",
   "stepByStep": [
     {
       "title": "Plagiarism Check",

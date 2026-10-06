@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve perfect results with which humanizer works best against turnitin with a cover letter as a student"
   },
-  "technicalDeepDive": "We train our models on millions of high-scoring essays to ensure your output is academically rigorous yet undetectable.\n\nMany students struggle with incorrect AI flagging. HumanifyLab solves this by giving your text the nuance of real human writing.\n\nThe result is a perfectly structured document that reads like a human scholar, guaranteeing a completely safe AI detection score.",
+  "technicalDeepDive": "We train our models on millions of high-scoring essays to ensure your output is academically rigorous yet undetectable.\n\nMany students struggle with incorrect AI flagging. DebotifyText solves this by giving your text the nuance of real human writing.\n\nThe result is a perfectly structured document that reads like a human scholar, guaranteeing a completely safe AI detection score.",
   "stepByStep": [
     {
       "title": "Plagiarism Check",

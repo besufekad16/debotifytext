@@ -4,22 +4,22 @@ import { ArrowRight, AlertTriangle, Info } from "lucide-react";
 import PageNavbar from "~/components/PageNavbar";
 import { SiteFooter } from "~/components/SiteFooter";
 
-const BASE_URL = "https://www.humanifylab.com";
+const BASE_URL = "https://www.debotifytext.com";
 const URL = `${BASE_URL}/ai-detector`;
 
 export const metadata: Metadata = {
-  title: { absolute: "AI Detector: How AI Detectors Work & How to Pass Every One | HumanifyLab" },
+  title: { absolute: "AI Detector: How AI Detectors Work & How to Pass Every One | DebotifyText" },
   description: "What is an AI detector, how do Turnitin, GPTZero and Originality.AI actually work, and how accurate are they really? Full 2026 breakdown plus how to pass every one.",
-  keywords: ["ai detector", "ai detectors", "what is an ai detector", "how do ai detectors work", "best ai detector", "ai detector accuracy", "bypass ai detector", "HumanifyLab", "humanify", "humanify ai", "humanify text", "humanify ai text", "humanify lab"],
-  authors: [{ name: "HumanifyLab", url: BASE_URL }],
+  keywords: ["ai detector", "ai detectors", "what is an ai detector", "how do ai detectors work", "best ai detector", "ai detector accuracy", "bypass ai detector", "DebotifyText", "debotify", "debotify ai", "debotify text", "debotify ai text", "debotify lab"],
+  authors: [{ name: "DebotifyText", url: BASE_URL }],
   alternates: { canonical: URL },
   openGraph: {
     title: "AI Detector: How AI Detectors Work & How to Pass Every One",
     description: "A full breakdown of how AI detectors work, how accurate they really are, and how to make your writing pass every one.",
     url: URL,
-    siteName: "HumanifyLab",
+    siteName: "DebotifyText",
     type: "article",
-    images: [{ url: `${BASE_URL}/forOpenGraph.png`, width: 1200, height: 630, alt: "AI Detector Guide — HumanifyLab" }],
+    images: [{ url: `${BASE_URL}/forOpenGraph.png`, width: 1200, height: 630, alt: "AI Detector Guide — DebotifyText" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -43,7 +43,7 @@ const FAQS = [
   { q: "How accurate are AI detectors?", a: "Independent testing consistently shows AI detectors produce false positives on human-written text at rates of roughly 1-6%, and their accuracy on AI text drops significantly once that text has been lightly edited or paraphrased. No major detector claims, or achieves, 100% accuracy in either direction." },
   { q: "Can AI detectors be wrong about human-written text?", a: "Yes, this is one of the most documented weaknesses of AI detection. Formal, structured, or non-native-English writing is disproportionately flagged as AI-generated even when written entirely by a human, because these detectors key on predictability and structural regularity, not authorship." },
   { q: "Which AI detector is the most accurate?", a: "There is no universally 'most accurate' detector — different tools optimize for different tradeoffs between false positives and false negatives, and accuracy varies by content type, subject, and language. This is why institutions and companies increasingly layer multiple detectors rather than relying on one." },
-  { q: "How do I make sure my writing passes AI detection?", a: "The most reliable approach is to rewrite AI-drafted text so the underlying statistical signature — word predictability, sentence length variation, and structural rhythm — matches natural human writing, which is exactly what HumanifyLab does. Simple synonym-swapping or light editing usually is not enough on its own." },
+  { q: "How do I make sure my writing passes AI detection?", a: "The most reliable approach is to rewrite AI-drafted text so the underlying statistical signature — word predictability, sentence length variation, and structural rhythm — matches natural human writing, which is exactly what DebotifyText does. Simple synonym-swapping or light editing usually is not enough on its own." },
 ];
 
 export default function AiDetectorPage() {
@@ -56,10 +56,10 @@ export default function AiDetectorPage() {
         headline: "AI Detector: How AI Detectors Work & How to Pass Every One",
         description: "A complete breakdown of how AI detectors work, how accurate they are, and how to pass every major one.",
         inLanguage: "en-US",
-        author: { "@type": "Organization", name: "HumanifyLab", url: BASE_URL },
+        author: { "@type": "Organization", name: "DebotifyText", url: BASE_URL },
         publisher: {
-          "@type": "Organization", name: "HumanifyLab", url: BASE_URL,
-          logo: { "@type": "ImageObject", url: `${BASE_URL}/humanify.png`, width: 512, height: 512 },
+          "@type": "Organization", name: "DebotifyText", url: BASE_URL,
+          logo: { "@type": "ImageObject", url: `${BASE_URL}/debotify.png`, width: 512, height: 512 },
         },
         mainEntityOfPage: { "@type": "WebPage", "@id": URL },
       },
@@ -88,7 +88,7 @@ export default function AiDetectorPage() {
       <div className="min-h-screen bg-white">
         <section className="bg-[#0f1419] text-white py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[var(--hl-mint-deep)] mb-4">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-green-700 mb-4">
               <Info className="w-4 h-4" /> Complete 2026 Breakdown
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight">
@@ -96,10 +96,10 @@ export default function AiDetectorPage() {
             </h1>
             <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto mb-8">
               An AI detector doesn't read your text for meaning — it scores statistical patterns. Here's exactly
-              what that means, which detectors matter most, where they get it wrong, and how HumanifyLab makes
+              what that means, which detectors matter most, where they get it wrong, and how DebotifyText makes
               your writing pass every one of them.
             </p>
-            <Link href="/bypass-ai-detectors" className="inline-flex items-center gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] text-white font-semibold px-8 py-4 rounded-xl transition-colors text-sm">
+            <Link href="/bypass-ai-detectors" className="inline-flex items-center gap-2 bg-green-700 hover:bg-green-600 text-white font-semibold px-8 py-4 rounded-xl transition-colors text-sm">
               See the Bypass Guide <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -107,21 +107,21 @@ export default function AiDetectorPage() {
 
         <section className="py-16 px-4 bg-white">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">What Is an AI Detector?</h2>
-            <p className="text-gray-600 leading-relaxed mb-4">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6">What Is an AI Detector?</h2>
+            <p className="text-slate-500 leading-relaxed mb-4">
               An AI detector is a piece of software — usually a fine-tuned classifier model — trained to estimate
               the probability that a given piece of text was produced by a large language model like GPT-4, Claude,
               or Gemini rather than written by a human. It outputs a score (often shown as a percentage) representing
               that probability, not a factual determination.
             </p>
-            <p className="text-gray-600 leading-relaxed mb-4">
+            <p className="text-slate-500 leading-relaxed mb-4">
               To do this, detectors look at signals such as <strong>perplexity</strong> (how predictable each word
               is given the preceding context — AI text tends to choose the statistically "safest" next word more
               often than humans do), <strong>burstiness</strong> (the natural variation in sentence length and
               structure that human writing has and AI writing often lacks), and increasingly, structural and
               semantic patterns learned by training the classifier on large datasets of known AI and human text.
             </p>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-slate-500 leading-relaxed">
               Because detectors are pattern-matching systems rather than authorship-verification tools, they are
               fundamentally probabilistic — which is why every major detector below carries a documented error rate
               in both directions.
@@ -129,15 +129,15 @@ export default function AiDetectorPage() {
           </div>
         </section>
 
-        <section className="py-16 px-4 bg-gray-50">
+        <section className="py-16 px-4 bg-slate-50">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 text-center mb-4">Major AI Detectors Compared</h2>
-            <p className="text-gray-600 text-center max-w-2xl mx-auto mb-10 text-sm">
-              False-positive figures below are drawn from independently published testing and HumanifyLab's own
+            <h2 className="text-2xl font-bold text-slate-900 text-center mb-4">Major AI Detectors Compared</h2>
+            <p className="text-slate-500 text-center max-w-2xl mx-auto mb-10 text-sm">
+              False-positive figures below are drawn from independently published testing and DebotifyText's own
               ongoing verification; treat them as informed estimates rather than guaranteed rates, since every
               detector updates its model periodically.
             </p>
-            <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm bg-white">
+            <div className="overflow-x-auto rounded-2xl border border-slate-100 shadow-sm bg-white">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-[#0f1419] text-white">
@@ -149,11 +149,11 @@ export default function AiDetectorPage() {
                 </thead>
                 <tbody>
                   {DETECTOR_COMPARISON.map((d, i) => (
-                    <tr key={d.name} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                    <tr key={d.name} className={i % 2 === 0 ? "bg-white" : "bg-slate-50"}>
                       <td className="px-6 py-4 font-medium text-gray-800">{d.name}</td>
-                      <td className="px-6 py-4 text-gray-500">{d.type}</td>
-                      <td className="px-6 py-4 text-[var(--hl-mint-deep)] font-medium">{d.falsePositive}</td>
-                      <td className="px-6 py-4 text-gray-500">{d.notes}</td>
+                      <td className="px-6 py-4 text-slate-400">{d.type}</td>
+                      <td className="px-6 py-4 text-green-700 font-medium">{d.falsePositive}</td>
+                      <td className="px-6 py-4 text-slate-400">{d.notes}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -167,26 +167,26 @@ export default function AiDetectorPage() {
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 flex gap-4">
               <AlertTriangle className="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-semibold text-gray-900 mb-1">AI detectors flag real human writing too</h3>
+                <h3 className="font-semibold text-slate-900 mb-1">AI detectors flag real human writing too</h3>
                 <p className="text-sm text-gray-700 leading-relaxed">
                   Formal academic writing, non-native English phrasing, and even highly structured business writing
                   get flagged as "AI-generated" at meaningful rates across every detector in the table above. If
-                  you're a human writer who has been incorrectly flagged, HumanifyLab can also help — see our{" "}
-                  <Link href="/how-to-fix-ai-flagged-my-essay" className="text-[var(--hl-mint-deep)] hover:underline">guide to fixing a false AI flag</Link>.
+                  you're a human writer who has been incorrectly flagged, DebotifyText can also help — see our{" "}
+                  <Link href="/how-to-fix-ai-flagged-my-essay" className="text-green-700 hover:underline">guide to fixing a false AI flag</Link>.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-16 px-4 bg-gray-50">
+        <section className="py-16 px-4 bg-slate-50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">Frequently Asked Questions</h2>
+            <h2 className="text-2xl font-bold text-slate-900 text-center mb-8">Frequently Asked Questions</h2>
             <div className="space-y-4">
               {FAQS.map((faq) => (
-                <div key={faq.q} className="bg-white rounded-xl border border-gray-200 p-6">
-                  <h3 className="font-semibold text-gray-900 mb-2">{faq.q}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
+                <div key={faq.q} className="bg-white rounded-xl border border-slate-100 p-6">
+                  <h3 className="font-semibold text-slate-900 mb-2">{faq.q}</h3>
+                  <p className="text-slate-500 text-sm leading-relaxed">{faq.a}</p>
                 </div>
               ))}
             </div>
@@ -197,8 +197,8 @@ export default function AiDetectorPage() {
           <div className="max-w-2xl mx-auto">
             <h2 className="text-2xl font-bold mb-3">Ready to Pass Every AI Detector?</h2>
             <p className="text-gray-400 mb-6">99.9% bypass rate, verified weekly. Free plan, no sign-up required.</p>
-            <Link href="/" className="inline-flex items-center gap-2 bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)] text-white font-semibold px-8 py-4 rounded-xl transition-colors">
-              Try HumanifyLab Free <ArrowRight className="w-4 h-4" />
+            <Link href="/" className="inline-flex items-center gap-2 bg-green-700 hover:bg-green-600 text-white font-semibold px-8 py-4 rounded-xl transition-colors">
+              Try DebotifyText Free <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </section>

@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve flawless results with free ai humanizer for my essay instantly"
   },
-  "technicalDeepDive": "Unlike outdated spinners, our engine understands academic formatting and preserves your research arguments without triggering major academic detectors.\n\nThe result is a cohesive document that reads like a human scholar, guaranteeing a completely safe AI detection score.\n\nColleges use advanced heuristics to flag AI. HumanifyLab counters this by re-mapping the lexical density of your assignment.\n\nWe train our models on millions of high-scoring papers to ensure your output is proficient yet undetectable.",
+  "technicalDeepDive": "Unlike outdated spinners, our engine understands academic formatting and preserves your research arguments without triggering major academic detectors.\n\nThe result is a cohesive document that reads like a human scholar, guaranteeing a completely safe AI detection score.\n\nColleges use advanced heuristics to flag AI. DebotifyText counters this by re-mapping the lexical density of your assignment.\n\nWe train our models on millions of high-scoring papers to ensure your output is proficient yet undetectable.",
   "stepByStep": [
     {
       "title": "Upload Draft",

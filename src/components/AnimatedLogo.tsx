@@ -23,8 +23,8 @@ export default function AnimatedLogo() {
         
         <div className="relative h-20 w-20 sm:h-24 sm:w-24">
             <Image
-                src="/humanify.png"
-                alt="HumanifyLab Logo"
+                src="/debotify.png"
+                alt="DebotifyText Logo"
                 fill
                 className="object-contain rounded-full"
             />

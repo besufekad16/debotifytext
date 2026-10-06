@@ -7,7 +7,7 @@ import {
   BookOpen,
   Check,
   GraduationCap,
-  Sparkles,
+  Feather,
   Zap,
 } from "lucide-react";
 
@@ -86,46 +86,71 @@ export default function LifetimeOfferBanner() {
 
   return (
     <section className="relative w-full overflow-hidden py-16 sm:py-24">
-      <div className="absolute inset-0 bg-[var(--hl-ink)]" />
+      {/* Immersive Deep Green Animated Background */}
+      <div className="absolute inset-0 bg-green-950" />
+      
+      {/* Architectural Grid Pattern */}
+      <div 
+        className="absolute inset-0 opacity-[0.05]" 
+        style={{
+          backgroundImage: `linear-gradient(rgba(255, 255, 255, 1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 1) 1px, transparent 1px)`,
+          backgroundSize: '3rem 3rem',
+          maskImage: 'radial-gradient(ellipse 60% 50% at 50% 50%, #000 70%, transparent 100%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 60% 50% at 50% 50%, #000 70%, transparent 100%)'
+        }} 
+      />
+
+      {/* Floating Animated Orbs */}
       <div
-        className="pointer-events-none absolute -left-24 -top-32 h-[28rem] w-[28rem] rounded-full opacity-40 blur-3xl"
-        style={{ background: "radial-gradient(circle, rgba(232,184,75,0.35), transparent 70%)" }}
+        className="pointer-events-none absolute -left-24 -top-32 h-[32rem] w-[32rem] animate-pulse rounded-full opacity-40 blur-[100px]"
+        style={{ background: "radial-gradient(circle, rgba(74,222,128,0.5), transparent 70%)", animationDuration: '4s' }}
       />
       <div
-        className="pointer-events-none absolute -bottom-24 -right-16 h-[24rem] w-[24rem] rounded-full opacity-30 blur-3xl"
-        style={{ background: "radial-gradient(circle, rgba(166,124,82,0.35), transparent 70%)" }}
+        className="pointer-events-none absolute -bottom-24 right-1/4 h-[28rem] w-[28rem] animate-pulse rounded-full opacity-30 blur-[100px]"
+        style={{ background: "radial-gradient(circle, rgba(34,197,94,0.6), transparent 70%)", animationDuration: '5s' }}
       />
       <div
-        className="pointer-events-none absolute inset-0 opacity-70"
+        className="pointer-events-none absolute top-1/4 -right-32 h-[40rem] w-[40rem] animate-pulse rounded-full opacity-20 blur-[120px]"
+        style={{ background: "radial-gradient(circle, rgba(16,185,129,0.4), transparent 70%)", animationDuration: '7s' }}
+      />
+
+      {/* Diagonal Light Sweep */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-70 mix-blend-overlay"
         style={{
           background:
-            "linear-gradient(105deg, transparent 40%, rgba(232,184,75,0.08) 50%, transparent 60%)",
-          backgroundSize: "220% 100%",
+            "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.05) 50%, transparent 60%)",
+          backgroundSize: "200% 100%",
           animation: "offerShine 6s linear infinite",
         }}
       />
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--hl-offer)] to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[var(--hl-mint-bright)]/50 to-transparent" />
+      
+      {/* Ambient Vignette */}
+      <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(2,44,34,1)] pointer-events-none" />
+
+      {/* Subtle top/bottom borders */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-green-400/40 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-green-500/30 to-transparent" />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
           <div className="text-center lg:text-left">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--hl-offer)]/35 bg-[var(--hl-offer)]/10 px-4 py-2">
-              <GraduationCap className="h-4 w-4 text-[var(--hl-offer)]" />
-              <span className="text-[11px] font-black uppercase tracking-[0.16em] text-[var(--hl-offer)]">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-green-400/30 bg-green-400/10 px-4 py-2">
+              <GraduationCap className="h-4 w-4 text-green-300" />
+              <span className="text-[11px] font-black uppercase tracking-[0.16em] text-green-300">
                 Back-to-School Lifetime Deal
               </span>
-              <Sparkles className="h-3.5 w-3.5 text-[var(--hl-offer)]/80" />
+              <Feather className="h-3.5 w-3.5 text-green-300/80" />
             </div>
 
             <h2 className="font-heading text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
               School is opening.
-              <span className="mt-2 block bg-gradient-to-r from-[#F5D78A] via-[#E8B84B] to-[#C8922A] bg-clip-text text-transparent">
+              <span className="mt-2 block bg-gradient-to-r from-green-200 via-green-400 to-green-500 bg-clip-text text-transparent">
                 Your humanizer is forever.
               </span>
             </h2>
 
-            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/65 sm:text-lg lg:mx-0">
+            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-green-50 sm:text-lg lg:mx-0 opacity-80">
               One payment before the semester starts. Get{" "}
               <strong className="font-semibold text-white">20,000 words every month for life</strong>
               {" "}
@@ -139,9 +164,9 @@ export default function LifetimeOfferBanner() {
                 "Built to beat Turnitin and GPTZero",
                 "Every future update included",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-sm text-white/85">
-                  <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[var(--hl-offer)]/15">
-                    <Check className="h-3 w-3 text-[var(--hl-offer)]" />
+                <li key={item} className="flex items-start gap-2.5 text-sm text-green-100/90">
+                  <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-green-400/20">
+                    <Check className="h-3 w-3 text-green-400" strokeWidth={3} />
                   </span>
                   {item}
                 </li>
@@ -149,48 +174,48 @@ export default function LifetimeOfferBanner() {
             </ul>
           </div>
 
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-2xl backdrop-blur-xl sm:p-8">
-            <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-[var(--hl-offer)]/20 blur-2xl" />
+          <div className="relative overflow-hidden rounded-[2rem] border border-green-400/20 bg-green-900/40 p-6 shadow-2xl backdrop-blur-xl sm:p-8">
+            <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-green-400/10 blur-3xl" />
 
             <div className="text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/45">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-green-300/70">
                 One-time payment
               </p>
               <div className="mt-2 text-5xl font-black tracking-tight text-white sm:text-6xl">
                 {displayPrice ?? "Pay Once"}
               </div>
-              <p className="mt-2 text-sm text-white/55">
+              <p className="mt-2 text-[13px] font-medium text-green-200/60">
                 lifetime access - 20k words refreshed monthly
               </p>
             </div>
 
-            <div className="mt-7">
-              <div className="mb-2 flex items-center justify-between text-xs">
-                <span className="inline-flex items-center gap-1.5 font-medium text-white/60">
-                  <BookOpen className="h-3.5 w-3.5 text-[var(--hl-offer)]" />
+            <div className="mt-8">
+              <div className="mb-3 flex items-center justify-between text-xs">
+                <span className="inline-flex items-center gap-1.5 font-medium text-green-100/80">
+                  <BookOpen className="h-3.5 w-3.5 text-green-400" />
                   {spotsTaken} of {MAX_SPOTS} spots claimed
                 </span>
-                <span className="font-bold text-[var(--hl-offer)]">{remaining} left</span>
+                <span className="font-bold text-green-400">{remaining} left</span>
               </div>
-              <div className="h-2.5 overflow-hidden rounded-full bg-white/10">
+              <div className="h-2 overflow-hidden rounded-full bg-green-950/50 border border-green-800/30">
                 <div
-                  className="h-full rounded-full transition-all duration-700"
+                  className="h-full rounded-full transition-all duration-1000 ease-out"
                   style={{
                     width: `${pctFull}%`,
                     background:
-                      pctFull > 70
-                        ? "linear-gradient(90deg,#f97316,#ef4444)"
-                        : "linear-gradient(90deg,#C8922A,#E8B84B,#F5D78A)",
+                      pctFull > 85
+                        ? "linear-gradient(90deg, #22c55e, #f87171)"
+                        : "linear-gradient(90deg, #166534, #22c55e, #86efac)",
                   }}
                 />
               </div>
             </div>
 
             <div className="mt-8">
-              <p className="mb-3 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-white/40">
+              <p className="mb-3 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-green-300/50">
                 Back-to-school pricing ends in
               </p>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-4 gap-3">
                 {[
                   { val: timeLeft.d, label: "Days" },
                   { val: timeLeft.h, label: "Hours" },
@@ -199,12 +224,12 @@ export default function LifetimeOfferBanner() {
                 ].map((unit) => (
                   <div
                     key={unit.label}
-                    className="rounded-2xl border border-white/10 bg-black/30 px-2 py-3 text-center"
+                    className="rounded-xl border border-green-500/20 bg-green-950/40 px-2 py-3 text-center backdrop-blur-sm"
                   >
                     <div className="font-mono text-2xl font-black tabular-nums text-white sm:text-3xl">
                       {unit.val}
                     </div>
-                    <div className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-white/40">
+                    <div className="mt-1 text-[10px] font-bold uppercase tracking-wider text-green-400/60">
                       {unit.label}
                     </div>
                   </div>
@@ -214,18 +239,17 @@ export default function LifetimeOfferBanner() {
 
             <Link
               href="/pricing#lifetime"
-              className="group mt-8 flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-4 text-sm font-black uppercase tracking-wide text-[var(--hl-ink)] transition-transform hover:scale-[1.02] active:scale-[0.98] sm:text-base"
+              className="group mt-8 flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 text-[15px] font-black uppercase tracking-wide text-green-950 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_20px_rgba(34,197,94,0.3)]"
               style={{
-                background: "linear-gradient(135deg,#F5D78A 0%,#E8B84B 45%,#C8922A 100%)",
-                animation: "offerPulse 2.4s ease-in-out infinite",
+                background: "linear-gradient(135deg, #bbf7d0 0%, #4ade80 50%, #22c55e 100%)",
               }}
             >
-              <Zap className="h-5 w-5" />
+              <Zap className="h-5 w-5 fill-green-950" />
               {displayPrice ? `Lock Lifetime before school — ${displayPrice}` : "Lock Lifetime before school opens"}
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
 
-            <p className="mt-4 text-center text-xs text-white/35">
+            <p className="mt-5 text-center text-[11px] font-medium text-green-100/40">
               30-day money-back · Instant access · Never billed again
             </p>
           </div>

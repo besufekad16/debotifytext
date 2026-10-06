@@ -9,7 +9,7 @@
     "idealUser": "Marketers",
     "coreIntent": "Achieve perfect results with which humanizer works best against sapling with an article for international students"
   },
-  "technicalDeepDive": "When educators run your work through Turnitin, they look for robotic patterns. Our system removes these watermarks entirely.\n\nThe result is a logically sound submission that exhibits natural human burstiness, guaranteeing a completely safe AI detection score.\n\nMany students struggle with false positives. HumanifyLab solves this by giving your text the depth of real human writing.\n\nWe train our models on millions of high-scoring papers to ensure your output is proficient yet undetectable.",
+  "technicalDeepDive": "When educators run your work through Turnitin, they look for robotic patterns. Our system removes these watermarks entirely.\n\nThe result is a logically sound submission that exhibits natural human burstiness, guaranteeing a completely safe AI detection score.\n\nMany students struggle with false positives. DebotifyText solves this by giving your text the depth of real human writing.\n\nWe train our models on millions of high-scoring papers to ensure your output is proficient yet undetectable.",
   "stepByStep": [
     {
       "title": "Scholarly Rewrite",

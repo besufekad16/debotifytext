@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve flawless results with what removes ai detection for safeassign with an essay as a student"
   },
-  "technicalDeepDive": "We train our models on millions of high-scoring papers to ensure your output is academically rigorous yet undetectable.\n\nUnlike simple tools, our engine understands scholarly citations and protects your main ideas without triggering GPTZero or Turnitin.\n\nUniversities use advanced heuristics to detect AI. HumanifyLab counters this by re-evaluating the semantic structure of your assignment.",
+  "technicalDeepDive": "We train our models on millions of high-scoring papers to ensure your output is academically rigorous yet undetectable.\n\nUnlike simple tools, our engine understands scholarly citations and protects your main ideas without triggering GPTZero or Turnitin.\n\nUniversities use advanced heuristics to detect AI. DebotifyText counters this by re-evaluating the semantic structure of your assignment.",
   "stepByStep": [
     {
       "title": "Scholarly Rewrite",

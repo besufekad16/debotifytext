@@ -230,7 +230,7 @@ export default function TeamPage() {
   if (loading || !isLoaded) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-[var(--hl-mint-deep)]" />
+        <Loader2 className="h-8 w-8 animate-spin text-green-700" />
       </div>
     );
   }
@@ -242,9 +242,9 @@ export default function TeamPage() {
       <main className="flex-1 py-12">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10">
-            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--hl-mint-deep)]">Team</span>
-            <h1 className="mt-2 text-2xl font-semibold tracking-tight text-gray-900 sm:text-3xl">Team management</h1>
-            <p className="mt-2 text-sm text-gray-600">
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-green-700">Team</span>
+            <h1 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">Team management</h1>
+            <p className="mt-2 text-sm text-slate-500">
               Manage your team members and collaborate on humanization projects.
             </p>
           </div>
@@ -273,7 +273,7 @@ export default function TeamPage() {
             <div className="mb-8 rounded-3xl border border-border bg-card p-8 shadow-lg">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-[1.05rem] font-semibold text-gray-900">Your Team</h2>
+                  <h2 className="text-[1.05rem] font-semibold text-slate-900">Your Team</h2>
                   <p className="text-[13px] text-gray-400">Team: {teamData.team.name}</p>
                 </div>
                 {teamData.team.ownerId !== teamData.team.members.find(m => m.email === currentUserEmail)?.id && (
@@ -288,12 +288,12 @@ export default function TeamPage() {
                 )}
               </div>
               <div className="mt-6">
-                <h3 className="text-[13px] font-semibold text-gray-900">Team Owner</h3>
+                <h3 className="text-[13px] font-semibold text-slate-900">Team Owner</h3>
                 <div className="mt-2 rounded-2xl border border-border bg-background p-4">
                   <div className="flex items-center gap-3">
                     <Crown className="h-5 w-5 text-amber-500" />
                     <div>
-                      <p className="text-[13.5px] font-medium text-gray-900">{teamData.team.owner?.name}</p>
+                      <p className="text-[13.5px] font-medium text-slate-900">{teamData.team.owner?.name}</p>
                       <p className="text-[13px] text-gray-400">{teamData.team.owner?.email}</p>
                     </div>
                   </div>
@@ -308,7 +308,7 @@ export default function TeamPage() {
                 <div key={team.id} className="rounded-3xl border border-border bg-card p-8 shadow-lg">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h2 className="text-[1.05rem] font-semibold text-gray-900">{team.name}</h2>
+                      <h2 className="text-[1.05rem] font-semibold text-slate-900">{team.name}</h2>
                       <p className="text-[13px] text-gray-400">{team.members.length} members</p>
                     </div>
                     <Button
@@ -324,11 +324,11 @@ export default function TeamPage() {
 
                   <div className="mt-6">
                     <div className="flex items-center justify-between">
-                      <h3 className="text-[13px] font-semibold text-gray-900">Team Members</h3>
+                      <h3 className="text-[13px] font-semibold text-slate-900">Team Members</h3>
                       <Button
                         size="sm"
                         onClick={() => setSelectedTeamId(selectedTeamId === team.id ? null : team.id)}
-                        className="rounded-full bg-[var(--hl-mint-deep)]"
+                        className="rounded-full bg-green-700"
                       >
                         <UserPlus className="h-4 w-4" />
                       </Button>
@@ -346,7 +346,7 @@ export default function TeamPage() {
                         <Button
                           onClick={() => addMember(team.id)}
                           disabled={actionLoading}
-                          className="rounded-full bg-[var(--hl-mint-deep)]"
+                          className="rounded-full bg-green-700"
                         >
                           {actionLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Add"}
                         </Button>
@@ -365,7 +365,7 @@ export default function TeamPage() {
                             <div className="flex items-center gap-3">
                               <Users className="h-5 w-5 text-muted-foreground/70" />
                               <div>
-                                <p className="text-[13.5px] font-medium text-gray-900">{member.name}</p>
+                                <p className="text-[13.5px] font-medium text-slate-900">{member.name}</p>
                                 <p className="text-[13px] text-gray-400">{member.email}</p>
                               </div>
                             </div>
@@ -399,10 +399,10 @@ export default function TeamPage() {
                 </Button>
               ) : (
                 <div className="rounded-3xl border border-border bg-card p-8 shadow-lg">
-                  <h2 className="text-[1.05rem] font-semibold text-gray-900">Create New Team</h2>
+                  <h2 className="text-[1.05rem] font-semibold text-slate-900">Create New Team</h2>
                   <div className="mt-6 space-y-4">
                     <div>
-                      <label className="text-[13px] font-medium text-gray-900">Team Name</label>
+                      <label className="text-[13px] font-medium text-slate-900">Team Name</label>
                       <input
                         type="text"
                         placeholder="Enter team name"
@@ -415,7 +415,7 @@ export default function TeamPage() {
                       <Button
                         onClick={createTeam}
                         disabled={actionLoading}
-                        className="rounded-full bg-[var(--hl-mint-deep)]"
+                        className="rounded-full bg-green-700"
                       >
                         {actionLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Create Team"}
                       </Button>

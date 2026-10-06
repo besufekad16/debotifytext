@@ -9,7 +9,7 @@
     "idealUser": "Writers",
     "coreIntent": "Achieve flawless results with which humanizer works best against sapling with my paper for masters students"
   },
-  "technicalDeepDive": "Unlike simple tools, our engine understands university guidelines and maintains your research arguments without triggering major academic detectors.\n\nBy introducing natural variance into the text, we ensure your academic voice is believable.\n\nUniversities use advanced models to detect AI. HumanifyLab counters this by re-mapping the semantic structure of your paper.\n\nWhen TAs run your work through Turnitin, they look for robotic patterns. Our system erases these watermarks entirely.",
+  "technicalDeepDive": "Unlike simple tools, our engine understands university guidelines and maintains your research arguments without triggering major academic detectors.\n\nBy introducing natural variance into the text, we ensure your academic voice is believable.\n\nUniversities use advanced models to detect AI. DebotifyText counters this by re-mapping the semantic structure of your paper.\n\nWhen TAs run your work through Turnitin, they look for robotic patterns. Our system erases these watermarks entirely.",
   "stepByStep": [
     {
       "title": "Upload Draft",

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, X, ArrowRight, Sparkles, RefreshCw } from "lucide-react";
+import { Check, X, ArrowRight, Feather, RefreshCw } from "lucide-react";
 import { cn } from "~/lib/utils";
 
 // Example data - placeholders for now
@@ -147,16 +147,16 @@ export default function ComparisonSection() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1], delay: 0.1 }}
-              className="group relative overflow-hidden rounded-3xl border border-rgba(94,61,42,0.28) bg-#faf6f1/30 p-6 sm:p-8 transition-all hover:border-var(--hl-mint) hover:bg-#faf6f1/50 hover:shadow-xl hover:shadow-rgba(94,61,42,0.28)/20"
+              className="group relative overflow-hidden rounded-3xl border border-rgba(21,128,61,0.15) bg-#faf6f1/30 p-6 sm:p-8 transition-all hover:border-var(--hl-mint) hover:bg-#faf6f1/50 hover:shadow-xl hover:shadow-rgba(21,128,61,0.15)/20"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <div className="h-8 w-8 rounded-full bg-rgba(94,61,42,0.28) flex items-center justify-center text-var(--hl-mint)">
+                  <div className="h-8 w-8 rounded-full bg-rgba(21,128,61,0.15) flex items-center justify-center text-var(--hl-mint)">
                     <Check className="h-4 w-4" />
                   </div>
                   <span className="text-sm font-semibold text-slate-700">After (Humanized)</span>
                 </div>
-                <span className="text-xs font-medium text-var(--hl-mint) bg-rgba(94,61,42,0.28)/50 px-2 py-1 rounded-md border border-rgba(94,61,42,0.28)">
+                <span className="text-xs font-medium text-var(--hl-mint) bg-rgba(21,128,61,0.15)/50 px-2 py-1 rounded-md border border-rgba(21,128,61,0.15)">
                   100% Human Score
                 </span>
               </div>

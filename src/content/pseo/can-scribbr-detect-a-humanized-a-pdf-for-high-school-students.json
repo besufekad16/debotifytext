@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with can scribbr detect a humanized a pdf for high school students"
   },
-  "technicalDeepDive": "We train our algorithms on millions of peer-reviewed essays to ensure your output is proficient yet undetectable.\n\nMany students struggle with incorrect AI flagging. HumanifyLab fixes this issue by giving your text the nuance of real human writing.\n\nWhen TAs run your work through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.",
+  "technicalDeepDive": "We train our algorithms on millions of peer-reviewed essays to ensure your output is proficient yet undetectable.\n\nMany students struggle with incorrect AI flagging. DebotifyText fixes this issue by giving your text the nuance of real human writing.\n\nWhen TAs run your work through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.",
   "stepByStep": [
     {
       "title": "Upload Draft",

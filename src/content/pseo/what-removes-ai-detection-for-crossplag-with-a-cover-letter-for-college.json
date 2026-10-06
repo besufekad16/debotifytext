@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve flawless results with what removes ai detection for crossplag with a cover letter for college"
   },
-  "technicalDeepDive": "The result is a perfectly structured paper that flows naturally, guaranteeing a 0% AI detection score.\n\nUnlike basic spinners, our engine understands academic formatting and protects your research arguments without triggering major academic detectors.\n\nWhen TAs run your assignment through Turnitin, they look for robotic patterns. Our system removes these watermarks entirely.\n\nAcademic institutions use strict heuristics to detect AI. HumanifyLab counters this by re-mapping the semantic structure of your paper.",
+  "technicalDeepDive": "The result is a perfectly structured paper that flows naturally, guaranteeing a 0% AI detection score.\n\nUnlike basic spinners, our engine understands academic formatting and protects your research arguments without triggering major academic detectors.\n\nWhen TAs run your assignment through Turnitin, they look for robotic patterns. Our system removes these watermarks entirely.\n\nAcademic institutions use strict heuristics to detect AI. DebotifyText counters this by re-mapping the semantic structure of your paper.",
   "stepByStep": [
     {
       "title": "Academic Scan",

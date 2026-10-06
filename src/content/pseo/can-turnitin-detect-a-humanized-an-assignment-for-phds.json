@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with can turnitin detect a humanized an assignment for phds"
   },
-  "technicalDeepDive": "When TAs run your work through Turnitin, they look for predictable phrasing. Our system erases these patterns entirely.\n\nWe train our algorithms on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nUniversities use strict models to detect AI. HumanifyLab counters this by re-evaluating the lexical density of your paper.",
+  "technicalDeepDive": "When TAs run your work through Turnitin, they look for predictable phrasing. Our system erases these patterns entirely.\n\nWe train our algorithms on millions of peer-reviewed papers to ensure your output is academically rigorous yet undetectable.\n\nUniversities use strict models to detect AI. DebotifyText counters this by re-evaluating the lexical density of your paper.",
   "stepByStep": [
     {
       "title": "Plagiarism Check",

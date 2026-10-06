@@ -1,9 +1,9 @@
-Contact: mailto:humanifylab1@gmail.com
+Contact: mailto:debotifytext1@gmail.com
 Preferred-Languages: en
-Canonical: https://www.humanifylab.com/.well-known/security.txt
-Policy: https://www.humanifylab.com/responsible-use
-Hiring: https://www.humanifylab.com/contact
+Canonical: https://www.debotifytext.com/.well-known/security.txt
+Policy: https://www.debotifytext.com/responsible-use
+Hiring: https://www.debotifytext.com/contact
 
-# HumanifyLab Security Contact
+# DebotifyText Security Contact
 # If you discover a security vulnerability, please report it to us.
 # We take security seriously and will respond promptly.

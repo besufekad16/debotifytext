@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve flawless results with how to humanize my personal statement for academic writing"
   },
-  "technicalDeepDive": "When professors run your work through Turnitin, they look for robotic patterns. Our system eliminates these watermarks entirely.\n\nWe train our algorithms on millions of peer-reviewed papers to ensure your output is proficient yet undetectable.\n\nMany researchers struggle with incorrect AI flagging. HumanifyLab fixes this issue by giving your text the depth of real human writing.\n\nBy introducing natural variance into the text, we ensure your student tone is authentic.",
+  "technicalDeepDive": "When professors run your work through Turnitin, they look for robotic patterns. Our system eliminates these watermarks entirely.\n\nWe train our algorithms on millions of peer-reviewed papers to ensure your output is proficient yet undetectable.\n\nMany researchers struggle with incorrect AI flagging. DebotifyText fixes this issue by giving your text the depth of real human writing.\n\nBy introducing natural variance into the text, we ensure your student tone is authentic.",
   "stepByStep": [
     {
       "title": "Upload Draft",

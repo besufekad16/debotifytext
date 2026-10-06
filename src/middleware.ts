@@ -20,6 +20,7 @@ const isPublicRoute = createRouteMatcher([
   '/api/webhooks/clerk(.*)',
   '/api/webhooks/polar(.*)',
   '/api/polar/products(.*)',
+  '/api/polar/unlimited-spots(.*)',
   '/api/polar/lifetime',
   '/api/humanize(.*)',
   '/sitemap.xml',

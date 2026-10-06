@@ -9,7 +9,7 @@
     "idealUser": "Professionals",
     "coreIntent": "Achieve perfect results with is it hard to bypass crossplag with an assignment without detection"
   },
-  "technicalDeepDive": "When professors run your work through Turnitin, they look for predictable phrasing. Our system removes these watermarks entirely.\n\nColleges use highly sensitive heuristics to detect AI. HumanifyLab counters this by re-mapping the lexical density of your paper.\n\nWe train our models on millions of high-scoring essays to ensure your output is proficient yet undetectable.",
+  "technicalDeepDive": "When professors run your work through Turnitin, they look for predictable phrasing. Our system removes these watermarks entirely.\n\nColleges use highly sensitive heuristics to detect AI. DebotifyText counters this by re-mapping the lexical density of your paper.\n\nWe train our models on millions of high-scoring essays to ensure your output is proficient yet undetectable.",
   "stepByStep": [
     {
       "title": "Scholarly Rewrite",

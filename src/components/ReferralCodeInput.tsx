@@ -13,7 +13,7 @@ export default function ReferralCodeInput({ alreadyApplied }: Props) {
 
   if (alreadyApplied || status === "success") {
     return (
-      <p className="text-xs text-[var(--hl-mint-deep)] font-medium">
+      <p className="text-xs text-green-700 font-medium">
         ✓ {status === "success" ? message : "Referral code already applied to your account."}
       </p>
     );
@@ -45,15 +45,15 @@ export default function ReferralCodeInput({ alreadyApplied }: Props) {
 
   return (
     <div className="mt-3">
-      <p className="text-xs text-gray-500 mb-1.5">Have a referral code from a friend?</p>
+      <p className="text-xs text-slate-400 mb-1.5">Have a referral code from a friend?</p>
       <div className="flex gap-2">
         <input
           type="text"
-          placeholder="e.g. humanify-002"
+          placeholder="e.g. debotify-002"
           value={code}
           onChange={(e) => { setCode(e.target.value); setStatus("idle"); }}
           disabled={status === "loading"}
-          className="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-300 disabled:opacity-50"
+          className="flex-1 text-sm border border-slate-100 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-300 disabled:opacity-50"
         />
         <button
           onClick={apply}

@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with are there free tools to beat grammarly with my paper as a student"
   },
-  "technicalDeepDive": "The result is a cohesive document that exhibits natural human burstiness, guaranteeing a 0% AI detection score.\n\nWe train our models on millions of peer-reviewed papers to ensure your output is proficient yet undetectable.\n\nWhen TAs run your assignment through Turnitin, they look for robotic patterns. Our system eliminates these patterns entirely.\n\nColleges use advanced algorithms to flag AI. HumanifyLab counters this by re-mapping the semantic structure of your essay.",
+  "technicalDeepDive": "The result is a cohesive document that exhibits natural human burstiness, guaranteeing a 0% AI detection score.\n\nWe train our models on millions of peer-reviewed papers to ensure your output is proficient yet undetectable.\n\nWhen TAs run your assignment through Turnitin, they look for robotic patterns. Our system eliminates these patterns entirely.\n\nColleges use advanced algorithms to flag AI. DebotifyText counters this by re-mapping the semantic structure of your essay.",
   "stepByStep": [
     {
       "title": "Upload Draft",

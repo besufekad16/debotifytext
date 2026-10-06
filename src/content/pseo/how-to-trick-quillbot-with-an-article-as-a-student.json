@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve perfect results with how to trick quillbot with an article as a student"
   },
-  "technicalDeepDive": "Many researchers struggle with incorrect AI flagging. HumanifyLab fixes this issue by giving your text the depth of real human writing.\n\nWhen TAs run your work through Turnitin, they look for predictable phrasing. Our system erases these patterns entirely.\n\nThe result is a logically sound document that reads like a human scholar, guaranteeing a completely safe AI detection score.",
+  "technicalDeepDive": "Many researchers struggle with incorrect AI flagging. DebotifyText fixes this issue by giving your text the depth of real human writing.\n\nWhen TAs run your work through Turnitin, they look for predictable phrasing. Our system erases these patterns entirely.\n\nThe result is a logically sound document that reads like a human scholar, guaranteeing a completely safe AI detection score.",
   "stepByStep": [
     {
       "title": "Scholarly Rewrite",

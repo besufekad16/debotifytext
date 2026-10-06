@@ -14,7 +14,7 @@ interface SEOBreadcrumbsProps {
 
 export function SEOBreadcrumbs({ items }: SEOBreadcrumbsProps) {
   return (
-    <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-6">
+    <nav className="flex items-center space-x-2 text-sm text-slate-500 mb-6">
       <Link 
         href="/" 
         className="flex items-center hover:text-var(--hl-mint-deep) transition-colors"
@@ -34,7 +34,7 @@ export function SEOBreadcrumbs({ items }: SEOBreadcrumbsProps) {
               {item.label}
             </Link>
           ) : (
-            <span className="text-gray-900 font-medium">{item.label}</span>
+            <span className="text-slate-900 font-medium">{item.label}</span>
           )}
         </div>
       ))}

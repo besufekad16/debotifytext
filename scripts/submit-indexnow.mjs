@@ -1,6 +1,6 @@
 /**
  * IndexNow URL Submission Script
- * Submits all HumanifyLab SEO pages to Bing + Yandex via IndexNow.
+ * Submits all DebotifyText SEO pages to Bing + Yandex via IndexNow.
  *
  * Usage:
  *   node scripts/submit-indexnow.mjs
@@ -14,7 +14,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const HOST        = 'www.humanifylab.com';
+const HOST        = 'www.debotifytext.com';
 const BASE_URL    = `https://${HOST}`;
 const INDEX_NOW_KEY = 'cae535bda6cc4564a9c5dda38f8236eb';
 const KEY_LOCATION  = `${BASE_URL}/${INDEX_NOW_KEY}.txt`;

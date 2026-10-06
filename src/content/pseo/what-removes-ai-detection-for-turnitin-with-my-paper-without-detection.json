@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve flawless results with what removes ai detection for turnitin with my paper without detection"
   },
-  "technicalDeepDive": "When professors run your work through Turnitin, they look for robotic patterns. Our system removes these watermarks entirely.\n\nThe result is a cohesive document that reads like a human scholar, guaranteeing a 0% AI detection score.\n\nColleges use advanced heuristics to flag AI. HumanifyLab counters this by re-mapping the semantic structure of your essay.\n\nUnlike simple spinners, our engine understands university guidelines and maintains your core thesis without triggering major academic detectors.",
+  "technicalDeepDive": "When professors run your work through Turnitin, they look for robotic patterns. Our system removes these watermarks entirely.\n\nThe result is a cohesive document that reads like a human scholar, guaranteeing a 0% AI detection score.\n\nColleges use advanced heuristics to flag AI. DebotifyText counters this by re-mapping the semantic structure of your essay.\n\nUnlike simple spinners, our engine understands university guidelines and maintains your core thesis without triggering major academic detectors.",
   "stepByStep": [
     {
       "title": "Upload Draft",

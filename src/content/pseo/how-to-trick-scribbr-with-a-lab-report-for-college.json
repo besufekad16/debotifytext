@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with how to trick scribbr with a lab report for college"
   },
-  "technicalDeepDive": "We train our algorithms on millions of high-scoring essays to ensure your output is academically rigorous yet undetectable.\n\nUnlike basic spinners, our engine understands scholarly citations and maintains your main ideas without triggering GPTZero or Turnitin.\n\nMany researchers struggle with false positives. HumanifyLab solves this by giving your text the depth of real human writing.\n\nUniversities use highly sensitive heuristics to flag AI. HumanifyLab counters this by re-evaluating the lexical density of your assignment.",
+  "technicalDeepDive": "We train our algorithms on millions of high-scoring essays to ensure your output is academically rigorous yet undetectable.\n\nUnlike basic spinners, our engine understands scholarly citations and maintains your main ideas without triggering GPTZero or Turnitin.\n\nMany researchers struggle with false positives. DebotifyText solves this by giving your text the depth of real human writing.\n\nUniversities use highly sensitive heuristics to flag AI. DebotifyText counters this by re-evaluating the lexical density of your assignment.",
   "stepByStep": [
     {
       "title": "Plagiarism Check",

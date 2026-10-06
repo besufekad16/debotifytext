@@ -12,13 +12,13 @@ export default function PricingLayout({
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://www.humanifylab.com"
+        "item": "https://www.debotifytext.com"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Pricing",
-        "item": "https://www.humanifylab.com/pricing"
+        "item": "https://www.debotifytext.com/pricing"
       }
     ]
   };
@@ -26,11 +26,11 @@ export default function PricingLayout({
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": "HumanifyLab AI Humanizer",
+    "name": "DebotifyText AI Humanizer",
     "description": "Transform AI-generated text into natural, human-like writing with flexible pricing plans.",
     "brand": {
       "@type": "Brand",
-      "name": "HumanifyLab"
+      "name": "DebotifyText"
     },
     "offers": {
       "@type": "AggregateOffer",

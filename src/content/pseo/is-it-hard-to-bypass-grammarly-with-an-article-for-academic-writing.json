@@ -9,7 +9,7 @@
     "idealUser": "Professionals",
     "coreIntent": "Achieve flawless results with is it hard to bypass grammarly with an article for academic writing"
   },
-  "technicalDeepDive": "We train our models on millions of high-scoring papers to ensure your output is academically rigorous yet undetectable.\n\nWhen TAs run your work through Turnitin, they look for robotic patterns. Our system eliminates these patterns entirely.\n\nColleges use advanced heuristics to flag AI. HumanifyLab counters this by re-mapping the semantic structure of your paper.",
+  "technicalDeepDive": "We train our models on millions of high-scoring papers to ensure your output is academically rigorous yet undetectable.\n\nWhen TAs run your work through Turnitin, they look for robotic patterns. Our system eliminates these patterns entirely.\n\nColleges use advanced heuristics to flag AI. DebotifyText counters this by re-mapping the semantic structure of your paper.",
   "stepByStep": [
     {
       "title": "Upload Draft",

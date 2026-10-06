@@ -8,7 +8,7 @@ export function PseoMetricsTable({ keyword, metrics }: { keyword: string; metric
     <section className="my-32 w-full max-w-6xl mx-auto px-6">
       <div className="text-center mb-16">
         <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-slate-600 shadow-sm mx-auto mb-6">
-          <ShieldCheck className="h-4 w-4 text-[var(--hl-mint-deep)]" />
+          <ShieldCheck className="h-4 w-4 text-green-700" />
           <span>Real-time Telemetry</span>
         </div>
         <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-slate-900 capitalize">
@@ -52,7 +52,7 @@ export function PseoMetricsTable({ keyword, metrics }: { keyword: string; metric
 
         {/* Card 3 (Highlight) */}
         <div className="group relative overflow-hidden p-8 bg-slate-900 text-white rounded-3xl border border-slate-800 shadow-[0_20px_40px_-12px_rgba(0,0,0,0.2)] transition-all duration-300 hover:-translate-y-1">
-          <div className="absolute inset-0 bg-gradient-to-br from-[var(--hl-mint-deep)]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute inset-0 bg-gradient-to-br from-green-700/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="flex justify-between items-start mb-6 relative z-10">
             <div className="p-3 bg-white/10 rounded-2xl backdrop-blur-md border border-white/10">
               <ArrowUpRight className="h-6 w-6 text-white" />
@@ -62,7 +62,7 @@ export function PseoMetricsTable({ keyword, metrics }: { keyword: string; metric
           <div className="text-sm font-semibold text-slate-400 mb-1 uppercase tracking-wider relative z-10">Semantic Match</div>
           <div className="text-4xl font-black text-white tracking-tight relative z-10">{metrics.semanticPreservationScore}%</div>
           <div className="mt-6 h-1.5 w-full bg-white/10 rounded-full overflow-hidden relative z-10">
-            <div className="h-full bg-[var(--hl-mint-bright)] transition-all duration-1000 ease-out origin-left shadow-[0_0_10px_var(--hl-mint-bright)]" style={{ width: `${metrics.semanticPreservationScore}%` }} />
+            <div className="h-full bg-green-500 transition-all duration-1000 ease-out origin-left shadow-[0_0_10px_var(--hl-mint-bright)]" style={{ width: `${metrics.semanticPreservationScore}%` }} />
           </div>
         </div>
 

@@ -53,7 +53,7 @@ export function getAllApprovedSlugs(): string[] {
     .map(contract => contract.slug);
 }
 
-export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://humanifylab.com";
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://debotifytext.com";
 
 // Keep some utilities alive for compatibility with anything outside of the old templates
 export function pseoPath(slug: string): string {

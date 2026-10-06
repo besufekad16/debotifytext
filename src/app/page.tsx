@@ -4,14 +4,14 @@ import UnifiedHomePage from "./UnifiedHomePage";
 export const metadata: Metadata = {
   title: "Humanize AI Text Free | #1 AI Humanizer & AI Detector Bypass Tool",
   description:
-    "Looking for how to avoid AI detection? Use HumanifyLab to humanize AI text from ChatGPT, Claude, and Gemini. The best AI humanizer to bypass AI detectors for free.",
+    "Looking for how to avoid AI detection? Use DebotifyText to humanize AI text from ChatGPT, Claude, and Gemini. The best AI humanizer to bypass AI detectors for free.",
   keywords: [
-    "HumanifyLab",
-    "humanify",
-    "humanify ai",
-    "humanify text",
-    "humanify ai text",
-    "humanify lab",
+    "DebotifyText",
+    "debotify",
+    "debotify ai",
+    "debotify text",
+    "debotify ai text",
+    "debotify lab",
     "humify",
     "ai humanizer",
     "humanize ai text",
@@ -27,29 +27,29 @@ export const metadata: Metadata = {
     "essay humanizer",
     "ai to human text converter",
   ],
-  authors: [{ name: "HumanifyLab" }],
-  creator: "HumanifyLab",
-  publisher: "HumanifyLab",
+  authors: [{ name: "DebotifyText" }],
+  creator: "DebotifyText",
+  publisher: "DebotifyText",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   alternates: {
-    canonical: "https://www.humanifylab.com",
+    canonical: "https://www.debotifytext.com",
   },
   openGraph: {
     title: "Humanize AI Text Free | #1 AI Humanizer & AI Detector Bypass Tool",
     description:
-      "Looking for how to avoid AI detection? Use HumanifyLab to humanize AI text from ChatGPT, Claude, and Gemini. The best AI humanizer to bypass AI detectors for free.",
-    url: "https://www.humanifylab.com",
-    siteName: "HumanifyLab",
+      "Looking for how to avoid AI detection? Use DebotifyText to humanize AI text from ChatGPT, Claude, and Gemini. The best AI humanizer to bypass AI detectors for free.",
+    url: "https://www.debotifytext.com",
+    siteName: "DebotifyText",
     images: [
       {
-        url: "https://www.humanifylab.com/forOpenGraph.png",
+        url: "https://www.debotifytext.com/forOpenGraph.png",
         width: 1200,
         height: 630,
-        alt: "HumanifyLab — Humanify AI Text Free",
+        alt: "DebotifyText — Debotify AI Text Free",
       },
     ],
     locale: "en_US",
@@ -59,10 +59,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Humanize AI Text Free | #1 AI Humanizer & AI Detector Bypass Tool",
     description:
-      "Looking for how to avoid AI detection? Use HumanifyLab to humanize AI text from ChatGPT, Claude, and Gemini. The best AI humanizer to bypass AI detectors for free.",
-    images: ["https://www.humanifylab.com/forOpenGraph.png"],
-    site: "@humanifylab",
-    creator: "@humanifylab",
+      "Looking for how to avoid AI detection? Use DebotifyText to humanize AI text from ChatGPT, Claude, and Gemini. The best AI humanizer to bypass AI detectors for free.",
+    images: ["https://www.debotifytext.com/forOpenGraph.png"],
+    site: "@debotifytext",
+    creator: "@debotifytext",
   },
   robots: {
     index: true,
@@ -83,20 +83,20 @@ export default function HomePage() {
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://www.humanifylab.com/#organization",
-        name: "HumanifyLab",
-        alternateName: ["Humanify", "Humanify Lab"],
-        url: "https://www.humanifylab.com",
-        logo: "https://www.humanifylab.com/humanify.png",
-        sameAs: ["https://twitter.com/humanifylab"]
+        "@id": "https://www.debotifytext.com/#organization",
+        name: "DebotifyText",
+        alternateName: ["Debotify", "Debotify Text"],
+        url: "https://www.debotifytext.com",
+        logo: "https://www.debotifytext.com/debotify.png",
+        sameAs: ["https://twitter.com/debotifytext"]
       },
       {
         "@type": "SoftwareApplication",
-        "@id": "https://www.humanifylab.com/#software",
-        name: "HumanifyLab AI Humanizer",
+        "@id": "https://www.debotifytext.com/#software",
+        name: "DebotifyText AI Humanizer",
         description:
-          "HumanifyLab is an AI text humanizer that rewrites ChatGPT, Claude and Gemini content into natural writing engineered to pass Turnitin, GPTZero, Originality.ai and Copyleaks — helping users score closer to 0% AI.",
-        url: "https://www.humanifylab.com",
+          "DebotifyText is an AI text humanizer that rewrites ChatGPT, Claude and Gemini content into natural writing engineered to pass Turnitin, GPTZero, Originality.ai and Copyleaks — helping users score closer to 0% AI.",
+        url: "https://www.debotifytext.com",
         applicationCategory: "UtilitiesApplication",
         operatingSystem: "Web",
         offers: {
@@ -105,8 +105,8 @@ export default function HomePage() {
           priceCurrency: "USD",
           description: "Free plan available; Lifetime and monthly plans for higher volume.",
         },
-        creator: { "@id": "https://www.humanifylab.com/#organization" },
-        publisher: { "@id": "https://www.humanifylab.com/#organization" },
+        creator: { "@id": "https://www.debotifytext.com/#organization" },
+        publisher: { "@id": "https://www.debotifytext.com/#organization" },
         featureList: [
           "AI text humanization",
           "Bypass Turnitin, GPTZero, Originality.ai, ZeroGPT and Copyleaks",
@@ -119,19 +119,19 @@ export default function HomePage() {
       },
       {
         "@type": "WebPage",
-        "@id": "https://www.humanifylab.com/#webpage",
-        url: "https://www.humanifylab.com",
-        name: "HumanifyLab: The #1 Free AI Humanizer & Detector Bypass",
-        isPartOf: { "@id": "https://www.humanifylab.com/#website" },
-        about: { "@id": "https://www.humanifylab.com/#software" },
+        "@id": "https://www.debotifytext.com/#webpage",
+        url: "https://www.debotifytext.com",
+        name: "DebotifyText: The #1 Free AI Humanizer & Detector Bypass",
+        isPartOf: { "@id": "https://www.debotifytext.com/#website" },
+        about: { "@id": "https://www.debotifytext.com/#software" },
         inLanguage: "en-US",
       },
       {
         "@type": "HowTo",
-        "@id": "https://www.humanifylab.com/#howto",
-        name: "How to humanize AI text and bypass AI detectors with HumanifyLab",
+        "@id": "https://www.debotifytext.com/#howto",
+        name: "How to humanize AI text and bypass AI detectors with DebotifyText",
         description:
-          "Paste AI text, run HumanifyLab, and verify on Turnitin, GPTZero, or Originality.ai to score closer to 0% AI.",
+          "Paste AI text, run DebotifyText, and verify on Turnitin, GPTZero, or Originality.ai to score closer to 0% AI.",
         step: [
           {
             "@type": "HowToStep",
@@ -143,7 +143,7 @@ export default function HomePage() {
             "@type": "HowToStep",
             position: 2,
             name: "Humanize",
-            text: "Click Humanize. HumanifyLab rewrites sentence rhythm, burstiness, and phrasing while preserving meaning.",
+            text: "Click Humanize. DebotifyText rewrites sentence rhythm, burstiness, and phrasing while preserving meaning.",
           },
           {
             "@type": "HowToStep",
@@ -155,30 +155,30 @@ export default function HomePage() {
       },
       {
         "@type": "FAQPage",
-        "@id": "https://www.humanifylab.com/#faq",
+        "@id": "https://www.debotifytext.com/#faq",
         mainEntity: [
           {
             "@type": "Question",
-            name: "What is HumanifyLab?",
+            name: "What is DebotifyText?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "HumanifyLab (often searched as Humanify or Humanify Lab) is the #1 free AI text humanizer. It intelligently rewrites robotic ChatGPT, Claude, and Gemini text into natural, human-like writing that easily bypasses AI detectors like Turnitin, GPTZero, and Originality.ai.",
+              text: "DebotifyText (often searched as Debotify or Debotify Text) is the #1 free AI text humanizer. It intelligently rewrites robotic ChatGPT, Claude, and Gemini text into natural, human-like writing that easily bypasses AI detectors like Turnitin, GPTZero, and Originality.ai.",
             },
           },
           {
             "@type": "Question",
-            name: "Is Humanify free?",
+            name: "Is Debotify free?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Yes, HumanifyLab offers a genuinely free plan to test the AI humanizer. You can paste your text and see exactly how it bypasses AI detection and improves readability before ever needing to upgrade to our unlimited Lifetime plan.",
+              text: "Yes, DebotifyText offers a genuinely free plan to test the AI humanizer. You can paste your text and see exactly how it bypasses AI detection and improves readability before ever needing to upgrade to our unlimited Lifetime plan.",
             },
           },
           {
             "@type": "Question",
-            name: "How does Humanify Lab work?",
+            name: "How does Debotify Text work?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Humanify Lab uses proprietary anti-detection models to analyze the predictability (perplexity and burstiness) of your AI draft. It then reconstructs the sentence phrasing, vocabulary, and rhythm to mirror human writing, completely removing the AI watermark.",
+              text: "Debotify Text uses proprietary anti-detection models to analyze the predictability (perplexity and burstiness) of your AI draft. It then reconstructs the sentence phrasing, vocabulary, and rhythm to mirror human writing, completely removing the AI watermark.",
             },
           },
           {
@@ -186,7 +186,7 @@ export default function HomePage() {
             name: "Which is the best AI text humanizer in 2026?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "HumanifyLab is widely considered the best text humanizer because it actually preserves the original meaning of your text while successfully scoring 0% AI on rigorous detectors like Turnitin and GPTZero. Unlike basic paraphrasers, it is purpose-built for humanization.",
+              text: "DebotifyText is widely considered the best text humanizer because it actually preserves the original meaning of your text while successfully scoring 0% AI on rigorous detectors like Turnitin and GPTZero. Unlike basic paraphrasers, it is purpose-built for humanization.",
             },
           },
           {
@@ -194,7 +194,7 @@ export default function HomePage() {
             name: "How to 100% humanize AI text?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Paste your AI draft (150+ words works best) into HumanifyLab at humanifylab.com, pick a tone, and click Humanize. Then do a short personal edit pass - fix names, numbers, and quotes, and add one sentence only you could write. A dedicated humanizer plus a human edit is what gets text reading 100% human.",
+              text: "Paste your AI draft (150+ words works best) into DebotifyText at debotifytext.com, pick a tone, and click Humanize. Then do a short personal edit pass - fix names, numbers, and quotes, and add one sentence only you could write. A dedicated humanizer plus a human edit is what gets text reading 100% human.",
             },
           },
           {
@@ -202,7 +202,7 @@ export default function HomePage() {
             name: "Can ChatGPT humanize AI text?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Not reliably. Asking ChatGPT to humanize its own output keeps the same statistical fingerprints detectors look for - uniform rhythm and predictable word choice. A dedicated AI humanizer like HumanifyLab is built to vary sentence length, burstiness, and phrasing, which is why it outperforms prompting ChatGPT to rewrite itself.",
+              text: "Not reliably. Asking ChatGPT to humanize its own output keeps the same statistical fingerprints detectors look for - uniform rhythm and predictable word choice. A dedicated AI humanizer like DebotifyText is built to vary sentence length, burstiness, and phrasing, which is why it outperforms prompting ChatGPT to rewrite itself.",
             },
           },
           {
@@ -210,20 +210,20 @@ export default function HomePage() {
             name: "Can AI humanize a text?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Yes - that is exactly what an AI humanizer does. HumanifyLab uses advanced models trained specifically to rewrite robotic drafts with natural cadence and varied vocabulary while keeping the original meaning completely intact.",
+              text: "Yes - that is exactly what an AI humanizer does. DebotifyText uses advanced models trained specifically to rewrite robotic drafts with natural cadence and varied vocabulary while keeping the original meaning completely intact.",
             },
           },
           {
             "@type": "Question",
-            name: "Can HumanifyLab help drafts that were flagged by AI detectors?",
+            name: "Can DebotifyText help drafts that were flagged by AI detectors?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "HumanifyLab rewrites ChatGPT, Claude, and Gemini drafts toward more natural rhythm and wording. Detectors such as Turnitin, GPTZero, Originality.ai, Copyleaks, and ZeroGPT still need your own verification. Scores are estimates and can false-positive. Do not treat a humanizer as permission to misrepresent authorship.",
+              text: "DebotifyText rewrites ChatGPT, Claude, and Gemini drafts toward more natural rhythm and wording. Detectors such as Turnitin, GPTZero, Originality.ai, Copyleaks, and ZeroGPT still need your own verification. Scores are estimates and can false-positive. Do not treat a humanizer as permission to misrepresent authorship.",
             },
           },
           {
             "@type": "Question",
-            name: "How do I score closer to 0% AI with HumanifyLab?",
+            name: "How do I score closer to 0% AI with DebotifyText?",
             acceptedAnswer: {
               "@type": "Answer",
               text: "Paste at least 100–250 words, pick Academic or Default tone, run Humanize, then re-check in your detector. For best results, do a short personal edit pass.",
@@ -258,7 +258,7 @@ export default function HomePage() {
             name: "What support channels are available?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Email humanifylab1@gmail.com or use in-app messaging. Paid plans get priority response.",
+              text: "Email debotifytext1@gmail.com or use in-app messaging. Paid plans get priority response.",
             },
           },
         ],

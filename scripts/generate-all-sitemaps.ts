@@ -9,7 +9,7 @@ import { getAllApprovedSlugs } from "../src/lib/pseo/keywords";
 import { pseoPath } from "../src/lib/pseo/keywords";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const BASE_URL = "https://www.humanifylab.com";
+const BASE_URL = "https://www.debotifytext.com";
 const PUBLIC_DIR = join(__dirname, "../public");
 const TODAY = new Date().toISOString().split("T")[0]!;
 

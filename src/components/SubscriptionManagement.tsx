@@ -136,7 +136,7 @@ export default function SubscriptionManagement({
     <Card className="border-white/60 bg-white/80 shadow-md backdrop-blur">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Package className="h-5 w-5 text-[var(--hl-mint-deep)]" />
+          <Package className="h-5 w-5 text-green-700" />
           Subscription
         </CardTitle>
         <CardDescription className="text-[12px] text-gray-400">Manage your subscription and billing</CardDescription>
@@ -144,13 +144,13 @@ export default function SubscriptionManagement({
       <CardContent className="space-y-4">
         {isLoading ? (
           <div className="flex items-center justify-center py-8">
-            <Loader2 className="h-6 w-6 animate-spin text-[var(--hl-mint-deep)]" />
+            <Loader2 className="h-6 w-6 animate-spin text-green-700" />
           </div>
         ) : hasActiveSubscription ? (
           <>
             <div>
               <label className="text-[12px] font-medium text-gray-400">Current Plan</label>
-              <p className="mt-1 text-[1.4rem] font-bold text-[var(--hl-mint-deep)]">{planName}</p>
+              <p className="mt-1 text-[1.4rem] font-bold text-green-700">{planName}</p>
               {details.cancelAtPeriodEnd && (
                 <p className="mt-1 text-[12px] text-amber-600">
                   Cancels at period end
@@ -163,7 +163,7 @@ export default function SubscriptionManagement({
                 <CreditCard className="h-4 w-4" />
                 Billing Cycle
               </label>
-              <p className="mt-1 text-[13.5px] font-semibold text-gray-900">{billingCycle}</p>
+              <p className="mt-1 text-[13.5px] font-semibold text-slate-900">{billingCycle}</p>
             </div>
             {nextResetDate && (
               <>
@@ -173,7 +173,7 @@ export default function SubscriptionManagement({
                     <Calendar className="h-4 w-4" />
                     Next Renewal
                   </label>
-                  <p className="mt-1 text-[13.5px] font-semibold text-gray-900">
+                  <p className="mt-1 text-[13.5px] font-semibold text-slate-900">
                     {new Date(nextResetDate).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",
@@ -222,12 +222,12 @@ export default function SubscriptionManagement({
             </div>
             <Separator />
             <div className="rounded-lg bg-gradient-to-r from-[#e0f2fe] to-[#bae6fd] p-4">
-              <p className="text-[13px] font-medium text-gray-900">Ready to upgrade?</p>
+              <p className="text-[13px] font-medium text-slate-900">Ready to upgrade?</p>
               <p className="mt-1 text-[13px] text-gray-400">
                 Get more credits, priority support, and API access with our premium plans.
               </p>
               <Link href="/pricing">
-                <Button className="mt-3 w-full bg-[var(--hl-mint-deep)] hover:bg-[var(--hl-mint)]">
+                <Button className="mt-3 w-full bg-green-700 hover:bg-green-600">
                   View Premium Plans
                   <ExternalLink className="ml-2 h-4 w-4" />
                 </Button>

@@ -9,7 +9,7 @@
     "idealUser": "Researchers",
     "coreIntent": "Achieve perfect results with can gptzero detect a humanized my capstone project as a student"
   },
-  "technicalDeepDive": "When professors run your work through Turnitin, they look for predictable phrasing. Our system removes these watermarks entirely.\n\nColleges use advanced heuristics to flag AI. HumanifyLab counters this by re-evaluating the semantic structure of your paper.\n\nUnlike simple spinners, our engine understands academic formatting and preserves your core thesis without triggering major academic detectors.",
+  "technicalDeepDive": "When professors run your work through Turnitin, they look for predictable phrasing. Our system removes these watermarks entirely.\n\nColleges use advanced heuristics to flag AI. DebotifyText counters this by re-evaluating the semantic structure of your paper.\n\nUnlike simple spinners, our engine understands academic formatting and preserves your core thesis without triggering major academic detectors.",
   "stepByStep": [
     {
       "title": "Citation Protection",

@@ -7,7 +7,7 @@ import AffiliateDashboard from "./AffiliateDashboard";
 
 export const metadata: Metadata = {
   title: "Affiliate Dashboard",
-  description: "Manage your HumanifyLab affiliate referrals, balance and payouts.",
+  description: "Manage your DebotifyText affiliate referrals, balance and payouts.",
   robots: {
     index: false,
     follow: true,
@@ -39,7 +39,7 @@ export default async function AffiliatePage() {
     },
   });
 
-  const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.humanifylab.com";
+  const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.debotifytext.com";
 
   const affiliateData = affiliate
     ? {

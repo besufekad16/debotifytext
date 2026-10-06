@@ -9,7 +9,7 @@
     "idealUser": "Students",
     "coreIntent": "Achieve flawless results with how to humanize my assignment safely"
   },
-  "technicalDeepDive": "When professors run your assignment through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.\n\nThe result is a logically sound submission that exhibits natural human burstiness, guaranteeing a completely safe AI detection score.\n\nMany researchers struggle with false positives. HumanifyLab fixes this issue by giving your text the nuance of real human writing.\n\nColleges use advanced models to detect AI. HumanifyLab counters this by re-mapping the lexical density of your assignment.",
+  "technicalDeepDive": "When professors run your assignment through Turnitin, they look for robotic patterns. Our system removes these patterns entirely.\n\nThe result is a logically sound submission that exhibits natural human burstiness, guaranteeing a completely safe AI detection score.\n\nMany researchers struggle with false positives. DebotifyText fixes this issue by giving your text the nuance of real human writing.\n\nColleges use advanced models to detect AI. DebotifyText counters this by re-mapping the lexical density of your assignment.",
   "stepByStep": [
     {
       "title": "Scholarly Rewrite",
