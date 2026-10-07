@@ -44,8 +44,6 @@ export default function PageNavbar({
   const baseNavLinks = [
     { href: homeBase, label: "Home" },
     { href: "/pricing", label: "Pricing" },
-    { href: "/topics", label: "Guides" },
-    
     { href: "/faq", label: "FAQ" },
     { href: "/contact", label: "Contact" },
   ];
