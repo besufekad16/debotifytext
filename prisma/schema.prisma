@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 model User {
@@ -26,7 +27,7 @@ model User {
   nextResetDate       DateTime?
   maxWordsPerRequest  Int                @default(1000)
   teamId              String?
-  referredByCode      String?   // referral code used at signup (optional)
+  referredByCode      String?
   apiKeys             ApiKey[]
   humanizerHistory    HumanizerHistory[]
   projects            Project[]
