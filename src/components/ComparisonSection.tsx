@@ -41,8 +41,8 @@ export default function ComparisonSection() {
     <section className="py-8 sm:py-12 bg-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
-        <div className="absolute top-20 left-20 w-64 h-64 bg-purple-100 rounded-full blur-3xl opacity-30" />
-        <div className="absolute bottom-20 right-20 w-80 h-80 bg-indigo-100 rounded-full blur-3xl opacity-30" />
+        <div className="absolute top-20 left-20 w-64 h-64 bg-green-100 rounded-full blur-3xl opacity-40" />
+        <div className="absolute bottom-20 right-20 w-80 h-80 bg-green-200 rounded-full blur-3xl opacity-30" />
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
@@ -147,16 +147,16 @@ export default function ComparisonSection() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1], delay: 0.1 }}
-              className="group relative overflow-hidden rounded-3xl border border-rgba(21,128,61,0.15) bg-#faf6f1/30 p-6 sm:p-8 transition-all hover:border-var(--hl-mint) hover:bg-#faf6f1/50 hover:shadow-xl hover:shadow-rgba(21,128,61,0.15)/20"
+              className="group relative overflow-hidden rounded-3xl border border-green-200 bg-green-50/50 p-6 sm:p-8 transition-all hover:border-green-400 hover:bg-green-50/80 hover:shadow-xl hover:shadow-green-900/5"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <div className="h-8 w-8 rounded-full bg-rgba(21,128,61,0.15) flex items-center justify-center text-var(--hl-mint)">
+                  <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-600">
                     <Check className="h-4 w-4" />
                   </div>
                   <span className="text-sm font-semibold text-slate-700">After (Humanized)</span>
                 </div>
-                <span className="text-xs font-medium text-var(--hl-mint) bg-rgba(21,128,61,0.15)/50 px-2 py-1 rounded-md border border-rgba(21,128,61,0.15)">
+                <span className="text-xs font-medium text-green-700 bg-green-100/50 px-2 py-1 rounded-md border border-green-200">
                   100% Human Score
                 </span>
               </div>
@@ -186,13 +186,13 @@ export default function ComparisonSection() {
 
                 {/* Gradient fade for truncated view */}
                 {viewMode === "split" && (
-                  <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-#faf6f1/90 to-transparent" />
+                  <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-green-50/90 to-transparent" />
                 )}
               </div>
 
               <button 
                 onClick={() => setViewMode(prev => prev === "split" ? "compare" : "split")}
-                className="mt-4 text-xs font-medium text-var(--hl-mint) hover:text-#5A4529 flex items-center gap-1 transition-colors"
+                className="mt-4 text-xs font-medium text-green-700 hover:text-green-800 flex items-center gap-1 transition-colors"
               >
                 {viewMode === "split" ? "Read full text" : "Show less"} <ArrowRight className={cn("h-3 w-3 transition-transform", viewMode === "compare" && "rotate-180")} />
               </button>

@@ -17,7 +17,7 @@ export default function ResponsibleUseDisclaimer() {
 
           {/* Content */}
           <div className="flex-1">
-            <p className="text-sm sm:text-base text-[#5A4529] leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
               <span className="font-semibold text-green-600">DebotifyText is not a tool for academic dishonesty or cheating.</span> We encourage responsible use that enhances your work while respecting academic integrity.
             </p>
           </div>

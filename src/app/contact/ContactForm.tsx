@@ -151,7 +151,7 @@ export default function ContactForm({ initialEmail, isEmailReadOnly }: ContactFo
       </div>
 
       {feedback ? (
-        <div className="rounded-2xl border border-var(--hl-mint) bg-#faf6f1 px-4 py-3 text-sm text-#5A4529">
+        <div className="rounded-2xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">
           {feedback}
         </div>
       ) : null}

@@ -9,36 +9,36 @@ const steps = [
     title: "Input Your Content",
     description: "Paste your AI-generated essays, blog posts, or assignments into our secure editor. We support plain text, Word docs, and PDFs.",
     icon: FileText,
-    color: "from-#faf6f10 to-var(--hl-mint)",
-    lightColor: "bg-primary/10",
-    borderColor: "border-rgba(21,128,61,0.15)",
+    color: "from-green-400 to-green-600",
+    lightColor: "bg-green-50",
+    borderColor: "border-green-200",
   },
   {
     step: "02",
     title: "Choose Your Tone",
     description: "Select from our expert-crafted presets or customize the style to match your natural voice. Whether academic or conversational, we've got you covered.",
     icon: ListChecks,
-    color: "from-#faf6f10 to-var(--hl-mint)",
-    lightColor: "bg-#faf6f1",
-    borderColor: "border-rgba(21,128,61,0.15)",
+    color: "from-green-400 to-green-600",
+    lightColor: "bg-green-50",
+    borderColor: "border-green-200",
   },
   {
     step: "03",
     title: "Humanize Instantly",
     description: "Our advanced linguistic engine rewrites your text in seconds, removing AI fingerprints while preserving your original meaning and message.",
     icon: Zap,
-    color: "from-var(--hl-mint) to-#5A4529",
-    lightColor: "bg-#faf6f1",
-    borderColor: "border-rgba(21,128,61,0.15)",
+    color: "from-green-400 to-green-600",
+    lightColor: "bg-green-50",
+    borderColor: "border-green-200",
   },
   {
     step: "04",
     title: "Achieve Quality",
     description: "Download your professionally humanized text. It now reads naturally with authentic human tone and style.",
     icon: ShieldCheck,
-    color: "from-#faf6f10 to-var(--hl-mint)",
-    lightColor: "bg-brand-green/10",
-    borderColor: "border-rgba(21,128,61,0.15)",
+    color: "from-green-400 to-green-600",
+    lightColor: "bg-green-50",
+    borderColor: "border-green-200",
   },
 ];
 
@@ -47,8 +47,8 @@ export default function HowToUseSection() {
     <section className="relative py-24 sm:py-32 bg-card overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
-        <div className="absolute top-[10%] left-[-10%] w-[40%] h-[40%] bg-#faf6f1/50 rounded-full blur-3xl opacity-50" />
-        <div className="absolute bottom-[10%] right-[-10%] w-[40%] h-[40%] bg-#faf6f1/50 rounded-full blur-3xl opacity-50" />
+        <div className="absolute top-[10%] left-[-10%] w-[40%] h-[40%] bg-green-100 rounded-full blur-3xl opacity-50" />
+        <div className="absolute bottom-[10%] right-[-10%] w-[40%] h-[40%] bg-green-100 rounded-full blur-3xl opacity-50" />
       </div>
 
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -72,11 +72,11 @@ export default function HowToUseSection() {
             return (
               <div
                 key={step.step}
-                className="group relative flex flex-col h-full rounded-[2rem] border border-border bg-card p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-#faf6f10/10 hover:-translate-y-2 hover:border-var(--hl-mint)"
+                className="group relative flex flex-col h-full rounded-[2rem] border border-border bg-card p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-green-900/10 hover:-translate-y-2 hover:border-green-400"
               >
                 {/* Step Number Badge */}
                 <div className={cn(
-                  "mb-8 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br text-white font-black text-lg shadow-lg shadow-#faf6f10/20 group-hover:scale-110 transition-transform duration-300",
+                  "mb-8 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br text-white font-black text-lg shadow-lg shadow-green-900/20 group-hover:scale-110 transition-transform duration-300",
                   step.color
                 )}>
                   {step.step}

@@ -294,37 +294,7 @@ export default function PricingPageClient({ isTeamMember = false, hasSubscriptio
           </Button>
         </div>
 
-        {/* Affiliate callout */}
-        <div className="mt-8 rounded-2xl border border-[rgba(21,128,61,0.18)] bg-green-50 p-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div className="text-center sm:text-left">
-              <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
-                <span className="text-xs font-bold uppercase tracking-widest text-green-700 bg-green-700/10 px-2.5 py-0.5 rounded-full">
-                  Affiliate Program
-                </span>
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-1">
-                Share DebotifyText. Earn 10% in USDT.
-              </h3>
-              <p className="text-sm text-slate-400 max-w-md">
-                Refer a friend and earn 10% of their first payment — paid directly to your crypto wallet. No cap, no expiry.
-              </p>
-              <div className="flex flex-wrap gap-4 mt-3 justify-center sm:justify-start text-xs text-slate-400">
-                <span className="flex items-center gap-1"><span className="text-green-600 font-bold">✓</span> Paid in USDT</span>
-                <span className="flex items-center gap-1"><span className="text-green-600 font-bold">✓</span> No KYC needed</span>
-                <span className="flex items-center gap-1"><span className="text-green-600 font-bold">✓</span> Instant signup</span>
-                <span className="flex items-center gap-1"><span className="text-green-600 font-bold">✓</span> Works worldwide</span>
-              </div>
-            </div>
-            <Button
-              size="lg"
-              className="shrink-0 rounded-xl bg-green-700 hover:bg-green-800 text-white font-semibold px-8"
-              onClick={() => router.push("/affiliate")}
-            >
-              Start Earning
-            </Button>
-          </div>
-        </div>
+
       </div>
     </div>
   );

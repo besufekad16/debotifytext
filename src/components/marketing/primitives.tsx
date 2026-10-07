@@ -51,7 +51,7 @@ export function Eyebrow({ children, dark = false }: { children: React.ReactNode;
     <span
       className={cn(
         "inline-block text-xs font-semibold uppercase tracking-[0.18em]",
-        dark ? "text-[#a67c52]" : "text-green-700",
+        dark ? "text-green-400" : "text-green-700",
       )}
     >
       {children}
@@ -175,7 +175,7 @@ export function Card({
 export function StatBlock({ value, label, dark = false }: { value: string; label: string; dark?: boolean }) {
   return (
     <div className="text-center">
-      <div className={cn("text-2xl font-bold tracking-tight sm:text-3xl", dark ? "text-[#a67c52]" : "text-green-700")}>
+      <div className={cn("text-2xl font-bold tracking-tight sm:text-3xl", "text-green-700")}>
         {value}
       </div>
       <div className={cn("mt-1 text-xs uppercase tracking-wide", dark ? "text-gray-400" : "text-slate-400")}>

@@ -150,19 +150,19 @@ export default function ApiKeysClient({ hasApiAccess }: ApiKeysClientProps) {
               <h3 className="text-[13.5px] font-semibold text-slate-900 mb-1.5">With API access, you can:</h3>
               <ul className="space-y-2 text-[13px] text-slate-400">
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="h-4 w-4 text-#faf6f10 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
                   <span>Integrate AI humanization into your own applications</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="h-4 w-4 text-#faf6f10 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
                   <span>Automate content humanization workflows</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="h-4 w-4 text-#faf6f10 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
                   <span>Process content at scale with programmatic access</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="h-4 w-4 text-#faf6f10 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
                   <span>Build custom integrations with your existing tools</span>
                 </li>
               </ul>

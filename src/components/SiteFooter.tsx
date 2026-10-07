@@ -52,7 +52,7 @@ function FooterColumn({ title, links }: { title: string; links: { label: string;
 
 export function SiteFooter() {
   return (
-    <footer className="bg-slate-950 border-t border-slate-900">
+    <footer className="bg-[#02180b] border-t border-[#06331a]">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="grid grid-cols-2 gap-10 md:grid-cols-12 lg:gap-8">
           <div className="col-span-2 md:col-span-4">

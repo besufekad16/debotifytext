@@ -1144,9 +1144,9 @@ export default function UnifiedHomePage() {
                       <Button
                         onClick={handleHumanize}
                         disabled={!originalText.trim() || isHumanizing || wordCount < 100}
-                        className="group relative w-full h-12 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-[15px] shadow-[0_8px_20px_-8px_rgba(0,0,0,0.3)] hover:-translate-y-px transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 overflow-hidden"
+                        className="group relative w-full h-12 rounded-xl bg-green-600 hover:bg-green-700 text-white font-semibold text-[15px] shadow-[0_8px_20px_-8px_rgba(21,128,61,0.5)] hover:-translate-y-px transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 overflow-hidden"
                       >
-                        <div className="absolute inset-0 bg-gradient-to-r from-green-500/0 via-green-500/20 to-green-500/0 -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-green-400/0 via-green-400/30 to-green-400/0 -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out" />
                         
                         {isHumanizing ? (
                           <span className="flex items-center gap-2 relative z-10">
@@ -1324,15 +1324,15 @@ export default function UnifiedHomePage() {
             </div>
             </section>
           {/* AI Detector Logos - Horizontal Scrolling */}
-          <section className="relative w-full py-10 overflow-hidden bg-gradient-to-b from-white to-gray-50">
-            <p className="text-center text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-400 mb-8">
+          <section className="relative w-full py-10 overflow-hidden bg-gradient-to-b from-white to-green-50/50">
+            <p className="text-center text-[10px] font-semibold tracking-[0.2em] uppercase text-green-700/60 mb-8">
               Our AI bypasses industry standard detectors
             </p>
             
             <div className="relative">
               {/* Gradient overlays for fade effect */}
               <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-              <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-green-50/50 to-transparent z-10 pointer-events-none"></div>
               
               {/* Scrolling container */}
               <div className="marquee-container overflow-hidden">

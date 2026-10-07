@@ -94,15 +94,15 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots, 
         @keyframes glow-pulse {
           0%, 100% {
             box-shadow:
-              0 0 30px rgba(212,168,85,0.5),
-              0 0 60px rgba(139,111,71,0.3),
+              0 0 30px rgba(34, 197, 94, 0.5),
+              0 0 60px rgba(21, 128, 61, 0.3),
               0 20px 60px rgba(0,0,0,0.5),
               inset 0 1px 0 rgba(255,255,255,0.15);
           }
           50% {
             box-shadow:
-              0 0 60px rgba(212,168,85,0.8),
-              0 0 120px rgba(139,111,71,0.5),
+              0 0 60px rgba(74, 222, 128, 0.8),
+              0 0 120px rgba(34, 197, 94, 0.5),
               0 20px 80px rgba(0,0,0,0.6),
               inset 0 1px 0 rgba(255,255,255,0.2);
           }
@@ -122,9 +122,9 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots, 
         <div className="relative mt-6 pt-5">
 
           {/* Badge — centered above card */}
-          <div className="absolute -top-0 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 bg-gradient-to-r from-[#C8922A] via-[#E8B84B] to-[#C8922A] px-4 py-1.5 rounded-sm shadow-xl border border-[#F5D78A]/40 whitespace-nowrap">
-            <Flame className="h-3 w-3 text-[#3b1f0e]" />
-            <span className="text-[10px] sm:text-xs font-bold text-[#3b1f0e] uppercase tracking-widest">
+          <div className="absolute -top-0 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-600 px-4 py-1.5 rounded-sm shadow-xl border border-emerald-300/40 whitespace-nowrap">
+            <Flame className="h-3 w-3 text-emerald-950" />
+            <span className="text-[10px] sm:text-xs font-bold text-emerald-950 uppercase tracking-widest">
               Limited — {remaining} of {max} spots left
             </span>
           </div>
@@ -133,17 +133,17 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots, 
           <div
             className="relative overflow-hidden rounded-2xl border-2 w-full"
             style={{
-              background: 'linear-gradient(145deg, #2a1a06 0%, #3d2508 35%, #2e1c07 65%, #1e1204 100%)',
-              borderColor: 'rgba(212,168,85,0.65)',
+              background: 'linear-gradient(145deg, #022c22 0%, #064e3b 35%, #065f46 65%, #020617 100%)',
+              borderColor: 'rgba(52, 211, 153, 0.65)',
               animation: 'glow-pulse 3.5s ease-in-out infinite',
             }}
           >
             {/* Glass top sheen */}
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#F5D78A]/60 to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/60 to-transparent" />
             <div className="pointer-events-none absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/[0.07] to-transparent" />
 
             {/* Diagonal glass reflection */}
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#D4A855]/10 via-transparent to-green-700/15" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-400/10 via-transparent to-emerald-700/15" />
 
             {/* Shimmer sweep */}
             <div
@@ -155,20 +155,20 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots, 
             <div
               className="pointer-events-none absolute -top-20 -right-20 w-56 h-56 rounded-full"
               style={{
-                background: 'radial-gradient(circle, rgba(212,168,85,0.25) 0%, transparent 70%)',
+                background: 'radial-gradient(circle, rgba(52, 211, 153, 0.25) 0%, transparent 70%)',
                 animation: 'orb-a 9s ease-in-out infinite',
               }}
             />
             <div
               className="pointer-events-none absolute -bottom-20 -left-20 w-56 h-56 rounded-full"
               style={{
-                background: 'radial-gradient(circle, rgba(139,111,71,0.2) 0%, transparent 70%)',
+                background: 'radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 70%)',
                 animation: 'orb-b 11s ease-in-out infinite',
               }}
             />
 
             {/* Bottom border glow */}
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#D4A855]/40 to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent" />
 
             {/* ── Content ── */}
             <div className="relative z-10 p-6 sm:p-8 md:p-10 lg:p-12">
@@ -179,14 +179,14 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots, 
                 {/* Left: identity */}
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full border border-[#D4A855]/50 bg-[#D4A855]/10">
-                      <InfinityIcon className="h-5 w-5 text-[#E8C870]" />
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full border border-emerald-400/50 bg-emerald-400/10">
+                      <InfinityIcon className="h-5 w-5 text-emerald-300" />
                     </div>
                     <div>
                       <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-none">
                         Unlimited
                       </h3>
-                      <p className="text-[#D4A855] text-xs font-semibold uppercase tracking-widest mt-0.5">
+                      <p className="text-emerald-400 text-xs font-semibold uppercase tracking-widest mt-0.5">
                         2-Month Access
                       </p>
                     </div>
@@ -202,7 +202,7 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots, 
                     <span className="text-5xl sm:text-6xl font-black text-white leading-none">$100</span>
                   </div>
                   <p className="text-white/50 text-xs mt-1">billed every 2 months · cancel anytime</p>
-                  <p className="text-[#D4A855] text-xs font-medium mt-0.5">Unlimited access for 2 months per cycle</p>
+                  <p className="text-emerald-400 text-xs font-medium mt-0.5">Unlimited access for 2 months per cycle</p>
                 </div>
               </div>
 
@@ -210,10 +210,10 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots, 
               <div className="mb-8 p-4 rounded-xl bg-white/[0.05] border border-white/[0.08]">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs text-white/70 font-medium flex items-center gap-1.5">
-                    <Flame className={`h-3.5 w-3.5 ${isUrgent ? 'text-orange-400' : 'text-[#D4A855]'}`} />
+                    <Flame className={`h-3.5 w-3.5 ${isUrgent ? 'text-orange-400' : 'text-emerald-400'}`} />
                     {taken} of {max} spots claimed
                   </span>
-                  <span className={`text-xs font-bold ${isUrgent ? 'text-orange-400' : 'text-[#D4A855]'}`}>
+                  <span className={`text-xs font-bold ${isUrgent ? 'text-orange-400' : 'text-emerald-400'}`}>
                     {remaining} remaining
                   </span>
                 </div>
@@ -224,7 +224,7 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots, 
                       width: `${pctFull}%`,
                       background: isUrgent
                         ? 'linear-gradient(90deg, #f97316, #ef4444)'
-                        : 'linear-gradient(90deg, #C8922A, #E8B84B, #F5D78A)',
+                        : 'linear-gradient(90deg, #059669, #10b981, #34d399)',
                     }}
                   />
                 </div>
@@ -242,7 +242,7 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots, 
                 <ul className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
                   {FEATURES.map((f, i) => (
                     <li key={i} className="flex items-start gap-2.5 text-sm text-white/80">
-                      <ShieldCheck className="h-4 w-4 text-[#D4A855] mt-0.5 flex-shrink-0" />
+                      <ShieldCheck className="h-4 w-4 text-emerald-400 mt-0.5 flex-shrink-0" />
                       {f}
                     </li>
                   ))}
@@ -270,9 +270,9 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots, 
                       disabled={loading}
                       className="w-full py-4 rounded-xl text-sm font-bold shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60 flex items-center justify-center gap-2"
                       style={{
-                        background: 'linear-gradient(135deg, #E8B84B 0%, #C8922A 50%, #A87020 100%)',
-                        color: '#1a0e00',
-                        boxShadow: '0 4px 20px rgba(212,168,85,0.4), inset 0 1px 0 rgba(255,255,255,0.3)',
+                        background: 'linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%)',
+                        color: '#022c22',
+                        boxShadow: '0 4px 20px rgba(52, 211, 153, 0.4), inset 0 1px 0 rgba(255,255,255,0.3)',
                       }}
                     >
                       {loading ? (

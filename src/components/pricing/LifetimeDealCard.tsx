@@ -101,22 +101,23 @@ export default function LifetimeDealCard({ isTeamMember = false }: LifetimeDealC
   }
 
   return (
-    <div id="lifetime" className="relative mt-16 scroll-mt-28 overflow-hidden rounded-3xl border border-white/10 bg-slate-900 text-white shadow-2xl">
-      <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[var(--hl-offer)]/20 blur-3xl" />
+    <div id="lifetime" className="relative mt-16 scroll-mt-28 overflow-hidden rounded-[2rem] border border-green-700 bg-[#052E16] text-white shadow-xl" style={{ background: 'linear-gradient(180deg, #052E16 0%, #064E3B 100%)' }}>
+      <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-transparent to-transparent pointer-events-none rounded-[2rem]"></div>
+      <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-green-400/20 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-green-500/20 blur-3xl" />
 
       <div className="relative grid gap-10 p-8 sm:p-10 md:p-14 lg:grid-cols-[1.2fr_1fr] lg:items-center">
         <div>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--hl-offer)]/40 bg-[var(--hl-offer)]/10 px-4 py-1.5">
-            <Feather className="h-3.5 w-3.5 text-[var(--hl-offer)]" />
-            <span className="text-xs font-bold uppercase tracking-widest text-[var(--hl-offer)]">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-green-400/40 bg-green-400/10 px-4 py-1.5">
+            <Feather className="h-3.5 w-3.5 text-green-300" />
+            <span className="text-xs font-bold uppercase tracking-widest text-green-300">
               Back-to-School · Lifetime Deal
             </span>
           </div>
 
           <h2 className="text-4xl font-black leading-tight tracking-tight sm:text-5xl">
             Pay once.{" "}
-            <span className="bg-gradient-to-r from-[#F5D78A] via-[#E8B84B] to-[#C8922A] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-green-300 via-green-400 to-green-500 bg-clip-text text-transparent">
               Humanize forever.
             </span>
           </h2>
@@ -130,7 +131,7 @@ export default function LifetimeDealCard({ isTeamMember = false }: LifetimeDealC
           <ul className="mt-8 grid gap-3 sm:grid-cols-2">
             {LIFETIME_FEATURES.map((feature) => (
               <li key={feature} className="flex items-start gap-2.5 text-sm text-white/90">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-[var(--hl-offer)]" />
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-400" />
                 <span>{feature}</span>
               </li>
             ))}
@@ -151,9 +152,10 @@ export default function LifetimeDealCard({ isTeamMember = false }: LifetimeDealC
             size="lg"
             onClick={onClaim}
             disabled={isSubscribing || isLifetime || isTeamMember}
-            className="mt-6 w-full rounded-2xl font-black uppercase tracking-wide text-slate-900 hover:opacity-95"
+            className="mt-6 w-full rounded-2xl font-black uppercase tracking-wide shadow-lg transition-all hover:scale-[1.02]"
             style={{
-              background: "linear-gradient(135deg,#F5D78A 0%,#E8B84B 45%,#C8922A 100%)",
+              background: "linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%)",
+              color: "#022c22"
             }}
           >
             {isSubscribing ? (

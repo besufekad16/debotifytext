@@ -131,7 +131,7 @@ export default function RootLayout({
   };
 
   return (
-    <ClerkProvider>
+    <ClerkProvider appearance={{ variables: { colorPrimary: "#15803D" } }}>
       <html lang="en" className={`font-sans ${GeistSans.variable}`}>
         <head>
           {/* Google Analytics */}

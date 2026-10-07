@@ -321,14 +321,14 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
     <div className="space-y-12">
       {(hasYearlyPlans || hasUnlimitedPlan) && (
         <div className="flex flex-col items-center gap-2 text-center">
-          <div className="inline-flex items-center border border-border bg-card p-1 shadow-sm">
+          <div className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50/50 p-1.5 shadow-sm">
             <button
               type="button"
               onClick={() => { setBillingCycle("monthly"); setHasUserChangedBilling(true); }}
-              className={`min-w-[100px] px-4 py-2 text-xs sm:text-sm font-semibold transition whitespace-nowrap ${
+              className={`min-w-[100px] rounded-full px-5 py-2.5 text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
                 billingCycle === "monthly"
-                  ? "bg-gradient-to-r from-green-700 via-green-600 to-green-500 text-white shadow-sm"
-                  : "bg-transparent text-muted-foreground hover:text-foreground"
+                  ? "bg-white text-green-800 shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
+                  : "bg-transparent text-slate-500 hover:text-slate-900"
               }`}
             >
               Monthly
@@ -338,16 +338,16 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
               <button
                 type="button"
                 onClick={() => { setBillingCycle("unlimited"); setHasUserChangedBilling(true); }}
-                className={`relative min-w-[120px] px-3 py-2 text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-1.5 whitespace-nowrap ${
+                className={`relative min-w-[120px] rounded-full px-4 py-2.5 text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap ${
                   billingCycle === "unlimited"
-                    ? "bg-gradient-to-r from-green-700 via-green-600 to-green-500 text-white shadow-sm"
-                    : "bg-transparent text-muted-foreground hover:text-foreground"
+                    ? "bg-white text-green-800 shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
+                    : "bg-transparent text-slate-500 hover:text-slate-900"
                 }`}
               >
                 <InfinityIcon className="h-3.5 w-3.5" />
                 <span>Unlimited</span>
                 {billingCycle === "unlimited" && (
-                  <span className="px-1.5 py-0.5 text-[9px] sm:text-[10px] font-bold whitespace-nowrap bg-white/25 text-white border border-white/40">
+                  <span className="px-1.5 py-0.5 text-[9px] sm:text-[10px] font-bold whitespace-nowrap bg-green-100 text-green-800 rounded-full ml-1">
                     2 Months
                   </span>
                 )}
@@ -364,15 +364,15 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
               <button
                 type="button"
                 onClick={() => { setBillingCycle("yearly"); setHasUserChangedBilling(true); }}
-                className={`relative flex min-w-[100px] items-center justify-center gap-1.5 whitespace-nowrap px-3 py-2 text-xs font-semibold transition sm:text-sm ${
+                className={`relative flex min-w-[100px] rounded-full items-center justify-center gap-1.5 whitespace-nowrap px-5 py-2.5 text-xs font-semibold transition-all sm:text-sm ${
                   billingCycle === "yearly"
-                    ? "bg-gradient-to-r from-green-700 via-green-600 to-green-500 text-white shadow-sm"
-                    : "bg-transparent text-muted-foreground hover:text-foreground"
+                    ? "bg-white text-green-800 shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
+                    : "bg-transparent text-slate-500 hover:text-slate-900"
                 }`}
               >
                 <span>Yearly</span>
                 {billingCycle === "yearly" && (
-                  <span className="px-1.5 py-0.5 text-[9px] sm:text-[10px] font-bold whitespace-nowrap bg-white/25 text-white border border-white/40">
+                  <span className="px-1.5 py-0.5 text-[9px] sm:text-[10px] font-bold whitespace-nowrap bg-green-100 text-green-800 rounded-full ml-1">
                     Save 50%
                   </span>
                 )}
@@ -402,62 +402,26 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
           return (
             <div
               key={product.key}
-              className={`group relative flex h-full flex-col border transition-all duration-700 p-8 sm:p-10 md:p-12 w-full ${
+              className={`group relative flex h-full flex-col transition-all duration-300 p-8 sm:p-10 md:p-12 w-full rounded-[2rem] ${
                 isPopular
-                  ? "scale-105 z-10 overflow-visible border-[#8b5e3c]/55 bg-slate-900 shadow-2xl shadow-[rgba(21,128,61,0.45)] hover:scale-[1.05] hover:border-[#a67c52]/70 hover:shadow-[0_0_80px_rgba(21,128,61,0.55),0_0_120px_rgba(34,197,94,0.25)]"
-                  : "overflow-hidden border border-[#e8ddd0] bg-white shadow-lg hover:shadow-xl hover:border-[#d4c4b0]"
+                  ? "z-10 border border-green-700 bg-[#052E16] shadow-xl"
+                  : "border border-slate-200 bg-white/70 backdrop-blur-sm shadow-sm"
               }`}
               style={isPopular ? {
-                background: 'linear-gradient(135deg, rgba(58, 35, 22, 0.92) 0%, rgba(94, 61, 42, 0.95) 45%, rgba(139, 94, 60, 0.88) 100%)',
-                backdropFilter: 'blur(60px) saturate(160%)',
-                WebkitBackdropFilter: 'blur(60px) saturate(160%)',
-                boxShadow: '0 12px 48px 0 rgba(94, 61, 42, 0.4), inset 0 2px 0 0 rgba(255, 255, 255, 0.22), 0 0 50px rgba(166, 124, 82, 0.2)'
+                background: 'linear-gradient(180deg, #052E16 0%, #064E3B 100%)',
               } : undefined}
             >
-              {/* Multiple glass reflection layers */}
               {isPopular && (
                 <>
-                  {/* Top glass shine - more brownish when not hovering */}
-                  <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-[rgba(21,128,61,0.15)]/30 via-green-600/10 to-transparent opacity-50 group-hover:from-white/40 group-hover:via-white/10 group-hover:opacity-80 transition-all duration-700 pointer-events-none"></div>
-                  
-                  {/* Diagonal glass reflection - brownish tint */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-600/20 via-transparent to-green-700/30 opacity-40 group-hover:from-white/30 group-hover:opacity-80 transition-all duration-700 pointer-events-none"></div>
-                  
-                  {/* Reverse diagonal for depth - brownish */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-green-700/25 via-transparent to-green-600/15 opacity-35 group-hover:to-white/20 group-hover:opacity-70 transition-all duration-700 pointer-events-none"></div>
-                  
-                  {/* Animated shimmer effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" style={{
-                    animation: 'shimmer 3s infinite'
-                  }}></div>
-                  
-                  {/* Outer glow aura - multiple layers */}
-                  <div className="absolute -inset-4 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" style={{
-                    background: 'radial-gradient(circle at center, rgba(166, 124, 82, 0.55), rgba(94, 61, 42, 0.25), transparent)',
-                    filter: 'blur(30px)',
-                    zIndex: -1
-                  }}></div>
-                  
-                  <div className="absolute -inset-8 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" style={{
-                    background: 'radial-gradient(circle at center, rgba(166, 124, 82, 0.4), rgba(94, 61, 42, 0.15), transparent)',
-                    filter: 'blur(50px)',
-                    zIndex: -2
-                  }}></div>
-                </>
-              )}
-              {isPopular && (
-                <>
-                  <div className="absolute -top-4 sm:-top-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-green-300 bg-green-50 px-3 py-1 text-[10px] font-semibold text-green-800 shadow-lg sm:-top-5 sm:px-4 sm:py-1.5 sm:text-xs">
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-transparent to-transparent pointer-events-none rounded-[2rem]"></div>
+                  <div className="absolute -top-4 sm:-top-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-green-500 px-4 py-1.5 text-[10px] font-bold text-white shadow-sm sm:text-xs">
                     Most Loved
                   </div>
-                  {/* Glowing orb effect */}
-                  <div className="absolute -top-20 -right-20 w-40 h-40 bg-green-700/30 blur-3xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
-                  <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-green-600/30 blur-3xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
                 </>
               )}
 
               {showSavingsBadge && (
-                <div className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-white/20 backdrop-blur-sm px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-semibold text-white whitespace-nowrap border border-white/30 shadow-lg">
+                <div className="absolute top-4 right-4 rounded-full bg-slate-100 px-3 py-1 text-[10px] sm:text-xs font-bold text-green-700">
                   Save {planSavings}%
                 </div>
               )}
@@ -518,10 +482,10 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
                     </Button>
                   ) : (
                       <Button
-                      className={`w-full h-14 sm:h-16 py-4 sm:py-5 text-sm sm:text-[15px] font-semibold shadow-lg transition-all duration-300 ${
+                      className={`w-full h-14 sm:h-14 rounded-xl py-4 sm:py-5 text-sm sm:text-[15px] font-semibold shadow-sm transition-all duration-300 ${
                         isPopular
-                          ? "bg-green-50 text-green-800 hover:bg-white hover:text-green-950 hover:shadow-[0_0_28px_rgba(232,184,75,0.35)] hover:scale-105"
-                          : "bg-green-700 text-white hover:bg-green-800"
+                          ? "bg-green-500 text-white hover:bg-green-400"
+                          : "bg-slate-900 text-white hover:bg-slate-800"
                       }`}
                       onClick={() => activeProductId && onSubscribe(activeProductId)}
                       disabled={!activeProductId || !!ctaLoadingId}
