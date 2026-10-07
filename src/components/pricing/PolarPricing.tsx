@@ -180,7 +180,11 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
           try {
             errorData = JSON.parse(textData);
           } catch (e) {}
-          throw new Error(errorData.error || `Failed to load products (Status ${productsRes.status})`);
+          if (active) {
+            setError(errorData.error || `Failed to load products (Status ${productsRes.status})`);
+            setLoading(false);
+          }
+          return;
         }
 
         const data = (await productsRes.json()) as Product[];
@@ -191,7 +195,7 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
           if (active) setSpots(spotsData);
         }
       } catch (e) {
-        setError((e as Error).message);
+        if (active) setError((e as Error).message);
       } finally {
         if (active) setLoading(false);
       }
