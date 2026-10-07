@@ -69,7 +69,7 @@ export default function PageNavbar({
           <Link href="/" className="flex flex-shrink-0 items-center gap-2.5" aria-label="DebotifyText home">
             <Image src="/debotify.png" alt="" width={34} height={34} className="h-8 w-8" />
             <span className="text-lg font-bold tracking-tight text-slate-900">
-              Debotify<span className="text-green-700">Lab</span>
+              Debotify<span className="text-green-700">Text</span>
             </span>
           </Link>
 

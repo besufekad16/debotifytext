@@ -61,7 +61,7 @@ export function SiteFooter() {
                 <Image src="/debotify.png" alt="DebotifyText" width={24} height={24} className="h-6 w-6" />
               </div>
               <span className="text-xl font-extrabold text-white tracking-tight">
-                Debotify<span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-500">Lab</span>
+                Debotify<span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-500">Text</span>
               </span>
             </Link>
             <p className="mb-8 max-w-xs text-[14px] leading-relaxed text-slate-400 font-medium">
