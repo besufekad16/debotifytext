@@ -157,7 +157,7 @@ export default async function PseoPage({ params }: PageProps) {
         name: "DebotifyText",
         logo: {
           "@type": "ImageObject",
-          url: `${BASE_URL}/debotify.png`
+          url: `${BASE_URL}/debotify-logo.png`
         }
       }
     },

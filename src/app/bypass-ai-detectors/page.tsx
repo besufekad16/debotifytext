@@ -61,7 +61,7 @@ export default function BypassAiDetectorsPage() {
         author: { "@type": "Organization", name: "DebotifyText", url: BASE_URL },
         publisher: {
           "@type": "Organization", name: "DebotifyText", url: BASE_URL,
-          logo: { "@type": "ImageObject", url: `${BASE_URL}/debotify.png`, width: 512, height: 512 },
+          logo: { "@type": "ImageObject", url: `${BASE_URL}/debotify-logo.png`, width: 512, height: 512 },
         },
         mainEntityOfPage: { "@type": "WebPage", "@id": URL },
       },

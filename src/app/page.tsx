@@ -87,7 +87,7 @@ export default function HomePage() {
         name: "DebotifyText",
         alternateName: ["Debotify", "Debotify Text"],
         url: "https://www.debotifytext.com",
-        logo: "https://www.debotifytext.com/debotify.png",
+        logo: "https://www.debotifytext.com/debotify-logo.png",
         sameAs: ["https://twitter.com/debotifytext"]
       },
       {

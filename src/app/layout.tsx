@@ -51,8 +51,8 @@ export const metadata: Metadata = {
     },
   },
   icons: [
-    { rel: "icon", url: "/debotify.png", type: "image/png" },
-    { rel: "apple-touch-icon", url: "/debotify.png" }
+    { rel: "icon", url: "/debotify-logo.png", type: "image/png" },
+    { rel: "apple-touch-icon", url: "/debotify-logo.png" }
   ],
   openGraph: {
     type: "website",
@@ -108,7 +108,7 @@ export default function RootLayout({
         "url": "https://www.debotifytext.com",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://www.debotifytext.com/debotify.png"
+          "url": "https://www.debotifytext.com/debotify-logo.png"
         },
         "alternateName": ["Debotify", "Debotify Text", "DebotifyText AI Humanizer"],
         "description": "DebotifyText is an AI text humanizer for making ChatGPT, Claude, and Gemini drafts read more naturally. Also searched as debotify, debotify lab, essay humanizer, and free AI humanizer.",

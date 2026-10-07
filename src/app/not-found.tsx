@@ -21,7 +21,7 @@ export default function NotFound() {
         <div className="mb-5 flex justify-center">
           <div className="relative h-40 w-40 sm:h-48 sm:w-48 md:h-56 md:w-56 flex-shrink-0">
             <Image
-              src="/debotify.png"
+              src="/debotify-logo.png"
               alt="DebotifyText"
               fill
               className="object-contain"

@@ -58,7 +58,7 @@ export function SiteFooter() {
           <div className="col-span-2 md:col-span-4">
             <Link href="/" className="mb-6 inline-flex items-center gap-2.5">
               <div className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center">
-                <Image src="/debotify.png" alt="DebotifyText" width={24} height={24} className="h-6 w-6" />
+                <Image src="/debotify-logo.png" alt="DebotifyText" width={24} height={24} className="h-6 w-6" />
               </div>
               <span className="text-xl font-extrabold text-white tracking-tight">
                 Debotify<span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-500">Text</span>

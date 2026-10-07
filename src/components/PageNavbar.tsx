@@ -67,7 +67,7 @@ export default function PageNavbar({
       <header className="sticky top-0 z-[100] w-full border-b border-black/5 bg-white/80 backdrop-blur-xl">
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link href="/" className="flex flex-shrink-0 items-center gap-2.5" aria-label="DebotifyText home">
-            <Image src="/debotify.png" alt="" width={34} height={34} className="h-8 w-8" />
+            <Image src="/debotify-logo.png" alt="" width={34} height={34} className="h-8 w-8" />
             <span className="text-lg font-bold tracking-tight text-slate-900">
               Debotify<span className="text-green-700">Text</span>
             </span>
