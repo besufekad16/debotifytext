@@ -66,7 +66,7 @@ export default function ExitIntentPopup() {
   return (
     <>
       <div
-        className={`fixed inset-0 z-50 bg-slate-900/55 backdrop-blur-[2px] transition-opacity duration-200 ${
+        className={`fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm transition-opacity duration-200 ${
           isClosing ? "opacity-0" : "opacity-100"
         }`}
         onClick={handleClose}
@@ -79,67 +79,64 @@ export default function ExitIntentPopup() {
             : "translate-y-0 opacity-100 sm:scale-100"
         }`}
       >
-        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-slate-900 shadow-2xl">
+        <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/60 bg-white/95 shadow-2xl backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/95">
           <div
             className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full blur-3xl"
-            style={{ background: "radial-gradient(circle, rgba(232,184,75,0.35), transparent 70%)" }}
+            style={{ background: "radial-gradient(circle, rgba(21,128,61,0.15), transparent 70%)" }}
           />
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--hl-offer)] to-transparent" />
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-green-600/50 to-transparent" />
 
           <button
             onClick={handleClose}
-            className="absolute right-3 top-3 z-10 rounded-lg p-1.5 text-white/50 transition-colors hover:bg-white/10 hover:text-white"
+            className="absolute right-4 top-4 z-10 rounded-full p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-300"
             aria-label="Close"
           >
             <X className="h-4 w-4" />
           </button>
 
           <div className="relative p-6 sm:p-8">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--hl-offer)]/35 bg-[var(--hl-offer)]/10 px-3 py-1.5">
-              <GraduationCap className="h-3.5 w-3.5 text-[var(--hl-offer)]" />
-              <span className="text-[10px] font-black uppercase tracking-[0.14em] text-[var(--hl-offer)]">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-green-700/20 bg-green-700/10 px-3 py-1.5">
+              <GraduationCap className="h-3.5 w-3.5 text-green-700 dark:text-green-500" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-green-800 dark:text-green-400">
                 Back-to-School · Lifetime
               </span>
             </div>
 
-            <h2 className="pr-8 text-xl font-bold tracking-tight text-white sm:text-2xl">
+            <h2 className="pr-8 text-xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-2xl">
               Wait — lock in lifetime before semester starts
             </h2>
 
-            <p className="mt-2 text-sm leading-relaxed text-white/60 sm:text-base">
+            <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300 sm:text-base">
               Pay once. Get 20,000 words every month forever. No subscription. No renewals.
             </p>
 
-            <div className="mt-5 space-y-2.5 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+            <div className="mt-6 space-y-3 rounded-2xl border border-slate-100 bg-slate-50 p-4 dark:border-white/10 dark:bg-white/[0.04]">
               {[
                 "20,000 words / month for life",
                 "Built for Turnitin & GPTZero",
                 "30-day money-back guarantee",
               ].map((item) => (
-                <div key={item} className="flex items-center gap-2.5 text-sm text-white/85">
-                  <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[var(--hl-offer)]/15">
-                    <Check className="h-3 w-3 text-[var(--hl-offer)]" />
+                <div key={item} className="flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200">
+                  <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-green-700/15">
+                    <Check className="h-3.5 w-3.5 text-green-700 dark:text-green-500" />
                   </span>
                   {item}
                 </div>
               ))}
             </div>
 
-            <div className="mt-6 space-y-3">
+            <div className="mt-8 space-y-3">
               <button
                 onClick={handleCTA}
-                className="group flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-sm font-black uppercase tracking-wide text-slate-900 transition-transform hover:scale-[1.02] active:scale-[0.98]"
-                style={{
-                  background: "linear-gradient(135deg,#F5D78A 0%,#E8B84B 45%,#C8922A 100%)",
-                }}
+                className="group flex w-full items-center justify-center gap-2 rounded-2xl bg-[#15803D] px-6 py-4 text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-green-700/20 transition-all hover:scale-[1.02] hover:bg-green-800 hover:shadow-green-700/30 active:scale-[0.98]"
               >
                 Claim Lifetime Access
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
 
               <button
                 onClick={handleClose}
-                className="w-full px-6 py-2 text-sm text-white/40 transition-colors hover:text-white/70"
+                className="w-full rounded-xl px-6 py-2.5 text-sm font-medium text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-700 dark:hover:bg-slate-800/50 dark:hover:text-slate-300"
               >
                 No thanks
               </button>
