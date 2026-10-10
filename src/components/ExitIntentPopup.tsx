@@ -79,7 +79,7 @@ export default function ExitIntentPopup() {
             : "translate-y-0 opacity-100 sm:scale-100"
         }`}
       >
-        <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/60 bg-white/95 shadow-2xl backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/95">
+        <div className="relative max-h-[calc(100dvh-2rem)] overflow-y-auto overflow-x-hidden rounded-[2rem] border border-slate-200/60 bg-white/95 shadow-2xl backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/95">
           <div
             className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full blur-3xl"
             style={{ background: "radial-gradient(circle, rgba(21,128,61,0.15), transparent 70%)" }}

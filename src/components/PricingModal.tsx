@@ -103,7 +103,7 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
         onClick={handleClose}
       >
         <div
-          className={`relative w-full max-w-[420px] overflow-hidden rounded-[2.5rem] border border-green-400/20 bg-green-950 shadow-[0_30px_100px_-15px_rgba(34,197,94,0.25)] transition-all duration-300 cubic-bezier(0.16,1,0.3,1) ${
+          className={`relative w-full max-w-[420px] max-h-[calc(100dvh-2rem)] overflow-y-auto overflow-x-hidden rounded-[2.5rem] border border-green-400/20 bg-green-950 shadow-[0_30px_100px_-15px_rgba(34,197,94,0.25)] transition-all duration-300 cubic-bezier(0.16,1,0.3,1) ${
             isVisible ? "translate-y-0 scale-100 opacity-100" : "translate-y-8 scale-95 opacity-0"
           }`}
           onClick={(e) => e.stopPropagation()}
