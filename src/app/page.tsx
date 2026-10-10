@@ -283,7 +283,7 @@ export default function HomePage() {
             name: "What support channels are available?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Email debotifytext1@gmail.com or use in-app messaging. Paid plans get priority response.",
+              text: "Email debotifytext@gmail.com or use in-app messaging. Paid plans get priority response.",
             },
           },
         ],

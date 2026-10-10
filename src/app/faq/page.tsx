@@ -111,7 +111,7 @@ export default function FAQPage() {
         },
         {
           question: "How do I contact support?",
-          answer: "You can reach our support team through our contact page or by emailing debotifytext1@gmail.com. We typically respond within 24 hours.",
+          answer: "You can reach our support team through our contact page or by emailing debotifytext@gmail.com. We typically respond within 24 hours.",
         },
       ],
     },

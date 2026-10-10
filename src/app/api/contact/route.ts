@@ -3,6 +3,8 @@ import { z } from "zod";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { db } from "~/server/db";
 
+import { resend } from "~/lib/resend";
+
 export const dynamic = "force-dynamic";
 
 const contactSchema = z.object({
@@ -34,6 +36,25 @@ export async function POST(request: Request) {
         message: payload.message,
       },
     });
+
+    // Send notification email to the support team
+    try {
+      await resend.emails.send({
+        from: 'onboarding@resend.dev', // Resend default testing address
+        to: 'debotifytext@gmail.com', // Sent to admin email
+        subject: `New Contact Message from ${payload.name}`,
+        html: `
+          <h3>New Contact Message</h3>
+          <p><strong>Name:</strong> ${payload.name}</p>
+          <p><strong>Email:</strong> ${userEmail ?? "No email provided"}</p>
+          <p><strong>Message:</strong></p>
+          <p>${payload.message}</p>
+        `,
+      });
+    } catch (emailError) {
+      console.error("[RESEND_ERROR]", emailError);
+      // We don't fail the overall request if the email fails to send
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {

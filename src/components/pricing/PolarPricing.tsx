@@ -526,6 +526,7 @@ export default function PolarPricing({ isTeamMember = false, defaultBillingCycle
             productId={unlimitedProductId}
             isTeamMember={isTeamMember}
             spots={spots}
+            displayPrice={unlimitedProduct?.monthly?.displayPrice}
           />
         );
       })()}

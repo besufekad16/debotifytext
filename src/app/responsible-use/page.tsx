@@ -155,10 +155,10 @@ export default function ResponsibleUsePage() {
                 If you have concerns or questions about how to use DebotifyText ethically in your context, please reach
                 out to us at{" "}
                 <Link
-                  href="mailto:debotifytext1@gmail.com"
+                  href="mailto:debotifytext@gmail.com"
                   className="font-semibold text-green-700 underline underline-offset-4"
                 >
-                  debotifytext1@gmail.com
+                  debotifytext@gmail.com
                 </Link>{" "}
                 or consult with your academic advisor or institution&apos;s integrity office.
               </p>

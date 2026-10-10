@@ -174,7 +174,7 @@ const FAQ_ITEMS = [
     id: "support",
     question: "What support channels are available?",
     answer:
-      "Email debotifytext1@gmail.com or use in-app messaging. Paid plans get priority response.",
+      "Email debotifytext@gmail.com or use in-app messaging. Paid plans get priority response.",
   },
 ];
 

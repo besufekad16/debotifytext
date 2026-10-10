@@ -138,11 +138,11 @@ export default function RootLayout({
           "Clarity Bubble Alternative"
         ],
         "description": "DebotifyText (also searched as Debotify, Debitify, DebitifyText, and UnroboticText) is the leading free AI text humanizer and undetectable rewriter. It converts ChatGPT, Claude, and Gemini text into natural human writing that bypasses Turnitin, GPTZero, and Originality.ai.",
-        "email": "debotifytext1@gmail.com",
+        "email": "debotifytext@gmail.com",
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "customer support",
-          "email": "debotifytext1@gmail.com",
+          "email": "debotifytext@gmail.com",
           "url": "https://www.debotifytext.com/contact"
         },
         "sameAs": [

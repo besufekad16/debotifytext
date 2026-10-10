@@ -18,6 +18,7 @@ interface Props {
   isTeamMember?: boolean;
   spots?: SpotsData | null;
   compact?: boolean; // compact mode for use inside modals
+  displayPrice?: string;
 }
 
 const FEATURES = [
@@ -33,7 +34,7 @@ const FEATURES = [
   "No daily limits, no caps",
 ];
 
-export default function UnlimitedCard({ productId, isTeamMember = false, spots, compact = false }: Props) {
+export default function UnlimitedCard({ productId, isTeamMember = false, spots, compact = false, displayPrice = "$100" }: Props) {
   const { isSignedIn } = useUser();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -199,7 +200,7 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots, 
                 {/* Right: price */}
                 <div className="sm:text-right flex-shrink-0">
                   <div className="flex items-baseline gap-1 sm:justify-end">
-                    <span className="text-5xl sm:text-6xl font-black text-white leading-none">$100</span>
+                    <span className="text-5xl sm:text-6xl font-black text-white leading-none">{displayPrice}</span>
                   </div>
                   <p className="text-white/50 text-xs mt-1">billed every 2 months · cancel anytime</p>
                   <p className="text-emerald-400 text-xs font-medium mt-0.5">Unlimited access for 2 months per cycle</p>
@@ -278,7 +279,7 @@ export default function UnlimitedCard({ productId, isTeamMember = false, spots, 
                       {loading ? (
                         <><Loader2 className="h-4 w-4 animate-spin" /> Processing…</>
                       ) : (
-                        <><Zap className="h-4 w-4" /> Get Unlimited — $100</>
+                        <><Zap className="h-4 w-4" /> Get Unlimited — {displayPrice}</>
                       )}
                     </button>
                   )}

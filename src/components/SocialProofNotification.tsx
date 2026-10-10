@@ -56,6 +56,23 @@ export default function SocialProofNotification() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
   useEffect(() => {
+    // Fetch live prices from Polar API to update the global PLANS array
+    fetch("/api/polar/products")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          const basic = data.find((p) => p.key === "small");
+          if (basic?.monthly?.displayPrice) PLANS[0]!.price = basic.monthly.displayPrice.replace('/month', '');
+
+          const pro = data.find((p) => p.key === "medium");
+          if (pro?.monthly?.displayPrice) PLANS[1]!.price = pro.monthly.displayPrice.replace('/month', '');
+
+          const ultra = data.find((p) => p.key === "large");
+          if (ultra?.monthly?.displayPrice) PLANS[2]!.price = ultra.monthly.displayPrice.replace('/month', '');
+        }
+      })
+      .catch((err) => console.error("[SocialProof] Failed to fetch prices:", err));
+
     const showNotification = () => {
       const notification = generateRandomNotification();
       setNotifications((prev) => [...prev, notification]);

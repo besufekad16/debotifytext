@@ -194,10 +194,11 @@ export async function fetchPolarProduct(productId?: string | null): Promise<Pola
 
 export function formatPolarPrice(product: PolarProductSummary): string {
   if (!product.priceAmount || !product.priceCurrency) return "";
-  const amount = (product.priceAmount / 100).toFixed(2);
+  const amountNumber = product.priceAmount / 100;
+  const amountStr = amountNumber % 1 === 0 ? amountNumber.toString() : amountNumber.toFixed(2);
   const isRecurring = product.priceType === "recurring";
   const interval = product.recurringInterval ? `/${product.recurringInterval}` : "";
-  return `${currencySymbol(product.priceCurrency)}${amount}${isRecurring ? interval : ""}`;
+  return `${currencySymbol(product.priceCurrency)}${amountStr}${isRecurring ? interval : ""}`;
 }
 
 function currencySymbol(code: string): string {

@@ -93,8 +93,8 @@ export default async function ContactPage() {
       title: "Email us anytime",
       description: (
         <>
-          <a href="mailto:debotifytext1@gmail.com" className="font-semibold text-green-700 transition-colors hover:text-green-800">
-            debotifytext1@gmail.com
+          <a href="mailto:debotifytext@gmail.com" className="font-semibold text-green-700 transition-colors hover:text-green-800">
+            debotifytext@gmail.com
           </a>{" "}
           — we respond in under 24 hours.
         </>

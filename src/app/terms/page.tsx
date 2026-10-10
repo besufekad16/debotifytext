@@ -126,8 +126,8 @@ const SECTIONS: LegalSection[] = [
     paragraphs: [
       <span key="contact">
         For questions about these Terms of Service, please contact us at{" "}
-        <a href="mailto:debotifytext1@gmail.com" className="font-semibold text-green-700 underline underline-offset-4">
-          debotifytext1@gmail.com
+        <a href="mailto:debotifytext@gmail.com" className="font-semibold text-green-700 underline underline-offset-4">
+          debotifytext@gmail.com
         </a>
         . We typically respond within 24 hours.
       </span>,
