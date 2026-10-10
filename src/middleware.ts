@@ -64,6 +64,14 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
       }
     }
   }
+}, {
+  authorizedParties: [
+    'https://debotifytext.com',
+    'https://www.debotifytext.com',
+    // Allow localhost for local development
+    'http://localhost:3050',
+    'http://localhost:3000'
+  ]
 })
 
 export const config = {
