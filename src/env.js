@@ -25,9 +25,9 @@ export const env = createEnv({
     POLAR_CREDITS_20000: z.string().optional(),
     POLAR_CREDITS_45000: z.string().optional(),
     POLAR_PRODUCT_UNLIMITED_2M: z.string().optional(),
-    AISTUDIOS_API_KEY: z.string(),
-    OPENAI_API_KEY: z.string(),
-    RESEND_API_KEY: z.string(),
+    AISTUDIOS_API_KEY: z.string().optional(),
+    OPENAI_API_KEY: z.string().optional(),
+    RESEND_API_KEY: z.string().optional(),
     OXAPAY_PAYOUT_API_KEY: z.string().optional(),
     CRON_SECRET: z.string().optional(),
     NODE_ENV: z
