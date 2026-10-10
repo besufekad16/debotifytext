@@ -4,6 +4,7 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { db } from "~/server/db";
 
 import { resend } from "~/lib/resend";
+import { getAdminContactNotificationHtml, getContactConfirmationHtml } from "~/lib/email-templates";
 
 export const dynamic = "force-dynamic";
 
@@ -40,17 +41,22 @@ export async function POST(request: Request) {
     // Send notification email to the support team
     try {
       await resend.emails.send({
-        from: 'onboarding@resend.dev', // Resend default testing address
+        from: 'DebotifyText Support <support@debotifytext.com>', 
         to: 'debotifytext@gmail.com', // Sent to admin email
+        replyTo: userEmail,
         subject: `New Contact Message from ${payload.name}`,
-        html: `
-          <h3>New Contact Message</h3>
-          <p><strong>Name:</strong> ${payload.name}</p>
-          <p><strong>Email:</strong> ${userEmail ?? "No email provided"}</p>
-          <p><strong>Message:</strong></p>
-          <p>${payload.message}</p>
-        `,
+        html: getAdminContactNotificationHtml(payload.name, userEmail ?? "No email provided", payload.message),
       });
+
+      // Send automated confirmation email to the user
+      if (userEmail) {
+        await resend.emails.send({
+          from: 'DebotifyText <support@debotifytext.com>',
+          to: userEmail,
+          subject: 'We received your message - DebotifyText',
+          html: getContactConfirmationHtml(payload.name),
+        });
+      }
     } catch (emailError) {
       console.error("[RESEND_ERROR]", emailError);
       // We don't fail the overall request if the email fails to send

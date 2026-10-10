@@ -3,6 +3,8 @@ import { headers } from 'next/headers'
 import type { WebhookEvent } from '@clerk/nextjs/server'
 import { db } from '~/server/db'
 import { env } from '~/env'
+import { resend } from '~/lib/resend'
+import { getWelcomeEmailHtml } from '~/lib/email-templates'
 
 export async function POST(req: Request) {
   // Get the headers
@@ -60,6 +62,24 @@ export async function POST(req: Request) {
       })
 
       console.log(`User created: ${id}`)
+
+      // Send welcome email
+      const userEmailAddress = email_addresses[0]?.email_address;
+      if (userEmailAddress) {
+        try {
+          const name = `${first_name || ''} ${last_name || ''}`.trim() || username || 'User';
+          await resend.emails.send({
+            from: 'DebotifyText <hello@debotifytext.com>',
+            to: userEmailAddress,
+            subject: 'Welcome to DebotifyText! 🎉',
+            html: getWelcomeEmailHtml(name),
+          });
+          console.log(`Welcome email sent to ${userEmailAddress}`);
+        } catch (emailError) {
+          console.error('Failed to send welcome email:', emailError);
+          // Don't fail the webhook if email fails
+        }
+      }
     } catch (error) {
       console.error('Error creating user:', error)
       return new Response('Error creating user', { status: 500 })
