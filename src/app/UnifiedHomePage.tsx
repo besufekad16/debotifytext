@@ -1423,9 +1423,9 @@ export default function UnifiedHomePage() {
               
               <div className="grid md:grid-cols-3 gap-8 relative z-10">
                 {[
-                  { n: "1", title: "Paste your text", desc: "Drop in content from ChatGPT, Claude, Gemini, or any AI tool. Supports plain text, .docx, and .pdf." },
-                  { n: "2", title: "Hit Humanize", desc: "Our engine rewrites for natural flow, varied sentence rhythm, and authentic tone — while keeping your meaning." },
-                  { n: "3", title: "Copy and use", desc: "Download as .txt or .docx, or copy directly. Ready for submission, publication, or wherever you need it." },
+                  { n: "1", title: "Paste your text", image: "/step1.jpg", desc: "Drop in content from ChatGPT, Claude, Gemini, or any AI tool. Supports plain text, .docx, and .pdf." },
+                  { n: "2", title: "Hit Humanize", image: "/step2.jpg", desc: "Our engine rewrites for natural flow, varied sentence rhythm, and authentic tone — while keeping your meaning." },
+                  { n: "3", title: "Copy and use", image: "/step3.jpg", desc: "Download as .txt or .docx, or copy directly. Ready for submission, publication, or wherever you need it." },
                 ].map((step, idx) => (
                   <div key={step.n} className="group relative text-center rounded-[2rem] bg-white border border-slate-100 p-10 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(34,197,94,0.15)] hover:border-green-200 transition-all duration-500 overflow-hidden">
                     {/* Background Number */}
@@ -1434,10 +1434,8 @@ export default function UnifiedHomePage() {
                     </div>
                     
                     <div className="relative z-10 flex flex-col items-center">
-                      <div className="w-16 h-16 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-green-500/20 group-hover:border-green-200 transition-all duration-500">
-                        {idx === 0 && <FileText className="w-7 h-7 text-green-600" />}
-                        {idx === 1 && <Feather className="w-7 h-7 text-green-600" />}
-                        {idx === 2 && <Copy className="w-7 h-7 text-green-600" />}
+                      <div className="w-40 h-40 mb-8 rounded-3xl overflow-hidden shadow-md ring-1 ring-slate-100 group-hover:scale-105 group-hover:shadow-[0_20px_40px_-15px_rgba(34,197,94,0.3)] group-hover:ring-green-200 transition-all duration-500 relative">
+                        <Image src={step.image} alt={step.title} fill className="object-cover" />
                       </div>
                       <h3 className="text-xl font-bold text-slate-800 mb-3">{step.title}</h3>
                       <p className="text-[14px] text-slate-500 leading-relaxed max-w-[260px]">
