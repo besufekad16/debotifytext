@@ -40,9 +40,10 @@
   ],
   "exclude": [
     "node_modules",
+    "scripts",
+    "scripts/**/*",
     "check-webhook-config.js",
     "verify-checkout-fix.cjs",
-    "scripts/generate-sitemaps.js",
     "test-polar-checkout.js"
   ]
 }

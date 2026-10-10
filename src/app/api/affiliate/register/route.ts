@@ -2,11 +2,11 @@ import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import { db } from "~/server/db";
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://humanifylab.com";
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.debotifytext.com";
 
 function generateReferralCode(count: number): string {
   const padded = String(count + 1).padStart(3, "0");
-  return `humanify-${padded}`;
+  return `debotify-${padded}`;
 }
 
 export async function POST() {

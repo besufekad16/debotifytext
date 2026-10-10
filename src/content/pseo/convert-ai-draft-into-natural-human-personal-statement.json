@@ -1,0 +1,63 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 89,
+    "postHumanizationOriginality": 99.1,
+    "semanticPreservationScore": 99.2,
+    "tokensProcessedAvg": 848585
+  },
+  "persona": {
+    "idealUser": "Academic Researchers & Thesis Writers",
+    "coreIntent": "Successfully solve convert ai draft into natural human personal statement with natural, human-like phrasing."
+  },
+  "technicalDeepDive": "When searchers look for convert ai draft into natural human personal statement, the central challenge is overcoming the statistical uniformity that AI detection models target. LLMs like ChatGPT and Claude produce text with uniform sentence cadence and low token perplexity.\n\nDebotifyText addresses this by dynamically restructuring sentence rhythm (burstiness) and substituting overused AI terminology with rich, natural synonyms. Our engine preserves your citations, technical terms, and core thesis while eliminating the statistical markers that trigger detection algorithms.\n\nThe result is polished, academic-grade writing that flows naturally for human readers and scores closer to 0% AI on automated checks.",
+  "stepByStep": [
+    {
+      "title": "Input Your Text",
+      "description": "Paste your draft into DebotifyText to address convert ai draft into natural human personal statement."
+    },
+    {
+      "title": "Select Tone & Humanize",
+      "description": "Choose Academic, Casual, or Professional tone and click Humanize to restructure sentence rhythm natively."
+    },
+    {
+      "title": "Verify & Submit",
+      "description": "Review the humanized output, conduct a personal edit pass, and submit with full confidence."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Burstiness",
+      "definition": "The variation in sentence length and structure that characterizes natural human writing."
+    },
+    {
+      "term": "Perplexity",
+      "definition": "A measurement of how unpredictable word choices are to a language model."
+    },
+    {
+      "term": "AI Watermark",
+      "definition": "Statistical frequency clusters that detectors like Turnitin use to identify synthetic content."
+    },
+    {
+      "term": "Semantic Anchoring",
+      "definition": "Our technique for preserving original citations, facts, and logical meaning during rewriting."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How does DebotifyText help with convert ai draft into natural human personal statement?",
+      "answer": "DebotifyText uses proprietary semantic restructuring to analyze token predictability and rhythm. It naturally rewrites phrasing to mirror human variation, ensuring your content reads authentically and avoids detection."
+    },
+    {
+      "question": "Is using DebotifyText for convert ai draft into natural human personal statement free?",
+      "answer": "Yes, DebotifyText provides a genuinely free tier allowing you to humanize drafts and verify readability before needing any paid plan."
+    },
+    {
+      "question": "Does DebotifyText change the original meaning of my text?",
+      "answer": "No. Unlike basic paraphrasers that swap words randomly, DebotifyText preserves your core arguments, data, and citations while restructuring syntax and flow."
+    },
+    {
+      "question": "Which AI detectors does DebotifyText bypass?",
+      "answer": "DebotifyText is tested against Turnitin, GPTZero, Originality.ai, Copyleaks, Winston AI, Canvas, and SafeAssign."
+    }
+  ]
+}

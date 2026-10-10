@@ -1,4 +1,4 @@
-import { Polar } from "@polar-sh/sdk";
+import { createPolar } from "@polar-sh/sdk/2026-10";
 import { env } from "~/env";
 
 export type PolarProductSummary = {
@@ -22,9 +22,9 @@ export type PolarPricingTier = {
   yearly?: PolarProductSummary | null;
 };
 
-const polarClient = new Polar({
+const polarClient = createPolar({
   accessToken: env.POLAR_ACCESS_TOKEN,
-  server: env.POLAR_ENV,
+  environment: (env.POLAR_ENV as "production" | "sandbox") ?? "production",
 });
 
 // Custom UI descriptions for better presentation
@@ -168,7 +168,7 @@ export async function fetchPolarProduct(productId?: string | null): Promise<Pola
   if (!productId) return null;
 
   try {
-    const product = await polarClient.products.get({ id: productId });
+    const product = (await polarClient.products.get(productId)) as any;
     const price: any =
       product.prices?.find((p: any) => p.amountType === "fixed" && !p.isArchived) ??
       product.prices?.[0];

@@ -1,6 +1,6 @@
 # ============================================================
 # DebotifyText — robots.txt
-# https://debotifytext.com
+# https://www.debotifytext.com
 # ============================================================
 
 # ── Default: allow all public content ────────────────────────
@@ -117,4 +117,4 @@ Disallow: /api/
 # https://debotifytext.com/llms.txt
 
 # ── Sitemap index (Dynamic Next.js Sitemaps) ──────────
-Sitemap: https://debotifytext.com/sitemap.xml
+Sitemap: https://www.debotifytext.com/sitemap.xml

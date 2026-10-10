@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { validateEvent } from "@polar-sh/sdk/webhooks";
+import { webhooks } from "@polar-sh/sdk/2026-10";
 import { db } from "~/server/db";
 import { env } from "~/env";
 import { getNextMonthlyResetDate } from "~/server/utils/credit-reset";
@@ -245,7 +245,7 @@ export async function POST(req: NextRequest) {
     // validateEvent returns the validated payload or throws WebhookVerificationError
     // NOTE: The Polar SDK automatically base64 encodes the secret internally
     try {
-      validateEvent(body, headers, webhookSecret);
+      webhooks.validateEvent(body, headers, webhookSecret);
       console.log("[Polar Webhook] ✅ Signature validated successfully");
     } catch (validationError) {
       console.error("[Polar Webhook] ❌ Signature validation FAILED");

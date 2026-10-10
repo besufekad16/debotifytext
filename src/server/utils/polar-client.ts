@@ -51,6 +51,7 @@ async function ensurePolarCustomer(
         method: "GET",
         headers: {
           Authorization: `Bearer ${env.POLAR_ACCESS_TOKEN}`,
+          "Polar-Version": "2026-10",
         },
       }
     );
@@ -68,6 +69,7 @@ async function ensurePolarCustomer(
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${env.POLAR_ACCESS_TOKEN}`,
+        "Polar-Version": "2026-10",
       },
       body: JSON.stringify({
         external_id: clerkId,
@@ -132,6 +134,7 @@ export async function ingestPolarEvent(
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${env.POLAR_ACCESS_TOKEN}`,
+        "Polar-Version": "2026-10",
       },
       body: JSON.stringify({ events: [event] }),
     });
@@ -177,6 +180,7 @@ export async function getPolarSubscription(
         method: "GET",
         headers: {
           Authorization: `Bearer ${env.POLAR_ACCESS_TOKEN}`,
+          "Polar-Version": "2026-10",
         },
       }
     );

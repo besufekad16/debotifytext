@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
  * TEMPORARY DEBUG ENDPOINT
  * This endpoint helps verify your webhook secret is configured correctly
  * 
- * Access: https://www.humanifylab.com/api/webhooks/polar/debug
+ * Access: https://www.debotifytext.com/api/webhooks/polar/debug
  * 
  * DELETE THIS FILE after you've verified the webhook secret!
  */

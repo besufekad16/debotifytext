@@ -157,7 +157,7 @@ export async function POST(request: Request) {
 // GET - API documentation
 export async function GET() {
   return NextResponse.json({
-    message: "HumanifyLab Humanizer API",
+    message: "DebotifyText Humanizer API",
     version: "1.0.0",
     documentation: {
       endpoint: "/api/humanize",

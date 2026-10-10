@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { Polar } from "@polar-sh/sdk";
+import { createPolar } from "@polar-sh/sdk/2026-10";
 import { currentUser } from "@clerk/nextjs/server";
 import { cookies } from "next/headers";
 import { env } from "~/env";
@@ -7,9 +7,9 @@ import { db } from "~/server/db";
 
 export const dynamic = "force-dynamic";
 
-const polarClient = new Polar({
+const polarClient = createPolar({
   accessToken: env.POLAR_ACCESS_TOKEN,
-  server: env.POLAR_ENV,
+  environment: (env.POLAR_ENV as "production" | "sandbox") ?? "production",
 });
 
 export async function POST(req: NextRequest) {
@@ -73,14 +73,14 @@ export async function POST(req: NextRequest) {
     // Create checkout session - products should be an array of product IDs
     const checkout = await polarClient.checkouts.create({
       products: [productId],
-      customerEmail: user.emailAddresses[0]?.emailAddress,
-      customerName: user.fullName || undefined,
+      customer_email: user.emailAddresses[0]?.emailAddress ?? null,
+      customer_name: user.fullName || null,
       metadata: {
         clerkId: user.id,
         ...(refCode ? { ref: refCode } : {}),
       },
-      successUrl: `${baseUrl}/?purchase=success`,
-    } as any);
+      success_url: `${baseUrl}/?purchase=success`,
+    });
 
     console.log("[Polar Checkout] Checkout created:", checkout.id);
 

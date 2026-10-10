@@ -19,15 +19,30 @@ export const metadata: Metadata = {
     'debotify',
     'debotify ai',
     'debotify text',
-    'debotify ai text',
-    'debotify lab',
+    'debotifytext humanizer',
+    'debitify',
+    'debitifytext',
+    'debitify text',
+    'unrobotictext',
+    'unrobotic text',
     'ai humanizer',
+    'humanize ai',
+    'text humanizer',
+    'humanizer ai',
+    'ai rewriter',
+    'ai rewriting',
+    'content humanizer',
+    'ai paraphraser',
+    'rewrite ai',
+    'clarity bubble',
+    'claritybubble',
+    'clarity ai',
     'humanize ai text',
     'ai text humanizer',
     'free ai humanizer',
     'best ai humanizer',
     'undetectable ai',
-    'bypass ai detection',
+    'ai detector bypass',
     'bypass turnitin ai detection',
     'bypass gptzero',
     'humanize chatgpt text',
@@ -110,8 +125,19 @@ export default function RootLayout({
           "@type": "ImageObject",
           "url": "https://www.debotifytext.com/debotify-logo.png"
         },
-        "alternateName": ["Debotify", "Debotify Text", "DebotifyText AI Humanizer"],
-        "description": "DebotifyText is an AI text humanizer for making ChatGPT, Claude, and Gemini drafts read more naturally. Also searched as debotify, debotify lab, essay humanizer, and free AI humanizer.",
+        "alternateName": [
+          "Debotify",
+          "Debotify Text",
+          "DebotifyText AI Humanizer",
+          "Debitify",
+          "DebitifyText",
+          "Debitify Text",
+          "DebotifyText Humanizer",
+          "UnroboticText",
+          "Unrobotic Text",
+          "Clarity Bubble Alternative"
+        ],
+        "description": "DebotifyText (also searched as Debotify, Debitify, DebitifyText, and UnroboticText) is the leading free AI text humanizer and undetectable rewriter. It converts ChatGPT, Claude, and Gemini text into natural human writing that bypasses Turnitin, GPTZero, and Originality.ai.",
         "email": "debotifytext1@gmail.com",
         "contactPoint": {
           "@type": "ContactPoint",
@@ -131,7 +157,10 @@ export default function RootLayout({
   };
 
   return (
-    <ClerkProvider appearance={{ variables: { colorPrimary: "#15803D" } }}>
+    <ClerkProvider
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || "pk_test_Y2xlcmsuZGVib3RpZnl0ZXh0LmNvbSQ"}
+      appearance={{ variables: { colorPrimary: "#15803D" } }}
+    >
       <html lang="en" className={`font-sans ${GeistSans.variable}`}>
         <head>
           {/* Google Analytics */}

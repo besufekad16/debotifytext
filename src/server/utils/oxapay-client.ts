@@ -34,7 +34,7 @@ export async function sendPayout(
     currency: "USDT",
     network,
     amount: parseFloat(amount),
-    description: `HumanifyLab affiliate payout`,
+    description: `DebotifyText affiliate payout`,
   });
 
   try {
