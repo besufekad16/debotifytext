@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     description: "Rewrite ChatGPT, Claude & Gemini text into natural human writing that passes Turnitin, GPTZero, Originality.ai and every major AI detector. Free to try.",
     images: [
       {
-        url: "/forOpenGraph.png",
+        url: "/forOpenGraph.jpg",
         width: 1200,
         height: 630,
         alt: "DebotifyText — Professional AI Humanizer"
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "AI Humanizer — Humanize AI Text & Bypass AI Detectors | DebotifyText",
     description: "Rewrite ChatGPT, Claude & Gemini text into natural human writing that passes Turnitin, GPTZero, Originality.ai and every major AI detector. Free to try.",
-    images: ["/forOpenGraph.png"],
+    images: ["/forOpenGraph.jpg"],
     site: "@debotifytext",
     creator: "@debotifytext",
   },
