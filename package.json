@@ -88,5 +88,15 @@
   "ct3aMetadata": {
     "initVersion": "7.39.3"
   },
-  "packageManager": "npm@11.0.0"
+  "packageManager": "npm@11.0.0",
+  "allowScripts": {
+    "@clerk/shared": true,
+    "@prisma/client": true,
+    "@prisma/engines": true,
+    "core-js": true,
+    "prisma": true,
+    "protobufjs": true,
+    "sharp": true,
+    "unrs-resolver": true
+  }
 }
