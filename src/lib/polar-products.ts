@@ -177,10 +177,10 @@ export async function fetchPolarProduct(productId?: string | null): Promise<Pola
       id: product.id,
       name: product.name,
       description: product.description ?? null,
-      priceAmount: price?.priceAmount ?? null,
-      priceCurrency: price?.priceCurrency ?? null,
+      priceAmount: price?.priceAmount ?? price?.price_amount ?? price?.amount ?? null,
+      priceCurrency: price?.priceCurrency ?? price?.price_currency ?? null,
       priceType: price?.type ?? null,
-      recurringInterval: price?.recurringInterval ?? null,
+      recurringInterval: price?.recurringInterval ?? price?.recurring_interval ?? null,
     };
 
     summary.displayPrice = formatPolarPrice(summary);
