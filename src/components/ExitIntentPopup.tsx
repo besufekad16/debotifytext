@@ -79,7 +79,7 @@ export default function ExitIntentPopup() {
             : "translate-y-0 opacity-100 sm:scale-100"
         }`}
       >
-        <div className="relative max-h-[calc(100dvh-2rem)] overflow-y-auto overflow-x-hidden rounded-[2rem] border border-slate-200/60 bg-white/95 shadow-2xl backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/95">
+        <div className="relative max-h-[calc(100dvh-2rem)] overflow-y-auto overflow-x-hidden popup-scrollbar rounded-[2rem] border border-slate-200/60 bg-white/95 shadow-2xl backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/95">
           <div
             className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full blur-3xl"
             style={{ background: "radial-gradient(circle, rgba(21,128,61,0.15), transparent 70%)" }}
@@ -94,8 +94,8 @@ export default function ExitIntentPopup() {
             <X className="h-4 w-4" />
           </button>
 
-          <div className="relative p-6 sm:p-8">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-green-700/20 bg-green-700/10 px-3 py-1.5">
+          <div className="relative p-6 sm:p-7">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-green-700/20 bg-green-700/10 px-3 py-1.5">
               <GraduationCap className="h-3.5 w-3.5 text-green-700 dark:text-green-500" />
               <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-green-800 dark:text-green-400">
                 Back-to-School · Lifetime
@@ -106,11 +106,11 @@ export default function ExitIntentPopup() {
               Wait — lock in lifetime before semester starts
             </h2>
 
-            <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300 sm:text-base">
+            <p className="mt-2.5 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
               Pay once. Get 20,000 words every month forever. No subscription. No renewals.
             </p>
 
-            <div className="mt-6 space-y-3 rounded-2xl border border-slate-100 bg-slate-50 p-4 dark:border-white/10 dark:bg-white/[0.04]">
+            <div className="mt-5 space-y-2.5 rounded-2xl border border-slate-100 bg-slate-50 p-4 dark:border-white/10 dark:bg-white/[0.04]">
               {[
                 "20,000 words / month for life",
                 "Built for Turnitin & GPTZero",
@@ -125,10 +125,10 @@ export default function ExitIntentPopup() {
               ))}
             </div>
 
-            <div className="mt-8 space-y-3">
+            <div className="mt-6 space-y-2.5">
               <button
                 onClick={handleCTA}
-                className="group flex w-full items-center justify-center gap-2 rounded-2xl bg-[#15803D] px-6 py-4 text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-green-700/20 transition-all hover:scale-[1.02] hover:bg-green-800 hover:shadow-green-700/30 active:scale-[0.98]"
+                className="group flex w-full items-center justify-center gap-2 rounded-2xl bg-[#15803D] px-6 py-3.5 sm:py-4 text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-green-700/20 transition-all hover:scale-[1.02] hover:bg-green-800 hover:shadow-green-700/30 active:scale-[0.98]"
               >
                 Claim Lifetime Access
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

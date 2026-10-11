@@ -222,3 +222,51 @@ html {
     transform: none !important;
   }
 }
+
+/* Custom sleek modal & popup scrollbars matching dark green UI */
+.popup-scrollbar-green {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(74, 222, 128, 0.3) transparent;
+}
+.popup-scrollbar-green::-webkit-scrollbar {
+  width: 6px;
+}
+.popup-scrollbar-green::-webkit-scrollbar-track {
+  background: transparent;
+}
+.popup-scrollbar-green::-webkit-scrollbar-thumb {
+  background: rgba(74, 222, 128, 0.3);
+  border-radius: 9999px;
+}
+.popup-scrollbar-green::-webkit-scrollbar-thumb:hover {
+  background: rgba(74, 222, 128, 0.55);
+}
+.popup-scrollbar-green::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.popup-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.35) transparent;
+}
+.popup-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.popup-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.popup-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.35);
+  border-radius: 9999px;
+}
+.popup-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.6);
+}
+.popup-scrollbar::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+

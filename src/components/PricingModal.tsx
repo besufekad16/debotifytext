@@ -103,7 +103,7 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
         onClick={handleClose}
       >
         <div
-          className={`relative w-full max-w-[420px] max-h-[calc(100dvh-2rem)] overflow-y-auto overflow-x-hidden rounded-[2.5rem] border border-green-400/20 bg-green-950 shadow-[0_30px_100px_-15px_rgba(34,197,94,0.25)] transition-all duration-300 cubic-bezier(0.16,1,0.3,1) ${
+          className={`relative w-full max-w-[420px] max-h-[calc(100dvh-2rem)] overflow-y-auto overflow-x-hidden popup-scrollbar-green rounded-[2.5rem] border border-green-400/20 bg-green-950 shadow-[0_30px_100px_-15px_rgba(34,197,94,0.25)] transition-all duration-300 cubic-bezier(0.16,1,0.3,1) ${
             isVisible ? "translate-y-0 scale-100 opacity-100" : "translate-y-8 scale-95 opacity-0"
           }`}
           onClick={(e) => e.stopPropagation()}
@@ -121,38 +121,38 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
             <X className="h-4 w-4" strokeWidth={2.5} />
           </button>
 
-          <div className="relative p-7 sm:p-9">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-green-400/30 bg-green-400/10 px-3.5 py-1.5 shadow-[inset_0_0_10px_rgba(74,222,128,0.1)]">
+          <div className="relative p-6 sm:p-8">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-green-400/30 bg-green-400/10 px-3.5 py-1.5 shadow-[inset_0_0_10px_rgba(74,222,128,0.1)]">
               <GraduationCap className="h-3.5 w-3.5 text-green-300" />
               <span className="text-[10px] font-black uppercase tracking-[0.16em] text-green-300">
                 Back-to-School Lifetime
               </span>
             </div>
 
-            <h2 className="pr-8 text-3xl font-black tracking-tight text-white leading-[1.1]">
+            <h2 className="pr-8 text-2xl sm:text-3xl font-black tracking-tight text-white leading-[1.1]">
               Out of credits?<br/>
               <span className="bg-gradient-to-r from-green-200 via-green-400 to-green-500 bg-clip-text text-transparent">
                 Go lifetime.
               </span>
             </h2>
-            <p className="mt-3 text-[15px] leading-relaxed text-green-100/60 font-medium">
+            <p className="mt-2.5 text-sm sm:text-[15px] leading-relaxed text-green-100/60 font-medium">
               Pay once before school opens. Get 20,000 words every month — forever. No renewals.
             </p>
 
             {displayPrice && (
-              <div className="mt-6 text-center bg-green-900/30 rounded-2xl border border-green-800/30 py-4">
-                <div className="text-[40px] font-black text-white leading-none tracking-tight">{displayPrice}</div>
-                <div className="mt-1.5 text-[11px] font-bold uppercase tracking-widest text-green-300/50">one-time · yours for life</div>
+              <div className="mt-5 text-center bg-green-900/30 rounded-2xl border border-green-800/30 py-3 sm:py-3.5">
+                <div className="text-3xl sm:text-[38px] font-black text-white leading-none tracking-tight">{displayPrice}</div>
+                <div className="mt-1 text-[10.5px] font-bold uppercase tracking-widest text-green-300/50">one-time · yours for life</div>
               </div>
             )}
 
-            <ul className="mt-6 space-y-3">
+            <ul className="mt-5 space-y-2.5">
               {[
                 "20,000 words refreshed monthly",
                 "Beat Turnitin, GPTZero & more",
                 "Every future update included",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-[14.5px] font-medium text-green-50/90">
+                <li key={item} className="flex items-start gap-3 text-sm sm:text-[14.5px] font-medium text-green-50/90">
                   <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-green-400/20">
                     <Check className="h-3 w-3 text-green-400" strokeWidth={3} />
                   </span>
@@ -164,7 +164,7 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
             <button
               onClick={onClaim}
               disabled={ctaLoading}
-              className="group mt-8 flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-4 text-[15px] font-black uppercase tracking-wide text-green-950 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 shadow-[0_0_20px_rgba(34,197,94,0.3)]"
+              className="group mt-6 flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-3.5 sm:py-4 text-sm sm:text-[15px] font-black uppercase tracking-wide text-green-950 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 shadow-[0_0_20px_rgba(34,197,94,0.3)]"
               style={{
                 background: "linear-gradient(135deg, #bbf7d0 0%, #4ade80 50%, #22c55e 100%)",
               }}
