@@ -66,6 +66,8 @@ export const metadata: Metadata = {
     },
   },
   icons: [
+    { rel: "icon", url: "/favicon.ico", sizes: "any" },
+    { rel: "icon", url: "/icon.svg", type: "image/svg+xml" },
     { rel: "icon", url: "/debotify-logo.png", type: "image/png" },
     { rel: "apple-touch-icon", url: "/debotify-logo.png" }
   ],
