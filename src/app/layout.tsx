@@ -4,8 +4,16 @@ import { type Metadata } from "next";
 import { Toaster } from "sonner";
 import { ClerkProvider } from "@clerk/nextjs";
 import { GeistSans } from "geist/font/sans";
+import { Outfit } from "next/font/google";
 import CookieConsent from "~/components/CookieConsent";
 import { TooltipProvider } from "~/components/ui/tooltip";
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-outfit",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.debotifytext.com'),
@@ -65,12 +73,18 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  icons: [
-    { rel: "icon", url: "/favicon.ico", sizes: "any" },
-    { rel: "icon", url: "/icon.svg", type: "image/svg+xml" },
-    { rel: "icon", url: "/debotify-logo.png", type: "image/png" },
-    { rel: "apple-touch-icon", url: "/debotify-logo.png" }
-  ],
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/debotify-logo.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -80,7 +94,7 @@ export const metadata: Metadata = {
     description: "Rewrite ChatGPT, Claude & Gemini text into natural human writing that passes Turnitin, GPTZero, Originality.ai and every major AI detector. Free to try.",
     images: [
       {
-        url: "/forOpenGraph.jpg",
+        url: "/forOpenGraph.png",
         width: 1200,
         height: 630,
         alt: "DebotifyText — Professional AI Humanizer"
@@ -91,7 +105,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "AI Humanizer — Humanize AI Text & Bypass AI Detectors | DebotifyText",
     description: "Rewrite ChatGPT, Claude & Gemini text into natural human writing that passes Turnitin, GPTZero, Originality.ai and every major AI detector. Free to try.",
-    images: ["/forOpenGraph.jpg"],
+    images: ["/forOpenGraph.png"],
     site: "@debotifytext",
     creator: "@debotifytext",
   },
@@ -163,7 +177,7 @@ export default function RootLayout({
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || "pk_test_Y2xlcmsuZGVib3RpZnl0ZXh0LmNvbSQ"}
       appearance={{ variables: { colorPrimary: "#15803D" } }}
     >
-      <html lang="en" className={`font-sans ${GeistSans.variable}`}>
+      <html lang="en" className={`font-sans ${GeistSans.variable} ${outfit.variable}`}>
         <head>
           {/* Google Analytics */}
           <script
@@ -192,9 +206,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             }}
           />
           {/* End Google Tag Manager */}
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-          <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
         </head>
         <body suppressHydrationWarning className="overflow-x-hidden">
           {/* Google Tag Manager (noscript) */}

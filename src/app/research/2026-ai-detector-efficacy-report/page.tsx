@@ -18,18 +18,59 @@ export const metadata: Metadata = {
     description: "Official empirical testing of 10,000 AI-generated documents against top detectors.",
     url: URL,
     siteName: "DebotifyText",
+    images: [{ url: `${BASE_URL}/forOpenGraph.png`, width: 1200, height: 630, alt: "The 2026 AI Detector Efficacy & Bypass Report" }],
     type: "article",
   },
   twitter: {
     card: "summary_large_image",
     title: "The 2026 AI Detector Efficacy & Bypass Report",
     description: "Empirical testing of 10,000 AI documents against Turnitin, GPTZero, and more.",
+    images: [`${BASE_URL}/forOpenGraph.png`],
   },
 };
 
 export default function ResearchReportPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ScholarlyArticle",
+        "@id": `${URL}#article`,
+        headline: "The 2026 AI Detector Efficacy & Bypass Report",
+        description: "Empirical testing of 10,000 AI-generated documents against Turnitin, GPTZero, Originality.ai, and Copyleaks.",
+        url: URL,
+        inLanguage: "en-US",
+        datePublished: "2026-10-01",
+        dateModified: "2026-10-14",
+        author: {
+          "@type": "Organization",
+          name: "DebotifyText Research Lab",
+          url: `${BASE_URL}/research`,
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "DebotifyText",
+          url: BASE_URL,
+          logo: `${BASE_URL}/debotify-logo.png`,
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+          { "@type": "ListItem", position: 2, name: "Research", item: `${BASE_URL}/research` },
+          { "@type": "ListItem", position: 3, name: "2026 AI Detector Efficacy Report", item: URL },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-white dark:bg-gray-950">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <PageNavbar />
       
       <main className="flex-1">

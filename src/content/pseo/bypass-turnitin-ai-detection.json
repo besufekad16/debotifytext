@@ -1,0 +1,63 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 92,
+    "postHumanizationOriginality": 99.4,
+    "semanticPreservationScore": 98.6,
+    "tokensProcessedAvg": 850000
+  },
+  "persona": {
+    "idealUser": "University Students & Thesis Candidates",
+    "coreIntent": "Master bypass turnitin ai detection with authentic, human-grade writing."
+  },
+  "technicalDeepDive": "Turnitin evaluates student submissions by scanning for predictable linguistic sequences and low sentence variance typical of large language models. DebotifyText restructures these patterns at the semantic level without altering core arguments or references.\n\nBy adjusting token probabilities and varying clause complexity, DebotifyText eliminates the mechanical predictability that flags Turnitin scanners.\n\nAlways review humanized drafts to ensure proper alignment with institutional academic integrity policies.",
+  "stepByStep": [
+    {
+      "title": "Paste Your Draft",
+      "description": "Input your synthetic text to address bypass turnitin ai detection."
+    },
+    {
+      "title": "Select Tone & Humanize",
+      "description": "Choose Academic, Professional, or Casual tone and run the DebotifyText transformation."
+    },
+    {
+      "title": "Verify & Export",
+      "description": "Review the restructured output with varied burstiness and export with complete confidence."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Burstiness",
+      "definition": "Natural standard deviation in sentence length and rhythm across a document."
+    },
+    {
+      "term": "Perplexity",
+      "definition": "A mathematical measure of word predictability in language models."
+    },
+    {
+      "term": "AI Fingerprint",
+      "definition": "Uniform statistical token sequences targeted by detection software."
+    },
+    {
+      "term": "Semantic Integrity",
+      "definition": "Guaranteeing original facts, data points, and citations stay 100% unchanged."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How does DebotifyText help with bypass turnitin ai detection?",
+      "answer": "DebotifyText recalculates token probabilities and varies sentence structures to match natural human writing."
+    },
+    {
+      "question": "Is bypass turnitin ai detection free to test on DebotifyText?",
+      "answer": "Yes, DebotifyText offers a genuinely free trial tier with word credits to test humanization before subscribing."
+    },
+    {
+      "question": "Does DebotifyText preserve my original meaning and citations?",
+      "answer": "Yes. Unlike simple synonym spinners, DebotifyText preserves 100% of your arguments, facts, and citations."
+    },
+    {
+      "question": "Which AI detectors does DebotifyText bypass?",
+      "answer": "DebotifyText is verified weekly against Turnitin, GPTZero, Originality.ai, Copyleaks, Winston AI, and Canvas LMS."
+    }
+  ]
+}

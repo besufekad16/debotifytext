@@ -59,30 +59,38 @@ const STATIC_PAGES = [
   '/responsible-use',
   '/terms',
   '/privacy',
+  '/research',
+  '/research/2026-ai-detector-efficacy-report',
+  '/topics',
+  '/topics/guides',
+  '/topics/detectors',
+  '/topics/bypass',
+  '/topics/humanizer',
+  '/topics/usecases',
+  '/topics/compare',
+  '/topics/essay',
+  '/topics/writing',
 ].map(p => `${BASE_URL}${p}`);
 
 // ── Collect all keyword slugs ─────────────────────────────────────────────────
 
-const v1Path = path.join(__dirname, '..', 'src', 'lib', 'pseo-data.ts');
-const v2Path = path.join(__dirname, '..', 'src', 'lib', 'pseo-data-v2.ts');
+const registryPath = path.join(__dirname, '..', 'src', 'data', 'pseo-registry.json');
+let registrySlugs = [];
+if (fs.existsSync(registryPath)) {
+  const regData = JSON.parse(fs.readFileSync(registryPath, 'utf-8'));
+  registrySlugs = Array.isArray(regData) ? regData : Object.keys(regData);
+} else {
+  console.error('pseo-registry.json not found!');
+}
 
-console.log('Reading v1 slugs...');
-const v1Slugs = getSlugsFromDataFile(v1Path);
-
-console.log('Reading v2 slugs...');
-const v2Slugs = getSlugsFromDataFile(v2Path);
-
-// Deduplicate across both
-const allSlugsSet = new Set([...v1Slugs, ...v2Slugs]);
+const allSlugsSet = new Set(registrySlugs);
 const keywordUrls = [...allSlugsSet].map(slug => `${BASE_URL}/${slug}`);
 
 const allUrls = [...STATIC_PAGES, ...keywordUrls];
 
 console.log(`\nTotal URLs to submit: ${allUrls.length}`);
-console.log(`  Static pages: ${STATIC_PAGES.length}`);
-console.log(`  V1 keyword pages: ${v1Slugs.length}`);
-console.log(`  V2 keyword pages: ${v2Slugs.length}`);
-console.log(`  Unique keyword pages: ${allSlugsSet.size}`);
+console.log(`  Static & Hub pages: ${STATIC_PAGES.length}`);
+console.log(`  Valid PSEO keyword pages: ${allSlugsSet.size}`);
 
 // ── Batch and submit ──────────────────────────────────────────────────────────
 

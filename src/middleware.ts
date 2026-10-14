@@ -17,6 +17,10 @@ const isPublicRoute = createRouteMatcher([
   // orphans long-tail URLs behind XML-only discovery.
   '/topics(.*)',
   '/guides(.*)',
+  '/research(.*)',
+  '/ai-detector(.*)',
+  '/bypass-ai-detectors(.*)',
+  '/ai-humanizer(.*)',
   '/api/webhooks/clerk(.*)',
   '/api/webhooks/polar(.*)',
   '/api/polar/products(.*)',

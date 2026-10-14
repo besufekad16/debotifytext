@@ -23,6 +23,7 @@ const REGION_LINKS = [
 ];
 
 const COMPANY_LINKS = [
+  { label: "Research Lab", href: "/research" },
   { label: "Contact", href: "/contact" },
   { label: "FAQ", href: "/faq" },
   { label: "Responsible Use", href: "/responsible-use" },

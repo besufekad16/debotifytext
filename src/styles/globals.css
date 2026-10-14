@@ -75,16 +75,16 @@
   }
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: "Outfit", ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-outfit), "Outfit", ui-sans-serif, system-ui, sans-serif;
     font-feature-settings: "cv11", "ss01";
     text-rendering: optimizeLegibility;
   }
   h1, h2, h3, h4 {
     @apply font-semibold tracking-tight text-balance;
-    font-family: "Outfit", ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-outfit), "Outfit", ui-sans-serif, system-ui, sans-serif;
   }
   .font-heading {
-    font-family: "Outfit", ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-outfit), "Outfit", ui-sans-serif, system-ui, sans-serif;
   }
   p {
     @apply text-pretty;

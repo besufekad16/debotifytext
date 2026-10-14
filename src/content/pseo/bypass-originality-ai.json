@@ -1,0 +1,63 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 92,
+    "postHumanizationOriginality": 99.4,
+    "semanticPreservationScore": 98.6,
+    "tokensProcessedAvg": 850000
+  },
+  "persona": {
+    "idealUser": "SEO Agencies & Content Publishers",
+    "coreIntent": "Master bypass originality ai with authentic, human-grade writing."
+  },
+  "technicalDeepDive": "Originality.ai is designed specifically for web content publishers and SEO teams. It flags uniform semantic flow and robotic transitions.\n\nDebotifyText restructures vocabulary and contextual transitions to mirror native English human writers, preventing Google Helpful Content penalties.\n\nPublish with complete peace of mind knowing your articles flow authentically.",
+  "stepByStep": [
+    {
+      "title": "Paste Your Draft",
+      "description": "Input your synthetic text to address bypass originality ai."
+    },
+    {
+      "title": "Select Tone & Humanize",
+      "description": "Choose Academic, Professional, or Casual tone and run the DebotifyText transformation."
+    },
+    {
+      "title": "Verify & Export",
+      "description": "Review the restructured output with varied burstiness and export with complete confidence."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Burstiness",
+      "definition": "Natural standard deviation in sentence length and rhythm across a document."
+    },
+    {
+      "term": "Perplexity",
+      "definition": "A mathematical measure of word predictability in language models."
+    },
+    {
+      "term": "AI Fingerprint",
+      "definition": "Uniform statistical token sequences targeted by detection software."
+    },
+    {
+      "term": "Semantic Integrity",
+      "definition": "Guaranteeing original facts, data points, and citations stay 100% unchanged."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How does DebotifyText help with bypass originality ai?",
+      "answer": "DebotifyText recalculates token probabilities and varies sentence structures to match natural human writing."
+    },
+    {
+      "question": "Is bypass originality ai free to test on DebotifyText?",
+      "answer": "Yes, DebotifyText offers a genuinely free trial tier with word credits to test humanization before subscribing."
+    },
+    {
+      "question": "Does DebotifyText preserve my original meaning and citations?",
+      "answer": "Yes. Unlike simple synonym spinners, DebotifyText preserves 100% of your arguments, facts, and citations."
+    },
+    {
+      "question": "Which AI detectors does DebotifyText bypass?",
+      "answer": "DebotifyText is verified weekly against Turnitin, GPTZero, Originality.ai, Copyleaks, Winston AI, and Canvas LMS."
+    }
+  ]
+}

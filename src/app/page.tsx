@@ -113,7 +113,13 @@ export default function HomePage() {
         ],
         url: "https://www.debotifytext.com",
         logo: "https://www.debotifytext.com/debotify-logo.png",
-        sameAs: ["https://twitter.com/debotifytext"]
+        sameAs: [
+          "https://x.com/debotifytext",
+          "https://www.linkedin.com/company/debotifytext",
+          "https://www.facebook.com/debotifytext",
+          "https://www.instagram.com/debotifytext",
+          "https://www.youtube.com/@debotifytext"
+        ]
       },
       {
         "@type": "SoftwareApplication",

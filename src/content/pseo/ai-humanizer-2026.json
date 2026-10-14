@@ -1,0 +1,63 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 92,
+    "postHumanizationOriginality": 99.4,
+    "semanticPreservationScore": 98.6,
+    "tokensProcessedAvg": 850000
+  },
+  "persona": {
+    "idealUser": "Modern Writers & Students",
+    "coreIntent": "Master ai humanizer 2026 with authentic, human-grade writing."
+  },
+  "technicalDeepDive": "AI detectors continually retrain on synthetic data. DebotifyText 2026 architecture introduces dynamic entropy re-weighting, ensuring your content always stays ahead of detection algorithms.",
+  "stepByStep": [
+    {
+      "title": "Paste Your Draft",
+      "description": "Input your synthetic text to address ai humanizer 2026."
+    },
+    {
+      "title": "Select Tone & Humanize",
+      "description": "Choose Academic, Professional, or Casual tone and run the DebotifyText transformation."
+    },
+    {
+      "title": "Verify & Export",
+      "description": "Review the restructured output with varied burstiness and export with complete confidence."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Burstiness",
+      "definition": "Natural standard deviation in sentence length and rhythm across a document."
+    },
+    {
+      "term": "Perplexity",
+      "definition": "A mathematical measure of word predictability in language models."
+    },
+    {
+      "term": "AI Fingerprint",
+      "definition": "Uniform statistical token sequences targeted by detection software."
+    },
+    {
+      "term": "Semantic Integrity",
+      "definition": "Guaranteeing original facts, data points, and citations stay 100% unchanged."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How does DebotifyText help with ai humanizer 2026?",
+      "answer": "DebotifyText recalculates token probabilities and varies sentence structures to match natural human writing."
+    },
+    {
+      "question": "Is ai humanizer 2026 free to test on DebotifyText?",
+      "answer": "Yes, DebotifyText offers a genuinely free trial tier with word credits to test humanization before subscribing."
+    },
+    {
+      "question": "Does DebotifyText preserve my original meaning and citations?",
+      "answer": "Yes. Unlike simple synonym spinners, DebotifyText preserves 100% of your arguments, facts, and citations."
+    },
+    {
+      "question": "Which AI detectors does DebotifyText bypass?",
+      "answer": "DebotifyText is verified weekly against Turnitin, GPTZero, Originality.ai, Copyleaks, Winston AI, and Canvas LMS."
+    }
+  ]
+}

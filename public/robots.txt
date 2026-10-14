@@ -8,6 +8,8 @@ User-agent: *
 Allow: /
 Allow: /topics
 Allow: /topics/
+Allow: /research
+Allow: /research/
 Allow: /guides
 Allow: /guides/
 Allow: /pricing

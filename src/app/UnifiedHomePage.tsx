@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState, type ChangeEvent, type DragEv
 import { useUser, SignInButton } from "@clerk/nextjs";
 import Link from "next/link";
 import Image from "next/image";
-import mammoth from "mammoth";
 import ModernNavbar from "~/components/ModernNavbar";
 import HistoryDrawer from "~/components/HistoryDrawer";
 import { Button } from "~/components/ui/button";
@@ -729,11 +728,13 @@ export default function UnifiedHomePage() {
       return;
     }
 
-    // Handle .docx files with mammoth
+    // Handle .docx files with mammoth (dynamically imported to save ~200KB bundle)
     if (fileExtension === ".docx") {
       try {
         const arrayBuffer = await file.arrayBuffer();
-        const result = await mammoth.extractRawText({ arrayBuffer });
+        const mammothModule = await import("mammoth");
+        const extractRawText = mammothModule.extractRawText || (mammothModule as any).default?.extractRawText;
+        const result = await extractRawText({ arrayBuffer });
         const text = result.value;
 
         if (text && text.trim()) {

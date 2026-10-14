@@ -20,14 +20,19 @@ const STATIC_PAGES = [
   '/ai-humanizer',
   '/ai-detector',
   '/bypass-ai-detectors',
+  '/research',
+  '/research/2026-ai-detector-efficacy-report',
   '/topics',
+  '/topics/guides',
+  '/topics/detectors',
+  '/topics/bypass',
+  '/topics/humanizer',
   '/pricing',
   '/faq',
   '/contact',
   '/privacy',
   '/terms',
-  '/responsible-use',
-  '/research/2026-ai-detector-efficacy-report'
+  '/responsible-use'
 ];
 
 const today = new Date().toISOString().split('T')[0];
@@ -46,10 +51,33 @@ ${STATIC_PAGES.map(p => `  <url>
 fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-main.xml'), mainXml);
 console.log('Generated public/sitemap-main.xml');
 
-// 2. Split PSEO URLs into chunks of 500
-const CHUNK_SIZE = 500;
-const pseoChunk1 = approvedSlugs.slice(0, CHUNK_SIZE);
-const pseoChunk2 = approvedSlugs.slice(CHUNK_SIZE, CHUNK_SIZE * 2);
+// 2. Put core high-priority target slugs first
+const priorityPrefixes = [
+  'free-ai-humanizer',
+  'bypass-turnitin-ai-detection',
+  'bypass-gptzero',
+  'bypass-originality-ai',
+  'bypass-zerogpt',
+  'bypass-copyleaks',
+  'bypass-winston-ai',
+  'bypass-sapling',
+  'ai-humanizer-2026',
+  'ai-text-humanizer',
+  'bypass-ai-detection',
+  'ai-humanizer-usa',
+  'ai-humanizer-uk',
+  'ai-humanizer-canada'
+];
+
+const prioritySlugs = approvedSlugs.filter(s => priorityPrefixes.includes(s));
+const otherSlugs = approvedSlugs.filter(s => !priorityPrefixes.includes(s));
+const sortedSlugs = [...prioritySlugs, ...otherSlugs];
+
+const CHUNK_SIZE = 550;
+const chunks = [];
+for (let i = 0; i < sortedSlugs.length; i += CHUNK_SIZE) {
+  chunks.push(sortedSlugs.slice(i, i + CHUNK_SIZE));
+}
 
 function generateUrlset(slugs) {
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -58,17 +86,17 @@ ${slugs.map(slug => `  <url>
     <loc>${BASE_URL}/${slug}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>`).join('\n')}
 </urlset>
 `;
 }
 
-fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-pseo-1.xml'), generateUrlset(pseoChunk1));
-console.log(`Generated public/sitemap-pseo-1.xml (${pseoChunk1.length} URLs)`);
-
-fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-pseo-2.xml'), generateUrlset(pseoChunk2));
-console.log(`Generated public/sitemap-pseo-2.xml (${pseoChunk2.length} URLs)`);
+chunks.forEach((chunk, idx) => {
+  const filename = `sitemap-pseo-${idx + 1}.xml`;
+  fs.writeFileSync(path.join(PUBLIC_DIR, filename), generateUrlset(chunk));
+  console.log(`Generated public/${filename} (${chunk.length} URLs)`);
+});
 
 // 3. Generate sitemap.xml index
 const sitemapIndexXml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -77,14 +105,10 @@ const sitemapIndexXml = `<?xml version="1.0" encoding="UTF-8"?>
     <loc>${BASE_URL}/sitemap-main.xml</loc>
     <lastmod>${today}</lastmod>
   </sitemap>
-  <sitemap>
-    <loc>${BASE_URL}/sitemap-pseo-1.xml</loc>
+${chunks.map((_, idx) => `  <sitemap>
+    <loc>${BASE_URL}/sitemap-pseo-${idx + 1}.xml</loc>
     <lastmod>${today}</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>${BASE_URL}/sitemap-pseo-2.xml</loc>
-    <lastmod>${today}</lastmod>
-  </sitemap>
+  </sitemap>`).join('\n')}
 </sitemapindex>
 `;
 fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap.xml'), sitemapIndexXml);

@@ -20,13 +20,14 @@ export default {
     extend: {
       fontFamily: {
         sans: [
+          "var(--font-outfit)",
           "Outfit",
           "var(--font-geist-sans)",
           "ui-sans-serif",
           "system-ui",
           "sans-serif",
         ],
-        heading: ["Outfit", "ui-sans-serif", "system-ui", "sans-serif"],
+        heading: ["var(--font-outfit)", "Outfit", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
