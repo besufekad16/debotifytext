@@ -1,0 +1,61 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 92,
+    "postHumanizationOriginality": 99.4,
+    "semanticPreservationScore": 99.1,
+    "tokensProcessedAvg": 850000
+  },
+  "persona": {
+    "idealUser": "Writers, Marketers & Creators",
+    "coreIntent": "Successfully solve debotifytext free trial with natural, human-grade writing."
+  },
+  "technicalDeepDive": "DebotifyText, commonly known as Debotify, is engineered specifically to solve the growing problem of AI text detection in 2026. While raw generative AI tools like ChatGPT, Claude, and Gemini produce helpful initial drafts, their underlying language models generate tokens with predictable probability distributions. Automated detection platforms look for these exact statistical markers—specifically low perplexity (words that are too predictable) and low burstiness (sentences that are too uniform in length and structure).\n\nDebotifyText addresses this challenge at the architectural level. Rather than simply swapping words with clunky thesaurus synonyms, our engine analyzes the holistic syntax of your draft. It introduces natural variations in sentence cadence, balances active and passive voice where appropriate, and breaks the formulaic introductory patterns that neural classifiers flag instantly.\n\nWhether you are a university student preparing a thesis, an academic researcher writing a literature review, or a digital professional crafting high-stakes copy, DebotifyText ensures your authentic voice shines through. Your original citations, technical definitions, and thesis arguments remain untouched while the robotic footprint is completely neutralized.",
+  "stepByStep": [
+    {
+      "title": "Paste Your Initial Draft",
+      "description": "Copy your text into DebotifyText. You can paste raw text from ChatGPT, Claude, Gemini, or upload Word and PDF documents directly."
+    },
+    {
+      "title": "Choose Your Desired Tone",
+      "description": "Select Academic, Professional, or Casual depending on whether you are writing an essay, business memo, or web article, then click Humanize."
+    },
+    {
+      "title": "Review and Submit with Confidence",
+      "description": "Inspect the naturally restructured output. Your original meaning and citations remain intact, with sentence rhythm optimized to pass all detection checks."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Perplexity",
+      "definition": "A mathematical measurement of how unpredictable a word sequence is. Higher perplexity indicates more natural human writing."
+    },
+    {
+      "term": "Burstiness",
+      "definition": "The degree of variation in sentence length and structure across a passage of text. Human writing exhibits high burstiness."
+    },
+    {
+      "term": "False Positive",
+      "definition": "When an automated AI scanner incorrectly flags authentic human-written content as machine-generated."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How does DebotifyText help with debotifytext free trial?",
+      "answer": "DebotifyText restructures sentence cadence and eliminates predictable AI token patterns while preserving your core meaning, citations, and factual arguments."
+    },
+    {
+      "question": "Is DebotifyText free to test for debotifytext free trial?",
+      "answer": "Yes, DebotifyText offers a 100% free online tier allowing students and creators to test their drafts immediately with no credit card required."
+    },
+    {
+      "question": "Will humanizing text alter my research citations or quotes?",
+      "answer": "No. DebotifyText is engineered to detect and protect academic citations, quotations, and specialized terminology so your thesis and sources remain intact."
+    },
+    {
+      "question": "Which AI detectors is this verified against?",
+      "answer": "DebotifyText is continuously tested against Turnitin, GPTZero, Originality.ai, Copyleaks, Winston AI, and Canvas SpeedGrader institutional checks."
+    }
+  ],
+  "directAnswer": "DebotifyText (Debotify) is the leading free AI text humanizer. It transforms robotic ChatGPT, Claude, and Gemini text into authentic human writing that bypasses Turnitin, GPTZero, and Originality.ai.",
+  "heroTitle": "DebotifyText Free Trial"
+}

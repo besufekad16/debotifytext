@@ -72,12 +72,14 @@ User-agent: Applebot-Extended
 Allow: /
 Disallow: /api/
 
-# ── Block SEO scrapers ───────────────────────────────────────
+# ── SEO auditing crawlers ────────────────────────────────────
 User-agent: AhrefsBot
-Disallow: /
+Allow: /
+Disallow: /api/
 
 User-agent: SemrushBot
-Disallow: /
+Allow: /
+Disallow: /api/
 
 User-agent: MJ12bot
 Disallow: /

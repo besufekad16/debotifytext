@@ -2,21 +2,26 @@ import { type Metadata } from "next";
 import UnifiedHomePage from "./UnifiedHomePage";
 
 export const metadata: Metadata = {
-  title: "Humanize AI Text Free | #1 AI Humanizer & AI Detector Bypass Tool",
+  title: "DebotifyText (Debotify) — Free AI Humanizer & Bypass AI Detector",
   description:
-    "Looking for how to avoid AI detection? Use DebotifyText to humanize AI text from ChatGPT, Claude, and Gemini. The best AI humanizer to bypass AI detectors for free.",
+    "DebotifyText (Debotify) is the #1 free AI humanizer. Humanize text for free, bypass AI detectors like Turnitin and GPTZero, and humanify your text in 2026.",
   keywords: [
     "DebotifyText",
     "debotify",
     "debotify ai",
     "debotify text",
     "debotifytext humanizer",
+    "free ai humanizer",
+    "humanize text for free",
+    "ai humanizer",
+    "bypass ai detector",
+    "ai humanizer 2026",
+    "humanify your text",
     "debitify",
     "debitifytext",
     "debitify text",
     "unrobotictext",
     "unrobotic text",
-    "ai humanizer",
     "humanize ai",
     "text humanizer",
     "humanizer ai",
@@ -30,9 +35,7 @@ export const metadata: Metadata = {
     "clarity ai",
     "humanize ai text",
     "ai text humanizer",
-    "free ai humanizer",
     "best ai humanizer",
-    "bypass ai detector",
     "bypass ai detection",
     "bypass turnitin",
     "bypass gptzero",
@@ -54,9 +57,9 @@ export const metadata: Metadata = {
     canonical: "https://www.debotifytext.com",
   },
   openGraph: {
-    title: "Humanize AI Text Free | #1 AI Humanizer & AI Detector Bypass Tool",
+    title: "DebotifyText (Debotify) — Free AI Humanizer & Bypass AI Detector",
     description:
-      "Looking for how to avoid AI detection? Use DebotifyText to humanize AI text from ChatGPT, Claude, and Gemini. The best AI humanizer to bypass AI detectors for free.",
+      "DebotifyText (Debotify) is the #1 free AI humanizer. Humanize text for free, bypass AI detectors like Turnitin and GPTZero, and humanify your text in 2026.",
     url: "https://www.debotifytext.com",
     siteName: "DebotifyText",
     images: [
@@ -64,7 +67,7 @@ export const metadata: Metadata = {
         url: "https://www.debotifytext.com/forOpenGraph.png",
         width: 1200,
         height: 630,
-        alt: "DebotifyText — Debotify AI Text Free",
+        alt: "DebotifyText — Free AI Humanizer and AI Detector Bypass",
       },
     ],
     locale: "en_US",
@@ -72,9 +75,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Humanize AI Text Free | #1 AI Humanizer & AI Detector Bypass Tool",
+    title: "DebotifyText (Debotify) — Free AI Humanizer & Bypass AI Detector",
     description:
-      "Looking for how to avoid AI detection? Use DebotifyText to humanize AI text from ChatGPT, Claude, and Gemini. The best AI humanizer to bypass AI detectors for free.",
+      "DebotifyText (Debotify) is the #1 free AI humanizer. Humanize text for free, bypass AI detectors like Turnitin and GPTZero, and humanify your text in 2026.",
     images: ["https://www.debotifytext.com/forOpenGraph.png"],
     site: "@debotifytext",
     creator: "@debotifytext",
@@ -116,6 +119,7 @@ export default function HomePage() {
         sameAs: [
           "https://x.com/debotifytext",
           "https://www.linkedin.com/company/debotifytext",
+          "https://www.linkedin.com/in/debotifytext",
           "https://www.facebook.com/debotifytext",
           "https://www.instagram.com/debotifytext",
           "https://www.youtube.com/@debotifytext"

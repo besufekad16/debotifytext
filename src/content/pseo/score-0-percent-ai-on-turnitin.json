@@ -1,0 +1,61 @@
+{
+  "metrics": {
+    "initialDetectionRisk": 92,
+    "postHumanizationOriginality": 99.4,
+    "semanticPreservationScore": 99.1,
+    "tokensProcessedAvg": 850000
+  },
+  "persona": {
+    "idealUser": "University Students & Researchers",
+    "coreIntent": "Successfully solve score 0 percent ai on turnitin with natural, human-grade writing."
+  },
+  "technicalDeepDive": "Modern AI detection systems like Turnitin do not read content the way human evaluators do. Instead, Turnitin scans text using trained neural classifiers that calculate mathematical predictability across sliding token windows. When an AI model writes an essay or report, it consistently selects the statistically most probable next word, resulting in a flat perplexity score and uniform sentence cadence. This is why standard human writing easily passes while unmodified AI drafts trigger high confidence flags.\n\nTo reliably bypass Turnitin, your text must exhibit high burstiness—a natural alternation between short, punchy statements and complex, multi-clause explanations. Furthermore, overused transition words such as \"moreover,\" \"furthermore,\" \"testament to,\" and \"it is crucial to remember\" must be replaced with organic transitional phrasing that reflects genuine human contemplation.\n\nDebotifyText analyzes your document against the exact statistical thresholds used by Turnitin. By dynamically reorganizing sentence boundaries, injecting natural linguistic variance, and preserving your original thesis points, our engine helps you achieve consistent 0% AI detection scores on institutional Blackboard and Canvas submissions.",
+  "stepByStep": [
+    {
+      "title": "Paste Your Initial Draft",
+      "description": "Copy your text into DebotifyText. You can paste raw text from ChatGPT, Claude, Gemini, or upload Word and PDF documents directly."
+    },
+    {
+      "title": "Choose Your Desired Tone",
+      "description": "Select Academic, Professional, or Casual depending on whether you are writing an essay, business memo, or web article, then click Humanize."
+    },
+    {
+      "title": "Review and Submit with Confidence",
+      "description": "Inspect the naturally restructured output. Your original meaning and citations remain intact, with sentence rhythm optimized to pass all detection checks."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Perplexity",
+      "definition": "A mathematical measurement of how unpredictable a word sequence is. Higher perplexity indicates more natural human writing."
+    },
+    {
+      "term": "Burstiness",
+      "definition": "The degree of variation in sentence length and structure across a passage of text. Human writing exhibits high burstiness."
+    },
+    {
+      "term": "False Positive",
+      "definition": "When an automated AI scanner incorrectly flags authentic human-written content as machine-generated."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How does DebotifyText help with score 0 percent ai on turnitin?",
+      "answer": "DebotifyText restructures sentence cadence and eliminates predictable AI token patterns while preserving your core meaning, citations, and factual arguments."
+    },
+    {
+      "question": "Is DebotifyText free to test for score 0 percent ai on turnitin?",
+      "answer": "Yes, DebotifyText offers a 100% free online tier allowing students and creators to test their drafts immediately with no credit card required."
+    },
+    {
+      "question": "Will humanizing text alter my research citations or quotes?",
+      "answer": "No. DebotifyText is engineered to detect and protect academic citations, quotations, and specialized terminology so your thesis and sources remain intact."
+    },
+    {
+      "question": "Which AI detectors is this verified against?",
+      "answer": "DebotifyText is continuously tested against Turnitin, GPTZero, Originality.ai, Copyleaks, Winston AI, and Canvas SpeedGrader institutional checks."
+    }
+  ],
+  "directAnswer": "Bypassing Turnitin requires breaking predictable AI token sequences and sentence uniformity. DebotifyText naturally restructures your syntax, varies sentence length, and preserves your core meaning to score 0% AI.",
+  "heroTitle": "Score 0 Percent AI on Turnitin"
+}

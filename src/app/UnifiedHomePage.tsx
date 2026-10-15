@@ -915,12 +915,12 @@ export default function UnifiedHomePage() {
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
                     <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
                   </span>
-                  Trusted by 500,000+ writers
+                  #1 Free AI Humanizer • DebotifyText (Debotify)
                 </div>
 
                 <h1 className="mb-6 tracking-tight text-balance">
                   <span className="block text-4xl font-extrabold leading-tight text-slate-900 sm:text-5xl lg:text-6xl">
-                    Humanize AI text.
+                    DebotifyText: Humanize AI text.
                   </span>
                   <span className="mt-2 block text-4xl font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-green-600 via-green-500 to-green-700 sm:text-5xl lg:text-[4.2rem]">
                     Bypass AI detection.
@@ -928,8 +928,8 @@ export default function UnifiedHomePage() {
                 </h1>
 
                 <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-slate-600">
-                  Paste ChatGPT, Claude, or Gemini. Get natural writing built to pass Turnitin,
-                  GPTZero, Originality.ai, and Copyleaks — meaning intact.
+                  DebotifyText (Debotify) rewrites ChatGPT, Claude, and Gemini text into 100% natural writing built to bypass Turnitin,
+                  GPTZero, and Originality.ai — preserving your core meaning and voice.
                 </p>
 
                 <div className="flex flex-wrap items-center justify-center gap-3">

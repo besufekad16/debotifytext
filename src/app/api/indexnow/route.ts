@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 const HOST          = "www.debotifytext.com";
 const INDEX_NOW_KEY = "cae535bda6cc4564a9c5dda38f8236eb";
 const KEY_LOCATION  = `${BASE_URL}/${INDEX_NOW_KEY}.txt`;
-const BATCH_SIZE    = 9000;
+const BATCH_SIZE    = 500;
 
 const STATIC_PAGES = [
   "/",

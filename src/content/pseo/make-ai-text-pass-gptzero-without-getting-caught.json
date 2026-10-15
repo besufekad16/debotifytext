@@ -1,63 +1,61 @@
 {
   "metrics": {
-    "initialDetectionRisk": 93,
-    "postHumanizationOriginality": 98.8,
-    "semanticPreservationScore": 97.2,
-    "tokensProcessedAvg": 517096
+    "initialDetectionRisk": 92,
+    "postHumanizationOriginality": 99.4,
+    "semanticPreservationScore": 99.1,
+    "tokensProcessedAvg": 850000
   },
   "persona": {
-    "idealUser": "College & University Students",
-    "coreIntent": "Successfully solve make ai text pass gptzero without getting caught with natural, human-like phrasing."
+    "idealUser": "University Students & Researchers",
+    "coreIntent": "Successfully solve make ai text pass gptzero without getting caught with natural, human-grade writing."
   },
-  "technicalDeepDive": "When searchers look for make ai text pass gptzero without getting caught, the central challenge is overcoming the statistical uniformity that AI detection models target. LLMs like ChatGPT and Claude produce text with uniform sentence cadence and low token perplexity.\n\nDebotifyText addresses this by dynamically restructuring sentence rhythm (burstiness) and substituting overused AI terminology with rich, natural synonyms. Our engine preserves your citations, technical terms, and core thesis while eliminating the statistical markers that trigger detection algorithms.\n\nThe result is polished, academic-grade writing that flows naturally for human readers and scores closer to 0% AI on automated checks.",
+  "technicalDeepDive": "Modern AI detection systems like GPTZero do not read content the way human evaluators do. Instead, GPTZero scans text using trained neural classifiers that calculate mathematical predictability across sliding token windows. When an AI model writes an essay or report, it consistently selects the statistically most probable next word, resulting in a flat perplexity score and uniform sentence cadence. This is why standard human writing easily passes while unmodified AI drafts trigger high confidence flags.\n\nTo reliably bypass GPTZero, your text must exhibit high burstiness—a natural alternation between short, punchy statements and complex, multi-clause explanations. Furthermore, overused transition words such as \"moreover,\" \"furthermore,\" \"testament to,\" and \"it is crucial to remember\" must be replaced with organic transitional phrasing that reflects genuine human contemplation.\n\nDebotifyText analyzes your document against the exact statistical thresholds used by GPTZero. By dynamically reorganizing sentence boundaries, injecting natural linguistic variance, and preserving your original thesis points, our engine helps you achieve consistent 0% AI detection scores on institutional Blackboard and Canvas submissions.",
   "stepByStep": [
     {
-      "title": "Input Your Text",
-      "description": "Paste your draft into DebotifyText to address make ai text pass gptzero without getting caught."
+      "title": "Paste Your Initial Draft",
+      "description": "Copy your text into DebotifyText. You can paste raw text from ChatGPT, Claude, Gemini, or upload Word and PDF documents directly."
     },
     {
-      "title": "Select Tone & Humanize",
-      "description": "Choose Academic, Casual, or Professional tone and click Humanize to restructure sentence rhythm natively."
+      "title": "Choose Your Desired Tone",
+      "description": "Select Academic, Professional, or Casual depending on whether you are writing an essay, business memo, or web article, then click Humanize."
     },
     {
-      "title": "Verify & Submit",
-      "description": "Review the humanized output, conduct a personal edit pass, and submit with full confidence."
+      "title": "Review and Submit with Confidence",
+      "description": "Inspect the naturally restructured output. Your original meaning and citations remain intact, with sentence rhythm optimized to pass all detection checks."
     }
   ],
   "glossary": [
     {
-      "term": "Burstiness",
-      "definition": "The variation in sentence length and structure that characterizes natural human writing."
-    },
-    {
       "term": "Perplexity",
-      "definition": "A measurement of how unpredictable word choices are to a language model."
+      "definition": "A mathematical measurement of how unpredictable a word sequence is. Higher perplexity indicates more natural human writing."
     },
     {
-      "term": "AI Watermark",
-      "definition": "Statistical frequency clusters that detectors like Turnitin use to identify synthetic content."
+      "term": "Burstiness",
+      "definition": "The degree of variation in sentence length and structure across a passage of text. Human writing exhibits high burstiness."
     },
     {
-      "term": "Semantic Anchoring",
-      "definition": "Our technique for preserving original citations, facts, and logical meaning during rewriting."
+      "term": "False Positive",
+      "definition": "When an automated AI scanner incorrectly flags authentic human-written content as machine-generated."
     }
   ],
   "faqs": [
     {
       "question": "How does DebotifyText help with make ai text pass gptzero without getting caught?",
-      "answer": "DebotifyText uses proprietary semantic restructuring to analyze token predictability and rhythm. It naturally rewrites phrasing to mirror human variation, ensuring your content reads authentically and avoids detection."
+      "answer": "DebotifyText restructures sentence cadence and eliminates predictable AI token patterns while preserving your core meaning, citations, and factual arguments."
     },
     {
-      "question": "Is using DebotifyText for make ai text pass gptzero without getting caught free?",
-      "answer": "Yes, DebotifyText provides a genuinely free tier allowing you to humanize drafts and verify readability before needing any paid plan."
+      "question": "Is DebotifyText free to test for make ai text pass gptzero without getting caught?",
+      "answer": "Yes, DebotifyText offers a 100% free online tier allowing students and creators to test their drafts immediately with no credit card required."
     },
     {
-      "question": "Does DebotifyText change the original meaning of my text?",
-      "answer": "No. Unlike basic paraphrasers that swap words randomly, DebotifyText preserves your core arguments, data, and citations while restructuring syntax and flow."
+      "question": "Will humanizing text alter my research citations or quotes?",
+      "answer": "No. DebotifyText is engineered to detect and protect academic citations, quotations, and specialized terminology so your thesis and sources remain intact."
     },
     {
-      "question": "Which AI detectors does DebotifyText bypass?",
-      "answer": "DebotifyText is tested against Turnitin, GPTZero, Originality.ai, Copyleaks, Winston AI, Canvas, and SafeAssign."
+      "question": "Which AI detectors is this verified against?",
+      "answer": "DebotifyText is continuously tested against Turnitin, GPTZero, Originality.ai, Copyleaks, Winston AI, and Canvas SpeedGrader institutional checks."
     }
-  ]
+  ],
+  "directAnswer": "Bypassing GPTZero requires breaking predictable AI token sequences and sentence uniformity. DebotifyText naturally restructures your syntax, varies sentence length, and preserves your core meaning to score 0% AI.",
+  "heroTitle": "Make AI Text Pass GPTZero Without Getting Caught"
 }

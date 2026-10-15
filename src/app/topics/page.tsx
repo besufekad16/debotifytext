@@ -8,22 +8,38 @@ interface TopicsPageProps {
   searchParams: Promise<{ page?: string; cluster?: string }>;
 }
 
-export const metadata: Metadata = {
-  title: "AI Humanizer Knowledge Hub & Detector Guides | DebotifyText",
-  description: "Browse 1,000 comprehensive guides on bypassing Turnitin, GPTZero, Originality.ai, and humanizing ChatGPT, Claude, and Gemini text.",
-  alternates: {
-    canonical: "https://www.debotifytext.com/topics",
-  },
-  openGraph: {
-    title: "AI Humanizer Knowledge Hub & Detector Guides | DebotifyText",
-    description: "Browse 1,000 comprehensive guides on bypassing Turnitin, GPTZero, Originality.ai, and humanizing ChatGPT, Claude, and Gemini text.",
-    url: "https://www.debotifytext.com/topics",
-    siteName: "DebotifyText",
-    locale: "en_US",
-    type: "website",
-    images: [{ url: "https://www.debotifytext.com/forOpenGraph.png", width: 1200, height: 630 }],
-  },
-};
+export async function generateMetadata({ searchParams }: TopicsPageProps): Promise<Metadata> {
+  const { page = "1" } = await searchParams;
+  const currentPage = Math.max(1, parseInt(page, 10) || 1);
+  const canonicalUrl = currentPage > 1
+    ? `https://www.debotifytext.com/topics?page=${currentPage}`
+    : "https://www.debotifytext.com/topics";
+
+  const title = currentPage > 1
+    ? `AI Humanizer Guides & Topics (Page ${currentPage}) | DebotifyText`
+    : "AI Humanizer Knowledge Hub & Detector Guides | DebotifyText";
+
+  return {
+    title,
+    description: "Browse comprehensive expert guides on bypassing Turnitin, GPTZero, Originality.ai, and humanizing ChatGPT, Claude, and Gemini text.",
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title,
+      description: "Browse comprehensive expert guides on bypassing Turnitin, GPTZero, Originality.ai, and humanizing ChatGPT, Claude, and Gemini text.",
+      url: canonicalUrl,
+      siteName: "DebotifyText",
+      locale: "en_US",
+      type: "website",
+      images: [{ url: "https://www.debotifytext.com/forOpenGraph.png", width: 1200, height: 630 }],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 
 const ITEMS_PER_PAGE = 24;
 

@@ -40,21 +40,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const url = `${BASE_URL}${pseoPath(contract.slug)}`;
 
-  // Construct a powerful meta description (under ~150 chars) integrating secondary keywords
-  const secondaryKeywordsStr = contract.secondaryKeywords.slice(0, 2).join(", ");
-  let metaDesc = `${contract.content.directAnswer} Humanize AI text and bypass AI detection for ${secondaryKeywordsStr} with DebotifyText.`;
-  if (metaDesc.length > 155) {
-    metaDesc = metaDesc.substring(0, 152) + "...";
+  // Capitalize primary keyword for title cleanly and keep length optimal (<= 60 chars)
+  const titleCaps = contract.primaryKeyword.replace(/\b\w/g, l => l.toUpperCase());
+  let optimizedTitle = `${titleCaps} | DebotifyText`;
+  if (optimizedTitle.length < 45) {
+    optimizedTitle = `${titleCaps} — AI Humanizer | DebotifyText`;
+  }
+  if (optimizedTitle.length > 62) {
+    optimizedTitle = `${titleCaps.slice(0, 46)}... | DebotifyText`;
   }
 
-  // Capitalize primary keyword for the title
-  const titleCaps = contract.primaryKeyword.replace(/\b\w/g, l => l.toUpperCase());
-  const optimizedTitle = `${titleCaps} | Free AI Humanizer to Bypass AI Detection`;
+  // Meta description: 140 - 155 chars, professional and compelling
+  let metaDesc = contract.content.directAnswer;
+  if (!metaDesc.includes("DebotifyText")) {
+    metaDesc = `${metaDesc} Humanize your AI text with DebotifyText.`;
+  }
+  if (metaDesc.length > 155) {
+    metaDesc = metaDesc.substring(0, 151).trim() + "...";
+  }
 
   return {
     title: { absolute: optimizedTitle },
     description: metaDesc,
-    keywords: [contract.primaryKeyword, ...contract.secondaryKeywords, "debotifytext", "ai humanizer", "bypass ai detector", "student essay humanizer"],
+    keywords: [contract.primaryKeyword, ...contract.secondaryKeywords, "debotifytext", "debotify", "free ai humanizer", "ai humanizer", "bypass ai detector"],
     authors: [{ name: "DebotifyText Research Team", url: BASE_URL }],
     creator: "DebotifyText",
     publisher: "DebotifyText",
@@ -65,7 +73,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url,
       siteName: "DebotifyText",
       locale: "en_US",
-      type: "article",
+      type: "website",
       images: [
         {
           url: `${BASE_URL}/forOpenGraph.png`,
@@ -111,9 +119,6 @@ export default async function PseoPage({ params }: PageProps) {
     notFound();
   }
 
-  const trustRating = (4.7 + (engine as any).random() * 0.3).toFixed(1);
-  const trustReviews = Math.floor(1000 + (engine as any).random() * 50000).toLocaleString();
-
   const layout = engine.generateLayout();
   const relatedSlugs = getRandomApprovedSlugs(6, contract.slug);
 
@@ -123,7 +128,7 @@ export default async function PseoPage({ params }: PageProps) {
       "@type": "WebPage",
       "@id": `${url}#webpage`,
       url,
-      name: contract.content.heroTitle,
+      name: contract.content.heroTitle || contract.primaryKeyword,
       description: contract.content.directAnswer,
       isPartOf: { "@type": "WebSite", "@id": `${BASE_URL}/#website`, name: "DebotifyText", url: BASE_URL },
       inLanguage: "en-US",
@@ -150,18 +155,26 @@ export default async function PseoPage({ params }: PageProps) {
     },
     {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "TechArticle",
       "@id": `${url}#article`,
-      headline: contract.content.heroTitle,
+      headline: contract.content.heroTitle || contract.primaryKeyword,
       description: contract.content.directAnswer,
+      datePublished: "2026-01-15T08:00:00+00:00",
+      dateModified: "2026-10-15T08:00:00+00:00",
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": url,
+      },
+      image: `${BASE_URL}/forOpenGraph.png`,
       author: {
         "@type": "Organization",
-        name: "DebotifyText Research Lab",
+        name: "DebotifyText Research Team",
         url: `${BASE_URL}/research`,
       },
       publisher: {
         "@type": "Organization",
         name: "DebotifyText",
+        url: BASE_URL,
         logo: {
           "@type": "ImageObject",
           url: `${BASE_URL}/debotify-logo.png`,
@@ -271,14 +284,13 @@ export default async function PseoPage({ params }: PageProps) {
 
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-white/90 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-800 shadow-sm backdrop-blur-md mx-auto">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600" />
+              <span className="inline-flex h-full w-full rounded-full bg-emerald-500" />
             </span>
-            Trusted by 500,000+ Students & Content Writers
+            DebotifyText Expert Guide • 2026 Detection Standards
           </div>
 
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-900 mb-6 capitalize leading-[1.15]">
-            {contract.primaryKeyword.includes('?') ? contract.primaryKeyword : `${contract.primaryKeyword}?`}
+            {contract.content?.heroTitle || contract.primaryKeyword}
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-8 font-normal">
